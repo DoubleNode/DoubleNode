@@ -7,7 +7,7 @@
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
   s.version      = "0.0.1"
-  s.summary      = "A collection of utility functions"
+  s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
   #
@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
 
   # Specify the license type. CocoaPods detects automatically the license file if it is named
   # 'LICENCE*.*' or 'LICENSE*.*', however if the name is different, specify it.
-  # s.license      = 'MIT (example)'
+  s.license      = 'LICENSE'
   # s.license      = { :type => 'MIT (example)', :file => 'FILE_LICENSE' }
 
   # Specify the authors of the library, with email addresses. You can often find
@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
 
   # Specify the location from where the source should be retrieved.
   #
-  s.source       = { :git => "https://github.com/ehlersd/DoubleNode", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/ehlersd/DoubleNode.git", :tag => "0.0.1" }
 
 
   # If this Pod runs only on iOS or OS X, then specify the platform and
@@ -54,9 +54,8 @@ Pod::Spec.new do |s|
   # added to the Pods project. If the pattern is a directory then the
   # path will automatically have '*.{h,m,mm,c,cpp}' appended.
   #
-  s.source_files = 'Classes', 'Classes/**/*.{h,m}'
-  s.source_files = 'Categories', 'Categories/**/*.{h,m}'
-  s.exclude_files = 'Classes/Exclude'
+  s.source_files = '*.{h,m}'
+  # s.exclude_files = 'Classes/Exclude'
 
   # A list of file patterns which select the header files that should be
   # made available to the application. If the pattern is a directory then the

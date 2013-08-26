@@ -12,9 +12,9 @@
 @interface DNManagedObject : NSManagedObject    // <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, retain)   NSNumber*       id;
-@property (nonatomic, strong)   SCCustomCell*   customCell;
+//@property (nonatomic, strong)   SCCustomCell*   customCell;
 
-+ (SCClassDefinition*)classDef;
+//+ (SCClassDefinition*)classDef;
 + (NSManagedObjectContext*)managedObjectContext;
 + (NSManagedObjectModel*)managedObjectModel;
 

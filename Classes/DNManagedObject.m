@@ -8,33 +8,33 @@
 
 #import "DNManagedObject.h"
 
-#import "MZPMunzeeAPI.h"
-#import "MZPAppDelegate.h"
+//#import "MZPMunzeeAPI.h"
+#import "AppDelegate.h"
 
 @implementation DNManagedObject
 
 @dynamic id;
 
-@synthesize customCell;
+//@synthesize customCell;
 
-+ (SCClassDefinition*)classDef
-{
-    return nil;
-}
+//+ (SCClassDefinition*)classDef
+//{
+//    return nil;
+//}
 
 + (NSManagedObjectContext*)managedObjectContext
 {
-    return [MZPAppDelegate appDelegate].managedObjectContext;
+    return [AppDelegate appDelegate].managedObjectContext;
 }
 
 + (NSManagedObjectModel*)managedObjectModel
 {
-    return MZPAppDelegate.appDelegate.managedObjectModel;
+    return AppDelegate.appDelegate.managedObjectModel;
 }
 
 + (BOOL)saveContext
 {
-    return [[MZPAppDelegate appDelegate] saveContext];
+    return [[AppDelegate appDelegate] saveContext];
 }
 
 + (NSArray*)getAll
@@ -159,7 +159,7 @@
 
 - (void)deleteWithNoSave
 {
-    [MZPAppDelegate runOnMainThreadWithoutDeadlocking:^
+    [AppDelegate runOnMainThreadWithoutDeadlocking:^
      {
          [[[self class] managedObjectContext] deleteObject:self];
          [self save];
