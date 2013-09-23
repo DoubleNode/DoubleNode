@@ -21,11 +21,12 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
-#import "DNEventInterceptWindow.h"
-
-#import "MZPAppDelegate.h"
-
 @implementation DNUtilities
+
++ (id<DNApplicationDelegate>)appDelegate
+{
+    return (id<DNApplicationDelegate>)[[UIApplication sharedApplication] delegate];
+}
 
 + (DNUtilities*)sharedInstance
 {
@@ -276,7 +277,7 @@
     }
     else
     {
-        DLog(LL_Debug, @"error, file not found: %@", path);
+        DLog(LL_Debug, LD_General, @"error, file not found: %@", path);
     }
     
     return avSound;
@@ -346,13 +347,6 @@
     return hexStr;
 }
 
-+ (void)setEventInterceptDelegate:(id<DNEventInterceptWindowDelegate>)delegate
-{
-    DNEventInterceptWindow* window  = (DNEventInterceptWindow*)[MZPAppDelegate appDelegate].window;
-    
-    window.eventInterceptDelegate = delegate;
-}
-
 + (UIImage*)imageScaledForRetina:(UIImage*)image
 {
     // [UIImage imageWithCGImage:[newImage CGImage] scale:2.0 orientation:UIImageOrientationUp];
@@ -366,27 +360,27 @@
 
 + (id)settingsItem:(NSString*)item
 {
-    return [[MZPAppDelegate appDelegate] settingsItem:item];
+    return [[[self class] appDelegate] settingsItem:item];
 }
 
 + (id)settingsItem:(NSString*)item default:(id)defaultValue
 {
-    return [[MZPAppDelegate appDelegate] settingsItem:item default:defaultValue];
+    return [[[self class] appDelegate] settingsItem:item default:defaultValue];
 }
 
 + (id)settingsItem:(NSString*)item boolDefault:(BOOL)defaultValue
 {
-    return [[MZPAppDelegate appDelegate] settingsItem:item boolDefault:defaultValue];
+    return [[[self class] appDelegate] settingsItem:item boolDefault:defaultValue];
 }
 
 + (void)setSettingsItem:(NSString*)item value:(id)value
 {
-    [[MZPAppDelegate appDelegate] setSettingsItem:item value:value];
+    [[[self class] appDelegate] setSettingsItem:item value:value];
 }
 
 + (void)setSettingsItem:(NSString*)item boolValue:(BOOL)value
 {
-    [[MZPAppDelegate appDelegate] setSettingsItem:item boolValue:value];
+    [[[self class] appDelegate] setSettingsItem:item boolValue:value];
 }
 
 + (NSString *)getIPAddress

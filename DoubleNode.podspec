@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.0.1"
+  s.version      = "0.0.3"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
@@ -34,7 +34,7 @@ Pod::Spec.new do |s|
 
   # Specify the location from where the source should be retrieved.
   #
-  s.source       = { :git => "https://github.com/ehlersd/DoubleNode.git", :tag => "0.0.2" }
+  s.source       = { :git => "https://github.com/ehlersd/DoubleNode.git", :tag => s.version.to_s }
 
 
   # If this Pod runs only on iOS or OS X, then specify the platform and
@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
   # added to the Pods project. If the pattern is a directory then the
   # path will automatically have '*.{h,m,mm,c,cpp}' appended.
   #
-  s.source_files = '*.{h,m}'
+  s.source_files = 'Classes/*.{h,m}','Categories/*.{h,m}'
   # s.exclude_files = 'Classes/Exclude'
 
   # A list of file patterns which select the header files that should be
@@ -81,8 +81,7 @@ Pod::Spec.new do |s|
   # Specify a list of frameworks that the application needs to link
   # against for this Pod to work.
   #
-  # s.framework  = 'SomeFramework'
-  # s.frameworks = 'SomeFramework', 'AnotherFramework'
+  s.frameworks  = 'AVFoundation','CoreTelephony','CoreData','AudioToolbox'
 
   # Specify a list of libraries that the application needs to link
   # against for this Pod to work.

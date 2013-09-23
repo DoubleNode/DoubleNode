@@ -8,24 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-//#import "Stats.h"
-//#import "DCIntrospect.h"
-
-//#import "RIButtonItem.h"
-//#import "UIAlertView+Blocks.h"
-//#import "UIActionSheet+Blocks.h"
-
-//#import "DNAppConstants.h"
-//#import "DNEventInterceptWindow.h"
-
-//#import "GANTracker.h"
 #import "LoggerClient.h"
-//#import "SIAlertView.h"
 
-//#import "UIView+FrameAccessor.h"
-//#import "UIColor+HexString.h"
-//#import "NSDate+PrettyDate.h"
-//#import "UIFont+Custom.h"
+#import "DNApplicationDelegate.h"
 
 /*
  *  System Versioning Preprocessor Macros
@@ -48,12 +33,20 @@ typedef enum
 }
 LogLevel;
 
-#if defined(CONFIGURATION_Live)
-    #define DLog(...)       do{}while(0)
-    #define DLogImage(...)  do{}while(0)
+#define LD_General          @"general"
+#define LD_CoreFramework    @"coreframework"
+#define LD_CoreData         @"coredata"
+
+#if !defined(DEBUG)
+    #define DLogMarker(marker)          NSLog(@"%@", marker)
+    #define DLog(level,domain,...)      NSLog(__VA_ARGS__)
+    #define DLogData(level,domain,data) do{}while(0)
+    #define DLogImage(...)              do{}while(0)
 #else
-    #define DLog(level, ...)        LogMessageF(__FILE__,__LINE__,__FUNCTION__,@"general",level,__VA_ARGS__)
-    #define DLogImage(level, image) LogImageDataF(__FILE__,__LINE__,__FUNCTION__,@"general",level,image.size.width,image.size.height,UIImagePNGRepresentation(image))
+    #define DLogMarker(marker)              NSLog(@"%@", marker); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,@"%@", marker)
+    #define DLog(level,domain,...)          NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__)
+    #define DLogData(level,domain,data)     LogDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,data)
+    #define DLogImage(level,domain,image)   LogImageDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,image.size.width,image.size.height,UIImagePNGRepresentation(image))
 
 extern void LogImageDataF(const char *filename, int lineNumber, const char *functionName, NSString *domain, int level, int width, int height, NSData *data);
 
@@ -70,6 +63,8 @@ typedef BOOL (^RevealBlock_Bool)(BOOL left);
 
 @interface DNUtilities : NSObject
 
++ (id<DNApplicationDelegate>)appDelegate;
+
 + (CGFloat)screenHeight;
 + (BOOL)isTall;
 + (BOOL)isDeviceIPad;
@@ -84,8 +79,6 @@ typedef BOOL (^RevealBlock_Bool)(BOOL left);
 
 + (void)playSound:(NSString*)name;
 + (NSString*)encodeWithHMAC_SHA1:(NSString*)data withKey:(NSString*)key;
-
-+ (void)setEventInterceptDelegate:(id<DNEventInterceptWindowDelegate>)delegate;
 
 + (UIImage*)imageScaledForRetina:(UIImage*)image;
 

@@ -9,12 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@interface DNManagedObject : NSManagedObject    // <NSFetchedResultsControllerDelegate>
+#import "DNApplicationDelegate.h"
 
-@property (nonatomic, retain)   NSNumber*       id;
-//@property (nonatomic, strong)   SCCustomCell*   customCell;
+@interface DNManagedObject : NSManagedObject
+{
+    NSFetchedResultsController* fetchedResultsController;
+    NSManagedObjectContext*     managedObjectContext;
+}
 
-//+ (SCClassDefinition*)classDef;
+@property (nonatomic, retain)   NSNumber*   id;
+
++ (NSString*)entityName;
++ (NSString*)getAll_TemplateName;
++ (NSString*)getFromId_TemplateName;
+
++ (id<DNApplicationDelegate>)appDelegate;
 + (NSManagedObjectContext*)managedObjectContext;
 + (NSManagedObjectModel*)managedObjectModel;
 
@@ -22,14 +31,32 @@
 + (NSArray*)getAll;
 + (BOOL)deleteAll;
 
-+ (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;
 + (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;
 + (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;
 + (NSString*)dictionaryString:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSString*)defaultValue;
++ (NSArray*)dictionaryArray:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSArray*)defaultValue;
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue;
-+ (NSDictionary*)dictionaryDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue;
++ (id)dictionaryObject:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue;
 
-- (id)save;
++ (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;
++ (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;
++ (NSString*)dictionaryString:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSString*)defaultValue;
++ (NSArray*)dictionaryArray:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSArray*)defaultValue;
++ (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue;
++ (id)dictionaryObject:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue;
+
++ (instancetype)getFromId:(NSNumber*)id;
+
+- (instancetype)init;
+- (instancetype)initWithDictionary:(NSDictionary*)dict;
+- (instancetype)initWithDictionary:(NSDictionary*)dict dirty:(BOOL*)dirtyFlag;
+
+- (void)clearData;
+- (void)loadWithDictionary:(NSDictionary*)dict;
+- (void)loadWithDictionary:(NSDictionary*)dict dirty:(BOOL*)dirtyFlag;
+
+- (instancetype)save;
+- (void)deleteWithNoSave;
 - (void)delete;
 
 @end
