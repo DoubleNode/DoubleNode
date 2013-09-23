@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.0.4"
+  s.version      = "0.0.5"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
@@ -54,7 +54,7 @@ Pod::Spec.new do |s|
   # added to the Pods project. If the pattern is a directory then the
   # path will automatically have '*.{h,m,mm,c,cpp}' appended.
   #
-  s.source_files = 'Classes/*.{h,m}','Categories/*.{h,m}','ColorUtils/*.{h,m}'
+  s.source_files = 'Classes/*.{h,m}','Categories/*.{h,m}'
   # s.exclude_files = 'Classes/Exclude'
 
   # A list of file patterns which select the header files that should be
@@ -102,4 +102,13 @@ Pod::Spec.new do |s|
   #
   # s.dependency 'JSONKit', '~> 1.4'
   s.dependency 'NSLogger'
+  
+  # This creates a new Pod::Specification instance, which has the the following attributes:
+  # * part_of:  'RestKit', '0.9.3'
+  # * name:    'RestKit/Network'
+  # Other attributes are delegated to the `part_of' spec, so the version, summary etc will by default be the same
+  s.subspec 'ColorUtils' do |cu|
+    cu.description = 'A useful category extending UIColor with additional functionality including direct access to color components and creating colors from hex values.'
+    cu.source_files = 'ColorUtils/ColorUtils/*.{h,m}'
+  end
 end

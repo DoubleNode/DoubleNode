@@ -7,9 +7,9 @@
 //
 
 #import "DNAppConstants.h"
-#import "ColorUtils.h"
 
-#import "CDOConstant.h"
+#import "ColorUtils.h"
+#import "DNUtilities.h"
 
 @implementation DNAppConstants
 
@@ -48,34 +48,9 @@
 
 + (id)constantValue:(NSString*)key
 {
-    static BOOL firstTime = YES;
+    NSString*   value   = [NSString stringWithFormat:@"%@", [[self class] plistConfig:key]];
     
-    @synchronized( self )
-    {
-        if (firstTime == YES)
-        {
-            BOOL    resetFlag   = [[[self class] plistConfig:@"ResetConstants"] boolValue];
-            if (resetFlag == YES)
-            {
-                [CDOConstant deleteAll];
-            }
-            
-            //[[PARParleyAPI manager] expireAppStyle];
-            
-            firstTime = NO;
-        }
-    }
-    
-    CDOConstant*    constant = [CDOConstant getFromKey:key];
-    if (constant == nil)
-    {
-        constant        = [[CDOConstant alloc] init];
-        constant.key    = key;
-        constant.value  = [NSString stringWithFormat:@"%@", [[self class] plistConfig:key]];
-        [constant save];
-    }
-    
-    return constant.value;
+    return value;
 }
 
 + (id)plistConfig:(NSString*)key
@@ -93,7 +68,7 @@
     id  value = [dict objectForKey:key];
     if ((value == nil) || (value == [NSNull null]))
     {
-        NSLog(@"***** MISSING CONSTANT KEY: %@", key);
+        DLog(LL_Warning, LD_CoreFramework, @"***** MISSING CONSTANT KEY: %@", key);
     }
     
     return value;
