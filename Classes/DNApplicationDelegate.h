@@ -12,7 +12,7 @@
 
 - (NSManagedObjectContext*)managedObjectContext;
 - (NSManagedObjectModel*)managedObjectModel;
-- (BOOL)saveContext;
+- (void)saveContext;
 
 - (id)settingsItem:(NSString*)item;
 - (id)settingsItem:(NSString*)item default:(id)defaultValue;

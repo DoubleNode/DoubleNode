@@ -21,7 +21,13 @@
 
 + (NSString*)entityName;
 + (NSString*)getAll_TemplateName;
++ (NSArray*)getAll_SortKeys;
++ (NSString*)getFromId_KeyName;
 + (NSString*)getFromId_TemplateName;
+
++ (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
+                                    ofEntity:(NSEntityDescription*)entity
+                                fromResponse:(NSHTTPURLResponse*)response;
 
 + (id<DNApplicationDelegate>)appDelegate;
 + (NSManagedObjectContext*)managedObjectContext;

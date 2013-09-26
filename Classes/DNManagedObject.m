@@ -42,6 +42,13 @@
     return nil;
 }
 
++ (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
+                                    ofEntity:(NSEntityDescription*)entity
+                                fromResponse:(NSHTTPURLResponse*)response
+{
+    return [[NSDictionary alloc] init];
+}
+
 #pragma mark - AppDelegate access functions
 
 + (id<DNApplicationDelegate>)appDelegate
@@ -311,6 +318,10 @@
                 {
                     object  = @"";
                 }
+            }
+            else
+            {
+                object = [object stringValue];
             }
             if (object != (NSString*)[NSNull null])
             {
