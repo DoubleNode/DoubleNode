@@ -59,9 +59,9 @@
     return [[[self class] appDelegate] managedObjectModel];
 }
 
-+ (BOOL)saveContext
++ (void)saveContext
 {
-    return [[[self class] appDelegate] saveContext];
+    [[[self class] appDelegate] saveContext];
 }
 
 #pragma mark - Base entity fetch functions

@@ -27,7 +27,7 @@
 + (NSManagedObjectContext*)managedObjectContext;
 + (NSManagedObjectModel*)managedObjectModel;
 
-+ (BOOL)saveContext;
++ (void)saveContext;
 + (NSArray*)getAll;
 + (BOOL)deleteAll;
 
