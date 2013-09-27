@@ -22,26 +22,6 @@
     return NSStringFromClass(self);
 }
 
-+ (NSString*)getAll_TemplateName
-{
-    return nil;
-}
-
-+ (NSArray*)getAll_SortKeys
-{
-    return @[ @"" ];
-}
-
-+ (NSString*)getFromId_KeyName
-{
-    return @"ID";
-}
-
-+ (NSString*)getFromId_TemplateName
-{
-    return nil;
-}
-
 + (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
                                     ofEntity:(NSEntityDescription*)entity
                                 fromResponse:(NSHTTPURLResponse*)response
@@ -85,6 +65,19 @@
 }
 
 #pragma mark - Base entity fetch functions
+
++ (instancetype)entity;
++ (instancetype)entityFromDictionary:(NSDictionary*)dict;
+
+- (instancetype)init;
+- (instancetype)initWithDictionary:(NSDictionary*)dict;
+
+- (void)clearData;
+- (void)loadWithDictionary:(NSDictionary*)dict;
+
+- (instancetype)save;
+- (void)deleteWithNoSave;
+- (void)delete;
 
 + (BOOL)deleteAll
 {
@@ -207,7 +200,14 @@
 
 - (void)clearData
 {
-    self.id = @0;
+    @try
+    {
+        self.id = @0;
+    }
+    @catch (NSException *exception)
+    {
+        DLog(LL_Warning, LD_CoreData, @"exception=%@", exception);
+    }
 }
 
 - (void)loadWithDictionary:(NSDictionary*)dict

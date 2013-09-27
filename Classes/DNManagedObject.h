@@ -20,10 +20,6 @@
 @property (nonatomic, retain)   NSNumber*   id;
 
 + (NSString*)entityName;
-+ (NSString*)getAll_TemplateName;
-+ (NSArray*)getAll_SortKeys;
-+ (NSString*)getFromId_KeyName;
-+ (NSString*)getFromId_TemplateName;
 
 + (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
                                     ofEntity:(NSEntityDescription*)entity
@@ -56,15 +52,14 @@
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue;
 + (id)dictionaryObject:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue;
 
-+ (instancetype)getFromId:(NSNumber*)id;
++ (instancetype)entity;
++ (instancetype)entityFromDictionary:(NSDictionary*)dict;
 
 - (instancetype)init;
 - (instancetype)initWithDictionary:(NSDictionary*)dict;
-- (instancetype)initWithDictionary:(NSDictionary*)dict dirty:(BOOL*)dirtyFlag;
 
 - (void)clearData;
 - (void)loadWithDictionary:(NSDictionary*)dict;
-- (void)loadWithDictionary:(NSDictionary*)dict dirty:(BOOL*)dirtyFlag;
 
 - (instancetype)save;
 - (void)deleteWithNoSave;
