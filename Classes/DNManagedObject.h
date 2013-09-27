@@ -11,6 +11,8 @@
 
 #import "DNApplicationDelegate.h"
 
+#import "DNModel.h"
+
 @interface DNManagedObject : NSManagedObject
 {
     NSFetchedResultsController* fetchedResultsController;
@@ -20,6 +22,7 @@
 @property (nonatomic, retain)   NSNumber*   id;
 
 + (NSString*)entityName;
++ (DNModel*)entityModel;
 
 + (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
                                     ofEntity:(NSEntityDescription*)entity
@@ -35,8 +38,6 @@
 + (NSManagedObjectModel*)managedObjectModel;
 
 + (void)saveContext;
-+ (NSArray*)getAll;
-+ (BOOL)deleteAll;
 
 + (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;
 + (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;

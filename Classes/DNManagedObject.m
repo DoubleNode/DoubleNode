@@ -17,9 +17,24 @@
 
 #pragma mark - Entity description functions
 
++ (DNModel*)entityModel
+{
+    return nil;
+}
+
 + (NSString*)entityName
 {
-    return NSStringFromClass(self);
+    return NSStringFromClass([self class]);
+}
+
++ (id)entityIDWithDictionary:(NSDictionary*)dict
+{
+    return [[self class] dictionaryNumber:dict withItem:@"id" andDefault:nil];
+}
+
+- (void)loadWithDictionary:(NSDictionary*)dict
+{
+    
 }
 
 + (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
@@ -64,98 +79,17 @@
     [[[self class] appDelegate] saveContext];
 }
 
-#pragma mark - Base entity fetch functions
-
-+ (instancetype)entity;
-+ (instancetype)entityFromDictionary:(NSDictionary*)dict;
-
-- (instancetype)init;
-- (instancetype)initWithDictionary:(NSDictionary*)dict;
-
-- (void)clearData;
-- (void)loadWithDictionary:(NSDictionary*)dict;
-
-- (instancetype)save;
-- (void)deleteWithNoSave;
-- (void)delete;
-
-+ (BOOL)deleteAll
-{
-    NSArray*    all = [[self class] getAll];
-    if ([all count] > 0)
-    {
-        [all enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-         {
-             [obj deleteWithNoSave];
-         }];
-        
-        [[self class] saveContext];
-    }
-    
-    return YES;
-}
-
-+ (NSArray*)getAll
-{
-    NSFetchRequest* fetchRequest    = [[[self managedObjectModel] fetchRequestTemplateForName:[[self class] getAll_TemplateName]] copy];
-    if (fetchRequest == nil)
-    {
-        DLog(LL_Debug, LD_General, @"Unable to get fetchRequest");
-        return nil;
-    }
-    
-    NSMutableArray* sortDescriptors = [NSMutableArray array];
-    
-    NSArray*    sortKeys = [[self class] getAll_SortKeys];
-    [sortKeys enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-     {
-         NSString*  sortKey = obj;
-         if ((sortKey != nil) && ([sortKey length] > 0))
-         {
-             [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]];
-         }
-     }];
-    if ([sortDescriptors count] > 0)
-    {
-        [fetchRequest setSortDescriptors:sortDescriptors];
-    }
-    
-    NSError*    error;
-    NSArray*    resultArray = [[[self class] managedObjectContext] executeFetchRequest:fetchRequest
-                                                                                 error:&error];
-    if ([resultArray count] == 0)
-    {
-        return nil;
-    }
-    
-    return resultArray;
-}
-
-+ (instancetype)getFromId:(NSNumber*)id
-{
-    NSDictionary*   substDict       = [NSDictionary dictionaryWithObjectsAndKeys:id, [[self class] getFromId_KeyName], nil];
-    NSFetchRequest* fetchRequest    = [[[self class] managedObjectModel] fetchRequestFromTemplateWithName:[[self class] getFromId_TemplateName]
-                                                                                    substitutionVariables:substDict];
-    if (fetchRequest == nil)
-    {
-        DLog(LL_Debug, LD_General, @"Unable to get fetchRequest");
-        return nil;
-    }
-    
-    [fetchRequest setFetchLimit:1];
-    
-    NSError*    error;
-    NSArray*    resultArray = [[[self class] managedObjectContext] executeFetchRequest:fetchRequest
-                                                                                 error:&error];
-    if ([resultArray count] == 0)
-    {
-        return nil;
-    }
-    
-    return [resultArray objectAtIndex:0];
-}
-
 #pragma mark - Entity initialization functions
+
++ (instancetype)entity
+{
+    return [[self alloc] init];
+}
+
++ (instancetype)entityFromDictionary:(NSDictionary*)dict
+{
+    return [[self alloc] initWithDictionary:dict];
+}
 
 - (instancetype)init
 {
@@ -174,25 +108,26 @@
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict
 {
-    return [self initWithDictionary:dict dirty:nil];
-}
+    __block id  newSelf = self;
 
-- (instancetype)initWithDictionary:(NSDictionary*)dict
-                             dirty:(BOOL*)dirtyFlag
-{
-    id  saveSelf    = self;
-    id  idValue     = [[self class] dictionaryNumber:dict withItem:@"id" andDefault:nil];
-    
-    self = [[self class] getFromId:idValue];
-    if (!self)
+    id  idValue = [[self class] entityIDWithDictionary:dict];
+
+    [[[self class] entityModel] getFromID:idValue
+                                 onResult:^(id entity)
+     {
+         newSelf = entity;
+     }];
+    if (newSelf == nil)
     {
-        self = [saveSelf init];
+        newSelf = [[self class] init];
     }
+    
+    self = newSelf;
     if (self)
     {
-        self.id = [NSNumber numberWithInt:[idValue intValue]];
+        self.id = idValue;
         
-        [self loadWithDictionary:dict dirty:dirtyFlag];
+        [self loadWithDictionary:dict];
     }
     
     return self;
@@ -208,16 +143,6 @@
     {
         DLog(LL_Warning, LD_CoreData, @"exception=%@", exception);
     }
-}
-
-- (void)loadWithDictionary:(NSDictionary*)dict
-{
-    [self loadWithDictionary:dict dirty:nil];
-}
-
-- (void)loadWithDictionary:(NSDictionary*)dict
-                     dirty:(BOOL*)dirtyFlag
-{
 }
 
 #pragma mark - Entity save/delete functions

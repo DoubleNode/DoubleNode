@@ -6,9 +6,8 @@
 //
 //
 
-#import <CoreData/CoreData.h>
-
 #import "DNModel.h"
+
 #import "DNManagedObject.h"
 
 @interface DNModel () <NSFetchedResultsControllerDelegate>
@@ -22,16 +21,52 @@
 
 @implementation DNModel
 
-#pragma mark - model details
++ (NSString*)entityName     {   return nil;     }
 
-- (NSString*)getAllFetchTemplate
+- (id)init
 {
-    return @"";
+    self = [super init];
+    if (self)
+    {
+    }
+    
+    return self;
 }
 
-- (NSArray*)getAllSortKeys
+#pragma mark - model details
+
+- (NSString*)getFromIDFetchTemplate     {   return [NSString stringWithFormat:@"a%@ByID", [[self class] entityName]];   }
+- (NSString*)getAllFetchTemplate        {   return [NSString stringWithFormat:@"every%@", [[self class] entityName]];   }
+
+- (NSArray*)getAllSortKeys      {   return @[ @"id" ];   }
+
+#pragma mark - getFromID
+
+- (void)getFromID:(id)idValue onResult:(getFromID_resultsHandlerBlock)resultsHandler
 {
-    return @[  ];
+    NSDictionary*   substDict       = @{ @"ID": idValue };
+    
+    NSFetchRequest* fetchRequest    = [[[DNUtilities appDelegate] managedObjectModel] fetchRequestFromTemplateWithName:[self getFromIDFetchTemplate]
+                                                                                                 substitutionVariables:substDict];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return;
+    }
+    
+    [fetchRequest setFetchLimit:1];
+    
+    NSError*    error;
+    NSArray*    resultArray = [[[DNUtilities appDelegate] managedObjectContext] executeFetchRequest:fetchRequest
+                                                                                              error:&error];
+    if ([resultArray count] == 0)
+    {
+        resultsHandler(nil);
+    }
+    else
+    {
+        resultsHandler([resultArray objectAtIndex:0]);
+    }
 }
 
 #pragma mark - getAll
