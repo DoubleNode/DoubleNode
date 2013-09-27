@@ -28,6 +28,11 @@
 + (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
                                     ofEntity:(NSEntityDescription*)entity
                                 fromResponse:(NSHTTPURLResponse*)response;
++ (BOOL)shouldFetchRemoteAttributeValuesForObjectWithID:(NSManagedObjectID*)objectID
+                                 inManagedObjectContext:(NSManagedObjectContext*)context;
++ (BOOL)shouldFetchRemoteValuesForRelationship:(NSRelationshipDescription*)relationship
+                               forObjectWithID:(NSManagedObjectID*)objectID
+                        inManagedObjectContext:(NSManagedObjectContext*)context;
 
 + (id<DNApplicationDelegate>)appDelegate;
 + (NSManagedObjectContext*)managedObjectContext;

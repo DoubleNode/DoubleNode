@@ -49,6 +49,19 @@
     return [[NSDictionary alloc] init];
 }
 
++ (BOOL)shouldFetchRemoteAttributeValuesForObjectWithID:(NSManagedObjectID*)objectID
+                                 inManagedObjectContext:(NSManagedObjectContext*)context
+{
+    return NO;  // No detail content endpoint calls needed
+}
+
++ (BOOL)shouldFetchRemoteValuesForRelationship:(NSRelationshipDescription*)relationship
+                               forObjectWithID:(NSManagedObjectID*)objectID
+                        inManagedObjectContext:(NSManagedObjectContext*)context
+{
+    return NO;  // No detail content endpoint calls needed
+}
+
 #pragma mark - AppDelegate access functions
 
 + (id<DNApplicationDelegate>)appDelegate

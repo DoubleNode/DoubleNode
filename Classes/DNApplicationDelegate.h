@@ -10,8 +10,11 @@
 
 @protocol DNApplicationDelegate<NSObject>
 
+- (void)disableURLCache;
+
 - (NSManagedObjectContext*)managedObjectContext;
 - (NSManagedObjectModel*)managedObjectModel;
+- (void)deletePersistentStore;
 - (void)saveContext;
 
 - (id)settingsItem:(NSString*)item;
