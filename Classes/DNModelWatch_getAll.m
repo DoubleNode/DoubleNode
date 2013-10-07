@@ -46,6 +46,11 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [super dealloc];
+}
+
 - (void)performFetch:(NSError **)error
 {
     [super performFetch:error];

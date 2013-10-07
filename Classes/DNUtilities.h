@@ -74,6 +74,7 @@ typedef BOOL (^RevealBlock_Bool)(BOOL left);
 
 + (void)runBlock:(void (^)())block;
 + (void)runAfterDelay:(CGFloat)delay block:(void (^)())block;
++ (void)runRepeatedlyAfterDelay:(CGFloat)delay block:(void (^)(BOOL* stop))block;
 + (NSTimer*)repeatRunAfterDelay:(CGFloat)delay block:(void (^)())block;
 + (bool)canDevicePlaceAPhoneCall;
 

@@ -20,6 +20,13 @@ typedef void(^getFromID_resultsHandlerBlock)(id entity);
 
 + (NSString*)entityName;
 
+#pragma mark - AppDelegate access functions
+
++ (id<DNApplicationDelegate>)appDelegate;
++ (NSManagedObjectContext*)managedObjectContext;
++ (NSManagedObjectModel*)managedObjectModel;
++ (void)saveContext;
+
 - (id)init;
 
 - (NSString*)getFromIDFetchTemplate;
@@ -28,8 +35,7 @@ typedef void(^getFromID_resultsHandlerBlock)(id entity);
 
 - (void)getFromID:(id)idValue onResult:(getFromID_resultsHandlerBlock)resultsHandler;
 
-- (DNModelWatch*)getAllWatchKey:(NSString*)watchKey
-                       onResult:(getAll_resultsHandlerBlock)resultsHandler;
+- (DNModelWatch*)getAllOnResult:(getAll_resultsHandlerBlock)resultsHandler;
 
 - (void)deleteAll;
 

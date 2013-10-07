@@ -218,6 +218,21 @@
     [self performSelector:@selector(runBlock:) withObject:block_ afterDelay:delay];
 }
 
++ (void)runRepeatedlyAfterDelay:(CGFloat)delay block:(void (^)(BOOL* stop))block
+{
+    [[self class] runAfterDelay:delay
+                          block:^
+     {
+         BOOL   stop = NO;
+         block(&stop);
+         if (stop == NO)
+         {
+             [[self class] runRepeatedlyAfterDelay:delay
+                                             block:block];
+         }
+     }];
+}
+
 - (void)instanceRunBlock:(void (^)())block
 {
     block();
