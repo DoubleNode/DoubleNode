@@ -12,9 +12,9 @@
 
 @interface DNModel () <NSFetchedResultsControllerDelegate>
 {
-    NSFetchedResultsController*     fetchedResultsController;
+    NSMutableDictionary*            fetchWatches;
     
-    getAll_resultsHandlerBlock      getAll_resultsHandler;
+    getFromID_resultsHandlerBlock   getFromID_resultsHandler;
 }
 
 @end
@@ -28,6 +28,7 @@
     self = [super init];
     if (self)
     {
+        fetchWatches    = [NSMutableDictionary dictionary];
     }
     
     return self;
@@ -44,6 +45,8 @@
 
 - (void)getFromID:(id)idValue onResult:(getFromID_resultsHandlerBlock)resultsHandler
 {
+    getFromID_resultsHandler    = resultsHandler;
+    
     NSDictionary*   substDict       = @{ @"ID": idValue };
     
     NSFetchRequest* fetchRequest    = [[[DNUtilities appDelegate] managedObjectModel] fetchRequestFromTemplateWithName:[self getFromIDFetchTemplate]
@@ -56,36 +59,31 @@
     
     [fetchRequest setFetchLimit:1];
     
-    NSError*    error;
-    NSArray*    resultArray = [[[DNUtilities appDelegate] managedObjectContext] executeFetchRequest:fetchRequest
-                                                                                              error:&error];
-    if ([resultArray count] == 0)
-    {
-        resultsHandler(nil);
-    }
-    else
-    {
-        resultsHandler([resultArray objectAtIndex:0]);
-    }
-}
-
-#pragma mark - getAll
-
-- (void)getAllRefetchData
-{
+    NSMutableArray* sortDescriptors = [NSMutableArray array];
+    [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:@"ID" ascending:YES]];
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    NSFetchedResultsController* fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                                               managedObjectContext:[[DNUtilities appDelegate] managedObjectContext]
+                                                                                                 sectionNameKeyPath:nil
+                                                                                                          cacheName:nil];
+    fetchedResultsController.delegate = self;
+    [fetchWatches setObject:fetchedResultsController forKey:@"getFromID"];
+    
     fetchedResultsController.fetchRequest.resultType = NSManagedObjectResultType;
     [fetchedResultsController performFetch:nil];
 }
 
-- (void)getAllOnResult:(getAll_resultsHandlerBlock)resultsHandler
+#pragma mark - getAll
+
+- (DNModelWatch*)getAllWatchKey:(NSString*)watchKey
+                       onResult:(getAll_resultsHandlerBlock)resultsHandler
 {
-    getAll_resultsHandler   = resultsHandler;
-    
     NSFetchRequest* fetchRequest    = [[[[DNUtilities appDelegate] managedObjectModel] fetchRequestTemplateForName:[self getAllFetchTemplate]] copy];
     if (fetchRequest == nil)
     {
         DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
-        return;
+        return nil;
     }
     
     NSMutableArray* sortDescriptors = [NSMutableArray array];
@@ -102,19 +100,18 @@
         [fetchRequest setSortDescriptors:sortDescriptors];
     }
     
-    fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                   managedObjectContext:[[DNUtilities appDelegate] managedObjectContext]
-                                                                     sectionNameKeyPath:nil
-                                                                              cacheName:nil];
-    fetchedResultsController.delegate = self;
-    [fetchedResultsController performFetch:nil];
+    DNModelWatch_getAll*    watch   = [DNModelWatch_getAll watchWithFetch:fetchRequest andHandler:resultsHandler];
+    
+    [fetchWatches setObject:watch forKey:watchKey];
+    
+    return watch;
 }
 
 #pragma mark - deleteAll
 
 - (void)deleteAll
 {
-    [self getAllOnResult:^(NSArray* managedObjects)
+    [self getAllWatchKey:@"deleteAll" onResult:^(DNModelWatch* watch, NSArray* managedObjects)
      {
          [managedObjects enumerateObjectsUsingBlock:^(DNManagedObject* managedObject, NSUInteger idx, BOOL *stop)
           {
@@ -122,6 +119,8 @@
           }];
          
          [DNManagedObject saveContext];
+         
+         [fetchWatches removeObjectForKey:@"deleteAll"];
      }];
 }
 
@@ -129,7 +128,13 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
-    getAll_resultsHandler(fetchedResultsController.fetchedObjects);
+    if ([fetchWatches objectForKey:@"getFromID"] != nil)
+    {
+        if (controller == fetchWatches[@"getFromID"])
+        {
+            getFromID_resultsHandler(controller.fetchedObjects[0]);
+        }
+    }
 }
 
 @end
