@@ -48,7 +48,7 @@
 
 - (void)performFetch:(NSError **)error
 {
-    [self performFetch:error];
+    [super performFetch:error];
     
     fetchResultsController.fetchRequest.resultType = NSManagedObjectResultType;
     [fetchResultsController performFetch:error];

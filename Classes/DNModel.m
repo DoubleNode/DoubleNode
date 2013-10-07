@@ -10,6 +10,8 @@
 
 #import "DNManagedObject.h"
 
+#import "DNModelWatch_getAll.h"
+
 @interface DNModel () <NSFetchedResultsControllerDelegate>
 {
     NSMutableDictionary*            fetchWatches;
@@ -45,8 +47,6 @@
 
 - (void)getFromID:(id)idValue onResult:(getFromID_resultsHandlerBlock)resultsHandler
 {
-    getFromID_resultsHandler    = resultsHandler;
-    
     NSDictionary*   substDict       = @{ @"ID": idValue };
     
     NSFetchRequest* fetchRequest    = [[[DNUtilities appDelegate] managedObjectModel] fetchRequestFromTemplateWithName:[self getFromIDFetchTemplate]
@@ -84,6 +84,7 @@
     {
         DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
         return nil;
+        return;
     }
     
     NSMutableArray* sortDescriptors = [NSMutableArray array];
@@ -113,14 +114,14 @@
 {
     [self getAllWatchKey:@"deleteAll" onResult:^(DNModelWatch* watch, NSArray* managedObjects)
      {
+         [fetchWatches removeObjectForKey:@"deleteAll"];
+
          [managedObjects enumerateObjectsUsingBlock:^(DNManagedObject* managedObject, NSUInteger idx, BOOL *stop)
           {
               [managedObject deleteWithNoSave];
           }];
          
          [DNManagedObject saveContext];
-         
-         [fetchWatches removeObjectForKey:@"deleteAll"];
      }];
 }
 
@@ -128,13 +129,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
-    if ([fetchWatches objectForKey:@"getFromID"] != nil)
-    {
-        if (controller == fetchWatches[@"getFromID"])
-        {
-            getFromID_resultsHandler(controller.fetchedObjects[0]);
-        }
-    }
+    //getAll_resultsHandler(nil, controller.fetchedObjects);
 }
 
 @end

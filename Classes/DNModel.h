@@ -28,8 +28,8 @@ typedef void(^getFromID_resultsHandlerBlock)(id entity);
 
 - (void)getFromID:(id)idValue onResult:(getFromID_resultsHandlerBlock)resultsHandler;
 
-- (void)getAllRefetchData;
-- (DNModelWatch*)getAllWatchKey:(NSString*)watchKey onResult:(getAll_resultsHandlerBlock)resultsHandler;
+- (DNModelWatch*)getAllWatchKey:(NSString*)watchKey
+                       onResult:(getAll_resultsHandlerBlock)resultsHandler;
 
 - (void)deleteAll;
 
