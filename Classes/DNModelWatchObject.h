@@ -16,6 +16,8 @@ typedef void(^DNModelWatchObject_resultsHandlerBlock)(DNModelWatchObjects* watch
 
 @interface DNModelWatchObject : DNModelWatch
 
+- (id)initWithModel:(DNModel*)model andHandler:(DNModelWatchObject_resultsHandlerBlock)handler;
+
 - (DNManagedObject*)object;
 
 @end

@@ -17,9 +17,10 @@
 
 @implementation DNModelWatchObjects
 
-- (id)initWithHandler:(DNModelWatchObjects_resultsHandlerBlock)handler
+- (id)initWithModel:(DNModel*)model
+         andHandler:(DNModelWatchObjects_resultsHandlerBlock)handler
 {
-    self = [super init];
+    self = [super initWithModel:model];
     if (self)
     {
         resultsHandler  = handler;

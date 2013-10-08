@@ -9,9 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class DNModel;
+
 @interface DNModelWatch : NSObject
 
-- (id)init;
+- (id)initWithModel:(DNModel*)model;
 
 - (void)cancelWatch;
 - (void)refreshWatch;
