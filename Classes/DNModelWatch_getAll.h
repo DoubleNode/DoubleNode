@@ -17,6 +17,8 @@ typedef void(^getAll_resultsHandlerBlock)(DNModelWatch* watch, NSArray* entities
 
 - (id)initWithFetch:(NSFetchRequest*)fetch andHandler:(getAll_resultsHandlerBlock)resultsHandler;
 
+- (void)cancelFetch;
+
 - (void)executeResultsHandler:(NSArray*)entities;
 
 @end

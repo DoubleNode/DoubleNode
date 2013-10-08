@@ -20,6 +20,10 @@
     return self;
 }
 
+- (void)cancelFetch
+{
+}
+
 - (void)performFetch:(NSError **)error
 {
 }

@@ -13,6 +13,7 @@
 
 - (id)init;
 
+- (void)cancelFetch;
 - (void)performFetch:(NSError **)error;
 
 - (void)executeResultsHandler:(NSArray*)entities;

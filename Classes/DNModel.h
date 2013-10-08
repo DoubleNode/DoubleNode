@@ -39,6 +39,4 @@ typedef void(^getFromID_resultsHandlerBlock)(id entity);
 
 - (void)deleteAll;
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController*)controller;
-
 @end

@@ -72,6 +72,7 @@ typedef BOOL (^RevealBlock_Bool)(BOOL left);
 + (NSString*)appendNibSuffix:(NSString*)nibNameOrNil;
 + (NSString*)deviceImageName:(NSString*)name;
 
++ (void)runOnMainThreadWithoutDeadlocking:(void (^)())block;
 + (void)runBlock:(void (^)())block;
 + (void)runAfterDelay:(CGFloat)delay block:(void (^)())block;
 + (void)runRepeatedlyAfterDelay:(CGFloat)delay block:(void (^)(BOOL* stop))block;

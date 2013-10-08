@@ -10,7 +10,7 @@
 
 #import "DNManagedObject.h"
 
-@interface DNModel () <NSFetchedResultsControllerDelegate>
+@interface DNModel ()
 {
     NSMutableDictionary*    fetchWatches;
 }
@@ -131,13 +131,6 @@
               [managedObject deleteWithNoSave];
           }];
      }];
-}
-
-#pragma mark - NSFetchedResultsControllerDelegate
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
-{
-    //getAll_resultsHandler(nil, controller.fetchedObjects);
 }
 
 @end

@@ -207,6 +207,18 @@
     return [fileName stringByAppendingFormat:@".%@", extension];
 }
 
++ (void)runOnMainThreadWithoutDeadlocking:(void (^)())block
+{
+    if ([NSThread isMainThread])
+    {
+        block();
+    }
+    else
+    {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
+}
+
 + (void)runBlock:(void (^)())block
 {
     block();
