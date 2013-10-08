@@ -94,7 +94,7 @@
 
 #pragma mark - getAll
 
-- (DNModelWatch*)getAllOnResult:(getAll_resultsHandlerBlock)resultsHandler
+- (DNModelWatchObjects*)getAllOnResult:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler
 {
     NSFetchRequest* fetchRequest    = [[[[DNUtilities appDelegate] managedObjectModel] fetchRequestTemplateForName:[self getAllFetchTemplate]] copy];
     if (fetchRequest == nil)
@@ -117,7 +117,7 @@
         [fetchRequest setSortDescriptors:sortDescriptors];
     }
 
-    return [DNModelWatch_getAll watchWithFetch:fetchRequest andHandler:resultsHandler];
+    return [DNModelWatchObjects_getAll watchWithFetch:fetchRequest andHandler:resultsHandler];
 }
 
 #pragma mark - deleteAll

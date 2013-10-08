@@ -13,9 +13,9 @@
 
 - (id)init;
 
-- (void)cancelFetch;
-- (void)performFetch:(NSError **)error;
+- (void)cancelWatch;
+- (void)refreshWatch;
 
-- (void)executeResultsHandler:(NSArray*)entities;
+- (void)executeResultsHandler;
 
 @end

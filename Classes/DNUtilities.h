@@ -33,6 +33,7 @@ typedef enum
 }
 LogLevel;
 
+#define LD_UnitTests        @"unittests"
 #define LD_General          @"general"
 #define LD_CoreFramework    @"coreframework"
 #define LD_CoreData         @"coredata"

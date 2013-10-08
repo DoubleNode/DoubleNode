@@ -20,15 +20,15 @@
     return self;
 }
 
-- (void)cancelFetch
+- (void)cancelWatch
 {
 }
 
-- (void)performFetch:(NSError **)error
+- (void)refreshWatch
 {
 }
 
-- (void)executeResultsHandler:(NSArray*)entities
+- (void)executeResultsHandler
 {
 }
 

@@ -1,79 +1,78 @@
 //
-//  DNModelWatch_getAll.m
+//  DNModelWatchObjects_getAll.m
 //  Pods
 //
 //  Created by Darren Ehlers on 10/6/13.
 //
 //
 
-#import "DNModelWatch_getAll.h"
+#import "DNModelWatchObjects_getAll.h"
 
-@interface DNModelWatch_getAll () <NSFetchedResultsControllerDelegate>
+@interface DNModelWatchObjects_getAll () <NSFetchedResultsControllerDelegate>
 {
     NSFetchRequest*             fetchRequest;
     NSFetchedResultsController* fetchResultsController;
-    
-    getAll_resultsHandlerBlock  resultsHandler;
 }
 
 @end
 
-@implementation DNModelWatch_getAll
+@implementation DNModelWatchObjects_getAll
 
 + (id)watchWithFetch:(NSFetchRequest*)fetch
-          andHandler:(getAll_resultsHandlerBlock)resultsHandler
+          andHandler:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler
 {
-    return [[DNModelWatch_getAll alloc] initWithFetch:fetch andHandler:resultsHandler];
+    return [[DNModelWatchObjects_getAll alloc] initWithFetch:fetch andHandler:resultsHandler];
 }
 
 - (id)initWithFetch:(NSFetchRequest*)fetch
-         andHandler:(getAll_resultsHandlerBlock)handler
+         andHandler:(DNModelWatchObjects_resultsHandlerBlock)handler
 {
-    self = [super init];
+    self = [super initWithHandler:handler];
     if (self)
     {
         fetchRequest    = fetch;
-        resultsHandler  = handler;
         
         fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                      managedObjectContext:[[DNUtilities appDelegate] managedObjectContext]
                                                                        sectionNameKeyPath:nil
-                                                                                cacheName:nil];
+                                                                                cacheName:nil]; // @"getAll"];
         fetchResultsController.delegate = self;
-        [self performFetch:nil];
 
-        //DLog(LL_Debug, LD_CoreData, @"fetchedObjects=%@", fetchResultsController.fetchedObjects);
-        if ([fetchResultsController.fetchedObjects count] > 0)
+        [self refreshWatch];
+
+        if ([[self objects] count] > 0)
         {
-            [self executeResultsHandler:fetchResultsController.fetchedObjects];
+            [self executeResultsHandler];
         }
     }
     
     return self;
 }
 
-- (void)cancelFetch
+- (NSArray*)objects
 {
-    [super cancelFetch];
+    return fetchResultsController.fetchedObjects;
+}
+
+- (void)cancelWatch
+{
+    [super cancelWatch];
     
     fetchRequest            = nil;
     fetchResultsController  = nil;
-    resultsHandler          = nil;
 }
 
-- (void)performFetch:(NSError **)error
+- (void)refreshWatch
 {
-    [super performFetch:error];
+    [super refreshWatch];
+    
+    NSError*    error = nil;
     
     fetchResultsController.fetchRequest.resultType = NSManagedObjectResultType;
-    [fetchResultsController performFetch:error];
-}
-
-- (void)executeResultsHandler:(NSArray*)entities
-{
-    if (resultsHandler)
+    BOOL    result = [fetchResultsController performFetch:&error];
+    if (result == NO)
     {
-        resultsHandler(self, entities);
+        DLog(LL_Error, LD_CoreData, @"error=%@", [error localizedDescription]);
     }
 }
 
@@ -81,7 +80,7 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
-    [self executeResultsHandler:controller.fetchedObjects];
+    [self executeResultsHandler];
 }
 
 - (void)controller:(NSFetchedResultsController*)controller

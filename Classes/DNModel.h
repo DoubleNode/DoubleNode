@@ -12,7 +12,7 @@
 #import "DNUtilities.h"
 
 #import "DNModelWatch.h"
-#import "DNModelWatch_getAll.h"
+#import "DNModelWatchObjects_getAll.h"
 
 typedef void(^getFromID_resultsHandlerBlock)(id entity);
 
@@ -35,7 +35,7 @@ typedef void(^getFromID_resultsHandlerBlock)(id entity);
 
 - (void)getFromID:(id)idValue onResult:(getFromID_resultsHandlerBlock)resultsHandler;
 
-- (DNModelWatch*)getAllOnResult:(getAll_resultsHandlerBlock)resultsHandler;
+- (DNModelWatchObjects*)getAllOnResult:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler;
 
 - (void)deleteAll;
 
