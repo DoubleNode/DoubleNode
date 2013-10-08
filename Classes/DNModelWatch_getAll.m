@@ -42,7 +42,11 @@
         fetchResultsController.delegate = self;
         [self performFetch:nil];
 
-        [self executeResultsHandler:fetchResultsController.fetchedObjects];
+        //DLog(LL_Debug, LD_CoreData, @"fetchedObjects=%@", fetchResultsController.fetchedObjects);
+        if ([fetchResultsController.fetchedObjects count] > 0)
+        {
+            [self executeResultsHandler:fetchResultsController.fetchedObjects];
+        }
     }
     
     return self;

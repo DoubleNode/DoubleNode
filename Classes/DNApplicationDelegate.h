@@ -12,6 +12,7 @@
 
 - (void)disableURLCache;
 
+- (void)setPersistentStorePrefix:(NSString*)prefix;
 - (NSManagedObjectContext*)managedObjectContext;
 - (NSManagedObjectModel*)managedObjectModel;
 - (void)deletePersistentStore;
