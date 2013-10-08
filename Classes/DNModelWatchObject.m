@@ -8,7 +8,26 @@
 
 #import "DNModelWatchObject.h"
 
+@interface DNModelWatchObject ()
+{
+    DNModelWatchObject_resultsHandlerBlock  resultsHandler;
+}
+
+@end
+
 @implementation DNModelWatchObject
+
+- (id)initWithModel:(DNModel*)model
+         andHandler:(DNModelWatchObject_resultsHandlerBlock)handler
+{
+    self = [super initWithModel:model];
+    if (self)
+    {
+        resultsHandler  = handler;
+    }
+    
+    return self;
+}
 
 - (DNManagedObject*)object;
 {

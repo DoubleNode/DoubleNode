@@ -29,6 +29,10 @@ typedef void(^getFromID_resultsHandlerBlock)(id entity);
 
 - (id)init;
 
+- (void)saveContext;
+- (void)retainWatch:(DNModelWatch*)watch;
+- (void)releaseWatch:(DNModelWatch*)watch;
+
 - (NSString*)getFromIDFetchTemplate;
 - (NSString*)getAllFetchTemplate;
 - (NSArray*)getAllSortKeys;

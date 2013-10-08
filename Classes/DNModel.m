@@ -12,7 +12,7 @@
 
 @interface DNModel ()
 {
-    NSMutableDictionary*    fetchWatches;
+    NSMutableArray* watches;
 }
 
 @end
@@ -50,10 +50,25 @@
     self = [super init];
     if (self)
     {
-        fetchWatches    = [NSMutableDictionary dictionary];
+        watches     = [NSMutableArray array];
     }
     
     return self;
+}
+
+- (void)saveContext
+{
+    [[self class] saveContext];
+}
+
+- (void)retainWatch:(DNModelWatch*)watch
+{
+    [watches addObject:watch];
+}
+
+- (void)releaseWatch:(DNModelWatch*)watch
+{
+    [watches removeObject:watch];
 }
 
 #pragma mark - model details
@@ -117,19 +132,21 @@
         [fetchRequest setSortDescriptors:sortDescriptors];
     }
 
-    return [DNModelWatchObjects_getAll watchWithFetch:fetchRequest andHandler:resultsHandler];
+    return [DNModelWatchObjects_getAll watchWithModel:self andFetch:fetchRequest andHandler:resultsHandler];
 }
 
 #pragma mark - deleteAll
 
 - (void)deleteAll
 {
-    [self getAllOnResult:^(DNModelWatch* watch, NSArray* managedObjects)
+    [self getAllOnResult:^(DNModelWatch* watch, NSArray* objects)
      {
-         [managedObjects enumerateObjectsUsingBlock:^(DNManagedObject* managedObject, NSUInteger idx, BOOL *stop)
+         [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
           {
-              [managedObject deleteWithNoSave];
+              [object deleteWithNoSave];
           }];
+         
+         [self saveContext];
      }];
 }
 

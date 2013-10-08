@@ -8,13 +8,25 @@
 
 #import "DNModelWatch.h"
 
+#import "DNModel.h"
+
+@interface DNModelWatch ()
+{
+    DNModel*    model;
+}
+
+@end
+
 @implementation DNModelWatch
 
-- (id)init
+- (id)initWithModel:(DNModel*)myModel
 {
     self = [super init];
     if (self)
     {
+        model   = myModel;
+        
+        [model retainWatch:self];
     }
     
     return self;
@@ -22,6 +34,7 @@
 
 - (void)cancelWatch
 {
+    [model releaseWatch:self];
 }
 
 - (void)refreshWatch

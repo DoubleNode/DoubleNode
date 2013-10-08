@@ -18,16 +18,18 @@
 
 @implementation DNModelWatchObjects_getAll
 
-+ (id)watchWithFetch:(NSFetchRequest*)fetch
++ (id)watchWithModel:(DNModel*)model
+            andFetch:(NSFetchRequest*)fetch
           andHandler:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler
 {
-    return [[DNModelWatchObjects_getAll alloc] initWithFetch:fetch andHandler:resultsHandler];
+    return [[DNModelWatchObjects_getAll alloc] initWithModel:model andFetch:fetch andHandler:resultsHandler];
 }
 
-- (id)initWithFetch:(NSFetchRequest*)fetch
+- (id)initWithModel:(DNModel*)model
+           andFetch:(NSFetchRequest*)fetch
          andHandler:(DNModelWatchObjects_resultsHandlerBlock)handler
 {
-    self = [super initWithHandler:handler];
+    self = [super initWithModel:model andHandler:handler];
     if (self)
     {
         fetchRequest    = fetch;
@@ -35,7 +37,7 @@
         fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                      managedObjectContext:[[DNUtilities appDelegate] managedObjectContext]
                                                                        sectionNameKeyPath:nil
-                                                                                cacheName:nil]; // @"getAll"];
+                                                                                cacheName:@"getAll"];
         fetchResultsController.delegate = self;
 
         [self refreshWatch];

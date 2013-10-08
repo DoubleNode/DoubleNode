@@ -14,7 +14,7 @@ typedef void(^DNModelWatchObjects_resultsHandlerBlock)(DNModelWatchObjects* watc
 
 @interface DNModelWatchObjects : DNModelWatch
 
-- (id)initWithHandler:(DNModelWatchObjects_resultsHandlerBlock)handler;
+- (id)initWithModel:(DNModel*)model andHandler:(DNModelWatchObjects_resultsHandlerBlock)handler;
 
 - (NSArray*)objects;
 
