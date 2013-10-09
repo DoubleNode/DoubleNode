@@ -12,10 +12,8 @@
 #import "DNUtilities.h"
 
 #import "DNManagedObject.h"
-#import "DNModelWatchObject.h"
-#import "DNModelWatchObjects_getAll.h"
-
-typedef void(^getFromID_resultsHandlerBlock)(id entity);
+#import "DNModelWatchFetchedObject.h"
+#import "DNModelWatchFetchedObjects.h"
 
 @interface DNModel : NSObject
 
@@ -40,11 +38,13 @@ typedef void(^getFromID_resultsHandlerBlock)(id entity);
 
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
                           onResult:(DNModelWatchObject_resultsHandlerBlock)resultHandler;
+- (DNModelWatchObjects*)watchObjects:(NSArray*)objects
+                            onResult:(DNModelWatchObjects_resultsHandlerBlock)resultHandler;
 
 - (void)retainWatch:(DNModelWatch*)watch;
 - (void)releaseWatch:(DNModelWatch*)watch;
 
-- (void)getFromID:(id)idValue onResult:(getFromID_resultsHandlerBlock)resultsHandler;
+- (DNModelWatchObject*)getFromID:(id)idValue onResult:(DNModelWatchObject_resultsHandlerBlock)resultsHandler;
 
 - (DNModelWatchObjects*)getAllOnResult:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler;
 

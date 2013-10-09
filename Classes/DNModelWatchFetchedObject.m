@@ -1,14 +1,14 @@
 //
-//  DNModelWatchObjects_getAll.m
+//  DNModelWatchFetchedObject.m
 //  Pods
 //
 //  Created by Darren Ehlers on 10/6/13.
 //
 //
 
-#import "DNModelWatchObjects_getAll.h"
+#import "DNModelWatchFetchedObject.h"
 
-@interface DNModelWatchObjects_getAll () <NSFetchedResultsControllerDelegate>
+@interface DNModelWatchFetchedObject () <NSFetchedResultsControllerDelegate>
 {
     NSFetchRequest*             fetchRequest;
     NSFetchedResultsController* fetchResultsController;
@@ -16,18 +16,18 @@
 
 @end
 
-@implementation DNModelWatchObjects_getAll
+@implementation DNModelWatchFetchedObject
 
 + (id)watchWithModel:(DNModel*)model
             andFetch:(NSFetchRequest*)fetch
-          andHandler:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler
+          andHandler:(DNModelWatchObject_resultsHandlerBlock)resultsHandler
 {
-    return [[DNModelWatchObjects_getAll alloc] initWithModel:model andFetch:fetch andHandler:resultsHandler];
+    return [[DNModelWatchFetchedObject alloc] initWithModel:model andFetch:fetch andHandler:resultsHandler];
 }
 
 - (id)initWithModel:(DNModel*)model
            andFetch:(NSFetchRequest*)fetch
-         andHandler:(DNModelWatchObjects_resultsHandlerBlock)handler
+         andHandler:(DNModelWatchObject_resultsHandlerBlock)handler
 {
     self = [super initWithModel:model andHandler:handler];
     if (self)
@@ -37,12 +37,12 @@
         fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                      managedObjectContext:[[DNUtilities appDelegate] managedObjectContext]
                                                                        sectionNameKeyPath:nil
-                                                                                cacheName:@"getAll"];
+                                                                                cacheName:NSStringFromClass([self class])];
         fetchResultsController.delegate = self;
 
         [self refreshWatch];
 
-        if ([[self objects] count] > 0)
+        if ([fetchResultsController.fetchedObjects count] > 0)
         {
             [self executeResultsHandler];
         }
@@ -51,9 +51,14 @@
     return self;
 }
 
-- (NSArray*)objects
+- (DNManagedObject*)object
 {
-    return fetchResultsController.fetchedObjects;
+    if ([fetchResultsController.fetchedObjects count] == 0)
+    {
+        return nil;
+    }
+    
+    return fetchResultsController.fetchedObjects[0];
 }
 
 - (void)cancelWatch
