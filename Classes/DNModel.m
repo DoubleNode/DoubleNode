@@ -45,6 +45,11 @@
 
 #pragma mark - initialization functions
 
++ (instancetype)model
+{
+    return [[self alloc] init];
+}
+
 - (id)init
 {
     self = [super init];
@@ -61,6 +66,33 @@
     [[self class] saveContext];
 }
 
+#pragma mark - model details
+
+- (NSString*)getFromIDFetchTemplate     {   return [NSString stringWithFormat:@"a%@ByID", [[self class] entityName]];   }
+- (NSString*)getAllFetchTemplate        {   return [NSString stringWithFormat:@"every%@", [[self class] entityName]];   }
+
+- (NSArray*)getAllSortKeys      {   return @[ @"id" ];   }
+
+#pragma mark - watch management
+
+- (DNModelWatchObject*)watchObject:(DNManagedObject*)object
+                          onResult:(DNModelWatchObject_resultsHandlerBlock)resultHandler
+{
+    DNModelWatchObject* watch   = [[DNModelWatchObject alloc] initWithModel:self
+                                                                 andHandler:resultHandler];
+    
+    return watch;
+}
+
+- (DNModelWatchObjects*)watchObjects:(NSArray*)objects
+                            onResult:(DNModelWatchObjects_resultsHandlerBlock)resultHandler
+{
+    DNModelWatchObjects*    watch   = [[DNModelWatchObjects alloc] initWithModel:self
+                                                                      andHandler:resultHandler];
+    
+    return watch;
+}
+
 - (void)retainWatch:(DNModelWatch*)watch
 {
     [watches addObject:watch];
@@ -71,16 +103,9 @@
     [watches removeObject:watch];
 }
 
-#pragma mark - model details
-
-- (NSString*)getFromIDFetchTemplate     {   return [NSString stringWithFormat:@"a%@ByID", [[self class] entityName]];   }
-- (NSString*)getAllFetchTemplate        {   return [NSString stringWithFormat:@"every%@", [[self class] entityName]];   }
-
-- (NSArray*)getAllSortKeys      {   return @[ @"id" ];   }
-
 #pragma mark - getFromID
 
-- (void)getFromID:(id)idValue onResult:(getFromID_resultsHandlerBlock)resultsHandler
+- (DNModelWatchObject*)getFromID:(id)idValue onResult:(DNModelWatchObject_resultsHandlerBlock)resultsHandler
 {
     NSDictionary*   substDict       = @{ @"ID": idValue };
     
@@ -94,17 +119,7 @@
     
     [fetchRequest setFetchLimit:1];
     
-    NSError*    error;
-    NSArray*    resultArray = [[[DNUtilities appDelegate] managedObjectContext] executeFetchRequest:fetchRequest
-                                                                                              error:&error];
-    if ([resultArray count] == 0)
-    {
-        resultsHandler(nil);
-    }
-    else
-    {
-        resultsHandler([resultArray objectAtIndex:0]);
-    }
+    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest andHandler:resultsHandler];
 }
 
 #pragma mark - getAll
@@ -132,7 +147,7 @@
         [fetchRequest setSortDescriptors:sortDescriptors];
     }
 
-    return [DNModelWatchObjects_getAll watchWithModel:self andFetch:fetchRequest andHandler:resultsHandler];
+    return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest andHandler:resultsHandler];
 }
 
 #pragma mark - deleteAll

@@ -8,11 +8,10 @@
 
 #import "DNModelWatch.h"
 
-#import "DNManagedObject.h"
-
+@class DNManagedObject;
 @class DNModelWatchObject;
 
-typedef void(^DNModelWatchObject_resultsHandlerBlock)(DNModelWatchObjects* watch, DNManagedObject* object);
+typedef void(^DNModelWatchObject_resultsHandlerBlock)(DNModelWatchObject* watch, DNManagedObject* object);
 
 @interface DNModelWatchObject : DNModelWatch
 

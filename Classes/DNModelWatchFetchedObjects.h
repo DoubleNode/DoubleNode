@@ -1,5 +1,5 @@
 //
-//  DNModelWatchObjects_getAll.h
+//  DNModelWatchFetchedObjects.h
 //  Pods
 //
 //  Created by Darren Ehlers on 10/6/13.
@@ -12,7 +12,7 @@
 
 #import "DNModel.h"
 
-@interface DNModelWatchObjects_getAll : DNModelWatchObjects
+@interface DNModelWatchFetchedObjects : DNModelWatchObjects
 
 + (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch andHandler:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler;
 

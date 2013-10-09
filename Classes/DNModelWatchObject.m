@@ -34,4 +34,19 @@
     return nil;
 }
 
+- (void)cancelWatch
+{
+    [super cancelWatch];
+    
+    resultsHandler          = nil;
+}
+
+- (void)executeResultsHandler
+{
+    if (resultsHandler)
+    {
+        resultsHandler(self, [self object]);
+    }
+}
+
 @end
