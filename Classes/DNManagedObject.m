@@ -115,7 +115,7 @@
     id  idValue = [[self class] entityIDWithDictionary:dict];
 
     [[[self class] entityModel] getFromID:idValue
-                                 onResult:^(id entity)
+                                 onResult:^(DNModelWatchObject* watch, id entity)
      {
          newSelf = entity;
      }];
@@ -164,6 +164,16 @@
 {
     [self deleteWithNoSave];
     [self save];
+}
+
+- (instancetype)entityValidate:(NSString*)entityName
+{
+    if ([[[self class] entityName] isEqualToString:entityName] == NO)
+    {
+        return nil;
+    }
+
+    return self;
 }
 
 #pragma mark - Dictionary Translation functions

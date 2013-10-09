@@ -14,8 +14,8 @@
 
 @interface DNModelWatchFetchedObjects : DNModelWatchObjects
 
-+ (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch andHandler:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler;
++ (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
-- (id)initWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch andHandler:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler;
+- (id)initWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
 @end

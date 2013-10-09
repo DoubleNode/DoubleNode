@@ -10,7 +10,7 @@
 
 @interface DNModelWatchObjects ()
 {
-    DNModelWatchObjects_resultsHandlerBlock resultsHandler;
+    DNModelWatchObjectsDidChangeHandlerBlock    didChangeHandler;
 }
 
 @end
@@ -18,12 +18,12 @@
 @implementation DNModelWatchObjects
 
 - (id)initWithModel:(DNModel*)model
-         andHandler:(DNModelWatchObjects_resultsHandlerBlock)handler
+         andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     self = [super initWithModel:model];
     if (self)
     {
-        resultsHandler  = handler;
+        didChangeHandler  = handler;
     }
     
     return self;
@@ -38,14 +38,14 @@
 {
     [super cancelWatch];
     
-    resultsHandler          = nil;
+    didChangeHandler    = nil;
 }
 
-- (void)executeResultsHandler
+- (void)executeDidChangeHandler
 {
-    if (resultsHandler)
+    if (didChangeHandler)
     {
-        resultsHandler(self, [self objects]);
+        didChangeHandler(self, [self objects]);
     }
 }
 

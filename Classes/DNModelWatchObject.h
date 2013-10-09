@@ -11,11 +11,12 @@
 @class DNManagedObject;
 @class DNModelWatchObject;
 
-typedef void(^DNModelWatchObject_resultsHandlerBlock)(DNModelWatchObject* watch, DNManagedObject* object);
+typedef void(^DNModelWatchObjectWillChangeHandlerBlock)(DNModelWatchObject* watch, DNManagedObject* object);
+typedef void(^DNModelWatchObjectDidChangeHandlerBlock)(DNModelWatchObject* watch, DNManagedObject* object);
 
 @interface DNModelWatchObject : DNModelWatch
 
-- (id)initWithModel:(DNModel*)model andHandler:(DNModelWatchObject_resultsHandlerBlock)handler;
+- (id)initWithModel:(DNModel*)model andHandler:(DNModelWatchObjectDidChangeHandlerBlock)handler;
 
 - (DNManagedObject*)object;
 

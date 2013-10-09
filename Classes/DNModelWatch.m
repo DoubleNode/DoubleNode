@@ -41,7 +41,11 @@
 {
 }
 
-- (void)executeResultsHandler
+- (void)executeWillChangeHandler
+{
+}
+
+- (void)executeDidChangeHandler
 {
 }
 

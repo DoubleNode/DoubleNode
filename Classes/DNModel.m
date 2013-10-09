@@ -71,12 +71,13 @@
 - (NSString*)getFromIDFetchTemplate     {   return [NSString stringWithFormat:@"a%@ByID", [[self class] entityName]];   }
 - (NSString*)getAllFetchTemplate        {   return [NSString stringWithFormat:@"every%@", [[self class] entityName]];   }
 
+- (NSArray*)getFromIDSortKeys   {   return @[ @"id" ];   }
 - (NSArray*)getAllSortKeys      {   return @[ @"id" ];   }
 
 #pragma mark - watch management
 
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
-                          onResult:(DNModelWatchObject_resultsHandlerBlock)resultHandler
+                          onResult:(DNModelWatchObjectDidChangeHandlerBlock)resultHandler
 {
     DNModelWatchObject* watch   = [[DNModelWatchObject alloc] initWithModel:self
                                                                  andHandler:resultHandler];
@@ -85,7 +86,7 @@
 }
 
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
-                            onResult:(DNModelWatchObjects_resultsHandlerBlock)resultHandler
+                            onResult:(DNModelWatchObjectsDidChangeHandlerBlock)resultHandler
 {
     DNModelWatchObjects*    watch   = [[DNModelWatchObjects alloc] initWithModel:self
                                                                       andHandler:resultHandler];
@@ -105,7 +106,7 @@
 
 #pragma mark - getFromID
 
-- (DNModelWatchObject*)getFromID:(id)idValue onResult:(DNModelWatchObject_resultsHandlerBlock)resultsHandler
+- (DNModelWatchObject*)getFromID:(id)idValue onResult:(DNModelWatchObjectDidChangeHandlerBlock)resultsHandler
 {
     NSDictionary*   substDict       = @{ @"ID": idValue };
     
@@ -114,7 +115,21 @@
     if (fetchRequest == nil)
     {
         DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
-        return;
+        return nil;
+    }
+    
+    NSMutableArray* sortDescriptors = [NSMutableArray array];
+    
+    [[self getFromIDSortKeys] enumerateObjectsUsingBlock:^(NSString* sortKey, NSUInteger idx, BOOL *stop)
+     {
+         if ((sortKey != nil) && ([sortKey length] > 0))
+         {
+             [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]];
+         }
+     }];
+    if ([sortDescriptors count] > 0)
+    {
+        [fetchRequest setSortDescriptors:sortDescriptors];
     }
     
     [fetchRequest setFetchLimit:1];
@@ -124,7 +139,7 @@
 
 #pragma mark - getAll
 
-- (DNModelWatchObjects*)getAllOnResult:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler
+- (DNModelWatchObjects*)getAllOnResult:(DNModelWatchObjectsDidChangeHandlerBlock)resultsHandler
 {
     NSFetchRequest* fetchRequest    = [[[[DNUtilities appDelegate] managedObjectModel] fetchRequestTemplateForName:[self getAllFetchTemplate]] copy];
     if (fetchRequest == nil)

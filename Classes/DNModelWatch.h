@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "DNUtilities.h"
+
 @class DNModel;
 
 @interface DNModelWatch : NSObject
@@ -18,6 +20,7 @@
 - (void)cancelWatch;
 - (void)refreshWatch;
 
-- (void)executeResultsHandler;
+- (void)executeWillChangeHandler;
+- (void)executeDidChangeHandler;
 
 @end

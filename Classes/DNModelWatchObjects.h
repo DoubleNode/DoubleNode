@@ -10,11 +10,12 @@
 
 @class DNModelWatchObjects;
 
-typedef void(^DNModelWatchObjects_resultsHandlerBlock)(DNModelWatchObjects* watch, NSArray* objects);
+typedef void(^DNModelWatchObjectsWillChangeHandlerBlock)(DNModelWatchObjects* watch, NSArray* objects);
+typedef void(^DNModelWatchObjectsDidChangeHandlerBlock)(DNModelWatchObjects* watch, NSArray* objects);
 
 @interface DNModelWatchObjects : DNModelWatch
 
-- (id)initWithModel:(DNModel*)model andHandler:(DNModelWatchObjects_resultsHandlerBlock)handler;
+- (id)initWithModel:(DNModel*)model andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
 - (NSArray*)objects;
 

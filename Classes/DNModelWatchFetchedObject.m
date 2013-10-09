@@ -20,31 +20,33 @@
 
 + (id)watchWithModel:(DNModel*)model
             andFetch:(NSFetchRequest*)fetch
-          andHandler:(DNModelWatchObject_resultsHandlerBlock)resultsHandler
+          andHandler:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchFetchedObject alloc] initWithModel:model andFetch:fetch andHandler:resultsHandler];
+    return [[DNModelWatchFetchedObject alloc] initWithModel:model andFetch:fetch andHandler:handler];
 }
 
 - (id)initWithModel:(DNModel*)model
            andFetch:(NSFetchRequest*)fetch
-         andHandler:(DNModelWatchObject_resultsHandlerBlock)handler
+         andHandler:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
     self = [super initWithModel:model andHandler:handler];
     if (self)
     {
         fetchRequest    = fetch;
         
+        NSString*   className   = NSStringFromClass([self class]);
+        
         fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                      managedObjectContext:[[DNUtilities appDelegate] managedObjectContext]
                                                                        sectionNameKeyPath:nil
-                                                                                cacheName:NSStringFromClass([self class])];
+                                                                                cacheName:className];
         fetchResultsController.delegate = self;
 
         [self refreshWatch];
 
         if ([fetchResultsController.fetchedObjects count] > 0)
         {
-            [self executeResultsHandler];
+            [self executeDidChangeHandler];
         }
     }
     
@@ -86,12 +88,16 @@
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
-- (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
+- (void)controllerWillChangeContent:(NSFetchedResultsController*)controller
 {
-    [self executeResultsHandler];
+    [self executeWillChangeHandler];
 }
 
-/*
+- (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
+{
+    [self executeDidChangeHandler];
+}
+
 - (void)controller:(NSFetchedResultsController*)controller
   didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex
@@ -132,6 +138,5 @@
             break;
     }
 }
-*/
 
 @end

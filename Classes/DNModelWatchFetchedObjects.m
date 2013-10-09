@@ -20,14 +20,14 @@
 
 + (id)watchWithModel:(DNModel*)model
             andFetch:(NSFetchRequest*)fetch
-          andHandler:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler
+          andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchFetchedObjects alloc] initWithModel:model andFetch:fetch andHandler:resultsHandler];
+    return [[DNModelWatchFetchedObjects alloc] initWithModel:model andFetch:fetch andHandler:handler];
 }
 
 - (id)initWithModel:(DNModel*)model
            andFetch:(NSFetchRequest*)fetch
-         andHandler:(DNModelWatchObjects_resultsHandlerBlock)handler
+         andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     self = [super initWithModel:model andHandler:handler];
     if (self)
@@ -44,7 +44,7 @@
 
         if ([[self objects] count] > 0)
         {
-            [self executeResultsHandler];
+            [self executeDidChangeHandler];
         }
     }
     
@@ -81,9 +81,14 @@
 
 #pragma mark - NSFetchedResultsControllerDelegate
 
+- (void)controllerWillChangeContent:(NSFetchedResultsController*)controller
+{
+    [self executeWillChangeHandler];
+}
+
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
-    [self executeResultsHandler];
+    [self executeDidChangeHandler];
 }
 
 /*

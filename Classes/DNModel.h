@@ -34,19 +34,20 @@
 
 - (NSString*)getFromIDFetchTemplate;
 - (NSString*)getAllFetchTemplate;
+- (NSArray*)getFromIDSortKeys;
 - (NSArray*)getAllSortKeys;
 
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
-                          onResult:(DNModelWatchObject_resultsHandlerBlock)resultHandler;
+                          onResult:(DNModelWatchObjectDidChangeHandlerBlock)resultHandler;
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
-                            onResult:(DNModelWatchObjects_resultsHandlerBlock)resultHandler;
+                            onResult:(DNModelWatchObjectsDidChangeHandlerBlock)resultHandler;
 
 - (void)retainWatch:(DNModelWatch*)watch;
 - (void)releaseWatch:(DNModelWatch*)watch;
 
-- (DNModelWatchObject*)getFromID:(id)idValue onResult:(DNModelWatchObject_resultsHandlerBlock)resultsHandler;
+- (DNModelWatchObject*)getFromID:(id)idValue onResult:(DNModelWatchObjectDidChangeHandlerBlock)resultsHandler;
 
-- (DNModelWatchObjects*)getAllOnResult:(DNModelWatchObjects_resultsHandlerBlock)resultsHandler;
+- (DNModelWatchObjects*)getAllOnResult:(DNModelWatchObjectsDidChangeHandlerBlock)resultsHandler;
 
 - (void)deleteAll;
 
