@@ -10,6 +10,8 @@
 
 #import "DNManagedObject.h"
 
+#import "DNModelWatchObject.h"
+
 @interface DNModel ()
 {
     NSMutableArray* watches;
@@ -45,6 +47,11 @@
 
 #pragma mark - initialization functions
 
++ (instancetype)model
+{
+    return [[self alloc] init];
+}
+
 - (id)init
 {
     self = [super init];
@@ -61,6 +68,22 @@
     [[self class] saveContext];
 }
 
+#pragma mark - model details
+
+- (NSString*)getFromIDFetchTemplate     {   return [NSString stringWithFormat:@"a%@ByID", [[self class] entityName]];   }
+- (NSString*)getAllFetchTemplate        {   return [NSString stringWithFormat:@"every%@", [[self class] entityName]];   }
+
+- (NSArray*)getAllSortKeys      {   return @[ @"id" ];   }
+
+#pragma mark - watch management
+
+- (DNModelWatchObject*)watchObject:(DNManagedObject*)object
+                          onResult:(DNModelWatchObject_resultsHandlerBlock)resultHandler
+{
+    DNModelWatchObject* watch   = [[DNModelWatchObject alloc] initWithModel:self
+                                                                 andHandler:resultHandler];
+}
+
 - (void)retainWatch:(DNModelWatch*)watch
 {
     [watches addObject:watch];
@@ -70,13 +93,6 @@
 {
     [watches removeObject:watch];
 }
-
-#pragma mark - model details
-
-- (NSString*)getFromIDFetchTemplate     {   return [NSString stringWithFormat:@"a%@ByID", [[self class] entityName]];   }
-- (NSString*)getAllFetchTemplate        {   return [NSString stringWithFormat:@"every%@", [[self class] entityName]];   }
-
-- (NSArray*)getAllSortKeys      {   return @[ @"id" ];   }
 
 #pragma mark - getFromID
 

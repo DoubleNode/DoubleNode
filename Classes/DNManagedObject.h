@@ -11,7 +11,7 @@
 
 #import "DNApplicationDelegate.h"
 
-#import "DNModel.h"
+@class DNModel;
 
 @interface DNManagedObject : NSManagedObject
 {

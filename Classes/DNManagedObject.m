@@ -8,6 +8,8 @@
 
 #import "DNManagedObject.h"
 
+#import "DNModel.h"
+
 #import "DNUtilities.h"
 #import "NSString+HTML.h"
 

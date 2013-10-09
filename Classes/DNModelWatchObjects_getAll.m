@@ -71,6 +71,7 @@
     NSError*    error = nil;
     
     fetchResultsController.fetchRequest.resultType = NSManagedObjectResultType;
+    
     BOOL    result = [fetchResultsController performFetch:&error];
     if (result == NO)
     {
@@ -85,6 +86,7 @@
     [self executeResultsHandler];
 }
 
+/*
 - (void)controller:(NSFetchedResultsController*)controller
   didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex
@@ -125,5 +127,6 @@
             break;
     }
 }
+*/
 
 @end
