@@ -54,9 +54,11 @@
 + (id)dictionaryObject:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue;
 
 + (instancetype)entity;
++ (instancetype)entityFromID:(id)idValue;
 + (instancetype)entityFromDictionary:(NSDictionary*)dict;
 
 - (instancetype)init;
+- (instancetype)initWithID:(id)idValue;
 - (instancetype)initWithDictionary:(NSDictionary*)dict;
 
 - (void)clearData;

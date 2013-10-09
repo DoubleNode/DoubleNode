@@ -81,6 +81,11 @@
     [[[self class] appDelegate] saveContext];
 }
 
+- (void)setId:(id)idValue
+{
+    [self setValue:idValue forKey:@"id"];
+}
+
 #pragma mark - Entity initialization functions
 
 + (instancetype)entity
@@ -93,6 +98,11 @@
     return [[self alloc] initWithDictionary:dict];
 }
 
++ (instancetype)entityFromID:(id)idValue
+{
+    return [[self alloc] initWithID:idValue];
+}
+
 - (instancetype)init
 {
     managedObjectContext    = [[self class] managedObjectContext];
@@ -103,6 +113,29 @@
     if (self)
     {
         [self clearData];
+    }
+    
+    return self;
+}
+
+- (instancetype)initWithID:(id)idValue
+{
+    __block id  newSelf = self;
+    
+    [[[self class] entityModel] getFromID:idValue
+                                 onResult:^(DNModelWatchObject* watch, id entity)
+     {
+         newSelf = entity;
+     }];
+    if (newSelf == nil)
+    {
+        newSelf = [[self class] init];
+    }
+    
+    self = newSelf;
+    if (self)
+    {
+        self.id = idValue;
     }
     
     return self;
