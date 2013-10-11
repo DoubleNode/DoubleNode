@@ -68,4 +68,6 @@
 - (void)deleteWithNoSave;
 - (void)delete;
 
+- (NSEntityDescription*)entityDescription;
+
 @end

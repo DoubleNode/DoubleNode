@@ -199,6 +199,14 @@
     [self save];
 }
 
+#pragma mark - Entity Description functions
+
+- (NSEntityDescription*)entityDescription
+{
+    return [NSEntityDescription entityForName:[[self class] entityName]
+                       inManagedObjectContext:[[self class] managedObjectContext]];
+}
+
 #pragma mark - Dictionary Translation functions
 
 + (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue

@@ -11,6 +11,7 @@
 @interface DNModelWatchKVOObject ()
 {
     DNManagedObject*    object;
+    NSDictionary*       attributes;
 }
 
 @end
@@ -24,23 +25,44 @@
     return [[DNModelWatchKVOObject alloc] initWithModel:model andObject:object didChange:handler];
 }
 
++ (id)watchWithModel:(DNModel*)model
+           andObject:(DNManagedObject*)object
+       andAttributes:(NSDictionary*)attributes
+           didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
+{
+    return [[DNModelWatchKVOObject alloc] initWithModel:model andObject:object andAttributes:attributes didChange:handler];
+}
+
 - (id)initWithModel:(DNModel*)model
           andObject:(DNManagedObject*)pObject
+          didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
+{
+    return [self initWithModel:model andObject:pObject andAttributes:nil didChange:handler];
+}
+
+- (id)initWithModel:(DNModel*)model
+          andObject:(DNManagedObject*)pObject
+      andAttributes:(NSDictionary*)pAttributes
           didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
     self = [super initWithModel:model didChange:handler];
     if (self)
     {
-        object  = pObject;
+        object      = pObject;
+        attributes  = pAttributes;
+        if (attributes == nil)
+        {
+            // Track ALL attributes
+            attributes  = [[object entityDescription] attributesByName];
+        }
         
-        [object addObserver:self
-                 forKeyPath:@"key"
-                    options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-                    context:nil];
-        [object addObserver:self
-                 forKeyPath:@"value"
-                    options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-                    context:nil];
+        [attributes enumerateKeysAndObjectsUsingBlock:^(NSString* attributeName, id obj, BOOL* stop)
+         {
+             [object addObserver:self
+                      forKeyPath:attributeName
+                         options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                         context:nil];
+         }];
         
         [self refreshWatch];
     }
@@ -57,8 +79,10 @@
 {
     [super cancelWatch];
     
-    [object removeObserver:self forKeyPath:@"key"];
-    [object removeObserver:self forKeyPath:@"value"];
+    [attributes enumerateKeysAndObjectsUsingBlock:^(NSString* attributeName, id obj, BOOL* stop)
+     {
+         [object removeObserver:self forKeyPath:attributeName];
+     }];
     
     object  = nil;
 }
