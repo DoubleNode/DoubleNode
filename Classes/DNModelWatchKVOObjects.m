@@ -19,16 +19,16 @@
 
 + (id)watchWithModel:(DNModel*)model
           andObjects:(NSArray*)objects
-          andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchKVOObjects alloc] initWithModel:model andObjects:objects andHandler:handler];
+    return [[DNModelWatchKVOObjects alloc] initWithModel:model andObjects:objects didChange:handler];
 }
 
 - (id)initWithModel:(DNModel*)model
          andObjects:(NSArray*)pObjects
-         andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+          didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    self = [super initWithModel:model andHandler:handler];
+    self = [super initWithModel:model didChange:handler];
     if (self)
     {
         objects = pObjects;

@@ -68,6 +68,4 @@
 - (void)deleteWithNoSave;
 - (void)delete;
 
-- (id)entityValidate:(NSString*)entityName;
-
 @end

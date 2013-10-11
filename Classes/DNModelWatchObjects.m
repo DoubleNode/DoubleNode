@@ -10,6 +10,7 @@
 
 @interface DNModelWatchObjects ()
 {
+    DNModelWatchObjectsWillChangeHandlerBlock   willChangeHandler;
     DNModelWatchObjectsDidChangeHandlerBlock    didChangeHandler;
 }
 
@@ -18,7 +19,7 @@
 @implementation DNModelWatchObjects
 
 - (id)initWithModel:(DNModel*)model
-         andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+          didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     self = [super initWithModel:model];
     if (self)
@@ -38,7 +39,16 @@
 {
     [super cancelWatch];
     
+    willChangeHandler   = nil;
     didChangeHandler    = nil;
+}
+
+- (void)executeWillChangeHandler
+{
+    if (willChangeHandler)
+    {
+        willChangeHandler(self, [self objects]);
+    }
 }
 
 - (void)executeDidChangeHandler

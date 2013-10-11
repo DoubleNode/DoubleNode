@@ -20,26 +20,24 @@
 
 + (id)watchWithModel:(DNModel*)model
             andFetch:(NSFetchRequest*)fetch
-          andHandler:(DNModelWatchObjectDidChangeHandlerBlock)handler
+           didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchFetchedObject alloc] initWithModel:model andFetch:fetch andHandler:handler];
+    return [[DNModelWatchFetchedObject alloc] initWithModel:model andFetch:fetch didChange:handler];
 }
 
 - (id)initWithModel:(DNModel*)model
            andFetch:(NSFetchRequest*)fetch
-         andHandler:(DNModelWatchObjectDidChangeHandlerBlock)handler
+          didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
-    self = [super initWithModel:model andHandler:handler];
+    self = [super initWithModel:model didChange:handler];
     if (self)
     {
         fetchRequest    = fetch;
         
-        NSString*   className   = NSStringFromClass([self class]);
-        
         fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                      managedObjectContext:[[DNUtilities appDelegate] managedObjectContext]
                                                                        sectionNameKeyPath:nil
-                                                                                cacheName:className];
+                                                                                cacheName:NSStringFromClass([self class])];
         fetchResultsController.delegate = self;
 
         [self refreshWatch];

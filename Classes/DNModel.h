@@ -38,16 +38,16 @@
 - (NSArray*)getAllSortKeys;
 
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
-                          onResult:(DNModelWatchObjectDidChangeHandlerBlock)handler;
+                         didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler;
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
-                            onResult:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
+                           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
 - (void)retainWatch:(DNModelWatch*)watch;
 - (void)releaseWatch:(DNModelWatch*)watch;
 
-- (DNModelWatchObject*)getFromID:(id)idValue onResult:(DNModelWatchObjectDidChangeHandlerBlock)handler;
+- (DNModelWatchObject*)getFromID:(id)idValue didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler;
 
-- (DNModelWatchObjects*)getAllOnResult:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
+- (DNModelWatchObjects*)getAllDidChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
 - (void)deleteAll;
 

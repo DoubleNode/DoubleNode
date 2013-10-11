@@ -79,21 +79,21 @@
 #pragma mark - watch management
 
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
-                          onResult:(DNModelWatchObjectDidChangeHandlerBlock)handler
+                        didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
     DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
                                                                          andObject:object
-                                                                        andHandler:handler];
+                                                                         didChange:handler];
     
     return watch;
 }
 
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
-                            onResult:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+                           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self
                                                                             andObjects:objects
-                                                                            andHandler:handler];
+                                                                             didChange:handler];
     
     return watch;
 }
@@ -110,7 +110,8 @@
 
 #pragma mark - getFromID
 
-- (DNModelWatchObject*)getFromID:(id)idValue onResult:(DNModelWatchObjectDidChangeHandlerBlock)handler
+- (DNModelWatchObject*)getFromID:(id)idValue
+                       didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
     NSDictionary*   substDict       = @{ @"ID": idValue };
     
@@ -138,12 +139,12 @@
     
     [fetchRequest setFetchLimit:1];
     
-    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest andHandler:handler];
+    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest didChange:handler];
 }
 
 #pragma mark - getAll
 
-- (DNModelWatchObjects*)getAllOnResult:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+- (DNModelWatchObjects*)getAllDidChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     NSFetchRequest* fetchRequest    = [[[[DNUtilities appDelegate] managedObjectModel] fetchRequestTemplateForName:[self getAllFetchTemplate]] copy];
     if (fetchRequest == nil)
@@ -166,14 +167,14 @@
         [fetchRequest setSortDescriptors:sortDescriptors];
     }
 
-    return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest andHandler:handler];
+    return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest didChange:handler];
 }
 
 #pragma mark - deleteAll
 
 - (void)deleteAll
 {
-    [self getAllOnResult:^(DNModelWatch* watch, NSArray* objects)
+    [self getAllDidChange:^(DNModelWatch* watch, NSArray* objects)
      {
          [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
           {

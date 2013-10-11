@@ -20,16 +20,16 @@
 
 + (id)watchWithModel:(DNModel*)model
             andFetch:(NSFetchRequest*)fetch
-          andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchFetchedObjects alloc] initWithModel:model andFetch:fetch andHandler:handler];
+    return [[DNModelWatchFetchedObjects alloc] initWithModel:model andFetch:fetch didChange:handler];
 }
 
 - (id)initWithModel:(DNModel*)model
            andFetch:(NSFetchRequest*)fetch
-         andHandler:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+          didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    self = [super initWithModel:model andHandler:handler];
+    self = [super initWithModel:model didChange:handler];
     if (self)
     {
         fetchRequest    = fetch;
@@ -91,7 +91,6 @@
     [self executeDidChangeHandler];
 }
 
-/*
 - (void)controller:(NSFetchedResultsController*)controller
   didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
            atIndex:(NSUInteger)sectionIndex
@@ -132,6 +131,5 @@
             break;
     }
 }
-*/
 
 @end

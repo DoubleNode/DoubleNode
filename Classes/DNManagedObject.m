@@ -29,7 +29,7 @@
     return NSStringFromClass([self class]);
 }
 
-+ (id)entityIDWithDictionary:(NSDictionary*)dict
++ (id)entityIdWithDictionary:(NSDictionary*)dict
 {
     return [[self class] dictionaryNumber:dict withItem:@"id" andDefault:nil];
 }
@@ -120,16 +120,16 @@
 
 - (instancetype)initWithID:(id)idValue
 {
-    __block id  newSelf = self;
+    __block id  newSelf = nil;
     
     [[[self class] entityModel] getFromID:idValue
-                                 onResult:^(DNModelWatchObject* watch, id entity)
+                                didChange:^(DNModelWatchObject* watch, id entity)
      {
          newSelf = entity;
      }];
     if (newSelf == nil)
     {
-        newSelf = [[self class] init];
+        newSelf = [self init];
     }
     
     self = newSelf;
@@ -143,12 +143,12 @@
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict
 {
-    __block id  newSelf = self;
+    __block id  newSelf = nil;
 
-    id  idValue = [[self class] entityIDWithDictionary:dict];
+    id  idValue = [[self class] entityIdWithDictionary:dict];
 
     [[[self class] entityModel] getFromID:idValue
-                                 onResult:^(DNModelWatchObject* watch, id entity)
+                                didChange:^(DNModelWatchObject* watch, id entity)
      {
          newSelf = entity;
      }];
@@ -197,16 +197,6 @@
 {
     [self deleteWithNoSave];
     [self save];
-}
-
-- (instancetype)entityValidate:(NSString*)entityName
-{
-    if ([[[self class] entityName] isEqualToString:entityName] == NO)
-    {
-        return nil;
-    }
-
-    return self;
 }
 
 #pragma mark - Dictionary Translation functions

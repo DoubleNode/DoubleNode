@@ -19,16 +19,16 @@
 
 + (id)watchWithModel:(DNModel*)model
            andObject:(DNManagedObject*)object
-          andHandler:(DNModelWatchObjectDidChangeHandlerBlock)handler
+           didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchKVOObject alloc] initWithModel:model andObject:object andHandler:handler];
+    return [[DNModelWatchKVOObject alloc] initWithModel:model andObject:object didChange:handler];
 }
 
 - (id)initWithModel:(DNModel*)model
           andObject:(DNManagedObject*)pObject
-         andHandler:(DNModelWatchObjectDidChangeHandlerBlock)handler
+          didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
-    self = [super initWithModel:model andHandler:handler];
+    self = [super initWithModel:model didChange:handler];
     if (self)
     {
         object  = pObject;
