@@ -79,7 +79,19 @@
 #pragma mark - watch management
 
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
-                        didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
+                         didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
+{
+    DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
+                                                                         andObject:object
+                                                                     andAttributes:nil
+                                                                         didChange:handler];
+    
+    return watch;
+}
+
+- (DNModelWatchObject*)watchObject:(DNManagedObject*)object
+                     andAttributes:(NSArray*)attributes
+                         didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
     DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
                                                                          andObject:object
@@ -89,6 +101,18 @@
 }
 
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
+                           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+{
+    DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self
+                                                                            andObjects:objects
+                                                                         andAttributes:nil
+                                                                             didChange:handler];
+    
+    return watch;
+}
+
+- (DNModelWatchObjects*)watchObjects:(NSArray*)objects
+                       andAttributes:(NSArray*)attributes
                            didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self

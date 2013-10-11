@@ -10,8 +10,8 @@
 
 @interface DNModelWatchKVOObjects ()
 {
-    NSArray*        objects;
-    NSDictionary*   attributes;
+    NSArray*    objects;
+    NSArray*    attributes;
 }
 
 @end
@@ -27,7 +27,7 @@
 
 + (id)watchWithModel:(DNModel*)model
           andObjects:(NSArray*)objects
-       andAttributes:(NSDictionary*)attributes
+       andAttributes:(NSArray*)attributes
            didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     return [[DNModelWatchKVOObjects alloc] initWithModel:model andObjects:objects andAttributes:attributes didChange:handler];
@@ -42,7 +42,7 @@
 
 - (id)initWithModel:(DNModel*)model
          andObjects:(NSArray*)pObjects
-      andAttributes:(NSDictionary*)pAttributes
+      andAttributes:(NSArray*)pAttributes
           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     self = [super initWithModel:model didChange:handler];
@@ -53,14 +53,14 @@
         
         [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
          {
-             NSDictionary*  objectAttributes = attributes;
+             NSArray*  objectAttributes = attributes;
              if (objectAttributes == nil)
              {
                  // Track ALL attributes
-                 objectAttributes  = [[object entityDescription] attributesByName];
+                 objectAttributes  = [[[object entityDescription] attributesByName] allKeys];
              }
              
-             [attributes enumerateKeysAndObjectsUsingBlock:^(NSString* attributeName, id obj, BOOL* stop)
+             [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
               {
                   [object addObserver:self
                            forKeyPath:attributeName
@@ -86,14 +86,14 @@
     
     [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
      {
-         NSDictionary*  objectAttributes = attributes;
+         NSArray*  objectAttributes = attributes;
          if (objectAttributes == nil)
          {
              // Track ALL attributes
-             objectAttributes  = [[object entityDescription] attributesByName];
+             objectAttributes  = [[[object entityDescription] attributesByName] allKeys];
          }
          
-         [attributes enumerateKeysAndObjectsUsingBlock:^(NSString* attributeName, id obj, BOOL* stop)
+         [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
           {
               [object removeObserver:self forKeyPath:attributeName];
           }];

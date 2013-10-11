@@ -11,7 +11,7 @@
 @interface DNModelWatchKVOObject ()
 {
     DNManagedObject*    object;
-    NSDictionary*       attributes;
+    NSArray*            attributes;
 }
 
 @end
@@ -27,7 +27,7 @@
 
 + (id)watchWithModel:(DNModel*)model
            andObject:(DNManagedObject*)object
-       andAttributes:(NSDictionary*)attributes
+       andAttributes:(NSArray*)attributes
            didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
     return [[DNModelWatchKVOObject alloc] initWithModel:model andObject:object andAttributes:attributes didChange:handler];
@@ -42,7 +42,7 @@
 
 - (id)initWithModel:(DNModel*)model
           andObject:(DNManagedObject*)pObject
-      andAttributes:(NSDictionary*)pAttributes
+      andAttributes:(NSArray*)pAttributes
           didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
     self = [super initWithModel:model didChange:handler];
@@ -53,10 +53,10 @@
         if (attributes == nil)
         {
             // Track ALL attributes
-            attributes  = [[object entityDescription] attributesByName];
+            attributes  = [[[object entityDescription] attributesByName] allKeys];
         }
         
-        [attributes enumerateKeysAndObjectsUsingBlock:^(NSString* attributeName, id obj, BOOL* stop)
+        [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
          {
              [object addObserver:self
                       forKeyPath:attributeName
@@ -79,7 +79,7 @@
 {
     [super cancelWatch];
     
-    [attributes enumerateKeysAndObjectsUsingBlock:^(NSString* attributeName, id obj, BOOL* stop)
+    [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
      {
          [object removeObserver:self forKeyPath:attributeName];
      }];

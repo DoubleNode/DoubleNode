@@ -21,7 +21,7 @@
 
 + (id)watchWithModel:(DNModel*)model
           andObjects:(NSArray*)objects
-       andAttributes:(NSDictionary*)attributes
+       andAttributes:(NSArray*)attributes
            didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
 - (id)initWithModel:(DNModel*)model
@@ -30,7 +30,7 @@
 
 - (id)initWithModel:(DNModel*)model
          andObjects:(NSArray*)objects
-      andAttributes:(NSDictionary*)attributes
+      andAttributes:(NSArray*)attributes
           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
 @end
