@@ -95,6 +95,7 @@
 {
     DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
                                                                          andObject:object
+                                                                     andAttributes:attributes
                                                                          didChange:handler];
     
     return watch;
@@ -117,6 +118,7 @@
 {
     DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self
                                                                             andObjects:objects
+                                                                         andAttributes:attributes
                                                                              didChange:handler];
     
     return watch;

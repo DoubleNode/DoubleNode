@@ -40,12 +40,12 @@
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
                          didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler;
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
-                     andAttributes:(NSDictionary*)attributes
+                     andAttributes:(NSArray*)attributes
                          didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler;
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
                            didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
-                       andAttributes:(NSDictionary*)attributes
+                       andAttributes:(NSArray*)attributes
                            didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
 - (void)retainWatch:(DNModelWatch*)watch;

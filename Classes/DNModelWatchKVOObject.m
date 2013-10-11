@@ -101,7 +101,10 @@
                         change:(NSDictionary*)change
                        context:(void *)context
 {
-    [self executeDidChangeHandler];
+    if ([change[@"new"] isEqual:change[@"old"]] == NO)
+    {
+        [self executeDidChangeHandler];
+    }
 }
 
 @end
