@@ -170,14 +170,16 @@
 
 - (void)clearData
 {
+    /*
     @try
     {
-        self.id = @0;
+        self.id = nil;
     }
     @catch (NSException *exception)
     {
         DLog(LL_Warning, LD_CoreData, @"exception=%@", exception);
     }
+     */
 }
 
 #pragma mark - Entity save/delete functions
