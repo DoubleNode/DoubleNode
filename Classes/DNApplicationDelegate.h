@@ -12,6 +12,7 @@
 
 - (void)disableURLCache;
 
+- (void)setDoNotUseIncrementalStore:(BOOL)flagValue;
 - (void)setPersistentStorePrefix:(NSString*)prefix;
 - (NSManagedObjectContext*)managedObjectContext;
 - (NSManagedObjectModel*)managedObjectModel;

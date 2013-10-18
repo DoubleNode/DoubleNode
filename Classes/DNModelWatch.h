@@ -17,6 +17,7 @@
 
 - (id)initWithModel:(DNModel*)model;
 
+- (BOOL)checkWatch;
 - (void)cancelWatch;
 - (void)refreshWatch;
 

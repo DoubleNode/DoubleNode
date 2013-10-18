@@ -32,6 +32,11 @@
     return self;
 }
 
+- (BOOL)checkWatch
+{
+    return [model checkWatch:self];
+}
+
 - (void)cancelWatch
 {
     [model releaseWatch:self];

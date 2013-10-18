@@ -109,7 +109,7 @@
     
     NSEntityDescription*    entity = [NSEntityDescription entityForName:[[self class] entityName] inManagedObjectContext:managedObjectContext];
     
-    self = [self initWithEntity:entity insertIntoManagedObjectContext:managedObjectContext];
+    self = [self initWithEntity:entity insertIntoManagedObjectContext:[[self class] managedObjectContext]];
     if (self)
     {
         [self clearData];
@@ -120,13 +120,7 @@
 
 - (instancetype)initWithID:(id)idValue
 {
-    __block id  newSelf = nil;
-    
-    [[[self class] entityModel] getFromID:idValue
-                                didChange:^(DNModelWatchObject* watch, id entity)
-     {
-         newSelf = entity;
-     }];
+    id  newSelf = [[[self class] entityModel] getFromID:idValue];
     if (newSelf == nil)
     {
         newSelf = [self init];
@@ -143,18 +137,12 @@
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict
 {
-    __block id  newSelf = nil;
-
     id  idValue = [[self class] entityIdWithDictionary:dict];
-
-    [[[self class] entityModel] getFromID:idValue
-                                didChange:^(DNModelWatchObject* watch, id entity)
-     {
-         newSelf = entity;
-     }];
+    
+    id  newSelf = [[[self class] entityModel] getFromID:idValue];
     if (newSelf == nil)
     {
-        newSelf = [[self class] init];
+        newSelf = [self init];
     }
     
     self = newSelf;
@@ -184,7 +172,7 @@
 
 #pragma mark - Entity save/delete functions
 
-- (instancetype)save;
+- (instancetype)saveContext;
 {
     [[self class] saveContext];
     return self;
@@ -198,7 +186,7 @@
 - (void)delete
 {
     [self deleteWithNoSave];
-    [self save];
+    [self saveContext];
 }
 
 #pragma mark - Entity Description functions

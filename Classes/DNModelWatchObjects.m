@@ -38,14 +38,12 @@
 - (void)cancelWatch
 {
     [super cancelWatch];
-    
-    willChangeHandler   = nil;
-    didChangeHandler    = nil;
 }
 
 - (void)executeWillChangeHandler
 {
-    if (willChangeHandler)
+    [super executeWillChangeHandler];
+    if ([self checkWatch] && (willChangeHandler != nil))
     {
         willChangeHandler(self, [self objects]);
     }
@@ -53,9 +51,10 @@
 
 - (void)executeDidChangeHandler
 {
-    if (didChangeHandler)
+    [super executeDidChangeHandler];
+    if ([self checkWatch] && (didChangeHandler != nil))
     {
-        didChangeHandler(self, [self objects]);
+         didChangeHandler(self, [self objects]);
     }
 }
 

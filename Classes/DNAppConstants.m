@@ -53,17 +53,24 @@
     return value;
 }
 
-+ (id)plistConfig:(NSString*)key
+static NSDictionary*    plistConfigDict = nil;
+
++ (NSDictionary*)plistDict
 {
-    static NSDictionary*    dict = nil;
-    
     @synchronized( self )
     {
-        if (dict == nil)
+        if (plistConfigDict == nil)
         {
-            dict    = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"Constants_plist"] ofType:@"plist"]];
+            plistConfigDict = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"Constants_plist"] ofType:@"plist"]];
         }
     }
+    
+    return plistConfigDict;
+}
+
++ (id)plistConfig:(NSString*)key
+{
+    NSDictionary*   dict = [[self class] plistDict];
     
     id  value = [dict objectForKey:key];
     if ((value == nil) || (value == [NSNull null]))

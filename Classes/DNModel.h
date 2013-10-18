@@ -15,6 +15,8 @@
 #import "DNModelWatchFetchedObject.h"
 #import "DNModelWatchFetchedObjects.h"
 
+typedef void(^DNModelCompletionHandlerBlock)();
+
 @interface DNModel : NSObject
 
 + (NSString*)entityName;
@@ -48,13 +50,16 @@
                        andAttributes:(NSArray*)attributes
                            didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
+- (BOOL)checkWatch:(DNModelWatch*)watch;
 - (void)retainWatch:(DNModelWatch*)watch;
 - (void)releaseWatch:(DNModelWatch*)watch;
 
+- (id)getFromID:(id)idValue;
 - (DNModelWatchObject*)getFromID:(id)idValue didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler;
 
+- (id)getAll;
 - (DNModelWatchObjects*)getAllDidChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
 
-- (void)deleteAll;
+- (void)deleteAllWithCompletion:(DNModelCompletionHandlerBlock)handler;
 
 @end

@@ -64,7 +64,7 @@
 - (void)clearData;
 - (void)loadWithDictionary:(NSDictionary*)dict;
 
-- (instancetype)save;
+- (instancetype)saveContext;
 - (void)deleteWithNoSave;
 - (void)delete;
 

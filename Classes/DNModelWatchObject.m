@@ -45,7 +45,7 @@
 - (void)executeWillChangeHandler
 {
     [super executeWillChangeHandler];
-    if (willChangeHandler)
+    if ([self checkWatch] && (willChangeHandler != nil))
     {
         willChangeHandler(self, [self object]);
     }
@@ -54,7 +54,7 @@
 - (void)executeDidChangeHandler
 {
     [super executeDidChangeHandler];
-    if (didChangeHandler)
+    if ([self checkWatch] && (didChangeHandler != nil))
     {
         didChangeHandler(self, [self object]);
     }

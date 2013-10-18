@@ -16,6 +16,8 @@
 + (UIFont*)fontWithPreString:(NSString*)preString;
 + (CGSize)sizeWithPreString:(NSString*)preString;
 + (id)constantValue:(NSString*)key;
+
++ (NSDictionary*)plistDict;
 + (id)plistConfig:(NSString*)key;
 
 @end

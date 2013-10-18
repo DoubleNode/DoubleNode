@@ -124,6 +124,11 @@
     return watch;
 }
 
+- (BOOL)checkWatch:(DNModelWatch*)watch
+{
+    return [watches containsObject:watch];
+}
+
 - (void)retainWatch:(DNModelWatch*)watch
 {
     [watches addObject:watch];
@@ -136,8 +141,48 @@
 
 #pragma mark - getFromID
 
+- (id)getFromID:(id)idValue
+{
+    NSFetchRequest* fetchRequest    = [self getFromID_FetchRequest:idValue];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+    
+    NSError*    error;
+    NSArray*    resultArray;
+    
+    @try
+    {
+        resultArray  = [[[self class] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+        if ([resultArray count] == 0)
+        {
+            return nil;
+        }
+    }
+    @catch (NSException *exception)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
+    }
+    
+    return [resultArray objectAtIndex:0];
+}
+
 - (DNModelWatchObject*)getFromID:(id)idValue
                        didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
+{
+    NSFetchRequest* fetchRequest    = [self getFromID_FetchRequest:idValue];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+    
+    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest didChange:handler];
+}
+
+- (NSFetchRequest*)getFromID_FetchRequest:(id)idValue
 {
     NSDictionary*   substDict       = @{ @"ID": idValue };
     
@@ -165,12 +210,52 @@
     
     [fetchRequest setFetchLimit:1];
     
-    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest didChange:handler];
+    return fetchRequest;
 }
 
 #pragma mark - getAll
 
+- (NSArray*)getAll
+{
+    NSFetchRequest* fetchRequest    = [self getAll_FetchRequest];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+    
+    NSError*    error;
+    NSArray*    resultArray;
+    
+    @try
+    {
+        resultArray  = [[[self class] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+        if ([resultArray count] == 0)
+        {
+            return nil;
+        }
+    }
+    @catch (NSException *exception)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
+    }
+    
+    return [resultArray objectAtIndex:0];
+}
+
 - (DNModelWatchObjects*)getAllDidChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+{
+    NSFetchRequest* fetchRequest    = [self getAll_FetchRequest];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+    
+    return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest didChange:handler];
+}
+
+- (NSFetchRequest*)getAll_FetchRequest
 {
     NSFetchRequest* fetchRequest    = [[[[DNUtilities appDelegate] managedObjectModel] fetchRequestTemplateForName:[self getAllFetchTemplate]] copy];
     if (fetchRequest == nil)
@@ -192,23 +277,25 @@
     {
         [fetchRequest setSortDescriptors:sortDescriptors];
     }
-
-    return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest didChange:handler];
+    
+    return fetchRequest;
 }
 
 #pragma mark - deleteAll
 
-- (void)deleteAll
+- (void)deleteAllWithCompletion:(DNModelCompletionHandlerBlock)handler;
 {
-    [self getAllDidChange:^(DNModelWatch* watch, NSArray* objects)
+    [[self getAll] enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
      {
-         [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
-          {
-              [object deleteWithNoSave];
-          }];
-         
-         [self saveContext];
+         [object deleteWithNoSave];
      }];
+    
+    [self saveContext];
+         
+     if (handler != nil)
+     {
+         handler();
+     }
 }
 
 @end
