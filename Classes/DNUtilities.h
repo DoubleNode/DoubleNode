@@ -71,6 +71,7 @@ typedef BOOL (^RevealBlock_Bool)(BOOL left);
 + (BOOL)isDeviceIPad;
 
 + (NSString*)appendNibSuffix:(NSString*)nibNameOrNil;
++ (NSString*)appendNibSuffix:(NSString*)nibNameOrNil withDefaultNib:(NSString*)defaultNib;
 + (NSString*)deviceImageName:(NSString*)name;
 
 + (void)runOnMainThreadWithoutDeadlocking:(void (^)())block;

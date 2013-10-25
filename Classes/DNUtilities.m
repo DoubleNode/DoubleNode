@@ -80,12 +80,26 @@
     return result;
 }
 
++ (NSString*)appendNibSuffix:(NSString*)nibNameOrNil withDefaultNib:(NSString*)defaultNib
+{
+    if ([nibNameOrNil length] == 0)
+    {
+        nibNameOrNil    = defaultNib;
+    }
+
+    return [DNUtilities appendNibSuffix:nibNameOrNil];
+}
+
 + (NSString*)appendNibSuffix:(NSString*)nibNameOrNil
 {
+    //NSString*   bundlePath      = [[NSBundle mainBundle] pathForResource:[[[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"] objectAtIndex:0] ofType:@"lproj"];
+    NSString*   bundlePath      = [[NSBundle mainBundle] pathForResource:@"Base" ofType:@"lproj"];
+    NSBundle*   languageBundle  = [NSBundle bundleWithPath:bundlePath];
+
     if ([DNUtilities isDeviceIPad])
     {
         NSString*   tempNibName = [NSString stringWithFormat:@"%@~ipad", nibNameOrNil];
-        if([[NSBundle mainBundle] pathForResource:tempNibName ofType:@"nib"] != nil)
+        if([languageBundle pathForResource:tempNibName ofType:@"nib"] != nil)
         {
             //file found
             nibNameOrNil = tempNibName;
@@ -94,7 +108,7 @@
     else
     {
         NSString*   tempNibName = [NSString stringWithFormat:@"%@~iphone", nibNameOrNil];
-        if([[NSBundle mainBundle] pathForResource:tempNibName ofType:@"nib"] != nil)
+        if([languageBundle pathForResource:tempNibName ofType:@"nib"] != nil)
         {
             //file found
             nibNameOrNil = tempNibName;
@@ -103,7 +117,7 @@
         if ([DNUtilities isTall])
         {
             NSString*   tempNibName = [NSString stringWithFormat:@"%@-568h", nibNameOrNil];
-            if([[NSBundle mainBundle] pathForResource:tempNibName ofType:@"nib"] != nil)
+            if([languageBundle pathForResource:tempNibName ofType:@"nib"] != nil)
             {
                 //file found
                 nibNameOrNil = tempNibName;
