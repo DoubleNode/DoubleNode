@@ -12,19 +12,11 @@
 
 #import "UILabel+TextKerning.h"
 
-#import "CDOConstant.h"
-
 @implementation DNThemeManager
 
 + (NSString*)themeName
 {
-    NSString*   retval  = [AppConstants appTheme];
-    if ([retval length] == 0)
-    {
-        retval = @"Base";
-    }
-
-    return [NSString stringWithFormat:@"DN%@Theme", retval];
+    return @"DNBaseTheme";
 }
 
 + (id <DNTheme>)sharedTheme
@@ -95,8 +87,6 @@
     [btnView.titleLabel setKerning:[[theme performSelector:[[self class] functionNameForAttribute:@"LabelKerning" withType:@"Button" andGroup:group andScreen:screen andItem:item]] doubleValue]];
     btnView.layer.borderColor   = [[theme performSelector:[[self class] functionNameForAttribute:@"BorderColor" withType:@"Button" andGroup:group andScreen:screen andItem:item]] CGColor];
     btnView.layer.borderWidth   = [[theme performSelector:[[self class] functionNameForAttribute:@"BorderWidth" withType:@"Button" andGroup:group andScreen:screen andItem:item]] doubleValue];
-
-    DLog(LL_Debug, LD_General, @"BorderWidth=%@", [theme performSelector:[[self class] functionNameForAttribute:@"BorderWidth" withType:@"Button" andGroup:group andScreen:screen andItem:item]]);
 }
 
 #pragma clang diagnostic pop

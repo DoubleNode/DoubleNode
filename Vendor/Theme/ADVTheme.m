@@ -9,8 +9,6 @@
 #import "ADVTheme.h"
 
 #import "ADVDefaultTheme.h"
-#import "ADVCustomTheme.h"
-#import "AppDelegate.h"
 
 @implementation ADVThemeManager
 
@@ -20,8 +18,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         // Create and return the theme:
-//        sharedTheme = [[ADVDefaultTheme alloc] init];
-        sharedTheme = [[ADVCustomTheme alloc] init];
+        sharedTheme = [[ADVDefaultTheme alloc] init];
     });
     
     return sharedTheme;

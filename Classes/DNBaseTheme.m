@@ -12,15 +12,11 @@
 
 @implementation DNBaseTheme
 
-- (UIFont*)ButtonFont   {   return [UIFont customFontWithName:@"ProximaNova-Regular" size:18.0f];   }
+- (UIFont*)Font {   return [UIFont systemFontOfSize:[UIFont systemFontSize]];   }
 
-- (NSNumber*)ButtonLabelKerning {   return @2.5f;    }
+- (NSNumber*)LabelKerning   {   return @1.0f;   }
 
-- (UIColor*)ButtonBorderColor   {   return [UIColor whiteColor];    }
-
-- (NSNumber*)ButtonBorderWidth  {   return @1.0f;    }
-
-- (NSNumber*)LOGWelcomeViewJustVisitingButtonLabelKerning   {   return @0.5f;    }
-- (NSNumber*)LOGWelcomeViewJustVisitingButtonBorderWidth    {   return @0.0f;    }
+- (UIColor*)BorderColor     {   return nil;     }
+- (NSNumber*)BorderWidth    {   return @0.0f;   }
 
 @end

@@ -135,6 +135,23 @@
     return self;
 }
 
+- (instancetype)initWithIDIfExists:(id)idValue
+{
+    id  newSelf = [[[self class] entityModel] getFromID:idValue];
+    if (newSelf == nil)
+    {
+        //newSelf = [self init];
+    }
+
+    self = newSelf;
+    if (self)
+    {
+        self.id = idValue;
+    }
+
+    return self;
+}
+
 - (instancetype)initWithDictionary:(NSDictionary*)dict
 {
     id  idValue = [[self class] entityIdWithDictionary:dict];

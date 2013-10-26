@@ -16,6 +16,7 @@
 
 @interface DNThemeManager : ADVThemeManager
 
++ (NSString*)themeName;
 + (id <DNTheme>)sharedTheme;
 
 + (void)customizeButton:(UIButton*)btnView

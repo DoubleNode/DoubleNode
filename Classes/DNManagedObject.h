@@ -59,6 +59,7 @@
 
 - (instancetype)init;
 - (instancetype)initWithID:(id)idValue;
+- (instancetype)initWithIDIfExists:(id)idValue;
 - (instancetype)initWithDictionary:(NSDictionary*)dict;
 
 - (void)clearData;
