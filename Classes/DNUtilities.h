@@ -34,10 +34,10 @@ typedef NS_ENUM(NSInteger, LogLevel)
     LL_Everything
 };
 
-const NSString*     LD_UnitTests        = @"unittests";
-const NSString*     LD_General          = @"general";
-const NSString*     LD_CoreFramework    = @"coreframework";
-const NSString*     LD_CoreData         = @"coredata";
+#define LD_UnitTests        @"unittests"
+#define LD_General          @"general"
+#define LD_CoreFramework    @"coreframework"
+#define LD_CoreData         @"coredata"
 
 #if !defined(DEBUG)
     #define DLogMarker(marker)          NSLog(@"%@", marker)
