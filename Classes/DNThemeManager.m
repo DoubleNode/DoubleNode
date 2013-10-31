@@ -8,7 +8,7 @@
 
 #import "DNThemeManager.h"
 
-#import "DNBaseTheme.h"
+#import "DNTheme.h"
 
 #import "UILabel+TextKerning.h"
 
@@ -16,7 +16,7 @@
 
 + (NSString*)themeName
 {
-    return @"DNBaseTheme";
+    return @"DNTheme";
 }
 
 + (id <DNThemeProtocol>)sharedTheme
