@@ -13,35 +13,35 @@
 
 @implementation DNAppConstants
 
-+ (UIColor*)colorWithString:(NSString*)string
++ (UIColor*)colorConstant:(NSString*)key
 {
-    return [UIColor colorWithString:[[self class] constantValue:string]];
+    return [UIColor colorWithString:[[self class] constantValue:key]];
 }
 
-+ (BOOL)boolWithString:(NSString*)string
++ (BOOL)boolConstant:(NSString*)key
 {
-    return [[[self class] constantValue:string] boolValue];
+    return [[[self class] constantValue:key] boolValue];
 }
 
-+ (double)doubleWithPreString:(NSString*)string
++ (double)doubleConstant:(NSString*)key
 {
-    return [[[self class] constantValue:string] doubleValue];
+    return [[[self class] constantValue:key] doubleValue];
 }
 
-+ (UIFont*)fontWithPreString:(NSString*)preString
++ (UIFont*)fontConstant:(NSString*)key
 {
-    NSString*   fontName    = [[self class] constantValue:[NSString stringWithFormat:@"%@Name", preString]];
-    NSString*   fontSize    = [[self class] constantValue:[NSString stringWithFormat:@"%@Size", preString]];
+    NSString*   fontName    = [[self class] constantValue:[NSString stringWithFormat:@"%@Name", key]];
+    NSString*   fontSize    = [[self class] constantValue:[NSString stringWithFormat:@"%@Size", key]];
     
     UIFont* retFont  = [UIFont fontWithName:fontName size:([fontSize doubleValue] / 2)];
     
     return [retFont fontWithSize:([fontSize doubleValue] / 2)];
 }
 
-+ (CGSize)sizeWithPreString:(NSString*)preString
++ (CGSize)sizeConstant:(NSString*)key
 {
-    NSString*   sizeWidth   = [[self class] constantValue:[NSString stringWithFormat:@"%@Width", preString]];
-    NSString*   sizeHeight  = [[self class] constantValue:[NSString stringWithFormat:@"%@Height", preString]];
+    NSString*   sizeWidth   = [[self class] constantValue:[NSString stringWithFormat:@"%@Width", key]];
+    NSString*   sizeHeight  = [[self class] constantValue:[NSString stringWithFormat:@"%@Height", key]];
     
     return CGSizeMake([sizeWidth floatValue], [sizeHeight floatValue]);
 }

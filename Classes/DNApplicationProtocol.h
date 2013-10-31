@@ -13,91 +13,102 @@
  */
 @protocol DNApplicationProtocol<NSObject>
 
+#pragma mark - CoreData DNApplicationProtocol functions
+
 /**
- *  <#Description#>
+ *  Disables the App URL Cache (if applicable).
+ *
+ *  @discussion The primary use-case for this function is for debugging, diagnostics and unit testing.
+ *
  */
 - (void)disableURLCache;
 
 /**
- *  <#Description#>
+ *  Sets a flag to disable the use of a NSIncrementalStore (if applicable).
  *
- *  @param flagValue <#flagValue description#>
+ *  @discussion The primary use-case for this function is for debugging, diagnostics and unit testing.
+ *
+ *  @param flagValue A BOOL flag to specify whether or not to bypass using a NSIncrementalStore when initializing the App's CoreData NSPersistentStore.
  */
 - (void)setDoNotUseIncrementalStore:(BOOL)flagValue;
 
 /**
- *  <#Description#>
+ *  Sets a string prefix to be used when opening and creating CoreData NSPersistentStore.
  *
- *  @param prefix <#prefix description#>
+ *  @discussion The primary use-case for this function is for debugging, diagnostics and unit testing.
+ *
+ *  @param prefix A NSString prefix to be prepended to any NSPersistentStore URLs.
  */
 - (void)setPersistentStorePrefix:(NSString*)prefix;
 
 /**
- *  <#Description#>
+ *  Creates or (if already created) returns the App's default NSManagedObjectContext.
  *
- *  @return <#return value description#>
+ *  @return The App's default NSManagedObjectContext object, creating it if needed.
  */
 - (NSManagedObjectContext*)managedObjectContext;
 
 /**
- *  <#Description#>
+ *  Creates or (if already created) returns the App's default NSManagedObjectModel.
  *
- *  @return <#return value description#>
+ *  @return The App's default NSManagedObjectModel object, creating it if needed.
  */
 - (NSManagedObjectModel*)managedObjectModel;
 
 /**
- *  <#Description#>
+ *  Closes the App's current NSPersistentStore, then removes the file from the device.
  */
 - (void)deletePersistentStore;
 
 /**
- *  <#Description#>
+ *  Flushes any cached updates from the current NSManagedObjectContext to the NSPersistentStore.
  */
 - (void)saveContext;
 
+#pragma mark - NSUserDefaults settings items
+
 /**
- *  <#Description#>
+ *  Loads and returns the current value of the user setting, specified by a key.
  *
- *  @param item <#item description#>
+ *  @param item The NSString key for the specific user setting.
  *
- *  @return <#return value description#>
+ *  @return The current value of the specified user setting (or @"" if not set).
  */
 - (id)settingsItem:(NSString*)item;
 
 /**
- *  <#Description#>
+ *  Loads and returns the current value of the user setting, specified by a key and a default value.
  *
- *  @param item         <#item description#>
- *  @param defaultValue <#defaultValue description#>
+ *  @param item         The NSString key for the specific user setting.
+ *  @param defaultValue The default value for the specific user setting, when it has not been previously set.
  *
- *  @return <#return value description#>
+ *  @return The current value of the specified user setting.
  */
 - (id)settingsItem:(NSString*)item default:(id)defaultValue;
 
 /**
- *  <#Description#>
+ *  Loads and returns the current BOOL value of the user setting, specified by a key and a default value.
  *
- *  @param item         <#item description#>
- *  @param defaultValue <#defaultValue description#>
+ *  @param item         The NSString key for the specific user setting.
+ *  @param defaultValue The default BOOL value for the specific user setting, when it has not been previously set.
  *
- *  @return <#return value description#>
+ *  @return The current value of the specified user setting.
  */
 - (id)settingsItem:(NSString*)item boolDefault:(BOOL)defaultValue;
 
 /**
- *  <#Description#>
+ *  Sets the value of the user setting, specified by a key.
  *
- *  @param item  <#item description#>
- *  @param value <#value description#>
+ *  @param item  The NSString key for the specific user setting.
+ *  @param value The new value for the specific user setting.
  */
 - (void)setSettingsItem:(NSString*)item value:(id)value;
 
 /**
- *  <#Description#>
+ *  Sets the BOOL value of the user setting, specified by a key.
  *
- *  @param item  <#item description#>
- *  @param value <#value description#>
+ *  @param item  The NSString key for the specific user setting.
+ *  @param value The new BOOL value for the specific user setting.
  */
 - (void)setSettingsItem:(NSString*)item boolValue:(BOOL)value;
 
