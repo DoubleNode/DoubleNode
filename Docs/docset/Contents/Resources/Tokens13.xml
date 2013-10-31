@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/DNModelWatchObject.html">
+	<File path="Classes/DNModelWatchObjects.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatchObject</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatchObjects</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchObject.h</DeclaredIn>
+			<DeclaredIn>DNModelWatchObjects.h</DeclaredIn>
             
 			
 			<NodeRef refid="13"/>
@@ -13,11 +13,11 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchObject/initWithModel:didChange:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchObjects/initWithModel:didChange:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchObject.h</DeclaredIn>
+			<DeclaredIn>DNModelWatchObjects.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithModel:(DNModel *)model didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler</Declaration>
+			<Declaration>- (id)initWithModel:(DNModel *)model didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
 			
 			
 			<Anchor>//api/name/initWithModel:didChange:</Anchor>
@@ -25,14 +25,14 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchObject/object</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchObjects/objects</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchObject.h</DeclaredIn>
+			<DeclaredIn>DNModelWatchObjects.h</DeclaredIn>
 			
-			<Declaration>- (DNManagedObject *)object</Declaration>
+			<Declaration>- (NSArray *)objects</Declaration>
 			
 			
-			<Anchor>//api/name/object</Anchor>
+			<Anchor>//api/name/objects</Anchor>
             <NodeRef refid="13"/>
 		</Token>
 		

@@ -1,4 +1,4 @@
 Documentation set was installed to Xcode!
 
 Path: /Users/darren.ehlers/Library/Developer/Shared/Documentation/DocSets/com.DoubleNode.DoubleNodeDocs.docset
-Time: 2013-10-31 15:46:59 +0000
+Time: 2013-10-31 21:04:35 +0000

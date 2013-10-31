@@ -4,7 +4,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/cl/DNAppConstants</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">Provides access to App-specific constants, specified in a plist file specified by the &apos;Constants_plist&apos; setting in the App&apos;s main *-Info.plst file.</Abstract>
 			<DeclaredIn>DNAppConstants.h</DeclaredIn>
             
 			
@@ -13,97 +13,132 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/colorWithString:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/colorConstant:</TokenIdentifier>
+			<Abstract type="html">Creates and returns a UIColor object, initialized with the NSString loaded from the Constants plist file for the specified key.</Abstract>
 			<DeclaredIn>DNAppConstants.h</DeclaredIn>
 			
-			<Declaration>+ (UIColor *)colorWithString:(NSString *)string</Declaration>
-			
-			
-			<Anchor>//api/name/colorWithString:</Anchor>
+			<Declaration>+ (UIColor *)colorConstant:(NSString *)key</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>key</Name>
+					<Abstract type="html">The string which specifies the key to the Constants plist file.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new UIColor object, configured according to the value in the Constants plist file.</Abstract></ReturnValue>
+			<Anchor>//api/name/colorConstant:</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/boolWithString:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/boolConstant:</TokenIdentifier>
+			<Abstract type="html">Returns a BOOL value, initialized with the boolValue of the NSString loaded from the Constants plist file for the specified key.</Abstract>
 			<DeclaredIn>DNAppConstants.h</DeclaredIn>
 			
-			<Declaration>+ (BOOL)boolWithString:(NSString *)string</Declaration>
-			
-			
-			<Anchor>//api/name/boolWithString:</Anchor>
+			<Declaration>+ (BOOL)boolConstant:(NSString *)key</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>key</Name>
+					<Abstract type="html">The string which specifies the key to the Constants plist file.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A BOOL value, configured according to the boolValue of the NSString in the Constants plist file.</Abstract></ReturnValue>
+			<Anchor>//api/name/boolConstant:</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/doubleWithPreString:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/doubleConstant:</TokenIdentifier>
+			<Abstract type="html">Returns a double value, initialized with the doubleValue of the NSString loaded from the Constants plist file for the specified key.</Abstract>
 			<DeclaredIn>DNAppConstants.h</DeclaredIn>
 			
-			<Declaration>+ (double)doubleWithPreString:(NSString *)string</Declaration>
-			
-			
-			<Anchor>//api/name/doubleWithPreString:</Anchor>
+			<Declaration>+ (double)doubleConstant:(NSString *)key</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>key</Name>
+					<Abstract type="html">The string which specifies the key to the Constants plist file.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A double value, configured according to the boolValue of the NSString in the Constants plist file.</Abstract></ReturnValue>
+			<Anchor>//api/name/doubleConstant:</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/fontWithPreString:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/fontConstant:</TokenIdentifier>
+			<Abstract type="html">Creates and returns a UIFont object, initialized with the NSString objects loaded from the Constants plist file for the specified key.</Abstract>
 			<DeclaredIn>DNAppConstants.h</DeclaredIn>
 			
-			<Declaration>+ (UIFont *)fontWithPreString:(NSString *)preString</Declaration>
-			
-			
-			<Anchor>//api/name/fontWithPreString:</Anchor>
+			<Declaration>+ (UIFont *)fontConstant:(NSString *)key</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>key</Name>
+					<Abstract type="html">The string which specifies the key to the Constants plist file.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new UIFont object, configured according to the value in the Constants plist file.</Abstract></ReturnValue>
+			<Anchor>//api/name/fontConstant:</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/sizeWithPreString:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/sizeConstant:</TokenIdentifier>
+			<Abstract type="html">Returns a CGSize value, initialized with the floatValue of the NSString objects loaded from the Constants plist file for the specified key.</Abstract>
 			<DeclaredIn>DNAppConstants.h</DeclaredIn>
 			
-			<Declaration>+ (CGSize)sizeWithPreString:(NSString *)preString</Declaration>
-			
-			
-			<Anchor>//api/name/sizeWithPreString:</Anchor>
+			<Declaration>+ (CGSize)sizeConstant:(NSString *)key</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>key</Name>
+					<Abstract type="html">The string which specifies the key to the Constants plist file.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new CGSize value, configured according to the value in the Constants plist file.</Abstract></ReturnValue>
+			<Anchor>//api/name/sizeConstant:</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/constantValue:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">Creates and returns a NSString object, initialized with the NSString object loaded from the Constants plist file for the specified key.</Abstract>
 			<DeclaredIn>DNAppConstants.h</DeclaredIn>
 			
 			<Declaration>+ (id)constantValue:(NSString *)key</Declaration>
-			
-			
+			<Parameters>
+				<Parameter>
+					<Name>key</Name>
+					<Abstract type="html">The string which specifies the key to the Constants plist file.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new NSString object, configured according to the value in the Constants plist file.</Abstract></ReturnValue>
 			<Anchor>//api/name/constantValue:</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/plistDict</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">Returns the NSDictionary of a plist file (loaded the first time) specified by the &apos;Constants_plist&apos; setting in the App&apos;s main *-Info.plst file.</Abstract>
 			<DeclaredIn>DNAppConstants.h</DeclaredIn>
 			
 			<Declaration>+ (NSDictionary *)plistDict</Declaration>
 			
-			
+			<ReturnValue><Abstract type="html">A new NSDictionary object, loaded with all of the keys/values in the Constants plist file.</Abstract></ReturnValue>
 			<Anchor>//api/name/plistDict</Anchor>
             <NodeRef refid="3"/>
 		</Token>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/plistConfig:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">Returns a NSObject object, initialized with the object loaded from the Constants plist file for the specified key.  If the specified key doesn&apos;t exist, a warning message is logged to the console.</Abstract>
 			<DeclaredIn>DNAppConstants.h</DeclaredIn>
 			
 			<Declaration>+ (id)plistConfig:(NSString *)key</Declaration>
-			
-			
+			<Parameters>
+				<Parameter>
+					<Name>key</Name>
+					<Abstract type="html">The string which specifies the key to the Constants plist file.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new NSString object, configured according to the value in the Constants plist file.</Abstract></ReturnValue>
 			<Anchor>//api/name/plistConfig:</Anchor>
             <NodeRef refid="3"/>
 		</Token>

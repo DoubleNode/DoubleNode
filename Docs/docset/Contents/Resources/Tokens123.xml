@@ -4,7 +4,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/c/tdef/LogLevel</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">DLog Logging Items and Macros</Abstract>
 			<DeclaredIn>DNUtilities.h</DeclaredIn>
             
 			

@@ -265,11 +265,6 @@
             
         </Node>
 		<Node id="5" type="file" documentType="reference">
-            <Name>DNBaseTheme</Name>
-            <Path>Classes/DNBaseTheme.html</Path>
-            
-        </Node>
-		<Node id="6" type="file" documentType="reference">
             <Name>DNManagedObject</Name>
             <Path>Classes/DNManagedObject.html</Path>
             
@@ -308,7 +303,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="7" type="file" documentType="reference">
+		<Node id="6" type="file" documentType="reference">
             <Name>DNModel</Name>
             <Path>Classes/DNModel.html</Path>
             
@@ -341,7 +336,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="8" type="file" documentType="reference">
+		<Node id="7" type="file" documentType="reference">
             <Name>DNModelWatch</Name>
             <Path>Classes/DNModelWatch.html</Path>
             
@@ -368,7 +363,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="9" type="file" documentType="reference">
+		<Node id="8" type="file" documentType="reference">
             <Name>DNModelWatchFetchedObject</Name>
             <Path>Classes/DNModelWatchFetchedObject.html</Path>
             
@@ -401,7 +396,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="10" type="file" documentType="reference">
+		<Node id="9" type="file" documentType="reference">
             <Name>DNModelWatchFetchedObjects</Name>
             <Path>Classes/DNModelWatchFetchedObjects.html</Path>
             
@@ -434,7 +429,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="11" type="file" documentType="reference">
+		<Node id="10" type="file" documentType="reference">
             <Name>DNModelWatchKVOObject</Name>
             <Path>Classes/DNModelWatchKVOObject.html</Path>
             
@@ -467,7 +462,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="12" type="file" documentType="reference">
+		<Node id="11" type="file" documentType="reference">
             <Name>DNModelWatchKVOObjects</Name>
             <Path>Classes/DNModelWatchKVOObjects.html</Path>
             
@@ -500,7 +495,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="13" type="file" documentType="reference">
+		<Node id="12" type="file" documentType="reference">
             <Name>DNModelWatchObject</Name>
             <Path>Classes/DNModelWatchObject.html</Path>
             
@@ -527,7 +522,7 @@
             </Subnodes>
             
         </Node>
-		<Node id="14" type="file" documentType="reference">
+		<Node id="13" type="file" documentType="reference">
             <Name>DNModelWatchObjects</Name>
             <Path>Classes/DNModelWatchObjects.html</Path>
             
@@ -554,9 +549,14 @@
             </Subnodes>
             
         </Node>
-		<Node id="15" type="file" documentType="reference">
+		<Node id="14" type="file" documentType="reference">
             <Name>DNNavigationController</Name>
             <Path>Classes/DNNavigationController.html</Path>
+            
+        </Node>
+		<Node id="15" type="file" documentType="reference">
+            <Name>DNTheme</Name>
+            <Path>Classes/DNTheme.html</Path>
             
         </Node>
 		<Node id="16" type="file" documentType="reference">
@@ -3424,17 +3424,17 @@
             
         </Node>
 		<Node id="110" type="file" documentType="reference">
-            <Name>DNApplicationDelegate</Name>
-            <Path>Protocols/DNApplicationDelegate.html</Path>
+            <Name>DNApplicationProtocol</Name>
+            <Path>Protocols/DNApplicationProtocol.html</Path>
             
                 <Subnodes>
                 <Node type="section">
-                    <Path>Protocols/DNApplicationDelegate.html</Path>
+                    <Path>Protocols/DNApplicationProtocol.html</Path>
                     <Name>Overview</Name>
                     <Anchor>overview</Anchor>
                 </Node>
                 <Node type="section">
-                    <Path>Protocols/DNApplicationDelegate.html</Path>
+                    <Path>Protocols/DNApplicationProtocol.html</Path>
                     <Name>Tasks</Name>
                     <Anchor>tasks</Anchor>
                 </Node>
@@ -3442,7 +3442,7 @@
                 
                 
                 <Node type="section">
-                    <Path>Protocols/DNApplicationDelegate.html</Path>
+                    <Path>Protocols/DNApplicationProtocol.html</Path>
                     <Name>Instance Methods</Name>
                     <Anchor>instance_methods</Anchor>
                 </Node>
@@ -3451,8 +3451,8 @@
             
         </Node>
 		<Node id="111" type="file" documentType="reference">
-            <Name>DNTheme</Name>
-            <Path>Protocols/DNTheme.html</Path>
+            <Name>DNThemeProtocol</Name>
+            <Path>Protocols/DNThemeProtocol.html</Path>
             
         </Node>
 		<Node id="112" type="file" documentType="reference">

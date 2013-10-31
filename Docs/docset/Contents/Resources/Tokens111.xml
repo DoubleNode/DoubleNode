@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/DNTheme.html">
+	<File path="Protocols/DNThemeProtocol.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/DNTheme</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/DNThemeProtocol</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNTheme.h</DeclaredIn>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
             
 			
 			<NodeRef refid="111"/>

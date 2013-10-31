@@ -5,7 +5,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/cl/DNThemeManager</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNTheme.h</DeclaredIn>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
             
 			
 			<NodeRef refid="16"/>
@@ -15,7 +15,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/themeName</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNTheme.h</DeclaredIn>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
 			
 			<Declaration>+ (NSString *)themeName</Declaration>
 			
@@ -27,9 +27,9 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/sharedTheme</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNTheme.h</DeclaredIn>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
 			
-			<Declaration>+ (id&lt;DNTheme&gt;)sharedTheme</Declaration>
+			<Declaration>+ (id&lt;DNThemeProtocol&gt;)sharedTheme</Declaration>
 			
 			
 			<Anchor>//api/name/sharedTheme</Anchor>
@@ -39,7 +39,7 @@
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/customizeButton:withGroup:andScreen:andItem:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNTheme.h</DeclaredIn>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
 			
 			<Declaration>+ (void)customizeButton:(UIButton *)btnView withGroup:(NSString *)group andScreen:(NSString *)screen andItem:(NSString *)item</Declaration>
 			

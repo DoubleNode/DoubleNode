@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
-		<title>DNApplicationDelegate Protocol Reference</title>
+		<title>DNApplicationProtocol Protocol Reference</title>
 		<meta id="xcode-display" name="xcode-display" content="render"/>
 		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
 		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
@@ -16,7 +16,7 @@
 			</div>
 			
 			<div id="title" role="banner">
-				<h1 class="hideInXcode">DNApplicationDelegate Protocol Reference</h1>
+				<h1 class="hideInXcode">DNApplicationProtocol Protocol Reference</h1>
 			</div>
 			<ul id="headerButtons" role="toolbar">
 				<li id="toc_button">
@@ -25,6 +25,8 @@
 				<li id="jumpto_button" role="navigation">
 					<select id="jumpTo">
 	<option value="top">Jump To&#133;</option>
+	
+	<option value="overview">Overview</option>
 	
 	
 	
@@ -74,6 +76,8 @@
 		<nav id="tocContainer" class="isShowingTOC">
 			<ul id="toc" role="tree">
 				
+<li role="treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#overview">Overview</a></span></li>
+
 
 
 
@@ -122,7 +126,7 @@
 		</nav>
 		<article>
 			<div id="contents" class="isShowingTOC" role="main">
-				<a title="DNApplicationDelegate Protocol Reference" name="top"></a>
+				<a title="DNApplicationProtocol Protocol Reference" name="top"></a>
 				<div class="main-navigation navigation-top">
 					<ul>
 	<li><a href="../index.html">Index</a></li>
@@ -131,7 +135,7 @@
 				</div>
 				<div id="header">
 					<div class="section-header">
-						<h1 class="title title-header">DNApplicationDelegate Protocol Reference</h1>
+						<h1 class="title title-header">DNApplicationProtocol Protocol Reference</h1>
 					</div>		
 				</div>
 				<div id="container">	
@@ -142,12 +146,20 @@
 	<td class="specification-value">NSObject</td>
 </tr><tr>
 	<td class="specification-title">Declared in</td>
-	<td class="specification-value">DNApplicationDelegate.h</td>
+	<td class="specification-value">DNApplicationProtocol.h</td>
 </tr>
 						</tbody></table></div>
 					
                     
                     
+					
+					<div class="section section-overview">
+						<a title="Overview" name="overview"></a>
+						<h2 class="subtitle subtitle-overview">Overview</h2>
+						<p>Provides functions expected to be in the applications AppDelegate class.</p>
+					</div>
+					
+					
 					
 					
 					
@@ -254,10 +266,35 @@
 	<h3 class="subsubtitle method-title">deletePersistentStore</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Closes the App&rsquo;s current NSPersistentStore, then removes the file from the device.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)deletePersistentStore</code></div>
 
     
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -265,10 +302,40 @@
 	<h3 class="subsubtitle method-title">disableURLCache</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Disables the App URL Cache (if applicable).</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)disableURLCache</code></div>
 
     
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The primary use-case for this function is for debugging, diagnostics and unit testing.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -276,10 +343,40 @@
 	<h3 class="subsubtitle method-title">managedObjectContext</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates or (if already created) returns the App&rsquo;s default NSManagedObjectContext.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (NSManagedObjectContext *)managedObjectContext</code></div>
 
     
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The App&rsquo;s default NSManagedObjectContext object, creating it if needed.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -287,10 +384,40 @@
 	<h3 class="subsubtitle method-title">managedObjectModel</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates or (if already created) returns the App&rsquo;s default NSManagedObjectModel.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (NSManagedObjectModel *)managedObjectModel</code></div>
 
     
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The App&rsquo;s default NSManagedObjectModel object, creating it if needed.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -298,10 +425,35 @@
 	<h3 class="subsubtitle method-title">saveContext</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Flushes any cached updates from the current NSManagedObjectContext to the NSPersistentStore.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)saveContext</code></div>
 
     
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -309,10 +461,50 @@
 	<h3 class="subsubtitle method-title">setDoNotUseIncrementalStore:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets a flag to disable the use of a NSIncrementalStore (if applicable).</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)setDoNotUseIncrementalStore:(BOOL)<em>flagValue</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>flagValue</em></dt>
+			<dd><p>A BOOL flag to specify whether or not to bypass using a NSIncrementalStore when initializing the App&rsquo;s CoreData NSPersistentStore.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The primary use-case for this function is for debugging, diagnostics and unit testing.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -320,10 +512,50 @@
 	<h3 class="subsubtitle method-title">setPersistentStorePrefix:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets a string prefix to be used when opening and creating CoreData NSPersistentStore.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)setPersistentStorePrefix:(NSString *)<em>prefix</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>prefix</em></dt>
+			<dd><p>A NSString prefix to be prepended to any NSPersistentStore URLs.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<p>The primary use-case for this function is for debugging, diagnostics and unit testing.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -331,10 +563,50 @@
 	<h3 class="subsubtitle method-title">setSettingsItem:boolValue:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets the BOOL value of the user setting, specified by a key.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)setSettingsItem:(NSString *)<em>item</em> boolValue:(BOOL)<em>value</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>item</em></dt>
+			<dd><p>The NSString key for the specific user setting.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>value</em></dt>
+			<dd><p>The new BOOL value for the specific user setting.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -342,10 +614,50 @@
 	<h3 class="subsubtitle method-title">setSettingsItem:value:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Sets the value of the user setting, specified by a key.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (void)setSettingsItem:(NSString *)<em>item</em> value:(id)<em>value</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>item</em></dt>
+			<dd><p>The NSString key for the specific user setting.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>value</em></dt>
+			<dd><p>The new value for the specific user setting.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -353,10 +665,50 @@
 	<h3 class="subsubtitle method-title">settingsItem:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Loads and returns the current value of the user setting, specified by a key.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (id)settingsItem:(NSString *)<em>item</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>item</em></dt>
+			<dd><p>The NSString key for the specific user setting.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The current value of the specified user setting (or @&ldquo;&rdquo; if not set).</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -364,10 +716,55 @@
 	<h3 class="subsubtitle method-title">settingsItem:boolDefault:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Loads and returns the current BOOL value of the user setting, specified by a key and a default value.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (id)settingsItem:(NSString *)<em>item</em> boolDefault:(BOOL)<em>defaultValue</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>item</em></dt>
+			<dd><p>The NSString key for the specific user setting.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>defaultValue</em></dt>
+			<dd><p>The default BOOL value for the specific user setting, when it has not been previously set.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The current value of the specified user setting.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -375,10 +772,55 @@
 	<h3 class="subsubtitle method-title">settingsItem:default:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Loads and returns the current value of the user setting, specified by a key and a default value.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (id)settingsItem:(NSString *)<em>item</em> default:(id)<em>defaultValue</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>item</em></dt>
+			<dd><p>The NSString key for the specific user setting.</p></dd>
+		</dl>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>defaultValue</em></dt>
+			<dd><p>The default value for the specific user setting, when it has not been previously set.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>The current value of the specified user setting.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">DNApplicationProtocol.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 					</div>

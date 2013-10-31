@@ -17,7 +17,7 @@
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>DNUtilities.h</DeclaredIn>
 			
-			<Declaration>+ (id&lt;DNApplicationDelegate&gt;)appDelegate</Declaration>
+			<Declaration>+ (id&lt;DNApplicationProtocol&gt;)appDelegate</Declaration>
 			
 			
 			<Anchor>//api/name/appDelegate</Anchor>
