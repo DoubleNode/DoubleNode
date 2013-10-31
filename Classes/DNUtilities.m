@@ -23,9 +23,9 @@
 
 @implementation DNUtilities
 
-+ (id<DNApplicationDelegate>)appDelegate
++ (id<DNApplicationProtocol>)appDelegate
 {
-    return (id<DNApplicationDelegate>)[[UIApplication sharedApplication] delegate];
+    return (id<DNApplicationProtocol>)[[UIApplication sharedApplication] delegate];
 }
 
 + (DNUtilities*)sharedInstance

@@ -25,9 +25,9 @@
 
 #pragma mark - AppDelegate access functions
 
-+ (id<DNApplicationDelegate>)appDelegate
++ (id<DNApplicationProtocol>)appDelegate
 {
-    return (id<DNApplicationDelegate>)[[UIApplication sharedApplication] delegate];
+    return (id<DNApplicationProtocol>)[[UIApplication sharedApplication] delegate];
 }
 
 + (NSManagedObjectContext*)managedObjectContext

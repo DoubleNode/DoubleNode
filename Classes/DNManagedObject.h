@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-#import "DNApplicationDelegate.h"
+#import "DNApplicationProtocol.h"
 
 @class DNModel;
 
@@ -33,7 +33,7 @@
                                forObjectWithID:(NSManagedObjectID*)objectID
                         inManagedObjectContext:(NSManagedObjectContext*)context;
 
-+ (id<DNApplicationDelegate>)appDelegate;
++ (id<DNApplicationProtocol>)appDelegate;
 + (NSManagedObjectContext*)managedObjectContext;
 + (NSManagedObjectModel*)managedObjectModel;
 

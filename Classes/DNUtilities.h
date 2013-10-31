@@ -10,18 +10,20 @@
 
 #import "LoggerClient.h"
 
-#import "DNApplicationDelegate.h"
+#import "DNApplicationProtocol.h"
 
-/*
+/**
  *  System Versioning Preprocessor Macros
  */
-
 #define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
 #define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
+/**
+ *  DLog Logging Items and Macros
+ */
 typedef NS_ENUM(NSInteger, LogLevel)
 {
     LL_Critical = 0,
@@ -32,10 +34,10 @@ typedef NS_ENUM(NSInteger, LogLevel)
     LL_Everything
 };
 
-#define LD_UnitTests        @"unittests"
-#define LD_General          @"general"
-#define LD_CoreFramework    @"coreframework"
-#define LD_CoreData         @"coredata"
+const NSString*     LD_UnitTests        = @"unittests";
+const NSString*     LD_General          = @"general";
+const NSString*     LD_CoreFramework    = @"coreframework";
+const NSString*     LD_CoreData         = @"coredata";
 
 #if !defined(DEBUG)
     #define DLogMarker(marker)          NSLog(@"%@", marker)
@@ -58,12 +60,9 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
     #endif
 #endif
 
-typedef void (^RevealBlock)(BOOL left);
-typedef BOOL (^RevealBlock_Bool)(BOOL left);
-
 @interface DNUtilities : NSObject
 
-+ (id<DNApplicationDelegate>)appDelegate;
++ (id<DNApplicationProtocol>)appDelegate;
 
 + (CGFloat)screenHeight;
 + (BOOL)isTall;

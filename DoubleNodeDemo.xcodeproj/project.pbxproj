@@ -45,7 +45,7 @@
 		ADC9D5B61821EA5E0019F0DA /* UILabel+TextKerning.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D58B1821EA5E0019F0DA /* UILabel+TextKerning.m */; };
 		ADC9D5B71821EA5E0019F0DA /* UIScrollView+ScrollDirection.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D58D1821EA5E0019F0DA /* UIScrollView+ScrollDirection.m */; };
 		ADC9D5B81821EA5E0019F0DA /* DNAppConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5901821EA5E0019F0DA /* DNAppConstants.m */; };
-		ADC9D5B91821EA5E0019F0DA /* DNBaseTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5931821EA5E0019F0DA /* DNBaseTheme.m */; };
+		ADC9D5B91821EA5E0019F0DA /* DNTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5931821EA5E0019F0DA /* DNTheme.m */; };
 		ADC9D5BA1821EA5E0019F0DA /* DNManagedObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5951821EA5E0019F0DA /* DNManagedObject.m */; };
 		ADC9D5BB1821EA5E0019F0DA /* DNModel.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5971821EA5E0019F0DA /* DNModel.m */; };
 		ADC9D5BC1821EA5E0019F0DA /* DNModelWatch.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5991821EA5E0019F0DA /* DNModelWatch.m */; };
@@ -56,7 +56,7 @@
 		ADC9D5C11821EA5E0019F0DA /* DNModelWatchObject.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5A31821EA5E0019F0DA /* DNModelWatchObject.m */; };
 		ADC9D5C21821EA5E0019F0DA /* DNModelWatchObjects.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5A51821EA5E0019F0DA /* DNModelWatchObjects.m */; };
 		ADC9D5C31821EA5E0019F0DA /* DNNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5A71821EA5E0019F0DA /* DNNavigationController.m */; };
-		ADC9D5C41821EA5E0019F0DA /* DNTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5A91821EA5E0019F0DA /* DNTheme.m */; };
+		ADC9D5C41821EA5E0019F0DA /* DNThemeManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5A91821EA5E0019F0DA /* DNThemeManager.m */; };
 		ADC9D5C51821EA5E0019F0DA /* DNUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5AB1821EA5E0019F0DA /* DNUtilities.m */; };
 		ADC9D5C61821EA5E0019F0DA /* ADVDefaultTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5AF1821EA5E0019F0DA /* ADVDefaultTheme.m */; };
 		ADC9D5C71821EA5E0019F0DA /* ADVTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = ADC9D5B11821EA5E0019F0DA /* ADVTheme.m */; };
@@ -109,9 +109,9 @@
 		ADC9D58D1821EA5E0019F0DA /* UIScrollView+ScrollDirection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+ScrollDirection.m"; sourceTree = "<group>"; };
 		ADC9D58F1821EA5E0019F0DA /* DNAppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNAppConstants.h; sourceTree = "<group>"; };
 		ADC9D5901821EA5E0019F0DA /* DNAppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNAppConstants.m; sourceTree = "<group>"; };
-		ADC9D5911821EA5E0019F0DA /* DNApplicationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNApplicationDelegate.h; sourceTree = "<group>"; };
-		ADC9D5921821EA5E0019F0DA /* DNBaseTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNBaseTheme.h; sourceTree = "<group>"; };
-		ADC9D5931821EA5E0019F0DA /* DNBaseTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNBaseTheme.m; sourceTree = "<group>"; };
+		ADC9D5911821EA5E0019F0DA /* DNApplicationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNApplicationProtocol.h; sourceTree = "<group>"; };
+		ADC9D5921821EA5E0019F0DA /* DNTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNTheme.h; sourceTree = "<group>"; };
+		ADC9D5931821EA5E0019F0DA /* DNTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNTheme.m; sourceTree = "<group>"; };
 		ADC9D5941821EA5E0019F0DA /* DNManagedObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNManagedObject.h; sourceTree = "<group>"; };
 		ADC9D5951821EA5E0019F0DA /* DNManagedObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNManagedObject.m; sourceTree = "<group>"; };
 		ADC9D5961821EA5E0019F0DA /* DNModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNModel.h; sourceTree = "<group>"; };
@@ -132,8 +132,8 @@
 		ADC9D5A51821EA5E0019F0DA /* DNModelWatchObjects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNModelWatchObjects.m; sourceTree = "<group>"; };
 		ADC9D5A61821EA5E0019F0DA /* DNNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNNavigationController.h; sourceTree = "<group>"; };
 		ADC9D5A71821EA5E0019F0DA /* DNNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNNavigationController.m; sourceTree = "<group>"; };
-		ADC9D5A81821EA5E0019F0DA /* DNTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNTheme.h; sourceTree = "<group>"; };
-		ADC9D5A91821EA5E0019F0DA /* DNTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNTheme.m; sourceTree = "<group>"; };
+		ADC9D5A81821EA5E0019F0DA /* DNThemeManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNThemeManager.h; sourceTree = "<group>"; };
+		ADC9D5A91821EA5E0019F0DA /* DNThemeManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNThemeManager.m; sourceTree = "<group>"; };
 		ADC9D5AA1821EA5E0019F0DA /* DNUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNUtilities.h; sourceTree = "<group>"; };
 		ADC9D5AB1821EA5E0019F0DA /* DNUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNUtilities.m; sourceTree = "<group>"; };
 		ADC9D5AE1821EA5E0019F0DA /* ADVDefaultTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADVDefaultTheme.h; sourceTree = "<group>"; };
@@ -274,9 +274,9 @@
 			children = (
 				ADC9D58F1821EA5E0019F0DA /* DNAppConstants.h */,
 				ADC9D5901821EA5E0019F0DA /* DNAppConstants.m */,
-				ADC9D5911821EA5E0019F0DA /* DNApplicationDelegate.h */,
-				ADC9D5921821EA5E0019F0DA /* DNBaseTheme.h */,
-				ADC9D5931821EA5E0019F0DA /* DNBaseTheme.m */,
+				ADC9D5911821EA5E0019F0DA /* DNApplicationProtocol.h */,
+				ADC9D5921821EA5E0019F0DA /* DNTheme.h */,
+				ADC9D5931821EA5E0019F0DA /* DNTheme.m */,
 				ADC9D5941821EA5E0019F0DA /* DNManagedObject.h */,
 				ADC9D5951821EA5E0019F0DA /* DNManagedObject.m */,
 				ADC9D5961821EA5E0019F0DA /* DNModel.h */,
@@ -297,8 +297,8 @@
 				ADC9D5A51821EA5E0019F0DA /* DNModelWatchObjects.m */,
 				ADC9D5A61821EA5E0019F0DA /* DNNavigationController.h */,
 				ADC9D5A71821EA5E0019F0DA /* DNNavigationController.m */,
-				ADC9D5A81821EA5E0019F0DA /* DNTheme.h */,
-				ADC9D5A91821EA5E0019F0DA /* DNTheme.m */,
+				ADC9D5A81821EA5E0019F0DA /* DNThemeManager.h */,
+				ADC9D5A91821EA5E0019F0DA /* DNThemeManager.m */,
 				ADC9D5AA1821EA5E0019F0DA /* DNUtilities.h */,
 				ADC9D5AB1821EA5E0019F0DA /* DNUtilities.m */,
 			);
@@ -518,13 +518,13 @@
 				ADC9D5B41821EA5E0019F0DA /* NSTimer+Blocks.m in Sources */,
 				ADC9D57E1821A93F0019F0DA /* DNAppDelegate.m in Sources */,
 				ADC9D5BA1821EA5E0019F0DA /* DNManagedObject.m in Sources */,
-				ADC9D5B91821EA5E0019F0DA /* DNBaseTheme.m in Sources */,
+				ADC9D5B91821EA5E0019F0DA /* DNTheme.m in Sources */,
 				ADC9D5C31821EA5E0019F0DA /* DNNavigationController.m in Sources */,
 				ADC9D50B1821A2800019F0DA /* DoubleNodeDemo.xcdatamodeld in Sources */,
 				ADC9D5B81821EA5E0019F0DA /* DNAppConstants.m in Sources */,
 				ADC9D5B51821EA5E0019F0DA /* UIFont+Custom.m in Sources */,
 				ADC9D5B71821EA5E0019F0DA /* UIScrollView+ScrollDirection.m in Sources */,
-				ADC9D5C41821EA5E0019F0DA /* DNTheme.m in Sources */,
+				ADC9D5C41821EA5E0019F0DA /* DNThemeManager.m in Sources */,
 				ADC9D5C01821EA5E0019F0DA /* DNModelWatchKVOObjects.m in Sources */,
 				ADC9D5B61821EA5E0019F0DA /* UILabel+TextKerning.m in Sources */,
 				ADC9D5BD1821EA5E0019F0DA /* DNModelWatchFetchedObject.m in Sources */,
