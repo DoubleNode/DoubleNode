@@ -55,7 +55,7 @@
     return prettyTimestamp;
 }
 
-- (NSString*)prettyDateRange:(NSDate*)end
+- (NSString*)simpleDateRange:(NSDate*)end
 {
     NSString*    startFormat    = [NSDateFormatter dateFormatFromTemplate:@"MMM d"
                                                                   options:0
@@ -88,7 +88,7 @@
         return @"";
     }
     
-    return [NSString stringWithFormat:@"on %@", datestr];
+    return [NSString stringWithFormat:@"%@", datestr];
 }
 
 @end

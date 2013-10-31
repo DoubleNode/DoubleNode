@@ -14,12 +14,20 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/UIFont/customFontWithName:size:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">Creates and returns a new UIFont object (works around the iOS oddity which required an additional sizing call).</Abstract>
 			<DeclaredIn>UIFont+Custom.h</DeclaredIn>
 			
 			<Declaration>+ (UIFont *)customFontWithName:(NSString *)fontName size:(double)fontSize</Declaration>
-			
-			
+			<Parameters>
+				<Parameter>
+					<Name>fontName</Name>
+					<Abstract type="html">The postscript font name string</Abstract>
+				</Parameter><Parameter>
+					<Name>fontSize</Name>
+					<Abstract type="html">The font size (in points)</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new UIFont configured according to the specified parameters.</Abstract></ReturnValue>
 			<Anchor>//api/name/customFontWithName:size:</Anchor>
             <NodeRef refid="106"/>
 		</Token>

@@ -14,36 +14,41 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/NSDate/prettyDate</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">Creates and returns a new NSString object initialized with a natural language version of the source date in relation to now.</Abstract>
 			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
 			
 			<Declaration>- (NSString *)prettyDate</Declaration>
 			
-			
+			<ReturnValue><Abstract type="html">A new NSString object, configured with a natual language representation of the source date.</Abstract></ReturnValue>
 			<Anchor>//api/name/prettyDate</Anchor>
             <NodeRef refid="85"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSDate/prettyDateRange:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<TokenIdentifier>//apple_ref/occ/instm/NSDate/simpleDateRange:</TokenIdentifier>
+			<Abstract type="html">Creates and returns a new NSString object initialized with a simple display of a date range, between the source date and the end data parameter.</Abstract>
 			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
 			
-			<Declaration>- (NSString *)prettyDateRange:(NSDate *)end</Declaration>
-			
-			
-			<Anchor>//api/name/prettyDateRange:</Anchor>
+			<Declaration>- (NSString *)simpleDateRange:(NSDate *)end</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>end</Name>
+					<Abstract type="html">The end date for the date range string.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">A new NSString object, configured with a simple representation of a date range (ie: MMM d-d, yyyy).</Abstract></ReturnValue>
+			<Anchor>//api/name/simpleDateRange:</Anchor>
             <NodeRef refid="85"/>
 		</Token>
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/NSDate/localizedDate</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">Creates an returns a new NSString object initialized with a localized version of the source date.</Abstract>
 			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
 			
 			<Declaration>- (NSString *)localizedDate</Declaration>
 			
-			
+			<ReturnValue><Abstract type="html">A new NSString object, configured with a localized version of the source date.</Abstract></ReturnValue>
 			<Anchor>//api/name/localizedDate</Anchor>
             <NodeRef refid="85"/>
 		</Token>

@@ -38,7 +38,7 @@ typedef NS_OPTIONS(NSInteger, ScrollDirection)
 @interface UIScrollView (ScrollDirection)
 
 /**
- *  Calculate the current scroll direction(s)
+ *  Returns the current scroll direction(s)
  *
  *  @param lastContentOffset The last contentOffset point
  *

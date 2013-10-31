@@ -45,7 +45,7 @@
 	
 	<option value="//api/name/prettyDate">&nbsp;&nbsp;&nbsp;&nbsp;- prettyDate</option>
 	
-	<option value="//api/name/prettyDateRange:">&nbsp;&nbsp;&nbsp;&nbsp;- prettyDateRange:</option>
+	<option value="//api/name/simpleDateRange:">&nbsp;&nbsp;&nbsp;&nbsp;- simpleDateRange:</option>
 	
 	
 	
@@ -77,7 +77,7 @@
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/prettyDate">prettyDate</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/prettyDateRange:">prettyDateRange:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/simpleDateRange:">simpleDateRange:</a></span></li>
 	
 </ul></li>
 
@@ -129,7 +129,7 @@
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/prettyDateRange:">&ndash;&nbsp;prettyDateRange:</a></code>
+		<code><a href="#//api/name/simpleDateRange:">&ndash;&nbsp;simpleDateRange:</a></code>
 	</span>
 	
 	
@@ -161,10 +161,40 @@
 	<h3 class="subsubtitle method-title">localizedDate</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates an returns a new NSString object initialized with a localized version of the source date.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (NSString *)localizedDate</code></div>
 
     
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new NSString object, configured with a localized version of the source date.</p>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSDate+PrettyDate.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
@@ -172,21 +202,101 @@
 	<h3 class="subsubtitle method-title">prettyDate</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates and returns a new NSString object initialized with a natural language version of the source date in relation to now.</p>
+	</div>		
+	
+    
 
 	<div class="method-subsection method-declaration"><code>- (NSString *)prettyDate</code></div>
 
     
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new NSString object, configured with a natual language representation of the source date.</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="warning"><p><strong>Warning:</strong> This function is NOT localized, only supports English.</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSDate+PrettyDate.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/prettyDateRange:" title="prettyDateRange:"></a>
-	<h3 class="subsubtitle method-title">prettyDateRange:</h3>
+	<a name="//api/name/simpleDateRange:" title="simpleDateRange:"></a>
+	<h3 class="subsubtitle method-title">simpleDateRange:</h3>
 	
 	
+	
+	<div class="method-subsection brief-description">
+		<p>Creates and returns a new NSString object initialized with a simple display of a date range, between the source date and the end data parameter.</p>
+	</div>		
+	
+    
 
-	<div class="method-subsection method-declaration"><code>- (NSString *)prettyDateRange:(NSDate *)<em>end</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (NSString *)simpleDateRange:(NSDate *)<em>end</em></code></div>
 
     
+	
+	<div class="method-subsection arguments-section parameters">
+		<h4 class="method-subtitle parameter-title">Parameters</h4>
+		
+		<dl class="argument-def parameter-def">
+			<dt><em>end</em></dt>
+			<dd><p>The end date for the date range string.</p></dd>
+		</dl>
+		
+	</div>
+	
+	
+	
+	<div class="method-subsection return">
+		<h4 class="method-subtitle parameter-title">Return Value</h4>
+		<p>A new NSString object, configured with a simple representation of a date range (ie: MMM d-d, yyyy).</p>
+	</div>
+	
+	
+	
+	
+	
+	<div class="method-subsection discussion-section">
+		<h4 class="method-subtitle">Discussion</h4>
+		<div class="warning"><p><strong>Warning:</strong> This function is currently not very robust, and works well only for dates within the same month.  This function should be revisited and expanded upon in the future.</p></div>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	<div class="method-subsection declared-in-section">
+		<h4 class="method-subtitle">Declared In</h4>
+		<code class="declared-in-ref">NSDate+PrettyDate.h</code><br />
+	</div>				
+	
+	
 </div>
 						
 					</div>
@@ -204,7 +314,7 @@
 				<div id="footer">
 					<hr />
 					<div class="footer-copyright">
-						<p><span class="copyright">&copy; 2013 DoubleNode, LLC. All rights reserved. (Last updated: 2013-10-30)</span><br />
+						<p><span class="copyright">&copy; 2013 DoubleNode, LLC. All rights reserved. (Last updated: 2013-10-31)</span><br />
 						
 						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
 						

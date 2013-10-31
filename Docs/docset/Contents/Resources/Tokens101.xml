@@ -14,12 +14,12 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/NSString/stringByDecodingXMLEntities</TokenIdentifier>
-			<Abstract type="html"></Abstract>
+			<Abstract type="html">Creates and returns a new NSString object initialized with the source string, with XML entities replaced with their decoded values.  Current support includes: &amp;amp;amp;, &amp;amp;nbsp;, &amp;amp;apos;, &amp;amp;quot;, &amp;amp;lt;, &amp;amp;gt; and most numeric character representations.</Abstract>
 			<DeclaredIn>NSString+HTML.h</DeclaredIn>
 			
 			<Declaration>- (NSString *)stringByDecodingXMLEntities</Declaration>
 			
-			
+			<ReturnValue><Abstract type="html">A new NSString object, initialized with the source string, with XML entities replaced with their decoded values.</Abstract></ReturnValue>
 			<Anchor>//api/name/stringByDecodingXMLEntities</Anchor>
             <NodeRef refid="101"/>
 		</Token>

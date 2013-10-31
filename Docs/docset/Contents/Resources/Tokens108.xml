@@ -14,7 +14,7 @@
 		
 		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/UIScrollView/scrollDirection:</TokenIdentifier>
-			<Abstract type="html">Calculate the current scroll direction(s)</Abstract>
+			<Abstract type="html">Returns the current scroll direction(s)</Abstract>
 			<DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
 			
 			<Declaration>- (ScrollDirection)scrollDirection:(CGPoint)lastContentOffset</Declaration>
