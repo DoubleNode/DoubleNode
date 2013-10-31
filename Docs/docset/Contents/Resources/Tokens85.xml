@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSDate+PrettyDate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSDate(PrettyDate)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
+            
+			
+			<NodeRef refid="85"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSDate/prettyDate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)prettyDate</Declaration>
+			
+			
+			<Anchor>//api/name/prettyDate</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSDate/prettyDateRange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)prettyDateRange:(NSDate *)end</Declaration>
+			
+			
+			<Anchor>//api/name/prettyDateRange:</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSDate/localizedDate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)localizedDate</Declaration>
+			
+			
+			<Anchor>//api/name/localizedDate</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

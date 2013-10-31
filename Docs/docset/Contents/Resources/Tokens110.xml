@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Protocols/DNApplicationDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intf/DNApplicationDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+            
+			
+			<NodeRef refid="110"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/disableURLCache</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (void)disableURLCache</Declaration>
+			
+			
+			<Anchor>//api/name/disableURLCache</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/setDoNotUseIncrementalStore:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (void)setDoNotUseIncrementalStore:(BOOL)flagValue</Declaration>
+			
+			
+			<Anchor>//api/name/setDoNotUseIncrementalStore:</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/setPersistentStorePrefix:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (void)setPersistentStorePrefix:(NSString *)prefix</Declaration>
+			
+			
+			<Anchor>//api/name/setPersistentStorePrefix:</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/managedObjectContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (NSManagedObjectContext *)managedObjectContext</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectContext</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/managedObjectModel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (NSManagedObjectModel *)managedObjectModel</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectModel</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/deletePersistentStore</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (void)deletePersistentStore</Declaration>
+			
+			
+			<Anchor>//api/name/deletePersistentStore</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/saveContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (void)saveContext</Declaration>
+			
+			
+			<Anchor>//api/name/saveContext</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/settingsItem:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (id)settingsItem:(NSString *)item</Declaration>
+			
+			
+			<Anchor>//api/name/settingsItem:</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/settingsItem:default:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (id)settingsItem:(NSString *)item default:(id)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/settingsItem:default:</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/settingsItem:boolDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (id)settingsItem:(NSString *)item boolDefault:(BOOL)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/settingsItem:boolDefault:</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/setSettingsItem:value:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (void)setSettingsItem:(NSString *)item value:(id)value</Declaration>
+			
+			
+			<Anchor>//api/name/setSettingsItem:value:</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationDelegate/setSettingsItem:boolValue:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNApplicationDelegate.h</DeclaredIn>
+			
+			<Declaration>- (void)setSettingsItem:(NSString *)item boolValue:(BOOL)value</Declaration>
+			
+			
+			<Anchor>//api/name/setSettingsItem:boolValue:</Anchor>
+            <NodeRef refid="110"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

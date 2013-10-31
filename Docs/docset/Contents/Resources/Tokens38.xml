@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KWCaptureSpy.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KWCaptureSpy</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
+            
+			
+			<NodeRef refid="38"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWCaptureSpy/setArgument:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) id argument</Declaration>
+			
+			
+			<Anchor>//api/name/argument</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWCaptureSpy/argument</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) id argument</Declaration>
+			
+			
+			<Anchor>//api/name/argument</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWCaptureSpy/argument</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) id argument</Declaration>
+			
+			
+			<Anchor>//api/name/argument</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWCaptureSpy/initWithArgumentIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithArgumentIndex:(NSUInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/initWithArgumentIndex:</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KWBeBetweenMatcher.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBeBetweenMatcher</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBeBetweenMatcher.h</DeclaredIn>
+            
+			
+			<NodeRef refid="23"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeBetweenMatcher/beBetween:and:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBeBetweenMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)beBetween:(id)aLowerEndpoint and:(id)anUpperEndpoint</Declaration>
+			
+			
+			<Anchor>//api/name/beBetween:and:</Anchor>
+            <NodeRef refid="23"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeBetweenMatcher/beInTheIntervalFrom:to:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBeBetweenMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)beInTheIntervalFrom:(id)aLowerEndpoint to:(id)anUpperEndpoint</Declaration>
+			
+			
+			<Anchor>//api/name/beInTheIntervalFrom:to:</Anchor>
+            <NodeRef refid="23"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

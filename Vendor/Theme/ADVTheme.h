@@ -8,13 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-typedef enum  {
+
+typedef NS_ENUM(NSInteger, SSThemeTab)
+{
     SSThemeTabSecure,
     SSThemeTabDocs,
     SSThemeTabBugs,
     SSThemeTabBook,
     SSThemeTabOptions
-} SSThemeTab;
+};
 
 @protocol ADVTheme <NSObject>
 

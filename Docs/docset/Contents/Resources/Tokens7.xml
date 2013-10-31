@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DNModel.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DNModel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+            
+			
+			<NodeRef refid="7"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModel/entityName</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>+ (NSString *)entityName</Declaration>
+			
+			
+			<Anchor>//api/name/entityName</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModel/appDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>+ (id&lt;DNApplicationDelegate&gt;)appDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/appDelegate</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModel/managedObjectContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>+ (NSManagedObjectContext *)managedObjectContext</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectContext</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModel/managedObjectModel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>+ (NSManagedObjectModel *)managedObjectModel</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectModel</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModel/saveContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>+ (void)saveContext</Declaration>
+			
+			
+			<Anchor>//api/name/saveContext</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModel/model</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>+ (instancetype)model</Declaration>
+			
+			
+			<Anchor>//api/name/model</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/init</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (id)init</Declaration>
+			
+			
+			<Anchor>//api/name/init</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/saveContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (void)saveContext</Declaration>
+			
+			
+			<Anchor>//api/name/saveContext</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/getFromIDFetchTemplate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)getFromIDFetchTemplate</Declaration>
+			
+			
+			<Anchor>//api/name/getFromIDFetchTemplate</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/getAllFetchTemplate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)getAllFetchTemplate</Declaration>
+			
+			
+			<Anchor>//api/name/getAllFetchTemplate</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/getFromIDSortKeys</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (NSArray *)getFromIDSortKeys</Declaration>
+			
+			
+			<Anchor>//api/name/getFromIDSortKeys</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/getAllSortKeys</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (NSArray *)getAllSortKeys</Declaration>
+			
+			
+			<Anchor>//api/name/getAllSortKeys</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/watchObject:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (DNModelWatchObject *)watchObject:(DNManagedObject *)object didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/watchObject:didChange:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/watchObject:andAttributes:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (DNModelWatchObject *)watchObject:(DNManagedObject *)object andAttributes:(NSArray *)attributes didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/watchObject:andAttributes:didChange:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/watchObjects:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (DNModelWatchObjects *)watchObjects:(NSArray *)objects didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/watchObjects:didChange:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/watchObjects:andAttributes:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (DNModelWatchObjects *)watchObjects:(NSArray *)objects andAttributes:(NSArray *)attributes didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/watchObjects:andAttributes:didChange:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/checkWatch:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)checkWatch:(DNModelWatch *)watch</Declaration>
+			
+			
+			<Anchor>//api/name/checkWatch:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/retainWatch:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (void)retainWatch:(DNModelWatch *)watch</Declaration>
+			
+			
+			<Anchor>//api/name/retainWatch:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/releaseWatch:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (void)releaseWatch:(DNModelWatch *)watch</Declaration>
+			
+			
+			<Anchor>//api/name/releaseWatch:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/getFromID:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (id)getFromID:(id)idValue</Declaration>
+			
+			
+			<Anchor>//api/name/getFromID:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/getFromID:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (DNModelWatchObject *)getFromID:(id)idValue didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/getFromID:didChange:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/getAll</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (id)getAll</Declaration>
+			
+			
+			<Anchor>//api/name/getAll</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/getAllDidChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (DNModelWatchObjects *)getAllDidChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/getAllDidChange:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModel/deleteAllWithCompletion:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModel.h</DeclaredIn>
+			
+			<Declaration>- (void)deleteAllWithCompletion:(DNModelCompletionHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/deleteAllWithCompletion:</Anchor>
+            <NodeRef refid="7"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

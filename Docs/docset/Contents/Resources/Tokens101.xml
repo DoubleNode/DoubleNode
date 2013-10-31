@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSString+HTML.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSString(HTML)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>
+            
+			
+			<NodeRef refid="101"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSString/stringByDecodingXMLEntities</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSString+HTML.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)stringByDecodingXMLEntities</Declaration>
+			
+			
+			<Anchor>//api/name/stringByDecodingXMLEntities</Anchor>
+            <NodeRef refid="101"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DNAppDelegate.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DNAppDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+            
+			
+			<NodeRef refid="4"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/setWindow:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (strong, nonatomic) UIWindow *window</Declaration>
+			
+			
+			<Anchor>//api/name/window</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/window</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (strong, nonatomic) UIWindow *window</Declaration>
+			
+			
+			<Anchor>//api/name/window</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DNAppDelegate/window</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (strong, nonatomic) UIWindow *window</Declaration>
+			
+			
+			<Anchor>//api/name/window</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/setManagedObjectContext:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectContext</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/managedObjectContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectContext</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DNAppDelegate/managedObjectContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectContext</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/setManagedObjectModel:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectModel</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/managedObjectModel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectModel</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DNAppDelegate/managedObjectModel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectModel</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/setPersistentStoreCoordinator:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator</Declaration>
+			
+			
+			<Anchor>//api/name/persistentStoreCoordinator</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/persistentStoreCoordinator</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator</Declaration>
+			
+			
+			<Anchor>//api/name/persistentStoreCoordinator</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DNAppDelegate/persistentStoreCoordinator</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator</Declaration>
+			
+			
+			<Anchor>//api/name/persistentStoreCoordinator</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/saveContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>- (void)saveContext</Declaration>
+			
+			
+			<Anchor>//api/name/saveContext</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNAppDelegate/applicationDocumentsDirectory</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppDelegate.h</DeclaredIn>
+			
+			<Declaration>- (NSURL *)applicationDocumentsDirectory</Declaration>
+			
+			
+			<Anchor>//api/name/applicationDocumentsDirectory</Anchor>
+            <NodeRef refid="4"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

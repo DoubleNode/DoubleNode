@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KWBlock.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBlock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlock.h</DeclaredIn>
+            
+			
+			<NodeRef refid="34"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlock/initWithBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlock.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithBlock:(void ( ^ ) ( void ))block</Declaration>
+			
+			
+			<Anchor>//api/name/initWithBlock:</Anchor>
+            <NodeRef refid="34"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWBlock/blockWithBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlock.h</DeclaredIn>
+			
+			<Declaration>+ (id)blockWithBlock:(void ( ^ ) ( void ))block</Declaration>
+			
+			
+			<Anchor>//api/name/blockWithBlock:</Anchor>
+            <NodeRef refid="34"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlock/call</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlock.h</DeclaredIn>
+			
+			<Declaration>- (void)call</Declaration>
+			
+			
+			<Anchor>//api/name/call</Anchor>
+            <NodeRef refid="34"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

@@ -1,0 +1,677 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KWMock.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KWMock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+            
+			
+			<NodeRef refid="66"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initForClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initForClass:(Class)aClass</Declaration>
+			
+			
+			<Anchor>//api/name/initForClass:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initForProtocol:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initForProtocol:(Protocol *)aProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/initForProtocol:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initWithName:forClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithName:(NSString *)aName forClass:(Class)aClass</Declaration>
+			
+			
+			<Anchor>//api/name/initWithName:forClass:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initWithName:forProtocol:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithName:(NSString *)aName forProtocol:(Protocol *)aProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/initWithName:forProtocol:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initAsNullMockForClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initAsNullMockForClass:(Class)aClass</Declaration>
+			
+			
+			<Anchor>//api/name/initAsNullMockForClass:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initAsNullMockForProtocol:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initAsNullMockForProtocol:(Protocol *)aProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/initAsNullMockForProtocol:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initAsNullMockWithName:forClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initAsNullMockWithName:(NSString *)aName forClass:(Class)aClass</Declaration>
+			
+			
+			<Anchor>//api/name/initAsNullMockWithName:forClass:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initAsNullMockWithName:forProtocol:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initAsNullMockWithName:(NSString *)aName forProtocol:(Protocol *)aProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/initAsNullMockWithName:forProtocol:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initAsPartialMockForObject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initAsPartialMockForObject:(id)object</Declaration>
+			
+			
+			<Anchor>//api/name/initAsPartialMockForObject:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/initAsPartialMockWithName:forObject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)initAsPartialMockWithName:(NSString *)aName forObject:(id)object</Declaration>
+			
+			
+			<Anchor>//api/name/initAsPartialMockWithName:forObject:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/mockForClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)mockForClass:(Class)aClass</Declaration>
+			
+			
+			<Anchor>//api/name/mockForClass:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/mockForProtocol:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)mockForProtocol:(Protocol *)aProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/mockForProtocol:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/mockWithName:forClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)mockWithName:(NSString *)aName forClass:(Class)aClass</Declaration>
+			
+			
+			<Anchor>//api/name/mockWithName:forClass:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/mockWithName:forProtocol:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)mockWithName:(NSString *)aName forProtocol:(Protocol *)aProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/mockWithName:forProtocol:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/nullMockForClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)nullMockForClass:(Class)aClass</Declaration>
+			
+			
+			<Anchor>//api/name/nullMockForClass:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/nullMockForProtocol:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)nullMockForProtocol:(Protocol *)aProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/nullMockForProtocol:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/nullMockWithName:forClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)nullMockWithName:(NSString *)aName forClass:(Class)aClass</Declaration>
+			
+			
+			<Anchor>//api/name/nullMockWithName:forClass:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/nullMockWithName:forProtocol:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)nullMockWithName:(NSString *)aName forProtocol:(Protocol *)aProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/nullMockWithName:forProtocol:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/partialMockForObject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)partialMockForObject:(id)object</Declaration>
+			
+			
+			<Anchor>//api/name/partialMockForObject:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMock/partialMockWithName:forObject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>+ (id)partialMockWithName:(NSString *)aName forObject:(id)object</Declaration>
+			
+			
+			<Anchor>//api/name/partialMockWithName:forObject:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/setIsNullMock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) BOOL isNullMock</Declaration>
+			
+			
+			<Anchor>//api/name/isNullMock</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/isNullMock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) BOOL isNullMock</Declaration>
+			
+			
+			<Anchor>//api/name/isNullMock</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMock/isNullMock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) BOOL isNullMock</Declaration>
+			
+			
+			<Anchor>//api/name/isNullMock</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/setIsPartialMock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) BOOL isPartialMock</Declaration>
+			
+			
+			<Anchor>//api/name/isPartialMock</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/isPartialMock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) BOOL isPartialMock</Declaration>
+			
+			
+			<Anchor>//api/name/isPartialMock</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMock/isPartialMock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) BOOL isPartialMock</Declaration>
+			
+			
+			<Anchor>//api/name/isPartialMock</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/setMockName:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSString *mockName</Declaration>
+			
+			
+			<Anchor>//api/name/mockName</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/mockName</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSString *mockName</Declaration>
+			
+			
+			<Anchor>//api/name/mockName</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMock/mockName</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, readonly) NSString *mockName</Declaration>
+			
+			
+			<Anchor>//api/name/mockName</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/setMockedClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) Class mockedClass</Declaration>
+			
+			
+			<Anchor>//api/name/mockedClass</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/mockedClass</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) Class mockedClass</Declaration>
+			
+			
+			<Anchor>//api/name/mockedClass</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMock/mockedClass</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) Class mockedClass</Declaration>
+			
+			
+			<Anchor>//api/name/mockedClass</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/setMockedObject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) id mockedObject</Declaration>
+			
+			
+			<Anchor>//api/name/mockedObject</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/mockedObject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) id mockedObject</Declaration>
+			
+			
+			<Anchor>//api/name/mockedObject</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMock/mockedObject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) id mockedObject</Declaration>
+			
+			
+			<Anchor>//api/name/mockedObject</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/setMockedProtocol:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) Protocol *mockedProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/mockedProtocol</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/mockedProtocol</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) Protocol *mockedProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/mockedProtocol</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMock/mockedProtocol</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign, readonly) Protocol *mockedProtocol</Declaration>
+			
+			
+			<Anchor>//api/name/mockedProtocol</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stub:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)stub:(SEL)aSelector</Declaration>
+			
+			
+			<Anchor>//api/name/stub:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stub:withBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)stub:(SEL)aSelector withBlock:(id ( ^ ) ( NSArray *params ))block</Declaration>
+			
+			
+			<Anchor>//api/name/stub:withBlock:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stub:withArguments:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)stub:(SEL)aSelector withArguments:(id)firstArgument, ...</Declaration>
+			
+			
+			<Anchor>//api/name/stub:withArguments:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stub:andReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)stub:(SEL)aSelector andReturn:(id)aValue</Declaration>
+			
+			
+			<Anchor>//api/name/stub:andReturn:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stub:andReturn:withArguments:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)stub:(SEL)aSelector andReturn:(id)aValue withArguments:(id)firstArgument, ...</Declaration>
+			
+			
+			<Anchor>//api/name/stub:andReturn:withArguments:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stub</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)stub</Declaration>
+			
+			
+			<Anchor>//api/name/stub</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stubAndReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)stubAndReturn:(id)aValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubAndReturn:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stubAndReturn:times:afterThatReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)stubAndReturn:(id)aValue times:(id)times afterThatReturn:(id)aSecondValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubAndReturn:times:afterThatReturn:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stubMessagePattern:andReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)stubMessagePattern:(KWMessagePattern *)aMessagePattern andReturn:(id)aValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubMessagePattern:andReturn:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/stubMessagePattern:andReturn:times:afterThatReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)stubMessagePattern:(KWMessagePattern *)aMessagePattern andReturn:(id)aValue times:(id)times afterThatReturn:(id)aSecondValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubMessagePattern:andReturn:times:afterThatReturn:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/clearStubs</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)clearStubs</Declaration>
+			
+			
+			<Anchor>//api/name/clearStubs</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/addMessageSpy:forMessagePattern:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)addMessageSpy:(id&lt;KWMessageSpying&gt;)aSpy forMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			
+			
+			<Anchor>//api/name/addMessageSpy:forMessagePattern:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/removeMessageSpy:forMessagePattern:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)removeMessageSpy:(id&lt;KWMessageSpying&gt;)aSpy forMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			
+			
+			<Anchor>//api/name/removeMessageSpy:forMessagePattern:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/expect:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)expect:(SEL)aSelector</Declaration>
+			
+			
+			<Anchor>//api/name/expect:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/expect:withArguments:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)expect:(SEL)aSelector withArguments:(id)firstArgument, ...</Declaration>
+			
+			
+			<Anchor>//api/name/expect:withArguments:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/expect</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (id)expect</Declaration>
+			
+			
+			<Anchor>//api/name/expect</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMock/expectMessagePattern:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMock.h</DeclaredIn>
+			
+			<Declaration>- (void)expectMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			
+			
+			<Anchor>//api/name/expectMessagePattern:</Anchor>
+            <NodeRef refid="66"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

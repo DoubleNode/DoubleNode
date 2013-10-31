@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DNModelWatchKVOObjects.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatchKVOObjects</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchKVOObjects.h</DeclaredIn>
+            
+			
+			<NodeRef refid="12"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModelWatchKVOObjects/watchWithModel:andObjects:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchKVOObjects.h</DeclaredIn>
+			
+			<Declaration>+ (id)watchWithModel:(DNModel *)model andObjects:(NSArray *)objects didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/watchWithModel:andObjects:didChange:</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModelWatchKVOObjects/watchWithModel:andObjects:andAttributes:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchKVOObjects.h</DeclaredIn>
+			
+			<Declaration>+ (id)watchWithModel:(DNModel *)model andObjects:(NSArray *)objects andAttributes:(NSArray *)attributes didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/watchWithModel:andObjects:andAttributes:didChange:</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchKVOObjects/initWithModel:andObjects:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchKVOObjects.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithModel:(DNModel *)model andObjects:(NSArray *)objects didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/initWithModel:andObjects:didChange:</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchKVOObjects/initWithModel:andObjects:andAttributes:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchKVOObjects.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithModel:(DNModel *)model andObjects:(NSArray *)objects andAttributes:(NSArray *)attributes didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/initWithModel:andObjects:andAttributes:didChange:</Anchor>
+            <NodeRef refid="12"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

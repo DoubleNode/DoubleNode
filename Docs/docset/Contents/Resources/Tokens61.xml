@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KWMatcher.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KWMatcher</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+            
+			
+			<NodeRef refid="61"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/initWithSubject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithSubject:(id)anObject</Declaration>
+			
+			
+			<Anchor>//api/name/initWithSubject:</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMatcher/matcherWithSubject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>+ (id)matcherWithSubject:(id)anObject</Declaration>
+			
+			
+			<Anchor>//api/name/matcherWithSubject:</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/setSubject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) id subject</Declaration>
+			
+			
+			<Anchor>//api/name/subject</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/subject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) id subject</Declaration>
+			
+			
+			<Anchor>//api/name/subject</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMatcher/subject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) id subject</Declaration>
+			
+			
+			<Anchor>//api/name/subject</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMatcher/matcherStrings</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>+ (NSArray *)matcherStrings</Declaration>
+			
+			
+			<Anchor>//api/name/matcherStrings</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMatcher/canMatchSubject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>+ (BOOL)canMatchSubject:(id)anObject</Declaration>
+			
+			
+			<Anchor>//api/name/canMatchSubject:</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/evaluate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)evaluate</Declaration>
+			
+			
+			<Anchor>//api/name/evaluate</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/failureMessageForShould</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)failureMessageForShould</Declaration>
+			
+			
+			<Anchor>//api/name/failureMessageForShould</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/failureMessageForShouldNot</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)failureMessageForShouldNot</Declaration>
+			
+			
+			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

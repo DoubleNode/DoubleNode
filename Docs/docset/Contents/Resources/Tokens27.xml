@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KWBeMemberOfClassMatcher.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBeMemberOfClassMatcher</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBeMemberOfClassMatcher.h</DeclaredIn>
+            
+			
+			<NodeRef refid="27"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeMemberOfClassMatcher/beMemberOfClass:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBeMemberOfClassMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)beMemberOfClass:(Class)aClass</Declaration>
+			
+			
+			<Anchor>//api/name/beMemberOfClass:</Anchor>
+            <NodeRef refid="27"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

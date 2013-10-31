@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DNModelWatchFetchedObject.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatchFetchedObject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchFetchedObject.h</DeclaredIn>
+            
+			
+			<NodeRef refid="9"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModelWatchFetchedObject/watchWithModel:andFetch:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchFetchedObject.h</DeclaredIn>
+			
+			<Declaration>+ (id)watchWithModel:(DNModel *)model andFetch:(NSFetchRequest *)fetch didChange:(DNModelWatchObjectDidChangeHandlerBlock)resultsHandler</Declaration>
+			
+			
+			<Anchor>//api/name/watchWithModel:andFetch:didChange:</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchFetchedObject/initWithModel:andFetch:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchFetchedObject.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithModel:(DNModel *)model andFetch:(NSFetchRequest *)fetch didChange:(DNModelWatchObjectDidChangeHandlerBlock)resultsHandler</Declaration>
+			
+			
+			<Anchor>//api/name/initWithModel:andFetch:didChange:</Anchor>
+            <NodeRef refid="9"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

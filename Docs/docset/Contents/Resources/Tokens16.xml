@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DNThemeManager.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DNThemeManager</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTheme.h</DeclaredIn>
+            
+			
+			<NodeRef refid="16"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/themeName</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTheme.h</DeclaredIn>
+			
+			<Declaration>+ (NSString *)themeName</Declaration>
+			
+			
+			<Anchor>//api/name/themeName</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/sharedTheme</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTheme.h</DeclaredIn>
+			
+			<Declaration>+ (id&lt;DNTheme&gt;)sharedTheme</Declaration>
+			
+			
+			<Anchor>//api/name/sharedTheme</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/customizeButton:withGroup:andScreen:andItem:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeButton:(UIButton *)btnView withGroup:(NSString *)group andScreen:(NSString *)screen andItem:(NSString *)item</Declaration>
+			
+			
+			<Anchor>//api/name/customizeButton:withGroup:andScreen:andItem:</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Categories/NSTimer+Blocks.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cat/NSTimer(Blocks)</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSTimer+Blocks.h</DeclaredIn>
+            
+			
+			<NodeRef refid="103"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSTimer/scheduledTimerWithTimeInterval:block:repeats:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSTimer+Blocks.h</DeclaredIn>
+			
+			<Declaration>+ (id)scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval block:(void ( ^ ) ( ))inBlock repeats:(BOOL)inRepeats</Declaration>
+			
+			
+			<Anchor>//api/name/scheduledTimerWithTimeInterval:block:repeats:</Anchor>
+            <NodeRef refid="103"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSTimer/timerWithTimeInterval:block:repeats:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSTimer+Blocks.h</DeclaredIn>
+			
+			<Declaration>+ (id)timerWithTimeInterval:(NSTimeInterval)inTimeInterval block:(void ( ^ ) ( ))inBlock repeats:(BOOL)inRepeats</Declaration>
+			
+			
+			<Anchor>//api/name/timerWithTimeInterval:block:repeats:</Anchor>
+            <NodeRef refid="103"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

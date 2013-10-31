@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/KWNilMatcher.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/KWNilMatcher</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWNilMatcher.h</DeclaredIn>
+            
+			
+			<NodeRef refid="67"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWNilMatcher/beNil</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWNilMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)beNil</Declaration>
+			
+			
+			<Anchor>//api/name/beNil</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWNilMatcher/beNonNil</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWNilMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)beNonNil</Declaration>
+			
+			
+			<Anchor>//api/name/beNonNil</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWNilMatcher/beNil:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWNilMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)beNil:(BOOL)workaroundArgument</Declaration>
+			
+			
+			<Anchor>//api/name/beNil:</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWNilMatcher/beNonNil:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWNilMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)beNonNil:(BOOL)workaroundArgument</Declaration>
+			
+			
+			<Anchor>//api/name/beNonNil:</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWNilMatcher/verifyNilSubject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWNilMatcher.h</DeclaredIn>
+			
+			<Declaration>+ (BOOL)verifyNilSubject</Declaration>
+			
+			
+			<Anchor>//api/name/verifyNilSubject</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWNilMatcher/verifyNonNilSubject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWNilMatcher.h</DeclaredIn>
+			
+			<Declaration>+ (BOOL)verifyNonNilSubject</Declaration>
+			
+			
+			<Anchor>//api/name/verifyNonNilSubject</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

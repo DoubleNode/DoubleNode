@@ -1,0 +1,499 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>DNApplicationDelegate Protocol Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 961)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">DoubleNodeDocs </a></h1>
+				<a id="developerHome" href="../index.html">DoubleNode, LLC</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">DNApplicationDelegate Protocol Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/deletePersistentStore">&nbsp;&nbsp;&nbsp;&nbsp;- deletePersistentStore</option>
+	
+	<option value="//api/name/disableURLCache">&nbsp;&nbsp;&nbsp;&nbsp;- disableURLCache</option>
+	
+	<option value="//api/name/managedObjectContext">&nbsp;&nbsp;&nbsp;&nbsp;- managedObjectContext</option>
+	
+	<option value="//api/name/managedObjectModel">&nbsp;&nbsp;&nbsp;&nbsp;- managedObjectModel</option>
+	
+	<option value="//api/name/saveContext">&nbsp;&nbsp;&nbsp;&nbsp;- saveContext</option>
+	
+	<option value="//api/name/setDoNotUseIncrementalStore:">&nbsp;&nbsp;&nbsp;&nbsp;- setDoNotUseIncrementalStore:</option>
+	
+	<option value="//api/name/setPersistentStorePrefix:">&nbsp;&nbsp;&nbsp;&nbsp;- setPersistentStorePrefix:</option>
+	
+	<option value="//api/name/setSettingsItem:boolValue:">&nbsp;&nbsp;&nbsp;&nbsp;- setSettingsItem:boolValue:</option>
+	
+	<option value="//api/name/setSettingsItem:value:">&nbsp;&nbsp;&nbsp;&nbsp;- setSettingsItem:value:</option>
+	
+	<option value="//api/name/settingsItem:">&nbsp;&nbsp;&nbsp;&nbsp;- settingsItem:</option>
+	
+	<option value="//api/name/settingsItem:boolDefault:">&nbsp;&nbsp;&nbsp;&nbsp;- settingsItem:boolDefault:</option>
+	
+	<option value="//api/name/settingsItem:default:">&nbsp;&nbsp;&nbsp;&nbsp;- settingsItem:default:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/deletePersistentStore">deletePersistentStore</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/disableURLCache">disableURLCache</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/managedObjectContext">managedObjectContext</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/managedObjectModel">managedObjectModel</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/saveContext">saveContext</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setDoNotUseIncrementalStore:">setDoNotUseIncrementalStore:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setPersistentStorePrefix:">setPersistentStorePrefix:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setSettingsItem:boolValue:">setSettingsItem:boolValue:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/setSettingsItem:value:">setSettingsItem:value:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/settingsItem:">settingsItem:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/settingsItem:boolDefault:">settingsItem:boolDefault:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/settingsItem:default:">settingsItem:default:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="DNApplicationDelegate Protocol Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">DNApplicationDelegate Protocol Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Conforms to</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">DNApplicationDelegate.h</td>
+</tr>
+						</tbody></table></div>
+					
+                    
+                    
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/disableURLCache">&ndash;&nbsp;disableURLCache</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setDoNotUseIncrementalStore:">&ndash;&nbsp;setDoNotUseIncrementalStore:</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setPersistentStorePrefix:">&ndash;&nbsp;setPersistentStorePrefix:</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/managedObjectContext">&ndash;&nbsp;managedObjectContext</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/managedObjectModel">&ndash;&nbsp;managedObjectModel</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/deletePersistentStore">&ndash;&nbsp;deletePersistentStore</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/saveContext">&ndash;&nbsp;saveContext</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/settingsItem:">&ndash;&nbsp;settingsItem:</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/settingsItem:default:">&ndash;&nbsp;settingsItem:default:</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/settingsItem:boolDefault:">&ndash;&nbsp;settingsItem:boolDefault:</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setSettingsItem:value:">&ndash;&nbsp;setSettingsItem:value:</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/setSettingsItem:boolValue:">&ndash;&nbsp;setSettingsItem:boolValue:</a></code>
+	</span>
+	
+	<span class="task-item-suffix">required method</span>
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/deletePersistentStore" title="deletePersistentStore"></a>
+	<h3 class="subsubtitle method-title">deletePersistentStore</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)deletePersistentStore</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/disableURLCache" title="disableURLCache"></a>
+	<h3 class="subsubtitle method-title">disableURLCache</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)disableURLCache</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/managedObjectContext" title="managedObjectContext"></a>
+	<h3 class="subsubtitle method-title">managedObjectContext</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (NSManagedObjectContext *)managedObjectContext</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/managedObjectModel" title="managedObjectModel"></a>
+	<h3 class="subsubtitle method-title">managedObjectModel</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (NSManagedObjectModel *)managedObjectModel</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/saveContext" title="saveContext"></a>
+	<h3 class="subsubtitle method-title">saveContext</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)saveContext</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setDoNotUseIncrementalStore:" title="setDoNotUseIncrementalStore:"></a>
+	<h3 class="subsubtitle method-title">setDoNotUseIncrementalStore:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)setDoNotUseIncrementalStore:(BOOL)<em>flagValue</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setPersistentStorePrefix:" title="setPersistentStorePrefix:"></a>
+	<h3 class="subsubtitle method-title">setPersistentStorePrefix:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)setPersistentStorePrefix:(NSString *)<em>prefix</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setSettingsItem:boolValue:" title="setSettingsItem:boolValue:"></a>
+	<h3 class="subsubtitle method-title">setSettingsItem:boolValue:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)setSettingsItem:(NSString *)<em>item</em> boolValue:(BOOL)<em>value</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/setSettingsItem:value:" title="setSettingsItem:value:"></a>
+	<h3 class="subsubtitle method-title">setSettingsItem:value:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)setSettingsItem:(NSString *)<em>item</em> value:(id)<em>value</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/settingsItem:" title="settingsItem:"></a>
+	<h3 class="subsubtitle method-title">settingsItem:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (id)settingsItem:(NSString *)<em>item</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/settingsItem:boolDefault:" title="settingsItem:boolDefault:"></a>
+	<h3 class="subsubtitle method-title">settingsItem:boolDefault:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (id)settingsItem:(NSString *)<em>item</em> boolDefault:(BOOL)<em>defaultValue</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/settingsItem:default:" title="settingsItem:default:"></a>
+	<h3 class="subsubtitle method-title">settingsItem:default:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (id)settingsItem:(NSString *)<em>item</em> default:(id)<em>defaultValue</em></code></div>
+
+    
+</div>
+						
+					</div>
+					
+					
+                    
+                    
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 DoubleNode, LLC. All rights reserved. (Last updated: 2013-10-30)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,764 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="html/html; charset=utf-8" />
+		<title>DNModel Class Reference</title>
+		<meta id="xcode-display" name="xcode-display" content="render"/>
+		<link rel="stylesheet" type="text/css" href="../css/styles.css" media="all" />
+		<link rel="stylesheet" type="text/css" media="print" href="../css/stylesPrint.css" />
+		<meta name="generator" content="appledoc 2.2 (build 961)" />
+	</head>
+	<body>
+		<header id="top_header">
+			<div id="library" class="hideInXcode">
+				<h1><a id="libraryTitle" href="../index.html">DoubleNodeDocs </a></h1>
+				<a id="developerHome" href="../index.html">DoubleNode, LLC</a>
+			</div>
+			
+			<div id="title" role="banner">
+				<h1 class="hideInXcode">DNModel Class Reference</h1>
+			</div>
+			<ul id="headerButtons" role="toolbar">
+				<li id="toc_button">
+					<button aria-label="Show Table of Contents" role="checkbox" class="open" id="table_of_contents"><span class="disclosure"></span>Table of Contents</button>
+				</li>
+				<li id="jumpto_button" role="navigation">
+					<select id="jumpTo">
+	<option value="top">Jump To&#133;</option>
+	
+	
+	
+	
+	<option value="tasks">Tasks</option>
+	
+	
+	
+	
+	
+	
+	
+	<option value="class_methods">Class Methods</option>
+	
+	<option value="//api/name/appDelegate">&nbsp;&nbsp;&nbsp;&nbsp;+ appDelegate</option>
+	
+	<option value="//api/name/entityName">&nbsp;&nbsp;&nbsp;&nbsp;+ entityName</option>
+	
+	<option value="//api/name/managedObjectContext">&nbsp;&nbsp;&nbsp;&nbsp;+ managedObjectContext</option>
+	
+	<option value="//api/name/managedObjectModel">&nbsp;&nbsp;&nbsp;&nbsp;+ managedObjectModel</option>
+	
+	<option value="//api/name/model">&nbsp;&nbsp;&nbsp;&nbsp;+ model</option>
+	
+	<option value="//api/name/saveContext">&nbsp;&nbsp;&nbsp;&nbsp;+ saveContext</option>
+	
+	
+	
+	
+	<option value="instance_methods">Instance Methods</option>
+	
+	<option value="//api/name/checkWatch:">&nbsp;&nbsp;&nbsp;&nbsp;- checkWatch:</option>
+	
+	<option value="//api/name/deleteAllWithCompletion:">&nbsp;&nbsp;&nbsp;&nbsp;- deleteAllWithCompletion:</option>
+	
+	<option value="//api/name/getAll">&nbsp;&nbsp;&nbsp;&nbsp;- getAll</option>
+	
+	<option value="//api/name/getAllDidChange:">&nbsp;&nbsp;&nbsp;&nbsp;- getAllDidChange:</option>
+	
+	<option value="//api/name/getAllFetchTemplate">&nbsp;&nbsp;&nbsp;&nbsp;- getAllFetchTemplate</option>
+	
+	<option value="//api/name/getAllSortKeys">&nbsp;&nbsp;&nbsp;&nbsp;- getAllSortKeys</option>
+	
+	<option value="//api/name/getFromID:">&nbsp;&nbsp;&nbsp;&nbsp;- getFromID:</option>
+	
+	<option value="//api/name/getFromID:didChange:">&nbsp;&nbsp;&nbsp;&nbsp;- getFromID:didChange:</option>
+	
+	<option value="//api/name/getFromIDFetchTemplate">&nbsp;&nbsp;&nbsp;&nbsp;- getFromIDFetchTemplate</option>
+	
+	<option value="//api/name/getFromIDSortKeys">&nbsp;&nbsp;&nbsp;&nbsp;- getFromIDSortKeys</option>
+	
+	<option value="//api/name/init">&nbsp;&nbsp;&nbsp;&nbsp;- init</option>
+	
+	<option value="//api/name/releaseWatch:">&nbsp;&nbsp;&nbsp;&nbsp;- releaseWatch:</option>
+	
+	<option value="//api/name/retainWatch:">&nbsp;&nbsp;&nbsp;&nbsp;- retainWatch:</option>
+	
+	<option value="//api/name/saveContext">&nbsp;&nbsp;&nbsp;&nbsp;- saveContext</option>
+	
+	<option value="//api/name/watchObject:andAttributes:didChange:">&nbsp;&nbsp;&nbsp;&nbsp;- watchObject:andAttributes:didChange:</option>
+	
+	<option value="//api/name/watchObject:didChange:">&nbsp;&nbsp;&nbsp;&nbsp;- watchObject:didChange:</option>
+	
+	<option value="//api/name/watchObjects:andAttributes:didChange:">&nbsp;&nbsp;&nbsp;&nbsp;- watchObjects:andAttributes:didChange:</option>
+	
+	<option value="//api/name/watchObjects:didChange:">&nbsp;&nbsp;&nbsp;&nbsp;- watchObjects:didChange:</option>
+	
+	
+	
+</select>
+				</li>
+			</ul>
+		</header>
+		<nav id="tocContainer" class="isShowingTOC">
+			<ul id="toc" role="tree">
+				
+
+
+
+<li role="treeitem" id="task_treeitem"><span class="nodisclosure"></span><span class="sectionName"><a href="#tasks">Tasks</a></span><ul>
+	
+</ul></li>
+
+
+
+
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#class_methods">Class Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/appDelegate">appDelegate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/entityName">entityName</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/managedObjectContext">managedObjectContext</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/managedObjectModel">managedObjectModel</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/model">model</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/saveContext">saveContext</a></span></li>
+	
+</ul></li>
+
+
+
+<li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/checkWatch:">checkWatch:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/deleteAllWithCompletion:">deleteAllWithCompletion:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getAll">getAll</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getAllDidChange:">getAllDidChange:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getAllFetchTemplate">getAllFetchTemplate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getAllSortKeys">getAllSortKeys</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getFromID:">getFromID:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getFromID:didChange:">getFromID:didChange:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getFromIDFetchTemplate">getFromIDFetchTemplate</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/getFromIDSortKeys">getFromIDSortKeys</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/init">init</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/releaseWatch:">releaseWatch:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/retainWatch:">retainWatch:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/saveContext">saveContext</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/watchObject:andAttributes:didChange:">watchObject:andAttributes:didChange:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/watchObject:didChange:">watchObject:didChange:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/watchObjects:andAttributes:didChange:">watchObjects:andAttributes:didChange:</a></span></li>
+	
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/watchObjects:didChange:">watchObjects:didChange:</a></span></li>
+	
+</ul></li>
+
+
+			</ul>
+		</nav>
+		<article>
+			<div id="contents" class="isShowingTOC" role="main">
+				<a title="DNModel Class Reference" name="top"></a>
+				<div class="main-navigation navigation-top">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="header">
+					<div class="section-header">
+						<h1 class="title title-header">DNModel Class Reference</h1>
+					</div>		
+				</div>
+				<div id="container">	
+					
+					<div class="section section-specification"><table cellspacing="0"><tbody>
+						<tr>
+	<td class="specification-title">Inherits from</td>
+	<td class="specification-value">NSObject</td>
+</tr><tr>
+	<td class="specification-title">Declared in</td>
+	<td class="specification-value">DNModel.h</td>
+</tr>
+						</tbody></table></div>
+					
+                    
+                    
+					
+					
+					
+					<div class="section section-tasks">
+						<a title="Tasks" name="tasks"></a>
+						<h2 class="subtitle subtitle-tasks">Tasks</h2>
+						
+						
+						
+						
+
+						<ul class="task-list">
+							<li>
+	<span class="tooltip">
+		<code><a href="#//api/name/entityName">+&nbsp;entityName</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/appDelegate">+&nbsp;appDelegate</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/managedObjectContext">+&nbsp;managedObjectContext</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/managedObjectModel">+&nbsp;managedObjectModel</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/saveContext">+&nbsp;saveContext</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/model">+&nbsp;model</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/init">&ndash;&nbsp;init</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/saveContext">&ndash;&nbsp;saveContext</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/getFromIDFetchTemplate">&ndash;&nbsp;getFromIDFetchTemplate</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/getAllFetchTemplate">&ndash;&nbsp;getAllFetchTemplate</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/getFromIDSortKeys">&ndash;&nbsp;getFromIDSortKeys</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/getAllSortKeys">&ndash;&nbsp;getAllSortKeys</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchObject:didChange:">&ndash;&nbsp;watchObject:didChange:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchObject:andAttributes:didChange:">&ndash;&nbsp;watchObject:andAttributes:didChange:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchObjects:didChange:">&ndash;&nbsp;watchObjects:didChange:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/watchObjects:andAttributes:didChange:">&ndash;&nbsp;watchObjects:andAttributes:didChange:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/checkWatch:">&ndash;&nbsp;checkWatch:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/retainWatch:">&ndash;&nbsp;retainWatch:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/releaseWatch:">&ndash;&nbsp;releaseWatch:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/getFromID:">&ndash;&nbsp;getFromID:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/getFromID:didChange:">&ndash;&nbsp;getFromID:didChange:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/getAll">&ndash;&nbsp;getAll</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/getAllDidChange:">&ndash;&nbsp;getAllDidChange:</a></code>
+	</span>
+	
+	
+</li><li>
+	<span class="tooltip">
+		<code><a href="#//api/name/deleteAllWithCompletion:">&ndash;&nbsp;deleteAllWithCompletion:</a></code>
+	</span>
+	
+	
+</li>
+						</ul>
+						
+					</div>
+					
+					
+					
+					
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Class Methods" name="class_methods"></a>
+						<h2 class="subtitle subtitle-methods">Class Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/appDelegate" title="appDelegate"></a>
+	<h3 class="subsubtitle method-title">appDelegate</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>+ (id&lt;DNApplicationDelegate&gt;)appDelegate</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/entityName" title="entityName"></a>
+	<h3 class="subsubtitle method-title">entityName</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>+ (NSString *)entityName</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/managedObjectContext" title="managedObjectContext"></a>
+	<h3 class="subsubtitle method-title">managedObjectContext</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>+ (NSManagedObjectContext *)managedObjectContext</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/managedObjectModel" title="managedObjectModel"></a>
+	<h3 class="subsubtitle method-title">managedObjectModel</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>+ (NSManagedObjectModel *)managedObjectModel</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/model" title="model"></a>
+	<h3 class="subsubtitle method-title">model</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>+ (instancetype)model</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/saveContext" title="saveContext"></a>
+	<h3 class="subsubtitle method-title">saveContext</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>+ (void)saveContext</code></div>
+
+    
+</div>
+						
+					</div>
+					
+					
+					
+					<div class="section section-methods">
+						<a title="Instance Methods" name="instance_methods"></a>
+						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
+						
+						<div class="section-method">
+	<a name="//api/name/checkWatch:" title="checkWatch:"></a>
+	<h3 class="subsubtitle method-title">checkWatch:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (BOOL)checkWatch:(DNModelWatch *)<em>watch</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/deleteAllWithCompletion:" title="deleteAllWithCompletion:"></a>
+	<h3 class="subsubtitle method-title">deleteAllWithCompletion:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)deleteAllWithCompletion:(DNModelCompletionHandlerBlock)<em>handler</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/getAll" title="getAll"></a>
+	<h3 class="subsubtitle method-title">getAll</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (id)getAll</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/getAllDidChange:" title="getAllDidChange:"></a>
+	<h3 class="subsubtitle method-title">getAllDidChange:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (DNModelWatchObjects *)getAllDidChange:(DNModelWatchObjectsDidChangeHandlerBlock)<em>handler</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/getAllFetchTemplate" title="getAllFetchTemplate"></a>
+	<h3 class="subsubtitle method-title">getAllFetchTemplate</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)getAllFetchTemplate</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/getAllSortKeys" title="getAllSortKeys"></a>
+	<h3 class="subsubtitle method-title">getAllSortKeys</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (NSArray *)getAllSortKeys</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/getFromID:" title="getFromID:"></a>
+	<h3 class="subsubtitle method-title">getFromID:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (id)getFromID:(id)<em>idValue</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/getFromID:didChange:" title="getFromID:didChange:"></a>
+	<h3 class="subsubtitle method-title">getFromID:didChange:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (DNModelWatchObject *)getFromID:(id)<em>idValue</em> didChange:(DNModelWatchObjectDidChangeHandlerBlock)<em>handler</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/getFromIDFetchTemplate" title="getFromIDFetchTemplate"></a>
+	<h3 class="subsubtitle method-title">getFromIDFetchTemplate</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (NSString *)getFromIDFetchTemplate</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/getFromIDSortKeys" title="getFromIDSortKeys"></a>
+	<h3 class="subsubtitle method-title">getFromIDSortKeys</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (NSArray *)getFromIDSortKeys</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/init" title="init"></a>
+	<h3 class="subsubtitle method-title">init</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (id)init</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/releaseWatch:" title="releaseWatch:"></a>
+	<h3 class="subsubtitle method-title">releaseWatch:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)releaseWatch:(DNModelWatch *)<em>watch</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/retainWatch:" title="retainWatch:"></a>
+	<h3 class="subsubtitle method-title">retainWatch:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)retainWatch:(DNModelWatch *)<em>watch</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/saveContext" title="saveContext"></a>
+	<h3 class="subsubtitle method-title">saveContext</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (void)saveContext</code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/watchObject:andAttributes:didChange:" title="watchObject:andAttributes:didChange:"></a>
+	<h3 class="subsubtitle method-title">watchObject:andAttributes:didChange:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (DNModelWatchObject *)watchObject:(DNManagedObject *)<em>object</em> andAttributes:(NSArray *)<em>attributes</em> didChange:(DNModelWatchObjectDidChangeHandlerBlock)<em>handler</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/watchObject:didChange:" title="watchObject:didChange:"></a>
+	<h3 class="subsubtitle method-title">watchObject:didChange:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (DNModelWatchObject *)watchObject:(DNManagedObject *)<em>object</em> didChange:(DNModelWatchObjectDidChangeHandlerBlock)<em>handler</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/watchObjects:andAttributes:didChange:" title="watchObjects:andAttributes:didChange:"></a>
+	<h3 class="subsubtitle method-title">watchObjects:andAttributes:didChange:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (DNModelWatchObjects *)watchObjects:(NSArray *)<em>objects</em> andAttributes:(NSArray *)<em>attributes</em> didChange:(DNModelWatchObjectsDidChangeHandlerBlock)<em>handler</em></code></div>
+
+    
+</div>
+						
+						<div class="section-method">
+	<a name="//api/name/watchObjects:didChange:" title="watchObjects:didChange:"></a>
+	<h3 class="subsubtitle method-title">watchObjects:didChange:</h3>
+	
+	
+
+	<div class="method-subsection method-declaration"><code>- (DNModelWatchObjects *)watchObjects:(NSArray *)<em>objects</em> didChange:(DNModelWatchObjectsDidChangeHandlerBlock)<em>handler</em></code></div>
+
+    
+</div>
+						
+					</div>
+					
+					
+                    
+                    
+				</div>
+				<div class="main-navigation navigation-bottom">
+					<ul>
+	<li><a href="../index.html">Index</a></li>
+	<li><a href="../hierarchy.html">Hierarchy</a></li>
+</ul>
+				</div>
+				<div id="footer">
+					<hr />
+					<div class="footer-copyright">
+						<p><span class="copyright">&copy; 2013 DoubleNode, LLC. All rights reserved. (Last updated: 2013-10-30)</span><br />
+						
+						<span class="generator">Generated by <a href="http://appledoc.gentlebytes.com">appledoc 2.2 (build 961)</a>.</span></p>
+						
+					</div>
+				</div>
+			</div>
+		</article>
+		<script type="text/javascript">
+			function jumpToChange()
+			{
+				window.location.hash = this.options[this.selectedIndex].value;
+			}
+			
+			function toggleTOC()
+			{
+				var contents = document.getElementById('contents');
+				var tocContainer = document.getElementById('tocContainer');
+				
+				if (this.getAttribute('class') == 'open')
+				{
+					this.setAttribute('class', '');
+					contents.setAttribute('class', '');
+					tocContainer.setAttribute('class', '');
+					
+					window.name = "hideTOC";
+				}
+				else
+				{
+					this.setAttribute('class', 'open');
+					contents.setAttribute('class', 'isShowingTOC');
+					tocContainer.setAttribute('class', 'isShowingTOC');
+					
+					window.name = "";
+				}
+				return false;
+			}
+			
+			function toggleTOCEntryChildren(e)
+			{
+				e.stopPropagation();
+				var currentClass = this.getAttribute('class');
+				if (currentClass == 'children') {
+					this.setAttribute('class', 'children open');
+				}
+				else if (currentClass == 'children open') {
+					this.setAttribute('class', 'children');
+				}
+				return false;
+			}
+			
+			function tocEntryClick(e)
+			{
+				e.stopPropagation();
+				return true;
+			}
+			
+			function init()
+			{
+				var selectElement = document.getElementById('jumpTo');
+				selectElement.addEventListener('change', jumpToChange, false);
+				
+				var tocButton = document.getElementById('table_of_contents');
+				tocButton.addEventListener('click', toggleTOC, false);
+				
+				var taskTreeItem = document.getElementById('task_treeitem');
+				if (taskTreeItem.getElementsByTagName('li').length > 0)
+				{
+					taskTreeItem.setAttribute('class', 'children');
+					taskTreeItem.firstChild.setAttribute('class', 'disclosure');
+				}
+				
+				var tocList = document.getElementById('toc');
+				
+				var tocEntries = tocList.getElementsByTagName('li');
+				for (var i = 0; i < tocEntries.length; i++) {
+					tocEntries[i].addEventListener('click', toggleTOCEntryChildren, false);
+				}
+				
+				var tocLinks = tocList.getElementsByTagName('a');
+				for (var i = 0; i < tocLinks.length; i++) {
+					tocLinks[i].addEventListener('click', tocEntryClick, false);
+				}
+				
+				if (window.name == "hideTOC") {
+					toggleTOC.call(tocButton);
+				}
+			}
+			
+			window.onload = init;
+			
+			// If showing in Xcode, hide the TOC and Header
+			if (navigator.userAgent.match(/xcode/i)) {
+				document.getElementById("contents").className = "hideInXcode"
+				document.getElementById("tocContainer").className = "hideInXcode"
+				document.getElementById("top_header").className = "hideInXcode"
+			}
+			
+		</script>
+	</body>
+</html>

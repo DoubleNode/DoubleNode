@@ -22,7 +22,7 @@
 #define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
 #define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
 
-typedef enum
+typedef NS_ENUM(NSInteger, LogLevel)
 {
     LL_Critical = 0,
     LL_Error,
@@ -30,8 +30,7 @@ typedef enum
     LL_Debug,
     LL_Info,
     LL_Everything
-}
-LogLevel;
+};
 
 #define LD_UnitTests        @"unittests"
 #define LD_General          @"general"

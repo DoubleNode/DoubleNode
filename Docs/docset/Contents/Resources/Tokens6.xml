@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DNManagedObject.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DNManagedObject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+            
+			
+			<NodeRef refid="6"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/setId:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, retain) NSNumber *id</Declaration>
+			
+			
+			<Anchor>//api/name/id</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/id</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, retain) NSNumber *id</Declaration>
+			
+			
+			<Anchor>//api/name/id</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DNManagedObject/id</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, retain) NSNumber *id</Declaration>
+			
+			
+			<Anchor>//api/name/id</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/entityName</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSString *)entityName</Declaration>
+			
+			
+			<Anchor>//api/name/entityName</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/entityModel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (DNModel *)entityModel</Declaration>
+			
+			
+			<Anchor>//api/name/entityModel</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/attributesForRepresentation:ofEntity:fromResponse:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSDictionary *)attributesForRepresentation:(NSDictionary *)representation ofEntity:(NSEntityDescription *)entity fromResponse:(NSHTTPURLResponse *)response</Declaration>
+			
+			
+			<Anchor>//api/name/attributesForRepresentation:ofEntity:fromResponse:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/shouldFetchRemoteAttributeValuesForObjectWithID:inManagedObjectContext:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (BOOL)shouldFetchRemoteAttributeValuesForObjectWithID:(NSManagedObjectID *)objectID inManagedObjectContext:(NSManagedObjectContext *)context</Declaration>
+			
+			
+			<Anchor>//api/name/shouldFetchRemoteAttributeValuesForObjectWithID:inManagedObjectContext:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/shouldFetchRemoteValuesForRelationship:forObjectWithID:inManagedObjectContext:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (BOOL)shouldFetchRemoteValuesForRelationship:(NSRelationshipDescription *)relationship forObjectWithID:(NSManagedObjectID *)objectID inManagedObjectContext:(NSManagedObjectContext *)context</Declaration>
+			
+			
+			<Anchor>//api/name/shouldFetchRemoteValuesForRelationship:forObjectWithID:inManagedObjectContext:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/appDelegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (id&lt;DNApplicationDelegate&gt;)appDelegate</Declaration>
+			
+			
+			<Anchor>//api/name/appDelegate</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/managedObjectContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSManagedObjectContext *)managedObjectContext</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectContext</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/managedObjectModel</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSManagedObjectModel *)managedObjectModel</Declaration>
+			
+			
+			<Anchor>//api/name/managedObjectModel</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/saveContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (void)saveContext</Declaration>
+			
+			
+			<Anchor>//api/name/saveContext</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryNumber:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSNumber *)dictionaryNumber:(NSDictionary *)dictionary withItem:(NSString *)key andDefault:(NSNumber *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryNumber:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryDouble:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSNumber *)dictionaryDouble:(NSDictionary *)dictionary withItem:(NSString *)key andDefault:(NSNumber *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryDouble:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryString:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSString *)dictionaryString:(NSDictionary *)dictionary withItem:(NSString *)key andDefault:(NSString *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryString:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryArray:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSArray *)dictionaryArray:(NSDictionary *)dictionary withItem:(NSString *)key andDefault:(NSArray *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryArray:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryDate:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSDate *)dictionaryDate:(NSDictionary *)dictionary withItem:(NSString *)key andDefault:(NSDate *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryDate:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryObject:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (id)dictionaryObject:(NSDictionary *)dictionary withItem:(NSString *)key andDefault:(id)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryObject:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryNumber:dirty:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSNumber *)dictionaryNumber:(NSDictionary *)dictionary dirty:(BOOL *)dirtyFlag withItem:(NSString *)key andDefault:(NSNumber *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryNumber:dirty:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryDouble:dirty:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSNumber *)dictionaryDouble:(NSDictionary *)dictionary dirty:(BOOL *)dirtyFlag withItem:(NSString *)key andDefault:(NSNumber *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryDouble:dirty:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryString:dirty:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSString *)dictionaryString:(NSDictionary *)dictionary dirty:(BOOL *)dirtyFlag withItem:(NSString *)key andDefault:(NSString *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryString:dirty:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryArray:dirty:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSArray *)dictionaryArray:(NSDictionary *)dictionary dirty:(BOOL *)dirtyFlag withItem:(NSString *)key andDefault:(NSArray *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryArray:dirty:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryDate:dirty:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (NSDate *)dictionaryDate:(NSDictionary *)dictionary dirty:(BOOL *)dirtyFlag withItem:(NSString *)key andDefault:(NSDate *)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryDate:dirty:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/dictionaryObject:dirty:withItem:andDefault:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (id)dictionaryObject:(NSDictionary *)dictionary dirty:(BOOL *)dirtyFlag withItem:(NSString *)key andDefault:(id)defaultValue</Declaration>
+			
+			
+			<Anchor>//api/name/dictionaryObject:dirty:withItem:andDefault:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/entity</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (instancetype)entity</Declaration>
+			
+			
+			<Anchor>//api/name/entity</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/entityFromID:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (instancetype)entityFromID:(id)idValue</Declaration>
+			
+			
+			<Anchor>//api/name/entityFromID:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNManagedObject/entityFromDictionary:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>+ (instancetype)entityFromDictionary:(NSDictionary *)dict</Declaration>
+			
+			
+			<Anchor>//api/name/entityFromDictionary:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/init</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)init</Declaration>
+			
+			
+			<Anchor>//api/name/init</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/initWithID:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithID:(id)idValue</Declaration>
+			
+			
+			<Anchor>//api/name/initWithID:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/initWithIDIfExists:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithIDIfExists:(id)idValue</Declaration>
+			
+			
+			<Anchor>//api/name/initWithIDIfExists:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/initWithDictionary:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)initWithDictionary:(NSDictionary *)dict</Declaration>
+			
+			
+			<Anchor>//api/name/initWithDictionary:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/clearData</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (void)clearData</Declaration>
+			
+			
+			<Anchor>//api/name/clearData</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/loadWithDictionary:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (void)loadWithDictionary:(NSDictionary *)dict</Declaration>
+			
+			
+			<Anchor>//api/name/loadWithDictionary:</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/saveContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (instancetype)saveContext</Declaration>
+			
+			
+			<Anchor>//api/name/saveContext</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/deleteWithNoSave</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (void)deleteWithNoSave</Declaration>
+			
+			
+			<Anchor>//api/name/deleteWithNoSave</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/delete</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (void)delete</Declaration>
+			
+			
+			<Anchor>//api/name/delete</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNManagedObject/entityDescription</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNManagedObject.h</DeclaredIn>
+			
+			<Declaration>- (NSEntityDescription *)entityDescription</Declaration>
+			
+			
+			<Anchor>//api/name/entityDescription</Anchor>
+            <NodeRef refid="6"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

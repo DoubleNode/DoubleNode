@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/ADVThemeManager.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/ADVThemeManager</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+            
+			
+			<NodeRef refid="2"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/sharedTheme</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (id&lt;ADVTheme&gt;)sharedTheme</Declaration>
+			
+			
+			<Anchor>//api/name/sharedTheme</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/customizeAppAppearance</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeAppAppearance</Declaration>
+			
+			
+			<Anchor>//api/name/customizeAppAppearance</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/customizeView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeView:(UIView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/customizeView:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/customizePatternView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizePatternView:(UIView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/customizePatternView:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/customizeTimelineView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeTimelineView:(UIView *)view</Declaration>
+			
+			
+			<Anchor>//api/name/customizeTimelineView:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/customizeTableView:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeTableView:(UITableView *)tableView</Declaration>
+			
+			
+			<Anchor>//api/name/customizeTableView:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/customizeTabBarItem:forTab:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeTabBarItem:(UITabBarItem *)item forTab:(SSThemeTab)tab</Declaration>
+			
+			
+			<Anchor>//api/name/customizeTabBarItem:forTab:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/customizeNavigationBar:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeNavigationBar:(UINavigationBar *)navigationBar</Declaration>
+			
+			
+			<Anchor>//api/name/customizeNavigationBar:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/customizeMainLabel:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeMainLabel:(UILabel *)label</Declaration>
+			
+			
+			<Anchor>//api/name/customizeMainLabel:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/ADVThemeManager/customizeSecondaryLabel:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeSecondaryLabel:(UILabel *)label</Declaration>
+			
+			
+			<Anchor>//api/name/customizeSecondaryLabel:</Anchor>
+            <NodeRef refid="2"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>62CB0E27-6CD0-47E0-A1FC-41A6A8F7E20A</string>
+	<key>IDESourceControlProjectName</key>
+	<string>DoubleNodeDemo</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>C5A86567-B134-4A40-B58F-53EF2276F2DF</key>
+		<string>ssh://github.com/ehlersd/DoubleNode.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>DoubleNodeDemo/DoubleNodeDemo.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>C5A86567-B134-4A40-B58F-53EF2276F2DF</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/ehlersd/DoubleNode.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C5A86567-B134-4A40-B58F-53EF2276F2DF</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C5A86567-B134-4A40-B58F-53EF2276F2DF</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DoubleNode</string>
+		</dict>
+	</array>
+</dict>
+</plist>

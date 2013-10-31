@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DNModelWatch.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatch</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatch.h</DeclaredIn>
+            
+			
+			<NodeRef refid="8"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatch/initWithModel:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatch.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithModel:(DNModel *)model</Declaration>
+			
+			
+			<Anchor>//api/name/initWithModel:</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatch/checkWatch</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatch.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)checkWatch</Declaration>
+			
+			
+			<Anchor>//api/name/checkWatch</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatch/cancelWatch</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatch.h</DeclaredIn>
+			
+			<Declaration>- (void)cancelWatch</Declaration>
+			
+			
+			<Anchor>//api/name/cancelWatch</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatch/refreshWatch</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatch.h</DeclaredIn>
+			
+			<Declaration>- (void)refreshWatch</Declaration>
+			
+			
+			<Anchor>//api/name/refreshWatch</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatch/executeWillChangeHandler</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatch.h</DeclaredIn>
+			
+			<Declaration>- (void)executeWillChangeHandler</Declaration>
+			
+			
+			<Anchor>//api/name/executeWillChangeHandler</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatch/executeDidChangeHandler</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatch.h</DeclaredIn>
+			
+			<Declaration>- (void)executeDidChangeHandler</Declaration>
+			
+			
+			<Anchor>//api/name/executeDidChangeHandler</Anchor>
+            <NodeRef refid="8"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

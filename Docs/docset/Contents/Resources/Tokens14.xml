@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DNModelWatchObjects.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatchObjects</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchObjects.h</DeclaredIn>
+            
+			
+			<NodeRef refid="14"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchObjects/initWithModel:didChange:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchObjects.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithModel:(DNModel *)model didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			
+			
+			<Anchor>//api/name/initWithModel:didChange:</Anchor>
+            <NodeRef refid="14"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchObjects/objects</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNModelWatchObjects.h</DeclaredIn>
+			
+			<Declaration>- (NSArray *)objects</Declaration>
+			
+			
+			<Anchor>//api/name/objects</Anchor>
+            <NodeRef refid="14"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>

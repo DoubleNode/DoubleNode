@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Tokens version="1.0">
+	<File path="Classes/DNAppConstants.html">
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/cl/DNAppConstants</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppConstants.h</DeclaredIn>
+            
+			
+			<NodeRef refid="3"/>
+		</Token>
+		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/colorWithString:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppConstants.h</DeclaredIn>
+			
+			<Declaration>+ (UIColor *)colorWithString:(NSString *)string</Declaration>
+			
+			
+			<Anchor>//api/name/colorWithString:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/boolWithString:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppConstants.h</DeclaredIn>
+			
+			<Declaration>+ (BOOL)boolWithString:(NSString *)string</Declaration>
+			
+			
+			<Anchor>//api/name/boolWithString:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/doubleWithPreString:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppConstants.h</DeclaredIn>
+			
+			<Declaration>+ (double)doubleWithPreString:(NSString *)string</Declaration>
+			
+			
+			<Anchor>//api/name/doubleWithPreString:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/fontWithPreString:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppConstants.h</DeclaredIn>
+			
+			<Declaration>+ (UIFont *)fontWithPreString:(NSString *)preString</Declaration>
+			
+			
+			<Anchor>//api/name/fontWithPreString:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/sizeWithPreString:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppConstants.h</DeclaredIn>
+			
+			<Declaration>+ (CGSize)sizeWithPreString:(NSString *)preString</Declaration>
+			
+			
+			<Anchor>//api/name/sizeWithPreString:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/constantValue:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppConstants.h</DeclaredIn>
+			
+			<Declaration>+ (id)constantValue:(NSString *)key</Declaration>
+			
+			
+			<Anchor>//api/name/constantValue:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/plistDict</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppConstants.h</DeclaredIn>
+			
+			<Declaration>+ (NSDictionary *)plistDict</Declaration>
+			
+			
+			<Anchor>//api/name/plistDict</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNAppConstants/plistConfig:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNAppConstants.h</DeclaredIn>
+			
+			<Declaration>+ (id)plistConfig:(NSString *)key</Declaration>
+			
+			
+			<Anchor>//api/name/plistConfig:</Anchor>
+            <NodeRef refid="3"/>
+		</Token>
+		
+        
+	</File>
+</Tokens>
