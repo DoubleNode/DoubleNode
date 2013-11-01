@@ -409,18 +409,6 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatchVerifier/containObjects:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)containObjects:(id)firstObject, ...</Declaration>
-			
-			
-			<Anchor>//api/name/containObjects:</Anchor>
-            <NodeRef refid="60"/>
-		</Token>
-		
-		<Token>
 			<TokenIdentifier>//apple_ref/occ/instm/KWMatchVerifier/have:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
 			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
@@ -453,6 +441,18 @@
 			
 			
 			<Anchor>//api/name/haveAtMost:</Anchor>
+            <NodeRef refid="60"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatchVerifier/containObjects:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)containObjects:(id)firstObject, ...</Declaration>
+			
+			
+			<Anchor>//api/name/containObjects:</Anchor>
             <NodeRef refid="60"/>
 		</Token>
 		

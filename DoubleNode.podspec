@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.1.4"
+  s.version      = "0.1.5"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
@@ -71,6 +71,7 @@ Pod::Spec.new do |s|
   #
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
+  s.resources = "Docs/com.DoubleNode.DoubleNodeDocs.docset"
 
   # A list of paths to preserve after installing the Pod.
   # CocoaPods cleans by default any file that is not used.
