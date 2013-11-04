@@ -21,7 +21,17 @@
 
 @implementation DNModel
 
-+ (NSString*)entityName     {   return nil;     }
++ (NSString*)dataModelName
+{
+    // Assume a default datamodel name of Main.xcdatamodel
+    return @"Main";
+}
+
++ (NSString*)entityName
+{
+    // Assume a 3-character prefix to class name and the 5 character "Model" suffix
+    return [NSStringFromClass([self class]) substringWithRange:NSMakeRange(3, [NSStringFromClass([self class]) length] - 8)];
+}
 
 #pragma mark - AppDelegate access functions
 
@@ -32,17 +42,17 @@
 
 + (NSManagedObjectContext*)managedObjectContext
 {
-    return [[[self class] appDelegate] managedObjectContext];
+    return [[[self class] appDelegate] managedObjectContext:[self class]];
 }
 
 + (NSManagedObjectModel*)managedObjectModel
 {
-    return [[[self class] appDelegate] managedObjectModel];
+    return [[[self class] appDelegate] managedObjectModel:[self class]];
 }
 
 + (void)saveContext
 {
-    [[[self class] appDelegate] saveContext];
+    [[[self class] appDelegate] saveContext:[self class]];
 }
 
 #pragma mark - initialization functions
@@ -186,8 +196,8 @@
 {
     NSDictionary*   substDict       = @{ @"ID": idValue };
     
-    NSFetchRequest* fetchRequest    = [[[DNUtilities appDelegate] managedObjectModel] fetchRequestFromTemplateWithName:[self getFromIDFetchTemplate]
-                                                                                                 substitutionVariables:substDict];
+    NSFetchRequest* fetchRequest    = [[[self class] managedObjectModel] fetchRequestFromTemplateWithName:[self getFromIDFetchTemplate]
+                                                                                    substitutionVariables:substDict];
     if (fetchRequest == nil)
     {
         DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
@@ -257,7 +267,7 @@
 
 - (NSFetchRequest*)getAll_FetchRequest
 {
-    NSFetchRequest* fetchRequest    = [[[[DNUtilities appDelegate] managedObjectModel] fetchRequestTemplateForName:[self getAllFetchTemplate]] copy];
+    NSFetchRequest* fetchRequest    = [[[[self class] managedObjectModel] fetchRequestTemplateForName:[self getAllFetchTemplate]] copy];
     if (fetchRequest == nil)
     {
         DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");

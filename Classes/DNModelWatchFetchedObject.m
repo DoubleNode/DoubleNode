@@ -35,7 +35,7 @@
         fetchRequest    = fetch;
         
         fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                     managedObjectContext:[[DNUtilities appDelegate] managedObjectContext]
+                                                                     managedObjectContext:[[self class] managedObjectContext]
                                                                        sectionNameKeyPath:nil
                                                                                 cacheName:NSStringFromClass([self class])];
         fetchResultsController.delegate = self;

@@ -19,6 +19,7 @@ typedef void(^DNModelCompletionHandlerBlock)();
 
 @interface DNModel : NSObject
 
++ (NSString*)dataModelName;
 + (NSString*)entityName;
 
 #pragma mark - AppDelegate access functions

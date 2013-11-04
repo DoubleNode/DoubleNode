@@ -19,17 +19,29 @@
 
 #pragma mark - Entity description functions
 
++ (Class)entityModelClass
+{
+    NSException*    exception = [NSException exceptionWithName:@"DMManagedObject Exception"
+                                                        reason:@"Base entityModelClass: should never be called, override might be missing!"
+                                                      userInfo: nil];
+    @throw exception;
+
+    // Not sure if this is ever reached
+    return nil;
+}
+
 + (DNModel*)entityModel
 {
-    return nil;
+    return [[[[self class] entityModelClass] alloc] init];
 }
 
 + (NSString*)entityName
 {
-    return NSStringFromClass([self class]);
+    // Assume a 3-character prefix to class name and no suffix
+    return [NSStringFromClass([self class]) substringFromIndex:3];
 }
 
-+ (id)entityIdWithDictionary:(NSDictionary*)dict
++ (id)entityIDWithDictionary:(NSDictionary*)dict
 {
     return [[self class] dictionaryNumber:dict withItem:@"id" andDefault:nil];
 }
@@ -68,17 +80,17 @@
 
 + (NSManagedObjectContext*)managedObjectContext
 {
-    return [[[self class] appDelegate] managedObjectContext];
+    return [[[self class] appDelegate] managedObjectContext:[[self class] entityModelClass]];
 }
 
 + (NSManagedObjectModel*)managedObjectModel
 {
-    return [[[self class] appDelegate] managedObjectModel];
+    return [[[self class] appDelegate] managedObjectModel:[[self class] entityModelClass]];
 }
 
 + (void)saveContext
 {
-    [[[self class] appDelegate] saveContext];
+    [[[self class] appDelegate] saveContext:[[self class] entityModelClass]];
 }
 
 - (void)setId:(id)idValue
@@ -154,7 +166,7 @@
 
 - (instancetype)initWithDictionary:(NSDictionary*)dict
 {
-    id  idValue = [[self class] entityIdWithDictionary:dict];
+    id  idValue = [[self class] entityIDWithDictionary:dict];
     
     id  newSelf = [[[self class] entityModel] getFromID:idValue];
     if (newSelf == nil)
