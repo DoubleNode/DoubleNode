@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 #import "ADVTheme.h"
+#import "DNTextField.h"
 
 @protocol DNThemeProtocol <ADVTheme, NSObject>
 
@@ -23,5 +24,10 @@
               withGroup:(NSString*)group
               andScreen:(NSString*)screen
                 andItem:(NSString*)item;
+
++ (void)customizeTextField:(DNTextField*)txtfldView
+                 withGroup:(NSString*)group
+                 andScreen:(NSString*)screen
+                   andItem:(NSString*)item;
 
 @end
