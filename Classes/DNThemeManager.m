@@ -77,17 +77,42 @@
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
++ (id)performThemeSelector:(SEL)aSelector
+{
+    if (aSelector == nil)   {   return nil; }
+
+    id <ADVTheme>   theme = [self sharedTheme];
+
+    return [theme performSelector:aSelector];
+}
+
+#pragma clang diagnostic pop
+
++ (id)performThemeSelectorForAttribute:(NSString*)attribute
+                              withType:(NSString*)type
+                              andGroup:(NSString*)group
+                             andScreen:(NSString*)screen
+                               andItem:(NSString*)item
+{
+    SEL aSelector   = [[self class] functionNameForAttribute:attribute
+                                                    withType:type
+                                                    andGroup:group
+                                                   andScreen:screen
+                                                     andItem:item];
+
+    return [[self class] performThemeSelector:aSelector];
+}
+
 + (void)customizeButton:(UIButton*)btnView
               withGroup:(NSString*)group
               andScreen:(NSString*)screen
                 andItem:(NSString*)item
 {
-    id <ADVTheme>   theme = [self sharedTheme];
+    [btnView.titleLabel setKerning:[[[self class] performThemeSelectorForAttribute:@"LabelKerning" withType:@"Button" andGroup:group andScreen:screen andItem:item] doubleValue]];
 
-    btnView.titleLabel.font     = [theme performSelector:[[self class] functionNameForAttribute:@"Font" withType:@"Button" andGroup:group andScreen:screen andItem:item]];
-    [btnView.titleLabel setKerning:[[theme performSelector:[[self class] functionNameForAttribute:@"LabelKerning" withType:@"Button" andGroup:group andScreen:screen andItem:item]] doubleValue]];
-    btnView.layer.borderColor   = [[theme performSelector:[[self class] functionNameForAttribute:@"BorderColor" withType:@"Button" andGroup:group andScreen:screen andItem:item]] CGColor];
-    btnView.layer.borderWidth   = [[theme performSelector:[[self class] functionNameForAttribute:@"BorderWidth" withType:@"Button" andGroup:group andScreen:screen andItem:item]] doubleValue];
+    btnView.titleLabel.font     = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"Button" andGroup:group andScreen:screen andItem:item];
+    btnView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"Button" andGroup:group andScreen:screen andItem:item] CGColor];
+    btnView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"Button" andGroup:group andScreen:screen andItem:item] doubleValue];
 }
 
 + (void)customizeTextField:(DNTextField*)txtfldView
@@ -95,19 +120,15 @@
                  andScreen:(NSString*)screen
                    andItem:(NSString*)item
 {
-    id <ADVTheme>   theme = [self sharedTheme];
+    txtfldView.font                 = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextField" andGroup:group andScreen:screen andItem:item];
+    txtfldView.layer.borderColor    = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"TextField" andGroup:group andScreen:screen andItem:item] CGColor];
+    txtfldView.layer.borderWidth    = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"TextField" andGroup:group andScreen:screen andItem:item] doubleValue];
 
-    txtfldView.font                 = [theme performSelector:[[self class] functionNameForAttribute:@"Font" withType:@"TextField" andGroup:group andScreen:screen andItem:item]];
-    txtfldView.layer.borderColor    = [[theme performSelector:[[self class] functionNameForAttribute:@"BorderColor" withType:@"TextField" andGroup:group andScreen:screen andItem:item]] CGColor];
-    txtfldView.layer.borderWidth    = [[theme performSelector:[[self class] functionNameForAttribute:@"BorderWidth" withType:@"TextField" andGroup:group andScreen:screen andItem:item]] doubleValue];
+    txtfldView.horizontalPadding    = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding" withType:@"TextField" andGroup:group andScreen:screen andItem:item] doubleValue];
+    txtfldView.verticalPadding      = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding" withType:@"TextField" andGroup:group andScreen:screen andItem:item] doubleValue];
 
-    txtfldView.horizontalPadding    = [[theme performSelector:[[self class] functionNameForAttribute:@"HorizontalPadding" withType:@"TextField" andGroup:group andScreen:screen andItem:item]] doubleValue];
-    txtfldView.verticalPadding      = [[theme performSelector:[[self class] functionNameForAttribute:@"VerticalPadding" withType:@"TextField" andGroup:group andScreen:screen andItem:item]] doubleValue];
-
-    UIColor*    placeholderColor    = [theme performSelector:[[self class] functionNameForAttribute:@"PlaceholderColor" withType:@"TextField" andGroup:group andScreen:screen andItem:item]];
+    UIColor*    placeholderColor    = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor" withType:@"TextField" andGroup:group andScreen:screen andItem:item];
     [txtfldView setValue:placeholderColor forKeyPath:@"_placeholderLabel.textColor"];
 }
-
-#pragma clang diagnostic pop
 
 @end
