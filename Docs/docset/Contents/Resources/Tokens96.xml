@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSObject+KiwiGenericMatchingAdditions.html">
+	<File path="Categories/NSObject+KiwiMockAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiGenericMatchingAdditions)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiMockAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
+			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="96"/>
@@ -13,14 +13,50 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/isEqualOrMatches:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/mock</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
+			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)isEqualOrMatches:(id)object</Declaration>
+			<Declaration>+ (id)mock</Declaration>
 			
 			
-			<Anchor>//api/name/isEqualOrMatches:</Anchor>
+			<Anchor>//api/name/mock</Anchor>
+            <NodeRef refid="96"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/mockWithName:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)mockWithName:(NSString *)aName</Declaration>
+			
+			
+			<Anchor>//api/name/mockWithName:</Anchor>
+            <NodeRef refid="96"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/nullMock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)nullMock</Declaration>
+			
+			
+			<Anchor>//api/name/nullMock</Anchor>
+            <NodeRef refid="96"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/nullMockWithName:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)nullMockWithName:(NSString *)aName</Declaration>
+			
+			
+			<Anchor>//api/name/nullMockWithName:</Anchor>
             <NodeRef refid="96"/>
 		</Token>
 		

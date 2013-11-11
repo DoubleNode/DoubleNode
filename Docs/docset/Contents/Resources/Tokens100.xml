@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSObject+KiwiVerifierAdditions.html">
+	<File path="Categories/NSObject+KiwiVerifierMacroNames.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiVerifierAdditions)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiVerifierMacroNames)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiVerifierAdditions.h</DeclaredIn>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
             
 			
 			<NodeRef refid="100"/>
@@ -13,14 +13,146 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/attachToVerifier:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/should</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiVerifierAdditions.h</DeclaredIn>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
 			
-			<Declaration>- (id)attachToVerifier:(id&lt;KWVerifying&gt;)aVerifier</Declaration>
+			<Declaration>- (void)should</Declaration>
 			
 			
-			<Anchor>//api/name/attachToVerifier:</Anchor>
+			<Anchor>//api/name/should</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldNot</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldNot</Declaration>
+			
+			
+			<Anchor>//api/name/shouldNot</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldBeNil</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldBeNil</Declaration>
+			
+			
+			<Anchor>//api/name/shouldBeNil</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldNotBeNil</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldNotBeNil</Declaration>
+			
+			
+			<Anchor>//api/name/shouldNotBeNil</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldEventually</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldEventually</Declaration>
+			
+			
+			<Anchor>//api/name/shouldEventually</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldNotEventually</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldNotEventually</Declaration>
+			
+			
+			<Anchor>//api/name/shouldNotEventually</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldEventuallyBeforeTimingOutAfter</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldEventuallyBeforeTimingOutAfter</Declaration>
+			
+			
+			<Anchor>//api/name/shouldEventuallyBeforeTimingOutAfter</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldNotEventuallyBeforeTimingOutAfter</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldNotEventuallyBeforeTimingOutAfter</Declaration>
+			
+			
+			<Anchor>//api/name/shouldNotEventuallyBeforeTimingOutAfter</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldAfterWait</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldAfterWait</Declaration>
+			
+			
+			<Anchor>//api/name/shouldAfterWait</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldNotAfterWait</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldNotAfterWait</Declaration>
+			
+			
+			<Anchor>//api/name/shouldNotAfterWait</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldAfterWaitOf</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldAfterWaitOf</Declaration>
+			
+			
+			<Anchor>//api/name/shouldAfterWaitOf</Anchor>
+            <NodeRef refid="100"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/shouldNotAfterWaitOf</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			
+			<Declaration>- (void)shouldNotAfterWaitOf</Declaration>
+			
+			
+			<Anchor>//api/name/shouldNotAfterWaitOf</Anchor>
             <NodeRef refid="100"/>
 		</Token>
 		

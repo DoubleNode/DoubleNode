@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/ADVTheme.html">
+	<File path="Protocols/DNApplicationProtocol.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/ADVTheme</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/DNApplicationProtocol</TokenIdentifier>
+			<Abstract type="html">Provides functions expected to be in the applications AppDelegate class.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
             
 			
 			<NodeRef refid="113"/>
@@ -13,794 +13,193 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/statusBarStyle</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/disableURLCache</TokenIdentifier>
+			<Abstract type="html">Disables the App URL Cache (if applicable).</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (UIStatusBarStyle)statusBarStyle</Declaration>
+			<Declaration>- (void)disableURLCache</Declaration>
 			
 			
-			<Anchor>//api/name/statusBarStyle</Anchor>
+			<Anchor>//api/name/disableURLCache</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/mainColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/setDoNotUseIncrementalStore:</TokenIdentifier>
+			<Abstract type="html">Sets a flag to disable the use of a NSIncrementalStore (if applicable).</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (UIColor *)mainColor</Declaration>
+			<Declaration>- (void)setDoNotUseIncrementalStore:(BOOL)flagValue</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>flagValue</Name>
+					<Abstract type="html">A BOOL flag to specify whether or not to bypass using a NSIncrementalStore when initializing the App&apos;s CoreData NSPersistentStore.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/mainColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/secondColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)secondColor</Declaration>
-			
-			
-			<Anchor>//api/name/secondColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationTextColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)navigationTextColor</Declaration>
-			
-			
-			<Anchor>//api/name/navigationTextColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/highlightColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)highlightColor</Declaration>
-			
-			
-			<Anchor>//api/name/highlightColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/shadowColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)shadowColor</Declaration>
-			
-			
-			<Anchor>//api/name/shadowColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/highlightShadowColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)highlightShadowColor</Declaration>
-			
-			
-			<Anchor>//api/name/highlightShadowColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationTextShadowColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)navigationTextShadowColor</Declaration>
-			
-			
-			<Anchor>//api/name/navigationTextShadowColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/backgroundColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)backgroundColor</Declaration>
-			
-			
-			<Anchor>//api/name/backgroundColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationFont</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIFont *)navigationFont</Declaration>
-			
-			
-			<Anchor>//api/name/navigationFont</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/barButtonFont</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIFont *)barButtonFont</Declaration>
-			
-			
-			<Anchor>//api/name/barButtonFont</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/segmentFont</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIFont *)segmentFont</Declaration>
-			
-			
-			<Anchor>//api/name/segmentFont</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/baseTintColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)baseTintColor</Declaration>
-			
-			
-			<Anchor>//api/name/baseTintColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/accentTintColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)accentTintColor</Declaration>
-			
-			
-			<Anchor>//api/name/accentTintColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/selectedTabbarItemTintColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)selectedTabbarItemTintColor</Declaration>
-			
-			
-			<Anchor>//api/name/selectedTabbarItemTintColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchThumbColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)switchThumbColor</Declaration>
-			
-			
-			<Anchor>//api/name/switchThumbColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOnColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)switchOnColor</Declaration>
-			
-			
-			<Anchor>//api/name/switchOnColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchTintColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)switchTintColor</Declaration>
-			
-			
-			<Anchor>//api/name/switchTintColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/segmentedTintColor</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIColor *)segmentedTintColor</Declaration>
-			
-			
-			<Anchor>//api/name/segmentedTintColor</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/shadowOffset</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (CGSize)shadowOffset</Declaration>
-			
-			
-			<Anchor>//api/name/shadowOffset</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/topShadow</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)topShadow</Declaration>
-			
-			
-			<Anchor>//api/name/topShadow</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/bottomShadow</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)bottomShadow</Declaration>
-			
-			
-			<Anchor>//api/name/bottomShadow</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationBackgroundForBarMetrics:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)navigationBackgroundForBarMetrics:(UIBarMetrics)metrics</Declaration>
-			
-			
-			<Anchor>//api/name/navigationBackgroundForBarMetrics:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationBackgroundForIPadAndOrientation:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)navigationBackgroundForIPadAndOrientation:(UIInterfaceOrientation)orientation</Declaration>
-			
-			
-			<Anchor>//api/name/navigationBackgroundForIPadAndOrientation:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/barButtonBackgroundForState:style:barMetrics:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)barButtonBackgroundForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics</Declaration>
-			
-			
-			<Anchor>//api/name/barButtonBackgroundForState:style:barMetrics:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/backBackgroundForState:barMetrics:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)backBackgroundForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics</Declaration>
-			
-			
-			<Anchor>//api/name/backBackgroundForState:barMetrics:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/toolbarBackgroundForBarMetrics:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)toolbarBackgroundForBarMetrics:(UIBarMetrics)metrics</Declaration>
-			
-			
-			<Anchor>//api/name/toolbarBackgroundForBarMetrics:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchBackground</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)searchBackground</Declaration>
-			
-			
-			<Anchor>//api/name/searchBackground</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchScopeBackground</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)searchScopeBackground</Declaration>
-			
-			
-			<Anchor>//api/name/searchScopeBackground</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchFieldImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)searchFieldImage</Declaration>
-			
-			
-			<Anchor>//api/name/searchFieldImage</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchImageForIcon:state:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)searchImageForIcon:(UISearchBarIcon)icon state:(UIControlState)state</Declaration>
-			
-			
-			<Anchor>//api/name/searchImageForIcon:state:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchScopeButtonBackgroundForState:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)searchScopeButtonBackgroundForState:(UIControlState)state</Declaration>
-			
-			
-			<Anchor>//api/name/searchScopeButtonBackgroundForState:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchScopeButtonDivider</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)searchScopeButtonDivider</Declaration>
-			
-			
-			<Anchor>//api/name/searchScopeButtonDivider</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/segmentedBackgroundForState:barMetrics:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)segmentedBackgroundForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics</Declaration>
-			
-			
-			<Anchor>//api/name/segmentedBackgroundForState:barMetrics:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/segmentedDividerForBarMetrics:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)segmentedDividerForBarMetrics:(UIBarMetrics)barMetrics</Declaration>
-			
-			
-			<Anchor>//api/name/segmentedDividerForBarMetrics:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tableBackground</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)tableBackground</Declaration>
-			
-			
-			<Anchor>//api/name/tableBackground</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tableSectionHeaderBackground</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)tableSectionHeaderBackground</Declaration>
-			
-			
-			<Anchor>//api/name/tableSectionHeaderBackground</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tableFooterBackground</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)tableFooterBackground</Declaration>
-			
-			
-			<Anchor>//api/name/tableFooterBackground</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/viewBackground</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)viewBackground</Declaration>
-			
-			
-			<Anchor>//api/name/viewBackground</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/viewBackgroundPattern</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)viewBackgroundPattern</Declaration>
-			
-			
-			<Anchor>//api/name/viewBackgroundPattern</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/viewBackgroundTimeline</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)viewBackgroundTimeline</Declaration>
-			
-			
-			<Anchor>//api/name/viewBackgroundTimeline</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOnImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)switchOnImage</Declaration>
-			
-			
-			<Anchor>//api/name/switchOnImage</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOffImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)switchOffImage</Declaration>
-			
-			
-			<Anchor>//api/name/switchOffImage</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOnIcon</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)switchOnIcon</Declaration>
-			
-			
-			<Anchor>//api/name/switchOnIcon</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOffIcon</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)switchOffIcon</Declaration>
-			
-			
-			<Anchor>//api/name/switchOffIcon</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchTrack</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)switchTrack</Declaration>
-			
-			
-			<Anchor>//api/name/switchTrack</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchThumbForState:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)switchThumbForState:(UIControlState)state</Declaration>
-			
-			
-			<Anchor>//api/name/switchThumbForState:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderThumbForState:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)sliderThumbForState:(UIControlState)state</Declaration>
-			
-			
-			<Anchor>//api/name/sliderThumbForState:</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderMinTrack</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)sliderMinTrack</Declaration>
-			
-			
-			<Anchor>//api/name/sliderMinTrack</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderMaxTrack</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)sliderMaxTrack</Declaration>
-			
-			
-			<Anchor>//api/name/sliderMaxTrack</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderMinTrackDouble</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)sliderMinTrackDouble</Declaration>
-			
-			
-			<Anchor>//api/name/sliderMinTrackDouble</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderMaxTrackDouble</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)sliderMaxTrackDouble</Declaration>
-			
-			
-			<Anchor>//api/name/sliderMaxTrackDouble</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressTrackImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)progressTrackImage</Declaration>
-			
-			
-			<Anchor>//api/name/progressTrackImage</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressProgressImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)progressProgressImage</Declaration>
-			
-			
-			<Anchor>//api/name/progressProgressImage</Anchor>
+			<Anchor>//api/name/setDoNotUseIncrementalStore:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressPercentTrackImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/setPersistentStorePrefix:</TokenIdentifier>
+			<Abstract type="html">Sets a string prefix to be used when opening and creating CoreData NSPersistentStore.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (UIImage *)progressPercentTrackImage</Declaration>
+			<Declaration>- (void)setPersistentStorePrefix:(NSString *)prefix</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>prefix</Name>
+					<Abstract type="html">A NSString prefix to be prepended to any NSPersistentStore URLs.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/progressPercentTrackImage</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressPercentProgressImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)progressPercentProgressImage</Declaration>
-			
-			
-			<Anchor>//api/name/progressPercentProgressImage</Anchor>
-            <NodeRef refid="113"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressPercentProgressValueImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)progressPercentProgressValueImage</Declaration>
-			
-			
-			<Anchor>//api/name/progressPercentProgressValueImage</Anchor>
+			<Anchor>//api/name/setPersistentStorePrefix:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/stepperBackgroundForState:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/managedObjectContext:</TokenIdentifier>
+			<Abstract type="html">Creates or (if already created) returns the App&apos;s default NSManagedObjectContext.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (UIImage *)stepperBackgroundForState:(UIControlState)state</Declaration>
+			<Declaration>- (NSManagedObjectContext *)managedObjectContext:(Class)modelClass</Declaration>
 			
-			
-			<Anchor>//api/name/stepperBackgroundForState:</Anchor>
+			<ReturnValue><Abstract type="html">The App&apos;s default NSManagedObjectContext object, creating it if needed.</Abstract></ReturnValue>
+			<Anchor>//api/name/managedObjectContext:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/stepperDividerForState:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/managedObjectModel:</TokenIdentifier>
+			<Abstract type="html">Creates or (if already created) returns the App&apos;s default NSManagedObjectModel.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (UIImage *)stepperDividerForState:(UIControlState)state</Declaration>
+			<Declaration>- (NSManagedObjectModel *)managedObjectModel:(Class)modelClass</Declaration>
 			
-			
-			<Anchor>//api/name/stepperDividerForState:</Anchor>
+			<ReturnValue><Abstract type="html">The App&apos;s default NSManagedObjectModel object, creating it if needed.</Abstract></ReturnValue>
+			<Anchor>//api/name/managedObjectModel:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/stepperIncrementImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/deletePersistentStore:</TokenIdentifier>
+			<Abstract type="html">Closes the App&apos;s current NSPersistentStore, then removes the file from the device.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (UIImage *)stepperIncrementImage</Declaration>
+			<Declaration>- (void)deletePersistentStore:(Class)modelClass</Declaration>
 			
 			
-			<Anchor>//api/name/stepperIncrementImage</Anchor>
+			<Anchor>//api/name/deletePersistentStore:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/stepperDecrementImage</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/saveContext:</TokenIdentifier>
+			<Abstract type="html">Flushes any cached updates from the current NSManagedObjectContext to the NSPersistentStore.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (UIImage *)stepperDecrementImage</Declaration>
+			<Declaration>- (void)saveContext:(Class)modelClass</Declaration>
 			
 			
-			<Anchor>//api/name/stepperDecrementImage</Anchor>
+			<Anchor>//api/name/saveContext:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/buttonBackgroundForState:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)buttonBackgroundForState:(UIControlState)state</Declaration>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/settingsItem:</TokenIdentifier>
+			<Abstract type="html">Loads and returns the current value of the user setting, specified by a key.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			
-			<Anchor>//api/name/buttonBackgroundForState:</Anchor>
+			<Declaration>- (id)settingsItem:(NSString *)item</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The current value of the specified user setting (or @&quot;&quot; if not set).</Abstract></ReturnValue>
+			<Anchor>//api/name/settingsItem:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tabBarBackground</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)tabBarBackground</Declaration>
-			
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/settingsItem:default:</TokenIdentifier>
+			<Abstract type="html">Loads and returns the current value of the user setting, specified by a key and a default value.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Anchor>//api/name/tabBarBackground</Anchor>
+			<Declaration>- (id)settingsItem:(NSString *)item default:(id)defaultValue</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter><Parameter>
+					<Name>defaultValue</Name>
+					<Abstract type="html">The default value for the specific user setting, when it has not been previously set.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The current value of the specified user setting.</Abstract></ReturnValue>
+			<Anchor>//api/name/settingsItem:default:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tabBarSelectionIndicator</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/settingsItem:boolDefault:</TokenIdentifier>
+			<Abstract type="html">Loads and returns the current BOOL value of the user setting, specified by a key and a default value.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (UIImage *)tabBarSelectionIndicator</Declaration>
-			
-			
-			<Anchor>//api/name/tabBarSelectionIndicator</Anchor>
+			<Declaration>- (id)settingsItem:(NSString *)item boolDefault:(BOOL)defaultValue</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter><Parameter>
+					<Name>defaultValue</Name>
+					<Abstract type="html">The default BOOL value for the specific user setting, when it has not been previously set.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The current value of the specified user setting.</Abstract></ReturnValue>
+			<Anchor>//api/name/settingsItem:boolDefault:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/imageForTab:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/setSettingsItem:value:</TokenIdentifier>
+			<Abstract type="html">Sets the value of the user setting, specified by a key.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (UIImage *)imageForTab:(SSThemeTab)tab</Declaration>
+			<Declaration>- (void)setSettingsItem:(NSString *)item value:(id)value</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter><Parameter>
+					<Name>value</Name>
+					<Abstract type="html">The new value for the specific user setting.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			
-			<Anchor>//api/name/imageForTab:</Anchor>
+			<Anchor>//api/name/setSettingsItem:value:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/finishedImageForTab:selected:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
-			
-			<Declaration>- (UIImage *)finishedImageForTab:(SSThemeTab)tab selected:(BOOL)selected</Declaration>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/setSettingsItem:boolValue:</TokenIdentifier>
+			<Abstract type="html">Sets the BOOL value of the user setting, specified by a key.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
+			<Declaration>- (void)setSettingsItem:(NSString *)item boolValue:(BOOL)value</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter><Parameter>
+					<Name>value</Name>
+					<Abstract type="html">The new BOOL value for the specific user setting.</Abstract>
+				</Parameter>
+			</Parameters>
 			
-			<Anchor>//api/name/finishedImageForTab:selected:</Anchor>
+			<Anchor>//api/name/setSettingsItem:boolValue:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		

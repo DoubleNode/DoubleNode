@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSObject+KWUserDefinedMatchersDefinitions.html">
+	<File path="Categories/NSObject+KiwiGenericMatchingAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KWUserDefinedMatchersDefinitions)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiGenericMatchingAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KiwiBlockMacros.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="95"/>
@@ -13,14 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/name</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/isEqualOrMatches:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KiwiBlockMacros.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
 			
-			<Declaration>- (void)name</Declaration>
+			<Declaration>- (BOOL)isEqualOrMatches:(id)object</Declaration>
 			
 			
-			<Anchor>//api/name/name</Anchor>
+			<Anchor>//api/name/isEqualOrMatches:</Anchor>
             <NodeRef refid="95"/>
 		</Token>
 		

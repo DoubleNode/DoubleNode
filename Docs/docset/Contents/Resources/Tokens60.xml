@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWHaveValueMatcher.html">
+	<File path="Classes/KWInequalityMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWHaveValueMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWInequalityMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="60"/>
@@ -13,50 +13,50 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWHaveValueMatcher/haveValue:forKey:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInequalityMatcher/beLessThan:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)haveValue:(id)value forKey:(NSString *)key</Declaration>
+			<Declaration>- (void)beLessThan:(id)aValue</Declaration>
 			
 			
-			<Anchor>//api/name/haveValue:forKey:</Anchor>
+			<Anchor>//api/name/beLessThan:</Anchor>
             <NodeRef refid="60"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWHaveValueMatcher/haveValue:forKeyPath:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInequalityMatcher/beLessThanOrEqualTo:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)haveValue:(id)value forKeyPath:(NSString *)keyPath</Declaration>
+			<Declaration>- (void)beLessThanOrEqualTo:(id)aValue</Declaration>
 			
 			
-			<Anchor>//api/name/haveValue:forKeyPath:</Anchor>
+			<Anchor>//api/name/beLessThanOrEqualTo:</Anchor>
             <NodeRef refid="60"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWHaveValueMatcher/haveValueForKey:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInequalityMatcher/beGreaterThan:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)haveValueForKey:(NSString *)key</Declaration>
+			<Declaration>- (void)beGreaterThan:(id)aValue</Declaration>
 			
 			
-			<Anchor>//api/name/haveValueForKey:</Anchor>
+			<Anchor>//api/name/beGreaterThan:</Anchor>
             <NodeRef refid="60"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWHaveValueMatcher/haveValueForKeyPath:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInequalityMatcher/beGreaterThanOrEqualTo:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)haveValueForKeyPath:(NSString *)keyPath</Declaration>
+			<Declaration>- (void)beGreaterThanOrEqualTo:(id)aValue</Declaration>
 			
 			
-			<Anchor>//api/name/haveValueForKeyPath:</Anchor>
+			<Anchor>//api/name/beGreaterThanOrEqualTo:</Anchor>
             <NodeRef refid="60"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWInvocationCapturerDelegate.html">
+	<File path="Protocols/KWMatching.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWInvocationCapturerDelegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWMatching</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
             
 			
 			<NodeRef refid="121"/>
@@ -13,26 +13,122 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWInvocationCapturerDelegate/invocationCapturer:methodSignatureForSelector:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/initWithSubject:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
 			
-			<Declaration>- (NSMethodSignature *)invocationCapturer:(KWInvocationCapturer *)anInvocationCapturer methodSignatureForSelector:(SEL)aSelector</Declaration>
+			<Declaration>- (id)initWithSubject:(id)anObject</Declaration>
 			
 			
-			<Anchor>//api/name/invocationCapturer:methodSignatureForSelector:</Anchor>
+			<Anchor>//api/name/initWithSubject:</Anchor>
             <NodeRef refid="121"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWInvocationCapturerDelegate/invocationCapturer:didCaptureInvocation:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/matcherStrings</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
 			
-			<Declaration>- (void)invocationCapturer:(KWInvocationCapturer *)anInvocationCapturer didCaptureInvocation:(NSInvocation *)anInvocation</Declaration>
+			<Declaration>+ (NSArray *)matcherStrings</Declaration>
 			
 			
-			<Anchor>//api/name/invocationCapturer:didCaptureInvocation:</Anchor>
+			<Anchor>//api/name/matcherStrings</Anchor>
+            <NodeRef refid="121"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/canMatchSubject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
+			
+			<Declaration>+ (BOOL)canMatchSubject:(id)anObject</Declaration>
+			
+			
+			<Anchor>//api/name/canMatchSubject:</Anchor>
+            <NodeRef refid="121"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/isNilMatcher</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isNilMatcher</Declaration>
+			
+			
+			<Anchor>//api/name/isNilMatcher</Anchor>
+            <NodeRef refid="121"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/shouldBeEvaluatedAtEndOfExample</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)shouldBeEvaluatedAtEndOfExample</Declaration>
+			
+			
+			<Anchor>//api/name/shouldBeEvaluatedAtEndOfExample</Anchor>
+            <NodeRef refid="121"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/willEvaluateMultipleTimes</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)willEvaluateMultipleTimes</Declaration>
+			
+			
+			<Anchor>//api/name/willEvaluateMultipleTimes</Anchor>
+            <NodeRef refid="121"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/setWillEvaluateMultipleTimes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
+			
+			<Declaration>- (void)setWillEvaluateMultipleTimes:(BOOL)shouldEvaluateMultipleTimes</Declaration>
+			
+			
+			<Anchor>//api/name/setWillEvaluateMultipleTimes:</Anchor>
+            <NodeRef refid="121"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/evaluate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)evaluate</Declaration>
+			
+			
+			<Anchor>//api/name/evaluate</Anchor>
+            <NodeRef refid="121"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/failureMessageForShould</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)failureMessageForShould</Declaration>
+			
+			
+			<Anchor>//api/name/failureMessageForShould</Anchor>
+            <NodeRef refid="121"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/failureMessageForShouldNot</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMatching.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)failureMessageForShouldNot</Declaration>
+			
+			
+			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
             <NodeRef refid="121"/>
 		</Token>
 		

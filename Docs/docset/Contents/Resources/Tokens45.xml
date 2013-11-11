@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWContainMatcher.html">
+	<File path="Classes/KWContainStringMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWContainMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWContainStringMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
+			<DeclaredIn>KWContainStringMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="45"/>
@@ -13,26 +13,50 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWContainMatcher/contain:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWContainStringMatcher/containString:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
+			<DeclaredIn>KWContainStringMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)contain:(id)anObject</Declaration>
+			<Declaration>- (void)containString:(NSString *)string</Declaration>
 			
 			
-			<Anchor>//api/name/contain:</Anchor>
+			<Anchor>//api/name/containString:</Anchor>
             <NodeRef refid="45"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWContainMatcher/containObjectsInArray:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWContainStringMatcher/containString:options:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
+			<DeclaredIn>KWContainStringMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)containObjectsInArray:(NSArray *)anArray</Declaration>
+			<Declaration>- (void)containString:(NSString *)string options:(NSStringCompareOptions)options</Declaration>
 			
 			
-			<Anchor>//api/name/containObjectsInArray:</Anchor>
+			<Anchor>//api/name/containString:options:</Anchor>
+            <NodeRef refid="45"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWContainStringMatcher/startWithString:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWContainStringMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)startWithString:(NSString *)prefix</Declaration>
+			
+			
+			<Anchor>//api/name/startWithString:</Anchor>
+            <NodeRef refid="45"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWContainStringMatcher/endWithString:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWContainStringMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)endWithString:(NSString *)suffix</Declaration>
+			
+			
+			<Anchor>//api/name/endWithString:</Anchor>
             <NodeRef refid="45"/>
 		</Token>
 		

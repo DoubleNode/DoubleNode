@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWBlockRaiseMatcher.html">
+	<File path="Classes/KWCallSite.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWBlockRaiseMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWCallSite</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBlockRaiseMatcher.h</DeclaredIn>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
             
 			
 			<NodeRef refid="40"/>
@@ -13,50 +13,110 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBlockRaiseMatcher/raise</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/initWithFilename:lineNumber:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBlockRaiseMatcher.h</DeclaredIn>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
 			
-			<Declaration>- (void)raise</Declaration>
+			<Declaration>- (id)initWithFilename:(NSString *)aFilename lineNumber:(NSUInteger)aLineNumber</Declaration>
 			
 			
-			<Anchor>//api/name/raise</Anchor>
+			<Anchor>//api/name/initWithFilename:lineNumber:</Anchor>
             <NodeRef refid="40"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBlockRaiseMatcher/raiseWithName:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWCallSite/callSiteWithFilename:lineNumber:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBlockRaiseMatcher.h</DeclaredIn>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
 			
-			<Declaration>- (void)raiseWithName:(NSString *)aName</Declaration>
+			<Declaration>+ (id)callSiteWithFilename:(NSString *)aFilename lineNumber:(NSUInteger)aLineNumber</Declaration>
 			
 			
-			<Anchor>//api/name/raiseWithName:</Anchor>
+			<Anchor>//api/name/callSiteWithFilename:lineNumber:</Anchor>
             <NodeRef refid="40"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBlockRaiseMatcher/raiseWithReason:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/setFilename:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBlockRaiseMatcher.h</DeclaredIn>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
 			
-			<Declaration>- (void)raiseWithReason:(NSString *)aReason</Declaration>
+			<Declaration>@property (nonatomic, readonly, copy) NSString *filename</Declaration>
 			
 			
-			<Anchor>//api/name/raiseWithReason:</Anchor>
+			<Anchor>//api/name/filename</Anchor>
             <NodeRef refid="40"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBlockRaiseMatcher/raiseWithName:reason:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/filename</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBlockRaiseMatcher.h</DeclaredIn>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
 			
-			<Declaration>- (void)raiseWithName:(NSString *)aName reason:(NSString *)aReason</Declaration>
+			<Declaration>@property (nonatomic, readonly, copy) NSString *filename</Declaration>
 			
 			
-			<Anchor>//api/name/raiseWithName:reason:</Anchor>
+			<Anchor>//api/name/filename</Anchor>
+            <NodeRef refid="40"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWCallSite/filename</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, copy) NSString *filename</Declaration>
+			
+			
+			<Anchor>//api/name/filename</Anchor>
+            <NodeRef refid="40"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/setLineNumber:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NSUInteger lineNumber</Declaration>
+			
+			
+			<Anchor>//api/name/lineNumber</Anchor>
+            <NodeRef refid="40"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/lineNumber</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NSUInteger lineNumber</Declaration>
+			
+			
+			<Anchor>//api/name/lineNumber</Anchor>
+            <NodeRef refid="40"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWCallSite/lineNumber</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NSUInteger lineNumber</Declaration>
+			
+			
+			<Anchor>//api/name/lineNumber</Anchor>
+            <NodeRef refid="40"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/isEqualToCallSite:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWCallSite.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isEqualToCallSite:(KWCallSite *)aCallSite</Declaration>
+			
+			
+			<Anchor>//api/name/isEqualToCallSite:</Anchor>
             <NodeRef refid="40"/>
 		</Token>
 		

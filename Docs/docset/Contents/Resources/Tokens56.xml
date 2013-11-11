@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWFutureObject.html">
+	<File path="Classes/KWGenericMatchEvaluator.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWFutureObject</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWGenericMatchEvaluator</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFutureObject.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchEvaluator.h</DeclaredIn>
             
 			
 			<NodeRef refid="56"/>
@@ -13,50 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWFutureObject/objectWithObjectPointer:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWGenericMatchEvaluator/isGenericMatcher:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFutureObject.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchEvaluator.h</DeclaredIn>
 			
-			<Declaration>+ (id)objectWithObjectPointer:(id *)pointer</Declaration>
+			<Declaration>+ (BOOL)isGenericMatcher:(id)object</Declaration>
 			
 			
-			<Anchor>//api/name/objectWithObjectPointer:</Anchor>
+			<Anchor>//api/name/isGenericMatcher:</Anchor>
             <NodeRef refid="56"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWFutureObject/futureObjectWithBlock:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWGenericMatchEvaluator/genericMatcher:matches:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFutureObject.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchEvaluator.h</DeclaredIn>
 			
-			<Declaration>+ (id)futureObjectWithBlock:(KWFutureObjectBlock)block</Declaration>
-			
-			
-			<Anchor>//api/name/futureObjectWithBlock:</Anchor>
-            <NodeRef refid="56"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWFutureObject/initWithBlock:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFutureObject.h</DeclaredIn>
-			
-			<Declaration>- (id)initWithBlock:(KWFutureObjectBlock)aBlock</Declaration>
+			<Declaration>+ (BOOL)genericMatcher:(id)matcher matches:(id)object</Declaration>
 			
 			
-			<Anchor>//api/name/initWithBlock:</Anchor>
-            <NodeRef refid="56"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWFutureObject/object</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFutureObject.h</DeclaredIn>
-			
-			<Declaration>- (id)object</Declaration>
-			
-			
-			<Anchor>//api/name/object</Anchor>
+			<Anchor>//api/name/genericMatcher:matches:</Anchor>
             <NodeRef refid="56"/>
 		</Token>
 		

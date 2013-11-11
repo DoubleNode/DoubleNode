@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWReporting.html">
+	<File path="Protocols/KWVerifying.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWReporting</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWVerifying</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReporting.h</DeclaredIn>
+			<DeclaredIn>KWVerifying.h</DeclaredIn>
             
 			
 			<NodeRef refid="125"/>
@@ -13,14 +13,98 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWReporting/reportFailure:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/setCallSite:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReporting.h</DeclaredIn>
+			<DeclaredIn>KWVerifying.h</DeclaredIn>
 			
-			<Declaration>- (void)reportFailure:(KWFailure *)failure</Declaration>
+			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
 			
 			
-			<Anchor>//api/name/reportFailure:</Anchor>
+			<Anchor>//api/name/callSite</Anchor>
+            <NodeRef refid="125"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/callSite</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWVerifying.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
+			
+			
+			<Anchor>//api/name/callSite</Anchor>
+            <NodeRef refid="125"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/KWVerifying/callSite</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWVerifying.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
+			
+			
+			<Anchor>//api/name/callSite</Anchor>
+            <NodeRef refid="125"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/descriptionForAnonymousItNode</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWVerifying.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)descriptionForAnonymousItNode</Declaration>
+			
+			
+			<Anchor>//api/name/descriptionForAnonymousItNode</Anchor>
+            <NodeRef refid="125"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/setSubject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWVerifying.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) id subject</Declaration>
+			
+			
+			<Anchor>//api/name/subject</Anchor>
+            <NodeRef refid="125"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/subject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWVerifying.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) id subject</Declaration>
+			
+			
+			<Anchor>//api/name/subject</Anchor>
+            <NodeRef refid="125"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfp/KWVerifying/subject</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWVerifying.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong) id subject</Declaration>
+			
+			
+			<Anchor>//api/name/subject</Anchor>
+            <NodeRef refid="125"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/exampleWillEnd</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWVerifying.h</DeclaredIn>
+			
+			<Declaration>- (void)exampleWillEnd</Declaration>
+			
+			
+			<Anchor>//api/name/exampleWillEnd</Anchor>
             <NodeRef refid="125"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWInequalityMatcher.html">
+	<File path="Classes/KWInvocationCapturer.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWInequalityMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWInvocationCapturer</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
             
 			
 			<NodeRef refid="61"/>
@@ -13,50 +13,122 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInequalityMatcher/beLessThan:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/initWithDelegate:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (void)beLessThan:(id)aValue</Declaration>
+			<Declaration>- (id)initWithDelegate:(id)aDelegate</Declaration>
 			
 			
-			<Anchor>//api/name/beLessThan:</Anchor>
+			<Anchor>//api/name/initWithDelegate:</Anchor>
             <NodeRef refid="61"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInequalityMatcher/beLessThanOrEqualTo:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/initWithDelegate:userInfo:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (void)beLessThanOrEqualTo:(id)aValue</Declaration>
+			<Declaration>- (id)initWithDelegate:(id)aDelegate userInfo:(NSDictionary *)aUserInfo</Declaration>
 			
 			
-			<Anchor>//api/name/beLessThanOrEqualTo:</Anchor>
+			<Anchor>//api/name/initWithDelegate:userInfo:</Anchor>
             <NodeRef refid="61"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInequalityMatcher/beGreaterThan:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWInvocationCapturer/invocationCapturerWithDelegate:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (void)beGreaterThan:(id)aValue</Declaration>
+			<Declaration>+ (id)invocationCapturerWithDelegate:(id)aDelegate</Declaration>
 			
 			
-			<Anchor>//api/name/beGreaterThan:</Anchor>
+			<Anchor>//api/name/invocationCapturerWithDelegate:</Anchor>
             <NodeRef refid="61"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInequalityMatcher/beGreaterThanOrEqualTo:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWInvocationCapturer/invocationCapturerWithDelegate:userInfo:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInequalityMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (void)beGreaterThanOrEqualTo:(id)aValue</Declaration>
+			<Declaration>+ (id)invocationCapturerWithDelegate:(id)aDelegate userInfo:(NSDictionary *)aUserInfo</Declaration>
 			
 			
-			<Anchor>//api/name/beGreaterThanOrEqualTo:</Anchor>
+			<Anchor>//api/name/invocationCapturerWithDelegate:userInfo:</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/setDelegate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, weak, readonly) id delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/delegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, weak, readonly) id delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWInvocationCapturer/delegate</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, weak, readonly) id delegate</Declaration>
+			
+			
+			<Anchor>//api/name/delegate</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/setUserInfo:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSDictionary *userInfo</Declaration>
+			
+			
+			<Anchor>//api/name/userInfo</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/userInfo</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSDictionary *userInfo</Declaration>
+			
+			
+			<Anchor>//api/name/userInfo</Anchor>
+            <NodeRef refid="61"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWInvocationCapturer/userInfo</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSDictionary *userInfo</Declaration>
+			
+			
+			<Anchor>//api/name/userInfo</Anchor>
             <NodeRef refid="61"/>
 		</Token>
 		

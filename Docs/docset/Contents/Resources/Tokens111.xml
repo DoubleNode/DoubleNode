@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/UILabel+TextKerning.html">
+	<File path="Categories/UIScrollView+ScrollDirection.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/UILabel(TextKerning)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/UIScrollView(ScrollDirection)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>UILabel+TextKerning.h</DeclaredIn>
+			<DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
             
 			
 			<NodeRef refid="111"/>
@@ -13,39 +13,19 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/UILabel/setText:withKerning:</TokenIdentifier>
-			<Abstract type="html">Set the label&apos;s text to the given string, using the given kerning value if able. (i.e., if running on iOS 6.0+).</Abstract>
-			<DeclaredIn>UILabel+TextKerning.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/UIScrollView/scrollDirection:</TokenIdentifier>
+			<Abstract type="html">Returns the current scroll direction(s)</Abstract>
+			<DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
 			
-			<Declaration>- (void)setText:(NSString *)text withKerning:(CGFloat)kerning</Declaration>
+			<Declaration>- (ScrollDirection)scrollDirection:(CGPoint)lastContentOffset</Declaration>
 			<Parameters>
 				<Parameter>
-					<Name>text</Name>
-					<Abstract type="html">The text string to set the label to display</Abstract>
-				</Parameter><Parameter>
-					<Name>kerning</Name>
-					<Abstract type="html">The number of points by which to adjust spacing between characters (positive values increase spacing, negative values decrease spacing, a value of 0 is default)</Abstract>
+					<Name>lastContentOffset</Name>
+					<Abstract type="html">The last contentOffset point</Abstract>
 				</Parameter>
 			</Parameters>
-			
-			<Anchor>//api/name/setText:withKerning:</Anchor>
-            <NodeRef refid="111"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/UILabel/setKerning:</TokenIdentifier>
-			<Abstract type="html">Set the kerning value of the currently-set text.</Abstract>
-			<DeclaredIn>UILabel+TextKerning.h</DeclaredIn>
-			
-			<Declaration>- (void)setKerning:(CGFloat)kerning</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>kerning</Name>
-					<Abstract type="html">The number of points by which to adjust spacing between characters (positive values increase spacing, negative values decrease spacing, a value of 0 is default)</Abstract>
-				</Parameter>
-			</Parameters>
-			
-			<Anchor>//api/name/setKerning:</Anchor>
+			<ReturnValue><Abstract type="html">ScrollDirection value of multiple direction flags or&apos;d together.</Abstract></ReturnValue>
+			<Anchor>//api/name/scrollDirection:</Anchor>
             <NodeRef refid="111"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWGenericMatching.html">
+	<File path="Protocols/KWInvocationCapturerDelegate.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWGenericMatching</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWInvocationCapturerDelegate</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWGenericMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
             
 			
 			<NodeRef refid="120"/>
@@ -13,14 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWGenericMatching/matches:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWInvocationCapturerDelegate/invocationCapturer:methodSignatureForSelector:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWGenericMatcher.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)matches:(id)object</Declaration>
+			<Declaration>- (NSMethodSignature *)invocationCapturer:(KWInvocationCapturer *)anInvocationCapturer methodSignatureForSelector:(SEL)aSelector</Declaration>
 			
 			
-			<Anchor>//api/name/matches:</Anchor>
+			<Anchor>//api/name/invocationCapturer:methodSignatureForSelector:</Anchor>
+            <NodeRef refid="120"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWInvocationCapturerDelegate/invocationCapturer:didCaptureInvocation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			
+			<Declaration>- (void)invocationCapturer:(KWInvocationCapturer *)anInvocationCapturer didCaptureInvocation:(NSInvocation *)anInvocation</Declaration>
+			
+			
+			<Anchor>//api/name/invocationCapturer:didCaptureInvocation:</Anchor>
             <NodeRef refid="120"/>
 		</Token>
 		

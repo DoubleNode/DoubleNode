@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWMatcherFactory.html">
+	<File path="Classes/KWMatchers.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWMatcherFactory</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWMatchers</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWMatchers.h</DeclaredIn>
             
 			
 			<NodeRef refid="66"/>
@@ -13,98 +13,62 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/init</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMatchers/matchers</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWMatchers.h</DeclaredIn>
 			
-			<Declaration>- (id)init</Declaration>
+			<Declaration>+ (id)matchers</Declaration>
 			
 			
-			<Anchor>//api/name/init</Anchor>
+			<Anchor>//api/name/matchers</Anchor>
             <NodeRef refid="66"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/setRegisteredMatcherClasses:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMatchers/defineMatcher:as:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWMatchers.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSArray *registeredMatcherClasses</Declaration>
+			<Declaration>+ (void)defineMatcher:(NSString *)selectorString as:(KWMatchersBuildingBlock)block</Declaration>
 			
 			
-			<Anchor>//api/name/registeredMatcherClasses</Anchor>
+			<Anchor>//api/name/defineMatcher:as:</Anchor>
             <NodeRef refid="66"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/registeredMatcherClasses</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatchers/defineMatcher:as:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWMatchers.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSArray *registeredMatcherClasses</Declaration>
+			<Declaration>- (void)defineMatcher:(NSString *)selectorString as:(KWMatchersBuildingBlock)block</Declaration>
 			
 			
-			<Anchor>//api/name/registeredMatcherClasses</Anchor>
+			<Anchor>//api/name/defineMatcher:as:</Anchor>
             <NodeRef refid="66"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWMatcherFactory/registeredMatcherClasses</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatchers/addUserDefinedMatcherBuilder:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWMatchers.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSArray *registeredMatcherClasses</Declaration>
+			<Declaration>- (void)addUserDefinedMatcherBuilder:(KWUserDefinedMatcherBuilder *)builder</Declaration>
 			
 			
-			<Anchor>//api/name/registeredMatcherClasses</Anchor>
+			<Anchor>//api/name/addUserDefinedMatcherBuilder:</Anchor>
             <NodeRef refid="66"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/registerMatcherClass:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatchers/matcherForSelector:subject:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWMatchers.h</DeclaredIn>
 			
-			<Declaration>- (void)registerMatcherClass:(Class)aClass</Declaration>
-			
-			
-			<Anchor>//api/name/registerMatcherClass:</Anchor>
-            <NodeRef refid="66"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/registerMatcherClassesWithNamespacePrefix:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
-			
-			<Declaration>- (void)registerMatcherClassesWithNamespacePrefix:(NSString *)aNamespacePrefix</Declaration>
+			<Declaration>- (KWUserDefinedMatcher *)matcherForSelector:(SEL)selector subject:(id)subject</Declaration>
 			
 			
-			<Anchor>//api/name/registerMatcherClassesWithNamespacePrefix:</Anchor>
-            <NodeRef refid="66"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/methodSignatureForMatcherSelector:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
-			
-			<Declaration>- (NSMethodSignature *)methodSignatureForMatcherSelector:(SEL)aSelector</Declaration>
-			
-			
-			<Anchor>//api/name/methodSignatureForMatcherSelector:</Anchor>
-            <NodeRef refid="66"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/matcherFromInvocation:subject:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
-			
-			<Declaration>- (KWMatcher *)matcherFromInvocation:(NSInvocation *)anInvocation subject:(id)subject</Declaration>
-			
-			
-			<Anchor>//api/name/matcherFromInvocation:subject:</Anchor>
+			<Anchor>//api/name/matcherForSelector:subject:</Anchor>
             <NodeRef refid="66"/>
 		</Token>
 		

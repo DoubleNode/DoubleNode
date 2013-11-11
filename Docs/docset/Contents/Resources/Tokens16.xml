@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/DNStateOptions.html">
+	<File path="Classes/DNStateViewController.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/DNStateOptions</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/DNStateViewController</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateOptions.h</DeclaredIn>
+			<DeclaredIn>DNStateViewController.h</DeclaredIn>
             
 			
 			<NodeRef refid="16"/>
@@ -13,86 +13,38 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNStateOptions/setAnimated:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/changeToViewState:animated:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateOptions.h</DeclaredIn>
+			<DeclaredIn>DNStateViewController.h</DeclaredIn>
 			
-			<Declaration>@property (atomic) BOOL animated</Declaration>
+			<Declaration>- (void)changeToViewState:(NSString *)newViewState animated:(BOOL)animated</Declaration>
 			
 			
-			<Anchor>//api/name/animated</Anchor>
+			<Anchor>//api/name/changeToViewState:animated:</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNStateOptions/animated</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/changeFromCurrentState:toNewState:animated:completion:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateOptions.h</DeclaredIn>
+			<DeclaredIn>DNStateViewController.h</DeclaredIn>
 			
-			<Declaration>@property (atomic) BOOL animated</Declaration>
+			<Declaration>- (void)changeFromCurrentState:(NSString *)currentState toNewState:(NSString *)newState animated:(BOOL)animated completion:(void ( ^ ) ( BOOL finished ))completion</Declaration>
 			
 			
-			<Anchor>//api/name/animated</Anchor>
+			<Anchor>//api/name/changeFromCurrentState:toNewState:animated:completion:</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/DNStateOptions/animated</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/performViewStateSelector:options:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateOptions.h</DeclaredIn>
+			<DeclaredIn>DNStateViewController.h</DeclaredIn>
 			
-			<Declaration>@property (atomic) BOOL animated</Declaration>
-			
-			
-			<Anchor>//api/name/animated</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNStateOptions/setCompletion:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateOptions.h</DeclaredIn>
-			
-			<Declaration>@property (strong, nonatomic) void ( ^ ) ( BOOL finished ) completion</Declaration>
+			<Declaration>- (void)performViewStateSelector:(SEL)aSelector options:(DNStateOptions *)options</Declaration>
 			
 			
-			<Anchor>//api/name/completion</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNStateOptions/completion</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateOptions.h</DeclaredIn>
-			
-			<Declaration>@property (strong, nonatomic) void ( ^ ) ( BOOL finished ) completion</Declaration>
-			
-			
-			<Anchor>//api/name/completion</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/DNStateOptions/completion</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateOptions.h</DeclaredIn>
-			
-			<Declaration>@property (strong, nonatomic) void ( ^ ) ( BOOL finished ) completion</Declaration>
-			
-			
-			<Anchor>//api/name/completion</Anchor>
-            <NodeRef refid="16"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNStateOptions/stateOptions</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateOptions.h</DeclaredIn>
-			
-			<Declaration>+ (id)stateOptions</Declaration>
-			
-			
-			<Anchor>//api/name/stateOptions</Anchor>
+			<Anchor>//api/name/performViewStateSelector:options:</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/SSThemeTab.html">
+	<File path="Constants/ScrollDirection.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/SSThemeTab</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/ScrollDirection</TokenIdentifier>
+			<Abstract type="html">Defines ScrollDirection bitmask flags</Abstract>
+			<DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
             
 			
 			<NodeRef refid="128"/>
@@ -14,51 +14,56 @@
 		
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabSecure</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabSecure</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/ScrollDirectionNone</TokenIdentifier>
+            <Abstract type="html">The UIScrollView is not scrolling
+     </Abstract>
+            <Declaration>ScrollDirectionNone</Declaration>
             
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
-            
-            <NodeRef refid="128"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabDocs</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabDocs</Declaration>
-            
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
+            <DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
             
             <NodeRef refid="128"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabBugs</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabBugs</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/ScrollDirectionRight</TokenIdentifier>
+            <Abstract type="html">The UIScrollView is scrolling to the right
+     </Abstract>
+            <Declaration>ScrollDirectionRight</Declaration>
             
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
-            
-            <NodeRef refid="128"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabBook</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabBook</Declaration>
-            
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
+            <DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
             
             <NodeRef refid="128"/>
         </Token>
         
         <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabOptions</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabOptions</Declaration>
+            <TokenIdentifier>//apple_ref/c/econst/ScrollDirectionLeft</TokenIdentifier>
+            <Abstract type="html">The UIScrollView is scrolling to the left
+     </Abstract>
+            <Declaration>ScrollDirectionLeft</Declaration>
             
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
+            <DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
+            
+            <NodeRef refid="128"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/ScrollDirectionUp</TokenIdentifier>
+            <Abstract type="html">The UIScrollView is scrolling up
+     </Abstract>
+            <Declaration>ScrollDirectionUp</Declaration>
+            
+            <DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
+            
+            <NodeRef refid="128"/>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/ScrollDirectionDown</TokenIdentifier>
+            <Abstract type="html">The UIScrollView is scrolling down
+     </Abstract>
+            <Declaration>ScrollDirectionDown</Declaration>
+            
+            <DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
             
             <NodeRef refid="128"/>
         </Token>

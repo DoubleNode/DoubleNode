@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWStub.html">
+	<File path="Classes/KWUserDefinedMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWStub</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWUserDefinedMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="83"/>
@@ -13,290 +13,206 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/initWithMessagePattern:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setSelector:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
 			
 			
-			<Anchor>//api/name/initWithMessagePattern:</Anchor>
+			<Anchor>//api/name/selector</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/initWithMessagePattern:value:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/selector</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithMessagePattern:(KWMessagePattern *)aMessagePattern value:(id)aValue</Declaration>
+			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
 			
 			
-			<Anchor>//api/name/initWithMessagePattern:value:</Anchor>
+			<Anchor>//api/name/selector</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/initWithMessagePattern:block:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/selector</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithMessagePattern:(KWMessagePattern *)aMessagePattern block:(id ( ^ ) ( NSArray *params ))aBlock</Declaration>
+			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
 			
 			
-			<Anchor>//api/name/initWithMessagePattern:block:</Anchor>
+			<Anchor>//api/name/selector</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/initWithMessagePattern:value:times:afterThatReturn:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setFailureMessageForShould:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithMessagePattern:(KWMessagePattern *)aMessagePattern value:(id)aValue times:(id)times afterThatReturn:(id)aSecondValue</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShould</Declaration>
 			
 			
-			<Anchor>//api/name/initWithMessagePattern:value:times:afterThatReturn:</Anchor>
+			<Anchor>//api/name/failureMessageForShould</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWStub/stubWithMessagePattern:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/failureMessageForShould</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)stubWithMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShould</Declaration>
 			
 			
-			<Anchor>//api/name/stubWithMessagePattern:</Anchor>
+			<Anchor>//api/name/failureMessageForShould</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWStub/stubWithMessagePattern:value:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/failureMessageForShould</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)stubWithMessagePattern:(KWMessagePattern *)aMessagePattern value:(id)aValue</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShould</Declaration>
 			
 			
-			<Anchor>//api/name/stubWithMessagePattern:value:</Anchor>
+			<Anchor>//api/name/failureMessageForShould</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWStub/stubWithMessagePattern:block:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setFailureMessageForShouldNot:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)stubWithMessagePattern:(KWMessagePattern *)aMessagePattern block:(id ( ^ ) ( NSArray *params ))aBlock</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShouldNot</Declaration>
 			
 			
-			<Anchor>//api/name/stubWithMessagePattern:block:</Anchor>
+			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWStub/stubWithMessagePattern:value:times:afterThatReturn:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/failureMessageForShouldNot</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)stubWithMessagePattern:(KWMessagePattern *)aMessagePattern value:(id)aValue times:(id)times afterThatReturn:(id)aSecondValue</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShouldNot</Declaration>
 			
 			
-			<Anchor>//api/name/stubWithMessagePattern:value:times:afterThatReturn:</Anchor>
+			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/setMessagePattern:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/failureMessageForShouldNot</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) KWMessagePattern *messagePattern</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShouldNot</Declaration>
 			
 			
-			<Anchor>//api/name/messagePattern</Anchor>
+			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/messagePattern</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setMatcherBlock:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) KWMessagePattern *messagePattern</Declaration>
+			<Declaration>@property (nonatomic, copy) KWUserDefinedMatcherBlock matcherBlock</Declaration>
 			
 			
-			<Anchor>//api/name/messagePattern</Anchor>
+			<Anchor>//api/name/matcherBlock</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWStub/messagePattern</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/matcherBlock</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) KWMessagePattern *messagePattern</Declaration>
+			<Declaration>@property (nonatomic, copy) KWUserDefinedMatcherBlock matcherBlock</Declaration>
 			
 			
-			<Anchor>//api/name/messagePattern</Anchor>
+			<Anchor>//api/name/matcherBlock</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/setValue:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/matcherBlock</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) id value</Declaration>
+			<Declaration>@property (nonatomic, copy) KWUserDefinedMatcherBlock matcherBlock</Declaration>
 			
 			
-			<Anchor>//api/name/value</Anchor>
+			<Anchor>//api/name/matcherBlock</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/value</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setDescription:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) id value</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *description</Declaration>
 			
 			
-			<Anchor>//api/name/value</Anchor>
+			<Anchor>//api/name/description</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWStub/value</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/description</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) id value</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *description</Declaration>
 			
 			
-			<Anchor>//api/name/value</Anchor>
+			<Anchor>//api/name/description</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/setReturnValueTimes:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/description</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) id returnValueTimes</Declaration>
+			<Declaration>@property (nonatomic, copy) NSString *description</Declaration>
 			
 			
-			<Anchor>//api/name/returnValueTimes</Anchor>
+			<Anchor>//api/name/description</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/returnValueTimes</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWUserDefinedMatcher/matcherWithSubject:block:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) id returnValueTimes</Declaration>
+			<Declaration>+ (id)matcherWithSubject:(id)aSubject block:(KWUserDefinedMatcherBlock)aBlock</Declaration>
 			
 			
-			<Anchor>//api/name/returnValueTimes</Anchor>
+			<Anchor>//api/name/matcherWithSubject:block:</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWStub/returnValueTimes</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/initWithSubject:block:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) id returnValueTimes</Declaration>
-			
-			
-			<Anchor>//api/name/returnValueTimes</Anchor>
-            <NodeRef refid="83"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/setReturnedValueTimes:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) int returnedValueTimes</Declaration>
+			<Declaration>- (id)initWithSubject:(id)aSubject block:(KWUserDefinedMatcherBlock)aBlock</Declaration>
 			
 			
-			<Anchor>//api/name/returnedValueTimes</Anchor>
-            <NodeRef refid="83"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/returnedValueTimes</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) int returnedValueTimes</Declaration>
-			
-			
-			<Anchor>//api/name/returnedValueTimes</Anchor>
-            <NodeRef refid="83"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWStub/returnedValueTimes</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) int returnedValueTimes</Declaration>
-			
-			
-			<Anchor>//api/name/returnedValueTimes</Anchor>
-            <NodeRef refid="83"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/setSecondValue:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) id secondValue</Declaration>
-			
-			
-			<Anchor>//api/name/secondValue</Anchor>
-            <NodeRef refid="83"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/secondValue</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) id secondValue</Declaration>
-			
-			
-			<Anchor>//api/name/secondValue</Anchor>
-            <NodeRef refid="83"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWStub/secondValue</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) id secondValue</Declaration>
-			
-			
-			<Anchor>//api/name/secondValue</Anchor>
-            <NodeRef refid="83"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStub/processInvocation:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStub.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)processInvocation:(NSInvocation *)anInvocation</Declaration>
-			
-			
-			<Anchor>//api/name/processInvocation:</Anchor>
+			<Anchor>//api/name/initWithSubject:block:</Anchor>
             <NodeRef refid="83"/>
 		</Token>
 		

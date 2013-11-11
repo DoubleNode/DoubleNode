@@ -1,16 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/DNThemeProtocol.html">
+	<File path="Protocols/KWContainmentCountMatcherTerminals.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/DNThemeProtocol</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWContainmentCountMatcherTerminals</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNThemeManager.h</DeclaredIn>
+			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="115"/>
 		</Token>
 		
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWContainmentCountMatcherTerminals/objects</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (id)objects</Declaration>
+			
+			
+			<Anchor>//api/name/objects</Anchor>
+            <NodeRef refid="115"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWContainmentCountMatcherTerminals/items</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (id)items</Declaration>
+			
+			
+			<Anchor>//api/name/items</Anchor>
+            <NodeRef refid="115"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWContainmentCountMatcherTerminals/elements</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (id)elements</Declaration>
+			
+			
+			<Anchor>//api/name/elements</Anchor>
+            <NodeRef refid="115"/>
+		</Token>
 		
         
 	</File>

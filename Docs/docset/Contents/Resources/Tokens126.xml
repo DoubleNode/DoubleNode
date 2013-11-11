@@ -1,113 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWVerifying.html">
+	<File path="Constants/LogLevel.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWVerifying</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWVerifying.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/c/tdef/LogLevel</TokenIdentifier>
+			<Abstract type="html">DLog Logging Items and Macros</Abstract>
+			<DeclaredIn>DNUtilities.h</DeclaredIn>
             
 			
 			<NodeRef refid="126"/>
 		</Token>
 		
 		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/setCallSite:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWVerifying.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
-			
-			
-			<Anchor>//api/name/callSite</Anchor>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/LL_Critical</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>LL_Critical</Declaration>
+            
+            <DeclaredIn>DNUtilities.h</DeclaredIn>
+            
             <NodeRef refid="126"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/callSite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWVerifying.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
-			
-			
-			<Anchor>//api/name/callSite</Anchor>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/LL_Error</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>LL_Error</Declaration>
+            
+            <DeclaredIn>DNUtilities.h</DeclaredIn>
+            
             <NodeRef refid="126"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfp/KWVerifying/callSite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWVerifying.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
-			
-			
-			<Anchor>//api/name/callSite</Anchor>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/LL_Warning</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>LL_Warning</Declaration>
+            
+            <DeclaredIn>DNUtilities.h</DeclaredIn>
+            
             <NodeRef refid="126"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/descriptionForAnonymousItNode</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWVerifying.h</DeclaredIn>
-			
-			<Declaration>- (NSString *)descriptionForAnonymousItNode</Declaration>
-			
-			
-			<Anchor>//api/name/descriptionForAnonymousItNode</Anchor>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/LL_Debug</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>LL_Debug</Declaration>
+            
+            <DeclaredIn>DNUtilities.h</DeclaredIn>
+            
             <NodeRef refid="126"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/setSubject:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWVerifying.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) id subject</Declaration>
-			
-			
-			<Anchor>//api/name/subject</Anchor>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/LL_Info</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>LL_Info</Declaration>
+            
+            <DeclaredIn>DNUtilities.h</DeclaredIn>
+            
             <NodeRef refid="126"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/subject</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWVerifying.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) id subject</Declaration>
-			
-			
-			<Anchor>//api/name/subject</Anchor>
+        </Token>
+        
+        <Token>
+            <TokenIdentifier>//apple_ref/c/econst/LL_Everything</TokenIdentifier>
+            <Abstract type="html"></Abstract>
+            <Declaration>LL_Everything</Declaration>
+            
+            <DeclaredIn>DNUtilities.h</DeclaredIn>
+            
             <NodeRef refid="126"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfp/KWVerifying/subject</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWVerifying.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) id subject</Declaration>
-			
-			
-			<Anchor>//api/name/subject</Anchor>
-            <NodeRef refid="126"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWVerifying/exampleWillEnd</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWVerifying.h</DeclaredIn>
-			
-			<Declaration>- (void)exampleWillEnd</Declaration>
-			
-			
-			<Anchor>//api/name/exampleWillEnd</Anchor>
-            <NodeRef refid="126"/>
-		</Token>
-		
+        </Token>
         
 	</File>
 </Tokens>

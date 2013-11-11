@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWMatchers.html">
+	<File path="Classes/KWMessagePattern.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWMatchers</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWMessagePattern</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatchers.h</DeclaredIn>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
             
 			
 			<NodeRef refid="67"/>
@@ -13,62 +13,194 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWMatchers/matchers</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/initWithSelector:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatchers.h</DeclaredIn>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
 			
-			<Declaration>+ (id)matchers</Declaration>
+			<Declaration>- (id)initWithSelector:(SEL)aSelector</Declaration>
 			
 			
-			<Anchor>//api/name/matchers</Anchor>
+			<Anchor>//api/name/initWithSelector:</Anchor>
             <NodeRef refid="67"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWMatchers/defineMatcher:as:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/initWithSelector:argumentFilters:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatchers.h</DeclaredIn>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
 			
-			<Declaration>+ (void)defineMatcher:(NSString *)selectorString as:(KWMatchersBuildingBlock)block</Declaration>
+			<Declaration>- (id)initWithSelector:(SEL)aSelector argumentFilters:(NSArray *)anArray</Declaration>
 			
 			
-			<Anchor>//api/name/defineMatcher:as:</Anchor>
+			<Anchor>//api/name/initWithSelector:argumentFilters:</Anchor>
             <NodeRef refid="67"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatchers/defineMatcher:as:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/initWithSelector:firstArgumentFilter:argumentList:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatchers.h</DeclaredIn>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
 			
-			<Declaration>- (void)defineMatcher:(NSString *)selectorString as:(KWMatchersBuildingBlock)block</Declaration>
+			<Declaration>- (id)initWithSelector:(SEL)aSelector firstArgumentFilter:(id)firstArgumentFilter argumentList:(va_list)argumentList</Declaration>
 			
 			
-			<Anchor>//api/name/defineMatcher:as:</Anchor>
+			<Anchor>//api/name/initWithSelector:firstArgumentFilter:argumentList:</Anchor>
             <NodeRef refid="67"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatchers/addUserDefinedMatcherBuilder:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMessagePattern/messagePatternWithSelector:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatchers.h</DeclaredIn>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
 			
-			<Declaration>- (void)addUserDefinedMatcherBuilder:(KWUserDefinedMatcherBuilder *)builder</Declaration>
+			<Declaration>+ (id)messagePatternWithSelector:(SEL)aSelector</Declaration>
 			
 			
-			<Anchor>//api/name/addUserDefinedMatcherBuilder:</Anchor>
+			<Anchor>//api/name/messagePatternWithSelector:</Anchor>
             <NodeRef refid="67"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatchers/matcherForSelector:subject:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMessagePattern/messagePatternWithSelector:argumentFilters:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatchers.h</DeclaredIn>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
 			
-			<Declaration>- (KWUserDefinedMatcher *)matcherForSelector:(SEL)selector subject:(id)subject</Declaration>
+			<Declaration>+ (id)messagePatternWithSelector:(SEL)aSelector argumentFilters:(NSArray *)anArray</Declaration>
 			
 			
-			<Anchor>//api/name/matcherForSelector:subject:</Anchor>
+			<Anchor>//api/name/messagePatternWithSelector:argumentFilters:</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMessagePattern/messagePatternWithSelector:firstArgumentFilter:argumentList:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>+ (id)messagePatternWithSelector:(SEL)aSelector firstArgumentFilter:(id)firstArgumentFilter argumentList:(va_list)argumentList</Declaration>
+			
+			
+			<Anchor>//api/name/messagePatternWithSelector:firstArgumentFilter:argumentList:</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMessagePattern/messagePatternFromInvocation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>+ (id)messagePatternFromInvocation:(NSInvocation *)anInvocation</Declaration>
+			
+			
+			<Anchor>//api/name/messagePatternFromInvocation:</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/setSelector:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) SEL selector</Declaration>
+			
+			
+			<Anchor>//api/name/selector</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/selector</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) SEL selector</Declaration>
+			
+			
+			<Anchor>//api/name/selector</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMessagePattern/selector</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) SEL selector</Declaration>
+			
+			
+			<Anchor>//api/name/selector</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/setArgumentFilters:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NSArray *argumentFilters</Declaration>
+			
+			
+			<Anchor>//api/name/argumentFilters</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/argumentFilters</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NSArray *argumentFilters</Declaration>
+			
+			
+			<Anchor>//api/name/argumentFilters</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMessagePattern/argumentFilters</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NSArray *argumentFilters</Declaration>
+			
+			
+			<Anchor>//api/name/argumentFilters</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/matchesInvocation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)matchesInvocation:(NSInvocation *)anInvocation</Declaration>
+			
+			
+			<Anchor>//api/name/matchesInvocation:</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/isEqualToMessagePattern:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isEqualToMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			
+			
+			<Anchor>//api/name/isEqualToMessagePattern:</Anchor>
+            <NodeRef refid="67"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMessagePattern/stringValue</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessagePattern.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)stringValue</Declaration>
+			
+			
+			<Anchor>//api/name/stringValue</Anchor>
             <NodeRef refid="67"/>
 		</Token>
 		

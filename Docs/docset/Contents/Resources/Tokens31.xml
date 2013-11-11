@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWBeMemberOfClassMatcher.html">
+	<File path="Classes/KWBeSubclassOfClassMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWBeMemberOfClassMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBeSubclassOfClassMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeMemberOfClassMatcher.h</DeclaredIn>
+			<DeclaredIn>KWBeSubclassOfClassMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="31"/>
@@ -13,14 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBeMemberOfClassMatcher/beMemberOfClass:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeSubclassOfClassMatcher/beSubclassOfClass:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeMemberOfClassMatcher.h</DeclaredIn>
+			<DeclaredIn>KWBeSubclassOfClassMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)beMemberOfClass:(Class)aClass</Declaration>
+			<Declaration>- (void)beSubclassOfClass:(Class)aClass</Declaration>
 			
 			
-			<Anchor>//api/name/beMemberOfClass:</Anchor>
+			<Anchor>//api/name/beSubclassOfClass:</Anchor>
             <NodeRef refid="31"/>
 		</Token>
 		

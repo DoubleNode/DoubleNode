@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWProbePoller.html">
+	<File path="Classes/KWRaiseMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWProbePoller</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWRaiseMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWProbePoller.h</DeclaredIn>
+			<DeclaredIn>KWRaiseMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="74"/>
@@ -13,26 +13,50 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWProbePoller/initWithTimeout:delay:shouldWait:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRaiseMatcher/raiseWhenSent:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWProbePoller.h</DeclaredIn>
+			<DeclaredIn>KWRaiseMatcher.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithTimeout:(NSTimeInterval)theTimeout delay:(NSTimeInterval)theDelay shouldWait:(BOOL)wait</Declaration>
+			<Declaration>- (void)raiseWhenSent:(SEL)aSelector</Declaration>
 			
 			
-			<Anchor>//api/name/initWithTimeout:delay:shouldWait:</Anchor>
+			<Anchor>//api/name/raiseWhenSent:</Anchor>
             <NodeRef refid="74"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWProbePoller/check:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRaiseMatcher/raiseWithName:whenSent:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWProbePoller.h</DeclaredIn>
+			<DeclaredIn>KWRaiseMatcher.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)check:(id&lt;KWProbe&gt;)probe</Declaration>
+			<Declaration>- (void)raiseWithName:(NSString *)aName whenSent:(SEL)aSelector</Declaration>
 			
 			
-			<Anchor>//api/name/check:</Anchor>
+			<Anchor>//api/name/raiseWithName:whenSent:</Anchor>
+            <NodeRef refid="74"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRaiseMatcher/raiseWithReason:whenSent:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWRaiseMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)raiseWithReason:(NSString *)aReason whenSent:(SEL)aSelector</Declaration>
+			
+			
+			<Anchor>//api/name/raiseWithReason:whenSent:</Anchor>
+            <NodeRef refid="74"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRaiseMatcher/raiseWithName:reason:whenSent:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWRaiseMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)raiseWithName:(NSString *)aName reason:(NSString *)aReason whenSent:(SEL)aSelector</Declaration>
+			
+			
+			<Anchor>//api/name/raiseWithName:reason:whenSent:</Anchor>
             <NodeRef refid="74"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/name.html">
+	<File path="Categories/NSArray+KiwiGenericMatchingAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/name</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSArray(KiwiGenericMatchingAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="87"/>
@@ -13,26 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/name/file</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSArray/containsObjectEqualToOrMatching:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
 			
-			<Declaration>+ (NSString *)file</Declaration>
+			<Declaration>- (BOOL)containsObjectEqualToOrMatching:(id)object</Declaration>
 			
 			
-			<Anchor>//api/name/file</Anchor>
+			<Anchor>//api/name/containsObjectEqualToOrMatching:</Anchor>
             <NodeRef refid="87"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/name/buildExampleGroups</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSArray/containsObjectMatching:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KiwiMacros.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
 			
-			<Declaration>+ (void)buildExampleGroups</Declaration>
+			<Declaration>- (BOOL)containsObjectMatching:(id)matcher</Declaration>
 			
 			
-			<Anchor>//api/name/buildExampleGroups</Anchor>
+			<Anchor>//api/name/containsObjectMatching:</Anchor>
             <NodeRef refid="87"/>
 		</Token>
 		

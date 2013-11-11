@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWExampleDelegate.html">
+	<File path="Protocols/KWExampleNode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWExampleDelegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWExampleNode</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleDelegate.h</DeclaredIn>
+			<DeclaredIn>KWExampleNode.h</DeclaredIn>
             
 			
 			<NodeRef refid="117"/>
@@ -13,14 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWExampleDelegate/example:didFailWithFailure:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWExampleNode/acceptExampleNodeVisitor:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleDelegate.h</DeclaredIn>
+			<DeclaredIn>KWExampleNode.h</DeclaredIn>
 			
-			<Declaration>- (void)example:(KWExample *)example didFailWithFailure:(KWFailure *)failure</Declaration>
+			<Declaration>- (void)acceptExampleNodeVisitor:(id&lt;KWExampleNodeVisitor&gt;)aVisitor</Declaration>
 			
 			
-			<Anchor>//api/name/example:didFailWithFailure:</Anchor>
+			<Anchor>//api/name/acceptExampleNodeVisitor:</Anchor>
+            <NodeRef refid="117"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWExampleNode/contextStack</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWExampleNode.h</DeclaredIn>
+			
+			<Declaration>- (NSArray *)contextStack</Declaration>
+			
+			
+			<Anchor>//api/name/contextStack</Anchor>
             <NodeRef refid="117"/>
 		</Token>
 		

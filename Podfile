@@ -12,4 +12,3 @@ end
 pod 'ColorUtils', :git => "git@github.com:ehlersd/ColorUtils.git"
 
 pod 'NSLogger'
-pod 'BSKeyboardControls'

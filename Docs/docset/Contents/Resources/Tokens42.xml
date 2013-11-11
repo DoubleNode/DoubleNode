@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWCaptureSpy.html">
+	<File path="Classes/KWChangeMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWCaptureSpy</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWChangeMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
+			<DeclaredIn>KWChangeMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="42"/>
@@ -13,50 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWCaptureSpy/setArgument:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWChangeMatcher/change:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
+			<DeclaredIn>KWChangeMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong, readonly) id argument</Declaration>
+			<Declaration>- (void)change:(KWChangeMatcherCountBlock)countBlock</Declaration>
 			
 			
-			<Anchor>//api/name/argument</Anchor>
+			<Anchor>//api/name/change:</Anchor>
             <NodeRef refid="42"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWCaptureSpy/argument</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWChangeMatcher/change:by:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
+			<DeclaredIn>KWChangeMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong, readonly) id argument</Declaration>
-			
-			
-			<Anchor>//api/name/argument</Anchor>
-            <NodeRef refid="42"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWCaptureSpy/argument</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong, readonly) id argument</Declaration>
+			<Declaration>- (void)change:(KWChangeMatcherCountBlock)countBlock by:(NSInteger)expectedDifference</Declaration>
 			
 			
-			<Anchor>//api/name/argument</Anchor>
-            <NodeRef refid="42"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWCaptureSpy/initWithArgumentIndex:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCaptureSpy.h</DeclaredIn>
-			
-			<Declaration>- (id)initWithArgumentIndex:(NSUInteger)index</Declaration>
-			
-			
-			<Anchor>//api/name/initWithArgumentIndex:</Anchor>
+			<Anchor>//api/name/change:by:</Anchor>
             <NodeRef refid="42"/>
 		</Token>
 		

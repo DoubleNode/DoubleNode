@@ -41,13 +41,11 @@
 	
 	<option value="instance_methods">Instance Methods</option>
 	
-	<option value="//api/name/changeFromCurrentState:toNewState:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- changeFromCurrentState:toNewState:animated:</option>
+	<option value="//api/name/changeFromCurrentState:toNewState:animated:completion:">&nbsp;&nbsp;&nbsp;&nbsp;- changeFromCurrentState:toNewState:animated:completion:</option>
 	
 	<option value="//api/name/changeToViewState:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- changeToViewState:animated:</option>
 	
-	<option value="//api/name/performViewStateSelector:animated:">&nbsp;&nbsp;&nbsp;&nbsp;- performViewStateSelector:animated:</option>
-	
-	<option value="//api/name/viewStateToCode:">&nbsp;&nbsp;&nbsp;&nbsp;- viewStateToCode:</option>
+	<option value="//api/name/performViewStateSelector:options:">&nbsp;&nbsp;&nbsp;&nbsp;- performViewStateSelector:options:</option>
 	
 	
 	
@@ -75,13 +73,11 @@
 
 <li role="treeitem" class="children"><span class="disclosure"></span><span class="sectionName"><a href="#instance_methods">Instance Methods</a></span><ul>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/changeFromCurrentState:toNewState:animated:">changeFromCurrentState:toNewState:animated:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/changeFromCurrentState:toNewState:animated:completion:">changeFromCurrentState:toNewState:animated:completion:</a></span></li>
 	
 	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/changeToViewState:animated:">changeToViewState:animated:</a></span></li>
 	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/performViewStateSelector:animated:">performViewStateSelector:animated:</a></span></li>
-	
-	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/viewStateToCode:">viewStateToCode:</a></span></li>
+	<li><span class="nodisclosure"></span><span class="sectionName"><a href="#//api/name/performViewStateSelector:options:">performViewStateSelector:options:</a></span></li>
 	
 </ul></li>
 
@@ -130,25 +126,19 @@
 						<ul class="task-list">
 							<li>
 	<span class="tooltip">
-		<code><a href="#//api/name/viewStateToCode:">&ndash;&nbsp;viewStateToCode:</a></code>
-	</span>
-	
-	
-</li><li>
-	<span class="tooltip">
 		<code><a href="#//api/name/changeToViewState:animated:">&ndash;&nbsp;changeToViewState:animated:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/changeFromCurrentState:toNewState:animated:">&ndash;&nbsp;changeFromCurrentState:toNewState:animated:</a></code>
+		<code><a href="#//api/name/changeFromCurrentState:toNewState:animated:completion:">&ndash;&nbsp;changeFromCurrentState:toNewState:animated:completion:</a></code>
 	</span>
 	
 	
 </li><li>
 	<span class="tooltip">
-		<code><a href="#//api/name/performViewStateSelector:animated:">&ndash;&nbsp;performViewStateSelector:animated:</a></code>
+		<code><a href="#//api/name/performViewStateSelector:options:">&ndash;&nbsp;performViewStateSelector:options:</a></code>
 	</span>
 	
 	
@@ -170,12 +160,12 @@
 						<h2 class="subtitle subtitle-methods">Instance Methods</h2>
 						
 						<div class="section-method">
-	<a name="//api/name/changeFromCurrentState:toNewState:animated:" title="changeFromCurrentState:toNewState:animated:"></a>
-	<h3 class="subsubtitle method-title">changeFromCurrentState:toNewState:animated:</h3>
+	<a name="//api/name/changeFromCurrentState:toNewState:animated:completion:" title="changeFromCurrentState:toNewState:animated:completion:"></a>
+	<h3 class="subsubtitle method-title">changeFromCurrentState:toNewState:animated:completion:</h3>
 	
 	
 
-	<div class="method-subsection method-declaration"><code>- (void)changeFromCurrentState:(NSString *)<em>currentState</em> toNewState:(NSString *)<em>newState</em> animated:(BOOL)<em>animated</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)changeFromCurrentState:(NSString *)<em>currentState</em> toNewState:(NSString *)<em>newState</em> animated:(BOOL)<em>animated</em> completion:(void ( ^ ) ( BOOL finished ))<em>completion</em></code></div>
 
     
 </div>
@@ -186,29 +176,18 @@
 	
 	
 
-	<div class="method-subsection method-declaration"><code>- (void)changeToViewState:(DNViewState)<em>newViewState</em> animated:(BOOL)<em>animated</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)changeToViewState:(NSString *)<em>newViewState</em> animated:(BOOL)<em>animated</em></code></div>
 
     
 </div>
 						
 						<div class="section-method">
-	<a name="//api/name/performViewStateSelector:animated:" title="performViewStateSelector:animated:"></a>
-	<h3 class="subsubtitle method-title">performViewStateSelector:animated:</h3>
+	<a name="//api/name/performViewStateSelector:options:" title="performViewStateSelector:options:"></a>
+	<h3 class="subsubtitle method-title">performViewStateSelector:options:</h3>
 	
 	
 
-	<div class="method-subsection method-declaration"><code>- (void)performViewStateSelector:(SEL)<em>aSelector</em> animated:(BOOL)<em>animated</em></code></div>
-
-    
-</div>
-						
-						<div class="section-method">
-	<a name="//api/name/viewStateToCode:" title="viewStateToCode:"></a>
-	<h3 class="subsubtitle method-title">viewStateToCode:</h3>
-	
-	
-
-	<div class="method-subsection method-declaration"><code>- (NSString *)viewStateToCode:(DNViewState)<em>viewState</em></code></div>
+	<div class="method-subsection method-declaration"><code>- (void)performViewStateSelector:(SEL)<em>aSelector</em> options:(DNStateOptions *)<em>options</em></code></div>
 
     
 </div>

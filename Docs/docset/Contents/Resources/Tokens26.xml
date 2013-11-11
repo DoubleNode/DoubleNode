@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWAsyncVerifier.html">
+	<File path="Classes/KWBeBetweenMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWAsyncVerifier</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBeBetweenMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			<DeclaredIn>KWBeBetweenMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="26"/>
@@ -13,98 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/setTimeout:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeBetweenMatcher/beBetween:and:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			<DeclaredIn>KWBeBetweenMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) NSTimeInterval timeout</Declaration>
+			<Declaration>- (void)beBetween:(id)aLowerEndpoint and:(id)anUpperEndpoint</Declaration>
 			
 			
-			<Anchor>//api/name/timeout</Anchor>
+			<Anchor>//api/name/beBetween:and:</Anchor>
             <NodeRef refid="26"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/timeout</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeBetweenMatcher/beInTheIntervalFrom:to:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			<DeclaredIn>KWBeBetweenMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) NSTimeInterval timeout</Declaration>
-			
-			
-			<Anchor>//api/name/timeout</Anchor>
-            <NodeRef refid="26"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWAsyncVerifier/timeout</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) NSTimeInterval timeout</Declaration>
+			<Declaration>- (void)beInTheIntervalFrom:(id)aLowerEndpoint to:(id)anUpperEndpoint</Declaration>
 			
 			
-			<Anchor>//api/name/timeout</Anchor>
-            <NodeRef refid="26"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/setShouldWait:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) BOOL shouldWait</Declaration>
-			
-			
-			<Anchor>//api/name/shouldWait</Anchor>
-            <NodeRef refid="26"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/shouldWait</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) BOOL shouldWait</Declaration>
-			
-			
-			<Anchor>//api/name/shouldWait</Anchor>
-            <NodeRef refid="26"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWAsyncVerifier/shouldWait</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, assign) BOOL shouldWait</Declaration>
-			
-			
-			<Anchor>//api/name/shouldWait</Anchor>
-            <NodeRef refid="26"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWAsyncVerifier/asyncVerifierWithExpectationType:callSite:matcherFactory:reporter:probeTimeout:shouldWait:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
-			
-			<Declaration>+ (id)asyncVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite matcherFactory:(KWMatcherFactory *)aMatcherFactory reporter:(id&lt;KWReporting&gt;)aReporter probeTimeout:(NSTimeInterval)probeTimeout shouldWait:(BOOL)shouldWait</Declaration>
-			
-			
-			<Anchor>//api/name/asyncVerifierWithExpectationType:callSite:matcherFactory:reporter:probeTimeout:shouldWait:</Anchor>
-            <NodeRef refid="26"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/verifyWithProbe:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
-			
-			<Declaration>- (void)verifyWithProbe:(KWAsyncMatcherProbe *)aProbe</Declaration>
-			
-			
-			<Anchor>//api/name/verifyWithProbe:</Anchor>
+			<Anchor>//api/name/beInTheIntervalFrom:to:</Anchor>
             <NodeRef refid="26"/>
 		</Token>
 		

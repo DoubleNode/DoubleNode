@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSString+HTML.html">
+	<File path="Categories/NSString+KWShellCommand.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSString(HTML)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSString(KWShellCommand)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSString+HTML.h</DeclaredIn>
+			<DeclaredIn>KWSymbolicator.h</DeclaredIn>
             
 			
 			<NodeRef refid="105"/>
@@ -13,14 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSString/stringByDecodingXMLEntities</TokenIdentifier>
-			<Abstract type="html">Creates and returns a new NSString object initialized with the source string, with XML entities replaced with their decoded values.  Current support includes: &amp;amp;amp;, &amp;amp;nbsp;, &amp;amp;apos;, &amp;amp;quot;, &amp;amp;lt;, &amp;amp;gt; and most numeric character representations.</Abstract>
-			<DeclaredIn>NSString+HTML.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NSString/stringWithShellCommand:arguments:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWSymbolicator.h</DeclaredIn>
 			
-			<Declaration>- (NSString *)stringByDecodingXMLEntities</Declaration>
+			<Declaration>+ (NSString *)stringWithShellCommand:(NSString *)command arguments:(NSArray *)arguments</Declaration>
 			
-			<ReturnValue><Abstract type="html">A new NSString object, initialized with the source string, with XML entities replaced with their decoded values.</Abstract></ReturnValue>
-			<Anchor>//api/name/stringByDecodingXMLEntities</Anchor>
+			
+			<Anchor>//api/name/stringWithShellCommand:arguments:</Anchor>
             <NodeRef refid="105"/>
 		</Token>
 		

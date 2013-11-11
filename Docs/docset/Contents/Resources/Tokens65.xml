@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWMatcher.html">
+	<File path="Classes/KWMatcherFactory.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWMatcherFactory</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
             
 			
 			<NodeRef refid="65"/>
@@ -13,122 +13,98 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/initWithSubject:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/init</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithSubject:(id)anObject</Declaration>
+			<Declaration>- (id)init</Declaration>
 			
 			
-			<Anchor>//api/name/initWithSubject:</Anchor>
+			<Anchor>//api/name/init</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWMatcher/matcherWithSubject:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/setRegisteredMatcherClasses:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
 			
-			<Declaration>+ (id)matcherWithSubject:(id)anObject</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSArray *registeredMatcherClasses</Declaration>
 			
 			
-			<Anchor>//api/name/matcherWithSubject:</Anchor>
+			<Anchor>//api/name/registeredMatcherClasses</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/setSubject:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/registeredMatcherClasses</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) id subject</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSArray *registeredMatcherClasses</Declaration>
 			
 			
-			<Anchor>//api/name/subject</Anchor>
+			<Anchor>//api/name/registeredMatcherClasses</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/subject</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMatcherFactory/registeredMatcherClasses</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) id subject</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSArray *registeredMatcherClasses</Declaration>
 			
 			
-			<Anchor>//api/name/subject</Anchor>
+			<Anchor>//api/name/registeredMatcherClasses</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWMatcher/subject</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/registerMatcherClass:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, strong) id subject</Declaration>
+			<Declaration>- (void)registerMatcherClass:(Class)aClass</Declaration>
 			
 			
-			<Anchor>//api/name/subject</Anchor>
+			<Anchor>//api/name/registerMatcherClass:</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWMatcher/matcherStrings</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/registerMatcherClassesWithNamespacePrefix:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
 			
-			<Declaration>+ (NSArray *)matcherStrings</Declaration>
+			<Declaration>- (void)registerMatcherClassesWithNamespacePrefix:(NSString *)aNamespacePrefix</Declaration>
 			
 			
-			<Anchor>//api/name/matcherStrings</Anchor>
+			<Anchor>//api/name/registerMatcherClassesWithNamespacePrefix:</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWMatcher/canMatchSubject:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/methodSignatureForMatcherSelector:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
 			
-			<Declaration>+ (BOOL)canMatchSubject:(id)anObject</Declaration>
+			<Declaration>- (NSMethodSignature *)methodSignatureForMatcherSelector:(SEL)aSelector</Declaration>
 			
 			
-			<Anchor>//api/name/canMatchSubject:</Anchor>
+			<Anchor>//api/name/methodSignatureForMatcherSelector:</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/evaluate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/matcherFromInvocation:subject:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
+			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)evaluate</Declaration>
-			
-			
-			<Anchor>//api/name/evaluate</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/failureMessageForShould</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
-			
-			<Declaration>- (NSString *)failureMessageForShould</Declaration>
+			<Declaration>- (KWMatcher *)matcherFromInvocation:(NSInvocation *)anInvocation subject:(id)subject</Declaration>
 			
 			
-			<Anchor>//api/name/failureMessageForShould</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/failureMessageForShouldNot</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcher.h</DeclaredIn>
-			
-			<Declaration>- (NSString *)failureMessageForShouldNot</Declaration>
-			
-			
-			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
+			<Anchor>//api/name/matcherFromInvocation:subject:</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		

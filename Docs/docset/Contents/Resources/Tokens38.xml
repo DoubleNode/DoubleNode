@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWBlock.html">
+	<File path="Classes/KWBlockNode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWBlock</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBlockNode</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBlock.h</DeclaredIn>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
             
 			
 			<NodeRef refid="38"/>
@@ -13,38 +13,134 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBlock/initWithBlock:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlockNode/initWithCallSite:description:block:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBlock.h</DeclaredIn>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithBlock:(void ( ^ ) ( void ))block</Declaration>
+			<Declaration>- (id)initWithCallSite:(KWCallSite *)aCallSite description:(NSString *)aDescription block:(void ( ^ ) ( void ))block</Declaration>
 			
 			
-			<Anchor>//api/name/initWithBlock:</Anchor>
+			<Anchor>//api/name/initWithCallSite:description:block:</Anchor>
             <NodeRef refid="38"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWBlock/blockWithBlock:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlockNode/setCallSite:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBlock.h</DeclaredIn>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
 			
-			<Declaration>+ (id)blockWithBlock:(void ( ^ ) ( void ))block</Declaration>
+			<Declaration>@property (nonatomic, strong, readonly) KWCallSite *callSite</Declaration>
 			
 			
-			<Anchor>//api/name/blockWithBlock:</Anchor>
+			<Anchor>//api/name/callSite</Anchor>
             <NodeRef refid="38"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBlock/call</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlockNode/callSite</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBlock.h</DeclaredIn>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
 			
-			<Declaration>- (void)call</Declaration>
+			<Declaration>@property (nonatomic, strong, readonly) KWCallSite *callSite</Declaration>
 			
 			
-			<Anchor>//api/name/call</Anchor>
+			<Anchor>//api/name/callSite</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWBlockNode/callSite</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) KWCallSite *callSite</Declaration>
+			
+			
+			<Anchor>//api/name/callSite</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlockNode/setDescription:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *description</Declaration>
+			
+			
+			<Anchor>//api/name/description</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlockNode/description</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *description</Declaration>
+			
+			
+			<Anchor>//api/name/description</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWBlockNode/description</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy) NSString *description</Declaration>
+			
+			
+			<Anchor>//api/name/description</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlockNode/setBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, readonly) void ( ^ ) ( void ) block</Declaration>
+			
+			
+			<Anchor>//api/name/block</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlockNode/block</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, readonly) void ( ^ ) ( void ) block</Declaration>
+			
+			
+			<Anchor>//api/name/block</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWBlockNode/block</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, copy, readonly) void ( ^ ) ( void ) block</Declaration>
+			
+			
+			<Anchor>//api/name/block</Anchor>
+            <NodeRef refid="38"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBlockNode/performBlock</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBlockNode.h</DeclaredIn>
+			
+			<Declaration>- (void)performBlock</Declaration>
+			
+			
+			<Anchor>//api/name/performBlock</Anchor>
             <NodeRef refid="38"/>
 		</Token>
 		

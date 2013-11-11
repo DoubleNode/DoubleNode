@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWPendingNode.html">
+	<File path="Classes/KWProbePoller.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWPendingNode</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWProbePoller</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
+			<DeclaredIn>KWProbePoller.h</DeclaredIn>
             
 			
 			<NodeRef refid="73"/>
@@ -13,134 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/setContext:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWProbePoller/initWithTimeout:delay:shouldWait:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
+			<DeclaredIn>KWProbePoller.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, strong) KWContextNode *context</Declaration>
+			<Declaration>- (id)initWithTimeout:(NSTimeInterval)theTimeout delay:(NSTimeInterval)theDelay shouldWait:(BOOL)wait</Declaration>
 			
 			
-			<Anchor>//api/name/context</Anchor>
+			<Anchor>//api/name/initWithTimeout:delay:shouldWait:</Anchor>
             <NodeRef refid="73"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/context</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWProbePoller/check:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
+			<DeclaredIn>KWProbePoller.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly, strong) KWContextNode *context</Declaration>
-			
-			
-			<Anchor>//api/name/context</Anchor>
-            <NodeRef refid="73"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWPendingNode/context</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly, strong) KWContextNode *context</Declaration>
+			<Declaration>- (BOOL)check:(id&lt;KWProbe&gt;)probe</Declaration>
 			
 			
-			<Anchor>//api/name/context</Anchor>
-            <NodeRef refid="73"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/initWithCallSite:context:description:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
-			
-			<Declaration>- (id)initWithCallSite:(KWCallSite *)aCallSite context:(KWContextNode *)context description:(NSString *)aDescription</Declaration>
-			
-			
-			<Anchor>//api/name/initWithCallSite:context:description:</Anchor>
-            <NodeRef refid="73"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWPendingNode/pendingNodeWithCallSite:context:description:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
-			
-			<Declaration>+ (id)pendingNodeWithCallSite:(KWCallSite *)aCallSite context:(KWContextNode *)context description:(NSString *)aDescription</Declaration>
-			
-			
-			<Anchor>//api/name/pendingNodeWithCallSite:context:description:</Anchor>
-            <NodeRef refid="73"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/setCallSite:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
-			
-			
-			<Anchor>//api/name/callSite</Anchor>
-            <NodeRef refid="73"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/callSite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
-			
-			
-			<Anchor>//api/name/callSite</Anchor>
-            <NodeRef refid="73"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWPendingNode/callSite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
-			
-			
-			<Anchor>//api/name/callSite</Anchor>
-            <NodeRef refid="73"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/setDescription:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSString *description</Declaration>
-			
-			
-			<Anchor>//api/name/description</Anchor>
-            <NodeRef refid="73"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/description</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSString *description</Declaration>
-			
-			
-			<Anchor>//api/name/description</Anchor>
-            <NodeRef refid="73"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWPendingNode/description</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWPendingNode.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSString *description</Declaration>
-			
-			
-			<Anchor>//api/name/description</Anchor>
+			<Anchor>//api/name/check:</Anchor>
             <NodeRef refid="73"/>
 		</Token>
 		

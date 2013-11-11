@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSObject+KiwiMockAdditions.html">
+	<File path="Categories/NSObject+KiwiSpyAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiMockAdditions)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiSpyAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
+			<DeclaredIn>NSObject+KiwiSpyAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="97"/>
@@ -13,50 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/mock</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/captureArgument:atIndex:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
+			<DeclaredIn>NSObject+KiwiSpyAdditions.h</DeclaredIn>
 			
-			<Declaration>+ (id)mock</Declaration>
+			<Declaration>- (KWCaptureSpy *)captureArgument:(SEL)selector atIndex:(NSUInteger)index</Declaration>
 			
 			
-			<Anchor>//api/name/mock</Anchor>
+			<Anchor>//api/name/captureArgument:atIndex:</Anchor>
             <NodeRef refid="97"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/mockWithName:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/captureArgument:atIndex:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
+			<DeclaredIn>NSObject+KiwiSpyAdditions.h</DeclaredIn>
 			
-			<Declaration>+ (id)mockWithName:(NSString *)aName</Declaration>
-			
-			
-			<Anchor>//api/name/mockWithName:</Anchor>
-            <NodeRef refid="97"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/nullMock</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
-			
-			<Declaration>+ (id)nullMock</Declaration>
+			<Declaration>+ (KWCaptureSpy *)captureArgument:(SEL)selector atIndex:(NSUInteger)index</Declaration>
 			
 			
-			<Anchor>//api/name/nullMock</Anchor>
-            <NodeRef refid="97"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/nullMockWithName:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiMockAdditions.h</DeclaredIn>
-			
-			<Declaration>+ (id)nullMockWithName:(NSString *)aName</Declaration>
-			
-			
-			<Anchor>//api/name/nullMockWithName:</Anchor>
+			<Anchor>//api/name/captureArgument:atIndex:</Anchor>
             <NodeRef refid="97"/>
 		</Token>
 		

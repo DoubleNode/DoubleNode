@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWStringContainsMatcher.html">
+	<File path="Classes/KWStringPrefixMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWStringContainsMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWStringPrefixMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
+			<DeclaredIn>KWStringPrefixMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="81"/>
@@ -13,38 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWStringContainsMatcher/matcherWithSubstring:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWStringPrefixMatcher/matcherWithPrefix:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
+			<DeclaredIn>KWStringPrefixMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)matcherWithSubstring:(NSString *)aSubstring</Declaration>
+			<Declaration>+ (id)matcherWithPrefix:(NSString *)aPrefix</Declaration>
 			
 			
-			<Anchor>//api/name/matcherWithSubstring:</Anchor>
+			<Anchor>//api/name/matcherWithPrefix:</Anchor>
             <NodeRef refid="81"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStringContainsMatcher/initWithSubstring:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWStringPrefixMatcher/initWithPrefix:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
+			<DeclaredIn>KWStringPrefixMatcher.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithSubstring:(NSString *)aSubstring</Declaration>
-			
-			
-			<Anchor>//api/name/initWithSubstring:</Anchor>
-            <NodeRef refid="81"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStringContainsMatcher/matches:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)matches:(id)object</Declaration>
+			<Declaration>- (id)initWithPrefix:(NSString *)aPrefix</Declaration>
 			
 			
-			<Anchor>//api/name/matches:</Anchor>
+			<Anchor>//api/name/initWithPrefix:</Anchor>
             <NodeRef refid="81"/>
 		</Token>
 		

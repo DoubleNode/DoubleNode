@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSInvocation+KWExampleGroup.html">
+	<File path="Categories/NSInvocation+KiwiAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSInvocation(KWExampleGroup)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSInvocation(KiwiAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuite.h</DeclaredIn>
+			<DeclaredIn>NSInvocation+KiwiAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="90"/>
@@ -13,26 +13,74 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSInvocation/kw_setExample:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSInvocation/invocationWithTarget:selector:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuite.h</DeclaredIn>
+			<DeclaredIn>NSInvocation+KiwiAdditions.h</DeclaredIn>
 			
-			<Declaration>- (void)kw_setExample:(KWExample *)exampleGroup</Declaration>
+			<Declaration>+ (NSInvocation *)invocationWithTarget:(id)anObject selector:(SEL)aSelector</Declaration>
 			
 			
-			<Anchor>//api/name/kw_setExample:</Anchor>
+			<Anchor>//api/name/invocationWithTarget:selector:</Anchor>
             <NodeRef refid="90"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSInvocation/kw_example</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSInvocation/invocationWithTarget:selector:messageArguments:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuite.h</DeclaredIn>
+			<DeclaredIn>NSInvocation+KiwiAdditions.h</DeclaredIn>
 			
-			<Declaration>- (KWExample *)kw_example</Declaration>
+			<Declaration>+ (NSInvocation *)invocationWithTarget:(id)anObject selector:(SEL)aSelector messageArguments:(const void *)firstBytes, ...</Declaration>
 			
 			
-			<Anchor>//api/name/kw_example</Anchor>
+			<Anchor>//api/name/invocationWithTarget:selector:messageArguments:</Anchor>
+            <NodeRef refid="90"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSInvocation/messageArgumentDataAtIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSInvocation+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>- (NSData *)messageArgumentDataAtIndex:(NSUInteger)anIndex</Declaration>
+			
+			
+			<Anchor>//api/name/messageArgumentDataAtIndex:</Anchor>
+            <NodeRef refid="90"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSInvocation/getMessageArgument:atIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSInvocation+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)getMessageArgument:(void *)buffer atIndex:(NSUInteger)anIndex</Declaration>
+			
+			
+			<Anchor>//api/name/getMessageArgument:atIndex:</Anchor>
+            <NodeRef refid="90"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSInvocation/setMessageArgument:atIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSInvocation+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)setMessageArgument:(const void *)bytes atIndex:(NSUInteger)anIndex</Declaration>
+			
+			
+			<Anchor>//api/name/setMessageArgument:atIndex:</Anchor>
+            <NodeRef refid="90"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSInvocation/setMessageArguments:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSInvocation+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)setMessageArguments:(const void *)firstBytes, ...</Declaration>
+			
+			
+			<Anchor>//api/name/setMessageArguments:</Anchor>
             <NodeRef refid="90"/>
 		</Token>
 		

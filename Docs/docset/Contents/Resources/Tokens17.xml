@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/DNStateViewController.html">
+	<File path="Classes/DNTextField.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/DNStateViewController</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/DNTextField</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateViewController.h</DeclaredIn>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
             
 			
 			<NodeRef refid="17"/>
@@ -13,50 +13,74 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/viewStateToCode:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNTextField/setVerticalPadding:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateViewController.h</DeclaredIn>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
 			
-			<Declaration>- (NSString *)viewStateToCode:(DNViewState)viewState</Declaration>
+			<Declaration>@property (nonatomic, assign) float verticalPadding</Declaration>
 			
 			
-			<Anchor>//api/name/viewStateToCode:</Anchor>
+			<Anchor>//api/name/verticalPadding</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/changeToViewState:animated:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNTextField/verticalPadding</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateViewController.h</DeclaredIn>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
 			
-			<Declaration>- (void)changeToViewState:(DNViewState)newViewState animated:(BOOL)animated</Declaration>
+			<Declaration>@property (nonatomic, assign) float verticalPadding</Declaration>
 			
 			
-			<Anchor>//api/name/changeToViewState:animated:</Anchor>
+			<Anchor>//api/name/verticalPadding</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/changeFromCurrentState:toNewState:animated:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/DNTextField/verticalPadding</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateViewController.h</DeclaredIn>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
 			
-			<Declaration>- (void)changeFromCurrentState:(NSString *)currentState toNewState:(NSString *)newState animated:(BOOL)animated</Declaration>
+			<Declaration>@property (nonatomic, assign) float verticalPadding</Declaration>
 			
 			
-			<Anchor>//api/name/changeFromCurrentState:toNewState:animated:</Anchor>
+			<Anchor>//api/name/verticalPadding</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/performViewStateSelector:animated:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNTextField/setHorizontalPadding:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNStateViewController.h</DeclaredIn>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
 			
-			<Declaration>- (void)performViewStateSelector:(SEL)aSelector animated:(BOOL)animated</Declaration>
+			<Declaration>@property (nonatomic, assign) float horizontalPadding</Declaration>
 			
 			
-			<Anchor>//api/name/performViewStateSelector:animated:</Anchor>
+			<Anchor>//api/name/horizontalPadding</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNTextField/horizontalPadding</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float horizontalPadding</Declaration>
+			
+			
+			<Anchor>//api/name/horizontalPadding</Anchor>
+            <NodeRef refid="17"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DNTextField/horizontalPadding</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float horizontalPadding</Declaration>
+			
+			
+			<Anchor>//api/name/horizontalPadding</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWConformToProtocolMatcher.html">
+	<File path="Classes/KWContainMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWConformToProtocolMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWContainMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWConformToProtocolMatcher.h</DeclaredIn>
+			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="44"/>
@@ -13,14 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWConformToProtocolMatcher/conformToProtocol:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWContainMatcher/contain:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWConformToProtocolMatcher.h</DeclaredIn>
+			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)conformToProtocol:(Protocol *)aProtocol</Declaration>
+			<Declaration>- (void)contain:(id)anObject</Declaration>
 			
 			
-			<Anchor>//api/name/conformToProtocol:</Anchor>
+			<Anchor>//api/name/contain:</Anchor>
+            <NodeRef refid="44"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWContainMatcher/containObjectsInArray:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)containObjectsInArray:(NSArray *)anArray</Declaration>
+			
+			
+			<Anchor>//api/name/containObjectsInArray:</Anchor>
             <NodeRef refid="44"/>
 		</Token>
 		

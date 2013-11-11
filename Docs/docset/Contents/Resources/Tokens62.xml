@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWInvocationCapturer.html">
+	<File path="Classes/KWItNode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWInvocationCapturer</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWItNode</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWItNode.h</DeclaredIn>
             
 			
 			<NodeRef refid="62"/>
@@ -13,122 +13,86 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/initWithDelegate:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWItNode/setExample:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWItNode.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithDelegate:(id)aDelegate</Declaration>
+			<Declaration>@property (nonatomic, strong) KWExample *example</Declaration>
 			
 			
-			<Anchor>//api/name/initWithDelegate:</Anchor>
+			<Anchor>//api/name/example</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/initWithDelegate:userInfo:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWItNode/example</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWItNode.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithDelegate:(id)aDelegate userInfo:(NSDictionary *)aUserInfo</Declaration>
+			<Declaration>@property (nonatomic, strong) KWExample *example</Declaration>
 			
 			
-			<Anchor>//api/name/initWithDelegate:userInfo:</Anchor>
+			<Anchor>//api/name/example</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWInvocationCapturer/invocationCapturerWithDelegate:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWItNode/example</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWItNode.h</DeclaredIn>
 			
-			<Declaration>+ (id)invocationCapturerWithDelegate:(id)aDelegate</Declaration>
+			<Declaration>@property (nonatomic, strong) KWExample *example</Declaration>
 			
 			
-			<Anchor>//api/name/invocationCapturerWithDelegate:</Anchor>
+			<Anchor>//api/name/example</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWInvocationCapturer/invocationCapturerWithDelegate:userInfo:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWItNode/setContext:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWItNode.h</DeclaredIn>
 			
-			<Declaration>+ (id)invocationCapturerWithDelegate:(id)aDelegate userInfo:(NSDictionary *)aUserInfo</Declaration>
+			<Declaration>@property (nonatomic, weak, readonly) KWContextNode *context</Declaration>
 			
 			
-			<Anchor>//api/name/invocationCapturerWithDelegate:userInfo:</Anchor>
+			<Anchor>//api/name/context</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/setDelegate:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWItNode/context</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWItNode.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak, readonly) id delegate</Declaration>
+			<Declaration>@property (nonatomic, weak, readonly) KWContextNode *context</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/context</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/delegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWItNode/context</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWItNode.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak, readonly) id delegate</Declaration>
+			<Declaration>@property (nonatomic, weak, readonly) KWContextNode *context</Declaration>
 			
 			
-			<Anchor>//api/name/delegate</Anchor>
+			<Anchor>//api/name/context</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWInvocationCapturer/delegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWItNode/itNodeWithCallSite:description:context:block:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWItNode.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak, readonly) id delegate</Declaration>
-			
-			
-			<Anchor>//api/name/delegate</Anchor>
-            <NodeRef refid="62"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/setUserInfo:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong, readonly) NSDictionary *userInfo</Declaration>
+			<Declaration>+ (id)itNodeWithCallSite:(KWCallSite *)aCallSite description:(NSString *)aDescription context:(KWContextNode *)context block:(void ( ^ ) ( void ))block</Declaration>
 			
 			
-			<Anchor>//api/name/userInfo</Anchor>
-            <NodeRef refid="62"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/userInfo</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong, readonly) NSDictionary *userInfo</Declaration>
-			
-			
-			<Anchor>//api/name/userInfo</Anchor>
-            <NodeRef refid="62"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWInvocationCapturer/userInfo</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong, readonly) NSDictionary *userInfo</Declaration>
-			
-			
-			<Anchor>//api/name/userInfo</Anchor>
+			<Anchor>//api/name/itNodeWithCallSite:description:context:block:</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		

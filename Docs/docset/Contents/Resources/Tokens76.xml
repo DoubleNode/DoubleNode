@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWReceiveMatcher.html">
+	<File path="Classes/KWRegisterMatchersNode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWReceiveMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWRegisterMatchersNode</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
             
 			
 			<NodeRef refid="76"/>
@@ -13,158 +13,98 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/setWillEvaluateMultipleTimes:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/initWithCallSite:namespacePrefix:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) BOOL willEvaluateMultipleTimes</Declaration>
+			<Declaration>- (id)initWithCallSite:(KWCallSite *)aCallSite namespacePrefix:(NSString *)aNamespacePrefix</Declaration>
 			
 			
-			<Anchor>//api/name/willEvaluateMultipleTimes</Anchor>
+			<Anchor>//api/name/initWithCallSite:namespacePrefix:</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/willEvaluateMultipleTimes</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWRegisterMatchersNode/registerMatchersNodeWithCallSite:namespacePrefix:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) BOOL willEvaluateMultipleTimes</Declaration>
+			<Declaration>+ (id)registerMatchersNodeWithCallSite:(KWCallSite *)aCallSite namespacePrefix:(NSString *)aNamespacePrefix</Declaration>
 			
 			
-			<Anchor>//api/name/willEvaluateMultipleTimes</Anchor>
+			<Anchor>//api/name/registerMatchersNodeWithCallSite:namespacePrefix:</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWReceiveMatcher/willEvaluateMultipleTimes</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/setCallSite:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) BOOL willEvaluateMultipleTimes</Declaration>
+			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
 			
 			
-			<Anchor>//api/name/willEvaluateMultipleTimes</Anchor>
+			<Anchor>//api/name/callSite</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/callSite</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>- (void)receive:(SEL)aSelector</Declaration>
+			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
 			
 			
-			<Anchor>//api/name/receive:</Anchor>
+			<Anchor>//api/name/callSite</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:withCount:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWRegisterMatchersNode/callSite</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>- (void)receive:(SEL)aSelector withCount:(NSUInteger)aCount</Declaration>
+			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
 			
 			
-			<Anchor>//api/name/receive:withCount:</Anchor>
+			<Anchor>//api/name/callSite</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:withCountAtLeast:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/setNamespacePrefix:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>- (void)receive:(SEL)aSelector withCountAtLeast:(NSUInteger)aCount</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSString *namespacePrefix</Declaration>
 			
 			
-			<Anchor>//api/name/receive:withCountAtLeast:</Anchor>
+			<Anchor>//api/name/namespacePrefix</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:withCountAtMost:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/namespacePrefix</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>- (void)receive:(SEL)aSelector withCountAtMost:(NSUInteger)aCount</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSString *namespacePrefix</Declaration>
 			
 			
-			<Anchor>//api/name/receive:withCountAtMost:</Anchor>
+			<Anchor>//api/name/namespacePrefix</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:andReturn:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWRegisterMatchersNode/namespacePrefix</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>- (void)receive:(SEL)aSelector andReturn:(id)aValue</Declaration>
-			
-			
-			<Anchor>//api/name/receive:andReturn:</Anchor>
-            <NodeRef refid="76"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:andReturn:withCount:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)receive:(SEL)aSelector andReturn:(id)aValue withCount:(NSUInteger)aCount</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSString *namespacePrefix</Declaration>
 			
 			
-			<Anchor>//api/name/receive:andReturn:withCount:</Anchor>
-            <NodeRef refid="76"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:andReturn:withCountAtLeast:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)receive:(SEL)aSelector andReturn:(id)aValue withCountAtLeast:(NSUInteger)aCount</Declaration>
-			
-			
-			<Anchor>//api/name/receive:andReturn:withCountAtLeast:</Anchor>
-            <NodeRef refid="76"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:andReturn:withCountAtMost:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)receive:(SEL)aSelector andReturn:(id)aValue withCountAtMost:(NSUInteger)aCount</Declaration>
-			
-			
-			<Anchor>//api/name/receive:andReturn:withCountAtMost:</Anchor>
-            <NodeRef refid="76"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receiveMessagePattern:countType:count:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)receiveMessagePattern:(KWMessagePattern *)aMessagePattern countType:(KWCountType)aCountType count:(NSUInteger)aCount</Declaration>
-			
-			
-			<Anchor>//api/name/receiveMessagePattern:countType:count:</Anchor>
-            <NodeRef refid="76"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receiveMessagePattern:andReturn:countType:count:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)receiveMessagePattern:(KWMessagePattern *)aMessagePattern andReturn:(id)aValue countType:(KWCountType)aCountType count:(NSUInteger)aCount</Declaration>
-			
-			
-			<Anchor>//api/name/receiveMessagePattern:andReturn:countType:count:</Anchor>
+			<Anchor>//api/name/namespacePrefix</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		

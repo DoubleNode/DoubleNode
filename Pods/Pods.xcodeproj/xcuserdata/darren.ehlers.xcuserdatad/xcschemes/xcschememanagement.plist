@@ -4,11 +4,6 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-BSKeyboardControls.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Pods-ColorUtils.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>171D3A40CD88470AA410A238</key>
+		<key>0FE7C3D7F9D346E1A6C26427</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>33268B8BBCC540E5BD837A69</key>
+		<key>4953A75439A144F5B240E4E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4A16386703B64C3CB098B012</key>
+		<key>6D6D3DFCA4C04F788D392D52</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B546D4AA288F422F81B20282</key>
+		<key>9AFB329281114AE7905A6AFA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E56B86CD2D134A1CB758983F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EA4064910BD34CE5B52AC70D</key>
+		<key>D6668242DC234999AFA4819E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
