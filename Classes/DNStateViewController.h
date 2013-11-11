@@ -10,16 +10,12 @@
 
 #import "DNStateOptions.h"
 
-typedef NSInteger DNViewState;
-
 @interface DNStateViewController : UIViewController
 {
-    DNViewState     currentViewState;
+    NSString*   currentViewState;
 }
 
-- (NSString*)viewStateToCode:(DNViewState)viewState;
-
-- (void)changeToViewState:(DNViewState)newViewState
+- (void)changeToViewState:(NSString*)newViewState
                  animated:(BOOL)animated;
 
 - (void)changeFromCurrentState:(NSString*)currentState

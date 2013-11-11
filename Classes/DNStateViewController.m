@@ -14,21 +14,16 @@
 
 @implementation DNStateViewController
 
-- (NSString*)viewStateToCode:(DNViewState)viewState
-{
-    return nil;
-}
-
-- (void)changeToViewState:(DNViewState)newViewState
+- (void)changeToViewState:(NSString*)newViewState
                  animated:(BOOL)animated
 {
-    if (newViewState == currentViewState)
+    if ([newViewState isEqualToString:currentViewState] == YES)
     {
         return;
     }
 
-    [self changeFromCurrentState:[self viewStateToCode:currentViewState]
-                      toNewState:[self viewStateToCode:newViewState]
+    [self changeFromCurrentState:currentViewState
+                      toNewState:newViewState
                         animated:animated
                       completion:^(BOOL finished)
      {
