@@ -1,4 +1,5 @@
 PODS:
+  - BSKeyboardControls (2.0)
   - ColorUtils (1.0.3)
   - Kiwi/ARC (2.2.3)
   - Kiwi/NonARC (2.2.3)
@@ -8,6 +9,7 @@ PODS:
   - NSLogger (1.1)
 
 DEPENDENCIES:
+  - BSKeyboardControls
   - ColorUtils (from `git@github.com:ehlersd/ColorUtils.git`)
   - Kiwi/XCTest
   - NSLogger
@@ -17,6 +19,7 @@ EXTERNAL SOURCES:
     :git: git@github.com:ehlersd/ColorUtils.git
 
 SPEC CHECKSUMS:
+  BSKeyboardControls: b24def9d769f0990d228abb4e525492cb68a2189
   ColorUtils: 05f7e6990b95f342acf693ac598af49b74b052a4
   Kiwi: 04c51e880831d291748ec702d42c4101f7eb95c9
   NSLogger: 4567fef08d0db18a89cce91b2053823fc0950738

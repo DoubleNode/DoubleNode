@@ -6,6 +6,12 @@
 // project.
 
 
+// BSKeyboardControls
+#define COCOAPODS_POD_AVAILABLE_BSKeyboardControls
+#define COCOAPODS_VERSION_MAJOR_BSKeyboardControls 2
+#define COCOAPODS_VERSION_MINOR_BSKeyboardControls 0
+#define COCOAPODS_VERSION_PATCH_BSKeyboardControls 0
+
 // ColorUtils
 #define COCOAPODS_POD_AVAILABLE_ColorUtils
 #define COCOAPODS_VERSION_MAJOR_ColorUtils 1

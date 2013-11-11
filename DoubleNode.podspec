@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.2.3"
+  s.version      = "0.2.4"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
@@ -103,6 +103,7 @@ Pod::Spec.new do |s|
   #
   # s.dependency 'JSONKit', '~> 1.4'
   s.dependency 'NSLogger'
+  s.dependency 'BSKeyboardControls'
   
   # This creates a new Pod::Specification instance, which has the the following attributes:
   # * part_of:  'RestKit', '0.9.3'
