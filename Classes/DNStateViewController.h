@@ -20,9 +20,10 @@
 
 - (void)changeFromCurrentState:(NSString*)currentState
                     toNewState:(NSString*)newState
-                      animated:(BOOL)animated;
+                      animated:(BOOL)animated
+                    completion:(void(^)(BOOL finished))completion;
 
 - (void)performViewStateSelector:(SEL)aSelector
-                        animated:(BOOL)animated;
+                         options:(DNStateOptions*)options;
 
 @end
