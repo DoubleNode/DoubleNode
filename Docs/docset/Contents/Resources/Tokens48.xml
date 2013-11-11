@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWExampleSuiteBuilder.html">
+	<File path="Classes/KWDeviceInfo.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWExampleSuiteBuilder</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWDeviceInfo</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
+			<DeclaredIn>KWDeviceInfo.h</DeclaredIn>
             
 			
 			<NodeRef refid="48"/>
@@ -13,314 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWExampleSuiteBuilder/sharedExampleSuiteBuilder</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWDeviceInfo/isSimulator</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
+			<DeclaredIn>KWDeviceInfo.h</DeclaredIn>
 			
-			<Declaration>+ (id)sharedExampleSuiteBuilder</Declaration>
+			<Declaration>+ (BOOL)isSimulator</Declaration>
 			
 			
-			<Anchor>//api/name/sharedExampleSuiteBuilder</Anchor>
+			<Anchor>//api/name/isSimulator</Anchor>
             <NodeRef refid="48"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/setIsBuildingExampleSuite:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWDeviceInfo/isPhysical</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
+			<DeclaredIn>KWDeviceInfo.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) BOOL isBuildingExampleSuite</Declaration>
+			<Declaration>+ (BOOL)isPhysical</Declaration>
 			
 			
-			<Anchor>//api/name/isBuildingExampleSuite</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/isBuildingExampleSuite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) BOOL isBuildingExampleSuite</Declaration>
-			
-			
-			<Anchor>//api/name/isBuildingExampleSuite</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWExampleSuiteBuilder/isBuildingExampleSuite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) BOOL isBuildingExampleSuite</Declaration>
-			
-			
-			<Anchor>//api/name/isBuildingExampleSuite</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/setCurrentExampleSuite:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong, readonly) KWExampleSuite *currentExampleSuite</Declaration>
-			
-			
-			<Anchor>//api/name/currentExampleSuite</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/currentExampleSuite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong, readonly) KWExampleSuite *currentExampleSuite</Declaration>
-			
-			
-			<Anchor>//api/name/currentExampleSuite</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWExampleSuiteBuilder/currentExampleSuite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong, readonly) KWExampleSuite *currentExampleSuite</Declaration>
-			
-			
-			<Anchor>//api/name/currentExampleSuite</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/setCurrentExample:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) KWExample *currentExample</Declaration>
-			
-			
-			<Anchor>//api/name/currentExample</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/currentExample</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) KWExample *currentExample</Declaration>
-			
-			
-			<Anchor>//api/name/currentExample</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWExampleSuiteBuilder/currentExample</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) KWExample *currentExample</Declaration>
-			
-			
-			<Anchor>//api/name/currentExample</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/setFocusedCallSite:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) KWCallSite *focusedCallSite</Declaration>
-			
-			
-			<Anchor>//api/name/focusedCallSite</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/focusedCallSite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) KWCallSite *focusedCallSite</Declaration>
-			
-			
-			<Anchor>//api/name/focusedCallSite</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWExampleSuiteBuilder/focusedCallSite</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, strong) KWCallSite *focusedCallSite</Declaration>
-			
-			
-			<Anchor>//api/name/focusedCallSite</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/focusWithURI:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)focusWithURI:(NSString *)nodeUrl</Declaration>
-			
-			
-			<Anchor>//api/name/focusWithURI:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/buildExampleSuite:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (KWExampleSuite *)buildExampleSuite:(void ( ^ ) ( void ))buildingBlock</Declaration>
-			
-			
-			<Anchor>//api/name/buildExampleSuite:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/pushContextNodeWithCallSite:description:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)pushContextNodeWithCallSite:(KWCallSite *)aCallSite description:(NSString *)aDescription</Declaration>
-			
-			
-			<Anchor>//api/name/pushContextNodeWithCallSite:description:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/popContextNode</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)popContextNode</Declaration>
-			
-			
-			<Anchor>//api/name/popContextNode</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/setRegisterMatchersNodeWithCallSite:namespacePrefix:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)setRegisterMatchersNodeWithCallSite:(KWCallSite *)aCallSite namespacePrefix:(NSString *)aNamespacePrefix</Declaration>
-			
-			
-			<Anchor>//api/name/setRegisterMatchersNodeWithCallSite:namespacePrefix:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/setBeforeAllNodeWithCallSite:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)setBeforeAllNodeWithCallSite:(KWCallSite *)aCallSite block:(void ( ^ ) ( void ))block</Declaration>
-			
-			
-			<Anchor>//api/name/setBeforeAllNodeWithCallSite:block:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/setAfterAllNodeWithCallSite:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)setAfterAllNodeWithCallSite:(KWCallSite *)aCallSite block:(void ( ^ ) ( void ))block</Declaration>
-			
-			
-			<Anchor>//api/name/setAfterAllNodeWithCallSite:block:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/setBeforeEachNodeWithCallSite:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)setBeforeEachNodeWithCallSite:(KWCallSite *)aCallSite block:(void ( ^ ) ( void ))block</Declaration>
-			
-			
-			<Anchor>//api/name/setBeforeEachNodeWithCallSite:block:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/setAfterEachNodeWithCallSite:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)setAfterEachNodeWithCallSite:(KWCallSite *)aCallSite block:(void ( ^ ) ( void ))block</Declaration>
-			
-			
-			<Anchor>//api/name/setAfterEachNodeWithCallSite:block:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/addItNodeWithCallSite:description:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)addItNodeWithCallSite:(KWCallSite *)aCallSite description:(NSString *)aDescription block:(void ( ^ ) ( void ))block</Declaration>
-			
-			
-			<Anchor>//api/name/addItNodeWithCallSite:description:block:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/addPendingNodeWithCallSite:description:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (void)addPendingNodeWithCallSite:(KWCallSite *)aCallSite description:(NSString *)aDescription</Declaration>
-			
-			
-			<Anchor>//api/name/addPendingNodeWithCallSite:description:</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/isFocused</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)isFocused</Declaration>
-			
-			
-			<Anchor>//api/name/isFocused</Anchor>
-            <NodeRef refid="48"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWExampleSuiteBuilder/foundFocus</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleSuiteBuilder.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)foundFocus</Declaration>
-			
-			
-			<Anchor>//api/name/foundFocus</Anchor>
+			<Anchor>//api/name/isPhysical</Anchor>
             <NodeRef refid="48"/>
 		</Token>
 		

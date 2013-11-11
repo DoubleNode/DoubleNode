@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSDate+PrettyDate.html">
+	<File path="Classes/KWUserDefinedMatcherBuilder.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSDate(PrettyDate)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWUserDefinedMatcherBuilder</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="85"/>
@@ -13,43 +13,134 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSDate/prettyDate</TokenIdentifier>
-			<Abstract type="html">Creates and returns a new NSString object initialized with a natural language version of the source date in relation to now.</Abstract>
-			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/setKey:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>- (NSString *)prettyDate</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly) NSString *key</Declaration>
 			
-			<ReturnValue><Abstract type="html">A new NSString object, configured with a natual language representation of the source date.</Abstract></ReturnValue>
-			<Anchor>//api/name/prettyDate</Anchor>
+			
+			<Anchor>//api/name/key</Anchor>
             <NodeRef refid="85"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSDate/simpleDateRange:</TokenIdentifier>
-			<Abstract type="html">Creates and returns a new NSString object initialized with a simple display of a date range, between the source date and the end data parameter.</Abstract>
-			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/key</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>- (NSString *)simpleDateRange:(NSDate *)end</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>end</Name>
-					<Abstract type="html">The end date for the date range string.</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">A new NSString object, configured with a simple representation of a date range (ie: MMM d-d, yyyy).</Abstract></ReturnValue>
-			<Anchor>//api/name/simpleDateRange:</Anchor>
+			<Declaration>@property (nonatomic, copy, readonly) NSString *key</Declaration>
+			
+			
+			<Anchor>//api/name/key</Anchor>
             <NodeRef refid="85"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSDate/localizedDate</TokenIdentifier>
-			<Abstract type="html">Creates an returns a new NSString object initialized with a localized version of the source date.</Abstract>
-			<DeclaredIn>NSDate+PrettyDate.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcherBuilder/key</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
 			
-			<Declaration>- (NSString *)localizedDate</Declaration>
+			<Declaration>@property (nonatomic, copy, readonly) NSString *key</Declaration>
 			
-			<ReturnValue><Abstract type="html">A new NSString object, configured with a localized version of the source date.</Abstract></ReturnValue>
-			<Anchor>//api/name/localizedDate</Anchor>
+			
+			<Anchor>//api/name/key</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWUserDefinedMatcherBuilder/builder</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			
+			<Declaration>+ (id)builder</Declaration>
+			
+			
+			<Anchor>//api/name/builder</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWUserDefinedMatcherBuilder/builderForSelector:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			
+			<Declaration>+ (id)builderForSelector:(SEL)aSelector</Declaration>
+			
+			
+			<Anchor>//api/name/builderForSelector:</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/initWithSelector:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithSelector:(SEL)aSelector</Declaration>
+			
+			
+			<Anchor>//api/name/initWithSelector:</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/match:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)match:(KWUserDefinedMatcherBlock)block</Declaration>
+			
+			
+			<Anchor>//api/name/match:</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/failureMessageForShould:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)failureMessageForShould:(KWUserDefinedMatcherMessageBlock)block</Declaration>
+			
+			
+			<Anchor>//api/name/failureMessageForShould:</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/failureMessageForShouldNot:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)failureMessageForShouldNot:(KWUserDefinedMatcherMessageBlock)block</Declaration>
+			
+			
+			<Anchor>//api/name/failureMessageForShouldNot:</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/description:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)description:(NSString *)description</Declaration>
+			
+			
+			<Anchor>//api/name/description:</Anchor>
+            <NodeRef refid="85"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/buildMatcherWithSubject:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			
+			<Declaration>- (KWUserDefinedMatcher *)buildMatcherWithSubject:(id)subject</Declaration>
+			
+			
+			<Anchor>//api/name/buildMatcherWithSubject:</Anchor>
             <NodeRef refid="85"/>
 		</Token>
 		

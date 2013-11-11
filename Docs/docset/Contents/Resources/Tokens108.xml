@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/UIScrollView+ScrollDirection.html">
+	<File path="Categories/NSValue+KiwiAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/UIScrollView(ScrollDirection)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSValue(KiwiAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
+			<DeclaredIn>NSValue+KiwiAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="108"/>
@@ -13,19 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/UIScrollView/scrollDirection:</TokenIdentifier>
-			<Abstract type="html">Returns the current scroll direction(s)</Abstract>
-			<DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NSValue/dataValue</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSValue+KiwiAdditions.h</DeclaredIn>
 			
-			<Declaration>- (ScrollDirection)scrollDirection:(CGPoint)lastContentOffset</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>lastContentOffset</Name>
-					<Abstract type="html">The last contentOffset point</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">ScrollDirection value of multiple direction flags or&apos;d together.</Abstract></ReturnValue>
-			<Anchor>//api/name/scrollDirection:</Anchor>
+			<Declaration>- (NSData *)dataValue</Declaration>
+			
+			
+			<Anchor>//api/name/dataValue</Anchor>
             <NodeRef refid="108"/>
 		</Token>
 		

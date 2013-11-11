@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWEqualMatcher.html">
+	<File path="Classes/KWContainMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWEqualMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWContainMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWEqualMatcher.h</DeclaredIn>
+			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="45"/>
@@ -13,14 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWEqualMatcher/equal:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWContainMatcher/contain:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWEqualMatcher.h</DeclaredIn>
+			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)equal:(id)anObject</Declaration>
+			<Declaration>- (void)contain:(id)anObject</Declaration>
 			
 			
-			<Anchor>//api/name/equal:</Anchor>
+			<Anchor>//api/name/contain:</Anchor>
+            <NodeRef refid="45"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWContainMatcher/containObjectsInArray:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWContainMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)containObjectsInArray:(NSArray *)anArray</Declaration>
+			
+			
+			<Anchor>//api/name/containObjectsInArray:</Anchor>
             <NodeRef refid="45"/>
 		</Token>
 		

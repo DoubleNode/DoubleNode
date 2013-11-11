@@ -1,67 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/SSThemeTab.html">
+	<File path="Protocols/KWProbe.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/SSThemeTab</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWProbe</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			<DeclaredIn>KWProbe.h</DeclaredIn>
             
 			
 			<NodeRef refid="124"/>
 		</Token>
 		
 		
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabSecure</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabSecure</Declaration>
-            
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
-            
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWProbe/isSatisfied</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWProbe.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isSatisfied</Declaration>
+			
+			
+			<Anchor>//api/name/isSatisfied</Anchor>
             <NodeRef refid="124"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabDocs</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabDocs</Declaration>
-            
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
-            
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWProbe/sample</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWProbe.h</DeclaredIn>
+			
+			<Declaration>- (void)sample</Declaration>
+			
+			
+			<Anchor>//api/name/sample</Anchor>
             <NodeRef refid="124"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabBugs</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabBugs</Declaration>
-            
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
-            
-            <NodeRef refid="124"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabBook</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabBook</Declaration>
-            
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
-            
-            <NodeRef refid="124"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/SSThemeTabOptions</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>SSThemeTabOptions</Declaration>
-            
-            <DeclaredIn>ADVTheme.h</DeclaredIn>
-            
-            <NodeRef refid="124"/>
-        </Token>
+		</Token>
+		
         
 	</File>
 </Tokens>

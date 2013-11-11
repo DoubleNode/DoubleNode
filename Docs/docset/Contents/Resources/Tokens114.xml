@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWExampleNode.html">
+	<File path="Protocols/DNApplicationProtocol.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWExampleNode</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleNode.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/DNApplicationProtocol</TokenIdentifier>
+			<Abstract type="html">Provides functions expected to be in the applications AppDelegate class.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
             
 			
 			<NodeRef refid="114"/>
@@ -13,26 +13,193 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWExampleNode/acceptExampleNodeVisitor:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleNode.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/disableURLCache</TokenIdentifier>
+			<Abstract type="html">Disables the App URL Cache (if applicable).</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (void)acceptExampleNodeVisitor:(id&lt;KWExampleNodeVisitor&gt;)aVisitor</Declaration>
+			<Declaration>- (void)disableURLCache</Declaration>
 			
 			
-			<Anchor>//api/name/acceptExampleNodeVisitor:</Anchor>
+			<Anchor>//api/name/disableURLCache</Anchor>
             <NodeRef refid="114"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWExampleNode/contextStack</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleNode.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/setDoNotUseIncrementalStore:</TokenIdentifier>
+			<Abstract type="html">Sets a flag to disable the use of a NSIncrementalStore (if applicable).</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
 			
-			<Declaration>- (NSArray *)contextStack</Declaration>
+			<Declaration>- (void)setDoNotUseIncrementalStore:(BOOL)flagValue</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>flagValue</Name>
+					<Abstract type="html">A BOOL flag to specify whether or not to bypass using a NSIncrementalStore when initializing the App&apos;s CoreData NSPersistentStore.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setDoNotUseIncrementalStore:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/setPersistentStorePrefix:</TokenIdentifier>
+			<Abstract type="html">Sets a string prefix to be used when opening and creating CoreData NSPersistentStore.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (void)setPersistentStorePrefix:(NSString *)prefix</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>prefix</Name>
+					<Abstract type="html">A NSString prefix to be prepended to any NSPersistentStore URLs.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setPersistentStorePrefix:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/managedObjectContext:</TokenIdentifier>
+			<Abstract type="html">Creates or (if already created) returns the App&apos;s default NSManagedObjectContext.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (NSManagedObjectContext *)managedObjectContext:(Class)modelClass</Declaration>
+			
+			<ReturnValue><Abstract type="html">The App&apos;s default NSManagedObjectContext object, creating it if needed.</Abstract></ReturnValue>
+			<Anchor>//api/name/managedObjectContext:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/managedObjectModel:</TokenIdentifier>
+			<Abstract type="html">Creates or (if already created) returns the App&apos;s default NSManagedObjectModel.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (NSManagedObjectModel *)managedObjectModel:(Class)modelClass</Declaration>
+			
+			<ReturnValue><Abstract type="html">The App&apos;s default NSManagedObjectModel object, creating it if needed.</Abstract></ReturnValue>
+			<Anchor>//api/name/managedObjectModel:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/deletePersistentStore:</TokenIdentifier>
+			<Abstract type="html">Closes the App&apos;s current NSPersistentStore, then removes the file from the device.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (void)deletePersistentStore:(Class)modelClass</Declaration>
 			
 			
-			<Anchor>//api/name/contextStack</Anchor>
+			<Anchor>//api/name/deletePersistentStore:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/saveContext:</TokenIdentifier>
+			<Abstract type="html">Flushes any cached updates from the current NSManagedObjectContext to the NSPersistentStore.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (void)saveContext:(Class)modelClass</Declaration>
+			
+			
+			<Anchor>//api/name/saveContext:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/settingsItem:</TokenIdentifier>
+			<Abstract type="html">Loads and returns the current value of the user setting, specified by a key.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (id)settingsItem:(NSString *)item</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The current value of the specified user setting (or @&quot;&quot; if not set).</Abstract></ReturnValue>
+			<Anchor>//api/name/settingsItem:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/settingsItem:default:</TokenIdentifier>
+			<Abstract type="html">Loads and returns the current value of the user setting, specified by a key and a default value.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (id)settingsItem:(NSString *)item default:(id)defaultValue</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter><Parameter>
+					<Name>defaultValue</Name>
+					<Abstract type="html">The default value for the specific user setting, when it has not been previously set.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The current value of the specified user setting.</Abstract></ReturnValue>
+			<Anchor>//api/name/settingsItem:default:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/settingsItem:boolDefault:</TokenIdentifier>
+			<Abstract type="html">Loads and returns the current BOOL value of the user setting, specified by a key and a default value.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (id)settingsItem:(NSString *)item boolDefault:(BOOL)defaultValue</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter><Parameter>
+					<Name>defaultValue</Name>
+					<Abstract type="html">The default BOOL value for the specific user setting, when it has not been previously set.</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">The current value of the specified user setting.</Abstract></ReturnValue>
+			<Anchor>//api/name/settingsItem:boolDefault:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/setSettingsItem:value:</TokenIdentifier>
+			<Abstract type="html">Sets the value of the user setting, specified by a key.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (void)setSettingsItem:(NSString *)item value:(id)value</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter><Parameter>
+					<Name>value</Name>
+					<Abstract type="html">The new value for the specific user setting.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setSettingsItem:value:</Anchor>
+            <NodeRef refid="114"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/DNApplicationProtocol/setSettingsItem:boolValue:</TokenIdentifier>
+			<Abstract type="html">Sets the BOOL value of the user setting, specified by a key.</Abstract>
+			<DeclaredIn>DNApplicationProtocol.h</DeclaredIn>
+			
+			<Declaration>- (void)setSettingsItem:(NSString *)item boolValue:(BOOL)value</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>item</Name>
+					<Abstract type="html">The NSString key for the specific user setting.</Abstract>
+				</Parameter><Parameter>
+					<Name>value</Name>
+					<Abstract type="html">The new BOOL value for the specific user setting.</Abstract>
+				</Parameter>
+			</Parameters>
+			
+			<Anchor>//api/name/setSettingsItem:boolValue:</Anchor>
             <NodeRef refid="114"/>
 		</Token>
 		

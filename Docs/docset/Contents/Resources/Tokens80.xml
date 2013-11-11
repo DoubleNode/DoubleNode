@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWUserDefinedMatcher.html">
+	<File path="Classes/KWSpec.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWUserDefinedMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWSpec</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWSpec.h</DeclaredIn>
             
 			
 			<NodeRef refid="80"/>
@@ -13,206 +13,74 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setSelector:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/addVerifier:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWSpec.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
+			<Declaration>+ (id)addVerifier:(id&lt;KWVerifying&gt;)aVerifier</Declaration>
 			
 			
-			<Anchor>//api/name/selector</Anchor>
+			<Anchor>//api/name/addVerifier:</Anchor>
             <NodeRef refid="80"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/selector</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/addExistVerifierWithExpectationType:callSite:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWSpec.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
+			<Declaration>+ (id)addExistVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite</Declaration>
 			
 			
-			<Anchor>//api/name/selector</Anchor>
+			<Anchor>//api/name/addExistVerifierWithExpectationType:callSite:</Anchor>
             <NodeRef refid="80"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/selector</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/addMatchVerifierWithExpectationType:callSite:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWSpec.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, assign) SEL selector</Declaration>
+			<Declaration>+ (id)addMatchVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite</Declaration>
 			
 			
-			<Anchor>//api/name/selector</Anchor>
+			<Anchor>//api/name/addMatchVerifierWithExpectationType:callSite:</Anchor>
             <NodeRef refid="80"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setFailureMessageForShould:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/addAsyncVerifierWithExpectationType:callSite:timeout:shouldWait:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWSpec.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShould</Declaration>
+			<Declaration>+ (id)addAsyncVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite timeout:(NSInteger)timeout shouldWait:(BOOL)shouldWait</Declaration>
 			
 			
-			<Anchor>//api/name/failureMessageForShould</Anchor>
+			<Anchor>//api/name/addAsyncVerifierWithExpectationType:callSite:timeout:shouldWait:</Anchor>
             <NodeRef refid="80"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/failureMessageForShould</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/file</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWSpec.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShould</Declaration>
+			<Declaration>+ (NSString *)file</Declaration>
 			
 			
-			<Anchor>//api/name/failureMessageForShould</Anchor>
+			<Anchor>//api/name/file</Anchor>
             <NodeRef refid="80"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/failureMessageForShould</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/buildExampleGroups</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWSpec.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShould</Declaration>
-			
-			
-			<Anchor>//api/name/failureMessageForShould</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setFailureMessageForShouldNot:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShouldNot</Declaration>
+			<Declaration>+ (void)buildExampleGroups</Declaration>
 			
 			
-			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/failureMessageForShouldNot</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShouldNot</Declaration>
-			
-			
-			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/failureMessageForShouldNot</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, copy) NSString *failureMessageForShouldNot</Declaration>
-			
-			
-			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setMatcherBlock:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, copy) KWUserDefinedMatcherBlock matcherBlock</Declaration>
-			
-			
-			<Anchor>//api/name/matcherBlock</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/matcherBlock</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, copy) KWUserDefinedMatcherBlock matcherBlock</Declaration>
-			
-			
-			<Anchor>//api/name/matcherBlock</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/matcherBlock</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, copy) KWUserDefinedMatcherBlock matcherBlock</Declaration>
-			
-			
-			<Anchor>//api/name/matcherBlock</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/setDescription:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, copy) NSString *description</Declaration>
-			
-			
-			<Anchor>//api/name/description</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/description</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, copy) NSString *description</Declaration>
-			
-			
-			<Anchor>//api/name/description</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcher/description</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, copy) NSString *description</Declaration>
-			
-			
-			<Anchor>//api/name/description</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWUserDefinedMatcher/matcherWithSubject:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>+ (id)matcherWithSubject:(id)aSubject block:(KWUserDefinedMatcherBlock)aBlock</Declaration>
-			
-			
-			<Anchor>//api/name/matcherWithSubject:block:</Anchor>
-            <NodeRef refid="80"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcher/initWithSubject:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>- (id)initWithSubject:(id)aSubject block:(KWUserDefinedMatcherBlock)aBlock</Declaration>
-			
-			
-			<Anchor>//api/name/initWithSubject:block:</Anchor>
+			<Anchor>//api/name/buildExampleGroups</Anchor>
             <NodeRef refid="80"/>
 		</Token>
 		

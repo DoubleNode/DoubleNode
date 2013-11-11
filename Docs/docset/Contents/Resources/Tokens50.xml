@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWFailure.html">
+	<File path="Classes/KWExample.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWFailure</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWExample</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
             
 			
 			<NodeRef refid="50"/>
@@ -13,134 +13,230 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWFailure/initWithCallSite:message:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/setLastInContexts:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithCallSite:(KWCallSite *)aCallSite message:(NSString *)aMessage</Declaration>
+			<Declaration>@property (nonatomic, strong, readonly) NSMutableArray *lastInContexts</Declaration>
 			
 			
-			<Anchor>//api/name/initWithCallSite:message:</Anchor>
+			<Anchor>//api/name/lastInContexts</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWFailure/initWithCallSite:format:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/lastInContexts</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithCallSite:(KWCallSite *)aCallSite format:(NSString *)format, ...</Declaration>
+			<Declaration>@property (nonatomic, strong, readonly) NSMutableArray *lastInContexts</Declaration>
 			
 			
-			<Anchor>//api/name/initWithCallSite:format:</Anchor>
+			<Anchor>//api/name/lastInContexts</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWFailure/failureWithCallSite:message:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWExample/lastInContexts</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>+ (id)failureWithCallSite:(KWCallSite *)aCallSite message:(NSString *)aMessage</Declaration>
+			<Declaration>@property (nonatomic, strong, readonly) NSMutableArray *lastInContexts</Declaration>
 			
 			
-			<Anchor>//api/name/failureWithCallSite:message:</Anchor>
+			<Anchor>//api/name/lastInContexts</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWFailure/failureWithCallSite:format:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/setSuite:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>+ (id)failureWithCallSite:(KWCallSite *)aCallSite format:(NSString *)format, ...</Declaration>
+			<Declaration>@property (nonatomic, weak) KWExampleSuite *suite</Declaration>
 			
 			
-			<Anchor>//api/name/failureWithCallSite:format:</Anchor>
+			<Anchor>//api/name/suite</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWFailure/setMessage:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/suite</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSString *message</Declaration>
+			<Declaration>@property (nonatomic, weak) KWExampleSuite *suite</Declaration>
 			
 			
-			<Anchor>//api/name/message</Anchor>
+			<Anchor>//api/name/suite</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWFailure/message</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWExample/suite</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSString *message</Declaration>
+			<Declaration>@property (nonatomic, weak) KWExampleSuite *suite</Declaration>
 			
 			
-			<Anchor>//api/name/message</Anchor>
+			<Anchor>//api/name/suite</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWFailure/message</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/setUnresolvedVerifier:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSString *message</Declaration>
+			<Declaration>@property (nonatomic, strong) id&lt;KWVerifying&gt; unresolvedVerifier</Declaration>
 			
 			
-			<Anchor>//api/name/message</Anchor>
+			<Anchor>//api/name/unresolvedVerifier</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWFailure/setCallSite:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/unresolvedVerifier</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak, readonly) KWCallSite *callSite</Declaration>
+			<Declaration>@property (nonatomic, strong) id&lt;KWVerifying&gt; unresolvedVerifier</Declaration>
 			
 			
-			<Anchor>//api/name/callSite</Anchor>
+			<Anchor>//api/name/unresolvedVerifier</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWFailure/callSite</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWExample/unresolvedVerifier</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak, readonly) KWCallSite *callSite</Declaration>
+			<Declaration>@property (nonatomic, strong) id&lt;KWVerifying&gt; unresolvedVerifier</Declaration>
 			
 			
-			<Anchor>//api/name/callSite</Anchor>
+			<Anchor>//api/name/unresolvedVerifier</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWFailure/callSite</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/initWithExampleNode:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, weak, readonly) KWCallSite *callSite</Declaration>
+			<Declaration>- (id)initWithExampleNode:(id&lt;KWExampleNode&gt;)node</Declaration>
 			
 			
-			<Anchor>//api/name/callSite</Anchor>
+			<Anchor>//api/name/initWithExampleNode:</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWFailure/exceptionValue</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/addVerifier:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWFailure.h</DeclaredIn>
+			<DeclaredIn>KWExample.h</DeclaredIn>
 			
-			<Declaration>- (NSException *)exceptionValue</Declaration>
+			<Declaration>- (id)addVerifier:(id&lt;KWVerifying&gt;)aVerifier</Declaration>
 			
 			
-			<Anchor>//api/name/exceptionValue</Anchor>
+			<Anchor>//api/name/addVerifier:</Anchor>
+            <NodeRef refid="50"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/addExistVerifierWithExpectationType:callSite:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWExample.h</DeclaredIn>
+			
+			<Declaration>- (id)addExistVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite</Declaration>
+			
+			
+			<Anchor>//api/name/addExistVerifierWithExpectationType:callSite:</Anchor>
+            <NodeRef refid="50"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/addMatchVerifierWithExpectationType:callSite:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWExample.h</DeclaredIn>
+			
+			<Declaration>- (id)addMatchVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite</Declaration>
+			
+			
+			<Anchor>//api/name/addMatchVerifierWithExpectationType:callSite:</Anchor>
+            <NodeRef refid="50"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/addAsyncVerifierWithExpectationType:callSite:timeout:shouldWait:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWExample.h</DeclaredIn>
+			
+			<Declaration>- (id)addAsyncVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite timeout:(NSInteger)timeout shouldWait:(BOOL)shouldWait</Declaration>
+			
+			
+			<Anchor>//api/name/addAsyncVerifierWithExpectationType:callSite:timeout:shouldWait:</Anchor>
+            <NodeRef refid="50"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/reportFailure:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWExample.h</DeclaredIn>
+			
+			<Declaration>- (void)reportFailure:(KWFailure *)failure</Declaration>
+			
+			
+			<Anchor>//api/name/reportFailure:</Anchor>
+            <NodeRef refid="50"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/runWithDelegate:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWExample.h</DeclaredIn>
+			
+			<Declaration>- (void)runWithDelegate:(id&lt;KWExampleDelegate&gt;)delegate</Declaration>
+			
+			
+			<Anchor>//api/name/runWithDelegate:</Anchor>
+            <NodeRef refid="50"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/generateDescriptionForAnonymousItNode</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWExample.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)generateDescriptionForAnonymousItNode</Declaration>
+			
+			
+			<Anchor>//api/name/generateDescriptionForAnonymousItNode</Anchor>
+            <NodeRef refid="50"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/isLastInContext:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWExample.h</DeclaredIn>
+			
+			<Declaration>- (BOOL)isLastInContext:(KWContextNode *)context</Declaration>
+			
+			
+			<Anchor>//api/name/isLastInContext:</Anchor>
+            <NodeRef refid="50"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWExample/descriptionWithContext</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWExample.h</DeclaredIn>
+			
+			<Declaration>- (NSString *)descriptionWithContext</Declaration>
+			
+			
+			<Anchor>//api/name/descriptionWithContext</Anchor>
             <NodeRef refid="50"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWAny.html">
+	<File path="Classes/DNThemeManager.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWAny</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/DNThemeManager</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAny.h</DeclaredIn>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
             
 			
 			<NodeRef refid="20"/>
@@ -13,14 +13,50 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWAny/any</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/themeName</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAny.h</DeclaredIn>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
 			
-			<Declaration>+ (id)any</Declaration>
+			<Declaration>+ (NSString *)themeName</Declaration>
 			
 			
-			<Anchor>//api/name/any</Anchor>
+			<Anchor>//api/name/themeName</Anchor>
+            <NodeRef refid="20"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/sharedTheme</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
+			
+			<Declaration>+ (id&lt;DNThemeProtocol&gt;)sharedTheme</Declaration>
+			
+			
+			<Anchor>//api/name/sharedTheme</Anchor>
+            <NodeRef refid="20"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/customizeButton:withGroup:andScreen:andItem:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeButton:(UIButton *)btnView withGroup:(NSString *)group andScreen:(NSString *)screen andItem:(NSString *)item</Declaration>
+			
+			
+			<Anchor>//api/name/customizeButton:withGroup:andScreen:andItem:</Anchor>
+            <NodeRef refid="20"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/customizeTextField:withGroup:andScreen:andItem:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNThemeManager.h</DeclaredIn>
+			
+			<Declaration>+ (void)customizeTextField:(DNTextField *)txtfldView withGroup:(NSString *)group andScreen:(NSString *)screen andItem:(NSString *)item</Declaration>
+			
+			
+			<Anchor>//api/name/customizeTextField:withGroup:andScreen:andItem:</Anchor>
             <NodeRef refid="20"/>
 		</Token>
 		

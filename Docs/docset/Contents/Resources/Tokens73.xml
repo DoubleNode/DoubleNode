@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWRegisterMatchersNode.html">
+	<File path="Classes/KWPendingNode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWRegisterMatchersNode</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWPendingNode</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
             
 			
 			<NodeRef refid="73"/>
@@ -13,33 +13,69 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/initWithCallSite:namespacePrefix:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/setContext:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithCallSite:(KWCallSite *)aCallSite namespacePrefix:(NSString *)aNamespacePrefix</Declaration>
+			<Declaration>@property (nonatomic, readonly, strong) KWContextNode *context</Declaration>
 			
 			
-			<Anchor>//api/name/initWithCallSite:namespacePrefix:</Anchor>
+			<Anchor>//api/name/context</Anchor>
             <NodeRef refid="73"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWRegisterMatchersNode/registerMatchersNodeWithCallSite:namespacePrefix:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/context</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
 			
-			<Declaration>+ (id)registerMatchersNodeWithCallSite:(KWCallSite *)aCallSite namespacePrefix:(NSString *)aNamespacePrefix</Declaration>
+			<Declaration>@property (nonatomic, readonly, strong) KWContextNode *context</Declaration>
 			
 			
-			<Anchor>//api/name/registerMatchersNodeWithCallSite:namespacePrefix:</Anchor>
+			<Anchor>//api/name/context</Anchor>
             <NodeRef refid="73"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/setCallSite:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWPendingNode/context</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly, strong) KWContextNode *context</Declaration>
+			
+			
+			<Anchor>//api/name/context</Anchor>
+            <NodeRef refid="73"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/initWithCallSite:context:description:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithCallSite:(KWCallSite *)aCallSite context:(KWContextNode *)context description:(NSString *)aDescription</Declaration>
+			
+			
+			<Anchor>//api/name/initWithCallSite:context:description:</Anchor>
+            <NodeRef refid="73"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWPendingNode/pendingNodeWithCallSite:context:description:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
+			
+			<Declaration>+ (id)pendingNodeWithCallSite:(KWCallSite *)aCallSite context:(KWContextNode *)context description:(NSString *)aDescription</Declaration>
+			
+			
+			<Anchor>//api/name/pendingNodeWithCallSite:context:description:</Anchor>
+            <NodeRef refid="73"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/setCallSite:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
 			
@@ -49,9 +85,9 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/callSite</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/callSite</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
 			
@@ -61,9 +97,9 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWRegisterMatchersNode/callSite</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWPendingNode/callSite</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
 			
 			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
 			
@@ -73,38 +109,38 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/setNamespacePrefix:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/setDescription:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSString *namespacePrefix</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSString *description</Declaration>
 			
 			
-			<Anchor>//api/name/namespacePrefix</Anchor>
+			<Anchor>//api/name/description</Anchor>
             <NodeRef refid="73"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/namespacePrefix</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWPendingNode/description</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSString *namespacePrefix</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSString *description</Declaration>
 			
 			
-			<Anchor>//api/name/namespacePrefix</Anchor>
+			<Anchor>//api/name/description</Anchor>
             <NodeRef refid="73"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWRegisterMatchersNode/namespacePrefix</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWPendingNode/description</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			<DeclaredIn>KWPendingNode.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSString *namespacePrefix</Declaration>
+			<Declaration>@property (nonatomic, readonly) NSString *description</Declaration>
 			
 			
-			<Anchor>//api/name/namespacePrefix</Anchor>
+			<Anchor>//api/name/description</Anchor>
             <NodeRef refid="73"/>
 		</Token>
 		

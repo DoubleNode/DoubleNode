@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWRegularExpressionPatternMatcher.html">
+	<File path="Classes/KWProbePoller.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWRegularExpressionPatternMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWProbePoller</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegularExpressionPatternMatcher.h</DeclaredIn>
+			<DeclaredIn>KWProbePoller.h</DeclaredIn>
             
 			
 			<NodeRef refid="74"/>
@@ -13,26 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWRegularExpressionPatternMatcher/matchPattern:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWProbePoller/initWithTimeout:delay:shouldWait:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegularExpressionPatternMatcher.h</DeclaredIn>
+			<DeclaredIn>KWProbePoller.h</DeclaredIn>
 			
-			<Declaration>- (void)matchPattern:(NSString *)pattern</Declaration>
+			<Declaration>- (id)initWithTimeout:(NSTimeInterval)theTimeout delay:(NSTimeInterval)theDelay shouldWait:(BOOL)wait</Declaration>
 			
 			
-			<Anchor>//api/name/matchPattern:</Anchor>
+			<Anchor>//api/name/initWithTimeout:delay:shouldWait:</Anchor>
             <NodeRef refid="74"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWRegularExpressionPatternMatcher/matchPattern:options:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWProbePoller/check:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWRegularExpressionPatternMatcher.h</DeclaredIn>
+			<DeclaredIn>KWProbePoller.h</DeclaredIn>
 			
-			<Declaration>- (void)matchPattern:(NSString *)pattern options:(NSRegularExpressionOptions)options</Declaration>
+			<Declaration>- (BOOL)check:(id&lt;KWProbe&gt;)probe</Declaration>
 			
 			
-			<Anchor>//api/name/matchPattern:options:</Anchor>
+			<Anchor>//api/name/check:</Anchor>
             <NodeRef refid="74"/>
 		</Token>
 		

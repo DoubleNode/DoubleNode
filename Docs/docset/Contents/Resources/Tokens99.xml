@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSProxy+KiwiVerifierAdditions.html">
+	<File path="Categories/NSObject+KiwiStubAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSProxy(KiwiVerifierAdditions)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiStubAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSProxy+KiwiVerifierAdditions.h</DeclaredIn>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="99"/>
@@ -13,26 +13,326 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSProxy/attachToVerifier:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSProxy+KiwiVerifierAdditions.h</DeclaredIn>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
 			
-			<Declaration>- (id)attachToVerifier:(id&lt;KWVerifying&gt;)aVerifier</Declaration>
+			<Declaration>- (void)stub:(SEL)aSelector</Declaration>
 			
 			
-			<Anchor>//api/name/attachToVerifier:</Anchor>
+			<Anchor>//api/name/stub:</Anchor>
             <NodeRef refid="99"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSProxy/attachToVerifier:verifier:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:withBlock:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSProxy+KiwiVerifierAdditions.h</DeclaredIn>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
 			
-			<Declaration>- (id)attachToVerifier:(id&lt;KWVerifying&gt;)firstVerifier verifier:(id&lt;KWVerifying&gt;)secondVerifier</Declaration>
+			<Declaration>- (void)stub:(SEL)aSelector withBlock:(id ( ^ ) ( NSArray *params ))block</Declaration>
 			
 			
-			<Anchor>//api/name/attachToVerifier:verifier:</Anchor>
+			<Anchor>//api/name/stub:withBlock:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:withArguments:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)stub:(SEL)aSelector withArguments:(id)firstArgument, ...</Declaration>
+			
+			
+			<Anchor>//api/name/stub:withArguments:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:andReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)stub:(SEL)aSelector andReturn:(id)aValue</Declaration>
+			
+			
+			<Anchor>//api/name/stub:andReturn:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:andReturn:withArguments:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)stub:(SEL)aSelector andReturn:(id)aValue withArguments:(id)firstArgument, ...</Declaration>
+			
+			
+			<Anchor>//api/name/stub:andReturn:withArguments:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)stub:(SEL)aSelector</Declaration>
+			
+			
+			<Anchor>//api/name/stub:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:withBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)stub:(SEL)aSelector withBlock:(id ( ^ ) ( NSArray *params ))block</Declaration>
+			
+			
+			<Anchor>//api/name/stub:withBlock:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:withArguments:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)stub:(SEL)aSelector withArguments:(id)firstArgument, ...</Declaration>
+			
+			
+			<Anchor>//api/name/stub:withArguments:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:andReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)stub:(SEL)aSelector andReturn:(id)aValue</Declaration>
+			
+			
+			<Anchor>//api/name/stub:andReturn:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub:andReturn:withArguments:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)stub:(SEL)aSelector andReturn:(id)aValue withArguments:(id)firstArgument, ...</Declaration>
+			
+			
+			<Anchor>//api/name/stub:andReturn:withArguments:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stub</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (id)stub</Declaration>
+			
+			
+			<Anchor>//api/name/stub</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stubAndReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (id)stubAndReturn:(id)aValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubAndReturn:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stubAndReturn:times:afterThatReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (id)stubAndReturn:(id)aValue times:(id)times afterThatReturn:(id)aSecondValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubAndReturn:times:afterThatReturn:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stubMessagePattern:andReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)stubMessagePattern:(KWMessagePattern *)aMessagePattern andReturn:(id)aValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubMessagePattern:andReturn:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stubMessagePattern:andReturn:overrideExisting:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)stubMessagePattern:(KWMessagePattern *)aMessagePattern andReturn:(id)aValue overrideExisting:(BOOL)overrideExisting</Declaration>
+			
+			
+			<Anchor>//api/name/stubMessagePattern:andReturn:overrideExisting:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stubMessagePattern:andReturn:times:afterThatReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)stubMessagePattern:(KWMessagePattern *)aMessagePattern andReturn:(id)aValue times:(id)times afterThatReturn:(id)aSecondValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubMessagePattern:andReturn:times:afterThatReturn:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stubMessagePattern:withBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)stubMessagePattern:(KWMessagePattern *)aMessagePattern withBlock:(id ( ^ ) ( NSArray *params ))block</Declaration>
+			
+			
+			<Anchor>//api/name/stubMessagePattern:withBlock:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stubMessagePattern:andReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)stubMessagePattern:(KWMessagePattern *)aMessagePattern andReturn:(id)aValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubMessagePattern:andReturn:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stubMessagePattern:andReturn:times:afterThatReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)stubMessagePattern:(KWMessagePattern *)aMessagePattern andReturn:(id)aValue times:(id)times afterThatReturn:(id)aSecondValue</Declaration>
+			
+			
+			<Anchor>//api/name/stubMessagePattern:andReturn:times:afterThatReturn:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/stubMessagePattern:withBlock:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)stubMessagePattern:(KWMessagePattern *)aMessagePattern withBlock:(id ( ^ ) ( NSArray *params ))block</Declaration>
+			
+			
+			<Anchor>//api/name/stubMessagePattern:withBlock:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/clearStubs</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)clearStubs</Declaration>
+			
+			
+			<Anchor>//api/name/clearStubs</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/addMessageSpy:forMessagePattern:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)addMessageSpy:(id&lt;KWMessageSpying&gt;)aSpy forMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			
+			
+			<Anchor>//api/name/addMessageSpy:forMessagePattern:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/removeMessageSpy:forMessagePattern:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (void)removeMessageSpy:(id&lt;KWMessageSpying&gt;)aSpy forMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			
+			
+			<Anchor>//api/name/removeMessageSpy:forMessagePattern:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/captureArgument:atIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>- (KWCaptureSpy *)captureArgument:(SEL)selector atIndex:(NSUInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/captureArgument:atIndex:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/addMessageSpy:forMessagePattern:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)addMessageSpy:(id&lt;KWMessageSpying&gt;)aSpy forMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			
+			
+			<Anchor>//api/name/addMessageSpy:forMessagePattern:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/removeMessageSpy:forMessagePattern:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (void)removeMessageSpy:(id&lt;KWMessageSpying&gt;)aSpy forMessagePattern:(KWMessagePattern *)aMessagePattern</Declaration>
+			
+			
+			<Anchor>//api/name/removeMessageSpy:forMessagePattern:</Anchor>
+            <NodeRef refid="99"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/captureArgument:atIndex:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSObject+KiwiStubAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (KWCaptureSpy *)captureArgument:(SEL)selector atIndex:(NSUInteger)index</Declaration>
+			
+			
+			<Anchor>//api/name/captureArgument:atIndex:</Anchor>
             <NodeRef refid="99"/>
 		</Token>
 		

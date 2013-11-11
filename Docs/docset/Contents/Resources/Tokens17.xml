@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/DNUtilities.html">
+	<File path="Classes/DNStateViewController.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/DNUtilities</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/DNStateViewController</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
+			<DeclaredIn>DNStateViewController.h</DeclaredIn>
             
 			
 			<NodeRef refid="17"/>
@@ -13,278 +13,50 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/appDelegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/viewStateToCode:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
+			<DeclaredIn>DNStateViewController.h</DeclaredIn>
 			
-			<Declaration>+ (id&lt;DNApplicationProtocol&gt;)appDelegate</Declaration>
+			<Declaration>- (NSString *)viewStateToCode:(DNViewState)viewState</Declaration>
 			
 			
-			<Anchor>//api/name/appDelegate</Anchor>
+			<Anchor>//api/name/viewStateToCode:</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/screenHeight</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/changeToViewState:animated:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
+			<DeclaredIn>DNStateViewController.h</DeclaredIn>
 			
-			<Declaration>+ (CGFloat)screenHeight</Declaration>
+			<Declaration>- (void)changeToViewState:(DNViewState)newViewState animated:(BOOL)animated</Declaration>
 			
 			
-			<Anchor>//api/name/screenHeight</Anchor>
+			<Anchor>//api/name/changeToViewState:animated:</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/isTall</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/changeFromCurrentState:toNewState:animated:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
+			<DeclaredIn>DNStateViewController.h</DeclaredIn>
 			
-			<Declaration>+ (BOOL)isTall</Declaration>
+			<Declaration>- (void)changeFromCurrentState:(NSString *)currentState toNewState:(NSString *)newState animated:(BOOL)animated</Declaration>
 			
 			
-			<Anchor>//api/name/isTall</Anchor>
+			<Anchor>//api/name/changeFromCurrentState:toNewState:animated:</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/isDeviceIPad</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateViewController/performViewStateSelector:animated:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
+			<DeclaredIn>DNStateViewController.h</DeclaredIn>
 			
-			<Declaration>+ (BOOL)isDeviceIPad</Declaration>
-			
-			
-			<Anchor>//api/name/isDeviceIPad</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/appendNibSuffix:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (NSString *)appendNibSuffix:(NSString *)nibNameOrNil</Declaration>
+			<Declaration>- (void)performViewStateSelector:(SEL)aSelector animated:(BOOL)animated</Declaration>
 			
 			
-			<Anchor>//api/name/appendNibSuffix:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/appendNibSuffix:withDefaultNib:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (NSString *)appendNibSuffix:(NSString *)nibNameOrNil withDefaultNib:(NSString *)defaultNib</Declaration>
-			
-			
-			<Anchor>//api/name/appendNibSuffix:withDefaultNib:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/deviceImageName:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (NSString *)deviceImageName:(NSString *)name</Declaration>
-			
-			
-			<Anchor>//api/name/deviceImageName:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/runOnMainThreadWithoutDeadlocking:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (void)runOnMainThreadWithoutDeadlocking:(void ( ^ ) ( ))block</Declaration>
-			
-			
-			<Anchor>//api/name/runOnMainThreadWithoutDeadlocking:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/runBlock:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (void)runBlock:(void ( ^ ) ( ))block</Declaration>
-			
-			
-			<Anchor>//api/name/runBlock:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/runAfterDelay:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (void)runAfterDelay:(CGFloat)delay block:(void ( ^ ) ( ))block</Declaration>
-			
-			
-			<Anchor>//api/name/runAfterDelay:block:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/runRepeatedlyAfterDelay:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (void)runRepeatedlyAfterDelay:(CGFloat)delay block:(void ( ^ ) ( BOOL *stop ))block</Declaration>
-			
-			
-			<Anchor>//api/name/runRepeatedlyAfterDelay:block:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/repeatRunAfterDelay:block:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (NSTimer *)repeatRunAfterDelay:(CGFloat)delay block:(void ( ^ ) ( ))block</Declaration>
-			
-			
-			<Anchor>//api/name/repeatRunAfterDelay:block:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/canDevicePlaceAPhoneCall</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (bool)canDevicePlaceAPhoneCall</Declaration>
-			
-			
-			<Anchor>//api/name/canDevicePlaceAPhoneCall</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/playSound:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (void)playSound:(NSString *)name</Declaration>
-			
-			
-			<Anchor>//api/name/playSound:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/encodeWithHMAC_SHA1:withKey:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (NSString *)encodeWithHMAC_SHA1:(NSString *)data withKey:(NSString *)key</Declaration>
-			
-			
-			<Anchor>//api/name/encodeWithHMAC_SHA1:withKey:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/imageScaledForRetina:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (UIImage *)imageScaledForRetina:(UIImage *)image</Declaration>
-			
-			
-			<Anchor>//api/name/imageScaledForRetina:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/settingsItem:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (id)settingsItem:(NSString *)item</Declaration>
-			
-			
-			<Anchor>//api/name/settingsItem:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/settingsItem:default:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (id)settingsItem:(NSString *)item default:(id)defaultValue</Declaration>
-			
-			
-			<Anchor>//api/name/settingsItem:default:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/settingsItem:boolDefault:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (id)settingsItem:(NSString *)item boolDefault:(BOOL)defaultValue</Declaration>
-			
-			
-			<Anchor>//api/name/settingsItem:boolDefault:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/setSettingsItem:value:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (void)setSettingsItem:(NSString *)item value:(id)value</Declaration>
-			
-			
-			<Anchor>//api/name/setSettingsItem:value:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/setSettingsItem:boolValue:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (void)setSettingsItem:(NSString *)item boolValue:(BOOL)value</Declaration>
-			
-			
-			<Anchor>//api/name/setSettingsItem:boolValue:</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/getIPAddress</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (NSString *)getIPAddress</Declaration>
-			
-			
-			<Anchor>//api/name/getIPAddress</Anchor>
-            <NodeRef refid="17"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNUtilities/updateImage:newImage:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
-			
-			<Declaration>+ (void)updateImage:(UIImageView *)imageView newImage:(UIImage *)newImage</Declaration>
-			
-			
-			<Anchor>//api/name/updateImage:newImage:</Anchor>
+			<Anchor>//api/name/performViewStateSelector:animated:</Anchor>
             <NodeRef refid="17"/>
 		</Token>
 		

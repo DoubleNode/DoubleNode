@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/DNThemeManager.html">
+	<File path="Classes/DNStateOptions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/DNThemeManager</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/DNStateOptions</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNThemeManager.h</DeclaredIn>
+			<DeclaredIn>DNStateOptions.h</DeclaredIn>
             
 			
 			<NodeRef refid="16"/>
@@ -13,38 +13,86 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/themeName</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateOptions/setAnimated:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNThemeManager.h</DeclaredIn>
+			<DeclaredIn>DNStateOptions.h</DeclaredIn>
 			
-			<Declaration>+ (NSString *)themeName</Declaration>
+			<Declaration>@property (atomic) BOOL animated</Declaration>
 			
 			
-			<Anchor>//api/name/themeName</Anchor>
+			<Anchor>//api/name/animated</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/sharedTheme</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateOptions/animated</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNThemeManager.h</DeclaredIn>
+			<DeclaredIn>DNStateOptions.h</DeclaredIn>
 			
-			<Declaration>+ (id&lt;DNThemeProtocol&gt;)sharedTheme</Declaration>
+			<Declaration>@property (atomic) BOOL animated</Declaration>
 			
 			
-			<Anchor>//api/name/sharedTheme</Anchor>
+			<Anchor>//api/name/animated</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNThemeManager/customizeButton:withGroup:andScreen:andItem:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/DNStateOptions/animated</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNThemeManager.h</DeclaredIn>
+			<DeclaredIn>DNStateOptions.h</DeclaredIn>
 			
-			<Declaration>+ (void)customizeButton:(UIButton *)btnView withGroup:(NSString *)group andScreen:(NSString *)screen andItem:(NSString *)item</Declaration>
+			<Declaration>@property (atomic) BOOL animated</Declaration>
 			
 			
-			<Anchor>//api/name/customizeButton:withGroup:andScreen:andItem:</Anchor>
+			<Anchor>//api/name/animated</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateOptions/setCompletion:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNStateOptions.h</DeclaredIn>
+			
+			<Declaration>@property (strong, nonatomic) void ( ^ ) ( BOOL finished ) completion</Declaration>
+			
+			
+			<Anchor>//api/name/completion</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNStateOptions/completion</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNStateOptions.h</DeclaredIn>
+			
+			<Declaration>@property (strong, nonatomic) void ( ^ ) ( BOOL finished ) completion</Declaration>
+			
+			
+			<Anchor>//api/name/completion</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DNStateOptions/completion</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNStateOptions.h</DeclaredIn>
+			
+			<Declaration>@property (strong, nonatomic) void ( ^ ) ( BOOL finished ) completion</Declaration>
+			
+			
+			<Anchor>//api/name/completion</Anchor>
+            <NodeRef refid="16"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/DNStateOptions/stateOptions</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNStateOptions.h</DeclaredIn>
+			
+			<Declaration>+ (id)stateOptions</Declaration>
+			
+			
+			<Anchor>//api/name/stateOptions</Anchor>
             <NodeRef refid="16"/>
 		</Token>
 		

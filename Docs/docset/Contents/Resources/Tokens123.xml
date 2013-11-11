@@ -1,77 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Constants/LogLevel.html">
+	<File path="Protocols/KWMessageSpying.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/c/tdef/LogLevel</TokenIdentifier>
-			<Abstract type="html">DLog Logging Items and Macros</Abstract>
-			<DeclaredIn>DNUtilities.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/intf/KWMessageSpying</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessageSpying.h</DeclaredIn>
             
 			
 			<NodeRef refid="123"/>
 		</Token>
 		
 		
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/LL_Critical</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>LL_Critical</Declaration>
-            
-            <DeclaredIn>DNUtilities.h</DeclaredIn>
-            
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWMessageSpying/object:didReceiveInvocation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWMessageSpying.h</DeclaredIn>
+			
+			<Declaration>- (void)object:(id)anObject didReceiveInvocation:(NSInvocation *)anInvocation</Declaration>
+			
+			
+			<Anchor>//api/name/object:didReceiveInvocation:</Anchor>
             <NodeRef refid="123"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/LL_Error</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>LL_Error</Declaration>
-            
-            <DeclaredIn>DNUtilities.h</DeclaredIn>
-            
-            <NodeRef refid="123"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/LL_Warning</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>LL_Warning</Declaration>
-            
-            <DeclaredIn>DNUtilities.h</DeclaredIn>
-            
-            <NodeRef refid="123"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/LL_Debug</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>LL_Debug</Declaration>
-            
-            <DeclaredIn>DNUtilities.h</DeclaredIn>
-            
-            <NodeRef refid="123"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/LL_Info</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>LL_Info</Declaration>
-            
-            <DeclaredIn>DNUtilities.h</DeclaredIn>
-            
-            <NodeRef refid="123"/>
-        </Token>
-        
-        <Token>
-            <TokenIdentifier>//apple_ref/c/econst/LL_Everything</TokenIdentifier>
-            <Abstract type="html"></Abstract>
-            <Declaration>LL_Everything</Declaration>
-            
-            <DeclaredIn>DNUtilities.h</DeclaredIn>
-            
-            <NodeRef refid="123"/>
-        </Token>
+		</Token>
+		
         
 	</File>
 </Tokens>

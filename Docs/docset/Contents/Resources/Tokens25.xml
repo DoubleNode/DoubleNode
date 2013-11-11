@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWBeIdenticalToMatcher.html">
+	<File path="Classes/KWAsyncMatcherProbe.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWBeIdenticalToMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWAsyncMatcherProbe</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeIdenticalToMatcher.h</DeclaredIn>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
             
 			
 			<NodeRef refid="25"/>
@@ -13,14 +13,86 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBeIdenticalToMatcher/beIdenticalTo:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncMatcherProbe/setMatchResult:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeIdenticalToMatcher.h</DeclaredIn>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
 			
-			<Declaration>- (void)beIdenticalTo:(id)anObject</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL matchResult</Declaration>
 			
 			
-			<Anchor>//api/name/beIdenticalTo:</Anchor>
+			<Anchor>//api/name/matchResult</Anchor>
+            <NodeRef refid="25"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncMatcherProbe/matchResult</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL matchResult</Declaration>
+			
+			
+			<Anchor>//api/name/matchResult</Anchor>
+            <NodeRef refid="25"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWAsyncMatcherProbe/matchResult</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL matchResult</Declaration>
+			
+			
+			<Anchor>//api/name/matchResult</Anchor>
+            <NodeRef refid="25"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncMatcherProbe/setMatcher:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) id&lt;KWMatching&gt; matcher</Declaration>
+			
+			
+			<Anchor>//api/name/matcher</Anchor>
+            <NodeRef refid="25"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncMatcherProbe/matcher</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) id&lt;KWMatching&gt; matcher</Declaration>
+			
+			
+			<Anchor>//api/name/matcher</Anchor>
+            <NodeRef refid="25"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWAsyncMatcherProbe/matcher</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) id&lt;KWMatching&gt; matcher</Declaration>
+			
+			
+			<Anchor>//api/name/matcher</Anchor>
+            <NodeRef refid="25"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncMatcherProbe/initWithMatcher:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>- (id)initWithMatcher:(id&lt;KWMatching&gt;)aMatcher</Declaration>
+			
+			
+			<Anchor>//api/name/initWithMatcher:</Anchor>
             <NodeRef refid="25"/>
 		</Token>
 		

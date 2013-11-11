@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWMessageTracker.html">
+	<File path="Classes/KWMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWMessageTracker</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="65"/>
@@ -13,35 +13,35 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/initWithSubject:messagePattern:countType:count:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/initWithSubject:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithSubject:(id)anObject messagePattern:(KWMessagePattern *)aMessagePattern countType:(KWCountType)aCountType count:(NSUInteger)aCount</Declaration>
+			<Declaration>- (id)initWithSubject:(id)anObject</Declaration>
 			
 			
-			<Anchor>//api/name/initWithSubject:messagePattern:countType:count:</Anchor>
+			<Anchor>//api/name/initWithSubject:</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWMessageTracker/messageTrackerWithSubject:messagePattern:countType:count:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMatcher/matcherWithSubject:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)messageTrackerWithSubject:(id)anObject messagePattern:(KWMessagePattern *)aMessagePattern countType:(KWCountType)aCountType count:(NSUInteger)aCount</Declaration>
+			<Declaration>+ (id)matcherWithSubject:(id)anObject</Declaration>
 			
 			
-			<Anchor>//api/name/messageTrackerWithSubject:messagePattern:countType:count:</Anchor>
+			<Anchor>//api/name/matcherWithSubject:</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/setSubject:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/setSubject:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) id subject</Declaration>
+			<Declaration>@property (nonatomic, strong) id subject</Declaration>
 			
 			
 			<Anchor>//api/name/subject</Anchor>
@@ -49,11 +49,11 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/subject</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/subject</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) id subject</Declaration>
+			<Declaration>@property (nonatomic, strong) id subject</Declaration>
 			
 			
 			<Anchor>//api/name/subject</Anchor>
@@ -61,11 +61,11 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWMessageTracker/subject</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWMatcher/subject</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) id subject</Declaration>
+			<Declaration>@property (nonatomic, strong) id subject</Declaration>
 			
 			
 			<Anchor>//api/name/subject</Anchor>
@@ -73,158 +73,62 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/setMessagePattern:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMatcher/matcherStrings</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) KWMessagePattern *messagePattern</Declaration>
+			<Declaration>+ (NSArray *)matcherStrings</Declaration>
 			
 			
-			<Anchor>//api/name/messagePattern</Anchor>
+			<Anchor>//api/name/matcherStrings</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/messagePattern</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWMatcher/canMatchSubject:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) KWMessagePattern *messagePattern</Declaration>
+			<Declaration>+ (BOOL)canMatchSubject:(id)anObject</Declaration>
 			
 			
-			<Anchor>//api/name/messagePattern</Anchor>
+			<Anchor>//api/name/canMatchSubject:</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWMessageTracker/messagePattern</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/evaluate</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) KWMessagePattern *messagePattern</Declaration>
+			<Declaration>- (BOOL)evaluate</Declaration>
 			
 			
-			<Anchor>//api/name/messagePattern</Anchor>
+			<Anchor>//api/name/evaluate</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/setCountType:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/failureMessageForShould</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) KWCountType countType</Declaration>
+			<Declaration>- (NSString *)failureMessageForShould</Declaration>
 			
 			
-			<Anchor>//api/name/countType</Anchor>
+			<Anchor>//api/name/failureMessageForShould</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/countType</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWMatcher/failureMessageForShouldNot</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
+			<DeclaredIn>KWMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) KWCountType countType</Declaration>
-			
-			
-			<Anchor>//api/name/countType</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWMessageTracker/countType</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) KWCountType countType</Declaration>
+			<Declaration>- (NSString *)failureMessageForShouldNot</Declaration>
 			
 			
-			<Anchor>//api/name/countType</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/setCount:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSUInteger count</Declaration>
-			
-			
-			<Anchor>//api/name/count</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/count</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSUInteger count</Declaration>
-			
-			
-			<Anchor>//api/name/count</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWMessageTracker/count</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSUInteger count</Declaration>
-			
-			
-			<Anchor>//api/name/count</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/stopTracking</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
-			
-			<Declaration>- (void)stopTracking</Declaration>
-			
-			
-			<Anchor>//api/name/stopTracking</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/succeeded</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)succeeded</Declaration>
-			
-			
-			<Anchor>//api/name/succeeded</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/expectedCountPhrase</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
-			
-			<Declaration>- (NSString *)expectedCountPhrase</Declaration>
-			
-			
-			<Anchor>//api/name/expectedCountPhrase</Anchor>
-            <NodeRef refid="65"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMessageTracker/receivedCountPhrase</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMessageTracker.h</DeclaredIn>
-			
-			<Declaration>- (NSString *)receivedCountPhrase</Declaration>
-			
-			
-			<Anchor>//api/name/receivedCountPhrase</Anchor>
+			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
             <NodeRef refid="65"/>
 		</Token>
 		

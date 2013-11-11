@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWBeKindOfClassMatcher.html">
+	<File path="Classes/KWAsyncVerifier.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWBeKindOfClassMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWAsyncVerifier</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeKindOfClassMatcher.h</DeclaredIn>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
             
 			
 			<NodeRef refid="26"/>
@@ -13,14 +13,98 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBeKindOfClassMatcher/beKindOfClass:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/setTimeout:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeKindOfClassMatcher.h</DeclaredIn>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
 			
-			<Declaration>- (void)beKindOfClass:(Class)aClass</Declaration>
+			<Declaration>@property (nonatomic, assign) NSTimeInterval timeout</Declaration>
 			
 			
-			<Anchor>//api/name/beKindOfClass:</Anchor>
+			<Anchor>//api/name/timeout</Anchor>
+            <NodeRef refid="26"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/timeout</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) NSTimeInterval timeout</Declaration>
+			
+			
+			<Anchor>//api/name/timeout</Anchor>
+            <NodeRef refid="26"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWAsyncVerifier/timeout</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) NSTimeInterval timeout</Declaration>
+			
+			
+			<Anchor>//api/name/timeout</Anchor>
+            <NodeRef refid="26"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/setShouldWait:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL shouldWait</Declaration>
+			
+			
+			<Anchor>//api/name/shouldWait</Anchor>
+            <NodeRef refid="26"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/shouldWait</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL shouldWait</Declaration>
+			
+			
+			<Anchor>//api/name/shouldWait</Anchor>
+            <NodeRef refid="26"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWAsyncVerifier/shouldWait</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) BOOL shouldWait</Declaration>
+			
+			
+			<Anchor>//api/name/shouldWait</Anchor>
+            <NodeRef refid="26"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/clm/KWAsyncVerifier/asyncVerifierWithExpectationType:callSite:matcherFactory:reporter:probeTimeout:shouldWait:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>+ (id)asyncVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite matcherFactory:(KWMatcherFactory *)aMatcherFactory reporter:(id&lt;KWReporting&gt;)aReporter probeTimeout:(NSTimeInterval)probeTimeout shouldWait:(BOOL)shouldWait</Declaration>
+			
+			
+			<Anchor>//api/name/asyncVerifierWithExpectationType:callSite:matcherFactory:reporter:probeTimeout:shouldWait:</Anchor>
+            <NodeRef refid="26"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWAsyncVerifier/verifyWithProbe:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWAsyncVerifier.h</DeclaredIn>
+			
+			<Declaration>- (void)verifyWithProbe:(KWAsyncMatcherProbe *)aProbe</Declaration>
+			
+			
+			<Anchor>//api/name/verifyWithProbe:</Anchor>
             <NodeRef refid="26"/>
 		</Token>
 		

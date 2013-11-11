@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWExampleDelegate.html">
+	<File path="Protocols/ADVTheme.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWExampleDelegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/ADVTheme</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleDelegate.h</DeclaredIn>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
             
 			
 			<NodeRef refid="113"/>
@@ -13,14 +13,794 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWExampleDelegate/example:didFailWithFailure:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/statusBarStyle</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWExampleDelegate.h</DeclaredIn>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
 			
-			<Declaration>- (void)example:(KWExample *)example didFailWithFailure:(KWFailure *)failure</Declaration>
+			<Declaration>- (UIStatusBarStyle)statusBarStyle</Declaration>
 			
 			
-			<Anchor>//api/name/example:didFailWithFailure:</Anchor>
+			<Anchor>//api/name/statusBarStyle</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/mainColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)mainColor</Declaration>
+			
+			
+			<Anchor>//api/name/mainColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/secondColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)secondColor</Declaration>
+			
+			
+			<Anchor>//api/name/secondColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationTextColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)navigationTextColor</Declaration>
+			
+			
+			<Anchor>//api/name/navigationTextColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/highlightColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)highlightColor</Declaration>
+			
+			
+			<Anchor>//api/name/highlightColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/shadowColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)shadowColor</Declaration>
+			
+			
+			<Anchor>//api/name/shadowColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/highlightShadowColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)highlightShadowColor</Declaration>
+			
+			
+			<Anchor>//api/name/highlightShadowColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationTextShadowColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)navigationTextShadowColor</Declaration>
+			
+			
+			<Anchor>//api/name/navigationTextShadowColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/backgroundColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)backgroundColor</Declaration>
+			
+			
+			<Anchor>//api/name/backgroundColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationFont</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIFont *)navigationFont</Declaration>
+			
+			
+			<Anchor>//api/name/navigationFont</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/barButtonFont</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIFont *)barButtonFont</Declaration>
+			
+			
+			<Anchor>//api/name/barButtonFont</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/segmentFont</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIFont *)segmentFont</Declaration>
+			
+			
+			<Anchor>//api/name/segmentFont</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/baseTintColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)baseTintColor</Declaration>
+			
+			
+			<Anchor>//api/name/baseTintColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/accentTintColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)accentTintColor</Declaration>
+			
+			
+			<Anchor>//api/name/accentTintColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/selectedTabbarItemTintColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)selectedTabbarItemTintColor</Declaration>
+			
+			
+			<Anchor>//api/name/selectedTabbarItemTintColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchThumbColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)switchThumbColor</Declaration>
+			
+			
+			<Anchor>//api/name/switchThumbColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOnColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)switchOnColor</Declaration>
+			
+			
+			<Anchor>//api/name/switchOnColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchTintColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)switchTintColor</Declaration>
+			
+			
+			<Anchor>//api/name/switchTintColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/segmentedTintColor</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIColor *)segmentedTintColor</Declaration>
+			
+			
+			<Anchor>//api/name/segmentedTintColor</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/shadowOffset</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (CGSize)shadowOffset</Declaration>
+			
+			
+			<Anchor>//api/name/shadowOffset</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/topShadow</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)topShadow</Declaration>
+			
+			
+			<Anchor>//api/name/topShadow</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/bottomShadow</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)bottomShadow</Declaration>
+			
+			
+			<Anchor>//api/name/bottomShadow</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationBackgroundForBarMetrics:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)navigationBackgroundForBarMetrics:(UIBarMetrics)metrics</Declaration>
+			
+			
+			<Anchor>//api/name/navigationBackgroundForBarMetrics:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/navigationBackgroundForIPadAndOrientation:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)navigationBackgroundForIPadAndOrientation:(UIInterfaceOrientation)orientation</Declaration>
+			
+			
+			<Anchor>//api/name/navigationBackgroundForIPadAndOrientation:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/barButtonBackgroundForState:style:barMetrics:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)barButtonBackgroundForState:(UIControlState)state style:(UIBarButtonItemStyle)style barMetrics:(UIBarMetrics)barMetrics</Declaration>
+			
+			
+			<Anchor>//api/name/barButtonBackgroundForState:style:barMetrics:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/backBackgroundForState:barMetrics:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)backBackgroundForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics</Declaration>
+			
+			
+			<Anchor>//api/name/backBackgroundForState:barMetrics:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/toolbarBackgroundForBarMetrics:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)toolbarBackgroundForBarMetrics:(UIBarMetrics)metrics</Declaration>
+			
+			
+			<Anchor>//api/name/toolbarBackgroundForBarMetrics:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)searchBackground</Declaration>
+			
+			
+			<Anchor>//api/name/searchBackground</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchScopeBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)searchScopeBackground</Declaration>
+			
+			
+			<Anchor>//api/name/searchScopeBackground</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchFieldImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)searchFieldImage</Declaration>
+			
+			
+			<Anchor>//api/name/searchFieldImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchImageForIcon:state:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)searchImageForIcon:(UISearchBarIcon)icon state:(UIControlState)state</Declaration>
+			
+			
+			<Anchor>//api/name/searchImageForIcon:state:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchScopeButtonBackgroundForState:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)searchScopeButtonBackgroundForState:(UIControlState)state</Declaration>
+			
+			
+			<Anchor>//api/name/searchScopeButtonBackgroundForState:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/searchScopeButtonDivider</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)searchScopeButtonDivider</Declaration>
+			
+			
+			<Anchor>//api/name/searchScopeButtonDivider</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/segmentedBackgroundForState:barMetrics:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)segmentedBackgroundForState:(UIControlState)state barMetrics:(UIBarMetrics)barMetrics</Declaration>
+			
+			
+			<Anchor>//api/name/segmentedBackgroundForState:barMetrics:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/segmentedDividerForBarMetrics:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)segmentedDividerForBarMetrics:(UIBarMetrics)barMetrics</Declaration>
+			
+			
+			<Anchor>//api/name/segmentedDividerForBarMetrics:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tableBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)tableBackground</Declaration>
+			
+			
+			<Anchor>//api/name/tableBackground</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tableSectionHeaderBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)tableSectionHeaderBackground</Declaration>
+			
+			
+			<Anchor>//api/name/tableSectionHeaderBackground</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tableFooterBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)tableFooterBackground</Declaration>
+			
+			
+			<Anchor>//api/name/tableFooterBackground</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/viewBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)viewBackground</Declaration>
+			
+			
+			<Anchor>//api/name/viewBackground</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/viewBackgroundPattern</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)viewBackgroundPattern</Declaration>
+			
+			
+			<Anchor>//api/name/viewBackgroundPattern</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/viewBackgroundTimeline</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)viewBackgroundTimeline</Declaration>
+			
+			
+			<Anchor>//api/name/viewBackgroundTimeline</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOnImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)switchOnImage</Declaration>
+			
+			
+			<Anchor>//api/name/switchOnImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOffImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)switchOffImage</Declaration>
+			
+			
+			<Anchor>//api/name/switchOffImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOnIcon</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)switchOnIcon</Declaration>
+			
+			
+			<Anchor>//api/name/switchOnIcon</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchOffIcon</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)switchOffIcon</Declaration>
+			
+			
+			<Anchor>//api/name/switchOffIcon</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchTrack</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)switchTrack</Declaration>
+			
+			
+			<Anchor>//api/name/switchTrack</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/switchThumbForState:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)switchThumbForState:(UIControlState)state</Declaration>
+			
+			
+			<Anchor>//api/name/switchThumbForState:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderThumbForState:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)sliderThumbForState:(UIControlState)state</Declaration>
+			
+			
+			<Anchor>//api/name/sliderThumbForState:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderMinTrack</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)sliderMinTrack</Declaration>
+			
+			
+			<Anchor>//api/name/sliderMinTrack</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderMaxTrack</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)sliderMaxTrack</Declaration>
+			
+			
+			<Anchor>//api/name/sliderMaxTrack</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderMinTrackDouble</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)sliderMinTrackDouble</Declaration>
+			
+			
+			<Anchor>//api/name/sliderMinTrackDouble</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/sliderMaxTrackDouble</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)sliderMaxTrackDouble</Declaration>
+			
+			
+			<Anchor>//api/name/sliderMaxTrackDouble</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressTrackImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)progressTrackImage</Declaration>
+			
+			
+			<Anchor>//api/name/progressTrackImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressProgressImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)progressProgressImage</Declaration>
+			
+			
+			<Anchor>//api/name/progressProgressImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressPercentTrackImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)progressPercentTrackImage</Declaration>
+			
+			
+			<Anchor>//api/name/progressPercentTrackImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressPercentProgressImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)progressPercentProgressImage</Declaration>
+			
+			
+			<Anchor>//api/name/progressPercentProgressImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/progressPercentProgressValueImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)progressPercentProgressValueImage</Declaration>
+			
+			
+			<Anchor>//api/name/progressPercentProgressValueImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/stepperBackgroundForState:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)stepperBackgroundForState:(UIControlState)state</Declaration>
+			
+			
+			<Anchor>//api/name/stepperBackgroundForState:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/stepperDividerForState:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)stepperDividerForState:(UIControlState)state</Declaration>
+			
+			
+			<Anchor>//api/name/stepperDividerForState:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/stepperIncrementImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)stepperIncrementImage</Declaration>
+			
+			
+			<Anchor>//api/name/stepperIncrementImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/stepperDecrementImage</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)stepperDecrementImage</Declaration>
+			
+			
+			<Anchor>//api/name/stepperDecrementImage</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/buttonBackgroundForState:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)buttonBackgroundForState:(UIControlState)state</Declaration>
+			
+			
+			<Anchor>//api/name/buttonBackgroundForState:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tabBarBackground</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)tabBarBackground</Declaration>
+			
+			
+			<Anchor>//api/name/tabBarBackground</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/tabBarSelectionIndicator</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)tabBarSelectionIndicator</Declaration>
+			
+			
+			<Anchor>//api/name/tabBarSelectionIndicator</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/imageForTab:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)imageForTab:(SSThemeTab)tab</Declaration>
+			
+			
+			<Anchor>//api/name/imageForTab:</Anchor>
+            <NodeRef refid="113"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/ADVTheme/finishedImageForTab:selected:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>ADVTheme.h</DeclaredIn>
+			
+			<Declaration>- (UIImage *)finishedImageForTab:(SSThemeTab)tab selected:(BOOL)selected</Declaration>
+			
+			
+			<Anchor>//api/name/finishedImageForTab:selected:</Anchor>
             <NodeRef refid="113"/>
 		</Token>
 		

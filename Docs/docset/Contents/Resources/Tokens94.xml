@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSObject+KiwiSpyAdditions.html">
+	<File path="Categories/NSNumber+KiwiAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiSpyAdditions)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSNumber(KiwiAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiSpyAdditions.h</DeclaredIn>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="94"/>
@@ -13,26 +13,194 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/captureArgument:atIndex:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithBytes:objCType:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiSpyAdditions.h</DeclaredIn>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
 			
-			<Declaration>- (KWCaptureSpy *)captureArgument:(SEL)selector atIndex:(NSUInteger)index</Declaration>
+			<Declaration>+ (id)numberWithBytes:(const void *)bytes objCType:(const char *)anObjCType</Declaration>
 			
 			
-			<Anchor>//api/name/captureArgument:atIndex:</Anchor>
+			<Anchor>//api/name/numberWithBytes:objCType:</Anchor>
             <NodeRef refid="94"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/captureArgument:atIndex:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithBoolBytes:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiSpyAdditions.h</DeclaredIn>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
 			
-			<Declaration>+ (KWCaptureSpy *)captureArgument:(SEL)selector atIndex:(NSUInteger)index</Declaration>
+			<Declaration>+ (id)numberWithBoolBytes:(const void *)bytes</Declaration>
 			
 			
-			<Anchor>//api/name/captureArgument:atIndex:</Anchor>
+			<Anchor>//api/name/numberWithBoolBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithCharBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithCharBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithCharBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithDoubleBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithDoubleBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithDoubleBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithFloatBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithFloatBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithFloatBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithIntBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithIntBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithIntBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithIntegerBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithIntegerBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithIntegerBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithLongBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithLongBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithLongBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithLongLongBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithLongLongBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithLongLongBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithShortBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithShortBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithShortBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithUnsignedCharBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithUnsignedCharBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithUnsignedCharBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithUnsignedIntBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithUnsignedIntBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithUnsignedIntBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithUnsignedIntegerBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithUnsignedIntegerBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithUnsignedIntegerBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithUnsignedLongBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithUnsignedLongBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithUnsignedLongBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithUnsignedLongLongBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithUnsignedLongLongBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithUnsignedLongLongBytes:</Anchor>
+            <NodeRef refid="94"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/NSNumber/numberWithUnsignedShortBytes:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSNumber+KiwiAdditions.h</DeclaredIn>
+			
+			<Declaration>+ (id)numberWithUnsignedShortBytes:(const void *)bytes</Declaration>
+			
+			
+			<Anchor>//api/name/numberWithUnsignedShortBytes:</Anchor>
             <NodeRef refid="94"/>
 		</Token>
 		

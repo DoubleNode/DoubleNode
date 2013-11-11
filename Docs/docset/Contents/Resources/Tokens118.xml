@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWMatching.html">
+	<File path="Protocols/KWExampleNode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWMatching</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWExampleNode</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
+			<DeclaredIn>KWExampleNode.h</DeclaredIn>
             
 			
 			<NodeRef refid="118"/>
@@ -13,122 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/initWithSubject:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWExampleNode/acceptExampleNodeVisitor:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
+			<DeclaredIn>KWExampleNode.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithSubject:(id)anObject</Declaration>
+			<Declaration>- (void)acceptExampleNodeVisitor:(id&lt;KWExampleNodeVisitor&gt;)aVisitor</Declaration>
 			
 			
-			<Anchor>//api/name/initWithSubject:</Anchor>
+			<Anchor>//api/name/acceptExampleNodeVisitor:</Anchor>
             <NodeRef refid="118"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/matcherStrings</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWExampleNode/contextStack</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
+			<DeclaredIn>KWExampleNode.h</DeclaredIn>
 			
-			<Declaration>+ (NSArray *)matcherStrings</Declaration>
-			
-			
-			<Anchor>//api/name/matcherStrings</Anchor>
-            <NodeRef refid="118"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/canMatchSubject:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
-			
-			<Declaration>+ (BOOL)canMatchSubject:(id)anObject</Declaration>
+			<Declaration>- (NSArray *)contextStack</Declaration>
 			
 			
-			<Anchor>//api/name/canMatchSubject:</Anchor>
-            <NodeRef refid="118"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/isNilMatcher</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)isNilMatcher</Declaration>
-			
-			
-			<Anchor>//api/name/isNilMatcher</Anchor>
-            <NodeRef refid="118"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/shouldBeEvaluatedAtEndOfExample</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)shouldBeEvaluatedAtEndOfExample</Declaration>
-			
-			
-			<Anchor>//api/name/shouldBeEvaluatedAtEndOfExample</Anchor>
-            <NodeRef refid="118"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/willEvaluateMultipleTimes</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)willEvaluateMultipleTimes</Declaration>
-			
-			
-			<Anchor>//api/name/willEvaluateMultipleTimes</Anchor>
-            <NodeRef refid="118"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/setWillEvaluateMultipleTimes:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
-			
-			<Declaration>- (void)setWillEvaluateMultipleTimes:(BOOL)shouldEvaluateMultipleTimes</Declaration>
-			
-			
-			<Anchor>//api/name/setWillEvaluateMultipleTimes:</Anchor>
-            <NodeRef refid="118"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/evaluate</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)evaluate</Declaration>
-			
-			
-			<Anchor>//api/name/evaluate</Anchor>
-            <NodeRef refid="118"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/failureMessageForShould</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
-			
-			<Declaration>- (NSString *)failureMessageForShould</Declaration>
-			
-			
-			<Anchor>//api/name/failureMessageForShould</Anchor>
-            <NodeRef refid="118"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWMatching/failureMessageForShouldNot</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatching.h</DeclaredIn>
-			
-			<Declaration>- (NSString *)failureMessageForShouldNot</Declaration>
-			
-			
-			<Anchor>//api/name/failureMessageForShouldNot</Anchor>
+			<Anchor>//api/name/contextStack</Anchor>
             <NodeRef refid="118"/>
 		</Token>
 		

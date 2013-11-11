@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWUserDefinedMatcherBuilder.html">
+	<File path="Classes/KWStringContainsMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWUserDefinedMatcherBuilder</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWStringContainsMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="81"/>
@@ -13,134 +13,38 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/setKey:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWStringContainsMatcher/matcherWithSubstring:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy, readonly) NSString *key</Declaration>
+			<Declaration>+ (id)matcherWithSubstring:(NSString *)aSubstring</Declaration>
 			
 			
-			<Anchor>//api/name/key</Anchor>
+			<Anchor>//api/name/matcherWithSubstring:</Anchor>
             <NodeRef refid="81"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/key</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWStringContainsMatcher/initWithSubstring:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy, readonly) NSString *key</Declaration>
+			<Declaration>- (id)initWithSubstring:(NSString *)aSubstring</Declaration>
 			
 			
-			<Anchor>//api/name/key</Anchor>
+			<Anchor>//api/name/initWithSubstring:</Anchor>
             <NodeRef refid="81"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWUserDefinedMatcherBuilder/key</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWStringContainsMatcher/matches:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
+			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, copy, readonly) NSString *key</Declaration>
-			
-			
-			<Anchor>//api/name/key</Anchor>
-            <NodeRef refid="81"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWUserDefinedMatcherBuilder/builder</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>+ (id)builder</Declaration>
+			<Declaration>- (BOOL)matches:(id)object</Declaration>
 			
 			
-			<Anchor>//api/name/builder</Anchor>
-            <NodeRef refid="81"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWUserDefinedMatcherBuilder/builderForSelector:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>+ (id)builderForSelector:(SEL)aSelector</Declaration>
-			
-			
-			<Anchor>//api/name/builderForSelector:</Anchor>
-            <NodeRef refid="81"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/initWithSelector:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>- (id)initWithSelector:(SEL)aSelector</Declaration>
-			
-			
-			<Anchor>//api/name/initWithSelector:</Anchor>
-            <NodeRef refid="81"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/match:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)match:(KWUserDefinedMatcherBlock)block</Declaration>
-			
-			
-			<Anchor>//api/name/match:</Anchor>
-            <NodeRef refid="81"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/failureMessageForShould:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)failureMessageForShould:(KWUserDefinedMatcherMessageBlock)block</Declaration>
-			
-			
-			<Anchor>//api/name/failureMessageForShould:</Anchor>
-            <NodeRef refid="81"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/failureMessageForShouldNot:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)failureMessageForShouldNot:(KWUserDefinedMatcherMessageBlock)block</Declaration>
-			
-			
-			<Anchor>//api/name/failureMessageForShouldNot:</Anchor>
-            <NodeRef refid="81"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/description:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>- (void)description:(NSString *)description</Declaration>
-			
-			
-			<Anchor>//api/name/description:</Anchor>
-            <NodeRef refid="81"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWUserDefinedMatcherBuilder/buildMatcherWithSubject:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWUserDefinedMatcher.h</DeclaredIn>
-			
-			<Declaration>- (KWUserDefinedMatcher *)buildMatcherWithSubject:(id)subject</Declaration>
-			
-			
-			<Anchor>//api/name/buildMatcherWithSubject:</Anchor>
+			<Anchor>//api/name/matches:</Anchor>
             <NodeRef refid="81"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWGenericMatching.html">
+	<File path="Protocols/KWContainmentCountMatcherTerminals.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWGenericMatching</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWContainmentCountMatcherTerminals</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWGenericMatcher.h</DeclaredIn>
+			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="116"/>
@@ -13,14 +13,38 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWGenericMatching/matches:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWContainmentCountMatcherTerminals/objects</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWGenericMatcher.h</DeclaredIn>
+			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)matches:(id)object</Declaration>
+			<Declaration>- (id)objects</Declaration>
 			
 			
-			<Anchor>//api/name/matches:</Anchor>
+			<Anchor>//api/name/objects</Anchor>
+            <NodeRef refid="116"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWContainmentCountMatcherTerminals/items</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (id)items</Declaration>
+			
+			
+			<Anchor>//api/name/items</Anchor>
+            <NodeRef refid="116"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWContainmentCountMatcherTerminals/elements</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (id)elements</Declaration>
+			
+			
+			<Anchor>//api/name/elements</Anchor>
             <NodeRef refid="116"/>
 		</Token>
 		

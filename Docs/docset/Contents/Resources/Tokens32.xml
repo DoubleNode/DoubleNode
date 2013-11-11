@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWBeforeAllNode.html">
+	<File path="Classes/KWBeSubclassOfClassMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWBeforeAllNode</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBeSubclassOfClassMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeforeAllNode.h</DeclaredIn>
+			<DeclaredIn>KWBeSubclassOfClassMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="32"/>
@@ -13,14 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWBeforeAllNode/beforeAllNodeWithCallSite:block:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeSubclassOfClassMatcher/beSubclassOfClass:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeforeAllNode.h</DeclaredIn>
+			<DeclaredIn>KWBeSubclassOfClassMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)beforeAllNodeWithCallSite:(KWCallSite *)aCallSite block:(void ( ^ ) ( void ))block</Declaration>
+			<Declaration>- (void)beSubclassOfClass:(Class)aClass</Declaration>
 			
 			
-			<Anchor>//api/name/beforeAllNodeWithCallSite:block:</Anchor>
+			<Anchor>//api/name/beSubclassOfClass:</Anchor>
             <NodeRef refid="32"/>
 		</Token>
 		

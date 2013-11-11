@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSString+KWShellCommand.html">
+	<File path="Categories/NSOrderedSet+KiwiGenericMatchingAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSString(KWShellCommand)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSOrderedSet(KiwiGenericMatchingAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWSymbolicator.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="102"/>
@@ -13,14 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSString/stringWithShellCommand:arguments:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSOrderedSet/containsObjectEqualToOrMatching:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWSymbolicator.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
 			
-			<Declaration>+ (NSString *)stringWithShellCommand:(NSString *)command arguments:(NSArray *)arguments</Declaration>
+			<Declaration>- (BOOL)containsObjectEqualToOrMatching:(id)object</Declaration>
 			
 			
-			<Anchor>//api/name/stringWithShellCommand:arguments:</Anchor>
+			<Anchor>//api/name/containsObjectEqualToOrMatching:</Anchor>
             <NodeRef refid="102"/>
 		</Token>
 		

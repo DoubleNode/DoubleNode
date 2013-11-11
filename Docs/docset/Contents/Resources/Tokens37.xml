@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWCallSite.html">
+	<File path="Classes/KWBeforeEachNode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWCallSite</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBeforeEachNode</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
+			<DeclaredIn>KWBeforeEachNode.h</DeclaredIn>
             
 			
 			<NodeRef refid="37"/>
@@ -13,110 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/initWithFilename:lineNumber:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWBeforeEachNode/beforeEachNodeWithCallSite:block:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
+			<DeclaredIn>KWBeforeEachNode.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithFilename:(NSString *)aFilename lineNumber:(NSUInteger)aLineNumber</Declaration>
-			
-			
-			<Anchor>//api/name/initWithFilename:lineNumber:</Anchor>
-            <NodeRef refid="37"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWCallSite/callSiteWithFilename:lineNumber:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
-			
-			<Declaration>+ (id)callSiteWithFilename:(NSString *)aFilename lineNumber:(NSUInteger)aLineNumber</Declaration>
+			<Declaration>+ (id)beforeEachNodeWithCallSite:(KWCallSite *)aCallSite block:(void ( ^ ) ( void ))block</Declaration>
 			
 			
-			<Anchor>//api/name/callSiteWithFilename:lineNumber:</Anchor>
-            <NodeRef refid="37"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/setFilename:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly, copy) NSString *filename</Declaration>
-			
-			
-			<Anchor>//api/name/filename</Anchor>
-            <NodeRef refid="37"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/filename</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly, copy) NSString *filename</Declaration>
-			
-			
-			<Anchor>//api/name/filename</Anchor>
-            <NodeRef refid="37"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWCallSite/filename</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly, copy) NSString *filename</Declaration>
-			
-			
-			<Anchor>//api/name/filename</Anchor>
-            <NodeRef refid="37"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/setLineNumber:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSUInteger lineNumber</Declaration>
-			
-			
-			<Anchor>//api/name/lineNumber</Anchor>
-            <NodeRef refid="37"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/lineNumber</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSUInteger lineNumber</Declaration>
-			
-			
-			<Anchor>//api/name/lineNumber</Anchor>
-            <NodeRef refid="37"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWCallSite/lineNumber</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
-			
-			<Declaration>@property (nonatomic, readonly) NSUInteger lineNumber</Declaration>
-			
-			
-			<Anchor>//api/name/lineNumber</Anchor>
-            <NodeRef refid="37"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWCallSite/isEqualToCallSite:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWCallSite.h</DeclaredIn>
-			
-			<Declaration>- (BOOL)isEqualToCallSite:(KWCallSite *)aCallSite</Declaration>
-			
-			
-			<Anchor>//api/name/isEqualToCallSite:</Anchor>
+			<Anchor>//api/name/beforeEachNodeWithCallSite:block:</Anchor>
             <NodeRef refid="37"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWInvocationCapturerDelegate.html">
+	<File path="Protocols/KWExampleDelegate.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWInvocationCapturerDelegate</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWExampleDelegate</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWExampleDelegate.h</DeclaredIn>
             
 			
 			<NodeRef refid="117"/>
@@ -13,26 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWInvocationCapturerDelegate/invocationCapturer:methodSignatureForSelector:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWExampleDelegate/example:didFailWithFailure:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			<DeclaredIn>KWExampleDelegate.h</DeclaredIn>
 			
-			<Declaration>- (NSMethodSignature *)invocationCapturer:(KWInvocationCapturer *)anInvocationCapturer methodSignatureForSelector:(SEL)aSelector</Declaration>
-			
-			
-			<Anchor>//api/name/invocationCapturer:methodSignatureForSelector:</Anchor>
-            <NodeRef refid="117"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWInvocationCapturerDelegate/invocationCapturer:didCaptureInvocation:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
-			
-			<Declaration>- (void)invocationCapturer:(KWInvocationCapturer *)anInvocationCapturer didCaptureInvocation:(NSInvocation *)anInvocation</Declaration>
+			<Declaration>- (void)example:(KWExample *)example didFailWithFailure:(KWFailure *)failure</Declaration>
 			
 			
-			<Anchor>//api/name/invocationCapturer:didCaptureInvocation:</Anchor>
+			<Anchor>//api/name/example:didFailWithFailure:</Anchor>
             <NodeRef refid="117"/>
 		</Token>
 		

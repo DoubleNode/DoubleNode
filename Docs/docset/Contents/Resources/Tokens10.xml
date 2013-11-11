@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/DNModelWatchKVOObject.html">
+	<File path="Classes/DNModelWatchFetchedObjects.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatchKVOObject</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatchFetchedObjects</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchKVOObject.h</DeclaredIn>
+			<DeclaredIn>DNModelWatchFetchedObjects.h</DeclaredIn>
             
 			
 			<NodeRef refid="10"/>
@@ -13,50 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNModelWatchKVOObject/watchWithModel:andObject:didChange:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModelWatchFetchedObjects/watchWithModel:andFetch:didChange:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchKVOObject.h</DeclaredIn>
+			<DeclaredIn>DNModelWatchFetchedObjects.h</DeclaredIn>
 			
-			<Declaration>+ (id)watchWithModel:(DNModel *)model andObject:(DNManagedObject *)object didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler</Declaration>
+			<Declaration>+ (id)watchWithModel:(DNModel *)model andFetch:(NSFetchRequest *)fetch didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
 			
 			
-			<Anchor>//api/name/watchWithModel:andObject:didChange:</Anchor>
+			<Anchor>//api/name/watchWithModel:andFetch:didChange:</Anchor>
             <NodeRef refid="10"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNModelWatchKVOObject/watchWithModel:andObject:andAttributes:didChange:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchFetchedObjects/initWithModel:andFetch:didChange:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchKVOObject.h</DeclaredIn>
+			<DeclaredIn>DNModelWatchFetchedObjects.h</DeclaredIn>
 			
-			<Declaration>+ (id)watchWithModel:(DNModel *)model andObject:(DNManagedObject *)object andAttributes:(NSArray *)attributes didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler</Declaration>
-			
-			
-			<Anchor>//api/name/watchWithModel:andObject:andAttributes:didChange:</Anchor>
-            <NodeRef refid="10"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchKVOObject/initWithModel:andObject:didChange:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchKVOObject.h</DeclaredIn>
-			
-			<Declaration>- (id)initWithModel:(DNModel *)model andObject:(DNManagedObject *)object didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler</Declaration>
+			<Declaration>- (id)initWithModel:(DNModel *)model andFetch:(NSFetchRequest *)fetch didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
 			
 			
-			<Anchor>//api/name/initWithModel:andObject:didChange:</Anchor>
-            <NodeRef refid="10"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchKVOObject/initWithModel:andObject:andAttributes:didChange:</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchKVOObject.h</DeclaredIn>
-			
-			<Declaration>- (id)initWithModel:(DNModel *)model andObject:(DNManagedObject *)object andAttributes:(NSArray *)attributes didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler</Declaration>
-			
-			
-			<Anchor>//api/name/initWithModel:andObject:andAttributes:didChange:</Anchor>
+			<Anchor>//api/name/initWithModel:andFetch:didChange:</Anchor>
             <NodeRef refid="10"/>
 		</Token>
 		

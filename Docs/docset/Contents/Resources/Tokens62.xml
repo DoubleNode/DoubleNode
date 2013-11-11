@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWMatcherFactory.html">
+	<File path="Classes/KWInvocationCapturer.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWMatcherFactory</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWInvocationCapturer</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
             
 			
 			<NodeRef refid="62"/>
@@ -13,98 +13,122 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/init</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/initWithDelegate:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (id)init</Declaration>
+			<Declaration>- (id)initWithDelegate:(id)aDelegate</Declaration>
 			
 			
-			<Anchor>//api/name/init</Anchor>
+			<Anchor>//api/name/initWithDelegate:</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/setRegisteredMatcherClasses:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/initWithDelegate:userInfo:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSArray *registeredMatcherClasses</Declaration>
+			<Declaration>- (id)initWithDelegate:(id)aDelegate userInfo:(NSDictionary *)aUserInfo</Declaration>
 			
 			
-			<Anchor>//api/name/registeredMatcherClasses</Anchor>
+			<Anchor>//api/name/initWithDelegate:userInfo:</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/registeredMatcherClasses</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWInvocationCapturer/invocationCapturerWithDelegate:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSArray *registeredMatcherClasses</Declaration>
+			<Declaration>+ (id)invocationCapturerWithDelegate:(id)aDelegate</Declaration>
 			
 			
-			<Anchor>//api/name/registeredMatcherClasses</Anchor>
+			<Anchor>//api/name/invocationCapturerWithDelegate:</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instp/KWMatcherFactory/registeredMatcherClasses</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWInvocationCapturer/invocationCapturerWithDelegate:userInfo:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>@property (nonatomic, readonly) NSArray *registeredMatcherClasses</Declaration>
+			<Declaration>+ (id)invocationCapturerWithDelegate:(id)aDelegate userInfo:(NSDictionary *)aUserInfo</Declaration>
 			
 			
-			<Anchor>//api/name/registeredMatcherClasses</Anchor>
+			<Anchor>//api/name/invocationCapturerWithDelegate:userInfo:</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/registerMatcherClass:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/setDelegate:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (void)registerMatcherClass:(Class)aClass</Declaration>
+			<Declaration>@property (nonatomic, weak, readonly) id delegate</Declaration>
 			
 			
-			<Anchor>//api/name/registerMatcherClass:</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/registerMatcherClassesWithNamespacePrefix:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/delegate</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (void)registerMatcherClassesWithNamespacePrefix:(NSString *)aNamespacePrefix</Declaration>
+			<Declaration>@property (nonatomic, weak, readonly) id delegate</Declaration>
 			
 			
-			<Anchor>//api/name/registerMatcherClassesWithNamespacePrefix:</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/methodSignatureForMatcherSelector:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWInvocationCapturer/delegate</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (NSMethodSignature *)methodSignatureForMatcherSelector:(SEL)aSelector</Declaration>
+			<Declaration>@property (nonatomic, weak, readonly) id delegate</Declaration>
 			
 			
-			<Anchor>//api/name/methodSignatureForMatcherSelector:</Anchor>
+			<Anchor>//api/name/delegate</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWMatcherFactory/matcherFromInvocation:subject:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/setUserInfo:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWMatcherFactory.h</DeclaredIn>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
 			
-			<Declaration>- (KWMatcher *)matcherFromInvocation:(NSInvocation *)anInvocation subject:(id)subject</Declaration>
+			<Declaration>@property (nonatomic, strong, readonly) NSDictionary *userInfo</Declaration>
 			
 			
-			<Anchor>//api/name/matcherFromInvocation:subject:</Anchor>
+			<Anchor>//api/name/userInfo</Anchor>
+            <NodeRef refid="62"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWInvocationCapturer/userInfo</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSDictionary *userInfo</Declaration>
+			
+			
+			<Anchor>//api/name/userInfo</Anchor>
+            <NodeRef refid="62"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWInvocationCapturer/userInfo</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWInvocationCapturer.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, strong, readonly) NSDictionary *userInfo</Declaration>
+			
+			
+			<Anchor>//api/name/userInfo</Anchor>
             <NodeRef refid="62"/>
 		</Token>
 		

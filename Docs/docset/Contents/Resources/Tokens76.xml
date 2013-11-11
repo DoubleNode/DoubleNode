@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWSpec.html">
+	<File path="Classes/KWReceiveMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWSpec</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWReceiveMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWSpec.h</DeclaredIn>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="76"/>
@@ -13,74 +13,158 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/addVerifier:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/setWillEvaluateMultipleTimes:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWSpec.h</DeclaredIn>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)addVerifier:(id&lt;KWVerifying&gt;)aVerifier</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL willEvaluateMultipleTimes</Declaration>
 			
 			
-			<Anchor>//api/name/addVerifier:</Anchor>
+			<Anchor>//api/name/willEvaluateMultipleTimes</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/addExistVerifierWithExpectationType:callSite:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/willEvaluateMultipleTimes</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWSpec.h</DeclaredIn>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)addExistVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL willEvaluateMultipleTimes</Declaration>
 			
 			
-			<Anchor>//api/name/addExistVerifierWithExpectationType:callSite:</Anchor>
+			<Anchor>//api/name/willEvaluateMultipleTimes</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/addMatchVerifierWithExpectationType:callSite:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instp/KWReceiveMatcher/willEvaluateMultipleTimes</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWSpec.h</DeclaredIn>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)addMatchVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite</Declaration>
+			<Declaration>@property (nonatomic, assign) BOOL willEvaluateMultipleTimes</Declaration>
 			
 			
-			<Anchor>//api/name/addMatchVerifierWithExpectationType:callSite:</Anchor>
+			<Anchor>//api/name/willEvaluateMultipleTimes</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/addAsyncVerifierWithExpectationType:callSite:timeout:shouldWait:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWSpec.h</DeclaredIn>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (id)addAsyncVerifierWithExpectationType:(KWExpectationType)anExpectationType callSite:(KWCallSite *)aCallSite timeout:(NSInteger)timeout shouldWait:(BOOL)shouldWait</Declaration>
+			<Declaration>- (void)receive:(SEL)aSelector</Declaration>
 			
 			
-			<Anchor>//api/name/addAsyncVerifierWithExpectationType:callSite:timeout:shouldWait:</Anchor>
+			<Anchor>//api/name/receive:</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/file</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:withCount:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWSpec.h</DeclaredIn>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (NSString *)file</Declaration>
+			<Declaration>- (void)receive:(SEL)aSelector withCount:(NSUInteger)aCount</Declaration>
 			
 			
-			<Anchor>//api/name/file</Anchor>
+			<Anchor>//api/name/receive:withCount:</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWSpec/buildExampleGroups</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:withCountAtLeast:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWSpec.h</DeclaredIn>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (void)buildExampleGroups</Declaration>
+			<Declaration>- (void)receive:(SEL)aSelector withCountAtLeast:(NSUInteger)aCount</Declaration>
 			
 			
-			<Anchor>//api/name/buildExampleGroups</Anchor>
+			<Anchor>//api/name/receive:withCountAtLeast:</Anchor>
+            <NodeRef refid="76"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:withCountAtMost:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)receive:(SEL)aSelector withCountAtMost:(NSUInteger)aCount</Declaration>
+			
+			
+			<Anchor>//api/name/receive:withCountAtMost:</Anchor>
+            <NodeRef refid="76"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:andReturn:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)receive:(SEL)aSelector andReturn:(id)aValue</Declaration>
+			
+			
+			<Anchor>//api/name/receive:andReturn:</Anchor>
+            <NodeRef refid="76"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:andReturn:withCount:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)receive:(SEL)aSelector andReturn:(id)aValue withCount:(NSUInteger)aCount</Declaration>
+			
+			
+			<Anchor>//api/name/receive:andReturn:withCount:</Anchor>
+            <NodeRef refid="76"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:andReturn:withCountAtLeast:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)receive:(SEL)aSelector andReturn:(id)aValue withCountAtLeast:(NSUInteger)aCount</Declaration>
+			
+			
+			<Anchor>//api/name/receive:andReturn:withCountAtLeast:</Anchor>
+            <NodeRef refid="76"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receive:andReturn:withCountAtMost:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)receive:(SEL)aSelector andReturn:(id)aValue withCountAtMost:(NSUInteger)aCount</Declaration>
+			
+			
+			<Anchor>//api/name/receive:andReturn:withCountAtMost:</Anchor>
+            <NodeRef refid="76"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receiveMessagePattern:countType:count:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)receiveMessagePattern:(KWMessagePattern *)aMessagePattern countType:(KWCountType)aCountType count:(NSUInteger)aCount</Declaration>
+			
+			
+			<Anchor>//api/name/receiveMessagePattern:countType:count:</Anchor>
+            <NodeRef refid="76"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWReceiveMatcher/receiveMessagePattern:andReturn:countType:count:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWReceiveMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)receiveMessagePattern:(KWMessagePattern *)aMessagePattern andReturn:(id)aValue countType:(KWCountType)aCountType count:(NSUInteger)aCount</Declaration>
+			
+			
+			<Anchor>//api/name/receiveMessagePattern:andReturn:countType:count:</Anchor>
             <NodeRef refid="76"/>
 		</Token>
 		

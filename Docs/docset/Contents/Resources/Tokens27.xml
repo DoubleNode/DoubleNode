@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWBeMemberOfClassMatcher.html">
+	<File path="Classes/KWBeBetweenMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWBeMemberOfClassMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBeBetweenMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeMemberOfClassMatcher.h</DeclaredIn>
+			<DeclaredIn>KWBeBetweenMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="27"/>
@@ -13,14 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBeMemberOfClassMatcher/beMemberOfClass:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeBetweenMatcher/beBetween:and:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeMemberOfClassMatcher.h</DeclaredIn>
+			<DeclaredIn>KWBeBetweenMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)beMemberOfClass:(Class)aClass</Declaration>
+			<Declaration>- (void)beBetween:(id)aLowerEndpoint and:(id)anUpperEndpoint</Declaration>
 			
 			
-			<Anchor>//api/name/beMemberOfClass:</Anchor>
+			<Anchor>//api/name/beBetween:and:</Anchor>
+            <NodeRef refid="27"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeBetweenMatcher/beInTheIntervalFrom:to:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWBeBetweenMatcher.h</DeclaredIn>
+			
+			<Declaration>- (void)beInTheIntervalFrom:(id)aLowerEndpoint to:(id)anUpperEndpoint</Declaration>
+			
+			
+			<Anchor>//api/name/beInTheIntervalFrom:to:</Anchor>
             <NodeRef refid="27"/>
 		</Token>
 		

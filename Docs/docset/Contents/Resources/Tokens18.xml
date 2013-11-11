@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWAfterAllNode.html">
+	<File path="Classes/DNTextField.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWAfterAllNode</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/DNTextField</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAfterAllNode.h</DeclaredIn>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
             
 			
 			<NodeRef refid="18"/>
@@ -13,14 +13,74 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWAfterAllNode/afterAllNodeWithCallSite:block:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNTextField/setVerticalPadding:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWAfterAllNode.h</DeclaredIn>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
 			
-			<Declaration>+ (id)afterAllNodeWithCallSite:(KWCallSite *)aCallSite block:(void ( ^ ) ( void ))block</Declaration>
+			<Declaration>@property (nonatomic, assign) float verticalPadding</Declaration>
 			
 			
-			<Anchor>//api/name/afterAllNodeWithCallSite:block:</Anchor>
+			<Anchor>//api/name/verticalPadding</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNTextField/verticalPadding</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float verticalPadding</Declaration>
+			
+			
+			<Anchor>//api/name/verticalPadding</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DNTextField/verticalPadding</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float verticalPadding</Declaration>
+			
+			
+			<Anchor>//api/name/verticalPadding</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNTextField/setHorizontalPadding:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float horizontalPadding</Declaration>
+			
+			
+			<Anchor>//api/name/horizontalPadding</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/DNTextField/horizontalPadding</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float horizontalPadding</Declaration>
+			
+			
+			<Anchor>//api/name/horizontalPadding</Anchor>
+            <NodeRef refid="18"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/DNTextField/horizontalPadding</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>DNTextField.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, assign) float horizontalPadding</Declaration>
+			
+			
+			<Anchor>//api/name/horizontalPadding</Anchor>
             <NodeRef refid="18"/>
 		</Token>
 		

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSTimer+Blocks.html">
+	<File path="Categories/NSProxy+KiwiVerifierAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSTimer(Blocks)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSProxy(KiwiVerifierAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSTimer+Blocks.h</DeclaredIn>
+			<DeclaredIn>NSProxy+KiwiVerifierAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="103"/>
@@ -13,48 +13,26 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSTimer/scheduledTimerWithTimeInterval:block:repeats:</TokenIdentifier>
-			<Abstract type="html">Creates and returns a new NSTimer object and schedules it on the current run loop in the default mode.</Abstract>
-			<DeclaredIn>NSTimer+Blocks.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NSProxy/attachToVerifier:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSProxy+KiwiVerifierAdditions.h</DeclaredIn>
 			
-			<Declaration>+ (id)scheduledTimerWithTimeInterval:(NSTimeInterval)inTimeInterval block:(void ( ^ ) ( ))inBlock repeats:(BOOL)inRepeats</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>inTimeInterval</Name>
-					<Abstract type="html">The number of seconds between firings of the timer. If seconds is less than or equal to 0.0, this method chooses the nonnegative value of 0.1 milliseconds instead.</Abstract>
-				</Parameter><Parameter>
-					<Name>inBlock</Name>
-					<Abstract type="html">The block to run when the timer fires. The timer maintains a strong reference to target until it (the timer) is invalidated.</Abstract>
-				</Parameter><Parameter>
-					<Name>inRepeats</Name>
-					<Abstract type="html">If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires.</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">A new NSTimer object, configured according to the specified parameters.</Abstract></ReturnValue>
-			<Anchor>//api/name/scheduledTimerWithTimeInterval:block:repeats:</Anchor>
+			<Declaration>- (id)attachToVerifier:(id&lt;KWVerifying&gt;)aVerifier</Declaration>
+			
+			
+			<Anchor>//api/name/attachToVerifier:</Anchor>
             <NodeRef refid="103"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSTimer/timerWithTimeInterval:block:repeats:</TokenIdentifier>
-			<Abstract type="html">Creates and returns a new NSTimer object initialized with the specified object and selector.</Abstract>
-			<DeclaredIn>NSTimer+Blocks.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/NSProxy/attachToVerifier:verifier:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>NSProxy+KiwiVerifierAdditions.h</DeclaredIn>
 			
-			<Declaration>+ (id)timerWithTimeInterval:(NSTimeInterval)inTimeInterval block:(void ( ^ ) ( ))inBlock repeats:(BOOL)inRepeats</Declaration>
-			<Parameters>
-				<Parameter>
-					<Name>inTimeInterval</Name>
-					<Abstract type="html">The number of seconds between firings of the timer. If seconds is less than or equal to 0.0, this method chooses the nonnegative value of 0.1 milliseconds instead.</Abstract>
-				</Parameter><Parameter>
-					<Name>inBlock</Name>
-					<Abstract type="html">The block to run when the timer fires. The timer maintains a strong reference to target until it (the timer) is invalidated.</Abstract>
-				</Parameter><Parameter>
-					<Name>inRepeats</Name>
-					<Abstract type="html">If YES, the timer will repeatedly reschedule itself until invalidated. If NO, the timer will be invalidated after it fires.</Abstract>
-				</Parameter>
-			</Parameters>
-			<ReturnValue><Abstract type="html">A new NSTimer object, configured according to the specified parameters.</Abstract></ReturnValue>
-			<Anchor>//api/name/timerWithTimeInterval:block:repeats:</Anchor>
+			<Declaration>- (id)attachToVerifier:(id&lt;KWVerifying&gt;)firstVerifier verifier:(id&lt;KWVerifying&gt;)secondVerifier</Declaration>
+			
+			
+			<Anchor>//api/name/attachToVerifier:verifier:</Anchor>
             <NodeRef refid="103"/>
 		</Token>
 		

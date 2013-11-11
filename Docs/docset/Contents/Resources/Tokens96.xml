@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Categories/NSObject+KiwiVerifierAdditions.html">
+	<File path="Categories/NSObject+KiwiGenericMatchingAdditions.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiVerifierAdditions)</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/NSObject(KiwiGenericMatchingAdditions)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiVerifierAdditions.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
             
 			
 			<NodeRef refid="96"/>
@@ -13,14 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/NSObject/attachToVerifier:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/NSObject/isEqualOrMatches:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>NSObject+KiwiVerifierAdditions.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatchingAdditions.h</DeclaredIn>
 			
-			<Declaration>- (id)attachToVerifier:(id&lt;KWVerifying&gt;)aVerifier</Declaration>
+			<Declaration>- (BOOL)isEqualOrMatches:(id)object</Declaration>
 			
 			
-			<Anchor>//api/name/attachToVerifier:</Anchor>
+			<Anchor>//api/name/isEqualOrMatches:</Anchor>
             <NodeRef refid="96"/>
 		</Token>
 		

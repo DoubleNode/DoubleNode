@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWDeviceInfo.html">
+	<File path="Classes/KWConformToProtocolMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWDeviceInfo</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWConformToProtocolMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWDeviceInfo.h</DeclaredIn>
+			<DeclaredIn>KWConformToProtocolMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="44"/>
@@ -13,26 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWDeviceInfo/isSimulator</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWConformToProtocolMatcher/conformToProtocol:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWDeviceInfo.h</DeclaredIn>
+			<DeclaredIn>KWConformToProtocolMatcher.h</DeclaredIn>
 			
-			<Declaration>+ (BOOL)isSimulator</Declaration>
-			
-			
-			<Anchor>//api/name/isSimulator</Anchor>
-            <NodeRef refid="44"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWDeviceInfo/isPhysical</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWDeviceInfo.h</DeclaredIn>
-			
-			<Declaration>+ (BOOL)isPhysical</Declaration>
+			<Declaration>- (void)conformToProtocol:(Protocol *)aProtocol</Declaration>
 			
 			
-			<Anchor>//api/name/isPhysical</Anchor>
+			<Anchor>//api/name/conformToProtocol:</Anchor>
             <NodeRef refid="44"/>
 		</Token>
 		

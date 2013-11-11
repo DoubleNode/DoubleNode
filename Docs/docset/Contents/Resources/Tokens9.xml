@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/DNModelWatchFetchedObjects.html">
+	<File path="Classes/DNModelWatchFetchedObject.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatchFetchedObjects</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/DNModelWatchFetchedObject</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchFetchedObjects.h</DeclaredIn>
+			<DeclaredIn>DNModelWatchFetchedObject.h</DeclaredIn>
             
 			
 			<NodeRef refid="9"/>
@@ -13,11 +13,11 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/DNModelWatchFetchedObjects/watchWithModel:andFetch:didChange:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/DNModelWatchFetchedObject/watchWithModel:andFetch:didChange:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchFetchedObjects.h</DeclaredIn>
+			<DeclaredIn>DNModelWatchFetchedObject.h</DeclaredIn>
 			
-			<Declaration>+ (id)watchWithModel:(DNModel *)model andFetch:(NSFetchRequest *)fetch didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			<Declaration>+ (id)watchWithModel:(DNModel *)model andFetch:(NSFetchRequest *)fetch didChange:(DNModelWatchObjectDidChangeHandlerBlock)resultsHandler</Declaration>
 			
 			
 			<Anchor>//api/name/watchWithModel:andFetch:didChange:</Anchor>
@@ -25,11 +25,11 @@
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchFetchedObjects/initWithModel:andFetch:didChange:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/DNModelWatchFetchedObject/initWithModel:andFetch:didChange:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>DNModelWatchFetchedObjects.h</DeclaredIn>
+			<DeclaredIn>DNModelWatchFetchedObject.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithModel:(DNModel *)model andFetch:(NSFetchRequest *)fetch didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler</Declaration>
+			<Declaration>- (id)initWithModel:(DNModel *)model andFetch:(NSFetchRequest *)fetch didChange:(DNModelWatchObjectDidChangeHandlerBlock)resultsHandler</Declaration>
 			
 			
 			<Anchor>//api/name/initWithModel:andFetch:didChange:</Anchor>

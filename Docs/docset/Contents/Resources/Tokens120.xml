@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWProbe.html">
+	<File path="Protocols/KWGenericMatching.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWProbe</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intf/KWGenericMatching</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWProbe.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="120"/>
@@ -13,26 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWProbe/isSatisfied</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/intfm/KWGenericMatching/matches:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWProbe.h</DeclaredIn>
+			<DeclaredIn>KWGenericMatcher.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)isSatisfied</Declaration>
-			
-			
-			<Anchor>//api/name/isSatisfied</Anchor>
-            <NodeRef refid="120"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWProbe/sample</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWProbe.h</DeclaredIn>
-			
-			<Declaration>- (void)sample</Declaration>
+			<Declaration>- (BOOL)matches:(id)object</Declaration>
 			
 			
-			<Anchor>//api/name/sample</Anchor>
+			<Anchor>//api/name/matches:</Anchor>
             <NodeRef refid="120"/>
 		</Token>
 		

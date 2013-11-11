@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWBeSubclassOfClassMatcher.html">
+	<File path="Classes/KWBeEmptyMatcher.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWBeSubclassOfClassMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWBeEmptyMatcher</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeSubclassOfClassMatcher.h</DeclaredIn>
+			<DeclaredIn>KWBeEmptyMatcher.h</DeclaredIn>
             
 			
 			<NodeRef refid="28"/>
@@ -13,14 +13,14 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWBeSubclassOfClassMatcher/beSubclassOfClass:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWBeEmptyMatcher/beEmpty</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWBeSubclassOfClassMatcher.h</DeclaredIn>
+			<DeclaredIn>KWBeEmptyMatcher.h</DeclaredIn>
 			
-			<Declaration>- (void)beSubclassOfClass:(Class)aClass</Declaration>
+			<Declaration>- (void)beEmpty</Declaration>
 			
 			
-			<Anchor>//api/name/beSubclassOfClass:</Anchor>
+			<Anchor>//api/name/beEmpty</Anchor>
             <NodeRef refid="28"/>
 		</Token>
 		

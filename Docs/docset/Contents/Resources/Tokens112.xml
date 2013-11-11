@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Protocols/KWContainmentCountMatcherTerminals.html">
+	<File path="Categories/UIScrollView+ScrollDirection.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intf/KWContainmentCountMatcherTerminals</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cat/UIScrollView(ScrollDirection)</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
+			<DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
             
 			
 			<NodeRef refid="112"/>
@@ -13,38 +13,19 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWContainmentCountMatcherTerminals/objects</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
+			<TokenIdentifier>//apple_ref/occ/instm/UIScrollView/scrollDirection:</TokenIdentifier>
+			<Abstract type="html">Returns the current scroll direction(s)</Abstract>
+			<DeclaredIn>UIScrollView+ScrollDirection.h</DeclaredIn>
 			
-			<Declaration>- (id)objects</Declaration>
-			
-			
-			<Anchor>//api/name/objects</Anchor>
-            <NodeRef refid="112"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWContainmentCountMatcherTerminals/items</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
-			
-			<Declaration>- (id)items</Declaration>
-			
-			
-			<Anchor>//api/name/items</Anchor>
-            <NodeRef refid="112"/>
-		</Token>
-		
-		<Token>
-			<TokenIdentifier>//apple_ref/occ/intfm/KWContainmentCountMatcherTerminals/elements</TokenIdentifier>
-			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveMatcher.h</DeclaredIn>
-			
-			<Declaration>- (id)elements</Declaration>
-			
-			
-			<Anchor>//api/name/elements</Anchor>
+			<Declaration>- (ScrollDirection)scrollDirection:(CGPoint)lastContentOffset</Declaration>
+			<Parameters>
+				<Parameter>
+					<Name>lastContentOffset</Name>
+					<Abstract type="html">The last contentOffset point</Abstract>
+				</Parameter>
+			</Parameters>
+			<ReturnValue><Abstract type="html">ScrollDirection value of multiple direction flags or&apos;d together.</Abstract></ReturnValue>
+			<Anchor>//api/name/scrollDirection:</Anchor>
             <NodeRef refid="112"/>
 		</Token>
 		

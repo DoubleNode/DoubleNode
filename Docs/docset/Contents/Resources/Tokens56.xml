@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWHaveValueMatcher.html">
+	<File path="Classes/KWFutureObject.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWHaveValueMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWFutureObject</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWFutureObject.h</DeclaredIn>
             
 			
 			<NodeRef refid="56"/>
@@ -13,50 +13,50 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWHaveValueMatcher/haveValue:forKey:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWFutureObject/objectWithObjectPointer:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWFutureObject.h</DeclaredIn>
 			
-			<Declaration>- (void)haveValue:(id)value forKey:(NSString *)key</Declaration>
+			<Declaration>+ (id)objectWithObjectPointer:(id *)pointer</Declaration>
 			
 			
-			<Anchor>//api/name/haveValue:forKey:</Anchor>
+			<Anchor>//api/name/objectWithObjectPointer:</Anchor>
             <NodeRef refid="56"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWHaveValueMatcher/haveValue:forKeyPath:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWFutureObject/futureObjectWithBlock:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWFutureObject.h</DeclaredIn>
 			
-			<Declaration>- (void)haveValue:(id)value forKeyPath:(NSString *)keyPath</Declaration>
+			<Declaration>+ (id)futureObjectWithBlock:(KWFutureObjectBlock)block</Declaration>
 			
 			
-			<Anchor>//api/name/haveValue:forKeyPath:</Anchor>
+			<Anchor>//api/name/futureObjectWithBlock:</Anchor>
             <NodeRef refid="56"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWHaveValueMatcher/haveValueForKey:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWFutureObject/initWithBlock:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWFutureObject.h</DeclaredIn>
 			
-			<Declaration>- (void)haveValueForKey:(NSString *)key</Declaration>
+			<Declaration>- (id)initWithBlock:(KWFutureObjectBlock)aBlock</Declaration>
 			
 			
-			<Anchor>//api/name/haveValueForKey:</Anchor>
+			<Anchor>//api/name/initWithBlock:</Anchor>
             <NodeRef refid="56"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWHaveValueMatcher/haveValueForKeyPath:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWFutureObject/object</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWHaveValueMatcher.h</DeclaredIn>
+			<DeclaredIn>KWFutureObject.h</DeclaredIn>
 			
-			<Declaration>- (void)haveValueForKeyPath:(NSString *)keyPath</Declaration>
+			<Declaration>- (id)object</Declaration>
 			
 			
-			<Anchor>//api/name/haveValueForKeyPath:</Anchor>
+			<Anchor>//api/name/object</Anchor>
             <NodeRef refid="56"/>
 		</Token>
 		

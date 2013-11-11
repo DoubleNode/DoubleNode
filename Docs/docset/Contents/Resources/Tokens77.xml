@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Tokens version="1.0">
-	<File path="Classes/KWStringContainsMatcher.html">
+	<File path="Classes/KWRegisterMatchersNode.html">
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/cl/KWStringContainsMatcher</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/cl/KWRegisterMatchersNode</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
             
 			
 			<NodeRef refid="77"/>
@@ -13,38 +13,98 @@
 		
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/clm/KWStringContainsMatcher/matcherWithSubstring:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/initWithCallSite:namespacePrefix:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>+ (id)matcherWithSubstring:(NSString *)aSubstring</Declaration>
+			<Declaration>- (id)initWithCallSite:(KWCallSite *)aCallSite namespacePrefix:(NSString *)aNamespacePrefix</Declaration>
 			
 			
-			<Anchor>//api/name/matcherWithSubstring:</Anchor>
+			<Anchor>//api/name/initWithCallSite:namespacePrefix:</Anchor>
             <NodeRef refid="77"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStringContainsMatcher/initWithSubstring:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/clm/KWRegisterMatchersNode/registerMatchersNodeWithCallSite:namespacePrefix:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>- (id)initWithSubstring:(NSString *)aSubstring</Declaration>
+			<Declaration>+ (id)registerMatchersNodeWithCallSite:(KWCallSite *)aCallSite namespacePrefix:(NSString *)aNamespacePrefix</Declaration>
 			
 			
-			<Anchor>//api/name/initWithSubstring:</Anchor>
+			<Anchor>//api/name/registerMatchersNodeWithCallSite:namespacePrefix:</Anchor>
             <NodeRef refid="77"/>
 		</Token>
 		
 		<Token>
-			<TokenIdentifier>//apple_ref/occ/instm/KWStringContainsMatcher/matches:</TokenIdentifier>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/setCallSite:</TokenIdentifier>
 			<Abstract type="html"></Abstract>
-			<DeclaredIn>KWStringContainsMatcher.h</DeclaredIn>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
 			
-			<Declaration>- (BOOL)matches:(id)object</Declaration>
+			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
 			
 			
-			<Anchor>//api/name/matches:</Anchor>
+			<Anchor>//api/name/callSite</Anchor>
+            <NodeRef refid="77"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/callSite</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
+			
+			
+			<Anchor>//api/name/callSite</Anchor>
+            <NodeRef refid="77"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWRegisterMatchersNode/callSite</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) KWCallSite *callSite</Declaration>
+			
+			
+			<Anchor>//api/name/callSite</Anchor>
+            <NodeRef refid="77"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/setNamespacePrefix:</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NSString *namespacePrefix</Declaration>
+			
+			
+			<Anchor>//api/name/namespacePrefix</Anchor>
+            <NodeRef refid="77"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instm/KWRegisterMatchersNode/namespacePrefix</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NSString *namespacePrefix</Declaration>
+			
+			
+			<Anchor>//api/name/namespacePrefix</Anchor>
+            <NodeRef refid="77"/>
+		</Token>
+		
+		<Token>
+			<TokenIdentifier>//apple_ref/occ/instp/KWRegisterMatchersNode/namespacePrefix</TokenIdentifier>
+			<Abstract type="html"></Abstract>
+			<DeclaredIn>KWRegisterMatchersNode.h</DeclaredIn>
+			
+			<Declaration>@property (nonatomic, readonly) NSString *namespacePrefix</Declaration>
+			
+			
+			<Anchor>//api/name/namespacePrefix</Anchor>
             <NodeRef refid="77"/>
 		</Token>
 		
