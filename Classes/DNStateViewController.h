@@ -16,7 +16,8 @@
 }
 
 - (void)changeToViewState:(NSString*)newViewState
-                 animated:(BOOL)animated;
+                 animated:(BOOL)animated
+               completion:(void(^)(BOOL finished))completion;
 
 - (void)changeFromCurrentState:(NSString*)currentState
                     toNewState:(NSString*)newState

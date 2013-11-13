@@ -20,14 +20,30 @@
 + (NSString*)themeName;
 + (id <DNThemeProtocol>)sharedTheme;
 
++ (NSString*)customizeNibNameWithClass:(NSString*)className
+                             withGroup:(NSString*)group
+                             andScreen:(NSString*)screen;
+
 + (void)customizeButton:(UIButton*)btnView
               withGroup:(NSString*)group
               andScreen:(NSString*)screen
                 andItem:(NSString*)item;
 
++ (void)customizeButton:(UIButton*)btnView
+              withGroup:(NSString*)group
+              andScreen:(NSString*)screen
+               andState:(NSString*)state
+                andItem:(NSString*)item;
+
 + (void)customizeTextField:(DNTextField*)txtfldView
                  withGroup:(NSString*)group
                  andScreen:(NSString*)screen
+                   andItem:(NSString*)item;
+
++ (void)customizeTextField:(DNTextField*)txtfldView
+                 withGroup:(NSString*)group
+                 andScreen:(NSString*)screen
+                  andState:(NSString*)state
                    andItem:(NSString*)item;
 
 @end

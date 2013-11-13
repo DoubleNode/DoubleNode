@@ -16,6 +16,7 @@
 
 - (void)changeToViewState:(NSString*)newViewState
                  animated:(BOOL)animated
+               completion:(void(^)(BOOL finished))completion
 {
     if ([newViewState isEqualToString:currentViewState] == YES)
     {
@@ -28,6 +29,7 @@
                       completion:^(BOOL finished)
      {
          currentViewState = newViewState;
+         if (completion != nil) {   completion(finished);   }
      }];
 }
 

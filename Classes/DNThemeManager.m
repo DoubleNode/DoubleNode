@@ -9,6 +9,7 @@
 #import "DNThemeManager.h"
 
 #import "DNTheme.h"
+#import "DNUtilities.h"
 
 #import "UILabel+TextKerning.h"
 
@@ -37,11 +38,24 @@
                        withType:(NSString*)type
                        andGroup:(NSString*)group
                       andScreen:(NSString*)screen
+                       andState:(NSString*)state
                         andItem:(NSString*)item
 {
     id <DNThemeProtocol>    theme = [self sharedTheme];
 
-    NSString*   retval  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, item, type, attribute];
+    NSString*   retval  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, state, item, type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    {
+        return NSSelectorFromString(retval);
+    }
+
+    retval  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, item, type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    {
+        return NSSelectorFromString(retval);
+    }
+
+    retval  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, state, type, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
     {
         return NSSelectorFromString(retval);
@@ -53,13 +67,31 @@
         return NSSelectorFromString(retval);
     }
 
+    retval  = [NSString stringWithFormat:@"%@%@%@%@", group, state, type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    {
+        return NSSelectorFromString(retval);
+    }
+
     retval  = [NSString stringWithFormat:@"%@%@%@", group, type, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
     {
         return NSSelectorFromString(retval);
     }
 
+    retval  = [NSString stringWithFormat:@"%@%@%@", state, type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    {
+        return NSSelectorFromString(retval);
+    }
+
     retval  = [NSString stringWithFormat:@"%@%@", type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    {
+        return NSSelectorFromString(retval);
+    }
+
+    retval  = [NSString stringWithFormat:@"%@%@", state, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
     {
         return NSSelectorFromString(retval);
@@ -94,13 +126,37 @@
                              andScreen:(NSString*)screen
                                andItem:(NSString*)item
 {
+    return [[self class] performThemeSelectorForAttribute:attribute withType:type andGroup:group andScreen:screen andState:@"" andItem:item];
+}
+
++ (id)performThemeSelectorForAttribute:(NSString*)attribute
+                              withType:(NSString*)type
+                              andGroup:(NSString*)group
+                             andScreen:(NSString*)screen
+                              andState:(NSString*)state
+                               andItem:(NSString*)item
+{
     SEL aSelector   = [[self class] functionNameForAttribute:attribute
                                                     withType:type
                                                     andGroup:group
                                                    andScreen:screen
+                                                    andState:state
                                                      andItem:item];
 
     return [[self class] performThemeSelector:aSelector];
+}
+
++ (NSString*)customizeNibNameWithClass:(NSString*)className
+                             withGroup:(NSString*)group
+                             andScreen:(NSString*)screen
+{
+    NSString*   retval  = [[self class] performThemeSelectorForAttribute:@"Name" withType:@"Nib" andGroup:group andScreen:screen andItem:@""];
+    if (retval == nil)
+    {
+        retval = className;
+    }
+
+    return [DNUtilities appendNibSuffix:retval];
 }
 
 + (void)customizeButton:(UIButton*)btnView
@@ -108,11 +164,20 @@
               andScreen:(NSString*)screen
                 andItem:(NSString*)item
 {
-    [btnView.titleLabel setKerning:[[[self class] performThemeSelectorForAttribute:@"LabelKerning" withType:@"Button" andGroup:group andScreen:screen andItem:item] doubleValue]];
+    [[self class] customizeButton:btnView withGroup:group andScreen:screen andState:@"" andItem:item];
+}
 
-    btnView.titleLabel.font     = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"Button" andGroup:group andScreen:screen andItem:item];
-    btnView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"Button" andGroup:group andScreen:screen andItem:item] CGColor];
-    btnView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"Button" andGroup:group andScreen:screen andItem:item] doubleValue];
++ (void)customizeButton:(UIButton*)btnView
+              withGroup:(NSString*)group
+              andScreen:(NSString*)screen
+               andState:(NSString*)state
+                andItem:(NSString*)item
+{
+    [btnView.titleLabel setKerning:[[[self class] performThemeSelectorForAttribute:@"LabelKerning" withType:@"Button" andGroup:group andScreen:screen andState:state andItem:item] doubleValue]];
+
+    btnView.titleLabel.font     = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"Button" andGroup:group andScreen:screen andState:state andItem:item];
+    btnView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"Button" andGroup:group andScreen:screen andState:state andItem:item] CGColor];
+    btnView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"Button" andGroup:group andScreen:screen andState:state andItem:item] doubleValue];
 }
 
 + (void)customizeTextField:(DNTextField*)txtfldView
@@ -120,14 +185,23 @@
                  andScreen:(NSString*)screen
                    andItem:(NSString*)item
 {
-    txtfldView.font                 = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextField" andGroup:group andScreen:screen andItem:item];
-    txtfldView.layer.borderColor    = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"TextField" andGroup:group andScreen:screen andItem:item] CGColor];
-    txtfldView.layer.borderWidth    = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"TextField" andGroup:group andScreen:screen andItem:item] doubleValue];
+    [[self class] customizeTextField:txtfldView withGroup:group andScreen:screen andState:@"" andItem:item];
+}
 
-    txtfldView.horizontalPadding    = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding" withType:@"TextField" andGroup:group andScreen:screen andItem:item] doubleValue];
-    txtfldView.verticalPadding      = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding" withType:@"TextField" andGroup:group andScreen:screen andItem:item] doubleValue];
++ (void)customizeTextField:(DNTextField*)txtfldView
+                 withGroup:(NSString*)group
+                 andScreen:(NSString*)screen
+                  andState:(NSString*)state
+                   andItem:(NSString*)item
+{
+    txtfldView.font                 = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextField" andGroup:group andScreen:screen andState:state andItem:item];
+    txtfldView.layer.borderColor    = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"TextField" andGroup:group andScreen:screen andState:state andItem:item] CGColor];
+    txtfldView.layer.borderWidth    = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"TextField" andGroup:group andScreen:screen andState:state andItem:item] doubleValue];
 
-    UIColor*    placeholderColor    = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor" withType:@"TextField" andGroup:group andScreen:screen andItem:item];
+    txtfldView.horizontalPadding    = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding" withType:@"TextField" andGroup:group andScreen:screen andState:state andItem:item] doubleValue];
+    txtfldView.verticalPadding      = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding" withType:@"TextField" andGroup:group andScreen:screen andState:state andItem:item] doubleValue];
+
+    UIColor*    placeholderColor    = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor" withType:@"TextField" andGroup:group andScreen:screen andState:state andItem:item];
     [txtfldView setValue:placeholderColor forKeyPath:@"_placeholderLabel.textColor"];
 }
 
