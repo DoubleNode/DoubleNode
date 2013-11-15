@@ -20,4 +20,9 @@
     return [self textRectForBounds:bounds];
 }
 
+- (CGRect)placeholderRectForBounds:(CGRect)bounds
+{
+    return [self textRectForBounds:bounds];
+}
+
 @end
