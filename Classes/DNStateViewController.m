@@ -8,11 +8,23 @@
 
 #import "DNStateViewController.h"
 
+#import "DNUtilities.h"
+
 @interface DNStateViewController ()
 
 @end
 
 @implementation DNStateViewController
+
+- (void)viewStateWillAppear:(NSString*)newViewState
+                   animated:(BOOL)animated
+{
+}
+
+- (void)viewStateDidAppear:(NSString*)newViewState
+                  animated:(BOOL)animated
+{
+}
 
 - (void)changeToViewState:(NSString*)newViewState
                  animated:(BOOL)animated
@@ -23,13 +35,23 @@
         return;
     }
 
-    [self changeFromCurrentState:currentViewState
-                      toNewState:newViewState
-                        animated:animated
-                      completion:^(BOOL finished)
+    [DNUtilities runOnMainThreadWithoutDeadlocking:^
      {
-         currentViewState = newViewState;
-         if (completion != nil) {   completion(finished);   }
+         [self viewStateWillAppear:newViewState animated:animated];
+
+         [self changeFromCurrentState:currentViewState
+                           toNewState:newViewState
+                             animated:animated
+                           completion:^(BOOL finished)
+          {
+              currentViewState = newViewState;
+
+              [DNUtilities runOnMainThreadWithoutDeadlocking:^
+               {
+                   [self viewStateDidAppear:newViewState animated:animated];
+                   if (completion != nil) {   completion(finished);   }
+               }];
+          }];
      }];
 }
 
@@ -57,6 +79,11 @@
     {
         [self performViewStateSelector:NSSelectorFromString(functionName) options:options];
         return;
+    }
+
+    if (completion)
+    {
+        completion(YES);
     }
 
     return;

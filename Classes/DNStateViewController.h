@@ -15,6 +15,12 @@
     NSString*   currentViewState;
 }
 
+- (void)viewStateWillAppear:(NSString*)newViewState
+                   animated:(BOOL)animated;
+
+- (void)viewStateDidAppear:(NSString*)newViewState
+                  animated:(BOOL)animated;
+
 - (void)changeToViewState:(NSString*)newViewState
                  animated:(BOOL)animated
                completion:(void(^)(BOOL finished))completion;

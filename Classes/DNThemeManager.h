@@ -32,7 +32,7 @@
 + (void)customizeButton:(UIButton*)btnView
               withGroup:(NSString*)group
               andScreen:(NSString*)screen
-               andState:(NSString*)state
+           andViewState:(NSString*)viewState
                 andItem:(NSString*)item;
 
 + (void)customizeTextField:(DNTextField*)txtfldView
@@ -43,7 +43,7 @@
 + (void)customizeTextField:(DNTextField*)txtfldView
                  withGroup:(NSString*)group
                  andScreen:(NSString*)screen
-                  andState:(NSString*)state
+              andViewState:(NSString*)viewState
                    andItem:(NSString*)item;
 
 @end
