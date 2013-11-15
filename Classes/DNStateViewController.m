@@ -16,6 +16,12 @@
 
 @implementation DNStateViewController
 
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+                                         duration:(NSTimeInterval)duration
+{
+    [self updateToViewState:currentViewState animated:YES completion:nil];
+}
+
 - (void)viewStateWillAppear:(NSString*)newViewState
                    animated:(BOOL)animated
 {
@@ -35,16 +41,30 @@
         return;
     }
 
+    [self updateToViewState:newViewState animated:animated completion:completion];
+}
+
+- (void)updateToViewState:(NSString*)newViewState
+                 animated:(BOOL)animated
+               completion:(void(^)(BOOL finished))completion
+{
     [DNUtilities runOnMainThreadWithoutDeadlocking:^
      {
          [self viewStateWillAppear:newViewState animated:animated];
 
-         [self changeFromCurrentState:currentViewState
+         NSString*  currentState = currentViewState;
+         if ([currentState isEqualToString:newViewState] == YES)
+         {
+             currentState = previousViewState;
+         }
+
+         [self changeFromCurrentState:currentState
                            toNewState:newViewState
                              animated:animated
                            completion:^(BOOL finished)
           {
-              currentViewState = newViewState;
+              previousViewState = currentState;
+              currentViewState  = newViewState;
 
               [DNUtilities runOnMainThreadWithoutDeadlocking:^
                {

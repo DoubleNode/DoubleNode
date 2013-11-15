@@ -13,6 +13,7 @@
 @interface DNStateViewController : UIViewController
 {
     NSString*   currentViewState;
+    NSString*   previousViewState;
 }
 
 - (void)viewStateWillAppear:(NSString*)newViewState
