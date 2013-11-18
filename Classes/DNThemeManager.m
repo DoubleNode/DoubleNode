@@ -261,7 +261,26 @@
     lblView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
     NSNumber*   labelKerning    = [[self class] performThemeSelectorForAttribute:@"Kerning" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    [lblView setKerning:[labelKerning doubleValue]];
+    UIFont*     labelFont       = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"Color" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    NSMutableAttributedString*  attrString  = [[lblView attributedText] mutableCopy];
+    NSRange                     attrRange   = NSMakeRange(0, [attrString length]);
+    if ([attrString length] == 0)
+    {
+        attrString  = [[NSMutableAttributedString alloc] initWithString:lblView.text];
+        attrRange   = NSMakeRange(0, [attrString length]);
+    }
+
+    [attrString removeAttribute:NSKernAttributeName range:attrRange];
+    [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
+
+    [attrString removeAttribute:NSFontAttributeName range:attrRange];
+    [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
+
+    [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
+    [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
+    [lblView setAttributedText:attrString];
 
     lblView.horizontalPadding   = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
     lblView.verticalPadding     = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
