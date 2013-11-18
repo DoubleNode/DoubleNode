@@ -94,14 +94,23 @@
         }
     }
 
-    NSString*   functionName    = [NSString stringWithFormat:@"changeToViewState%@:", newState];
+    BOOL    anyRun = NO;
+
+    NSString*   functionName    = [NSString stringWithFormat:@"changeFromViewState%@:", currentState];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
         [self performViewStateSelector:NSSelectorFromString(functionName) options:options];
-        return;
+        anyRun = YES;
     }
 
-    if (completion)
+    functionName    = [NSString stringWithFormat:@"changeToViewState%@:", newState];
+    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    {
+        [self performViewStateSelector:NSSelectorFromString(functionName) options:options];
+        anyRun = YES;
+    }
+
+    if (!anyRun && completion)
     {
         completion(YES);
     }

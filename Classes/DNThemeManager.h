@@ -10,6 +10,7 @@
 
 #import "ADVTheme.h"
 #import "DNTextField.h"
+#import "DNLabel.h"
 
 @protocol DNThemeProtocol <ADVTheme, NSObject>
 
@@ -23,6 +24,39 @@
 + (NSString*)customizeNibNameWithClass:(NSString*)className
                              withGroup:(NSString*)group
                              andScreen:(NSString*)screen;
+
++ (void)customizeView:(UIView*)view
+            withGroup:(NSString*)group
+            andScreen:(NSString*)screen
+              andItem:(NSString*)item;
+
++ (void)customizeView:(UIView*)view
+            withGroup:(NSString*)group
+            andScreen:(NSString*)screen
+         andViewState:(NSString*)viewState
+              andItem:(NSString*)item;
+
++ (void)customizeLabel:(DNLabel*)lblView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+               andItem:(NSString*)item;
+
++ (void)customizeLabel:(DNLabel*)lblView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+          andViewState:(NSString*)viewState
+               andItem:(NSString*)item;
+
++ (void)customizeImage:(UIImageView*)imgView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+               andItem:(NSString*)item;
+
++ (void)customizeImage:(UIImageView*)imgView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+          andViewState:(NSString*)viewState
+               andItem:(NSString*)item;
 
 + (void)customizeButton:(UIButton*)btnView
               withGroup:(NSString*)group

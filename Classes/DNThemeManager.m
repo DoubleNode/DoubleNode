@@ -221,6 +221,72 @@
     return [DNUtilities appendNibSuffix:retval];
 }
 
++ (void)customizeView:(UIView*)view
+            withGroup:(NSString*)group
+            andScreen:(NSString*)screen
+              andItem:(NSString*)item
+{
+    [[self class] customizeView:view withGroup:group andScreen:screen andViewState:@"" andItem:item];
+}
+
++ (void)customizeView:(UIView*)view
+            withGroup:(NSString*)group
+            andScreen:(NSString*)screen
+         andViewState:(NSString*)viewState
+              andItem:(NSString*)item
+{
+    view.layer.borderColor  = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
+    view.layer.borderWidth  = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+
+    view.backgroundColor    = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+}
+
++ (void)customizeLabel:(DNLabel*)lblView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+               andItem:(NSString*)item
+{
+    [[self class] customizeLabel:lblView withGroup:group andScreen:screen andViewState:@"" andItem:item];
+}
+
++ (void)customizeLabel:(DNLabel*)lblView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+          andViewState:(NSString*)viewState
+               andItem:(NSString*)item
+{
+    lblView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
+    lblView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+
+    lblView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    NSNumber*   labelKerning    = [[self class] performThemeSelectorForAttribute:@"Kerning" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    [lblView setKerning:[labelKerning doubleValue]];
+
+    lblView.horizontalPadding   = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    lblView.verticalPadding     = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+}
+
++ (void)customizeImage:(UIImageView*)imgView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+               andItem:(NSString*)item
+{
+    [[self class] customizeImage:imgView withGroup:group andScreen:screen andViewState:@"" andItem:item];
+}
+
++ (void)customizeImage:(UIImageView*)imgView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+          andViewState:(NSString*)viewState
+               andItem:(NSString*)item
+{
+    imgView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
+    imgView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+
+    imgView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+}
+
 + (void)customizeButton:(UIButton*)btnView
               withGroup:(NSString*)group
               andScreen:(NSString*)screen
