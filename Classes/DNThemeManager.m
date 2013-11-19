@@ -65,103 +65,118 @@
     id <DNThemeProtocol>    theme = [self sharedTheme];
 
     // LOG WelcomeView SignInWithKeyboard SignIn Button Font Normal
-    NSString*   retval  = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, controlStateString];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    NSString*   functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, controlStateString];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG WelcomeView SignIn Button Font Normal
-    retval  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, item, type, attribute, controlStateString];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, item, type, attribute, controlStateString];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG WelcomeView SignInWithKeyboard SignIn Button Font Normal
-    retval  = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, controlStateString];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, controlStateString];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG WelcomeView SignInWithKeyboard SignIn Button Font
-    retval  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, item, type, attribute];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, item, type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG WelcomeView SignIn Button Font
-    retval  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, item, type, attribute];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, item, type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG WelcomeView SignInWithKeyboard Button Font Normal
-    retval  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, type, attribute, controlStateString];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, type, attribute, controlStateString];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG WelcomeView SignInWithKeyboard Button Font
-    retval  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, viewState, type, attribute];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, viewState, type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG WelcomeView Button Font Normal
-    retval  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, type, attribute, controlStateString];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, type, attribute, controlStateString];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG WelcomeView Button Font
-    retval  = [NSString stringWithFormat:@"%@%@%@%@", group, screen, type, attribute];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@%@", group, screen, type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG Button Font Normal
-    retval  = [NSString stringWithFormat:@"%@%@%@%@", group, type, attribute, controlStateString];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@%@", group, type, attribute, controlStateString];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // LOG Button Font
-    retval  = [NSString stringWithFormat:@"%@%@%@", group, type, attribute];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@", group, type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // Button Font Normal
-    retval  = [NSString stringWithFormat:@"%@%@%@", type, attribute, controlStateString];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@%@", type, attribute, controlStateString];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // Button Font
-    retval  = [NSString stringWithFormat:@"%@%@", type, attribute];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@%@", type, attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
     // Font
-    retval  = [NSString stringWithFormat:@"%@", attribute];
-    if ([theme respondsToSelector:NSSelectorFromString(retval)] == YES)
+    functionName  = [NSString stringWithFormat:@"%@", attribute];
+    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        return NSSelectorFromString(retval);
+        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        return NSSelectorFromString(functionName);
     }
 
+    DLog(LL_Debug, LD_Theming, @"[THEMING] No Function Called!");
     return nil;
 }
 

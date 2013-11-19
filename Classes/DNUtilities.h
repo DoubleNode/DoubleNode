@@ -38,6 +38,8 @@ typedef NS_ENUM(NSInteger, LogLevel)
 #define LD_General          @"general"
 #define LD_CoreFramework    @"coreframework"
 #define LD_CoreData         @"coredata"
+#define LD_ViewState        @"viewstate"
+#define LD_Theming          @"theming"
 
 #if !defined(DEBUG)
     #define DLogMarker(marker)          NSLog(@"%@", marker)

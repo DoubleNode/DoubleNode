@@ -89,6 +89,7 @@
         NSString*   functionName    = [NSString stringWithFormat:@"changeFromViewState%@To%@:", currentState, newState];
         if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
         {
+            DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
             [self performViewStateSelector:NSSelectorFromString(functionName) options:options];
             return;
         }
@@ -99,6 +100,7 @@
     NSString*   functionName    = [NSString stringWithFormat:@"changeFromViewState%@:", currentState];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
+        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
         [self performViewStateSelector:NSSelectorFromString(functionName) options:options];
         anyRun = YES;
     }
@@ -106,12 +108,14 @@
     functionName    = [NSString stringWithFormat:@"changeToViewState%@:", newState];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
+        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
         [self performViewStateSelector:NSSelectorFromString(functionName) options:options];
         anyRun = YES;
     }
 
     if (!anyRun && completion)
     {
+        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] No Function Called!");
         completion(YES);
     }
 
