@@ -13,6 +13,16 @@
  */
 @protocol DNApplicationProtocol<NSObject>
 
+#pragma mark - Base DNApplicationProtocol functions
+
+/**
+ *  Returns the rootViewController.
+ *
+ *  @return The main window's rootViewController.
+ *
+ */
+- (UIViewController*)rootViewController;
+
 #pragma mark - CoreData DNApplicationProtocol functions
 
 /**
