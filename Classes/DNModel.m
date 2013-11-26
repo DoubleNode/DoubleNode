@@ -29,8 +29,8 @@
 
 + (NSString*)entityName
 {
-    // Assume a 3-character prefix to class name and the 5 character "Model" suffix
-    return [NSStringFromClass([self class]) substringWithRange:NSMakeRange(3, [NSStringFromClass([self class]) length] - 8)];
+    // Assume a 2-character prefix to class name and the 5 character "Model" suffix
+    return [NSStringFromClass([self class]) substringWithRange:NSMakeRange(2, [NSStringFromClass([self class]) length] - 7)];
 }
 
 #pragma mark - AppDelegate access functions
@@ -200,7 +200,7 @@
                                                                                     substitutionVariables:substDict];
     if (fetchRequest == nil)
     {
-        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        DLog(LL_Error, LD_CoreData, @"Unable to create fetchRequest [%@]", [self getFromIDFetchTemplate]);
         return nil;
     }
     
@@ -270,7 +270,7 @@
     NSFetchRequest* fetchRequest    = [[[[self class] managedObjectModel] fetchRequestTemplateForName:[self getAllFetchTemplate]] copy];
     if (fetchRequest == nil)
     {
-        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        DLog(LL_Error, LD_CoreData, @"Unable to create fetchRequest [%@]", [self getAllFetchTemplate]);
         return nil;
     }
     

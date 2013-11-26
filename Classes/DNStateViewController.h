@@ -12,9 +12,10 @@
 
 @interface DNStateViewController : UIViewController
 {
-    NSString*   currentViewState;
     NSString*   previousViewState;
 }
+
+@property (weak, nonatomic) NSString*   currentViewState;
 
 - (void)viewStateWillAppear:(NSString*)newViewState
                    animated:(BOOL)animated;

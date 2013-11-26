@@ -19,7 +19,7 @@
 - (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
                                          duration:(NSTimeInterval)duration
 {
-    [self updateToViewState:currentViewState animated:YES completion:nil];
+    [self updateToViewState:_currentViewState animated:YES completion:nil];
 }
 
 - (void)viewStateWillAppear:(NSString*)newViewState
@@ -36,7 +36,7 @@
                  animated:(BOOL)animated
                completion:(void(^)(BOOL finished))completion
 {
-    if ([newViewState isEqualToString:currentViewState] == YES)
+    if ([newViewState isEqualToString:_currentViewState] == YES)
     {
         return;
     }
@@ -52,7 +52,7 @@
      {
          [self viewStateWillAppear:newViewState animated:animated];
 
-         NSString*  currentState = currentViewState;
+         NSString*  currentState = _currentViewState;
          if ([currentState isEqualToString:newViewState] == YES)
          {
              currentState = previousViewState;
@@ -64,7 +64,7 @@
                            completion:^(BOOL finished)
           {
               previousViewState = currentState;
-              currentViewState  = newViewState;
+              _currentViewState = newViewState;
 
               [DNUtilities runOnMainThreadWithoutDeadlocking:^
                {
