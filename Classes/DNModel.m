@@ -80,9 +80,6 @@
 
 #pragma mark - model details
 
-- (NSString*)getFromIDFetchTemplate     {   return [NSString stringWithFormat:@"a%@ByID", [[self class] entityName]];   }
-- (NSString*)getAllFetchTemplate        {   return [NSString stringWithFormat:@"every%@", [[self class] entityName]];   }
-
 - (NSArray*)getFromIDSortKeys   {   return @[ @"id" ];   }
 - (NSArray*)getAllSortKeys      {   return @[ @"id" ];   }
 
@@ -194,15 +191,14 @@
 
 - (NSFetchRequest*)getFromID_FetchRequest:(id)idValue
 {
-    NSDictionary*   substDict       = @{ @"ID": idValue };
-    
-    NSFetchRequest* fetchRequest    = [[[self class] managedObjectModel] fetchRequestFromTemplateWithName:[self getFromIDFetchTemplate]
-                                                                                    substitutionVariables:substDict];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[[self class] entityName]];
     if (fetchRequest == nil)
     {
-        DLog(LL_Error, LD_CoreData, @"Unable to create fetchRequest [%@]", [self getFromIDFetchTemplate]);
+        DLog(LL_Error, LD_CoreData, @"Unable to create fetchRequest");
         return nil;
     }
+    
+    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"id == %@", idValue]];
     
     NSMutableArray* sortDescriptors = [NSMutableArray array];
     
@@ -267,10 +263,10 @@
 
 - (NSFetchRequest*)getAll_FetchRequest
 {
-    NSFetchRequest* fetchRequest    = [[[[self class] managedObjectModel] fetchRequestTemplateForName:[self getAllFetchTemplate]] copy];
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[[self class] entityName]];
     if (fetchRequest == nil)
     {
-        DLog(LL_Error, LD_CoreData, @"Unable to create fetchRequest [%@]", [self getAllFetchTemplate]);
+        DLog(LL_Error, LD_CoreData, @"Unable to create fetchRequest");
         return nil;
     }
     
