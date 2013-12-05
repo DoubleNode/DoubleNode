@@ -198,7 +198,7 @@
         return nil;
     }
     
-    [fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"id == %@", idValue]];
+    [fetchRequest setPredicate:[self getFromID_FetchRequestPredicate:idValue]];
     
     NSMutableArray* sortDescriptors = [NSMutableArray array];
     
@@ -217,6 +217,11 @@
     [fetchRequest setFetchLimit:1];
     
     return fetchRequest;
+}
+
+- (NSPredicate*)getFromID_FetchRequestPredicate:(id)idValue
+{
+    return [NSPredicate predicateWithFormat:@"id == %@", idValue];
 }
 
 #pragma mark - getAll
