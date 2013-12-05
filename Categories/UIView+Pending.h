@@ -21,6 +21,6 @@
 /**
  *  Sets current values to pending values.
  */
-- (void)implementPendingValues;
+- (void)applyPendingValues;
 
 @end

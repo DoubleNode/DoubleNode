@@ -41,7 +41,7 @@ const NSString* kPendingFrame   = @"PendingFrame";
     self.pendingFrame   = self.frame;
 }
 
-- (void)implementPendingValues
+- (void)applyPendingValues
 {
     self.alpha  = self.pendingAlpha;
     self.frame  = self.pendingFrame;
