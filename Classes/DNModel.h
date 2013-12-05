@@ -35,6 +35,8 @@ typedef void(^DNModelCompletionHandlerBlock)();
 
 - (void)saveContext;
 
+- (NSPredicate*)getFromID_FetchRequestPredicate:(id)idValue;
+
 - (NSArray*)getFromIDSortKeys;
 - (NSArray*)getAllSortKeys;
 

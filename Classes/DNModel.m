@@ -189,6 +189,11 @@
     return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest didChange:handler];
 }
 
+- (NSPredicate*)getFromID_FetchRequestPredicate:(id)idValue
+{
+    return [NSPredicate predicateWithFormat:@"id == %@", idValue];
+}
+
 - (NSFetchRequest*)getFromID_FetchRequest:(id)idValue
 {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[[self class] entityName]];
@@ -217,11 +222,6 @@
     [fetchRequest setFetchLimit:1];
     
     return fetchRequest;
-}
-
-- (NSPredicate*)getFromID_FetchRequestPredicate:(id)idValue
-{
-    return [NSPredicate predicateWithFormat:@"id == %@", idValue];
 }
 
 #pragma mark - getAll
