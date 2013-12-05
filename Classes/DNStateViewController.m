@@ -36,7 +36,7 @@
 
 - (void)setupPendingPropertiesToViewState:(NSString*)newViewState
 {
-    NSString*   functionName    = [NSString stringWithFormat:@"setupPendingPropertiesToViewState%@:", newViewState];
+    NSString*   functionName    = [NSString stringWithFormat:@"setupPendingPropertiesToViewState%@", newViewState];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
         DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);

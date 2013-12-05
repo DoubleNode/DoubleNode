@@ -35,16 +35,36 @@ const NSString* kPendingFrame   = @"PendingFrame";
     return [objc_getAssociatedObject(self, &kPendingFrame) CGRectValue];
 }
 
-- (void)resetPendingValues
+- (void)resetPendingAlpha
 {
     self.pendingAlpha   = self.alpha;
+}
+
+- (void)resetPendingFrame
+{
     self.pendingFrame   = self.frame;
+}
+
+- (void)resetPendingValues
+{
+    [self resetPendingAlpha];
+    [self resetPendingFrame];
+}
+
+- (void)applyPendingAlpha
+{
+    self.alpha  = self.pendingAlpha;
+}
+
+- (void)applyPendingFrame
+{
+    self.frame  = self.pendingFrame;
 }
 
 - (void)applyPendingValues
 {
-    self.alpha  = self.pendingAlpha;
-    self.frame  = self.pendingFrame;
+    [self applyPendingAlpha];
+    [self applyPendingFrame];
 }
 
 @end
