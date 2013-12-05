@@ -10,6 +10,8 @@
 
 #import "DNUtilities.h"
 
+#import "NSObject+PropertiesDictionary.h"
+
 @interface DNStateViewController ()
 
 @end
@@ -60,6 +62,14 @@
 {
     [DNUtilities runOnMainThreadWithoutDeadlocking:^
      {
+         [[self propertiesDictionary] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+          {
+              if ([obj isKindOfClass:[UIView class]] == YES)
+              {
+                  [obj resetPendingValues];
+              }
+          }];
+         
          [self viewStateWillAppear:newViewState animated:animated];
 
          NSString*  currentState = _currentViewState;
@@ -82,6 +92,14 @@
                {
                    [self viewStateDidAppear:newViewState animated:animated];
                    if (completion != nil) {   completion(finished);   }
+
+                   [[self propertiesDictionary] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+                    {
+                        if ([obj isKindOfClass:[UIView class]] == YES)
+                        {
+                            [obj applyPendingValues];
+                        }
+                    }];
                }];
           }];
      }];
