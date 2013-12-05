@@ -32,6 +32,16 @@
 {
 }
 
+- (void)setupPendingPropertiesToViewState:(NSString*)newViewState
+{
+    NSString*   functionName    = [NSString stringWithFormat:@"setupPendingPropertiesToViewState%@:", newViewState];
+    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    {
+        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
+        [self performViewStateSelector:NSSelectorFromString(functionName) options:nil];
+    }
+}
+
 - (void)changeToViewState:(NSString*)newViewState
                  animated:(BOOL)animated
                completion:(void(^)(BOOL finished))completion
@@ -57,6 +67,8 @@
          {
              currentState = previousViewState;
          }
+
+         [self setupPendingPropertiesToViewState:newViewState];
 
          [self changeFromCurrentState:currentState
                            toNewState:newViewState

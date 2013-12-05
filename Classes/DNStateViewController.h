@@ -10,6 +10,8 @@
 
 #import "DNStateOptions.h"
 
+#import "UIView+Pending.h"
+
 @interface DNStateViewController : UIViewController
 {
     NSString*   previousViewState;
@@ -22,6 +24,8 @@
 
 - (void)viewStateDidAppear:(NSString*)newViewState
                   animated:(BOOL)animated;
+
+- (void)setupPendingPropertiesToViewState:(NSString*)newViewState;
 
 - (void)changeToViewState:(NSString*)newViewState
                  animated:(BOOL)animated
