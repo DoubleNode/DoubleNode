@@ -251,7 +251,7 @@
         DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
     }
     
-    return [resultArray objectAtIndex:0];
+    return resultArray;
 }
 
 - (DNModelWatchObjects*)getAllDidChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
