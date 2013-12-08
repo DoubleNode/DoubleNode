@@ -10,7 +10,10 @@
 
 @interface DNStateOptions : NSObject
 
-@property (atomic)              BOOL animated;
+@property (atomic)              BOOL    animated;
+@property (atomic)              double  duration;
+@property (atomic)              double  fromDuration;
+@property (atomic)              double  toDuration;
 @property (strong, nonatomic)   void (^completion)(BOOL finished);
 
 + (id)stateOptions;
