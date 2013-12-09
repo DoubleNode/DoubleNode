@@ -69,6 +69,8 @@
         return;
     }
 
+    DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Transition from %@ to %@...", _currentViewState, newViewState);
+
     [self transitionToViewState:newViewState animated:animated completion:completion];
 }
 
@@ -76,6 +78,8 @@
                      animated:(BOOL)animated
                    completion:(void(^)(BOOL finished))completion
 {
+    self.transitionPending  = YES;
+
     [DNUtilities runOnMainThreadWithoutDeadlocking:^
      {
          [[self propertiesDictionary] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
@@ -104,17 +108,22 @@
               previousViewState = currentState;
               _currentViewState = newViewState;
 
+              self.transitionPending  = NO;
+
               [DNUtilities runOnMainThreadWithoutDeadlocking:^
                {
                    [self viewStateDidAppear:newViewState animated:animated];
                    if (completion != nil) {   completion(finished);   }
 
-                   [[self propertiesDictionary] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+                   [UIView animateWithDuration:0.5f animations:^
                     {
-                        if ([obj isKindOfClass:[UIView class]] == YES)
-                        {
-                            [obj applyPendingValues];
-                        }
+                        [[self propertiesDictionary] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+                         {
+                             if ([obj isKindOfClass:[UIView class]] == YES)
+                             {
+                                 [obj applyPendingValues];
+                             }
+                         }];
                     }];
                }];
           }];

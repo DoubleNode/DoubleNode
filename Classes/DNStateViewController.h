@@ -19,6 +19,8 @@
 
 @property (weak, nonatomic) NSString*   currentViewState;
 
+@property (atomic) BOOL     transitionPending;
+
 - (void)viewStateWillAppear:(NSString*)newViewState
                    animated:(BOOL)animated;
 
