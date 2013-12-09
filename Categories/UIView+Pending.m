@@ -10,8 +10,9 @@
 
 #import "UIView+Pending.h"
 
-const NSString* kPendingAlpha   = @"PendingAlpha";
-const NSString* kPendingFrame   = @"PendingFrame";
+const NSString* kPendingAlpha       = @"PendingAlpha";
+const NSString* kPendingFrame       = @"PendingFrame";
+const NSString* kPendingTransform   = @"PendingTransform";
 
 @implementation UIView (Pending)
 
@@ -109,6 +110,16 @@ const NSString* kPendingFrame   = @"PendingFrame";
     return [objc_getAssociatedObject(self, &kPendingFrame) CGRectValue];
 }
 
+- (void)setPendingTransform:(CATransform3D)pendingTransform
+{
+    objc_setAssociatedObject(self, &kPendingTransform, [NSValue valueWithCATransform3D:pendingTransform], OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (CATransform3D)pendingTransform
+{
+    return [objc_getAssociatedObject(self, &kPendingTransform) CATransform3DValue];
+}
+
 - (void)resetPendingAlpha
 {
     self.pendingAlpha   = self.alpha;
@@ -119,10 +130,16 @@ const NSString* kPendingFrame   = @"PendingFrame";
     self.pendingFrame   = self.frame;
 }
 
+- (void)resetPendingTransform
+{
+    self.pendingTransform   = self.layer.transform;
+}
+
 - (void)resetPendingValues
 {
     [self resetPendingAlpha];
     [self resetPendingFrame];
+    [self resetPendingTransform];
 }
 
 - (void)applyPendingAlpha
@@ -135,10 +152,16 @@ const NSString* kPendingFrame   = @"PendingFrame";
     self.frame  = self.pendingFrame;
 }
 
+- (void)applyPendingTransform
+{
+    self.layer.transform    = self.pendingTransform;
+}
+
 - (void)applyPendingValues
 {
     [self applyPendingAlpha];
     [self applyPendingFrame];
+    [self applyPendingTransform];
 }
 
 @end
