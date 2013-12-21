@@ -41,7 +41,7 @@
     NSString*   functionName    = [NSString stringWithFormat:@"setupPendingPropertiesForAllViewStates"];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
+        DLog(LL_Debug, LD_ViewState, @"Calling %@...", functionName);
         [self performViewStateSelector:NSSelectorFromString(functionName) options:nil];
         anyRun = YES;
     }
@@ -49,14 +49,14 @@
     functionName    = [NSString stringWithFormat:@"setupPendingPropertiesForViewState%@", newViewState];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
+        DLog(LL_Debug, LD_ViewState, @"Calling %@...", functionName);
         [self performViewStateSelector:NSSelectorFromString(functionName) options:nil];
         anyRun = YES;
     }
 
     if (!anyRun)
     {
-        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] No setupPendingProperties function called! (newViewState=%@)", newViewState);
+        DLog(LL_Debug, LD_ViewState, @"No setupPendingProperties function called! (newViewState=%@)", newViewState);
     }
 }
 
@@ -69,7 +69,7 @@
         return;
     }
 
-    DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Transition from %@ to %@...", _currentViewState, newViewState);
+    DLog(LL_Debug, LD_ViewState, @"Transition from %@ to %@...", _currentViewState, newViewState);
 
     [self transitionToViewState:newViewState animated:animated completion:completion];
 }
@@ -138,7 +138,7 @@
         NSString*   functionName    = [NSString stringWithFormat:@"transitionDurationFromViewState%@To%@", currentState, newState];
         if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
         {
-            DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
+            DLog(LL_Debug, LD_ViewState, @"Calling %@...", functionName);
             return [self performDurationViewStateSelector:NSSelectorFromString(functionName)];
         }
     }
@@ -151,7 +151,7 @@
     NSString*   functionName    = [NSString stringWithFormat:@"transitionDurationFromViewState%@", currentState];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
+        DLog(LL_Debug, LD_ViewState, @"Calling %@...", functionName);
         return [self performDurationViewStateSelector:NSSelectorFromString(functionName)];
     }
 
@@ -163,7 +163,7 @@
     NSString*   functionName    = [NSString stringWithFormat:@"transitionDurationToViewState%@", newState];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
+        DLog(LL_Debug, LD_ViewState, @"Calling %@...", functionName);
         return [self performDurationViewStateSelector:NSSelectorFromString(functionName)];
     }
 
@@ -192,7 +192,7 @@
                                          options:UIViewKeyframeAnimationOptionCalculationModeLinear
                                       animations:^
              {
-                 DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
+                 DLog(LL_Debug, LD_ViewState, @"Calling %@...", functionName);
                  [self performViewStateSelector:NSSelectorFromString(functionName) options:options];
              }
                                       completion:options.completion];
@@ -207,7 +207,7 @@
     NSString*   functionName    = [NSString stringWithFormat:@"transitionFromViewState%@:", currentState];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
+        DLog(LL_Debug, LD_ViewState, @"Calling %@...", functionName);
         fromSelector    = NSSelectorFromString(functionName);
         anyRun          = YES;
     }
@@ -215,7 +215,7 @@
     functionName    = [NSString stringWithFormat:@"transitionToViewState%@:", newState];
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] Calling %@...", functionName);
+        DLog(LL_Debug, LD_ViewState, @"Calling %@...", functionName);
         toSelector      = NSSelectorFromString(functionName);
         anyRun          = YES;
     }
@@ -248,7 +248,7 @@
     }
     else
     {
-        DLog(LL_Debug, LD_ViewState, @"[VIEWSTATE] No transitionViewState function called! (currentState=%@, newState=%@)", currentState, newState);
+        DLog(LL_Debug, LD_ViewState, @"No transitionViewState function called! (currentState=%@, newState=%@)", currentState, newState);
         if (completion)
         {
             completion(YES);

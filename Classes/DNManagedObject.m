@@ -201,10 +201,9 @@
 
 #pragma mark - Entity save/delete functions
 
-- (instancetype)saveContext;
+- (void)saveContext;
 {
     [[self class] saveContext];
-    return self;
 }
 
 - (void)deleteWithNoSave

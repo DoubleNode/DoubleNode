@@ -34,24 +34,6 @@
 - (void)disableURLCache;
 
 /**
- *  Sets a flag to disable the use of a NSIncrementalStore (if applicable).
- *
- *  @discussion The primary use-case for this function is for debugging, diagnostics and unit testing.
- *
- *  @param flagValue A BOOL flag to specify whether or not to bypass using a NSIncrementalStore when initializing the App's CoreData NSPersistentStore.
- */
-- (void)setDoNotUseIncrementalStore:(BOOL)flagValue;
-
-/**
- *  Sets a string prefix to be used when opening and creating CoreData NSPersistentStore.
- *
- *  @discussion The primary use-case for this function is for debugging, diagnostics and unit testing.
- *
- *  @param prefix A NSString prefix to be prepended to any NSPersistentStore URLs.
- */
-- (void)setPersistentStorePrefix:(NSString*)prefix;
-
-/**
  *  Creates or (if already created) returns the App's default NSManagedObjectContext.
  *
  *  @return The App's default NSManagedObjectContext object, creating it if needed.

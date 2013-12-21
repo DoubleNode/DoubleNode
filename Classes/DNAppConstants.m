@@ -75,7 +75,7 @@ static NSDictionary*    plistConfigDict = nil;
     id  value = [dict objectForKey:key];
     if ((value == nil) || (value == [NSNull null]))
     {
-        DLog(LL_Warning, LD_CoreFramework, @"***** MISSING CONSTANT KEY: %@", key);
+        DLog(LL_Warning, LD_Framework, @"***** MISSING CONSTANT KEY: %@", key);
     }
     
     return value;

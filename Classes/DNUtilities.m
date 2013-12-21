@@ -21,6 +21,13 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
+@interface DNUtilities()
+{
+    int                     logDebugLevel;
+    NSMutableDictionary*    logDebugDomains;
+}
+@end
+
 @implementation DNUtilities
 
 + (id<DNApplicationProtocol>)appDelegate
@@ -78,6 +85,11 @@
     });
     
     return result;
+}
+
++ (NSString*)applicationDocumentsDirectory
+{
+    return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
 }
 
 + (NSString*)appendNibSuffix:(NSString*)nibNameOrNil withDefaultNib:(NSString*)defaultNib
@@ -480,4 +492,62 @@
      }];
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        logDebugLevel   = LL_Everything;
+        logDebugDomains = [NSMutableDictionary dictionary];
+    }
+
+    return self;
+}
+
+- (void)logSetLevel:(int)level
+{
+    logDebugLevel   = level;
+}
+
+- (void)logEnableDomain:(NSString*)domain
+{
+    [logDebugDomains setObject:@YES forKey:domain];
+}
+
+- (void)logDisableDomain:(NSString*)domain
+{
+    [logDebugDomains setObject:@NO forKey:domain];
+}
+
+- (BOOL)isLogEnabledDomain:(NSString*)domain
+                  andLevel:(int)level
+{
+    if (level > logDebugLevel)
+    {
+        return NO;
+    }
+
+    if ([logDebugDomains valueForKey:domain] != nil)
+    {
+        return [[logDebugDomains objectForKey:domain] boolValue];
+    }
+
+    return YES;
+}
+
 @end
+
+void DNLogMessageF(const char *filename, int lineNumber, const char *functionName, NSString *domain, int level, NSString *format, ...)
+{
+    if ([[DNUtilities sharedInstance] isLogEnabledDomain:domain andLevel:level] == YES)
+    {
+        va_list args;
+        va_start(args, format);
+
+        NSString*   formattedStr = [[NSString alloc] initWithFormat:format arguments:args];
+        NSLog(@"[%@] %@", domain, formattedStr);
+        
+        va_end(args);
+    }
+}
+

@@ -8,6 +8,7 @@
 
 #import "DNModel.h"
 
+#import "DNDataModel.h"
 #import "DNManagedObject.h"
 #import "DNModelWatchKVOObject.h"
 #import "DNModelWatchKVOObjects.h"
@@ -21,10 +22,19 @@
 
 @implementation DNModel
 
++ (id)dataModel
+{
+    return [[self dataModelClass] dataModel];
+}
+
++ (Class)dataModelClass
+{
+    return [DNDataModel class];
+}
+
 + (NSString*)dataModelName
 {
-    // Assume a default datamodel name of Main.xcdatamodel
-    return @"Main";
+    return [[self class] dataModelName];
 }
 
 + (NSString*)entityName

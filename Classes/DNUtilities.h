@@ -34,12 +34,12 @@ typedef NS_ENUM(NSInteger, LogLevel)
     LL_Everything
 };
 
-#define LD_UnitTests        @"unittests"
-#define LD_General          @"general"
-#define LD_CoreFramework    @"coreframework"
-#define LD_CoreData         @"coredata"
-#define LD_ViewState        @"viewstate"
-#define LD_Theming          @"theming"
+#define LD_UnitTests        @"UNITTESTS"
+#define LD_General          @"GENERAL"
+#define LD_Framework        @"FRAMEWORK"
+#define LD_CoreData         @"COREDATA"
+#define LD_ViewState        @"VIEWSTATE"
+#define LD_Theming          @"THEMING"
 
 #if !defined(DEBUG)
     #define DLogMarker(marker)          NSLog(@"%@", marker)
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, LogLevel)
     #define DLogImage(...)              do{}while(0)
 #else
     #define DLogMarker(marker)              NSLog(@"%@", marker); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,@"%@", marker)
-    #define DLog(level,domain,...)          NSLog(__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__)
+    #define DLog(level,domain,...)          DNLogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__)
     #define DLogData(level,domain,data)     LogDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,data)
     #define DLogImage(level,domain,image)   LogImageDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,image.size.width,image.size.height,UIImagePNGRepresentation(image))
 
@@ -65,10 +65,13 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 @interface DNUtilities : NSObject
 
 + (id<DNApplicationProtocol>)appDelegate;
++ (DNUtilities*)sharedInstance;
 
 + (CGFloat)screenHeight;
 + (BOOL)isTall;
 + (BOOL)isDeviceIPad;
+
++ (NSString*)applicationDocumentsDirectory;
 
 + (NSString*)appendNibSuffix:(NSString*)nibNameOrNil;
 + (NSString*)appendNibSuffix:(NSString*)nibNameOrNil withDefaultNib:(NSString*)defaultNib;
@@ -97,4 +100,10 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (void)updateImage:(UIImageView*)imageView
            newImage:(UIImage*)newImage;
 
+- (void)logSetLevel:(int)level;
+- (void)logEnableDomain:(NSString*)domain;
+- (void)logDisableDomain:(NSString*)domain;
+
 @end
+
+void DNLogMessageF(const char *filename, int lineNumber, const char *functionName, NSString *domain, int level, NSString *format, ...);

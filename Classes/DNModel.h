@@ -19,6 +19,8 @@ typedef void(^DNModelCompletionHandlerBlock)();
 
 @interface DNModel : NSObject
 
++ (id)dataModel;
++ (Class)dataModelClass;
 + (NSString*)dataModelName;
 + (NSString*)entityName;
 

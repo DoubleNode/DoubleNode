@@ -68,7 +68,7 @@
     NSString*   functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, controlStateString];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -76,7 +76,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, item, type, attribute, controlStateString];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -84,7 +84,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, controlStateString];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -92,7 +92,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, item, type, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -100,7 +100,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, item, type, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -108,7 +108,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, type, attribute, controlStateString];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -116,7 +116,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, viewState, type, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -124,7 +124,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, type, attribute, controlStateString];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -132,7 +132,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@%@", group, screen, type, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -140,7 +140,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@%@", group, type, attribute, controlStateString];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -148,7 +148,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@", group, type, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -156,7 +156,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@%@", type, attribute, controlStateString];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -164,7 +164,7 @@
     functionName  = [NSString stringWithFormat:@"%@%@", type, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
@@ -172,11 +172,11 @@
     functionName  = [NSString stringWithFormat:@"%@", attribute];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
-        DLog(LL_Debug, LD_Theming, @"[THEMING] Calling %@...", functionName);
+        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
         return NSSelectorFromString(functionName);
     }
 
-    DLog(LL_Debug, LD_Theming, @"[THEMING] No Function Called!");
+    DLog(LL_Debug, LD_Theming, @"No Function Called!");
     return nil;
 }
 
