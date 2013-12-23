@@ -545,7 +545,7 @@ void DNLogMessageF(const char *filename, int lineNumber, const char *functionNam
         va_start(args, format);
 
         NSString*   formattedStr = [[NSString alloc] initWithFormat:format arguments:args];
-        NSLog(@"[%@] %@", domain, formattedStr);
+        NSLog(@"{%@} [%@:%d] %@", domain, [[NSString stringWithUTF8String:filename] lastPathComponent], lineNumber, formattedStr);
         
         va_end(args);
     }
