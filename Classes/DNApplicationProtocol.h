@@ -38,24 +38,24 @@
  *
  *  @return The App's default NSManagedObjectContext object, creating it if needed.
  */
-- (NSManagedObjectContext*)managedObjectContext:(Class)modelClass;
+//- (NSManagedObjectContext*)managedObjectContext:(Class)modelClass;
 
 /**
  *  Creates or (if already created) returns the App's default NSManagedObjectModel.
  *
  *  @return The App's default NSManagedObjectModel object, creating it if needed.
  */
-- (NSManagedObjectModel*)managedObjectModel:(Class)modelClass;
+//- (NSManagedObjectModel*)managedObjectModel:(Class)modelClass;
 
 /**
  *  Closes the App's current NSPersistentStore, then removes the file from the device.
  */
-- (void)deletePersistentStore:(Class)modelClass;
+//- (void)deletePersistentStore:(Class)modelClass;
 
 /**
  *  Flushes any cached updates from the current NSManagedObjectContext to the NSPersistentStore.
  */
-- (void)saveContext:(Class)modelClass;
+//- (void)saveContext:(Class)modelClass;
 
 #pragma mark - NSUserDefaults settings items
 

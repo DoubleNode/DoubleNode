@@ -45,24 +45,19 @@
 
 #pragma mark - AppDelegate access functions
 
-+ (id<DNApplicationProtocol>)appDelegate
-{
-    return (id<DNApplicationProtocol>)[[UIApplication sharedApplication] delegate];
-}
-
 + (NSManagedObjectContext*)managedObjectContext
 {
-    return [[[self class] appDelegate] managedObjectContext:[self class]];
+    return [[self dataModel] managedObjectContext];
 }
 
 + (NSManagedObjectModel*)managedObjectModel
 {
-    return [[[self class] appDelegate] managedObjectModel:[self class]];
+    return [[self dataModel] managedObjectModel];
 }
 
 + (void)saveContext
 {
-    [[[self class] appDelegate] saveContext:[self class]];
+    [[self dataModel] saveContext];
 }
 
 #pragma mark - initialization functions

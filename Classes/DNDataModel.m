@@ -26,16 +26,12 @@
 
 + (id)dataModel
 {
-    static id               dataModel = nil;
-    static dispatch_once_t  onceToken;
+    DLog(LL_Debug, LD_CoreData, @"Should NOT be here!");
 
-    dispatch_once(&onceToken, ^
-                  {
-                      // Create and return the theme:
-                      dataModel = [[[self class] alloc] init];
-                  });
-
-    return dataModel;
+    NSException*    exception = [NSException exceptionWithName:@"DNDatalModel Exception"
+                                                        reason:@"dataModel class MUST be overridden!"
+                                                      userInfo:nil];
+    @throw exception;
 }
 
 + (NSString*)dataModelName
