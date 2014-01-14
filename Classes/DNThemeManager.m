@@ -280,12 +280,15 @@
     UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"Color" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
     NSMutableAttributedString*  attrString  = [[lblView attributedText] mutableCopy];
-    NSRange                     attrRange   = NSMakeRange(0, [attrString length]);
     if ([attrString length] == 0)
     {
-        attrString  = [[NSMutableAttributedString alloc] initWithString:lblView.text];
-        attrRange   = NSMakeRange(0, [attrString length]);
+        if ([lblView.text length] > 0)
+        {
+            attrString  = [[NSMutableAttributedString alloc] initWithString:lblView.text];
+        }
     }
+
+    NSRange attrRange   = NSMakeRange(0, [attrString length]);
 
     [attrString removeAttribute:NSKernAttributeName range:attrRange];
     [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
