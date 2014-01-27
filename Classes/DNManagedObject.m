@@ -88,10 +88,12 @@
     [[[[self class] entityModelClass] dataModel] saveContext];
 }
 
+/* DME -- MIGHT NOT BE REQUIRED
 - (void)setId:(id)idValue
 {
     [self setValue:idValue forKey:@"id"];
 }
+*/
 
 #pragma mark - Entity initialization functions
 
