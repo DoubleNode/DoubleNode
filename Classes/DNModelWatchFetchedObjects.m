@@ -37,13 +37,6 @@
                                                                        sectionNameKeyPath:nil
                                                                                 cacheName:NSStringFromClass([self class])];
         fetchResultsController.delegate = self;
-
-        [self refreshWatch];
-
-        if ([[self objects] count] > 0)
-        {
-            [self executeDidChangeHandler];
-        }
     }
     
     return self;
@@ -52,6 +45,16 @@
 - (NSArray*)objects
 {
     return fetchResultsController.fetchedObjects;
+}
+
+- (void)startWatch
+{
+    [self refreshWatch];
+
+    if ([[self objects] count] > 0)
+    {
+        [self executeDidChangeHandler];
+    }
 }
 
 - (void)cancelWatch
