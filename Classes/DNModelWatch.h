@@ -24,4 +24,22 @@
 - (void)executeWillChangeHandler;
 - (void)executeDidChangeHandler;
 
+- (void)executeDidChangeSectionInsertHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
+                                     atIndex:(NSUInteger)sectionIndex;
+- (void)executeDidChangeSectionDeleteHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
+                                     atIndex:(NSUInteger)sectionIndex;
+
+- (void)executeDidChangeObjectInsertHandler:(id)object
+                                atIndexPath:(NSIndexPath*)indexPath
+                               newIndexPath:(NSIndexPath *)newIndexPath;
+- (void)executeDidChangeObjectDeleteHandler:(id)object
+                                atIndexPath:(NSIndexPath*)indexPath
+                               newIndexPath:(NSIndexPath *)newIndexPath;
+- (void)executeDidChangeObjectUpdateHandler:(id)object
+                                atIndexPath:(NSIndexPath*)indexPath
+                               newIndexPath:(NSIndexPath *)newIndexPath;
+- (void)executeDidChangeObjectMoveHandler:(id)object
+                              atIndexPath:(NSIndexPath*)indexPath
+                             newIndexPath:(NSIndexPath *)newIndexPath;
+
 @end

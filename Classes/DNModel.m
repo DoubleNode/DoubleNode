@@ -259,7 +259,7 @@
     return resultArray;
 }
 
-- (DNModelWatchObjects*)getAllDidChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
+- (DNModelWatchObjects*)getAllWatch
 {
     NSFetchRequest* fetchRequest    = [self getAll_FetchRequest];
     if (fetchRequest == nil)
@@ -268,7 +268,7 @@
         return nil;
     }
     
-    return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest didChange:handler];
+    return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest];
 }
 
 - (NSFetchRequest*)getAll_FetchRequest

@@ -20,16 +20,14 @@
 
 + (id)watchWithModel:(DNModel*)model
             andFetch:(NSFetchRequest*)fetch
-           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchFetchedObjects alloc] initWithModel:model andFetch:fetch didChange:handler];
+    return [[DNModelWatchFetchedObjects alloc] initWithModel:model andFetch:fetch];
 }
 
 - (id)initWithModel:(DNModel*)model
            andFetch:(NSFetchRequest*)fetch
-          didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    self = [super initWithModel:model didChange:handler];
+    self = [super initWithModel:model];
     if (self)
     {
         fetchRequest    = fetch;
@@ -101,10 +99,16 @@
     switch (type)
     {
         case NSFetchedResultsChangeInsert:
+        {
+            [self executeDidChangeSectionInsertHandler:sectionInfo atIndex:sectionIndex];
             break;
-            
+        }
+
         case NSFetchedResultsChangeDelete:
+        {
+            [self executeDidChangeSectionDeleteHandler:sectionInfo atIndex:sectionIndex];
             break;
+        }
     }
 }
 
@@ -119,16 +123,28 @@
     switch (type)
     {
         case NSFetchedResultsChangeInsert:
+        {
+            [self executeDidChangeObjectInsertHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath];
             break;
+        }
             
         case NSFetchedResultsChangeDelete:
+        {
+            [self executeDidChangeObjectDeleteHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath];
             break;
-            
+        }
+
         case NSFetchedResultsChangeUpdate:
+        {
+            [self executeDidChangeObjectUpdateHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath];
             break;
-            
+        }
+
         case NSFetchedResultsChangeMove:
+        {
+            [self executeDidChangeObjectMoveHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath];
             break;
+        }
     }
 }
 
