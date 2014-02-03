@@ -26,22 +26,6 @@
     return self;
 }
 
-/*
-- (id)initWithModel:(DNModel*)model
-         willChange:(DNModelWatchObjectsWillChangeHandlerBlock)willChangeHandler
-          didChange:(DNModelWatchObjectsDidChangeHandlerBlock)didChangeHandler
-{
-    self = [self initWithModel:model];
-    if (self)
-    {
-        self.willChangeHandler  = willChangeHandler;
-        self.didChangeHandler   = didChangeHandler;
-    }
-    
-    return self;
-}
-*/
-
 - (NSArray*)objects
 {
     return nil;
@@ -96,7 +80,7 @@
                                   newIndexPath:newIndexPath];
     if ([self checkWatch] && (self.didChangeObjectInsertHandler != nil))
     {
-        self.didChangeObjectInsertHandler(self, object, indexPath, newIndexPath);
+        self.didChangeObjectInsertHandler(self, object, newIndexPath);
     }
 }
 
@@ -109,7 +93,7 @@
                                   newIndexPath:newIndexPath];
     if ([self checkWatch] && (self.didChangeObjectDeleteHandler != nil))
     {
-        self.didChangeObjectDeleteHandler(self, object, indexPath, newIndexPath);
+        self.didChangeObjectDeleteHandler(self, object, indexPath);
     }
 }
 
@@ -122,7 +106,7 @@
                                   newIndexPath:newIndexPath];
     if ([self checkWatch] && (self.didChangeObjectUpdateHandler != nil))
     {
-        self.didChangeObjectUpdateHandler(self, object, indexPath, newIndexPath);
+        self.didChangeObjectUpdateHandler(self, object, indexPath);
     }
 }
 
