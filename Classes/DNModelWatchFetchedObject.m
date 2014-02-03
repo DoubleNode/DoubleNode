@@ -20,16 +20,14 @@
 
 + (id)watchWithModel:(DNModel*)model
             andFetch:(NSFetchRequest*)fetch
-           didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchFetchedObject alloc] initWithModel:model andFetch:fetch didChange:handler];
+    return [[DNModelWatchFetchedObject alloc] initWithModel:model andFetch:fetch];
 }
 
 - (id)initWithModel:(DNModel*)model
            andFetch:(NSFetchRequest*)fetch
-          didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
-    self = [super initWithModel:model didChange:handler];
+    self = [super initWithModel:model];
     if (self)
     {
         fetchRequest    = fetch;
@@ -39,16 +37,26 @@
                                                                        sectionNameKeyPath:nil
                                                                                 cacheName:NSStringFromClass([self class])];
         fetchResultsController.delegate = self;
-
-        [self refreshWatch];
-
-        if ([fetchResultsController.fetchedObjects count] > 0)
-        {
-            [self executeDidChangeHandler];
-        }
     }
     
     return self;
+}
+
+- (NSArray*)objects
+{
+    return fetchResultsController.fetchedObjects;
+}
+
+- (void)startWatch
+{
+    [super startWatch];
+
+    [self refreshWatch];
+
+    if ([[self objects] count] > 0)
+    {
+        [self executeDidChangeHandler];
+    }
 }
 
 - (DNManagedObject*)object

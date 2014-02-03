@@ -45,9 +45,12 @@
       andAttributes:(NSArray*)pAttributes
           didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
-    self = [super initWithModel:model didChange:handler];
+    self = [super initWithModel:model];
     if (self)
     {
+        self.didChangeHandler   = handler;
+        [self startWatch];
+
         object      = pObject;
         attributes  = pAttributes;
         if (attributes == nil)

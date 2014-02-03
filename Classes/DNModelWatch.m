@@ -32,6 +32,10 @@
     return self;
 }
 
+- (void)startWatch
+{
+}
+
 - (BOOL)checkWatch
 {
     return [model checkWatch:self];

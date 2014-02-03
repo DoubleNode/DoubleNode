@@ -49,7 +49,8 @@
     if (self)
     {
         self.didChangeHandler   = handler;
-        
+        [self startWatch];
+
         objects     = pObjects;
         attributes  = pAttributes;
         

@@ -181,8 +181,7 @@
     return [resultArray objectAtIndex:0];
 }
 
-- (DNModelWatchObject*)getFromID:(id)idValue
-                       didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
+- (DNModelWatchObject*)watchFromID:(id)idValue
 {
     NSFetchRequest* fetchRequest    = [self getFromID_FetchRequest:idValue];
     if (fetchRequest == nil)
@@ -191,7 +190,7 @@
         return nil;
     }
     
-    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest didChange:handler];
+    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest];
 }
 
 - (NSPredicate*)getFromID_FetchRequestPredicate:(id)idValue
@@ -259,7 +258,7 @@
     return resultArray;
 }
 
-- (DNModelWatchObjects*)getAllWatch
+- (DNModelWatchObjects*)watchAll
 {
     NSFetchRequest* fetchRequest    = [self getAll_FetchRequest];
     if (fetchRequest == nil)

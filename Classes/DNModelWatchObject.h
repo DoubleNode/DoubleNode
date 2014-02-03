@@ -16,7 +16,10 @@ typedef void(^DNModelWatchObjectDidChangeHandlerBlock)(DNModelWatchObject* watch
 
 @interface DNModelWatchObject : DNModelWatch
 
-- (id)initWithModel:(DNModel*)model didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler;
+@property (strong, nonatomic) DNModelWatchObjectWillChangeHandlerBlock  willChangeHandler;
+@property (strong, nonatomic) DNModelWatchObjectDidChangeHandlerBlock   didChangeHandler;
+
+- (id)initWithModel:(DNModel*)model;
 
 - (DNManagedObject*)object;
 

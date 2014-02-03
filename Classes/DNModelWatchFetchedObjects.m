@@ -49,6 +49,8 @@
 
 - (void)startWatch
 {
+    [super startWatch];
+
     [self refreshWatch];
 
     if ([[self objects] count] > 0)

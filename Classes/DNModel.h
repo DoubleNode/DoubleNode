@@ -58,10 +58,10 @@ typedef void(^DNModelCompletionHandlerBlock)();
 - (void)releaseWatch:(DNModelWatch*)watch;
 
 - (id)getFromID:(id)idValue;
-- (DNModelWatchObject*)getFromID:(id)idValue didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler;
+- (DNModelWatchObject*)watchFromID:(id)idValue;
 
 - (NSArray*)getAll;
-- (DNModelWatchObjects*)getAllWatch;
+- (DNModelWatchObjects*)watchAll;
 
 - (void)deleteAllWithCompletion:(DNModelCompletionHandlerBlock)handler;
 

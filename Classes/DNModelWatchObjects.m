@@ -26,6 +26,7 @@
     return self;
 }
 
+/*
 - (id)initWithModel:(DNModel*)model
          willChange:(DNModelWatchObjectsWillChangeHandlerBlock)willChangeHandler
           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)didChangeHandler
@@ -39,15 +40,11 @@
     
     return self;
 }
+*/
 
 - (NSArray*)objects
 {
     return nil;
-}
-
-- (void)cancelWatch
-{
-    [super cancelWatch];
 }
 
 - (void)executeWillChangeHandler

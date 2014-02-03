@@ -35,7 +35,7 @@ typedef void(^DNModelWatchObjectsDidChangeObjectMoveHandlerBlock)(DNModelWatchOb
 @property (strong, nonatomic) DNModelWatchObjectsDidChangeObjectMoveHandlerBlock        didChangeObjectMoveHandler;
 
 - (id)initWithModel:(DNModel*)model;
-- (id)initWithModel:(DNModel*)model willChange:(DNModelWatchObjectsWillChangeHandlerBlock)willChangeHandler didChange:(DNModelWatchObjectsDidChangeHandlerBlock)didChangeHandler;
+//- (id)initWithModel:(DNModel*)model willChange:(DNModelWatchObjectsWillChangeHandlerBlock)willChangeHandler didChange:(DNModelWatchObjectsDidChangeHandlerBlock)didChangeHandler;
 
 - (NSArray*)objects;
 
