@@ -86,13 +86,13 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController*)controller
 {
-    DLog(LL_Debug, LD_CoreData, @"controllerWillChangeContent:");
+    //DLog(LL_Debug, LD_CoreData, @"controllerWillChangeContent:");
     [self executeWillChangeHandler];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
-    DLog(LL_Debug, LD_CoreData, @"controllerDidChangeContent:");
+    //DLog(LL_Debug, LD_CoreData, @"controllerDidChangeContent:");
     [self executeDidChangeHandler];
 }
 
@@ -101,7 +101,7 @@
            atIndex:(NSUInteger)sectionIndex
      forChangeType:(NSFetchedResultsChangeType)type
 {
-    DLog(LL_Debug, LD_CoreData, @"controller:didChangeSection:atIndex:%d forChangeType:", sectionIndex);
+    //DLog(LL_Debug, LD_CoreData, @"controller:didChangeSection:atIndex:%d forChangeType:", sectionIndex);
     
     switch (type)
     {
@@ -125,7 +125,7 @@
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+    //DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
     
     switch (type)
     {
