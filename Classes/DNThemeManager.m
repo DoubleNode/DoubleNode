@@ -400,6 +400,10 @@
     txtfldView.layer.borderColor    = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
     txtfldView.layer.borderWidth    = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 
+    txtfldView.backgroundColor      = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtfldView.unhighlightedColor   = [[self class] performThemeSelectorForAttribute:@"UnhighlightedColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtfldView.highlightedColor     = [[self class] performThemeSelectorForAttribute:@"HighlightedColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
     UIColor*    placeholderColor    = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     [txtfldView setValue:placeholderColor forKeyPath:@"_placeholderLabel.textColor"];
 
