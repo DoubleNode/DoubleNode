@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <JustType/JustType.h>
 
-@interface DNTextField : UITextField
+@interface DNTextField : JTTextField
 
 @property (nonatomic, assign) float verticalPadding;
 @property (nonatomic, assign) float horizontalPadding;
