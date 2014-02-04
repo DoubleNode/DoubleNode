@@ -56,6 +56,15 @@
     return (height * scale);
 }
 
++ (CGFloat)screenWidth
+{
+    CGRect  bounds  = [[UIScreen mainScreen] bounds];
+    CGFloat width   = bounds.size.width;
+    CGFloat scale   = [[UIScreen mainScreen] scale];
+
+    return (width * scale);
+}
+
 + (BOOL)isTall
 {
     static dispatch_once_t  once;

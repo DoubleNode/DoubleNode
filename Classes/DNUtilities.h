@@ -68,6 +68,7 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (DNUtilities*)sharedInstance;
 
 + (CGFloat)screenHeight;
++ (CGFloat)screenWidth;
 + (BOOL)isTall;
 + (BOOL)isDeviceIPad;
 
