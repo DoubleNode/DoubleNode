@@ -23,7 +23,7 @@
 {
     NSException*    exception = [NSException exceptionWithName:@"DMManagedObject Exception"
                                                         reason:@"Base entityModelClass: should never be called, override might be missing!"
-                                                      userInfo: nil];
+                                                      userInfo:nil];
     @throw exception;
 
     // Not sure if this is ever reached
@@ -43,6 +43,11 @@
 
 + (id)entityIDWithDictionary:(NSDictionary*)dict
 {
+    if ([[dict objectForKey:@"id"] isKindOfClass:[NSString class]])
+    {
+        return [[self class] dictionaryString:dict withItem:@"id" andDefault:nil];
+    }
+
     return [[self class] dictionaryNumber:dict withItem:@"id" andDefault:nil];
 }
 
@@ -87,13 +92,6 @@
 {
     [[[[self class] entityModelClass] dataModel] saveContext];
 }
-
-/* DME -- MIGHT NOT BE REQUIRED
-- (void)setId:(id)idValue
-{
-    [self setValue:idValue forKey:@"id"];
-}
-*/
 
 #pragma mark - Entity initialization functions
 
@@ -236,7 +234,7 @@
     id  object = [dictionary objectForKey:key];
     if (object != nil)
     {
-        if (object != (NSString*)[NSNull null])
+        if (object != (NSNumber*)[NSNull null])
         {
             NSNumber*   newval  = [NSNumber numberWithInt:[object intValue]];
             

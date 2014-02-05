@@ -19,7 +19,7 @@
     NSManagedObjectContext*     managedObjectContext;
 }
 
-@property (nonatomic, retain)   NSNumber*   id;
+@property (nonatomic, retain)   id  id;
 
 + (NSString*)entityName;
 + (DNModel*)entityModel;
