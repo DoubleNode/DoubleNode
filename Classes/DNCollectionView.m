@@ -20,22 +20,10 @@
 
 @implementation DNCollectionView
 
-- (id)init
-{
-	self = [super init];
-	if (self)
-    {
-        objectChanges   = [NSMutableArray array];
-        sectionChanges  = [NSMutableArray array];
-	}
-
-	return self;
-}
-
 - (void)beginUpdates
 {
-    [objectChanges removeAllObjects];
-    [sectionChanges removeAllObjects];
+    objectChanges   = [NSMutableArray array];
+    sectionChanges  = [NSMutableArray array];
 }
 
 - (void)endUpdates
@@ -185,35 +173,49 @@
 
     for (NSDictionary* change in objectChanges)
     {
-        [change enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
+        [change enumerateKeysAndObjectsUsingBlock:^(id key, NSArray* obj, BOOL* stop)
          {
-             NSIndexPath*    indexPath = obj;
-
              NSFetchedResultsChangeType  type = [key unsignedIntegerValue];
-             switch (type)
+
+             [obj enumerateObjectsUsingBlock:^(NSIndexPath* obj, NSUInteger idx, BOOL* stop)
+              {
+                  switch (type)
+                  {
+                      case NSFetchedResultsChangeInsert:
+                      {
+                          if ([self numberOfItemsInSection:obj.section] == 0)
+                          {
+                              shouldReload = YES;
+                              *stop = YES;
+                          }
+                          break;
+                      }
+
+                      case NSFetchedResultsChangeDelete:
+                      {
+                          if ([self numberOfItemsInSection:obj.section] == 1)
+                          {
+                              shouldReload = YES;
+                              *stop = YES;
+                          }
+                          break;
+                      }
+
+                      case NSFetchedResultsChangeUpdate:
+                      case NSFetchedResultsChangeMove:
+                      {
+                          break;
+                      }
+                  }
+              }];
+
+             if (shouldReload)
              {
-                 case NSFetchedResultsChangeInsert:
-                 {
-                     shouldReload = ([self numberOfItemsInSection:indexPath.section] == 0);
-                     break;
-                 }
-
-                 case NSFetchedResultsChangeDelete:
-                 {
-                     shouldReload = ([self numberOfItemsInSection:indexPath.section] == 1);
-                     break;
-                 }
-
-                 case NSFetchedResultsChangeUpdate:
-                 case NSFetchedResultsChangeMove:
-                 {
-                     shouldReload = NO;
-                     break;
-                 }
+                 *stop = YES;
              }
          }];
     }
-    
+
     return shouldReload;
 }
 
