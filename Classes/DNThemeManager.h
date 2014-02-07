@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "DNUtilities.h"
+
 #import "ADVTheme.h"
 #import "DNTextField.h"
 #import "DNLabel.h"
