@@ -82,10 +82,16 @@
     _persistentStoreCoordinator = nil;
     _persistentStore            = nil;
 
-    NSURL*  storeUrl    = [self getPersistentStoreURL];
+    NSURL*      storeUrl    = [self getPersistentStoreURL];
+    NSError*    error       = nil;
+
+    if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl absoluteString] error:&error])
+    {
+        DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store (%@): %@", storeUrl, error);
+        return;
+    }
 
     DLog(LL_Error, LD_CoreData, @"CoreData store deleted (%@)", storeUrl);
-    [[NSFileManager defaultManager] removeItemAtPath:[storeUrl absoluteString] error:nil];
 }
 
 - (void)saveContext
