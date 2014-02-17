@@ -11,10 +11,15 @@
 
 @interface DNDataModel : NSObject
 
-@property (strong, nonatomic)   NSManagedObjectContext*         managedObjectContext;
-@property (strong, nonatomic)   NSManagedObjectModel*           managedObjectModel;
-@property (strong, nonatomic)   NSPersistentStoreCoordinator*   persistentStoreCoordinator;
-@property (strong, nonatomic)   NSPersistentStore*              persistentStore;
+@property (nonatomic, strong)   NSManagedObjectContext* tempInMemoryObjectContext;
+
+@property (strong, nonatomic, readonly)   NSManagedObjectContext*         mainObjectContext;
+@property (strong, nonatomic, readonly)   NSManagedObjectContext*         concurrentObjectContext;
+@property (strong, nonatomic, readonly)   NSManagedObjectContext*         tempMainObjectContext;
+
+@property (strong, nonatomic, readonly)   NSManagedObjectModel*           managedObjectModel;
+@property (strong, nonatomic, readonly)   NSPersistentStoreCoordinator*   persistentStoreCoordinator;
+@property (strong, nonatomic, readonly)   NSPersistentStore*              persistentStore;
 
 @property (strong, nonatomic)   NSString*   persistentStorePrefix;
 
@@ -31,9 +36,6 @@
 - (void)deletePersistentStore;
 - (void)saveContext;
 
-- (NSManagedObjectContext*)managedObjectContext;
-- (NSManagedObjectModel*)managedObjectModel;
-- (NSPersistentStoreCoordinator*)persistentStoreCoordinator;
-- (NSPersistentStore*)persistentStore;
+- (NSManagedObjectContext*)createNewManagedObjectContext;
 
 @end

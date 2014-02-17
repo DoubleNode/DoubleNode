@@ -80,13 +80,13 @@
 
 + (NSManagedObjectContext*)managedObjectContext
 {
-    return [[[[self class] entityModelClass] dataModel] managedObjectContext];
+    return [[[[self class] entityModelClass] dataModel] mainObjectContext];
 }
 
-+ (NSManagedObjectModel*)managedObjectModel
-{
-    return [[[[self class] entityModelClass] dataModel] managedObjectModel];
-}
+//+ (NSManagedObjectModel*)managedObjectModel
+//{
+//    return [[[[self class] entityModelClass] dataModel] managedObjectModel];
+//}
 
 + (void)saveContext
 {

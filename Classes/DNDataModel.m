@@ -11,15 +11,27 @@
 #import "AFIncrementalStore.h"
 #import "DNUtilities.h"
 
+#define SAVE_TO_DISK_TIME_INTERVAL 0.6f
+
 @interface DNDataModel ()
 {
 }
+
+@property (strong, nonatomic) NSManagedObjectContext*   privateWriterContext;   // tied to the persistent store coordinator
+
+- (void)contextObjectsDidChange:(NSNotification*)notification;
+- (void)saveToDisk:(NSNotification*)notification;
 
 @end
 
 @implementation DNDataModel
 
-@synthesize managedObjectContext        = _managedObjectContext;
+@synthesize tempInMemoryObjectContext   = _tempInMemoryObjectContext;
+
+@synthesize mainObjectContext           = _mainObjectContext;
+@synthesize concurrentObjectContext     = _concurrentObjectContext;
+@synthesize tempMainObjectContext       = _tempMainObjectContext;
+
 @synthesize managedObjectModel          = _managedObjectModel;
 @synthesize persistentStoreCoordinator  = _persistentStoreCoordinator;
 @synthesize persistentStore             = _persistentStore;
@@ -50,6 +62,21 @@
     return [NSStringFromClass([self class]) substringWithRange:NSMakeRange(2, [NSStringFromClass([self class]) length] - 11)];
 }
 
+- (void)dealloc
+{
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(saveToDisk:)
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationWillTerminateNotification
+                                                  object:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:UIApplicationWillResignActiveNotification
+                                                  object:nil];
+}
+
 - (id)init
 {
     self = [super init];
@@ -57,6 +84,16 @@
     {
         self.persistentStorePrefix  = @"";
         self.useIncrementalStore    = NO;
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(saveToDisk:)
+                                                     name:UIApplicationWillTerminateNotification
+                                                   object:nil];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(saveToDisk:)
+                                                     name:UIApplicationWillResignActiveNotification
+                                                   object:nil];
     }
 
     return self;
@@ -77,26 +114,40 @@
 
 - (void)deletePersistentStore
 {
-    _managedObjectContext       = nil;
-    _managedObjectModel         = nil;
-    _persistentStoreCoordinator = nil;
-    _persistentStore            = nil;
+    [NSFetchedResultsController deleteCacheWithName:nil];
+
+    [NSObject cancelPreviousPerformRequestsWithTarget:self
+                                             selector:@selector(saveToDisk:)
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:NSManagedObjectContextObjectsDidChangeNotification
+                                                  object:self.mainObjectContext];
 
     NSURL*      storeUrl    = [self getPersistentStoreURL];
     NSError*    error       = nil;
 
-    if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl absoluteString] error:&error])
+    if (![[self persistentStoreCoordinator] removePersistentStore:[self persistentStore] error:&error])
     {
-        DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store (%@): %@", storeUrl, error);
-        return;
+        DLog(LL_Error, LD_CoreData, @"Error deleting CoreData persistent store (%@): %@", storeUrl, error);
     }
+
+    if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
+    {
+        DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store file (%@): %@", storeUrl, error);
+    }
+
+    _persistentStoreCoordinator = nil;
+    _mainObjectContext          = nil;
 
     DLog(LL_Error, LD_CoreData, @"CoreData store deleted (%@)", storeUrl);
 }
 
 - (void)saveContext
 {
-    NSManagedObjectContext*     moc = [self managedObjectContext];
+    DLog(LL_Critical, LD_CoreData, @"saveContext DEPRECATED");
+    /*
+    NSManagedObjectContext*     moc = [self mainObjectContext];
     if (moc != nil)
     {
         NSError*    error = nil;
@@ -109,27 +160,90 @@
             abort();
         }
     }
+     */
 }
 
-//Explicitly write Core Data accessors
-- (NSManagedObjectContext*)managedObjectContext
+- (NSManagedObjectContext*)createNewManagedObjectContext
 {
-    if (_managedObjectContext)
+    NSManagedObjectContext* retValue = nil;
+
+    NSPersistentStoreCoordinator*   coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil)
     {
-        return _managedObjectContext;
+        retValue = [[NSManagedObjectContext alloc] init];
+        [retValue setPersistentStoreCoordinator:coordinator];
     }
 
-    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    if (_managedObjectContext)
+    return retValue;
+}
+
+#pragma mark - Core Data accessors
+
+- (NSManagedObjectContext*)tempInMemoryObjectContext
+{
+    if (!_tempInMemoryObjectContext)
     {
-        NSPersistentStoreCoordinator*   coordinator = [self persistentStoreCoordinator];
-        if (coordinator)
-        {
-            [_managedObjectContext setPersistentStoreCoordinator:coordinator];
-        }
+        NSMutableDictionary*    options = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
+                                           [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+                                           [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+
+        NSError*    error = nil;
+
+        NSPersistentStoreCoordinator*   persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+        [persistentStoreCoordinator addPersistentStoreWithType:NSInMemoryStoreType
+                                                 configuration:nil
+                                                           URL:[NSURL URLWithString:@"tempInMemoryStore"]
+                                                       options:options
+                                                         error:&error];
+
+        _tempInMemoryObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+        [_tempInMemoryObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
+        [_tempInMemoryObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
     }
 
-    return _managedObjectContext;
+    return _tempInMemoryObjectContext;
+}
+
+- (NSManagedObjectContext*)mainObjectContext
+{
+    if (_mainObjectContext)
+    {
+        return _mainObjectContext;
+    }
+
+    _mainObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+    if (_mainObjectContext)
+    {
+        [_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
+        [_mainObjectContext setParentContext:self.privateWriterContext];
+
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(contextObjectsDidChange:)
+                                                     name:NSManagedObjectContextObjectsDidChangeNotification
+                                                   object:_mainObjectContext];
+    }
+
+    return _mainObjectContext;
+}
+
+- (NSManagedObjectContext*)concurrentObjectContext
+{
+    NSManagedObjectContext* concurrentObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+
+    [concurrentObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
+    [concurrentObjectContext setParentContext:self.mainObjectContext];
+
+    return concurrentObjectContext;
+}
+
+- (NSManagedObjectContext*)tempMainObjectContext
+{
+    NSManagedObjectContext* tempMainObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+
+    [tempMainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
+    [tempMainObjectContext setParentContext:self.mainObjectContext];
+
+    return tempMainObjectContext;
 }
 
 - (NSManagedObjectModel*)managedObjectModel
@@ -181,51 +295,138 @@
                                 NSMigratePersistentStoresAutomaticallyOption : @(YES),
                                 };
 
-    if ([self useIncrementalStore] == YES)
+    for (int retry = 0; retry < 2; retry++)
     {
-        NSString*   incrmentalStoreClass    = [NSString stringWithFormat:@"%@IncrementalStore", [[self class] dataModelName]];
-
-        AFIncrementalStore* ist = (AFIncrementalStore*)[[self persistentStoreCoordinator] addPersistentStoreWithType:[NSClassFromString(incrmentalStoreClass) type]
-                                                                                                       configuration:nil
-                                                                                                                 URL:nil
-                                                                                                             options:nil
-                                                                                                               error:&error];
-        if (ist != nil)
+        if ([self useIncrementalStore] == YES)
         {
-            _persistentStore = [ist.backingPersistentStoreCoordinator addPersistentStoreWithType:[self storeType]
-                                                                                   configuration:nil
-                                                                                             URL:storeUrl
-                                                                                         options:options
-                                                                                           error:&error];
+            NSString*   incrmentalStoreClass    = [NSString stringWithFormat:@"%@IncrementalStore", [[self class] dataModelName]];
+
+            AFIncrementalStore* ist = (AFIncrementalStore*)[[self persistentStoreCoordinator] addPersistentStoreWithType:[NSClassFromString(incrmentalStoreClass) type]
+                                                                                                           configuration:nil
+                                                                                                                     URL:nil
+                                                                                                                 options:nil
+                                                                                                                   error:&error];
+            if (ist != nil)
+            {
+                _persistentStore = [ist.backingPersistentStoreCoordinator addPersistentStoreWithType:[self storeType]
+                                                                                       configuration:nil
+                                                                                                 URL:storeUrl
+                                                                                             options:options
+                                                                                               error:&error];
+            }
         }
-    }
-    else
-    {
-        _persistentStore = [[self persistentStoreCoordinator] addPersistentStoreWithType:[self storeType]
-                                                                           configuration:nil
-                                                                                     URL:storeUrl
-                                                                                 options:options
-                                                                                   error:&error];
+        else
+        {
+            _persistentStore = [[self persistentStoreCoordinator] addPersistentStoreWithType:[self storeType]
+                                                                               configuration:nil
+                                                                                         URL:storeUrl
+                                                                                     options:options
+                                                                                       error:&error];
+        }
+
+        // If Successful...
+        if (_persistentStore)
+        {
+            DLog(LL_Error, LD_CoreData, @"CoreData store exists:%@ (%@)", ([[NSFileManager defaultManager] fileExistsAtPath:[storeUrl path]] ? @"YES" : @"NO"), storeUrl);
+            break;
+        }
+
+        // ...else If Error...
+        if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
+        {
+            DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store file (%@): %@", storeUrl, error);
+        }
+
+        // Check if CoreData model inconsistency error
+        //if ((error.domain == NSCocoaErrorDomain) && ((error.code == 134130) || (error.code == 134140)))
+        //{
+        //    DLog(LL_Error, LD_CoreData, @"CoreData Model Inconsistency Error: %@, %@", error, [error userInfo]);
+
+        //    [self deletePersistentStore];
+        //    return nil;
+        //}
         
-        DLog(LL_Error, LD_CoreData, @"CoreData store exists:%@ (%@)", ([[NSFileManager defaultManager] fileExistsAtPath:[storeUrl absoluteString]] ? @"YES" : @"NO"), storeUrl);
+        DLog(LL_Error, LD_CoreData, @"CoreData RETRY create persistentStore");
     }
     if (_persistentStore == nil)
     {
-        // Check if CoreData model inconsistency error
-        if ((error.domain == NSCocoaErrorDomain) && ((error.code == 134130) || (error.code == 134140)))
-        {
-            DLog(LL_Error, LD_CoreData, @"CoreData Model Inconsistency Error: %@, %@", error, [error userInfo]);
-            //pst = nil;
-
-            [self deletePersistentStore];
-            return nil;
-        }
-
         DLog(LL_Critical, LD_CoreData, @"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
 
     return _persistentStore;
+}
+
+#pragma mark - Private methods
+
+- (NSManagedObjectContext*)privateWriterContext
+{
+    if (_privateWriterContext == nil)
+    {
+        _privateWriterContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        [_privateWriterContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
+
+        NSPersistentStoreCoordinator*   coordinator = [self persistentStoreCoordinator];
+        [_privateWriterContext performBlockAndWait:^
+         {
+             [_privateWriterContext setPersistentStoreCoordinator:coordinator];
+         }];
+    }
+
+    return _privateWriterContext;
+}
+
+- (void)contextObjectsDidChange:(NSNotification*)notification
+{
+    if (notification.object == self.mainObjectContext)
+    {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(saveToDisk:) object:nil];
+
+        [self performSelector:@selector(saveToDisk:) withObject:nil afterDelay:SAVE_TO_DISK_TIME_INTERVAL];
+    }
+}
+
+- (void)saveToDisk:(NSNotification*)notification
+{
+    NSManagedObjectContext* savingContext = self.mainObjectContext;
+
+    NSError*    error = nil;
+
+    if (![self.mainObjectContext save:&error])
+    {
+        DLog(LL_Error, LD_CoreData, @"ERROR saving main context: %@", [error localizedDescription]);
+    }
+
+    DLog(LL_Debug, LD_CoreData, @"Main context saved to disk");
+
+    if (![savingContext.parentContext hasChanges])
+    {
+        return;
+    }
+
+    void (^saveToDiskBlock)() = ^
+    {
+        [savingContext.parentContext performBlock:^
+         {
+             NSError*    error = nil;
+
+             if (![savingContext.parentContext save:&error])
+             {
+                 DLog(LL_Error, LD_CoreData, @"ERROR saving writer context: %@", [error localizedDescription]);
+             }
+
+             DLog(LL_Debug, LD_CoreData, @"Writer context saved to disk");
+         }];
+    };
+    
+    if (notification)
+    {
+        [savingContext performBlockAndWait:saveToDiskBlock];
+    }
+    else
+    {
+        [savingContext performBlock:saveToDiskBlock];
+    }
 }
 
 @end

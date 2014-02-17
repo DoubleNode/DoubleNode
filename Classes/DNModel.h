@@ -28,7 +28,7 @@ typedef void(^DNModelCompletionHandlerBlock)();
 
 //+ (id<DNApplicationProtocol>)appDelegate;
 + (NSManagedObjectContext*)managedObjectContext;
-+ (NSManagedObjectModel*)managedObjectModel;
+//+ (NSManagedObjectModel*)managedObjectModel;
 + (void)saveContext;
 
 + (instancetype)model;

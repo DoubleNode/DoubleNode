@@ -47,13 +47,13 @@
 
 + (NSManagedObjectContext*)managedObjectContext
 {
-    return [[self dataModel] managedObjectContext];
+    return [[self dataModel] mainObjectContext];
 }
 
-+ (NSManagedObjectModel*)managedObjectModel
-{
-    return [[self dataModel] managedObjectModel];
-}
+//+ (NSManagedObjectModel*)managedObjectModel
+//{
+//    return [[self dataModel] managedObjectModel];
+//}
 
 + (void)saveContext
 {
