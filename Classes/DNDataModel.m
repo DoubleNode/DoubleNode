@@ -206,6 +206,12 @@
 
 - (NSManagedObjectContext*)mainObjectContext
 {
+    NSThread*   thread = [NSThread currentThread];
+    if ([thread isMainThread] == NO)
+    {
+        DLog(LL_Critical, LD_CoreData, @"NOT MAIN THREAD!");
+    }
+
     if (_mainObjectContext)
     {
         return _mainObjectContext;
@@ -215,7 +221,22 @@
     if (_mainObjectContext)
     {
         [_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
-        [_mainObjectContext setParentContext:self.privateWriterContext];
+
+        //////////////////////////////////////
+        //
+        // TEMPORARILY DISABLE THE privateWriterContext DUE TO AFIS DEADLOCKS
+        //
+        //[_mainObjectContext setParentContext:self.privateWriterContext];
+        //
+        // MOVE CODE TO CREATE PSC FROM privateWriterContext
+        //
+        NSPersistentStoreCoordinator*   coordinator = [self persistentStoreCoordinator];
+        [_mainObjectContext performBlockAndWait:^
+         {
+             [_mainObjectContext setPersistentStoreCoordinator:coordinator];
+         }];
+        //
+        //////////////////////////////////////
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(contextObjectsDidChange:)
@@ -378,12 +399,21 @@
 
 - (void)contextObjectsDidChange:(NSNotification*)notification
 {
-    if (notification.object == self.mainObjectContext)
-    {
-        [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(saveToDisk:) object:nil];
+    NSManagedObjectContext* nofiticationContext = [notification object];
 
-        [self performSelector:@selector(saveToDisk:) withObject:nil afterDelay:SAVE_TO_DISK_TIME_INTERVAL];
+    if (nofiticationContext != self.mainObjectContext)
+    {
+        return;
     }
+
+    if (self.mainObjectContext.persistentStoreCoordinator != nofiticationContext.persistentStoreCoordinator)
+    {
+        return;
+    }
+
+    [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(saveToDisk:) object:nil];
+
+    [self performSelector:@selector(saveToDisk:) withObject:nil afterDelay:SAVE_TO_DISK_TIME_INTERVAL];
 }
 
 - (void)saveToDisk:(NSNotification*)notification

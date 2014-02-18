@@ -8,6 +8,7 @@
 
 #import "DNManagedObject.h"
 
+#import "DNDataModel.h"
 #import "DNModel.h"
 
 #import "DNUtilities.h"

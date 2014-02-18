@@ -31,7 +31,7 @@
     if (self)
     {
         fetchRequest    = fetch;
-        
+
         fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                      managedObjectContext:[[model class] managedObjectContext]
                                                                        sectionNameKeyPath:nil
@@ -71,10 +71,10 @@
 {
     [super refreshWatch];
     
-    NSError*    error = nil;
-    
     fetchResultsController.fetchRequest.resultType = NSManagedObjectResultType;
-    
+
+    NSError*    error = nil;
+
     BOOL    result = [fetchResultsController performFetch:&error];
     if (result == NO)
     {
