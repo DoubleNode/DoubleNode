@@ -124,21 +124,44 @@
                                                     name:NSManagedObjectContextObjectsDidChangeNotification
                                                   object:self.mainObjectContext];
 
-    NSURL*      storeUrl    = [self getPersistentStoreURL];
-    NSError*    error       = nil;
+    NSURL*  storeUrl    = [self getPersistentStoreURL];
+    DLog(LL_Error, LD_CoreData, @"CoreData store exists:%@ (%@)", ([[NSFileManager defaultManager] fileExistsAtPath:[storeUrl path]] ? @"YES" : @"NO"), storeUrl);
 
-    if (![[self persistentStoreCoordinator] removePersistentStore:[self persistentStore] error:&error])
+    NSError*    error   = nil;
+
+    @try
     {
-        DLog(LL_Error, LD_CoreData, @"Error deleting CoreData persistent store (%@): %@", storeUrl, error);
+        for (NSPersistentStore* store in [self persistentStoreCoordinator].persistentStores)
+        {
+            if (![[self persistentStoreCoordinator] removePersistentStore:store error:&error])
+            {
+                DLog(LL_Error, LD_CoreData, @"Error deleting CoreData persistent store: %@", error);
+            }
+        }
+
+        //if (![[self persistentStoreCoordinator] removePersistentStore:store error:&error])
+        //{
+        //    DLog(LL_Error, LD_CoreData, @"Error deleting CoreData persistent store: %@", error);
+        //}
+
+        if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
+        {
+            DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store file (%@): %@", storeUrl, error);
+        }
     }
-
-    if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
+    @catch (NSException* exception)
     {
-        DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store file (%@): %@", storeUrl, error);
+        DLog(LL_Error, LD_CoreData, @"Error deleting CoreData persistent store: %@", error);
     }
 
     _persistentStoreCoordinator = nil;
+    _persistentStore            = nil;
+    _managedObjectModel         = nil;
+
     _mainObjectContext          = nil;
+    _tempInMemoryObjectContext  = nil;
+    _concurrentObjectContext    = nil;
+    _tempMainObjectContext      = nil;
 
     DLog(LL_Error, LD_CoreData, @"CoreData store deleted (%@)", storeUrl);
 }
