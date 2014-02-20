@@ -32,10 +32,16 @@
     {
         fetchRequest    = fetch;
         
-        fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                     managedObjectContext:[[self class] managedObjectContext]
-                                                                       sectionNameKeyPath:nil
-                                                                                cacheName:NSStringFromClass([self class])];
+        NSManagedObjectContext* moc = [[self class] managedObjectContext];
+
+        [moc performBlockAndWait:^
+         {
+             fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
+                                                                          managedObjectContext:moc
+                                                                            sectionNameKeyPath:nil
+                                                                                     cacheName:NSStringFromClass([self class])];
+         }];
+
         fetchResultsController.delegate = self;
     }
     
@@ -80,16 +86,21 @@
 - (void)refreshWatch
 {
     [super refreshWatch];
-    
-    NSError*    error = nil;
-    
+
     fetchResultsController.fetchRequest.resultType = NSManagedObjectResultType;
     
-    BOOL    result = [fetchResultsController performFetch:&error];
-    if (result == NO)
-    {
-        DLog(LL_Error, LD_CoreData, @"error=%@", [error localizedDescription]);
-    }
+    NSManagedObjectContext* moc = [fetchResultsController managedObjectContext];
+
+    [moc performBlockAndWait:^
+     {
+         NSError*    error = nil;
+
+         BOOL   result = [fetchResultsController performFetch:&error];
+         if (result == NO)
+         {
+             DLog(LL_Error, LD_CoreData, @"error=%@", [error localizedDescription]);
+         }
+     }];
 }
 
 #pragma mark - NSFetchedResultsControllerDelegate

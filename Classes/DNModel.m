@@ -50,11 +50,6 @@
     return [[self dataModel] mainObjectContext];
 }
 
-//+ (NSManagedObjectModel*)managedObjectModel
-//{
-//    return [[self dataModel] managedObjectModel];
-//}
-
 + (void)saveContext
 {
     [[self dataModel] saveContext];
@@ -162,22 +157,30 @@
         return nil;
     }
     
-    NSError*    error;
-    NSArray*    resultArray;
+    __block NSError*    error;
+    __block NSArray*    resultArray;
     
-    @try
-    {
-        resultArray  = [[[self class] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-        if ([resultArray count] == 0)
-        {
-            return nil;
-        }
-    }
-    @catch (NSException *exception)
-    {
-        DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
-    }
-    
+    NSManagedObjectContext* moc = [[self class] managedObjectContext];
+
+    [moc performBlockAndWait:^
+     {
+         @try
+         {
+             resultArray  = [moc executeFetchRequest:fetchRequest error:&error];
+             if ([resultArray count] == 0)
+             {
+                 resultArray    = nil;
+                 return;
+             }
+         }
+         @catch (NSException *exception)
+         {
+             DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
+             resultArray    = nil;
+             return;
+         }
+     }];
+
     return [resultArray objectAtIndex:0];
 }
 
@@ -239,22 +242,30 @@
         return nil;
     }
     
-    NSError*    error;
-    NSArray*    resultArray;
-    
-    @try
-    {
-        resultArray  = [[[self class] managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-        if ([resultArray count] == 0)
-        {
-            return nil;
-        }
-    }
-    @catch (NSException *exception)
-    {
-        DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
-    }
-    
+    __block NSError*    error;
+    __block NSArray*    resultArray;
+
+    NSManagedObjectContext* moc = [[self class] managedObjectContext];
+
+    [moc performBlockAndWait:^
+     {
+         @try
+         {
+             resultArray  = [moc executeFetchRequest:fetchRequest error:&error];
+             if ([resultArray count] == 0)
+             {
+                 resultArray = nil;
+                 return;
+             }
+         }
+         @catch (NSException *exception)
+         {
+             DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
+             resultArray = nil;
+             return;
+         }
+     }];
+
     return resultArray;
 }
 

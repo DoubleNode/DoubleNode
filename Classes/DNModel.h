@@ -26,9 +26,7 @@ typedef void(^DNModelCompletionHandlerBlock)();
 
 #pragma mark - AppDelegate access functions
 
-//+ (id<DNApplicationProtocol>)appDelegate;
 + (NSManagedObjectContext*)managedObjectContext;
-//+ (NSManagedObjectModel*)managedObjectModel;
 + (void)saveContext;
 
 + (instancetype)model;

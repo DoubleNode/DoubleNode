@@ -84,11 +84,6 @@
     return [[[[self class] entityModelClass] dataModel] mainObjectContext];
 }
 
-//+ (NSManagedObjectModel*)managedObjectModel
-//{
-//    return [[[[self class] entityModelClass] dataModel] managedObjectModel];
-//}
-
 + (void)saveContext
 {
     [[[[self class] entityModelClass] dataModel] saveContext];
@@ -113,11 +108,17 @@
 
 - (instancetype)init
 {
-    managedObjectContext    = [[self class] managedObjectContext];
-    
-    NSEntityDescription*    entity = [NSEntityDescription entityForName:[[self class] entityName] inManagedObjectContext:managedObjectContext];
-    
-    self = [self initWithEntity:entity insertIntoManagedObjectContext:[[self class] managedObjectContext]];
+    NSManagedObjectContext*     moc     = [[self class] managedObjectContext];
+    __block DNManagedObject*    bself   = self;
+
+    [moc performBlockAndWait:^
+     {
+         NSEntityDescription*    entity = [NSEntityDescription entityForName:[[self class] entityName] inManagedObjectContext:moc];
+
+         bself = [self initWithEntity:entity insertIntoManagedObjectContext:moc];
+     }];
+
+    self = bself;
     if (self)
     {
         [self clearData];
@@ -204,7 +205,12 @@
 
 - (void)deleteWithNoSave
 {
-    [[[self class] managedObjectContext] deleteObject:self];
+    NSManagedObjectContext* moc = [[self class] managedObjectContext];
+
+    [moc performBlockAndWait:^
+     {
+         [moc deleteObject:self];
+     }];
 }
 
 - (void)delete
@@ -217,8 +223,17 @@
 
 - (NSEntityDescription*)entityDescription
 {
-    return [NSEntityDescription entityForName:[[self class] entityName]
-                       inManagedObjectContext:[[self class] managedObjectContext]];
+    __block NSEntityDescription*    retval;
+
+    NSManagedObjectContext* moc = [[self class] managedObjectContext];
+
+    [moc performBlockAndWait:^
+     {
+         retval = [NSEntityDescription entityForName:[[self class] entityName]
+                              inManagedObjectContext:moc];
+     }];
+
+    return retval;
 }
 
 #pragma mark - Dictionary Translation functions

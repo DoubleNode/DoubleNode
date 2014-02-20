@@ -33,9 +33,7 @@
                                forObjectWithID:(NSManagedObjectID*)objectID
                         inManagedObjectContext:(NSManagedObjectContext*)context;
 
-//+ (id<DNApplicationProtocol>)appDelegate;
 + (NSManagedObjectContext*)managedObjectContext;
-//+ (NSManagedObjectModel*)managedObjectModel;
 + (id)entityIDWithDictionary:(NSDictionary*)dict;
 
 + (void)saveContext;
