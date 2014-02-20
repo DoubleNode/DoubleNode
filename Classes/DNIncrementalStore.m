@@ -65,10 +65,10 @@
 {
     NSManagedObjectID*  retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ entity:%@ resourceID:%@", NSStringFromSelector(_cmd), [entity name], resourceIdentifier);
     retval = [super objectIDForEntity:entity
                withResourceIdentifier:resourceIdentifier];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ entity:%@ resourceID:%@ retval:%@", NSStringFromSelector(_cmd), [entity name], resourceIdentifier, retval);
 
     return retval;
 }
@@ -78,10 +78,10 @@
 {
     NSManagedObjectID*  retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ entity:%@ resourceID:%@", NSStringFromSelector(_cmd), [entity name], resourceIdentifier);
     retval = [super objectIDForBackingObjectForEntity:entity
                                withResourceIdentifier:resourceIdentifier];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ entity:%@ resourceID:%@ retval:%@", NSStringFromSelector(_cmd), [entity name], resourceIdentifier, retval);
 
     return retval;
 }
@@ -112,7 +112,7 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
                                                  withContext:context
                                                        error:error
                                              completionBlock:completionBlock];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], (retval ? @"YES" : @"NO"), ((error == NULL) ? @"<NONE>" : *error));
 
     return retval;
 }
@@ -125,13 +125,13 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 {
     BOOL    retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ representations:%@ response:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], representationsByEntityName, response);
     retval = [super insertOrUpdateObjectsFromRepresentations:representationsByEntityName
                                                 fromResponse:response
                                                  withContext:context
                                                        error:error
                                              completionBlock:completionBlock];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ representations:%@ response:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], representationsByEntityName, response, (retval ? @"YES" : @"NO"), ((error == NULL) ? @"<NONE>" : *error));
 
     return retval;
 }
@@ -142,11 +142,11 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 {
     id  retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ request:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], fetchRequest);
     retval = [super executeFetchRequest:fetchRequest
                             withContext:context
                                   error:error];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ request:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], fetchRequest, retval, ((error == NULL) ? @"<NONE>" : *error));
 
     return retval;
 }
@@ -157,11 +157,11 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 {
     id  retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ request:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], saveChangesRequest);
     retval = [super executeSaveChangesRequest:saveChangesRequest
                                   withContext:context
                                         error:error];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ request:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], saveChangesRequest, retval, ((error == NULL) ? @"<NONE>" : *error));
 
     return retval;
 }
@@ -171,10 +171,10 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 {
     NSArray*    retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ array:%@", NSStringFromSelector(_cmd), array);
     retval = [super obtainPermanentIDsForObjects:array
                                            error:error];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ array:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), array, retval, ((error == NULL) ? @"<NONE>" : *error));
 
     return retval;
 }
@@ -185,11 +185,11 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 {
     id  retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ request:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], persistentStoreRequest);
     retval = [super executeRequest:persistentStoreRequest
                        withContext:context
                              error:error];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ request:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], persistentStoreRequest, retval, ((error == NULL) ? @"<NONE>" : *error));
 
     return retval;
 }
@@ -200,11 +200,11 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 {
     NSIncrementalStoreNode* retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ objectID:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], objectID);
     retval = [super newValuesForObjectWithID:objectID
                                  withContext:context
                                        error:error];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ objectID:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], objectID, retval, ((error == NULL) ? @"<NONE>" : *error));
 
     return retval;
 }
@@ -216,28 +216,28 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 {
     id  retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ objectID:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], objectID);
     retval = [super newValueForRelationship:relationship
                             forObjectWithID:objectID
                                 withContext:context
                                       error:error];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ objectID:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], objectID, retval, ((error == NULL) ? @"<NONE>" : *error));
 
     return retval;
 }
 
 - (void)managedObjectContextDidRegisterObjectsWithIDs:(NSArray *)objectIDs
 {
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ objectIDs:%@", NSStringFromSelector(_cmd), objectIDs);
     [super managedObjectContextDidRegisterObjectsWithIDs:objectIDs];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ objectIDs:%@", NSStringFromSelector(_cmd), objectIDs);
 }
 
 - (void)managedObjectContextDidUnregisterObjectsWithIDs:(NSArray *)objectIDs
 {
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ objectIDs:%@", NSStringFromSelector(_cmd), objectIDs);
     [super managedObjectContextDidUnregisterObjectsWithIDs:objectIDs];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ objectIDs:%@", NSStringFromSelector(_cmd), objectIDs);
 }
 
 @end
