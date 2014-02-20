@@ -236,12 +236,6 @@
 
 - (NSManagedObjectContext*)mainObjectContext
 {
-    NSThread*   thread = [NSThread currentThread];
-    if ([thread isMainThread] == NO)
-    {
-        DLog(LL_Critical, LD_CoreData, @"NOT MAIN THREAD!");
-    }
-
     if (_mainObjectContext)
     {
         return _mainObjectContext;
@@ -253,9 +247,8 @@
         [_mainObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
         [_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
 
-        [_mainObjectContext setParentContext:self.privateWriterContext];
+        //[_mainObjectContext setParentContext:self.privateWriterContext];
 
-        /*
         //////////////////////////////////////
         //
         // TEMPORARILY DISABLE THE privateWriterContext DUE TO AFIS DEADLOCKS
@@ -271,7 +264,6 @@
          }];
         //
         //////////////////////////////////////
-         */
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(contextObjectsDidChange:)

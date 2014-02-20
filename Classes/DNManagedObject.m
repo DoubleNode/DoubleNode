@@ -207,7 +207,7 @@
 {
     NSManagedObjectContext* moc = [[self class] managedObjectContext];
 
-    [moc performBlockAndWait:^
+    [moc performBlock:^
      {
          [moc deleteObject:self];
      }];

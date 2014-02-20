@@ -91,7 +91,7 @@
     
     NSManagedObjectContext* moc = [fetchResultsController managedObjectContext];
 
-    [moc performBlockAndWait:^
+    [moc performBlock:^
      {
          NSError*    error = nil;
 
