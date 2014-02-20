@@ -508,9 +508,19 @@
     {
         logDebugLevel   = LL_Everything;
         logDebugDomains = [NSMutableDictionary dictionary];
+
+        [[self class] logResetLogState];
     }
 
     return self;
+}
+
+- (void)logResetLogState
+{
+    if ([[[self class] appDelegate] respondsToSelector:@selector(resetLogState)] == YES)
+    {
+        [[[self class] appDelegate] resetLogState];
+    };
 }
 
 - (void)logSetLevel:(int)level

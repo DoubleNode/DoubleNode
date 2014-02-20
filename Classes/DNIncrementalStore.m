@@ -89,9 +89,9 @@
 - (void)updateBackingObject:(NSManagedObject *)backingObject
 withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedObject
 {
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ backingObject:%@ managedObject:%@", NSStringFromSelector(_cmd), backingObject, managedObject);
     [super updateBackingObject:backingObject withAttributeAndRelationshipValuesFromManagedObject:managedObject];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@", NSStringFromSelector(_cmd));
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ backingObject:%@ managedObject:%@", NSStringFromSelector(_cmd), backingObject, managedObject);
 }
 
 #pragma mark -
