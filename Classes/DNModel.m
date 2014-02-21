@@ -157,16 +157,16 @@
         return nil;
     }
     
-    __block NSError*    error;
     __block NSArray*    resultArray;
     
-    NSManagedObjectContext* moc = [[self class] managedObjectContext];
-
-    [moc performBlockAndWait:^
+    [self performWithContext:[[self class] managedObjectContext]
+                blockAndWait:^(NSManagedObjectContext* context)
      {
          @try
          {
-             resultArray  = [moc executeFetchRequest:fetchRequest error:&error];
+             NSError*    error;
+
+             resultArray  = [context executeFetchRequest:fetchRequest error:&error];
              if ([resultArray count] == 0)
              {
                  resultArray    = nil;
@@ -180,7 +180,7 @@
              return;
          }
      }];
-
+    
     return [resultArray objectAtIndex:0];
 }
 
@@ -242,16 +242,16 @@
         return nil;
     }
     
-    __block NSError*    error;
     __block NSArray*    resultArray;
 
-    NSManagedObjectContext* moc = [[self class] managedObjectContext];
-
-    [moc performBlockAndWait:^
+    [self performWithContext:[[self class] managedObjectContext]
+                blockAndWait:^(NSManagedObjectContext* context)
      {
          @try
          {
-             resultArray  = [moc executeFetchRequest:fetchRequest error:&error];
+             NSError*    error;
+
+             resultArray  = [context executeFetchRequest:fetchRequest error:&error];
              if ([resultArray count] == 0)
              {
                  resultArray = nil;
@@ -322,6 +322,22 @@
      {
          handler();
      }
+}
+
+#pragma mark - private methods
+
+- (void)performWithContext:(NSManagedObjectContext*)context
+              blockAndWait:(void (^)(NSManagedObjectContext*))block
+{
+    [[[self class] dataModel] performWithContext:context
+                                    blockAndWait:block];
+}
+
+- (void)performWithContext:(NSManagedObjectContext*)context
+                     block:(void (^)(NSManagedObjectContext*))block
+{
+    [[[self class] dataModel] performWithContext:context
+                                           block:block];
 }
 
 @end

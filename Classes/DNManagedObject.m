@@ -108,14 +108,14 @@
 
 - (instancetype)init
 {
-    NSManagedObjectContext*     moc     = [[self class] managedObjectContext];
     __block DNManagedObject*    bself   = self;
 
-    [moc performBlockAndWait:^
+    [self performWithContext:[[self class] managedObjectContext]
+                blockAndWait:^(NSManagedObjectContext* context)
      {
-         NSEntityDescription*    entity = [NSEntityDescription entityForName:[[self class] entityName] inManagedObjectContext:moc];
+         NSEntityDescription*    entity = [NSEntityDescription entityForName:[[self class] entityName] inManagedObjectContext:context];
 
-         bself = [self initWithEntity:entity insertIntoManagedObjectContext:moc];
+         bself = [self initWithEntity:entity insertIntoManagedObjectContext:context];
      }];
 
     self = bself;
@@ -205,11 +205,10 @@
 
 - (void)deleteWithNoSave
 {
-    NSManagedObjectContext* moc = [[self class] managedObjectContext];
-
-    [moc performBlock:^
+    [self performWithContext:[[self class] managedObjectContext]
+                       block:^(NSManagedObjectContext* context)
      {
-         [moc deleteObject:self];
+         [context deleteObject:self];
      }];
 }
 
@@ -225,12 +224,11 @@
 {
     __block NSEntityDescription*    retval;
 
-    NSManagedObjectContext* moc = [[self class] managedObjectContext];
-
-    [moc performBlockAndWait:^
+    [self performWithContext:[[self class] managedObjectContext]
+                blockAndWait:^(NSManagedObjectContext* context)
      {
          retval = [NSEntityDescription entityForName:[[self class] entityName]
-                              inManagedObjectContext:moc];
+                              inManagedObjectContext:context];
      }];
 
     return retval;
@@ -433,6 +431,22 @@
     }
     
     return retval;
+}
+
+#pragma mark - private methods
+
+- (void)performWithContext:(NSManagedObjectContext*)context
+              blockAndWait:(void (^)(NSManagedObjectContext*))block
+{
+    [[[self class] entityModel] performWithContext:context
+                                      blockAndWait:block];
+}
+
+- (void)performWithContext:(NSManagedObjectContext*)context
+                     block:(void (^)(NSManagedObjectContext*))block
+{
+    [[[self class] entityModel] performWithContext:context
+                                             block:block];
 }
 
 @end

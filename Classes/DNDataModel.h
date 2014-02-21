@@ -38,4 +38,9 @@
 
 - (NSManagedObjectContext*)createNewManagedObjectContext;
 
+- (void)performWithContext:(NSManagedObjectContext*)context
+              blockAndWait:(void (^)(NSManagedObjectContext*))block;
+- (void)performWithContext:(NSManagedObjectContext*)context
+                     block:(void (^)(NSManagedObjectContext*))block;
+
 @end

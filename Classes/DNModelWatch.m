@@ -92,4 +92,20 @@
 {
 }
 
+#pragma mark - private methods
+
+- (void)performWithContext:(NSManagedObjectContext*)context
+              blockAndWait:(void (^)(NSManagedObjectContext*))block
+{
+    [model performWithContext:context
+                 blockAndWait:block];
+}
+
+- (void)performWithContext:(NSManagedObjectContext*)context
+                     block:(void (^)(NSManagedObjectContext*))block
+{
+    [model performWithContext:context
+                        block:block];
+}
+
 @end

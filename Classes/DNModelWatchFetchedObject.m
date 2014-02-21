@@ -32,12 +32,11 @@
     {
         fetchRequest    = fetch;
         
-        NSManagedObjectContext* moc = [[self class] managedObjectContext];
-
-        [moc performBlockAndWait:^
+        [self performWithContext:[[model class] managedObjectContext]
+                    blockAndWait:^(NSManagedObjectContext* context)
          {
              fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                          managedObjectContext:moc
+                                                                          managedObjectContext:context
                                                                             sectionNameKeyPath:nil
                                                                                      cacheName:NSStringFromClass([self class])];
          }];
@@ -89,9 +88,8 @@
 
     fetchResultsController.fetchRequest.resultType = NSManagedObjectResultType;
     
-    NSManagedObjectContext* moc = [fetchResultsController managedObjectContext];
-
-    [moc performBlock:^
+    [self performWithContext:[fetchResultsController managedObjectContext]
+                       block:^(NSManagedObjectContext* context)
      {
          NSError*    error = nil;
 

@@ -171,26 +171,19 @@
 
 - (void)saveContext
 {
-    DLog(LL_Critical, LD_CoreData, @"saveContext DEPRECATED");
-
-    /*
-    NSManagedObjectContext*     moc = [self mainObjectContext];
-    if (moc != nil)
-    {
-        [moc performBlock:^
+    [self performWithContext:self.mainObjectContext
+                       block:^(NSManagedObjectContext* context)
+     {
+         NSError*    error = nil;
+         
+         if ([context hasChanges] && ![context save:&error])
          {
-             NSError*    error = nil;
-
-             if ([moc hasChanges] && ![moc save:&error])
-             {
-                 // Replace this implementation with code to handle the error appropriately.
-                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                 DLog(LL_Critical, LD_CoreData, @"Unresolved error %@, %@", error, [error userInfo]);
-                 abort();
-             }
-         }];
-    }
-     */
+             // Replace this implementation with code to handle the error appropriately.
+             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+             DLog(LL_Critical, LD_CoreData, @"Unresolved error %@, %@", error, [error userInfo]);
+             abort();
+         }
+     }];
 }
 
 - (NSManagedObjectContext*)createNewManagedObjectContext
@@ -252,9 +245,10 @@
         [_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
         [_mainObjectContext setStalenessInterval:0];
 
-        [_mainObjectContext performBlockAndWait:^
+        [self performWithContext:_mainObjectContext
+                    blockAndWait:^(NSManagedObjectContext* context)
          {
-             [_mainObjectContext setParentContext:self.privateWriterContext];
+             [context setParentContext:self.privateWriterContext];
          }];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -423,9 +417,10 @@
         [_privateWriterContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
         [_privateWriterContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
 
-        [_privateWriterContext performBlockAndWait:^
+        [self performWithContext:_privateWriterContext
+                    blockAndWait:^(NSManagedObjectContext* context)
          {
-             [_privateWriterContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
+             [context setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
          }];
     }
 
@@ -492,7 +487,8 @@
 
     void (^saveToDiskBlock)() = ^
     {
-        [savingContext.parentContext performBlock:^
+        [self performWithContext:savingContext.parentContext
+                           block:^(NSManagedObjectContext* context)
          {
              NSError*    error = nil;
 
@@ -512,6 +508,36 @@
     else
     {
         [savingContext performBlock:saveToDiskBlock];
+    }
+}
+
+- (void)performWithContext:(NSManagedObjectContext*)context
+              blockAndWait:(void (^)(NSManagedObjectContext*))block
+{
+    if ((context == self.mainObjectContext) && ([NSThread isMainThread]))
+    {
+        block(context);
+    }
+    else
+    {
+        [context performBlockAndWait:^{
+            block(context);
+        }];
+    }
+}
+
+- (void)performWithContext:(NSManagedObjectContext*)context
+                     block:(void (^)(NSManagedObjectContext*))block
+{
+    if ((context == self.mainObjectContext) && ([NSThread isMainThread]))
+    {
+        block(context);
+    }
+    else
+    {
+        [context performBlock:^{
+            block(context);
+        }];
     }
 }
 
