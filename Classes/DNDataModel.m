@@ -250,29 +250,17 @@
     {
         [_mainObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
         [_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
+        [_mainObjectContext setStalenessInterval:0];
 
         [_mainObjectContext performBlockAndWait:^
          {
              [_mainObjectContext setParentContext:self.privateWriterContext];
          }];
 
-        /*
-        //////////////////////////////////////
-        //
-        // TEMPORARILY DISABLE THE privateWriterContext DUE TO AFIS DEADLOCKS
-        //
-        //[_mainObjectContext setParentContext:self.privateWriterContext];
-        //
-        // MOVE CODE TO CREATE PSC FROM privateWriterContext
-        //
-        NSPersistentStoreCoordinator*   coordinator = [self persistentStoreCoordinator];
-        [_mainObjectContext performBlockAndWait:^
-         {
-             [_mainObjectContext setPersistentStoreCoordinator:coordinator];
-         }];
-        //
-        //////////////////////////////////////
-        */
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(contextDidSave:)
+                                                     name:NSManagedObjectContextDidSaveNotification
+                                                   object:nil];
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(contextObjectsDidChange:)
@@ -442,6 +430,22 @@
     }
 
     return _privateWriterContext;
+}
+
+- (void)contextDidSave:(NSNotification*)notification
+{
+    NSManagedObjectContext* notificationContext = [notification object];
+    if (self.mainObjectContext.persistentStoreCoordinator != notificationContext.persistentStoreCoordinator)
+    {
+        return;
+    }
+
+    if (notificationContext == self.mainObjectContext)
+    {
+        return;
+    }
+
+    [self.mainObjectContext mergeChangesFromContextDidSaveNotification:notification];
 }
 
 - (void)contextObjectsDidChange:(NSNotification*)notification
