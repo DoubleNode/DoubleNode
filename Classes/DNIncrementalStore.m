@@ -17,34 +17,34 @@
                    forFetchRequest:(NSFetchRequest *)fetchRequest
                   fetchedObjectIDs:(NSArray *)fetchedObjectIDs
 {
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ operation:%@ fetchRequest:%@ fetchedObjectIDs=%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], operation, fetchRequest, fetchedObjectIDs);
     [super notifyManagedObjectContext:context
                 aboutRequestOperation:operation
                       forFetchRequest:fetchRequest
                      fetchedObjectIDs:fetchedObjectIDs];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ operation:%@ fetchRequest:%@ fetchedObjectIDs=%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], operation, fetchRequest, fetchedObjectIDs);
 }
 
 - (void)notifyManagedObjectContext:(NSManagedObjectContext *)context
             aboutRequestOperations:(NSArray *)operations
              forSaveChangesRequest:(NSSaveChangesRequest *)saveChangesRequest
 {
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ operation:%@ saveChangesRequest=%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], operations, saveChangesRequest);
     [super notifyManagedObjectContext:context
                aboutRequestOperations:operations
                 forSaveChangesRequest:saveChangesRequest];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ operation:%@ saveChangesRequest=%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], operations, saveChangesRequest);
 }
 
 - (void)notifyManagedObjectContext:(NSManagedObjectContext *)context
              aboutRequestOperation:(AFHTTPRequestOperation *)operation
        forNewValuesForObjectWithID:(NSManagedObjectID *)objectID
 {
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ operation:%@ objectID=%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], operation, objectID);
     [super notifyManagedObjectContext:context
                 aboutRequestOperation:operation
           forNewValuesForObjectWithID:objectID];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ operation:%@ objectID=%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], operation, objectID);
 }
 
 - (void)notifyManagedObjectContext:(NSManagedObjectContext *)context
@@ -52,12 +52,12 @@
        forNewValuesForRelationship:(NSRelationshipDescription *)relationship
                    forObjectWithID:(NSManagedObjectID *)objectID
 {
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ operation:%@ relationship=%@ objectID=%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], operation, relationship, objectID);
     [super notifyManagedObjectContext:context
                 aboutRequestOperation:operation
           forNewValuesForRelationship:relationship
                       forObjectWithID:objectID];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"]);
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ operation:%@ relationship=%@ objectID=%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], operation, relationship, objectID);
 }
 
 - (NSManagedObjectID *)objectIDForEntity:(NSEntityDescription *)entity

@@ -164,6 +164,7 @@
     _tempInMemoryObjectContext  = nil;
     _concurrentObjectContext    = nil;
     _tempMainObjectContext      = nil;
+    _privateWriterContext       = nil;
 
     DLog(LL_Error, LD_CoreData, @"CoreData store deleted (%@)", storeUrl);
 }
@@ -226,9 +227,12 @@
                                                          error:&error];
 
         _tempInMemoryObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-        [_tempInMemoryObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
-        [_tempInMemoryObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
-        [_tempInMemoryObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
+        if (_tempInMemoryObjectContext)
+        {
+            [_tempInMemoryObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
+            [_tempInMemoryObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
+            [_tempInMemoryObjectContext setPersistentStoreCoordinator:persistentStoreCoordinator];
+        }
     }
 
     return _tempInMemoryObjectContext;
@@ -247,8 +251,12 @@
         [_mainObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
         [_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
 
-        //[_mainObjectContext setParentContext:self.privateWriterContext];
+        [_mainObjectContext performBlockAndWait:^
+         {
+             [_mainObjectContext setParentContext:self.privateWriterContext];
+         }];
 
+        /*
         //////////////////////////////////////
         //
         // TEMPORARILY DISABLE THE privateWriterContext DUE TO AFIS DEADLOCKS
@@ -264,7 +272,8 @@
          }];
         //
         //////////////////////////////////////
-        
+        */
+
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(contextObjectsDidChange:)
                                                      name:NSManagedObjectContextObjectsDidChangeNotification
@@ -277,10 +286,12 @@
 - (NSManagedObjectContext*)concurrentObjectContext
 {
     NSManagedObjectContext* concurrentObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
-
-    [concurrentObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
-    [concurrentObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
-    [concurrentObjectContext setParentContext:self.mainObjectContext];
+    if (concurrentObjectContext)
+    {
+        [concurrentObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
+        [concurrentObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
+        [concurrentObjectContext setParentContext:self.mainObjectContext];
+    }
 
     return concurrentObjectContext;
 }
@@ -288,10 +299,12 @@
 - (NSManagedObjectContext*)tempMainObjectContext
 {
     NSManagedObjectContext* tempMainObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-
-    [tempMainObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
-    [tempMainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
-    [tempMainObjectContext setParentContext:self.mainObjectContext];
+    if (tempMainObjectContext)
+    {
+        [tempMainObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
+        [tempMainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
+        [tempMainObjectContext setParentContext:self.mainObjectContext];
+    }
 
     return tempMainObjectContext;
 }
@@ -411,16 +424,20 @@
 
 - (NSManagedObjectContext*)privateWriterContext
 {
-    if (_privateWriterContext == nil)
+    if (_privateWriterContext)
     {
-        _privateWriterContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+        return _privateWriterContext;
+    }
+
+    _privateWriterContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    if (_privateWriterContext)
+    {
         [_privateWriterContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
         [_privateWriterContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
 
-        NSPersistentStoreCoordinator*   coordinator = [self persistentStoreCoordinator];
         [_privateWriterContext performBlockAndWait:^
          {
-             [_privateWriterContext setPersistentStoreCoordinator:coordinator];
+             [_privateWriterContext setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
          }];
     }
 
@@ -455,6 +472,11 @@
     if (![self.mainObjectContext save:&error])
     {
         DLog(LL_Error, LD_CoreData, @"ERROR saving main context: %@", [error localizedDescription]);
+    }
+
+    if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
+    {
+        DLog(LL_Debug, LD_CoreData, @"CDTableDataModel");
     }
 
     DLog(LL_Debug, LD_CoreData, @"Main context saved to disk");
