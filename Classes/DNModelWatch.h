@@ -43,6 +43,9 @@
                               atIndexPath:(NSIndexPath*)indexPath
                              newIndexPath:(NSIndexPath *)newIndexPath;
 
+- (void)performBlockAndWait:(void (^)(NSManagedObjectContext*))block;
+- (void)performBlock:(void (^)(NSManagedObjectContext*))block;
+
 - (void)performWithContext:(NSManagedObjectContext*)context
               blockAndWait:(void (^)(NSManagedObjectContext*))block;
 - (void)performWithContext:(NSManagedObjectContext*)context

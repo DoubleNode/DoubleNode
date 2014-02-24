@@ -159,8 +159,7 @@
     
     __block NSArray*    resultArray;
     
-    [self performWithContext:[[self class] managedObjectContext]
-                blockAndWait:^(NSManagedObjectContext* context)
+    [self performBlockAndWait:^(NSManagedObjectContext* context)
      {
          @try
          {
@@ -249,8 +248,7 @@
     
     __block NSArray*    resultArray;
 
-    [self performWithContext:[[self class] managedObjectContext]
-                blockAndWait:^(NSManagedObjectContext* context)
+    [self performBlockAndWait:^(NSManagedObjectContext* context)
      {
          @try
          {
@@ -330,6 +328,18 @@
 }
 
 #pragma mark - private methods
+
+- (void)performBlockAndWait:(void (^)(NSManagedObjectContext*))block
+{
+    [self performWithContext:[[self class] managedObjectContext]
+                blockAndWait:block];
+}
+
+- (void)performBlock:(void (^)(NSManagedObjectContext*))block
+{
+    [self performWithContext:[[self class] managedObjectContext]
+                       block:block];
+}
 
 - (void)performWithContext:(NSManagedObjectContext*)context
               blockAndWait:(void (^)(NSManagedObjectContext*))block

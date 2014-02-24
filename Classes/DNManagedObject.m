@@ -110,8 +110,7 @@
 {
     __block DNManagedObject*    bself   = self;
 
-    [self performWithContext:[[self class] managedObjectContext]
-                blockAndWait:^(NSManagedObjectContext* context)
+    [self performBlockAndWait:^(NSManagedObjectContext* context)
      {
          NSEntityDescription*    entity = [NSEntityDescription entityForName:[[self class] entityName] inManagedObjectContext:context];
 
@@ -205,8 +204,7 @@
 
 - (void)deleteWithNoSave
 {
-    [self performWithContext:[[self class] managedObjectContext]
-                       block:^(NSManagedObjectContext* context)
+    [self performBlock:^(NSManagedObjectContext* context)
      {
          [context deleteObject:self];
      }];
@@ -224,8 +222,7 @@
 {
     __block NSEntityDescription*    retval;
 
-    [self performWithContext:[[self class] managedObjectContext]
-                blockAndWait:^(NSManagedObjectContext* context)
+    [self performBlockAndWait:^(NSManagedObjectContext* context)
      {
          retval = [NSEntityDescription entityForName:[[self class] entityName]
                               inManagedObjectContext:context];
@@ -434,6 +431,18 @@
 }
 
 #pragma mark - private methods
+
+- (void)performBlockAndWait:(void (^)(NSManagedObjectContext*))block
+{
+    [self performWithContext:[[self class] managedObjectContext]
+                blockAndWait:block];
+}
+
+- (void)performBlock:(void (^)(NSManagedObjectContext*))block
+{
+    [self performWithContext:[[self class] managedObjectContext]
+                       block:block];
+}
 
 - (void)performWithContext:(NSManagedObjectContext*)context
               blockAndWait:(void (^)(NSManagedObjectContext*))block
