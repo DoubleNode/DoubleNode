@@ -35,10 +35,13 @@
         [self performWithContext:[[model class] managedObjectContext]
                     blockAndWait:^(NSManagedObjectContext* context)
          {
+             NSAssert(context != nil, @"context is NIL");
+             NSAssert(fetchRequest != nil, @"fetchRequest is NIL");
+
              fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                           managedObjectContext:context
                                                                             sectionNameKeyPath:nil
-                                                                                     cacheName:NSStringFromClass([self class])];
+                                                                                     cacheName:nil];    //NSStringFromClass([self class])];
          }];
 
         fetchResultsController.delegate = self;
