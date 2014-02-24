@@ -432,27 +432,27 @@
 
 #pragma mark - private methods
 
-- (void)performBlockAndWait:(void (^)(NSManagedObjectContext*))block
+- (void)performBlockAndWait:(void (^)(NSManagedObjectContext* context))block
 {
     [self performWithContext:[[self class] managedObjectContext]
                 blockAndWait:block];
 }
 
-- (void)performBlock:(void (^)(NSManagedObjectContext*))block
+- (void)performBlock:(void (^)(NSManagedObjectContext* context))block
 {
     [self performWithContext:[[self class] managedObjectContext]
                        block:block];
 }
 
 - (void)performWithContext:(NSManagedObjectContext*)context
-              blockAndWait:(void (^)(NSManagedObjectContext*))block
+              blockAndWait:(void (^)(NSManagedObjectContext* context))block
 {
     [[[self class] entityModel] performWithContext:context
                                       blockAndWait:block];
 }
 
 - (void)performWithContext:(NSManagedObjectContext*)context
-                     block:(void (^)(NSManagedObjectContext*))block
+                     block:(void (^)(NSManagedObjectContext* context))block
 {
     [[[self class] entityModel] performWithContext:context
                                              block:block];

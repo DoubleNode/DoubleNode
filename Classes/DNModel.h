@@ -63,12 +63,12 @@ typedef void(^DNModelCompletionHandlerBlock)();
 
 - (void)deleteAllWithCompletion:(DNModelCompletionHandlerBlock)handler;
 
-- (void)performBlockAndWait:(void (^)(NSManagedObjectContext*))block;
-- (void)performBlock:(void (^)(NSManagedObjectContext*))block;
+- (void)performBlockAndWait:(void (^)(NSManagedObjectContext* context))block;
+- (void)performBlock:(void (^)(NSManagedObjectContext* context))block;
 
 - (void)performWithContext:(NSManagedObjectContext*)context
-              blockAndWait:(void (^)(NSManagedObjectContext*))block;
+              blockAndWait:(void (^)(NSManagedObjectContext* context))block;
 - (void)performWithContext:(NSManagedObjectContext*)context
-                     block:(void (^)(NSManagedObjectContext*))block;
+                     block:(void (^)(NSManagedObjectContext* context))block;
 
 @end
