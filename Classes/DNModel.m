@@ -180,7 +180,12 @@
              return;
          }
      }];
-    
+
+    if ([resultArray count] == 0)
+    {
+        return nil;
+    }
+
     return [resultArray objectAtIndex:0];
 }
 
