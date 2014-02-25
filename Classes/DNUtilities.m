@@ -23,7 +23,7 @@
 
 @interface DNUtilities()
 {
-    int                     logDebugLevel;
+    LogLevel                logDebugLevel;
     NSMutableDictionary*    logDebugDomains;
 }
 @end
@@ -526,19 +526,29 @@
     };
 }
 
-- (void)logSetLevel:(int)level
+- (void)logSetLevel:(LogLevel)level
 {
     logDebugLevel   = level;
 }
 
 - (void)logEnableDomain:(NSString*)domain
 {
-    [logDebugDomains setObject:@YES forKey:domain];
+    [self logEnableDomain:domain forLevel:LL_Everything];
+}
+
+- (void)logEnableDomain:(NSString*)domain forLevel:(LogLevel)level
+{
+    [logDebugDomains setObject:[NSNumber numberWithInt:level] forKey:domain];
 }
 
 - (void)logDisableDomain:(NSString*)domain
 {
-    [logDebugDomains setObject:@NO forKey:domain];
+    [self logDisableDomain:domain forLevel:LL_Everything];
+}
+
+- (void)logDisableDomain:(NSString*)domain forLevel:(LogLevel)level
+{
+    [logDebugDomains setObject:[NSNumber numberWithInt:(level - 1)] forKey:domain];
 }
 
 - (BOOL)isLogEnabledDomain:(NSString*)domain
@@ -551,7 +561,7 @@
 
     if ([logDebugDomains valueForKey:domain] != nil)
     {
-        return [[logDebugDomains objectForKey:domain] boolValue];
+        return (level <= [[logDebugDomains objectForKey:domain] intValue]);
     }
 
     return YES;

@@ -41,6 +41,7 @@ typedef NS_ENUM(NSInteger, LogLevel)
 #define LD_CoreDataIS       @"COREDATAIS"
 #define LD_ViewState        @"VIEWSTATE"
 #define LD_Theming          @"THEMING"
+#define LD_Location         @"LOCATION"
 
 #if !defined(DEBUG)
     #define DLogMarker(marker)          NSLog(@"%@", marker)
@@ -102,9 +103,11 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (void)updateImage:(UIImageView*)imageView
            newImage:(UIImage*)newImage;
 
-- (void)logSetLevel:(int)level;
+- (void)logSetLevel:(LogLevel)level;
 - (void)logEnableDomain:(NSString*)domain;
+- (void)logEnableDomain:(NSString*)domain forLevel:(LogLevel)level;
 - (void)logDisableDomain:(NSString*)domain;
+- (void)logDisableDomain:(NSString*)domain forLevel:(LogLevel)level;
 
 @end
 
