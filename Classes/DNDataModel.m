@@ -86,6 +86,7 @@
     {
         self.persistentStorePrefix  = @"";
         self.useIncrementalStore    = NO;
+        self.resetOnInitialization  = NO;
 
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(saveToDisk:)
@@ -339,6 +340,14 @@
                                 NSInferMappingModelAutomaticallyOption : @(YES),
                                 NSMigratePersistentStoresAutomaticallyOption : @(YES),
                                 };
+
+    if ([self resetOnInitialization] == YES)
+    {
+        if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
+        {
+            DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store file (%@): %@", storeUrl, error);
+        }
+    }
 
     for (int retry = 0; retry < 2; retry++)
     {
