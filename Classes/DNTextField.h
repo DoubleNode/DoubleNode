@@ -14,4 +14,6 @@
 @property (nonatomic, assign) float verticalPadding;
 @property (nonatomic, assign) float horizontalPadding;
 
+- (void)shake;
+
 @end

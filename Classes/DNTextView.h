@@ -11,4 +11,6 @@
 
 @interface DNTextView : JTTextView
 
+- (void)shake;
+
 @end
