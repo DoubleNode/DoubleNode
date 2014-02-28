@@ -270,14 +270,19 @@
           andViewState:(NSString*)viewState
                andItem:(NSString*)item
 {
-    lblView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
-    lblView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    lblView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor"    withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
+    lblView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"    withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 
     lblView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
-    NSNumber*   labelKerning    = [[self class] performThemeSelectorForAttribute:@"Kerning" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIFont*     labelFont       = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"Color" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    NSNumber*   labelKerning        = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIFont*     labelFont           = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIColor*    labelColor          = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    NSNumber*   labelLineSpacing    = [[self class] performThemeSelectorForAttribute:@"LineSpacing" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    NSMutableParagraphStyle*    paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:[labelLineSpacing intValue]];
+    [paragraphStyle setAlignment:lblView.textAlignment];
 
     NSMutableAttributedString*  attrString  = [[lblView attributedText] mutableCopy];
     if ([attrString length] == 0)
@@ -298,10 +303,14 @@
 
     [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
     [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
+
+    [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
+    [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:attrRange];
+
     [lblView setAttributedText:attrString];
 
-    lblView.horizontalPadding   = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
-    lblView.verticalPadding     = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    lblView.horizontalPadding   = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding"  withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    lblView.verticalPadding     = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding"    withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 }
 
 + (void)customizeImage:(UIImageView*)imgView

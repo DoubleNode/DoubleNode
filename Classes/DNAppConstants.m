@@ -28,6 +28,11 @@
     return [[[self class] constantValue:key] doubleValue];
 }
 
++ (int)intConstant:(NSString*)key
+{
+    return [[[self class] constantValue:key] intValue];
+}
+
 + (UIFont*)fontConstant:(NSString*)key
 {
     NSString*   fontName    = [[self class] constantValue:[NSString stringWithFormat:@"%@Name", key]];

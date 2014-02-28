@@ -34,6 +34,15 @@
 + (BOOL)boolConstant:(NSString*)key;
 
 /**
+ *  Returns a int value, initialized with the intValue of the NSString loaded from the Constants plist file for the specified key.
+ *
+ *  @param key The string which specifies the key to the Constants plist file.
+ *
+ *  @return A int value, configured according to the intValue of the NSString in the Constants plist file.
+ */
++ (int)intConstant:(NSString*)key;
+
+/**
  *  Returns a double value, initialized with the doubleValue of the NSString loaded from the Constants plist file for the specified key.
  *
  *  @param key The string which specifies the key to the Constants plist file.
