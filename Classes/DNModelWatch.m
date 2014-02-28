@@ -25,8 +25,6 @@
     if (self)
     {
         model   = myModel;
-        
-        [model retainWatch:self];
     }
     
     return self;
@@ -34,6 +32,7 @@
 
 - (void)startWatch
 {
+    [model retainWatch:self];
 }
 
 - (BOOL)checkWatch

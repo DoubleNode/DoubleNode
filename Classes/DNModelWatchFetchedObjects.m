@@ -57,22 +57,48 @@
 
 - (void)startWatch
 {
+    if ([self checkWatch])
+    {
+        return;
+    }
+
     [super startWatch];
 
     [self refreshWatch];
 
     if ([[self objects] count] > 0)
     {
+        [self executeWillChangeHandler];
+        [[self objects] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+         {
+             NSIndexPath*   indexPath   = [NSIndexPath indexPathForRow:idx inSection:0];
+             [self executeDidChangeObjectInsertHandler:obj atIndexPath:indexPath newIndexPath:indexPath];
+         }];
         [self executeDidChangeHandler];
     }
 }
 
 - (void)cancelWatch
 {
+    NSArray*    objects = [self objects];
+
+    fetchRequest                    = nil;
+    fetchResultsController.delegate = nil;
+    fetchResultsController          = nil;
+
+    if ([objects count] > 0)
+    {
+        [self executeWillChangeHandler];
+        [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+         {
+             NSIndexPath*   indexPath   = [NSIndexPath indexPathForRow:idx inSection:0];
+             [self executeDidChangeObjectDeleteHandler:obj atIndexPath:indexPath newIndexPath:indexPath];
+         }];
+
+        [self executeDidChangeHandler];
+    }
+
     [super cancelWatch];
-    
-    fetchRequest            = nil;
-    fetchResultsController  = nil;
 }
 
 - (void)refreshWatch
