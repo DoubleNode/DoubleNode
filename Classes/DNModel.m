@@ -80,8 +80,8 @@
 
 #pragma mark - model details
 
-- (NSArray*)getFromIDSortKeys   {   return @[ @"id" ];   }
-- (NSArray*)getAllSortKeys      {   return @[ @"id" ];   }
+- (NSArray*)getFromIDSortKeys   {   return @[ @{ @"field": @"id" }, @{ @"ascending": @YES } ];   }
+- (NSArray*)getAllSortKeys      {   return @[ @{ @"field": @"id" }, @{ @"ascending": @YES } ];   }
 
 #pragma mark - watch management
 
@@ -218,11 +218,13 @@
     
     NSMutableArray* sortDescriptors = [NSMutableArray array];
     
-    [[self getFromIDSortKeys] enumerateObjectsUsingBlock:^(NSString* sortKey, NSUInteger idx, BOOL *stop)
+    [[self getFromIDSortKeys] enumerateObjectsUsingBlock:^(NSDictionary* sortDict, NSUInteger idx, BOOL *stop)
      {
-         if ((sortKey != nil) && ([sortKey length] > 0))
+         NSString*  sortKey         = sortDict[@"field"];
+         BOOL       sortAscending   = [sortDict[@"ascending"] boolValue];
+         if (([sortKey length] > 0))
          {
-             [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]];
+             [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:sortAscending]];
          }
      }];
     if ([sortDescriptors count] > 0)
@@ -295,11 +297,13 @@
     
     NSMutableArray* sortDescriptors = [NSMutableArray array];
     
-    [[self getAllSortKeys] enumerateObjectsUsingBlock:^(NSString* sortKey, NSUInteger idx, BOOL *stop)
+    [[self getAllSortKeys] enumerateObjectsUsingBlock:^(NSDictionary* sortDict, NSUInteger idx, BOOL *stop)
      {
-         if ((sortKey != nil) && ([sortKey length] > 0))
+         NSString*  sortKey         = sortDict[@"field"];
+         BOOL       sortAscending   = [sortDict[@"ascending"] boolValue];
+         if (([sortKey length] > 0))
          {
-             [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:YES]];
+             [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:sortAscending]];
          }
      }];
     if ([sortDescriptors count] > 0)

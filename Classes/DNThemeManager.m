@@ -430,4 +430,36 @@
     [txtfldView setNeedsLayout];
 }
 
++ (void)customizeTextView:(DNTextView*)txtView
+                withGroup:(NSString*)group
+                andScreen:(NSString*)screen
+                  andItem:(NSString*)item
+{
+    [[self class] customizeTextView:txtView withGroup:group andScreen:screen andViewState:@"" andItem:item];
+}
+
++ (void)customizeTextView:(DNTextView*)txtView
+                withGroup:(NSString*)group
+                andScreen:(NSString*)screen
+             andViewState:(NSString*)viewState
+                  andItem:(NSString*)item
+{
+    txtView.font                = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
+    txtView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+
+    txtView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtView.textColor           = [[self class] performThemeSelectorForAttribute:@"TextColor" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    // Default is YES/nil if not specified, therefore, if != NO...
+    if (![[[self class] performThemeSelectorForAttribute:@"ShowSuggestions" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] isEqual:@NO])
+    {
+        CGRect  attachmentViewFrame = CGRectMake(0, 0, [DNUtilities screenWidth], 32.0f);
+        JTKeyboardAttachmentView*   attachmentView = [[JTKeyboardAttachmentView alloc] initWithFrame:attachmentViewFrame];
+        [txtView setInputAccessoryView:attachmentView];
+    }
+
+    [txtView setNeedsLayout];
+}
+
 @end

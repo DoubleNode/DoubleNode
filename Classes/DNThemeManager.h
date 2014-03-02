@@ -11,6 +11,8 @@
 #import "DNUtilities.h"
 
 #import "ADVTheme.h"
+
+#import "DNTextView.h"
 #import "DNTextField.h"
 #import "DNLabel.h"
 
@@ -81,5 +83,16 @@
                  andScreen:(NSString*)screen
               andViewState:(NSString*)viewState
                    andItem:(NSString*)item;
+
++ (void)customizeTextView:(DNTextView*)txtView
+                withGroup:(NSString*)group
+                andScreen:(NSString*)screen
+                  andItem:(NSString*)item;
+
++ (void)customizeTextView:(DNTextView*)txtView
+                withGroup:(NSString*)group
+                andScreen:(NSString*)screen
+             andViewState:(NSString*)viewState
+                  andItem:(NSString*)item;
 
 @end

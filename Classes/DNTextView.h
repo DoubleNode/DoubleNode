@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <JustType/JustType.h>
 
-@interface DNTextView : JTTextView
+@interface DNTextView : UITextView  // JTTextView
 
 - (void)shake;
 

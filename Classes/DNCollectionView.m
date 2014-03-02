@@ -129,17 +129,17 @@
 
 - (void)insertSections:(NSIndexSet*)sections
 {
-    [sectionChanges addObject:@{ @(NSFetchedResultsChangeInsert): sections }];
+    [sectionChanges addObject:@{ @(NSFetchedResultsChangeInsert): [sections copy] }];
 }
 
 - (void)deleteSections:(NSIndexSet*)sections
 {
-    [sectionChanges addObject:@{ @(NSFetchedResultsChangeDelete): sections }];
+    [sectionChanges addObject:@{ @(NSFetchedResultsChangeDelete): [sections copy] }];
 }
 
 - (void)reloadSections:(NSIndexSet*)sections
 {
-    [sectionChanges addObject:@{ @(NSFetchedResultsChangeUpdate): sections }];
+    [sectionChanges addObject:@{ @(NSFetchedResultsChangeUpdate): [sections copy] }];
 }
 
 - (void)moveSection:(NSInteger)section toSection:(NSInteger)newSection
@@ -149,22 +149,22 @@
 
 - (void)insertRowsAtIndexPaths:(NSArray*)indexPaths
 {
-    [objectChanges addObject:@{ @(NSFetchedResultsChangeInsert): indexPaths }];
+    [objectChanges addObject:@{ @(NSFetchedResultsChangeInsert): [indexPaths copy] }];
 }
 
 - (void)deleteRowsAtIndexPaths:(NSArray*)indexPaths
 {
-    [objectChanges addObject:@{ @(NSFetchedResultsChangeDelete): indexPaths }];
+    [objectChanges addObject:@{ @(NSFetchedResultsChangeDelete): [indexPaths copy] }];
 }
 
 - (void)reloadRowsAtIndexPaths:(NSArray*)indexPaths
 {
-    [objectChanges addObject:@{ @(NSFetchedResultsChangeUpdate): indexPaths }];
+    [objectChanges addObject:@{ @(NSFetchedResultsChangeUpdate): [indexPaths copy] }];
 }
 
 - (void)moveRowAtIndexPath:(NSIndexPath*)indexPath toIndexPath:(NSIndexPath*)newIndexPath
 {
-    [objectChanges addObject:@{ @(NSFetchedResultsChangeMove): @[ indexPath, newIndexPath ] }];
+    [objectChanges addObject:@{ @(NSFetchedResultsChangeMove): @[ [indexPath copy], [newIndexPath copy] ] }];
 }
 
 - (BOOL)shouldReloadCollectionViewToPreventKnownIssue
