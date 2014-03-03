@@ -275,6 +275,9 @@
 
     lblView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
+    //lblView.verticalAlignment   = [[[self class] performThemeSelectorForAttribute:@"VerticalAlignment" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
+    //lblView.lineHeight          = [[[self class] performThemeSelectorForAttribute:@"LineSpacing"     withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
+
     NSNumber*   labelKerning        = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     UIFont*     labelFont           = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     UIColor*    labelColor          = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
@@ -295,14 +298,23 @@
 
     NSRange attrRange   = NSMakeRange(0, [attrString length]);
 
-    [attrString removeAttribute:NSKernAttributeName range:attrRange];
-    [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
+    if (labelKerning)
+    {
+        [attrString removeAttribute:NSKernAttributeName range:attrRange];
+        [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
+    }
 
-    [attrString removeAttribute:NSFontAttributeName range:attrRange];
-    [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
+    if (labelFont)
+    {
+        [attrString removeAttribute:NSFontAttributeName range:attrRange];
+        [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
+    }
 
-    [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
-    [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
+    if (labelColor)
+    {
+        [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
+        [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
+    }
 
     [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
     [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:attrRange];
@@ -360,14 +372,24 @@
         attrRange   = NSMakeRange(0, [attrString length]);
     }
 
-    [attrString removeAttribute:NSKernAttributeName range:attrRange];
-    [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
+    if (labelKerning)
+    {
+        [attrString removeAttribute:NSKernAttributeName range:attrRange];
+        [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
+    }
 
-    [attrString removeAttribute:NSFontAttributeName range:attrRange];
-    [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
+    if (labelFont)
+    {
+        [attrString removeAttribute:NSFontAttributeName range:attrRange];
+        [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
+    }
 
-    [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
-    [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
+    if (labelColor)
+    {
+        [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
+        [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
+    }
+
     [btnView setAttributedTitle:attrString forState:controlState];
 }
 
@@ -444,12 +466,55 @@
              andViewState:(NSString*)viewState
                   andItem:(NSString*)item
 {
-    txtView.font                = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
-    txtView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    //xtView.font                = [[self class] performThemeSelectorForAttribute:@"Font"            withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor"    withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
+    txtView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"    withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 
     txtView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtView.textColor           = [[self class] performThemeSelectorForAttribute:@"TextColor" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    //txtView.textColor           = [[self class] performThemeSelectorForAttribute:@"TextColor"       withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    NSNumber*   txtViewKerning      = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIFont*     txtViewFont         = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIColor*    txtViewColor        = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    NSNumber*   txtViewLineSpacing  = [[self class] performThemeSelectorForAttribute:@"LineSpacing" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    NSMutableParagraphStyle*    paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:[txtViewLineSpacing intValue]];
+    [paragraphStyle setAlignment:txtView.textAlignment];
+
+    NSMutableAttributedString*  attrString  = [[txtView attributedText] mutableCopy];
+    if ([attrString length] == 0)
+    {
+        if ([txtView.text length] > 0)
+        {
+            attrString  = [[NSMutableAttributedString alloc] initWithString:txtView.text];
+        }
+    }
+
+    NSRange attrRange   = NSMakeRange(0, [attrString length]);
+
+    if (txtViewKerning)
+    {
+        [attrString removeAttribute:NSKernAttributeName range:attrRange];
+        [attrString addAttribute:NSKernAttributeName value:txtViewKerning range:attrRange];
+    }
+
+    if (txtViewFont)
+    {
+        [attrString removeAttribute:NSFontAttributeName range:attrRange];
+        [attrString addAttribute:NSFontAttributeName value:txtViewFont range:attrRange];
+    }
+
+    if (txtViewColor)
+    {
+        [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
+        [attrString addAttribute:NSForegroundColorAttributeName value:txtViewColor range:attrRange];
+    }
+
+    [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
+    [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:attrRange];
+
+    [txtView setAttributedText:attrString];
 
     // Default is YES/nil if not specified, therefore, if != NO...
     if (![[[self class] performThemeSelectorForAttribute:@"ShowSuggestions" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] isEqual:@NO])
