@@ -8,7 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
-@interface DNLabel : UILabel
+#import "TTTAttributedLabel.h"
+
+typedef enum
+{
+    DNLabelVerticalAlignmentCenter  = TTTAttributedLabelVerticalAlignmentCenter,
+    DNLabelVerticalAlignmentTop     = TTTAttributedLabelVerticalAlignmentTop,
+    DNLabelVerticalAlignmentBottom  = TTTAttributedLabelVerticalAlignmentBottom,
+}
+DNLabelVerticalAlignment;
+
+@interface DNLabel : TTTAttributedLabel
 
 @property (nonatomic, assign) float verticalPadding;
 @property (nonatomic, assign) float horizontalPadding;

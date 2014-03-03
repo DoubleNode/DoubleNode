@@ -275,8 +275,8 @@
 
     lblView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
-    //lblView.verticalAlignment   = [[[self class] performThemeSelectorForAttribute:@"VerticalAlignment" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
-    //lblView.lineHeight          = [[[self class] performThemeSelectorForAttribute:@"LineSpacing"     withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
+    lblView.verticalAlignment   = [[[self class] performThemeSelectorForAttribute:@"VerticalAlignment"  withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
+    lblView.lineHeightMultiple  = [[[self class] performThemeSelectorForAttribute:@"LineHeightMultiple" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
 
     NSNumber*   labelKerning        = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     UIFont*     labelFont           = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
