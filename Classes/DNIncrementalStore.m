@@ -216,12 +216,12 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 {
     id  retval;
 
-    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ objectID:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], objectID);
+    DLog(LL_Debug, LD_CoreDataIS, @"IN: %@ context:%@ objectID:%@ relationship:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], objectID, relationship);
     retval = [super newValueForRelationship:relationship
                             forObjectWithID:objectID
                                 withContext:context
                                       error:error];
-    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ objectID:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], objectID, retval, ((error == NULL) ? @"<NONE>" : *error));
+    DLog(LL_Debug, LD_CoreDataIS, @"OUT: %@ context:%@ objectID:%@ relationship:%@ retval:%@ error:%@", NSStringFromSelector(_cmd), [context.userInfo objectForKey:@"mocName"], objectID, relationship, retval, ((error == NULL) ? @"<NONE>" : *error));
 
     return retval;
 }

@@ -233,6 +233,33 @@
 
 #pragma mark - Dictionary Translation functions
 
++ (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [[self class] dictionaryBoolean:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    NSNumber*   retval  = defaultValue;
+
+    id  object = [dictionary objectForKey:key];
+    if (object != nil)
+    {
+        if (object != (NSNumber*)[NSNull null])
+        {
+            NSNumber*   newval  = [NSNumber numberWithInt:[object boolValue]];
+
+            if ((retval == nil) || ([newval isEqualToNumber:retval] == NO))
+            {
+                if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                retval = newval;
+            }
+        }
+    }
+
+    return retval;
+}
+
 + (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
     return [[self class] dictionaryNumber:dictionary dirty:nil withItem:key andDefault:defaultValue];
