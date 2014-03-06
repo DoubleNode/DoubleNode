@@ -13,6 +13,7 @@
 
 #import "DNUtilities.h"
 #import "NSString+HTML.h"
+#import "NSString+Inflections.h"
 
 @implementation DNManagedObject
 
@@ -61,9 +62,98 @@
                                     ofEntity:(NSEntityDescription*)entity
                                 fromResponse:(NSHTTPURLResponse*)response
 {
-    return [[NSDictionary alloc] init];
-}
+    // Convert keys in representation to camelCase
+    // Convert values to the type required by entity
+    NSMutableDictionary*    retRepresentation   = [[NSMutableDictionary alloc] initWithCapacity:representation.count];
+    NSDictionary*           attributes          = [entity attributesByName];
 
+    [representation enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
+     {
+         if ([key isKindOfClass:[NSString class]])
+         {
+             id  value = obj;
+
+             NSString*               name        = [(NSString*)key camelcase];
+             NSAttributeDescription* attribute   = [attributes objectForKey:name];
+             if (attribute != nil)
+             {
+                 switch (attribute.attributeType)
+                 {
+                     case NSInteger16AttributeType:
+                     case NSInteger32AttributeType:
+                     case NSInteger64AttributeType:
+                     case NSBooleanAttributeType:
+                     {
+                         if ([obj isKindOfClass:[NSString class]])
+                         {
+                             value = [NSNumber numberWithInteger:[(NSString*)obj integerValue]];
+                         }
+                         break;
+                     }
+
+                     case NSDecimalAttributeType:
+                     case NSDoubleAttributeType:
+                     case NSFloatAttributeType:
+                     {
+                         if ([obj isKindOfClass:[NSString class]])
+                         {
+                             value = [NSNumber numberWithDouble:[(NSString*)obj doubleValue]];
+                         }
+                         break;
+                     }
+
+                     case NSStringAttributeType:
+                     {
+                         if ([obj isKindOfClass:[NSNumber class]])
+                         {
+                             value = [(NSNumber*)obj stringValue];
+                         }
+                         break;
+                     }
+
+                     case NSDateAttributeType:
+                     {
+                         if ([obj isKindOfClass:[NSNumber class]])
+                         {
+                             if ([(NSNumber*)obj integerValue] == 0)
+                             {
+                                 value = [NSNull null];
+                             }
+                             else
+                             {
+                                 value = [NSDate dateWithTimeIntervalSince1970:[(NSNumber*)obj integerValue]];
+                             }
+                         }
+                         else if ([obj isKindOfClass:[NSString class]])
+                         {
+                             NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
+                             [formatter setAllowsFloats:NO];
+
+                             NSNumber*  timestamp = [formatter numberFromString:(NSString*)obj];
+                             if (timestamp != nil)
+                             {
+                                 if ([timestamp integerValue] == 0)
+                                 {
+                                     value = [NSNull null];
+                                 }
+                                 else
+                                 {
+                                     value = [NSDate dateWithTimeIntervalSince1970:[timestamp integerValue]];
+                                 }
+                             }
+                         }
+                         break;
+                     }
+                 }
+             }
+
+             [retRepresentation setObject:value forKey:name];
+         }
+     }];
+    
+    return retRepresentation;
+}
+ 
 + (BOOL)shouldFetchRemoteAttributeValuesForObjectWithID:(NSManagedObjectID*)objectID
                                  inManagedObjectContext:(NSManagedObjectContext*)context
 {
@@ -233,6 +323,16 @@
 
 #pragma mark - Dictionary Translation functions
 
+- (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [[self class] dictionaryBoolean:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [[self class] dictionaryBoolean:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
 + (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
     return [[self class] dictionaryBoolean:dictionary dirty:nil withItem:key andDefault:defaultValue];
@@ -258,6 +358,16 @@
     }
 
     return retval;
+}
+
+- (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [[self class] dictionaryNumber:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [[self class] dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 + (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
@@ -287,6 +397,16 @@
     return retval;
 }
 
+- (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [[self class] dictionaryDouble:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [[self class] dictionaryDouble:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
 + (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
     return [[self class] dictionaryDouble:dictionary dirty:nil withItem:key andDefault:defaultValue];
@@ -312,6 +432,16 @@
     }
     
     return retval;
+}
+
+- (NSString*)dictionaryString:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSString*)defaultValue
+{
+    return [[self class] dictionaryString:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSString*)dictionaryString:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSString*)defaultValue
+{
+    return [[self class] dictionaryString:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 + (NSString*)dictionaryString:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSString*)defaultValue
@@ -371,6 +501,16 @@
     return [retval stringByDecodingXMLEntities];
 }
 
+- (NSArray*)dictionaryArray:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSArray*)defaultValue
+{
+    return [[self class] dictionaryArray:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSArray*)dictionaryArray:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSArray*)defaultValue
+{
+    return [[self class] dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
 + (NSArray*)dictionaryArray:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSArray*)defaultValue
 {
     return [[self class] dictionaryArray:dictionary dirty:nil withItem:key andDefault:defaultValue];
@@ -401,6 +541,16 @@
     return retval;
 }
 
+- (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
+{
+    return [[self class] dictionaryDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue
+{
+    return [[self class] dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
     return [[self class] dictionaryDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
@@ -429,6 +579,16 @@
     }
     
     return retval;
+}
+
+- (id)dictionaryObject:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue
+{
+    return [[self class] dictionaryObject:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (id)dictionaryObject:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue
+{
+    return [[self class] dictionaryObject:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 + (id)dictionaryObject:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue
