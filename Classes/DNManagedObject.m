@@ -58,99 +58,73 @@
     
 }
 
++ (NSString*)translationForAttribute:(NSString*)attribute
+                            ofEntity:(NSEntityDescription*)entity
+{
+    NSString*   retval = [(NSString*)attribute camelizeWithLowerFirstLetter];
+
+    return retval;
+}
+
 + (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
                                     ofEntity:(NSEntityDescription*)entity
                                 fromResponse:(NSHTTPURLResponse*)response
 {
-    // Convert keys in representation to camelCase
-    // Convert values to the type required by entity
     NSMutableDictionary*    retRepresentation   = [[NSMutableDictionary alloc] initWithCapacity:representation.count];
     NSDictionary*           attributes          = [entity attributesByName];
 
     [representation enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
      {
-         if ([key isKindOfClass:[NSString class]])
+         if (![key isKindOfClass:[NSString class]])
          {
-             id  value = obj;
+             return;
+         }
 
-             NSString*               name        = [(NSString*)key camelcase];
-             NSAttributeDescription* attribute   = [attributes objectForKey:name];
-             if (attribute != nil)
+         NSString*                  name        = [self translationForAttribute:key ofEntity:entity];
+         NSAttributeDescription*    attribute   = [attributes objectForKey:name];
+         if (!attribute)
+         {
+             return;
+         }
+
+         switch (attribute.attributeType)
+         {
+             case NSInteger16AttributeType:
+             case NSInteger32AttributeType:
+             case NSInteger64AttributeType:
              {
-                 switch (attribute.attributeType)
-                 {
-                     case NSInteger16AttributeType:
-                     case NSInteger32AttributeType:
-                     case NSInteger64AttributeType:
-                     case NSBooleanAttributeType:
-                     {
-                         if ([obj isKindOfClass:[NSString class]])
-                         {
-                             value = [NSNumber numberWithInteger:[(NSString*)obj integerValue]];
-                         }
-                         break;
-                     }
-
-                     case NSDecimalAttributeType:
-                     case NSDoubleAttributeType:
-                     case NSFloatAttributeType:
-                     {
-                         if ([obj isKindOfClass:[NSString class]])
-                         {
-                             value = [NSNumber numberWithDouble:[(NSString*)obj doubleValue]];
-                         }
-                         break;
-                     }
-
-                     case NSStringAttributeType:
-                     {
-                         if ([obj isKindOfClass:[NSNumber class]])
-                         {
-                             value = [(NSNumber*)obj stringValue];
-                         }
-                         break;
-                     }
-
-                     case NSDateAttributeType:
-                     {
-                         if ([obj isKindOfClass:[NSNumber class]])
-                         {
-                             if ([(NSNumber*)obj integerValue] == 0)
-                             {
-                                 value = [NSNull null];
-                             }
-                             else
-                             {
-                                 value = [NSDate dateWithTimeIntervalSince1970:[(NSNumber*)obj integerValue]];
-                             }
-                         }
-                         else if ([obj isKindOfClass:[NSString class]])
-                         {
-                             NSNumberFormatter* formatter = [[NSNumberFormatter alloc] init];
-                             [formatter setAllowsFloats:NO];
-
-                             NSNumber*  timestamp = [formatter numberFromString:(NSString*)obj];
-                             if (timestamp != nil)
-                             {
-                                 if ([timestamp integerValue] == 0)
-                                 {
-                                     value = [NSNull null];
-                                 }
-                                 else
-                                 {
-                                     value = [NSDate dateWithTimeIntervalSince1970:[timestamp integerValue]];
-                                 }
-                             }
-                         }
-                         break;
-                     }
-                 }
+                 [retRepresentation setObject:[self dictionaryNumber:representation dirty:nil withItem:key andDefault:@0] forKey:name];
+                 break;
              }
 
-             [retRepresentation setObject:value forKey:name];
+             case NSBooleanAttributeType:
+             {
+                 [retRepresentation setObject:[self dictionaryBoolean:representation dirty:nil withItem:key andDefault:@NO] forKey:name];
+                 break;
+             }
+
+             case NSDecimalAttributeType:
+             case NSDoubleAttributeType:
+             case NSFloatAttributeType:
+             {
+                 [retRepresentation setObject:[self dictionaryDouble:representation dirty:nil withItem:key andDefault:@0.0f] forKey:name];
+                 break;
+             }
+
+             case NSStringAttributeType:
+             {
+                 [retRepresentation setObject:[self dictionaryString:representation dirty:nil withItem:key andDefault:@""] forKey:name];
+                 break;
+             }
+
+             case NSDateAttributeType:
+             {
+                 [retRepresentation setObject:[self dictionaryDate:representation dirty:nil withItem:key andDefault:[NSDate date]] forKey:name];
+                 break;
+             }
          }
      }];
-    
+
     return retRepresentation;
 }
  
@@ -481,6 +455,10 @@
                     object  = @"";
                 }
             }
+            else if ([object isKindOfClass:[NSNull class]] == YES)
+            {
+                object = @"";
+            }
             else
             {
                 object = [object stringValue];
@@ -558,22 +536,52 @@
 
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
-    NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
     NSDate*   retval  = defaultValue;
     
     id  object = [dictionary objectForKey:key];
     if (object != nil)
     {
-        if (object != (NSString*)[NSNull null])
+        if ([object isKindOfClass:[NSNumber class]])
         {
-            NSDate*   newval  = [dateFormatter dateFromString:object];
-            
-            if ((retval == nil) || ([newval isEqualToDate:retval] == NO))
+            if (object != (NSNumber*)[NSNull null])
             {
-                if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                retval = newval;
+                NSDate*   newval  = [NSDate dateWithTimeIntervalSince1970:[object intValue]];
+
+                if ((retval == nil) || ([newval isEqualToDate:retval] == NO))
+                {
+                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                    retval = newval;
+                }
+            }
+        }
+        else if ([object isKindOfClass:[NSString class]])
+        {
+            if (object != (NSString*)[NSNull null])
+            {
+                NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                
+                NSDate*   newval  = [dateFormatter dateFromString:object];
+
+                if (retval == nil)
+                {
+                    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
+                    [numberFormatter setAllowsFloats:NO];
+                    
+                    NSNumber*   timestamp = [numberFormatter numberFromString:object];
+                    if (timestamp != nil)
+                    {
+                        if ([timestamp integerValue] != 0)
+                        {
+                            newval = [NSDate dateWithTimeIntervalSince1970:[timestamp integerValue]];
+                        }
+                    }
+                }
+                if ((retval == nil) || ([newval isEqualToDate:retval] == NO))
+                {
+                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                    retval = newval;
+                }
             }
         }
     }

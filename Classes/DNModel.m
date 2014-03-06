@@ -80,8 +80,8 @@
 
 #pragma mark - model details
 
-- (NSArray*)getFromIDSortKeys   {   return @[ @{ @"field": @"id" }, @{ @"ascending": @YES } ];   }
-- (NSArray*)getAllSortKeys      {   return @[ @{ @"field": @"id" }, @{ @"ascending": @YES } ];   }
+- (NSArray*)getFromIDSortKeys   {   return @[ @{ @"field": @"id", @"ascending": @YES } ];   }
+- (NSArray*)getAllSortKeys      {   return @[ @{ @"field": @"id", @"ascending": @YES } ];   }
 
 #pragma mark - watch management
 

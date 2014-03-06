@@ -24,6 +24,8 @@
 + (NSString*)entityName;
 + (DNModel*)entityModel;
 
++ (NSString*)translationForAttribute:(NSString*)attribute
+                            ofEntity:(NSEntityDescription*)entity;
 + (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
                                     ofEntity:(NSEntityDescription*)entity
                                 fromResponse:(NSHTTPURLResponse*)response;
