@@ -15,6 +15,12 @@
 #import "NSString+HTML.h"
 #import "NSString+Inflections.h"
 
+// **********
+// DME: Set the default NSDate attribute value to approx Jan 1, 2970 (~1000 years in the future).  This will
+//      handle the cases where a date (such as an expiration date) is not specified to designate a state of "never expires".
+#define kDNDefaultDate_NeverExpires [NSDate dateWithTimeIntervalSince1970:31536000000.0f]
+// **********
+
 @implementation DNManagedObject
 
 @dynamic id;
@@ -119,7 +125,7 @@
 
              case NSDateAttributeType:
              {
-                 [retRepresentation setObject:[self dictionaryDate:representation dirty:nil withItem:key andDefault:[NSDate date]] forKey:name];
+                 [retRepresentation setObject:[self dictionaryDate:representation dirty:nil withItem:key andDefault:kDNDefaultDate_NeverExpires] forKey:name];
                  break;
              }
          }
@@ -562,8 +568,7 @@
                 [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
                 
                 NSDate*   newval  = [dateFormatter dateFromString:object];
-
-                if (retval == nil)
+                if (newval == nil)
                 {
                     NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
                     [numberFormatter setAllowsFloats:NO];
@@ -577,10 +582,13 @@
                         }
                     }
                 }
-                if ((retval == nil) || ([newval isEqualToDate:retval] == NO))
+                if (newval)
                 {
-                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                    retval = newval;
+                    if ((retval == nil) || ([newval isEqualToDate:retval] == NO))
+                    {
+                        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                        retval = newval;
+                    }
                 }
             }
         }
