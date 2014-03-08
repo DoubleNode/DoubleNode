@@ -475,12 +475,16 @@
 {
     NSManagedObjectContext* savingContext = self.mainObjectContext;
 
-    NSError*    error = nil;
-
-    if (![self.mainObjectContext save:&error])
-    {
-        DLog(LL_Error, LD_CoreData, @"ERROR saving main context: %@", [error localizedDescription]);
-    }
+    [self performWithContext:self.mainObjectContext
+                blockAndWait:^(NSManagedObjectContext* context)
+     {
+         NSError*    error = nil;
+         
+         if (![self.mainObjectContext save:&error])
+         {
+             DLog(LL_Error, LD_CoreData, @"ERROR saving main context: %@", [error localizedDescription]);
+         }
+     }];
 
     if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
     {
