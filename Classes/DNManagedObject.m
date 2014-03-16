@@ -40,7 +40,7 @@
 
 + (DNModel*)entityModel
 {
-    return [[[[self class] entityModelClass] alloc] init];
+    return [[[self entityModelClass] alloc] init];
 }
 
 + (NSString*)entityName
@@ -53,20 +53,63 @@
 {
     if ([[dict objectForKey:@"id"] isKindOfClass:[NSString class]])
     {
-        return [[self class] dictionaryString:dict withItem:@"id" andDefault:nil];
+        return [self dictionaryString:dict withItem:@"id" andDefault:nil];
     }
 
-    return [[self class] dictionaryNumber:dict withItem:@"id" andDefault:nil];
+    return [self dictionaryNumber:dict withItem:@"id" andDefault:nil];
 }
 
-- (void)loadWithDictionary:(NSDictionary*)dict
++ (NSString*)pathForEntity
 {
-    
+    NSException*    exception = [NSException exceptionWithName:@"DMManagedObject Exception"
+                                                        reason:@"Base pathForEntity: should never be called, override might be missing!"
+                                                      userInfo:nil];
+    @throw exception;
+
+    // Not sure if this is ever reached
+    return @"";
+}
+
++ (NSString*)requestWithParameters:(NSDictionary**)parameters
+                       withContext:(NSManagedObjectContext*)context
+{
+    NSException*    exception = [NSException exceptionWithName:@"DMManagedObject Exception"
+                                                        reason:@"Base requestWithParameters:withContext: should never be called, override might be missing!"
+                                                      userInfo:nil];
+    @throw exception;
+
+    // Not sure if this is ever reached
+    return nil;
+}
+
++ (NSDictionary*)representationsByEntityOfEntity:(NSEntityDescription*)entity
+                             fromRepresentations:(id)representations
+{
+    return @{entity.name: representations};
+}
+
++ (NSString*)resourceIdentifierForRepresentation:(NSDictionary*)representation
+                                        ofEntity:(NSEntityDescription*)entity
+                                    fromResponse:(NSHTTPURLResponse*)response
+{
+    return nil;
+}
+
++ (NSDictionary*)representationsByEntityForRelationshipsFromRepresentation:(NSDictionary*)representation
+                                                                  ofEntity:(NSEntityDescription*)entity
+                                                              fromResponse:(NSHTTPURLResponse*)response
+{
+    return nil;
 }
 
 + (NSString*)translationForAttribute:(NSString*)attribute
                             ofEntity:(NSEntityDescription*)entity
 {
+    if ([attribute rangeOfString:@"_"].location == NSNotFound)
+    {
+        return attribute;
+    }
+
     NSString*   retval = [(NSString*)attribute camelizeWithLowerFirstLetter];
 
     return retval;
@@ -134,6 +177,13 @@
     return retRepresentation;
 }
  
++ (NSDictionary*)representationsForRelationshipsFromRepresentation:(NSDictionary*)representation
+                                                          ofEntity:(NSEntityDescription*)entity
+                                                      fromResponse:(NSHTTPURLResponse*)response
+{
+    return @{};
+}
+
 + (BOOL)shouldFetchRemoteAttributeValuesForObjectWithID:(NSManagedObjectID*)objectID
                                  inManagedObjectContext:(NSManagedObjectContext*)context
 {
@@ -151,12 +201,12 @@
 
 + (NSManagedObjectContext*)managedObjectContext
 {
-    return [[[[self class] entityModelClass] dataModel] mainObjectContext];
+    return [[[self entityModelClass] dataModel] mainObjectContext];
 }
 
 + (void)saveContext
 {
-    [[[[self class] entityModelClass] dataModel] saveContext];
+    [[[self entityModelClass] dataModel] saveContext];
 }
 
 #pragma mark - Entity initialization functions
@@ -263,6 +313,11 @@
         DLog(LL_Warning, LD_CoreData, @"exception=%@", exception);
     }
      */
+}
+
+- (void)loadWithDictionary:(NSDictionary*)dict
+{
+
 }
 
 #pragma mark - Entity save/delete functions

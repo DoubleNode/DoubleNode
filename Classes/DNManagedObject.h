@@ -24,11 +24,26 @@
 + (NSString*)entityName;
 + (DNModel*)entityModel;
 
++ (NSString*)pathForEntity;
++ (NSString*)requestWithParameters:(NSDictionary**)parameters
+                       withContext:(NSManagedObjectContext*)context;
++ (NSDictionary*)representationsByEntityOfEntity:(NSEntityDescription*)entity
+                             fromRepresentations:(id)representations;
++ (NSString*)resourceIdentifierForRepresentation:(NSDictionary*)representation
+                                        ofEntity:(NSEntityDescription*)entity
+                                    fromResponse:(NSHTTPURLResponse*)response;
++ (NSDictionary*)representationsByEntityForRelationshipsFromRepresentation:(NSDictionary*)representation
+                                                                  ofEntity:(NSEntityDescription*)entity
+                                                              fromResponse:(NSHTTPURLResponse*)response;
+
 + (NSString*)translationForAttribute:(NSString*)attribute
                             ofEntity:(NSEntityDescription*)entity;
 + (NSDictionary*)attributesForRepresentation:(NSDictionary*)representation
                                     ofEntity:(NSEntityDescription*)entity
                                 fromResponse:(NSHTTPURLResponse*)response;
++ (NSDictionary*)representationsForRelationshipsFromRepresentation:(NSDictionary*)representation
+                                                          ofEntity:(NSEntityDescription*)entity
+                                                      fromResponse:(NSHTTPURLResponse*)response;
 + (BOOL)shouldFetchRemoteAttributeValuesForObjectWithID:(NSManagedObjectID*)objectID
                                  inManagedObjectContext:(NSManagedObjectContext*)context;
 + (BOOL)shouldFetchRemoteValuesForRelationship:(NSRelationshipDescription*)relationship

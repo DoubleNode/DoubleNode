@@ -34,7 +34,7 @@
 
 + (NSString*)dataModelName
 {
-    return [[self class] dataModelName];
+    return [self dataModelName];
 }
 
 + (NSString*)entityName
