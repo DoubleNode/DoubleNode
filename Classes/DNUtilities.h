@@ -42,6 +42,8 @@ typedef NS_ENUM(NSInteger, LogLevel)
 #define LD_ViewState        @"VIEWSTATE"
 #define LD_Theming          @"THEMING"
 #define LD_Location         @"LOCATION"
+#define LD_Networking       @"NETWORKING"
+#define LD_API              @"API"
 
 #if !defined(DEBUG)
     #define DLogMarker(marker)          NSLog(@"%@", marker)
