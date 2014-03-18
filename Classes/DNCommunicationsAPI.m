@@ -85,7 +85,54 @@
 
 - (void)markAPIKeyUpdated:(NSString*)apikey
 {
-    [self markUpdated:[self apiURLRetrieve:apikey]];
+    [self markAPIKeyUpdated:apikey withID:nil withParamString:nil];
+}
+
+- (void)markAPIKeyUpdated:(NSString*)apikey
+                   withID:(id)idValue
+{
+    [self markAPIKeyUpdated:apikey withID:idValue withParamString:nil];
+}
+
+- (void)markAPIKeyUpdated:(NSString*)apikey
+                   withID:(id)idValue
+          withParamString:(NSString*)params
+{
+    NSString*   paramString = @"";
+    if ([params length] > 0)
+    {
+        paramString = [paramString stringByAppendingFormat:@"%@&", params];
+    }
+
+    NSString*   urlPath = [NSString stringWithFormat:@"%@?%@", [self apiURLRetrieve:apikey withID:idValue], paramString];
+
+    [self markUpdated:urlPath];
+}
+
+- (void)markAPIKeyExpired:(NSString*)apikey
+{
+    [self markAPIKeyExpired:apikey withID:nil withParamString:nil];
+}
+
+- (void)markAPIKeyExpired:(NSString*)apikey
+                   withID:(id)idValue
+{
+    [self markAPIKeyExpired:apikey withID:idValue withParamString:nil];
+}
+
+- (void)markAPIKeyExpired:(NSString*)apikey
+                   withID:(id)idValue
+          withParamString:(NSString*)params
+{
+    NSString*   paramString = @"";
+    if ([params length] > 0)
+    {
+        paramString = [paramString stringByAppendingFormat:@"%@&", params];
+    }
+
+    NSString*   urlPath = [NSString stringWithFormat:@"%@?%@", [self apiURLRetrieve:apikey withID:idValue], paramString];
+
+    [self markExpired:urlPath];
 }
 
 - (void)markUpdated:(NSString*)cacheKey
@@ -750,7 +797,26 @@
                            filter:(BOOL(^)(id object))filterHandler
                        completion:(void(^)(NSArray* speakers))completionHandler
 {
-    [self markAPIKeyUpdated:apikey];
+    [self processingCompletionBlock:apikey withID:nil withParamString:nil objects:objects filter:filterHandler completion:completionHandler];
+}
+
+- (void)processingCompletionBlock:(NSString*)apikey
+                           withID:(id)idValue
+                          objects:(NSArray*)objects
+                           filter:(BOOL(^)(id object))filterHandler
+                       completion:(void(^)(NSArray* speakers))completionHandler
+{
+    [self processingCompletionBlock:apikey withID:idValue withParamString:nil objects:objects filter:filterHandler completion:completionHandler];
+}
+
+- (void)processingCompletionBlock:(NSString*)apikey
+                           withID:(id)idValue
+                  withParamString:(NSString*)params
+                          objects:(NSArray*)objects
+                           filter:(BOOL(^)(id object))filterHandler
+                       completion:(void(^)(NSArray* speakers))completionHandler
+{
+    [self markAPIKeyUpdated:apikey withID:idValue withParamString:params];
 
     NSMutableArray*    results     = [NSMutableArray arrayWithCapacity:[objects count]];
     

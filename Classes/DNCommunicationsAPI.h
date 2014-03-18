@@ -30,6 +30,23 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
           withTTL:(NSUInteger)ttl;
 
 - (void)markAPIKeyUpdated:(NSString*)apikey;
+
+- (void)markAPIKeyUpdated:(NSString*)apikey
+                   withID:(id)idValue;
+
+- (void)markAPIKeyUpdated:(NSString*)apikey
+                   withID:(id)idValue
+          withParamString:(NSString*)params;
+
+- (void)markAPIKeyExpired:(NSString*)apikey;
+
+- (void)markAPIKeyExpired:(NSString*)apikey
+                   withID:(id)idValue;
+
+- (void)markAPIKeyExpired:(NSString*)apikey
+                   withID:(id)idValue
+          withParamString:(NSString*)params;
+
 - (void)markUpdated:(NSString*)cacheKey;
 - (void)markExpired:(NSString*)cacheKey;
 
@@ -112,6 +129,19 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
                error:(void(^)(NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processingCompletionBlock:(NSString*)apikey
+                          objects:(NSArray*)objects
+                           filter:(BOOL(^)(id object))filterHandler
+                       completion:(void(^)(NSArray* speakers))completionHandler;
+
+- (void)processingCompletionBlock:(NSString*)apikey
+                           withID:(id)idValue
+                          objects:(NSArray*)objects
+                           filter:(BOOL(^)(id object))filterHandler
+                       completion:(void(^)(NSArray* speakers))completionHandler;
+
+- (void)processingCompletionBlock:(NSString*)apikey
+                           withID:(id)idValue
+                  withParamString:(NSString*)params
                           objects:(NSArray*)objects
                            filter:(BOOL(^)(id object))filterHandler
                        completion:(void(^)(NSArray* speakers))completionHandler;
