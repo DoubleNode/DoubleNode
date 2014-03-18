@@ -11,6 +11,12 @@
 
 #import "DNApplicationProtocol.h"
 
+// **********
+// DME: Set the default NSDate attribute value to approx Jan 1, 2970 (~1000 years in the future).  This will
+//      handle the cases where a date (such as an expiration date) is not specified to designate a state of "never expires".
+#define kDNDefaultDate_NeverExpires [NSDate dateWithTimeIntervalSince1970:31536000000.0f]
+// **********
+
 @class DNModel;
 
 @interface DNManagedObject : NSManagedObject

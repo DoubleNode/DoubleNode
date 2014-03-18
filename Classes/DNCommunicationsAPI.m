@@ -6,9 +6,11 @@
 //  Copyright (c) 2012 DoubleNode.com. All rights reserved.
 //
 
+#import <AFOAuth2Client/AFOAuth2Client.h>
+
 #import "DNCommunicationsAPI.h"
 
-#import "AppDelegate.h"
+#import "DNAppConstants.h"
 
 @implementation DNCommunicationsAPIQueued
 
@@ -122,7 +124,7 @@
 }
 
 - (NSString*)apiURLRetrieve:(NSString*)apikey
-                     withID:(NSNumber*)idValue
+                     withID:(id)idValue
 {
     NSString*       hostnameStr = [self getAPIHostnameString];
     NSURL*          hostname    = [NSURL URLWithString:hostnameStr];
@@ -194,6 +196,23 @@
 }
 
 - (void)processRequest:(NSString*)apikey
+                withID:(id)idValue
+            completion:(void(^)(NSDictionary* response))completionHandler
+                 error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
+{
+    [self processRequest:apikey withID:nil withParamString:nil completion:completionHandler error:errorHandler];
+}
+
+- (void)processRequest:(NSString*)apikey
+       withParamString:(NSString*)params
+            completion:(void(^)(NSDictionary* response))completionHandler
+                 error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
+{
+    [self processRequest:apikey withID:nil withParamString:params completion:completionHandler error:errorHandler];
+}
+
+- (void)processRequest:(NSString*)apikey
+                withID:(id)idValue
        withParamString:(NSString*)params
             completion:(void(^)(NSDictionary* response))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
@@ -204,20 +223,21 @@
         paramString = [paramString stringByAppendingFormat:@"%@&", params];
     }
     
-    NSString*   urlPath = [NSString stringWithFormat:@"%@?%@", [self apiURLRetrieve:apikey], paramString];
+    NSString*   urlPath = [NSString stringWithFormat:@"%@?%@", [self apiURLRetrieve:apikey withID:idValue], paramString];
     NSURL*      URL     = [NSURL URLWithString:urlPath];
     DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
 
-    DLog(LL_Debug, LD_API, @"auth_token=%@", [DNUtilities settingsItem:@"AuthenticationKey" default:@""]);
-    
     NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
-    [request setValue:[DNUtilities settingsItem:@"AuthenticationKey" default:@""] forHTTPHeaderField:@"auth_token"];
+
+    AFOAuthCredential*  oauthCredential = [AFOAuthCredential retrieveCredentialWithIdentifier:[DNAppConstants oAuthCredentialIdentifier]];
+    DLog(LL_Debug, LD_API, @"accessToken=%@", [oauthCredential accessToken]);
+    [request setValue:[NSString stringWithFormat:@"Bearer %@", [oauthCredential accessToken]] forHTTPHeaderField:@"Authorization"];
 
     [self subProcessRequest:request apikey:apikey completion:completionHandler error:errorHandler];
 }
 
 - (void)processPut:(NSString*)apikey
-            withID:(NSNumber*)idValue
+            withID:(id)idValue
         withParams:(NSDictionary*)params
         completion:(void(^)(NSDictionary* response))completionHandler
              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
@@ -246,7 +266,7 @@
 }
 
 - (void)processPut:(NSString*)apikey
-            withID:(NSNumber*)idValue
+            withID:(id)idValue
         withParams:(NSDictionary*)params
          withFiles:(NSArray*)files
         completion:(void(^)(NSDictionary* response))completionHandler
@@ -511,7 +531,7 @@
         NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
         [userInfoDict setValue:@"The App Server is currently not reachable" forKey:NSLocalizedDescriptionKey];
         
-        NSError*    error   = [NSError errorWithDomain:@"VLCommAPI" code:1001 userInfo:userInfoDict];
+        NSError*    error   = [NSError errorWithDomain:@"DNCommunicationsAPI" code:1001 userInfo:userInfoDict];
         errorHandler(503, error, [[request URL] absoluteString], [self retryRecommendation:apikey]);
         return;
     }
@@ -539,7 +559,7 @@
                  NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
                  [userInfoDict setValue:@"The authentication token for this device is no longer valid" forKey:NSLocalizedDescriptionKey];
                  
-                 error  = [NSError errorWithDomain:@"VLCommAPI" code:401 userInfo:userInfoDict];
+                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:401 userInfo:userInfoDict];
                  break;
              }
 
@@ -550,7 +570,7 @@
                  NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
                  [userInfoDict setValue:@"This device has been deactivated" forKey:NSLocalizedDescriptionKey];
                  
-                 error  = [NSError errorWithDomain:@"VLCommAPI" code:403 userInfo:userInfoDict];
+                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:403 userInfo:userInfoDict];
                  break;
              }
                  
@@ -559,7 +579,7 @@
                  NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
                  [userInfoDict setValue:@"Posting data is missing" forKey:NSLocalizedDescriptionKey];
                  
-                 error  = [NSError errorWithDomain:@"VLCommAPI" code:422 userInfo:userInfoDict];
+                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:422 userInfo:userInfoDict];
                  break;
              }
                  
@@ -568,7 +588,7 @@
                  NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
                  [userInfoDict setValue:@"Internal server error" forKey:NSLocalizedDescriptionKey];
                  
-                 error  = [NSError errorWithDomain:@"VLCommAPI" code:500 userInfo:userInfoDict];
+                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:500 userInfo:userInfoDict];
                  break;
              }
          }
@@ -599,7 +619,7 @@
              NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
              [userInfoDict setValue:@"Invalid response from server" forKey:NSLocalizedDescriptionKey];
              
-             error  = [NSError errorWithDomain:@"VLCommAPI" code:420 userInfo:userInfoDict];
+             error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:420 userInfo:userInfoDict];
          }
          
          if (error)
@@ -613,7 +633,7 @@
                  NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
                  [userInfoDict setValue:@"The authentication token for this device is no longer valid" forKey:NSLocalizedDescriptionKey];
                  
-                 error  = [NSError errorWithDomain:@"VLCommAPI" code:401 userInfo:userInfoDict];
+                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:401 userInfo:userInfoDict];
              }
              
              NSData*    jsonData = data;
@@ -640,10 +660,35 @@
 
 - (BOOL)processingNowBlock:(NSString*)apikey
                    objects:(NSArray*)objects
-                    filter:(BOOL(^)(id object))filter
+                    filter:(BOOL(^)(id object))filterHandler
                        now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler
 {
-    NSString*   urlPath     = [self apiURLRetrieve:apikey];
+    return [self processingNowBlock:apikey withID:nil withParamString:nil objects:objects filter:filterHandler now:nowHandler];
+}
+
+- (BOOL)processingNowBlock:(NSString*)apikey
+                    withID:(id)idValue
+                   objects:(NSArray*)objects
+                    filter:(BOOL(^)(id object))filterHandler
+                       now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler
+{
+    return [self processingNowBlock:apikey withID:idValue withParamString:nil objects:objects filter:filterHandler now:nowHandler];
+}
+
+- (BOOL)processingNowBlock:(NSString*)apikey
+                    withID:(id)idValue
+           withParamString:(NSString*)params
+                   objects:(NSArray*)objects
+                    filter:(BOOL(^)(id object))filterHandler
+                       now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler
+{
+    NSString*   paramString = @"";
+    if ([params length] > 0)
+    {
+        paramString = [paramString stringByAppendingFormat:@"%@&", params];
+    }
+
+    NSString*   urlPath     = [NSString stringWithFormat:@"%@?%@", [self apiURLRetrieve:apikey withID:idValue], paramString];
     NSInteger   ttlMinutes  = [self apiTTLRetrieve:apikey];
     BOOL        isExpired   = [self isExpired:urlPath withTTL:ttlMinutes];
     
@@ -659,7 +704,7 @@
                    {
                        [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
                         {
-                            if ((filter == nil) || filter(obj))
+                            if ((filterHandler == nil) || filterHandler(obj))
                             {
                                 [results addObject:obj];
                             }
@@ -675,7 +720,7 @@
 }
 
 - (BOOL)queueProcess:(NSString*)apikey
-              filter:(BOOL(^)(id object))filter
+              filter:(BOOL(^)(id object))filterHandler
           completion:(void(^)(NSArray* speakers))completionHandler
                error:(void(^)(NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
@@ -687,7 +732,7 @@
     }
     
     DNCommunicationsAPIQueued*  queuedObj  = [[DNCommunicationsAPIQueued alloc] init];
-    queuedObj.filter            = filter;
+    queuedObj.filterHandler     = filterHandler;
     queuedObj.completionHandler = completionHandler;
     queuedObj.errorHandler      = errorHandler;
     [processQueue addObject:queuedObj];
@@ -702,7 +747,7 @@
 
 - (void)processingCompletionBlock:(NSString*)apikey
                           objects:(NSArray*)objects
-                           filter:(BOOL(^)(id object))filter
+                           filter:(BOOL(^)(id object))filterHandler
                        completion:(void(^)(NSArray* speakers))completionHandler
 {
     [self markAPIKeyUpdated:apikey];
@@ -713,7 +758,7 @@
                    {
                        [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
                         {
-                            if ((filter == nil) || filter(obj))
+                            if ((filterHandler == nil) || filterHandler(obj))
                             {
                                 [results addObject:obj];
                             }
@@ -742,7 +787,7 @@
          
          [self processingCompletionBlock:apikey
                                  objects:objects
-                                  filter:queuedObj.filter
+                                  filter:queuedObj.filterHandler
                               completion:queuedObj.completionHandler];
      }];
 }

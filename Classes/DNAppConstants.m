@@ -13,6 +13,11 @@
 
 @implementation DNAppConstants
 
++ (NSString*)oAuthCredentialIdentifier
+{
+    return [[self class] constantValue:@"oAuthCredentialIdentifier"];
+}
+
 + (UIColor*)colorConstant:(NSString*)key
 {
     return [UIColor colorWithString:[[self class] constantValue:key]];

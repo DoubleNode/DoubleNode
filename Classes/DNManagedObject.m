@@ -15,12 +15,6 @@
 #import "NSString+HTML.h"
 #import "NSString+Inflections.h"
 
-// **********
-// DME: Set the default NSDate attribute value to approx Jan 1, 2970 (~1000 years in the future).  This will
-//      handle the cases where a date (such as an expiration date) is not specified to designate a state of "never expires".
-#define kDNDefaultDate_NeverExpires [NSDate dateWithTimeIntervalSince1970:31536000000.0f]
-// **********
-
 @implementation DNManagedObject
 
 @dynamic id;
@@ -181,7 +175,34 @@
                                                           ofEntity:(NSEntityDescription*)entity
                                                       fromResponse:(NSHTTPURLResponse*)response
 {
-    return @{};
+    NSMutableDictionary*    mutableRelationshipRepresentations = [NSMutableDictionary dictionaryWithCapacity:[entity.relationshipsByName count]];
+    [entity.relationshipsByName enumerateKeysAndObjectsUsingBlock:^(id name, id relationship, BOOL* stop)
+     {
+         id value = [representation valueForKey:name];
+         if (value)
+         {
+             if ([relationship isToMany])
+             {
+                 NSArray*   arrayOfRelationshipRepresentations = nil;
+                 if ([value isKindOfClass:[NSArray class]])
+                 {
+                     arrayOfRelationshipRepresentations = value;
+                 }
+                 else
+                 {
+                     arrayOfRelationshipRepresentations = [NSArray arrayWithObject:value];
+                 }
+
+                 [mutableRelationshipRepresentations setValue:arrayOfRelationshipRepresentations forKey:name];
+             }
+             else
+             {
+                 [mutableRelationshipRepresentations setValue:value forKey:name];
+             }
+         }
+     }];
+
+    return mutableRelationshipRepresentations;
 }
 
 + (BOOL)shouldFetchRemoteAttributeValuesForObjectWithID:(NSManagedObjectID*)objectID
@@ -317,7 +338,7 @@
 
 - (void)loadWithDictionary:(NSDictionary*)dict
 {
-
+    self.id  = [[self class] entityIDWithDictionary:dict];
 }
 
 #pragma mark - Entity save/delete functions

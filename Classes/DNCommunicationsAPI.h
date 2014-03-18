@@ -14,7 +14,7 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 
 @interface DNCommunicationsAPIQueued : NSObject
 
-@property (nonatomic, copy) BOOL    (^filter)(id item);
+@property (nonatomic, copy) BOOL    (^filterHandler)(id item);
 @property (nonatomic, copy) void    (^completionHandler)(NSArray* items);
 @property (nonatomic, copy) void    (^errorHandler)(NSError* error, NSString* url, NSTimeInterval retryRecommendation);
 
@@ -45,13 +45,13 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 - (NSTimeInterval)retryRecommendation:(NSString*)apikey;
 
 - (void)processPut:(NSString*)apikey
-            withID:(NSNumber*)idValue
+            withID:(id)idValue
         withParams:(NSDictionary*)params
         completion:(void(^)(NSDictionary* response))completionHandler
              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processPut:(NSString*)apikey
-            withID:(NSNumber*)idValue
+            withID:(id)idValue
         withParams:(NSDictionary*)params
          withFiles:(NSArray*)files
         completion:(void(^)(NSDictionary* response))completionHandler
@@ -73,23 +73,47 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processRequest:(NSString*)apikey
-       withParamString:(NSString*)paramString
+                withID:(id)idValue
+            completion:(void(^)(NSDictionary* response))completionHandler
+                 error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
+
+- (void)processRequest:(NSString*)apikey
+       withParamString:(NSString*)params
+            completion:(void(^)(NSDictionary* response))completionHandler
+                 error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
+
+- (void)processRequest:(NSString*)apikey
+                withID:(id)idValue
+       withParamString:(NSString*)params
             completion:(void(^)(NSDictionary* response))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (BOOL)processingNowBlock:(NSString*)apikey
                    objects:(NSArray*)objects
-                    filter:(BOOL(^)(id object))filter
+                    filter:(BOOL(^)(id object))filterHandler
+                       now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler;
+
+- (BOOL)processingNowBlock:(NSString*)apikey
+                    withID:(id)idValue
+                   objects:(NSArray*)objects
+                    filter:(BOOL(^)(id object))filterHandler
+                       now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler;
+
+- (BOOL)processingNowBlock:(NSString*)apikey
+                    withID:(id)idValue
+           withParamString:(NSString*)params
+                   objects:(NSArray*)objects
+                    filter:(BOOL(^)(id object))filterHandler
                        now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler;
 
 - (BOOL)queueProcess:(NSString*)apikey
-              filter:(BOOL(^)(id object))filter
+              filter:(BOOL(^)(id object))filterHandler
           completion:(void(^)(NSArray* speakers))completionHandler
                error:(void(^)(NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processingCompletionBlock:(NSString*)apikey
                           objects:(NSArray*)objects
-                           filter:(BOOL(^)(id object))filter
+                           filter:(BOOL(^)(id object))filterHandler
                        completion:(void(^)(NSArray* speakers))completionHandler;
 
 - (void)processingQueueCompletionBlock:(NSString*)apikey
