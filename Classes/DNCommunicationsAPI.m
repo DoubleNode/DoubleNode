@@ -570,8 +570,11 @@
     DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
     DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
 
-    id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-    DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+    if (data)
+    {
+        id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+    }
 
     NSInteger      statusCode  = [httpResponse statusCode];
 
@@ -800,7 +803,10 @@
 
                        [DNUtilities runAfterDelay:0.0f block:^
                         {
-                            nowHandler(results, isExpired);
+                            if (nowHandler)
+                            {
+                                nowHandler(results, isExpired);
+                            }
                         }];
                    });
     
