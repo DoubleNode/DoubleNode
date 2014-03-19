@@ -57,6 +57,11 @@
     return self;
 }
 
+- (void)reauthorizeWithSuccess:(void (^)(void))success
+                       failure:(void (^)(void))failure
+{
+}
+
 - (BOOL)isExpired:(NSString*)cacheKey
           withTTL:(NSUInteger)ttl
 {
@@ -276,10 +281,6 @@
 
     NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
 
-    AFOAuthCredential*  oauthCredential = [AFOAuthCredential retrieveCredentialWithIdentifier:[DNAppConstants oAuthCredentialIdentifier]];
-    DLog(LL_Debug, LD_API, @"accessToken=%@", [oauthCredential accessToken]);
-    [request setValue:[NSString stringWithFormat:@"Bearer %@", [oauthCredential accessToken]] forHTTPHeaderField:@"Authorization"];
-
     [self subProcessRequest:request apikey:apikey completion:completionHandler error:errorHandler];
 }
 
@@ -300,10 +301,7 @@
     DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
     DLog(LL_Debug, LD_API, @"paramString=%@", paramString);
 
-    DLog(LL_Debug, LD_API, @"auth_token=%@", [DNUtilities settingsItem:@"AuthenticationKey" default:@""]);
-
     NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
-    [request setValue:[DNUtilities settingsItem:@"AuthenticationKey" default:@""] forHTTPHeaderField:@"auth_token"];
 
     [request setHTTPMethod:@"PUT"];
     [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -330,10 +328,7 @@
     DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
     DLog(LL_Debug, LD_API, @"paramString=%@", paramString);
 
-    DLog(LL_Debug, LD_API, @"auth_token=%@", [DNUtilities settingsItem:@"AuthenticationKey" default:@""]);
-
     NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
-    [request setValue:[DNUtilities settingsItem:@"AuthenticationKey" default:@""] forHTTPHeaderField:@"auth_token"];
 
     [request setTimeoutInterval:10000];
     [request setHTTPMethod:@"PUT"];
@@ -443,10 +438,7 @@
     DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
     DLog(LL_Debug, LD_API, @"paramString=%@", paramString);
     
-    DLog(LL_Debug, LD_API, @"auth_token=%@", [DNUtilities settingsItem:@"AuthenticationKey" default:@""]);
-    
     NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
-    [request setValue:[DNUtilities settingsItem:@"AuthenticationKey" default:@""] forHTTPHeaderField:@"auth_token"];
 
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
@@ -471,11 +463,8 @@
     DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
     DLog(LL_Debug, LD_API, @"paramString=%@", paramString);
     
-    DLog(LL_Debug, LD_API, @"auth_token=%@", [DNUtilities settingsItem:@"AuthenticationKey" default:@""]);
-    
     NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
-    [request setValue:[DNUtilities settingsItem:@"AuthenticationKey" default:@""] forHTTPHeaderField:@"auth_token"];
-    
+
     [request setTimeoutInterval:10000];
     [request setHTTPMethod:@"POST"];
     
@@ -567,6 +556,138 @@
     [self subProcessRequest:request apikey:apikey completion:completionHandler error:errorHandler];
 }
 
+- (void)subProcessResponse:(NSHTTPURLResponse*)httpResponse
+                 errorCode:(NSInteger)errorCode
+                    apikey:(NSString*)apikey
+                   request:(NSURLRequest*)request
+                      data:(NSData*)data
+                     retry:(void(^)())retryHandler
+                completion:(void(^)(NSDictionary* response))completionHandler
+                     error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
+{
+    NSError*    error = nil;
+
+    DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
+    DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
+
+    id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+    DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+
+    NSInteger      statusCode  = [httpResponse statusCode];
+
+    if (errorCode == -1012)
+    {
+        statusCode = 401;
+    }
+
+    switch (statusCode)
+    {
+        case 401:  // bad auth_token
+        {
+            // Unauthorized. Try authenticating and retrying.
+            [self reauthorizeWithSuccess:^
+             {
+                 retryHandler();
+             }
+                                 failure:^
+             {
+                 errorHandler(statusCode, error, [[request URL] absoluteString], [self retryRecommendation:apikey]);
+             }];
+
+            return;
+        }
+
+        case 403:  // device deactivated
+        {
+            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+            [userInfoDict setValue:@"This request is forbidden" forKey:NSLocalizedDescriptionKey];
+
+            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:403 userInfo:userInfoDict];
+
+            break;
+        }
+
+        case 422:  // posting data missing
+        {
+            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+            [userInfoDict setValue:@"Posting data is missing" forKey:NSLocalizedDescriptionKey];
+
+            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:422 userInfo:userInfoDict];
+            break;
+        }
+
+        case 500:  // internal server error
+        {
+            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+            [userInfoDict setValue:@"Internal server error" forKey:NSLocalizedDescriptionKey];
+
+            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:500 userInfo:userInfoDict];
+            break;
+        }
+    }
+
+    NSDictionary*  resultDict  = nil;
+
+    if (((statusCode >= 200) && (statusCode <= 299) && (data != nil)) || (statusCode == 204))
+    {
+        id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+        if (responseR && [responseR isKindOfClass:[NSDictionary class]])
+        {
+            resultDict = responseR;
+        }
+        else if (responseR && [responseR isKindOfClass:[NSArray class]])
+        {
+            resultDict = @{ @"objects": responseR };
+        }
+        else
+        {
+            resultDict = [NSDictionary dictionary];
+        }
+    }
+
+    if ((error == nil) && (resultDict == nil))
+    {
+        NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+        [userInfoDict setValue:@"Invalid response from server" forKey:NSLocalizedDescriptionKey];
+
+        error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:420 userInfo:userInfoDict];
+    }
+
+    if (error)
+    {
+        DLog(LL_Debug, LD_API, @"allHeaderFields=%@", [httpResponse allHeaderFields]);
+
+        if (error.code == -1012)
+        {
+            [DNUtilities setSettingsItem:@"AuthenticationKey" value:@""];
+
+            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+            [userInfoDict setValue:@"The authentication token for this device is no longer valid" forKey:NSLocalizedDescriptionKey];
+
+            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:401 userInfo:userInfoDict];
+        }
+
+        NSData*    jsonData = data;
+        if (jsonData != nil)
+        {
+            id responseR = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+            DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+        }
+        else if (jsonData != nil)
+        {
+            NSString*  body = [NSString stringWithUTF8String:[jsonData bytes]];
+            DLog(LL_Debug, LD_API, @"error body=%@", body);
+        }
+
+        DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
+        errorHandler(statusCode, error, [[request URL] absoluteString], [self retryRecommendation:apikey]);
+        return;
+    }
+
+    completionHandler(resultDict);
+}
+
 - (void)subProcessRequest:(NSURLRequest*)request
                    apikey:(NSString*)apikey
                completion:(void(^)(NSDictionary* response))completionHandler
@@ -584,124 +705,44 @@
     }
     */
 
+    NSMutableURLRequest*    mRequest    = [request mutableCopy];
+
+    AFOAuthCredential*  oauthCredential = [AFOAuthCredential retrieveCredentialWithIdentifier:[DNAppConstants oAuthCredentialIdentifier]];
+    DLog(LL_Debug, LD_API, @"accessToken=%@", [oauthCredential accessToken]);
+    [mRequest setValue:[NSString stringWithFormat:@"Bearer %@", [oauthCredential accessToken]] forHTTPHeaderField:@"Authorization"];
+
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+    [NSURLConnection sendAsynchronousRequest:mRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
          
+         DLog(LL_Debug, LD_API, @"mRequest=%@", mRequest);
+         DLog(LL_Debug, LD_API, @"response=%@", response);
+
          NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
          
-         DLog(LL_Debug, LD_API, @"request=%@", request);
-         DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
-         DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
-         
-         NSInteger  statusCode  = [httpResponse statusCode];
-         switch (statusCode)
-         {
-             case 401:  // bad auth_token
-             {
-                 [DNUtilities setSettingsItem:@"AuthenticationKey" value:@""];
-
-                 NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-                 [userInfoDict setValue:@"The authentication token for this device is no longer valid" forKey:NSLocalizedDescriptionKey];
-                 
-                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:401 userInfo:userInfoDict];
-                 break;
-             }
-
-             case 403:  // device deactivated
-             {
-                 [DNUtilities setSettingsItem:@"AuthenticationKey" value:@""];
-                 
-                 NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-                 [userInfoDict setValue:@"This device has been deactivated" forKey:NSLocalizedDescriptionKey];
-                 
-                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:403 userInfo:userInfoDict];
-                 break;
-             }
-                 
-             case 422:  // posting data missing
-             {
-                 NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-                 [userInfoDict setValue:@"Posting data is missing" forKey:NSLocalizedDescriptionKey];
-                 
-                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:422 userInfo:userInfoDict];
-                 break;
-             }
-                 
-             case 500:  // internal server error
-             {
-                 NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-                 [userInfoDict setValue:@"Internal server error" forKey:NSLocalizedDescriptionKey];
-                 
-                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:500 userInfo:userInfoDict];
-                 break;
-             }
-         }
-         
-         NSDictionary*  resultDict  = nil;
-         NSData*        jsonData    = data;
-         
-         if (((statusCode >= 200) && (statusCode <= 299) && (jsonData != nil)) || (statusCode == 204))
-         {
-             id responseR = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-             DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
-             if (responseR && [responseR isKindOfClass:[NSDictionary class]])
-             {
-                 resultDict = responseR;
-             }
-             else if (responseR && [responseR isKindOfClass:[NSArray class]])
-             {
-                 resultDict = @{ @"objects": responseR };
-             }
-             else
-             {
-                 resultDict = [NSDictionary dictionary];
-             }
-         }
-         
-         if ((error == nil) && (resultDict == nil))
-         {
-             NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-             [userInfoDict setValue:@"Invalid response from server" forKey:NSLocalizedDescriptionKey];
-             
-             error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:420 userInfo:userInfoDict];
-         }
-         
-         if (error)
-         {
-             DLog(LL_Debug, LD_API, @"allHeaderFields=%@", [httpResponse allHeaderFields]);
-             
-             if (error.code == -1012)
-             {
-                 [DNUtilities setSettingsItem:@"AuthenticationKey" value:@""];
-                 
-                 NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-                 [userInfoDict setValue:@"The authentication token for this device is no longer valid" forKey:NSLocalizedDescriptionKey];
-                 
-                 error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:401 userInfo:userInfoDict];
-             }
-             
-             NSData*    jsonData = data;
-             if (jsonData != nil)
-             {
-                 id responseR = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-                 DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
-             }
-             else if (jsonData != nil)
-             {
-                 NSString*  body = [NSString stringWithUTF8String:[jsonData bytes]];
-                 DLog(LL_Debug, LD_API, @"error body=%@", body);
-             }
-             
-             DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
-             errorHandler(statusCode, error, [[request URL] absoluteString], [self retryRecommendation:apikey]);
-             return;
-         }
-         
-         completionHandler(resultDict);
-         [self resetRetryRecommendation:apikey];
+         [self subProcessResponse:httpResponse
+                        errorCode:error.code
+                           apikey:apikey
+                          request:mRequest
+                             data:data
+                            retry:^
+          {
+              [self subProcessRequest:mRequest
+                               apikey:apikey
+                           completion:completionHandler
+                                error:errorHandler];
+          }
+                       completion:^(NSDictionary* response)
+          {
+              completionHandler(response);
+              [self resetRetryRecommendation:apikey];
+          }
+                            error:^(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation)
+          {
+              errorHandler(responseCode, error, url, retryRecommendation);
+          }];
      }];
 }
 

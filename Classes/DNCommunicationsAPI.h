@@ -26,6 +26,9 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 
 - (id)init;
 
+- (void)reauthorizeWithSuccess:(void (^)(void))success
+                       failure:(void (^)(void))failure;
+
 - (BOOL)isExpired:(NSString*)cacheKey
           withTTL:(NSUInteger)ttl;
 
