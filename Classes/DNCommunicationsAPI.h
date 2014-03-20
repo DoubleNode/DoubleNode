@@ -67,45 +67,45 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 - (void)processPut:(NSString*)apikey
             withID:(id)idValue
         withParams:(NSDictionary*)params
-        completion:(void(^)(NSDictionary* response))completionHandler
+        completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processPut:(NSString*)apikey
             withID:(id)idValue
         withParams:(NSDictionary*)params
          withFiles:(NSArray*)files
-        completion:(void(^)(NSDictionary* response))completionHandler
+        completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processPost:(NSString*)apikey
          withParams:(NSDictionary*)params
-         completion:(void(^)(NSDictionary* response))completionHandler
+         completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
               error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processPost:(NSString*)apikey
          withParams:(NSDictionary*)params
           withFiles:(NSArray*)files
-         completion:(void(^)(NSDictionary* response))completionHandler
+         completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
               error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processRequest:(NSString*)apikey
-            completion:(void(^)(NSDictionary* response))completionHandler
+            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processRequest:(NSString*)apikey
                 withID:(id)idValue
-            completion:(void(^)(NSDictionary* response))completionHandler
+            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processRequest:(NSString*)apikey
        withParamString:(NSString*)params
-            completion:(void(^)(NSDictionary* response))completionHandler
+            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processRequest:(NSString*)apikey
                 withID:(id)idValue
        withParamString:(NSString*)params
-            completion:(void(^)(NSDictionary* response))completionHandler
+            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (BOOL)processingNowBlock:(NSString*)apikey
