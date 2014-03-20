@@ -241,7 +241,7 @@
 }
 
 - (void)processRequest:(NSString*)apikey
-            completion:(void(^)(NSDictionary* response))completionHandler
+            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     [self processRequest:apikey withParamString:@"" completion:completionHandler error:errorHandler];
@@ -249,7 +249,7 @@
 
 - (void)processRequest:(NSString*)apikey
                 withID:(id)idValue
-            completion:(void(^)(NSDictionary* response))completionHandler
+            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     [self processRequest:apikey withID:nil withParamString:nil completion:completionHandler error:errorHandler];
@@ -257,7 +257,7 @@
 
 - (void)processRequest:(NSString*)apikey
        withParamString:(NSString*)params
-            completion:(void(^)(NSDictionary* response))completionHandler
+            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     [self processRequest:apikey withID:nil withParamString:params completion:completionHandler error:errorHandler];
@@ -266,7 +266,7 @@
 - (void)processRequest:(NSString*)apikey
                 withID:(id)idValue
        withParamString:(NSString*)params
-            completion:(void(^)(NSDictionary* response))completionHandler
+            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     NSString*   paramString = @"";
@@ -287,7 +287,7 @@
 - (void)processPut:(NSString*)apikey
             withID:(id)idValue
         withParams:(NSDictionary*)params
-        completion:(void(^)(NSDictionary* response))completionHandler
+        completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     __block NSString*   paramString = @"";
@@ -314,7 +314,7 @@
             withID:(id)idValue
         withParams:(NSDictionary*)params
          withFiles:(NSArray*)files
-        completion:(void(^)(NSDictionary* response))completionHandler
+        completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     __block NSString*   paramString = @"";
@@ -424,7 +424,7 @@
 
 - (void)processPost:(NSString*)apikey
          withParams:(NSDictionary*)params
-         completion:(void(^)(NSDictionary* response))completionHandler
+         completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
               error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     __block NSString*   paramString = @"";
@@ -449,7 +449,7 @@
 - (void)processPost:(NSString*)apikey
          withParams:(NSDictionary*)params
           withFiles:(NSArray*)files
-         completion:(void(^)(NSDictionary* response))completionHandler
+         completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
               error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     __block NSString*   paramString = @"";
@@ -562,7 +562,7 @@
                    request:(NSURLRequest*)request
                       data:(NSData*)data
                      retry:(void(^)())retryHandler
-                completion:(void(^)(NSDictionary* response))completionHandler
+                completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                      error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     NSError*    error = nil;
@@ -688,12 +688,12 @@
         return;
     }
 
-    completionHandler(resultDict);
+    completionHandler(resultDict, [httpResponse allHeaderFields]);
 }
 
 - (void)subProcessRequest:(NSURLRequest*)request
                    apikey:(NSString*)apikey
-               completion:(void(^)(NSDictionary* response))completionHandler
+               completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                     error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     /*
@@ -737,9 +737,9 @@
                            completion:completionHandler
                                 error:errorHandler];
           }
-                       completion:^(NSDictionary* response)
+                       completion:^(NSDictionary* response, NSDictionary* headers)
           {
-              completionHandler(response);
+              completionHandler(response, headers);
               [self resetRetryRecommendation:apikey];
           }
                             error:^(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation)
