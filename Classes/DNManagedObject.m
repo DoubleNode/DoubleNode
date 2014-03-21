@@ -668,6 +668,19 @@
                 }
             }
         }
+        else if ([object isKindOfClass:[NSDate class]])
+        {
+            if (object != (NSDate*)[NSNull null])
+            {
+                NSDate*   newval  = object;
+
+                if ((retval == nil) || ([newval isEqualToDate:retval] == NO))
+                {
+                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                    retval = newval;
+                }
+            }
+        }
     }
     
     return retval;
