@@ -237,6 +237,11 @@
     return [[self alloc] init];
 }
 
++ (instancetype)entityFromObjectID:(NSManagedObjectID*)objectId
+{
+    return [[self alloc] initWithObjectID:objectId];
+}
+
 + (instancetype)entityFromDictionary:(NSDictionary*)dict
 {
     return [[self alloc] initWithDictionary:dict];
@@ -245,6 +250,28 @@
 + (instancetype)entityFromID:(id)idValue
 {
     return [[self alloc] initWithID:idValue];
+}
+
+- (NSDictionary*)serialize
+{
+    NSException*    exception = [NSException exceptionWithName:@"DMManagedObject Exception"
+                                                        reason:@"Base serialize should not be called, functionality not implemented yet!"
+                                                      userInfo:nil];
+    @throw exception;
+
+    // Not sure if this is ever reached
+    return nil;
+}
+
+- (id)initFromSerialization:(NSDictionary*)serialization
+{
+    NSException*    exception = [NSException exceptionWithName:@"DMManagedObject Exception"
+                                                        reason:@"Base initFromSerialization: should not be called, functionality not implemented yet!"
+                                                      userInfo:nil];
+    @throw exception;
+
+    // Not sure if this is ever reached
+    return nil;
 }
 
 - (instancetype)init
@@ -264,6 +291,21 @@
         [self clearData];
     }
     
+    return self;
+}
+
+- (instancetype)initWithObjectID:(NSManagedObjectID*)objectId
+{
+    __block DNManagedObject*    bself   = self;
+
+    [self performBlockAndWait:^(NSManagedObjectContext* context)
+     {
+         NSError*   error = nil;
+         bself = (DNManagedObject*)[context existingObjectWithID:objectId error:&error];
+     }];
+
+    self = bself;
+
     return self;
 }
 
@@ -339,6 +381,21 @@
 - (void)loadWithDictionary:(NSDictionary*)dict
 {
     self.id  = [[self class] entityIDWithDictionary:dict];
+}
+
+- (NSDictionary*)saveToDictionary
+{
+    return [self saveIDToDictionary];
+}
+
+- (NSDictionary*)saveIDToDictionary
+{
+    [self.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
+
+    return @{
+             @"id"          : self.id,
+             @"objectID"    : [[[self objectID] URIRepresentation] absoluteString]
+             };
 }
 
 #pragma mark - Entity save/delete functions

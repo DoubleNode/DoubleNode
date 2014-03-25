@@ -61,6 +61,9 @@
 
 + (void)saveContext;
 
+- (NSDictionary*)serialize;
+- (id)initFromSerialization:(NSDictionary*)serialization;
+
 - (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;
 - (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;
 - (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;
@@ -94,16 +97,20 @@
 + (id)dictionaryObject:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue;
 
 + (instancetype)entity;
-+ (instancetype)entityFromID:(id)idValue;
++ (instancetype)entityFromObjectID:(NSManagedObjectID*)objectId;
 + (instancetype)entityFromDictionary:(NSDictionary*)dict;
++ (instancetype)entityFromID:(id)idValue;
 
 - (instancetype)init;
+- (instancetype)initWithObjectID:(NSManagedObjectID*)objectId;
 - (instancetype)initWithID:(id)idValue;
 - (instancetype)initWithIDIfExists:(id)idValue;
 - (instancetype)initWithDictionary:(NSDictionary*)dict;
 
 - (void)clearData;
 - (void)loadWithDictionary:(NSDictionary*)dict;
+- (NSDictionary*)saveToDictionary;
+- (NSDictionary*)saveIDToDictionary;
 
 - (void)saveContext;
 - (void)deleteWithNoSave;
