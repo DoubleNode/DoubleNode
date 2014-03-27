@@ -18,6 +18,11 @@
     return [[self class] constantValue:@"oAuthCredentialIdentifier"];
 }
 
++ (NSString*)apiHostname
+{
+    return [[self class] constantValue:@"apiHostname"];
+}
+
 + (UIColor*)colorConstant:(NSString*)key
 {
     return [UIColor colorWithString:[[self class] constantValue:key]];
@@ -64,14 +69,25 @@
 }
 
 static NSDictionary*    plistConfigDict = nil;
+static NSString*        plistServerCode = nil;
 
 + (NSDictionary*)plistDict
 {
+    NSString*   serverCode  = [[DNUtilities appDelegate] settingsItem:@"ServerCode"];
+    if (![serverCode isEqualToString:plistServerCode])
+    {
+        plistConfigDict = nil;
+    }
+    plistServerCode = serverCode;
+
     @synchronized( self )
     {
         if (plistConfigDict == nil)
         {
-            plistConfigDict = [[NSDictionary alloc] initWithContentsOfFile:[[NSBundle mainBundle] pathForResource:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"Constants_plist"] ofType:@"plist"]];
+            NSString*   constantsPlist  = [NSString stringWithFormat:@"Constants_%@", serverCode];
+            NSString*   constantsPath   = [[NSBundle mainBundle] pathForResource:constantsPlist ofType:@"plist"];
+
+            plistConfigDict = [[NSDictionary alloc] initWithContentsOfFile:constantsPath];
         }
     }
     

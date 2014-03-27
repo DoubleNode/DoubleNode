@@ -157,7 +157,7 @@
 
 - (NSString*)getAPIHostnameString
 {
-    return [plistDictionary objectForKey:@"Hostname"];
+    return [DNAppConstants apiHostname];
 }
 
 - (NSString*)getFirstPartMethod:(NSString*)methodName

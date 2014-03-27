@@ -16,6 +16,7 @@
 #pragma mark - Constant plist to object functions
 
 + (NSString*)oAuthCredentialIdentifier;
++ (NSString*)apiHostname;
 
 /**
  *  Creates and returns a UIColor object, initialized with the NSString loaded from the Constants plist file for the specified key.
