@@ -19,6 +19,11 @@
 
 @implementation DNModelWatch
 
+- (void)dealloc
+{
+    [self cancelWatch];
+}
+
 - (id)initWithModel:(DNModel*)myModel
 {
     self = [super init];

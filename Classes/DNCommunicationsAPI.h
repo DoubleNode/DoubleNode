@@ -58,6 +58,9 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 - (NSString*)getFirstPartMethod:(NSString*)methodName;
 
 - (NSString*)apiURLRetrieve:(NSString*)apikey;
+- (NSInteger)apiPageSizeRetrieve:(NSString*)apikey;
+- (NSInteger)apiPageSizeRetrieve:(NSString*)apikey
+                         default:(NSInteger)defaultPageSize;
 - (NSInteger)apiTTLRetrieve:(NSString*)apikey;
 - (NSInteger)apiTTLRetrieve:(NSString*)apikey
                     default:(NSInteger)defaultTTL;

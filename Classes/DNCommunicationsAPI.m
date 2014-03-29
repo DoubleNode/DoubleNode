@@ -187,10 +187,24 @@
         urlStr  = [NSString stringWithFormat:urlStr, idValue];
     }
     NSURL*          url         = [NSURL URLWithString:urlStr relativeToURL:hostname];
+    return [url absoluteString];
+}
 
-    NSString*       result      = [url absoluteString];
-    return result;
-    //return [url absoluteString];
+- (NSInteger)apiPageSizeRetrieve:(NSString*)apikey
+{
+    return [self apiPageSizeRetrieve:apikey default:20];
+}
+
+- (NSInteger)apiPageSizeRetrieve:(NSString*)apikey
+                         default:(NSInteger)defaultPageSize
+{
+    NSInteger   retval = [[plistDictionary objectForKey:[apikey stringByAppendingString:@"PageSize"]] integerValue];
+    if (retval < 1)
+    {
+        retval = defaultPageSize;
+    }
+
+    return retval;
 }
 
 - (NSInteger)apiTTLRetrieve:(NSString*)apikey
@@ -201,14 +215,10 @@
 - (NSInteger)apiTTLRetrieve:(NSString*)apikey
                     default:(NSInteger)defaultTTL
 {
-//#ifdef DEBUG
-//    return 1;
-//#endif
-
     NSInteger   retval = [[plistDictionary objectForKey:[apikey stringByAppendingString:@"TTL"]] integerValue];
     if (retval < 1)
     {
-        retval = 60;
+        retval = defaultTTL;
     }
     
     return retval;
@@ -570,6 +580,7 @@
     DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
     DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
 
+    DLog(LL_Debug, LD_API, @"dataSize=%d", [data length]);
     if (data)
     {
         id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
@@ -779,7 +790,8 @@
         paramString = [paramString stringByAppendingFormat:@"%@&", params];
     }
 
-    NSString*   urlPath     = [NSString stringWithFormat:@"%@?%@", [self apiURLRetrieve:apikey withID:idValue], paramString];
+    NSInteger   pageSize    = [self apiPageSizeRetrieve:apikey];
+    NSString*   urlPath     = [NSString stringWithFormat:@"%@?%@items_per_page=%d&page=%@", [self apiURLRetrieve:apikey withID:idValue], paramString, pageSize, @1];
     NSInteger   ttlMinutes  = [self apiTTLRetrieve:apikey];
     BOOL        isExpired   = [self isExpired:urlPath withTTL:ttlMinutes];
     
