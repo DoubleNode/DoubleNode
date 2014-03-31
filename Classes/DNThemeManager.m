@@ -14,6 +14,7 @@
 #import "DNUtilities.h"
 
 #import "UILabel+TextKerning.h"
+#import "NZCircularImageView.h"
 
 @implementation DNThemeManager
 
@@ -339,8 +340,19 @@
           andViewState:(NSString*)viewState
                andItem:(NSString*)item
 {
-    imgView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
-    imgView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    UIColor*    borderColor = [[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    NSNumber*   borderWidth = [[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    if ([imgView isKindOfClass:[NZCircularImageView class]])
+    {
+        ((NZCircularImageView*)imgView).borderColor = borderColor;
+        ((NZCircularImageView*)imgView).borderWidth = borderWidth;
+    }
+    else
+    {
+        imgView.layer.borderColor   = [borderColor CGColor];
+        imgView.layer.borderWidth   = [borderWidth doubleValue];
+    }
 
     imgView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 }
