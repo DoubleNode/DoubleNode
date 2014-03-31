@@ -24,6 +24,9 @@
 /**
  *  DLog Logging Items and Macros
  */
+#ifndef __LOGLEVEL__
+#define __LOGLEVEL__    1
+
 typedef NS_ENUM(NSInteger, LogLevel)
 {
     LL_Critical = 0,
@@ -46,24 +49,26 @@ typedef NS_ENUM(NSInteger, LogLevel)
 #define LD_API              @"API"
 
 #if !defined(DEBUG)
-    #define DLogMarker(marker)          NSLog(@"%@", marker)
-    #define DLog(level,domain,...)      NSLog(__VA_ARGS__)
-    #define DLogData(level,domain,data) do{}while(0)
-    #define DLogImage(...)              do{}while(0)
+#define DLogMarker(marker)          NSLog(@"%@", marker)
+#define DLog(level,domain,...)      NSLog(__VA_ARGS__)
+#define DLogData(level,domain,data) do{}while(0)
+#define DLogImage(...)              do{}while(0)
 #else
-    #define DLogMarker(marker)              NSLog(@"%@", marker); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,@"%@", marker)
-    #define DLog(level,domain,...)          DNLogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__)
-    #define DLogData(level,domain,data)     LogDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,data)
-    #define DLogImage(level,domain,image)   LogImageDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,image.size.width,image.size.height,UIImagePNGRepresentation(image))
+#define DLogMarker(marker)              NSLog(@"%@", marker); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,@"%@", marker)
+#define DLog(level,domain,...)          DNLogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__)
+#define DLogData(level,domain,data)     LogDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,data)
+#define DLogImage(level,domain,image)   LogImageDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,image.size.width,image.size.height,UIImagePNGRepresentation(image))
 
 extern void LogImageDataF(const char *filename, int lineNumber, const char *functionName, NSString *domain, int level, int width, int height, NSData *data);
 
-    #undef assert
-    #if __DARWIN_UNIX03
-        #define assert(e)   (__builtin_expect(!(e), 0) ? (CFShow(CFSTR("assert going to fail, connect NSLogger NOW\n")), LoggerFlush(NULL,YES), __assert_rtn(__func__, __FILE__, __LINE__, #e)) : (void)0)
-    #else
-        #define assert(e)   (__builtin_expect(!(e), 0) ? (CFShow(CFSTR("assert going to fail, connect NSLogger NOW\n")), LoggerFlush(NULL,YES), __assert(#e, __FILE__, __LINE__)) : (void)0)
-    #endif
+#undef assert
+#if __DARWIN_UNIX03
+#define assert(e)   (__builtin_expect(!(e), 0) ? (CFShow(CFSTR("assert going to fail, connect NSLogger NOW\n")), LoggerFlush(NULL,YES), __assert_rtn(__func__, __FILE__, __LINE__, #e)) : (void)0)
+#else
+#define assert(e)   (__builtin_expect(!(e), 0) ? (CFShow(CFSTR("assert going to fail, connect NSLogger NOW\n")), LoggerFlush(NULL,YES), __assert(#e, __FILE__, __LINE__)) : (void)0)
+#endif
+#endif
+
 #endif
 
 @interface DNUtilities : NSObject
