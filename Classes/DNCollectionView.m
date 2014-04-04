@@ -41,25 +41,25 @@
                       {
                           case NSFetchedResultsChangeInsert:
                           {
-                              [self insertSections:obj];
+                              [super insertSections:obj];
                               break;
                           }
 
                           case NSFetchedResultsChangeDelete:
                           {
-                              [self deleteSections:obj];
+                              [super deleteSections:obj];
                               break;
                           }
 
                           case NSFetchedResultsChangeUpdate:
                           {
-                              [self reloadSections:obj];
+                              [super reloadSections:obj];
                               break;
                           }
 
                           case NSFetchedResultsChangeMove:
                           {
-                              [self moveSection:[obj[0] integerValue] toSection:[obj[1] integerValue]];
+                              [super moveSection:[obj[0] integerValue] toSection:[obj[1] integerValue]];
                               break;
                           }
                       }

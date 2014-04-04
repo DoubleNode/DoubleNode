@@ -13,7 +13,7 @@
 #import "AFIncrementalStore.h"
 #import "DNUtilities.h"
 
-#define SAVE_TO_DISK_TIME_INTERVAL 0.6f
+#define SAVE_TO_DISK_TIME_INTERVAL 1.0f
 
 @interface DNDataModel ()
 {
@@ -483,6 +483,18 @@
          if (![self.mainObjectContext save:&error])
          {
              DLog(LL_Error, LD_CoreData, @"ERROR saving main context: %@", [error localizedDescription]);
+             NSArray*   detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+             if ((detailedErrors != nil) && ([detailedErrors count] > 0))
+             {
+                 for (NSError* detailedError in detailedErrors)
+                 {
+                     DLog(LL_Error, LD_CoreData, @"  DetailedError: %@", [detailedError userInfo]);
+                 }
+             }
+             else
+             {
+                 DLog(LL_Error, LD_CoreData, @"  %@", [error userInfo]);
+             }
          }
      }];
 

@@ -86,38 +86,56 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
               error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processPost:(NSString*)apikey
+             withID:(id)idValue
+         withParams:(NSDictionary*)params
+         completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
+              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
+
+- (void)processPost:(NSString*)apikey
          withParams:(NSDictionary*)params
           withFiles:(NSArray*)files
          completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
               error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processRequest:(NSString*)apikey
+                offset:(NSUInteger)offset
+                 count:(NSUInteger)count
             completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processRequest:(NSString*)apikey
                 withID:(id)idValue
+                offset:(NSUInteger)offset
+                 count:(NSUInteger)count
             completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processRequest:(NSString*)apikey
        withParamString:(NSString*)params
+                offset:(NSUInteger)offset
+                 count:(NSUInteger)count
             completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processRequest:(NSString*)apikey
                 withID:(id)idValue
        withParamString:(NSString*)params
+                offset:(NSUInteger)offset
+                 count:(NSUInteger)count
             completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 
 - (BOOL)processingNowBlock:(NSString*)apikey
+                    offset:(NSUInteger)offset
+                     count:(NSUInteger)count
                    objects:(NSArray*)objects
                     filter:(BOOL(^)(id object))filterHandler
                        now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler;
 
 - (BOOL)processingNowBlock:(NSString*)apikey
                     withID:(id)idValue
+                    offset:(NSUInteger)offset
+                     count:(NSUInteger)count
                    objects:(NSArray*)objects
                     filter:(BOOL(^)(id object))filterHandler
                        now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler;
@@ -125,6 +143,8 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 - (BOOL)processingNowBlock:(NSString*)apikey
                     withID:(id)idValue
            withParamString:(NSString*)params
+                    offset:(NSUInteger)offset
+                     count:(NSUInteger)count
                    objects:(NSArray*)objects
                     filter:(BOOL(^)(id object))filterHandler
                        now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler;

@@ -284,9 +284,11 @@
     UIColor*    labelColor          = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     NSNumber*   labelLineSpacing    = [[self class] performThemeSelectorForAttribute:@"LineSpacing" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
+    NSTextAlignment labelTextAlignment  = [[[self class] performThemeSelectorForAttribute:@"TextAlignment"   withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
+
     NSMutableParagraphStyle*    paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:[labelLineSpacing intValue]];
-    [paragraphStyle setAlignment:lblView.textAlignment];
+    [paragraphStyle setAlignment:labelTextAlignment];
 
     NSMutableAttributedString*  attrString  = [[lblView attributedText] mutableCopy];
     if ([attrString length] == 0)

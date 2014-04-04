@@ -425,11 +425,11 @@
 {
     __block NSEntityDescription*    retval;
 
-    [self performBlockAndWait:^(NSManagedObjectContext* context)
-     {
+    //[self performBlockAndWait:^(NSManagedObjectContext* context)
+    // {
          retval = [NSEntityDescription entityForName:[[self class] entityName]
-                              inManagedObjectContext:context];
-     }];
+                              inManagedObjectContext:[[self class] managedObjectContext]];
+    // }];
 
     return retval;
 }

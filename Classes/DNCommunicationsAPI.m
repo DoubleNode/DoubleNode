@@ -142,12 +142,20 @@
 
 - (void)markUpdated:(NSString*)cacheKey
 {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[NSString stringWithFormat:@"[API]%@", cacheKey]];
+    [DNUtilities runAfterDelay:0.01f
+                         block:^
+     {
+         [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[NSString stringWithFormat:@"[API]%@", cacheKey]];
+     }];
 }
 
 - (void)markExpired:(NSString*)cacheKey
 {
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"[API]%@", cacheKey]];
+    [DNUtilities runAfterDelay:0.01f
+                         block:^
+     {
+         [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"[API]%@", cacheKey]];
+     }];
 }
 
 - (NSString*)getAPIHostname
@@ -251,31 +259,39 @@
 }
 
 - (void)processRequest:(NSString*)apikey
+                offset:(NSUInteger)offset
+                 count:(NSUInteger)count
             completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
-    [self processRequest:apikey withParamString:@"" completion:completionHandler error:errorHandler];
+    [self processRequest:apikey withParamString:@"" offset:offset count:count completion:completionHandler error:errorHandler];
 }
 
 - (void)processRequest:(NSString*)apikey
                 withID:(id)idValue
+                offset:(NSUInteger)offset
+                 count:(NSUInteger)count
             completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
-    [self processRequest:apikey withID:nil withParamString:nil completion:completionHandler error:errorHandler];
+    [self processRequest:apikey withID:idValue withParamString:nil offset:offset count:count completion:completionHandler error:errorHandler];
 }
 
 - (void)processRequest:(NSString*)apikey
        withParamString:(NSString*)params
+                offset:(NSUInteger)offset
+                 count:(NSUInteger)count
             completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
-    [self processRequest:apikey withID:nil withParamString:params completion:completionHandler error:errorHandler];
+    [self processRequest:apikey withID:nil withParamString:params offset:offset count:count completion:completionHandler error:errorHandler];
 }
 
 - (void)processRequest:(NSString*)apikey
                 withID:(id)idValue
        withParamString:(NSString*)params
+                offset:(NSUInteger)offset
+                 count:(NSUInteger)count
             completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
@@ -284,14 +300,22 @@
     {
         paramString = [paramString stringByAppendingFormat:@"%@&", params];
     }
-    
-    NSString*   urlPath = [NSString stringWithFormat:@"%@?%@", [self apiURLRetrieve:apikey withID:idValue], paramString];
-    NSURL*      URL     = [NSURL URLWithString:urlPath];
-    DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
 
-    NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
+    NSInteger   pageSize    = [self apiPageSizeRetrieve:apikey];
 
-    [self subProcessRequest:request apikey:apikey completion:completionHandler error:errorHandler];
+    NSUInteger  normalizedCount = (count == 0) ? 0 : (count - 1);
+    NSUInteger  firstPage       = (offset / pageSize) + 1;
+    NSUInteger  lastPage        = firstPage + (normalizedCount / pageSize);
+    for (NSUInteger page = firstPage; page <= lastPage; page++)
+    {
+        NSString*   urlPath = [NSString stringWithFormat:@"%@?%@items_per_page=%d&page=%d", [self apiURLRetrieve:apikey withID:idValue], paramString, pageSize, page];
+        NSURL*      URL     = [NSURL URLWithString:urlPath];
+        DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
+
+        NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
+
+        [self subProcessRequest:request apikey:apikey completion:completionHandler error:errorHandler];
+    }
 }
 
 - (void)processPut:(NSString*)apikey
@@ -437,13 +461,22 @@
          completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
               error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
+    [self processPost:apikey withID:nil withParams:params completion:completionHandler error:errorHandler];
+}
+
+- (void)processPost:(NSString*)apikey
+             withID:(id)idValue
+         withParams:(NSDictionary*)params
+         completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
+              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
+{
     __block NSString*   paramString = @"";
     [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
      {
          paramString = [paramString stringByAppendingFormat:@"%@=%@&", key, obj];
      }];
     
-    NSString*   urlPath = [self apiURLRetrieve:apikey];
+    NSString*   urlPath = [self apiURLRetrieve:apikey withID:idValue];
     NSURL*      URL     = [NSURL URLWithString:urlPath];
     DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
     DLog(LL_Debug, LD_API, @"paramString=%@", paramString);
@@ -581,11 +614,13 @@
     DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
 
     DLog(LL_Debug, LD_API, @"dataSize=%d", [data length]);
+    /*
     if (data)
     {
         id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
         DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
     }
+     */
 
     NSInteger      statusCode  = [httpResponse statusCode];
 
@@ -645,7 +680,7 @@
     if (((statusCode >= 200) && (statusCode <= 299) && (data != nil)) || (statusCode == 204))
     {
         id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+        //DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
         if (responseR && [responseR isKindOfClass:[NSDictionary class]])
         {
             resultDict = responseR;
@@ -761,25 +796,31 @@
 }
 
 - (BOOL)processingNowBlock:(NSString*)apikey
+                    offset:(NSUInteger)offset
+                     count:(NSUInteger)count
                    objects:(NSArray*)objects
                     filter:(BOOL(^)(id object))filterHandler
                        now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler
 {
-    return [self processingNowBlock:apikey withID:nil withParamString:nil objects:objects filter:filterHandler now:nowHandler];
+    return [self processingNowBlock:apikey withID:nil withParamString:nil offset:offset count:count objects:objects filter:filterHandler now:nowHandler];
 }
 
 - (BOOL)processingNowBlock:(NSString*)apikey
                     withID:(id)idValue
+                    offset:(NSUInteger)offset
+                     count:(NSUInteger)count
                    objects:(NSArray*)objects
                     filter:(BOOL(^)(id object))filterHandler
                        now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler
 {
-    return [self processingNowBlock:apikey withID:idValue withParamString:nil objects:objects filter:filterHandler now:nowHandler];
+    return [self processingNowBlock:apikey withID:idValue withParamString:nil offset:offset count:count objects:objects filter:filterHandler now:nowHandler];
 }
 
 - (BOOL)processingNowBlock:(NSString*)apikey
                     withID:(id)idValue
            withParamString:(NSString*)params
+                    offset:(NSUInteger)offset
+                     count:(NSUInteger)count
                    objects:(NSArray*)objects
                     filter:(BOOL(^)(id object))filterHandler
                        now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler
@@ -790,11 +831,22 @@
         paramString = [paramString stringByAppendingFormat:@"%@&", params];
     }
 
+    BOOL        isExpired   = NO;
     NSInteger   pageSize    = [self apiPageSizeRetrieve:apikey];
-    NSString*   urlPath     = [NSString stringWithFormat:@"%@?%@items_per_page=%d&page=%@", [self apiURLRetrieve:apikey withID:idValue], paramString, pageSize, @1];
-    NSInteger   ttlMinutes  = [self apiTTLRetrieve:apikey];
-    BOOL        isExpired   = [self isExpired:urlPath withTTL:ttlMinutes];
-    
+
+    NSUInteger  normalizedCount = (count == 0) ? 0 : (count - 1);
+    NSUInteger  firstPage       = (offset / pageSize) + 1;
+    NSUInteger  lastPage        = firstPage + (normalizedCount / pageSize);
+    for (NSUInteger page = firstPage; page <= lastPage; page++)
+    {
+        NSString*   urlPath     = [NSString stringWithFormat:@"%@?%@items_per_page=%d&page=%d", [self apiURLRetrieve:apikey withID:idValue], paramString, pageSize, page];
+        NSInteger   ttlMinutes  = [self apiTTLRetrieve:apikey];
+        if ([self isExpired:urlPath withTTL:ttlMinutes])
+        {
+            isExpired = YES;
+        }
+    }
+
     NSMutableArray*    results     = [NSMutableArray arrayWithCapacity:[objects count]];
     
     if ([objects count] == 0)

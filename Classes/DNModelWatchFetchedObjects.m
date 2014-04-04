@@ -124,13 +124,13 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController*)controller
 {
-    DLog(LL_Debug, LD_CoreData, @"controllerWillChangeContent:");
+    //DLog(LL_Debug, LD_CoreData, @"controllerWillChangeContent:");
     [self executeWillChangeHandler];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
-    DLog(LL_Debug, LD_CoreData, @"controllerDidChangeContent:");
+    //DLog(LL_Debug, LD_CoreData, @"controllerDidChangeContent:");
     [self executeDidChangeHandler];
 }
 
@@ -145,14 +145,14 @@
     {
         case NSFetchedResultsChangeInsert:
         {
-            DLog(LL_Debug, LD_CoreData, @"controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeInsert", sectionIndex);
+            //DLog(LL_Debug, LD_CoreData, @"controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeInsert", sectionIndex);
             [self executeDidChangeSectionInsertHandler:sectionInfo atIndex:sectionIndex];
             break;
         }
 
         case NSFetchedResultsChangeDelete:
         {
-            DLog(LL_Debug, LD_CoreData, @"controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeDelete", sectionIndex);
+            //DLog(LL_Debug, LD_CoreData, @"controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeDelete", sectionIndex);
             [self executeDidChangeSectionDeleteHandler:sectionInfo atIndex:sectionIndex];
             break;
         }
@@ -171,28 +171,28 @@
     {
         case NSFetchedResultsChangeInsert:
         {
-            DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeInsert newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+            //DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeInsert newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
             [self executeDidChangeObjectInsertHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath];
             break;
         }
             
         case NSFetchedResultsChangeDelete:
         {
-            DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeDelete newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+            //DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeDelete newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
             [self executeDidChangeObjectDeleteHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath];
             break;
         }
 
         case NSFetchedResultsChangeUpdate:
         {
-            DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeUpdate newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+            //DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeUpdate newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
             [self executeDidChangeObjectUpdateHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath];
             break;
         }
 
         case NSFetchedResultsChangeMove:
         {
-            DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeMove newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+            //DLog(LL_Debug, LD_CoreData, @"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeMove newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
             [self executeDidChangeObjectMoveHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath];
             break;
         }

@@ -237,6 +237,101 @@
     return fetchRequest;
 }
 
+#pragma mark - getFromDictionary
+
+- (id)getFromDictionary:(NSDictionary*)dict
+{
+    NSFetchRequest* fetchRequest    = [self getFromDictionary_FetchRequest:dict];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+
+    __block NSArray*    resultArray;
+
+    [self performBlockAndWait:^(NSManagedObjectContext* context)
+     {
+         @try
+         {
+             NSError*    error;
+
+             resultArray  = [context executeFetchRequest:fetchRequest error:&error];
+             if ([resultArray count] == 0)
+             {
+                 resultArray    = nil;
+                 return;
+             }
+         }
+         @catch (NSException *exception)
+         {
+             DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
+             resultArray    = nil;
+             return;
+         }
+     }];
+
+    if ([resultArray count] == 0)
+    {
+        return nil;
+    }
+
+    return [resultArray objectAtIndex:0];
+}
+
+- (DNModelWatchObject*)watchFromDictionary:(NSDictionary*)dict
+{
+    NSFetchRequest* fetchRequest    = [self getFromDictionary_FetchRequest:dict];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+
+    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest];
+}
+
+- (NSPredicate*)getFromDictionary_FetchRequestPredicate:(NSDictionary*)dict
+{
+    id  idValue     = dict[@"id"];
+    id  authorID    = dict[@"author"][@"id"];
+    id  prayerID    = dict[@"prayer"][@"assignmentID"];
+
+    return [NSPredicate predicateWithFormat:@"((id == %@) OR (id == 0)) AND (author.id == %@) AND (prayer.id == %@)", idValue, authorID, prayerID];
+}
+
+- (NSFetchRequest*)getFromDictionary_FetchRequest:(NSDictionary*)dict
+{
+    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[[self class] entityName]];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to create fetchRequest");
+        return nil;
+    }
+
+    [fetchRequest setPredicate:[self getFromDictionary_FetchRequestPredicate:dict]];
+
+    NSMutableArray* sortDescriptors = [NSMutableArray array];
+
+    [[self getFromIDSortKeys] enumerateObjectsUsingBlock:^(NSDictionary* sortDict, NSUInteger idx, BOOL *stop)
+     {
+         NSString*  sortKey         = sortDict[@"field"];
+         BOOL       sortAscending   = [sortDict[@"ascending"] boolValue];
+         if (([sortKey length] > 0))
+         {
+             [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:sortAscending]];
+         }
+     }];
+    if ([sortDescriptors count] > 0)
+    {
+        [fetchRequest setSortDescriptors:sortDescriptors];
+    }
+
+    [fetchRequest setFetchLimit:1];
+
+    return fetchRequest;
+}
+
 #pragma mark - getAll
 
 - (NSArray*)getAll

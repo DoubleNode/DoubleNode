@@ -58,6 +58,9 @@ typedef void(^DNModelCompletionHandlerBlock)();
 - (id)getFromID:(id)idValue;
 - (DNModelWatchObject*)watchFromID:(id)idValue;
 
+- (id)getFromDictionary:(NSDictionary*)dict;
+- (DNModelWatchObject*)watchFromDictionary:(NSDictionary*)dict;
+
 - (NSArray*)getAll;
 - (DNModelWatchObjects*)watchAll;
 
