@@ -106,6 +106,8 @@ Pod::Spec.new do |s|
   s.dependency 'JustType'
   s.dependency 'Inflections'
   s.dependency 'NZCircularImageView'
+  s.dependency 'TTTAttributedLabel'
+
   # Eventually, this needs to be here.  Keep in Parent project for the time being
   # s.dependency 'AFIncrementalStore', :git => "git@github.com:tableproject/AFIncrementalStore.git", :commit => '51588f5af25dec6f1f1746b7450982582ebd8d93'
 
