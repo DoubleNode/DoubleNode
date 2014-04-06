@@ -1,9 +1,9 @@
 //
 //  DNIncrementalStore.m
-//  Phoenix
+//  DoubleNode.com
 //
-//  Created by Darren Ehlers on 2/20/14.
-//  Copyright (c) 2014 Gateway Church. All rights reserved.
+//  Created by Darren Ehlers on 10/27/12.
+//  Copyright (c) 2012 DoubleNode.com. All rights reserved.
 //
 
 #import "DNIncrementalStore.h"
