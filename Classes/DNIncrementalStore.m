@@ -10,6 +10,7 @@
 
 #import "DNUtilities.h"
 
+/*
 @implementation DNIncrementalStore
 
 - (void)notifyManagedObjectContext:(NSManagedObjectContext *)context
@@ -241,3 +242,4 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 }
 
 @end
+*/

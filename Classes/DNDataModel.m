@@ -10,7 +10,7 @@
 
 #import "NSManagedObjectContext+description.h"
 
-#import "AFIncrementalStore.h"
+//#import "AFIncrementalStore.h"
 #import "DNUtilities.h"
 
 #define SAVE_TO_DISK_TIME_INTERVAL 1.0f
@@ -353,6 +353,7 @@
     {
         if ([self useIncrementalStore] == YES)
         {
+            /*
             NSString*   incrmentalStoreClass    = [NSString stringWithFormat:@"%@IncrementalStore", [[self class] dataModelName]];
 
             AFIncrementalStore* ist = (AFIncrementalStore*)[[self persistentStoreCoordinator] addPersistentStoreWithType:[NSClassFromString(incrmentalStoreClass) type]
@@ -368,6 +369,7 @@
                                                                                              options:options
                                                                                                error:&error];
             }
+             */
         }
         else
         {

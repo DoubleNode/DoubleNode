@@ -26,6 +26,7 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 
 - (id)init;
 
+- (void)addAuthorizationHeader:(NSMutableURLRequest*)request;
 - (void)reauthorizeWithSuccess:(void (^)(void))success
                        failure:(void (^)(void))failure;
 

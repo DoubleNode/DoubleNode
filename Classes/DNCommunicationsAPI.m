@@ -57,6 +57,10 @@
     return self;
 }
 
+- (void)addAuthorizationHeader:(NSMutableURLRequest*)request
+{
+}
+
 - (void)reauthorizeWithSuccess:(void (^)(void))success
                        failure:(void (^)(void))failure
 {
@@ -756,9 +760,7 @@
 
     NSMutableURLRequest*    mRequest    = [request mutableCopy];
 
-    AFOAuthCredential*  oauthCredential = [AFOAuthCredential retrieveCredentialWithIdentifier:[DNAppConstants oAuthCredentialIdentifier]];
-    DLog(LL_Debug, LD_API, @"accessToken=%@", [oauthCredential accessToken]);
-    [mRequest setValue:[NSString stringWithFormat:@"Bearer %@", [oauthCredential accessToken]] forHTTPHeaderField:@"Authorization"];
+    [self addAuthorizationHeader:mRequest];
 
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     

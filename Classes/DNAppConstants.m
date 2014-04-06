@@ -77,8 +77,8 @@ static NSString*        plistServerCode = nil;
     if (![serverCode isEqualToString:plistServerCode])
     {
         plistConfigDict = nil;
+        plistServerCode = serverCode;
     }
-    plistServerCode = serverCode;
 
     @synchronized( self )
     {
