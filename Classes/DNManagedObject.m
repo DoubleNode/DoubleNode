@@ -47,10 +47,10 @@
 {
     if ([[dict objectForKey:@"id"] isKindOfClass:[NSString class]])
     {
-        return [self dictionaryString:dict withItem:@"id" andDefault:nil];
+        return [DNUtilities dictionaryString:dict withItem:@"id" andDefault:nil];
     }
 
-    return [self dictionaryNumber:dict withItem:@"id" andDefault:nil];
+    return [DNUtilities dictionaryNumber:dict withItem:@"id" andDefault:nil];
 }
 
 + (NSString*)pathForEntity
@@ -438,345 +438,142 @@
 
 - (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
-    return [[self class] dictionaryBoolean:dictionary dirty:nil withItem:key andDefault:defaultValue];
+    return [DNUtilities dictionaryBoolean:dictionary dirty:nil withItem:key andDefault:defaultValue];
 }
 
 - (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
-    return [[self class] dictionaryBoolean:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
-}
-
-+ (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
-{
-    return [[self class] dictionaryBoolean:dictionary dirty:nil withItem:key andDefault:defaultValue];
-}
-
-+ (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
-{
-    NSNumber*   retval  = defaultValue;
-
-    id  object = [dictionary objectForKey:key];
-    if (object != nil)
-    {
-        if (object != (NSNumber*)[NSNull null])
-        {
-            NSNumber*   newval  = [NSNumber numberWithInt:[object boolValue]];
-
-            if ((retval == nil) || ([newval isEqualToNumber:retval] == NO))
-            {
-                if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                retval = newval;
-            }
-        }
-    }
-
-    return retval;
+    return [DNUtilities dictionaryBoolean:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 - (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
-    return [[self class] dictionaryNumber:dictionary dirty:nil withItem:key andDefault:defaultValue];
+    return [DNUtilities dictionaryNumber:dictionary dirty:nil withItem:key andDefault:defaultValue];
 }
 
 - (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
-    return [[self class] dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
-}
-
-+ (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
-{
-    return [[self class] dictionaryNumber:dictionary dirty:nil withItem:key andDefault:defaultValue];
-}
-
-+ (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
-{
-    NSNumber*   retval  = defaultValue;
-    
-    id  object = [dictionary objectForKey:key];
-    if (object != nil)
-    {
-        if (object != (NSNumber*)[NSNull null])
-        {
-            NSNumber*   newval  = [NSNumber numberWithInt:[object intValue]];
-            
-            if ((retval == nil) || ([newval isEqualToNumber:retval] == NO))
-            {
-                if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                retval = newval;
-            }
-        }
-    }
-    
-    return retval;
+    return [DNUtilities dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 - (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
-    return [[self class] dictionaryDouble:dictionary dirty:nil withItem:key andDefault:defaultValue];
+    return [DNUtilities dictionaryDouble:dictionary dirty:nil withItem:key andDefault:defaultValue];
 }
 
 - (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
-    return [[self class] dictionaryDouble:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
-}
-
-+ (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
-{
-    return [[self class] dictionaryDouble:dictionary dirty:nil withItem:key andDefault:defaultValue];
-}
-
-+ (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
-{
-    NSNumber*   retval  = defaultValue;
-    
-    id  object = [dictionary objectForKey:key];
-    if (object != nil)
-    {
-        if (object != (NSString*)[NSNull null])
-        {
-            NSNumber*   newval  = [NSNumber numberWithDouble:[object doubleValue]];
-            
-            if ((retval == nil) || ([newval isEqualToNumber:retval] == NO))
-            {
-                if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                retval = newval;
-            }
-        }
-    }
-    
-    return retval;
+    return [DNUtilities dictionaryDouble:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 - (NSString*)dictionaryString:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSString*)defaultValue
 {
-    return [[self class] dictionaryString:dictionary dirty:nil withItem:key andDefault:defaultValue];
+    return [DNUtilities dictionaryString:dictionary dirty:nil withItem:key andDefault:defaultValue];
 }
 
 - (NSString*)dictionaryString:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSString*)defaultValue
 {
-    return [[self class] dictionaryString:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
-}
-
-+ (NSString*)dictionaryString:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSString*)defaultValue
-{
-    return [[self class] dictionaryString:dictionary dirty:nil withItem:key andDefault:defaultValue];
-}
-
-+ (NSString*)dictionaryString:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSString*)defaultValue
-{
-    NSString*   retval  = defaultValue;
-    
-    id  object = [dictionary objectForKey:key];
-    if (object != nil)
-    {
-        if ([object isKindOfClass:[NSArray class]] == YES)
-        {
-            if (object != (NSArray*)[NSNull null])
-            {
-                if ([object count] > 0)
-                {
-                    NSString*   newval  = object[0];
-                    
-                    if ((retval == nil) || ([newval isEqualToString:retval] == NO))
-                    {
-                        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                        retval = newval;
-                    }
-                }
-            }
-        }
-        else
-        {
-            if ([object isKindOfClass:[NSString class]] == YES)
-            {
-                if ([object isEqualToString:@"<null>"] == YES)
-                {
-                    object  = @"";
-                }
-            }
-            else if ([object isKindOfClass:[NSNull class]] == YES)
-            {
-                object = @"";
-            }
-            else
-            {
-                object = [object stringValue];
-            }
-            if (object != (NSString*)[NSNull null])
-            {
-                NSString*   newval  = object;
-                
-                if ((retval == nil) || ([newval isEqualToString:retval] == NO))
-                {
-                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                    retval = newval;
-                }
-            }
-        }
-    }
-    
-    return [retval stringByDecodingXMLEntities];
+    return [DNUtilities dictionaryString:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 - (NSArray*)dictionaryArray:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSArray*)defaultValue
 {
-    return [[self class] dictionaryArray:dictionary dirty:nil withItem:key andDefault:defaultValue];
+    return [DNUtilities dictionaryArray:dictionary dirty:nil withItem:key andDefault:defaultValue];
 }
 
 - (NSArray*)dictionaryArray:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSArray*)defaultValue
 {
-    return [[self class] dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
-}
-
-+ (NSArray*)dictionaryArray:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSArray*)defaultValue
-{
-    return [[self class] dictionaryArray:dictionary dirty:nil withItem:key andDefault:defaultValue];
-}
-
-+ (NSArray*)dictionaryArray:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSArray*)defaultValue
-{
-    NSArray*    retval  = defaultValue;
-    
-    id  object = [dictionary objectForKey:key];
-    if (object != nil)
-    {
-        if (object != (NSArray*)[NSNull null])
-        {
-            if ([object isKindOfClass:[NSArray class]] == YES)
-            {
-                NSArray*   newval  = object;
-                
-                if ((retval == nil) || ([newval isEqualToArray:retval] == NO))
-                {
-                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                    retval = newval;
-                }
-            }
-        }
-    }
-    
-    return retval;
+    return [DNUtilities dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 - (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
-    return [[self class] dictionaryDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
+    return [DNUtilities dictionaryDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
 }
 
 - (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
-    return [[self class] dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
-}
-
-+ (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
-{
-    return [[self class] dictionaryDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
-}
-
-+ (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue
-{
-    NSDate*   retval  = defaultValue;
-    
-    id  object = [dictionary objectForKey:key];
-    if (object != nil)
-    {
-        if ([object isKindOfClass:[NSNumber class]])
-        {
-            if (object != (NSNumber*)[NSNull null])
-            {
-                NSDate*   newval  = [NSDate dateWithTimeIntervalSince1970:[object intValue]];
-
-                if ((retval == nil) || ([newval isEqualToDate:retval] == NO))
-                {
-                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                    retval = newval;
-                }
-            }
-        }
-        else if ([object isKindOfClass:[NSString class]])
-        {
-            if (object != (NSString*)[NSNull null])
-            {
-                NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-                
-                NSDate*   newval  = [dateFormatter dateFromString:object];
-                if (newval == nil)
-                {
-                    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-                    [numberFormatter setAllowsFloats:NO];
-                    
-                    NSNumber*   timestamp = [numberFormatter numberFromString:object];
-                    if (timestamp != nil)
-                    {
-                        if ([timestamp integerValue] != 0)
-                        {
-                            newval = [NSDate dateWithTimeIntervalSince1970:[timestamp integerValue]];
-                        }
-                    }
-                }
-                if (newval)
-                {
-                    if ((retval == nil) || ([newval isEqualToDate:retval] == NO))
-                    {
-                        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                        retval = newval;
-                    }
-                }
-            }
-        }
-        else if ([object isKindOfClass:[NSDate class]])
-        {
-            if (object != (NSDate*)[NSNull null])
-            {
-                NSDate*   newval  = object;
-
-                if ((retval == nil) || ([newval isEqualToDate:retval] == NO))
-                {
-                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                    retval = newval;
-                }
-            }
-        }
-    }
-    
-    return retval;
+    return [DNUtilities dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 - (id)dictionaryObject:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue
 {
-    return [[self class] dictionaryObject:dictionary dirty:nil withItem:key andDefault:defaultValue];
+    return [DNUtilities dictionaryObject:dictionary dirty:nil withItem:key andDefault:defaultValue];
 }
 
 - (id)dictionaryObject:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue
 {
-    return [[self class] dictionaryObject:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+    return [DNUtilities dictionaryObject:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
++ (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [DNUtilities dictionaryBoolean:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSNumber*)dictionaryBoolean:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [DNUtilities dictionaryBoolean:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
++ (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [DNUtilities dictionaryNumber:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [DNUtilities dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
++ (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [DNUtilities dictionaryDouble:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [DNUtilities dictionaryDouble:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
++ (NSString*)dictionaryString:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSString*)defaultValue
+{
+    return [DNUtilities dictionaryString:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSString*)dictionaryString:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSString*)defaultValue
+{
+    return [DNUtilities dictionaryString:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
++ (NSArray*)dictionaryArray:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSArray*)defaultValue
+{
+    return [DNUtilities dictionaryArray:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSArray*)dictionaryArray:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSArray*)defaultValue
+{
+    return [DNUtilities dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
++ (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
+{
+    return [DNUtilities dictionaryDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue
+{
+    return [DNUtilities dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 + (id)dictionaryObject:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue
 {
-    return [[self class] dictionaryObject:dictionary dirty:nil withItem:key andDefault:defaultValue];
+    return [DNUtilities dictionaryObject:dictionary dirty:nil withItem:key andDefault:defaultValue];
 }
 
 + (id)dictionaryObject:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue
 {
-    id  retval  = defaultValue;
-    
-    if ([dictionary objectForKey:key] != nil)
-    {
-        if (dictionary[key] != (id)[NSNull null])
-        {
-            id  newval  = dictionary[key];
-            
-            if ((retval == nil) || ([newval isEqual:retval] == NO))
-            {
-                if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
-                retval = newval;
-            }
-        }
-    }
-    
-    return retval;
+    return [DNUtilities dictionaryObject:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 #pragma mark - private methods

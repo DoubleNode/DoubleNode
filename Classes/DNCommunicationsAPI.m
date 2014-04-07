@@ -57,8 +57,9 @@
     return self;
 }
 
-- (void)addAuthorizationHeader:(NSMutableURLRequest*)request
+- (NSURLRequest*)addAuthorizationHeader:(NSURLRequest*)request
 {
+    return request;
 }
 
 - (void)reauthorizeWithSuccess:(void (^)(void))success
@@ -758,17 +759,17 @@
     }
     */
 
-    NSMutableURLRequest*    mRequest    = [request mutableCopy];
+    NSURLRequest*   finalRequest    = [self addAuthorizationHeader:request];
 
-    [self addAuthorizationHeader:mRequest];
+    DLog(LL_Debug, LD_API, @"headers=%@", [finalRequest allHTTPHeaderFields]);
 
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     
-    [NSURLConnection sendAsynchronousRequest:mRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+    [NSURLConnection sendAsynchronousRequest:finalRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
          
-         DLog(LL_Debug, LD_API, @"mRequest=%@", mRequest);
+         DLog(LL_Debug, LD_API, @"mRequest=%@", finalRequest);
          DLog(LL_Debug, LD_API, @"response=%@", response);
 
          NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
@@ -776,11 +777,11 @@
          [self subProcessResponse:httpResponse
                         errorCode:error.code
                            apikey:apikey
-                          request:mRequest
+                          request:finalRequest
                              data:data
                             retry:^
           {
-              [self subProcessRequest:mRequest
+              [self subProcessRequest:finalRequest
                                apikey:apikey
                            completion:completionHandler
                                 error:errorHandler];
