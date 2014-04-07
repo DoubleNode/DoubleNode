@@ -32,6 +32,13 @@
                   {
                       // Create and return the theme:
                       sharedTheme = [[NSClassFromString([[self class] themeName]) alloc] init];
+                      if (!sharedTheme)
+                      {
+                          NSException*    exception = [NSException exceptionWithName:@"DNThemeManager Exception"
+                                                                              reason:@"sharedTheme is missing!"
+                                                                            userInfo:nil];
+                          @throw exception;
+                      }
                   });
     
     return sharedTheme;

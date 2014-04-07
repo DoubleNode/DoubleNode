@@ -6,7 +6,6 @@
 //  Copyright (c) 2012 DoubleNode.com. All rights reserved.
 //
 
-/*
 #import "AFIncrementalStore.h"
 
 @interface AFIncrementalStore (_DNExternal)
@@ -56,4 +55,3 @@ withAttributeAndRelationshipValuesFromManagedObject:(NSManagedObject *)managedOb
 @interface DNIncrementalStore : AFIncrementalStore
 
 @end
-*/

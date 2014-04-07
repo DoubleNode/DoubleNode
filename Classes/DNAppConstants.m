@@ -86,8 +86,22 @@ static NSString*        plistServerCode = nil;
         {
             NSString*   constantsPlist  = [NSString stringWithFormat:@"Constants_%@", serverCode];
             NSString*   constantsPath   = [[NSBundle mainBundle] pathForResource:constantsPlist ofType:@"plist"];
+            if (!constantsPath)
+            {
+                NSException*    exception = [NSException exceptionWithName:@"DNAppConstants Exception"
+                                                                    reason:[NSString stringWithFormat:@"Constants plist not found: %@", constantsPlist]
+                                                                  userInfo:nil];
+                @throw exception;
+            }
 
             plistConfigDict = [[NSDictionary alloc] initWithContentsOfFile:constantsPath];
+            if (!plistConfigDict)
+            {
+                NSException*    exception = [NSException exceptionWithName:@"DNAppConstants Exception"
+                                                                    reason:[NSString stringWithFormat:@"Unable to initialize Constants Config Dictionary: %@", constantsPath]
+                                                                  userInfo:nil];
+                @throw exception;
+            }
         }
     }
     

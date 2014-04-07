@@ -10,7 +10,7 @@
 
 #import "NSManagedObjectContext+description.h"
 
-//#import "AFIncrementalStore.h"
+#import "AFIncrementalStore.h"
 #import "DNUtilities.h"
 
 #define SAVE_TO_DISK_TIME_INTERVAL 1.0f
