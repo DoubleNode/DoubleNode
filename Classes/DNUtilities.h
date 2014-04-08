@@ -88,6 +88,7 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (NSString*)deviceImageName:(NSString*)name;
 
 + (void)runOnMainThreadWithoutDeadlocking:(void (^)())block;
++ (void)runOnBackgroundThread:(void (^)())block;
 + (void)runBlock:(void (^)())block;
 + (void)runAfterDelay:(CGFloat)delay block:(void (^)())block;
 + (void)runRepeatedlyAfterDelay:(CGFloat)delay block:(void (^)(BOOL* stop))block;

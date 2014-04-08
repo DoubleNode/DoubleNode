@@ -134,6 +134,12 @@
 
     @try
     {
+        [_mainObjectContext reset];
+        [_tempInMemoryObjectContext reset];
+        [_concurrentObjectContext reset];
+        [_tempMainObjectContext reset];
+        [_privateWriterContext reset];
+
         for (NSPersistentStore* store in [self persistentStoreCoordinator].persistentStores)
         {
             if (![[self persistentStoreCoordinator] removePersistentStore:store error:&error])

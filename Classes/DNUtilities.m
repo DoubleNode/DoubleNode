@@ -256,6 +256,13 @@
     }
 }
 
++ (void)runOnBackgroundThread:(void (^)())block
+{
+    [NSThread detachNewThreadSelector:@selector(runBlock:)
+                             toTarget:self
+                           withObject:block];
+}
+
 + (void)runBlock:(void (^)())block
 {
     block();

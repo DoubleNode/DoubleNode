@@ -857,26 +857,26 @@
         DLog(LL_Debug, LD_API, @"ZERO OBJECTS [API]%@", apikey);
         return YES;
     }
-    
-    dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-                        {
-                            if ((filterHandler == nil) || filterHandler(obj))
-                            {
-                                [results addObject:obj];
-                            }
-                        }];
 
-                       [DNUtilities runAfterDelay:0.0f block:^
-                        {
-                            if (nowHandler)
-                            {
-                                nowHandler(results, isExpired);
-                            }
-                        }];
-                   });
-    
+    [DNUtilities runOnMainThreadWithoutDeadlocking:^
+     {
+         [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+          {
+              if ((filterHandler == nil) || filterHandler(obj))
+              {
+                  [results addObject:obj];
+              }
+          }];
+
+         [DNUtilities runAfterDelay:0.0f block:^
+          {
+              if (nowHandler)
+              {
+                  nowHandler(results, isExpired);
+              }
+          }];
+     }];
+
     return isExpired;
 }
 
@@ -934,21 +934,21 @@
 
     NSMutableArray*    results     = [NSMutableArray arrayWithCapacity:[objects count]];
     
-    dispatch_async(dispatch_get_main_queue(), ^
-                   {
-                       [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-                        {
-                            if ((filterHandler == nil) || filterHandler(obj))
-                            {
-                                [results addObject:obj];
-                            }
-                        }];
-                       
-                       [DNUtilities runAfterDelay:0.0f block:^
-                        {
-                            completionHandler(results);
-                        }];
-                   });
+    [DNUtilities runOnMainThreadWithoutDeadlocking:^
+     {
+         [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+          {
+              if ((filterHandler == nil) || filterHandler(obj))
+              {
+                  [results addObject:obj];
+              }
+          }];
+
+         [DNUtilities runAfterDelay:0.0f block:^
+          {
+              completionHandler(results);
+          }];
+     }];
 }
 
 - (void)processingQueueCompletionBlock:(NSString*)apikey
