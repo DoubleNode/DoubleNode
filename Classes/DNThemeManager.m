@@ -13,6 +13,11 @@
 #import "DNTheme.h"
 #import "DNUtilities.h"
 
+#import "DNTextView.h"
+#import "DNTextField.h"
+#import "DNLabel.h"
+#import "DNSegmentedControl.h"
+
 #import "UILabel+TextKerning.h"
 #import "NZCircularImageView.h"
 
@@ -546,6 +551,39 @@
     }
 
     [txtView setNeedsLayout];
+}
+
++ (void)customizeSegmentedControl:(DNSegmentedControl*)segmentedControl
+                        withGroup:(NSString*)group
+                        andScreen:(NSString*)screen
+                          andItem:(NSString*)item
+{
+    [[self class] customizeSegmentedControl:segmentedControl withGroup:group andScreen:screen andViewState:@"" andItem:item];
+}
+
++ (void)customizeSegmentedControl:(DNSegmentedControl*)segmentedControl
+                        withGroup:(NSString*)group
+                        andScreen:(NSString*)screen
+                     andViewState:(NSString*)viewState
+                          andItem:(NSString*)item
+{
+    segmentedControl.color          = [[self class] performThemeSelectorForAttribute:@"BackgroundColor"         withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    segmentedControl.selectedColor  = [[self class] performThemeSelectorForAttribute:@"SelectedBackgroundColor" withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    segmentedControl.borderColor    = [[self class] performThemeSelectorForAttribute:@"BorderColor"     withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    segmentedControl.borderWidth    = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"    withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+
+    NSNumber*   textAttributesKerning   = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIFont*     textAttributesFont      = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIColor*    textAttributesColor     = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    segmentedControl.textAttributes = @{ NSFontAttributeName:textAttributesFont, NSForegroundColorAttributeName:textAttributesColor, NSKernAttributeName:textAttributesKerning };
+
+    NSNumber*   selectedTextAttributesKerning   = [[self class] performThemeSelectorForAttribute:@"SelectedKerning" withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIFont*     selectedTextAttributesFont      = [[self class] performThemeSelectorForAttribute:@"SelectedFont"    withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIColor*    selectedTextAttributesColor     = [[self class] performThemeSelectorForAttribute:@"SelectedColor"   withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    segmentedControl.selectedTextAttributes = @{ NSFontAttributeName:selectedTextAttributesFont, NSForegroundColorAttributeName:selectedTextAttributesColor, NSKernAttributeName:selectedTextAttributesKerning };
 }
 
 @end
