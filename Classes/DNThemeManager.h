@@ -12,9 +12,7 @@
 
 #import "ADVTheme.h"
 
-#import "DNTextView.h"
-#import "DNTextField.h"
-#import "DNLabel.h"
+@class DNTextView, DNTextField, DNLabel, DNSegmentedControl;
 
 @protocol DNThemeProtocol <ADVTheme, NSObject>
 
@@ -94,5 +92,16 @@
                 andScreen:(NSString*)screen
              andViewState:(NSString*)viewState
                   andItem:(NSString*)item;
+
++ (void)customizeSegmentedControl:(PPiFlatSegmentedControl*)segmentedControl
+                        withGroup:(NSString*)group
+                        andScreen:(NSString*)screen
+                          andItem:(NSString*)item;
+
++ (void)customizeSegmentedControl:(PPiFlatSegmentedControl*)segmentedControl
+                        withGroup:(NSString*)group
+                        andScreen:(NSString*)screen
+                     andViewState:(NSString*)viewState
+                          andItem:(NSString*)item;
 
 @end

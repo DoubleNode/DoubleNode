@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.5.13"
+  s.version      = "0.5.14"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
@@ -107,6 +107,7 @@ Pod::Spec.new do |s|
   s.dependency 'Inflections'
   s.dependency 'NZCircularImageView'
   s.dependency 'TTTAttributedLabel'
+  s.dependency 'PPiFlatSegmentedControl'
   # s.dependency 'AFOAuth2Client'
 
   # Eventually, this needs to be here.  Keep in Parent project for the time being
