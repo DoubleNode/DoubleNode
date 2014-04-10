@@ -93,12 +93,12 @@
              andViewState:(NSString*)viewState
                   andItem:(NSString*)item;
 
-+ (void)customizeSegmentedControl:(PPiFlatSegmentedControl*)segmentedControl
++ (void)customizeSegmentedControl:(DNSegmentedControl*)segmentedControl
                         withGroup:(NSString*)group
                         andScreen:(NSString*)screen
                           andItem:(NSString*)item;
 
-+ (void)customizeSegmentedControl:(PPiFlatSegmentedControl*)segmentedControl
++ (void)customizeSegmentedControl:(DNSegmentedControl*)segmentedControl
                         withGroup:(NSString*)group
                         andScreen:(NSString*)screen
                      andViewState:(NSString*)viewState
