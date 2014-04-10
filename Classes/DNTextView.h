@@ -9,7 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <JustType/JustType.h>
 
-@interface DNTextView : UITextView  // JTTextView
+#import "GCPlaceholderTextView.h"
+
+@interface DNTextView : GCPlaceholderTextView  // TODO: Temporarily removed -- JTTextView
 
 - (void)shake;
 
