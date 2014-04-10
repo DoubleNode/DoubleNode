@@ -586,4 +586,39 @@
     segmentedControl.selectedTextAttributes = @{ NSFontAttributeName:selectedTextAttributesFont, NSForegroundColorAttributeName:selectedTextAttributesColor, NSKernAttributeName:selectedTextAttributesKerning };
 }
 
++ (void)customizeBarButtonItem:(UIBarButtonItem*)barButtonItem
+                     withGroup:(NSString*)group
+                     andScreen:(NSString*)screen
+                       andItem:(NSString*)item
+{
+    [[self class] customizeBarButtonItem:barButtonItem withGroup:group andScreen:screen andViewState:@"" andItem:item];
+}
+
++ (void)customizeBarButtonItemLabel:(UIBarButtonItem*)barButtonItem
+                          withGroup:(NSString*)group
+                          andScreen:(NSString*)screen
+                       andViewState:(NSString*)viewState
+                            andItem:(NSString*)item
+                    andControlState:(UIControlState)controlState
+{
+    NSNumber*   labelKerning    = [[self class] performThemeSelectorForAttribute:@"LabelKerning" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    UIFont*     labelFont       = [[self class] performThemeSelectorForAttribute:@"LabelFont" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"LabelColor" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+
+    [barButtonItem setTitleTextAttributes:@{ NSFontAttributeName:labelFont, NSForegroundColorAttributeName:labelColor, NSKernAttributeName:labelKerning }
+                                 forState:controlState];
+}
+
++ (void)customizeBarButtonItem:(UIBarButtonItem*)barButtonItem
+                     withGroup:(NSString*)group
+                     andScreen:(NSString*)screen
+                  andViewState:(NSString*)viewState
+                       andItem:(NSString*)item
+{
+    [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
+    [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateHighlighted];
+    [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateDisabled];
+    [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateSelected];
+}
+
 @end

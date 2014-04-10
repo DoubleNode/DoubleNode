@@ -104,4 +104,15 @@
                      andViewState:(NSString*)viewState
                           andItem:(NSString*)item;
 
++ (void)customizeBarButtonItem:(UIBarButtonItem*)barButtonItem
+                     withGroup:(NSString*)group
+                     andScreen:(NSString*)screen
+                       andItem:(NSString*)item;
+
++ (void)customizeBarButtonItem:(UIBarButtonItem*)barButtonItem
+                     withGroup:(NSString*)group
+                     andScreen:(NSString*)screen
+                  andViewState:(NSString*)viewState
+                       andItem:(NSString*)item;
+
 @end
