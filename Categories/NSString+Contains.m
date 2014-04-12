@@ -1,9 +1,12 @@
 //
 //  NSString+Contains.m
-//  Pods
+//  Gateway Church and DoubleNode.com
 //
-//  Created by Darren Ehlers on 2/27/14.
+//  Copyright (c) 2014 Gateway Church. All rights reserved.
 //
+//  Derived from work originally created by Darren Ehlers
+//  Portions Copyright (c) 2012 DoubleNode.com and Darren Ehlers.
+//  All rights reserved.
 //
 
 #import "NSString+Contains.h"

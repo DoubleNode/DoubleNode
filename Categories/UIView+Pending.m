@@ -1,9 +1,12 @@
 //
 //  UIView+Pending.m
-//  DoubleNode.com
+//  Gateway Church and DoubleNode.com
 //
-//  Created by Darren Ehlers on 10/27/12.
-//  Copyright (c) 2012 DoubleNode.com. All rights reserved.
+//  Copyright (c) 2014 Gateway Church. All rights reserved.
+//
+//  Derived from work originally created by Darren Ehlers
+//  Portions Copyright (c) 2012 DoubleNode.com and Darren Ehlers.
+//  All rights reserved.
 //
 
 #include <objc/runtime.h>
@@ -144,17 +147,26 @@ const NSString* kPendingTransform   = @"PendingTransform";
 
 - (void)applyPendingAlpha
 {
-    self.alpha  = self.pendingAlpha;
+    if (self.alpha != self.pendingAlpha)
+    {
+        self.alpha  = self.pendingAlpha;
+    }
 }
 
 - (void)applyPendingFrame
 {
-    self.frame  = self.pendingFrame;
+    if (!CGRectEqualToRect(self.frame, self.pendingFrame))
+    {
+        self.frame  = self.pendingFrame;
+    }
 }
 
 - (void)applyPendingTransform
 {
-    self.layer.transform    = self.pendingTransform;
+    if (!CATransform3DEqualToTransform(self.layer.transform, self.pendingTransform))
+    {
+        self.layer.transform    = self.pendingTransform;
+    }
 }
 
 - (void)applyPendingValues

@@ -1,8 +1,12 @@
 //
-// NSTimer+Blocks.h
+//  NSTimer+Blocks.h
+//  Gateway Church and DoubleNode.com
 //
-// Created by Jiva DeVoe on 1/14/11.
-// Copyright 2011 Random Ideas, LLC. All rights reserved.
+//  Copyright (c) 2014 Gateway Church. All rights reserved.
+//
+//  Derived from work originally created by Darren Ehlers
+//  Portions Copyright (c) 2012 DoubleNode.com and Darren Ehlers.
+//  All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

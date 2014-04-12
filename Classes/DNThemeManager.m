@@ -1,9 +1,12 @@
 //
 //  DNThemeManager.m
-//  DoubleNode.com
+//  Gateway Church and DoubleNode.com
 //
-//  Created by Darren Ehlers on 10/27/12.
-//  Copyright (c) 2012 DoubleNode.com. All rights reserved.
+//  Copyright (c) 2014 Gateway Church. All rights reserved.
+//
+//  Derived from work originally created by Darren Ehlers
+//  Portions Copyright (c) 2012 DoubleNode.com and Darren Ehlers.
+//  All rights reserved.
 //
 
 #import <CoreText/CoreText.h>
@@ -318,17 +321,27 @@
         [attrString removeAttribute:NSKernAttributeName range:attrRange];
         [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
     }
-
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/Label/Kerning is not specified!", group, screen, viewState, item);
+    }
     if (labelFont)
     {
         [attrString removeAttribute:NSFontAttributeName range:attrRange];
         [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
     }
-
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/Label/Font is not specified!", group, screen, viewState, item);
+    }
     if (labelColor)
     {
         [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
         [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/Label/Color is not specified!", group, screen, viewState, item);
     }
 
     [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
@@ -403,17 +416,27 @@
         [attrString removeAttribute:NSKernAttributeName range:attrRange];
         [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
     }
-
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/Button/LabelKerning is not specified!", group, screen, viewState, item, controlState);
+    }
     if (labelFont)
     {
         [attrString removeAttribute:NSFontAttributeName range:attrRange];
         [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
     }
-
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/Button/LabelFont is not specified!", group, screen, viewState, item, controlState);
+    }
     if (labelColor)
     {
         [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
         [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/Button/LabelColor is not specified!", group, screen, viewState, item, controlState);
     }
 
     [btnView setAttributedTitle:attrString forState:controlState];
@@ -492,12 +515,11 @@
              andViewState:(NSString*)viewState
                   andItem:(NSString*)item
 {
-    //xtView.font                = [[self class] performThemeSelectorForAttribute:@"Font"            withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor"    withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
-    txtView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"    withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    txtView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
+    txtView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 
-    txtView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    //txtView.textColor           = [[self class] performThemeSelectorForAttribute:@"TextColor"       withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtView.placeholderColor    = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor"    withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor"     withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
     NSNumber*   txtViewKerning      = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     UIFont*     txtViewFont         = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
@@ -524,17 +546,27 @@
         [attrString removeAttribute:NSKernAttributeName range:attrRange];
         [attrString addAttribute:NSKernAttributeName value:txtViewKerning range:attrRange];
     }
-
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/TextView/Kerning is not specified!", group, screen, viewState, item);
+    }
     if (txtViewFont)
     {
         [attrString removeAttribute:NSFontAttributeName range:attrRange];
         [attrString addAttribute:NSFontAttributeName value:txtViewFont range:attrRange];
     }
-
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/TextView/Font is not specified!", group, screen, viewState, item);
+    }
     if (txtViewColor)
     {
         [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
         [attrString addAttribute:NSForegroundColorAttributeName value:txtViewColor range:attrRange];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/TextView/Color is not specified!", group, screen, viewState, item);
     }
 
     [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
@@ -577,13 +609,65 @@
     UIFont*     textAttributesFont      = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     UIColor*    textAttributesColor     = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
-    segmentedControl.textAttributes = @{ NSFontAttributeName:textAttributesFont, NSForegroundColorAttributeName:textAttributesColor, NSKernAttributeName:textAttributesKerning };
+    NSMutableDictionary*    textAttributes  = [NSMutableDictionary dictionary];
+    if (textAttributesKerning)
+    {
+        [textAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Kerning is not specified!", group, screen, viewState, item);
+    }
+    if (textAttributesFont)
+    {
+        [textAttributes setObject:textAttributesFont forKey:NSFontAttributeName];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Font is not specified!", group, screen, viewState, item);
+    }
+    if (textAttributesColor)
+    {
+        [textAttributes setObject:textAttributesColor forKey:NSForegroundColorAttributeName];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Color is not specified!", group, screen, viewState, item);
+    }
+
+    segmentedControl.textAttributes = textAttributes;
 
     NSNumber*   selectedTextAttributesKerning   = [[self class] performThemeSelectorForAttribute:@"SelectedKerning" withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     UIFont*     selectedTextAttributesFont      = [[self class] performThemeSelectorForAttribute:@"SelectedFont"    withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     UIColor*    selectedTextAttributesColor     = [[self class] performThemeSelectorForAttribute:@"SelectedColor"   withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
-    segmentedControl.selectedTextAttributes = @{ NSFontAttributeName:selectedTextAttributesFont, NSForegroundColorAttributeName:selectedTextAttributesColor, NSKernAttributeName:selectedTextAttributesKerning };
+    NSMutableDictionary*    selectedTextAttributes  = [NSMutableDictionary dictionary];
+    if (selectedTextAttributesKerning)
+    {
+        [selectedTextAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedKerning is not specified!", group, screen, viewState, item);
+    }
+    if (selectedTextAttributesFont)
+    {
+        [selectedTextAttributes setObject:selectedTextAttributesFont forKey:NSFontAttributeName];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedFont is not specified!", group, screen, viewState, item);
+    }
+    if (selectedTextAttributesColor)
+    {
+        [selectedTextAttributes setObject:selectedTextAttributesColor forKey:NSForegroundColorAttributeName];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedColor is not specified!", group, screen, viewState, item);
+    }
+
+    segmentedControl.selectedTextAttributes = selectedTextAttributes;
 }
 
 + (void)customizeBarButtonItem:(UIBarButtonItem*)barButtonItem
@@ -605,7 +689,33 @@
     UIFont*     labelFont       = [[self class] performThemeSelectorForAttribute:@"LabelFont" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
     UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"LabelColor" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
 
-    [barButtonItem setTitleTextAttributes:@{ NSFontAttributeName:labelFont, NSForegroundColorAttributeName:labelColor, NSKernAttributeName:labelKerning }
+    NSMutableDictionary*    textAttributes  = [NSMutableDictionary dictionary];
+    if (labelKerning)
+    {
+        [textAttributes setObject:labelKerning forKey:NSKernAttributeName];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/BarButtonItem/LabelKerning is not specified!", group, screen, viewState, item, controlState);
+    }
+    if (labelFont)
+    {
+        [textAttributes setObject:labelFont forKey:NSFontAttributeName];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/BarButtonItem/LabelFont is not specified!", group, screen, viewState, item, controlState);
+    }
+    if (labelColor)
+    {
+        [textAttributes setObject:labelColor forKey:NSForegroundColorAttributeName];
+    }
+    else
+    {
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/BarButtonItem/LabelColor is not specified!", group, screen, viewState, item, controlState);
+    }
+
+    [barButtonItem setTitleTextAttributes:textAttributes
                                  forState:controlState];
 }
 
@@ -618,7 +728,6 @@
     [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
     [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateHighlighted];
     [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateDisabled];
-    [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateSelected];
 }
 
 @end
