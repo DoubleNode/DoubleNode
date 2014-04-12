@@ -335,6 +335,14 @@
     NSError*    error       = nil;
     NSURL*      storeUrl    = [self getPersistentStoreURL];
 
+    if ([self resetOnInitialization] == YES)
+    {
+        if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
+        {
+            DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store file (%@): %@", storeUrl, error);
+        }
+    }
+
     NSDictionary*   options = @{
                                 NSInferMappingModelAutomaticallyOption : @(YES),
                                 NSMigratePersistentStoresAutomaticallyOption : @(YES),
@@ -371,6 +379,10 @@
 
         DLog(LL_Error, LD_CoreData, @"CoreData RETRY create persistentStore");
     }
+    if (retval == nil)
+    {
+        DLog(LL_Critical, LD_CoreData, @"Unresolved error %@, %@", error, [error userInfo]);
+    }
 
     return retval;
 }
@@ -382,21 +394,10 @@
         return _persistentStore;
     }
 
-    NSError*    error       = nil;
-    NSURL*      storeUrl    = [self getPersistentStoreURL];
-
-    if ([self resetOnInitialization] == YES)
-    {
-        if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
-        {
-            DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store file (%@): %@", storeUrl, error);
-        }
-    }
-
     _persistentStore = [self persistentStoreWithPersistentStoreCoordinator:[self persistentStoreCoordinator]];
     if (_persistentStore == nil)
     {
-        DLog(LL_Critical, LD_CoreData, @"Unresolved error %@, %@", error, [error userInfo]);
+        DLog(LL_Critical, LD_CoreData, @"Error creating persistent store");
         abort();
     }
 
