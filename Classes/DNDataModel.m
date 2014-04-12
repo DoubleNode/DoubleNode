@@ -13,7 +13,6 @@
 
 #import "NSManagedObjectContext+description.h"
 
-#import "AFIncrementalStore.h"
 #import "DNUtilities.h"
 
 #define SAVE_TO_DISK_TIME_INTERVAL 1.0f
@@ -45,7 +44,7 @@
 {
     DLog(LL_Debug, LD_CoreData, @"Should NOT be here!");
 
-    NSException*    exception = [NSException exceptionWithName:@"DNDatalModel Exception"
+    NSException*    exception = [NSException exceptionWithName:@"DNDataModel Exception"
                                                         reason:@"dataModel class MUST be overridden!"
                                                       userInfo:nil];
     @throw exception;
@@ -57,7 +56,7 @@
     {
         DLog(LL_Debug, LD_CoreData, @"Should NOT be here!");
 
-        NSException*    exception = [NSException exceptionWithName:@"DNDatalModel Exception"
+        NSException*    exception = [NSException exceptionWithName:@"DNDataModel Exception"
                                                             reason:@"dataModel class MUST be overridden!"
                                                           userInfo:nil];
         @throw exception;
@@ -88,7 +87,6 @@
     if (self)
     {
         self.persistentStorePrefix  = @"";
-        self.useIncrementalStore    = NO;
         self.resetOnInitialization  = NO;
 
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -150,11 +148,6 @@
                 DLog(LL_Error, LD_CoreData, @"Error deleting CoreData persistent store: %@", error);
             }
         }
-
-        //if (![[self persistentStoreCoordinator] removePersistentStore:store error:&error])
-        //{
-        //    DLog(LL_Error, LD_CoreData, @"Error deleting CoreData persistent store: %@", error);
-        //}
 
         if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
         {
@@ -335,12 +328,9 @@
     return _persistentStoreCoordinator;
 }
 
-- (NSPersistentStore*)persistentStore
+- (NSPersistentStore*)persistentStoreWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)storeCoordinator
 {
-    if (_persistentStore)
-    {
-        return _persistentStore;
-    }
+    NSPersistentStore*  retval;
 
     NSError*    error       = nil;
     NSURL*      storeUrl    = [self getPersistentStoreURL];
@@ -350,47 +340,15 @@
                                 NSMigratePersistentStoresAutomaticallyOption : @(YES),
                                 };
 
-    if ([self resetOnInitialization] == YES)
-    {
-        if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
-        {
-            DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store file (%@): %@", storeUrl, error);
-        }
-    }
-
     for (int retry = 0; retry < 2; retry++)
     {
-        if ([self useIncrementalStore] == YES)
-        {
-            /*
-            NSString*   incrmentalStoreClass    = [NSString stringWithFormat:@"%@IncrementalStore", [[self class] dataModelName]];
-
-            AFIncrementalStore* ist = (AFIncrementalStore*)[[self persistentStoreCoordinator] addPersistentStoreWithType:[NSClassFromString(incrmentalStoreClass) type]
-                                                                                                           configuration:nil
-                                                                                                                     URL:nil
-                                                                                                                 options:nil
-                                                                                                                   error:&error];
-            if (ist != nil)
-            {
-                _persistentStore = [ist.backingPersistentStoreCoordinator addPersistentStoreWithType:[self storeType]
-                                                                                       configuration:nil
-                                                                                                 URL:storeUrl
-                                                                                             options:options
-                                                                                               error:&error];
-            }
-             */
-        }
-        else
-        {
-            _persistentStore = [[self persistentStoreCoordinator] addPersistentStoreWithType:[self storeType]
-                                                                               configuration:nil
-                                                                                         URL:storeUrl
-                                                                                     options:options
-                                                                                       error:&error];
-        }
-
+        retval = [storeCoordinator addPersistentStoreWithType:[self storeType]
+                                                configuration:nil
+                                                          URL:storeUrl
+                                                      options:options
+                                                        error:&error];
         // If Successful...
-        if (_persistentStore)
+        if (retval)
         {
             DLog(LL_Error, LD_CoreData, @"CoreData store exists:%@ (%@)", ([[NSFileManager defaultManager] fileExistsAtPath:[storeUrl path]] ? @"YES" : @"NO"), storeUrl);
             break;
@@ -410,9 +368,32 @@
         //    [self deletePersistentStore];
         //    return nil;
         //}
-        
+
         DLog(LL_Error, LD_CoreData, @"CoreData RETRY create persistentStore");
     }
+
+    return retval;
+}
+
+- (NSPersistentStore*)persistentStore
+{
+    if (_persistentStore)
+    {
+        return _persistentStore;
+    }
+
+    NSError*    error       = nil;
+    NSURL*      storeUrl    = [self getPersistentStoreURL];
+
+    if ([self resetOnInitialization] == YES)
+    {
+        if (![[NSFileManager defaultManager] removeItemAtPath:[storeUrl path] error:&error])
+        {
+            DLog(LL_Error, LD_CoreData, @"Error deleting CoreData store file (%@): %@", storeUrl, error);
+        }
+    }
+
+    _persistentStore = [self persistentStoreWithPersistentStoreCoordinator:[self persistentStoreCoordinator]];
     if (_persistentStore == nil)
     {
         DLog(LL_Critical, LD_CoreData, @"Unresolved error %@, %@", error, [error userInfo]);

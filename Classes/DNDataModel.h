@@ -26,7 +26,6 @@
 
 @property (strong, nonatomic)   NSString*   persistentStorePrefix;
 
-@property (assign, atomic)      BOOL        useIncrementalStore;
 @property (assign, atomic)      BOOL        resetOnInitialization;
 
 + (id)dataModel;
@@ -36,6 +35,8 @@
 
 - (NSString*)storeType;
 - (NSURL*)getPersistentStoreURL;
+
+- (NSPersistentStore*)persistentStoreWithPersistentStoreCoordinator:(NSPersistentStoreCoordinator*)storeCoordinator;
 
 - (void)deletePersistentStore;
 - (void)saveContext;
