@@ -26,6 +26,12 @@
 
 - (void)setText:(id)text
 {
+    if (!text)
+    {
+        self.attributedText = nil;
+        return;
+    }
+
     self.attributedText  = [[NSAttributedString alloc] initWithString:text
                                                            attributes:[self.attributedText attributesAtIndex:0 effectiveRange:NULL]];
 }
