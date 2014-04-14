@@ -479,6 +479,7 @@
     txtfldView.font                 = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     txtfldView.layer.borderColor    = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
     txtfldView.layer.borderWidth    = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    txtfldView.borderStyle          = [[[self class] performThemeSelectorForAttribute:@"BorderStyle" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] integerValue];
 
     txtfldView.backgroundColor      = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     txtfldView.unhighlightedColor   = [[self class] performThemeSelectorForAttribute:@"UnhighlightedColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
@@ -518,61 +519,10 @@
     txtView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
     txtView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 
+    txtView.font                = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtView.realTextColor       = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     txtView.placeholderColor    = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor"    withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     txtView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor"     withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-
-    NSNumber*   txtViewKerning      = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIFont*     txtViewFont         = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIColor*    txtViewColor        = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    NSNumber*   txtViewLineSpacing  = [[self class] performThemeSelectorForAttribute:@"LineSpacing" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-
-    NSMutableParagraphStyle*    paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:[txtViewLineSpacing intValue]];
-    [paragraphStyle setAlignment:txtView.textAlignment];
-
-    NSMutableAttributedString*  attrString  = [[txtView attributedText] mutableCopy];
-    if ([attrString length] == 0)
-    {
-        if ([txtView.text length] > 0)
-        {
-            attrString  = [[NSMutableAttributedString alloc] initWithString:txtView.text];
-        }
-    }
-
-    NSRange attrRange   = NSMakeRange(0, [attrString length]);
-
-    if (txtViewKerning)
-    {
-        [attrString removeAttribute:NSKernAttributeName range:attrRange];
-        [attrString addAttribute:NSKernAttributeName value:txtViewKerning range:attrRange];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/TextView/Kerning is not specified!", group, screen, viewState, item);
-    }
-    if (txtViewFont)
-    {
-        [attrString removeAttribute:NSFontAttributeName range:attrRange];
-        [attrString addAttribute:NSFontAttributeName value:txtViewFont range:attrRange];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/TextView/Font is not specified!", group, screen, viewState, item);
-    }
-    if (txtViewColor)
-    {
-        [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
-        [attrString addAttribute:NSForegroundColorAttributeName value:txtViewColor range:attrRange];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/TextView/Color is not specified!", group, screen, viewState, item);
-    }
-
-    [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
-    [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:attrRange];
-
-    [txtView setAttributedText:attrString];
 
     // Default is YES/nil if not specified, therefore, if != NO...
     if (![[[self class] performThemeSelectorForAttribute:@"ShowSuggestions" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] isEqual:@NO])
