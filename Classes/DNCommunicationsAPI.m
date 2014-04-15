@@ -50,9 +50,11 @@
     {
         queues      = [NSMutableDictionary dictionary];
         failures    = [NSMutableDictionary dictionary];
-        
-        NSString*       API_Path    = [[NSBundle mainBundle] pathForResource:[[NSBundle mainBundle] objectForInfoDictionaryKey:@"API_plist"] ofType: @"plist"];
-        plistDictionary             = [[NSDictionary alloc] initWithContentsOfFile:API_Path];
+
+        NSString*   filename    = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"API_plist"];
+        NSString*   API_Path    = [[NSBundle mainBundle] pathForResource:filename ofType: @"plist"];
+
+        plistDictionary = [[NSDictionary alloc] initWithContentsOfFile:API_Path];
     }
     
     return self;
