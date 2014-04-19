@@ -14,5 +14,6 @@
 @interface UIView (ImageOfView)
 
 - (UIImage*)imageOfView;
+- (UIImage*)imageOfViewInFrame:(CGRect)frame;
 
 @end

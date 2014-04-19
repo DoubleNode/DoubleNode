@@ -13,10 +13,30 @@
 
 @implementation UIView (ImageOfView)
 
-- (UIImage*)imageOfView;
+- (UIImage*)imageOfView
 {
-    UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.0);
-    [self.layer renderInContext:UIGraphicsGetCurrentContext()];
+    // DME: Old code replaced with faster iOS7 method
+    //UIGraphicsBeginImageContextWithOptions(self.bounds.size, self.opaque, 0.0);
+    //[self.layer renderInContext:UIGraphicsGetCurrentContext()];
+
+    // Create the image context
+    UIGraphicsBeginImageContextWithOptions(self.bounds.size, NO, self.window.screen.scale);
+
+    [self drawViewHierarchyInRect:self.frame afterScreenUpdates:NO];
+
+    UIImage*    img = UIGraphicsGetImageFromCurrentImageContext();
+
+    UIGraphicsEndImageContext();
+
+    return img;
+}
+
+- (UIImage*)imageOfViewInFrame:(CGRect)frame
+{
+    // Create the image context
+    UIGraphicsBeginImageContextWithOptions(frame.size, NO, self.window.screen.scale);
+
+    [self drawViewHierarchyInRect:frame afterScreenUpdates:NO];
 
     UIImage*    img = UIGraphicsGetImageFromCurrentImageContext();
 
