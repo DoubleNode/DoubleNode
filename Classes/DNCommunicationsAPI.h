@@ -12,6 +12,7 @@
 #import <Foundation/Foundation.h>
 
 #import "DNCommunicationDetails.h"
+#import "DNCommunicationPageDetails.h"
 
 #import "DNUtilities.h"
 
@@ -20,8 +21,8 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 @interface DNCommunicationsAPIQueued : NSObject
 
 @property (nonatomic, copy) BOOL    (^filterHandler)(id item);
-@property (nonatomic, copy) void    (^completionHandler)(DNCommunicationDetails* commDetails, NSArray* items);
-@property (nonatomic, copy) void    (^errorHandler)(DNCommunicationDetails* commDetails, NSError* error, NSTimeInterval retryRecommendation);
+@property (nonatomic, copy) void    (^completionHandler)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* items);
+@property (nonatomic, copy) void    (^errorHandler)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSError* error, NSTimeInterval retryRecommendation);
 
 @end
 
@@ -36,29 +37,15 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 - (void)reauthorizeWithSuccess:(void (^)(void))success
                        failure:(void (^)(void))failure;
 
-- (BOOL)isExpired:(NSString*)cacheKey
-          withTTL:(NSUInteger)ttl;
+- (BOOL)isCacheExpired:(DNCommunicationDetails*)commDetails
+       withPageDetails:(DNCommunicationPageDetails*)pageDetails
+               withTTL:(NSUInteger)ttl;
 
-- (void)markAPIKeyUpdated:(NSString*)apikey;
+- (void)markCacheUpdated:(DNCommunicationDetails*)commDetails
+         withPageDetails:(DNCommunicationPageDetails*)pageDetails;
 
-- (void)markAPIKeyUpdated:(NSString*)apikey
-                   withID:(id)idValue;
-
-- (void)markAPIKeyUpdated:(NSString*)apikey
-                   withID:(id)idValue
-          withParamString:(NSString*)params;
-
-- (void)markAPIKeyExpired:(NSString*)apikey;
-
-- (void)markAPIKeyExpired:(NSString*)apikey
-                   withID:(id)idValue;
-
-- (void)markAPIKeyExpired:(NSString*)apikey
-                   withID:(id)idValue
-          withParamString:(NSString*)params;
-
-- (void)markUpdated:(NSString*)cacheKey;
-- (void)markExpired:(NSString*)cacheKey;
+- (void)markCacheExpired:(DNCommunicationDetails*)commDetails
+         withPageDetails:(DNCommunicationPageDetails*)pageDetails;
 
 - (NSString*)getAPIHostname;
 - (NSString*)getAPIHostnameString;
@@ -77,11 +64,39 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 - (BOOL)processNow:(DNCommunicationDetails*)commDetails
            objects:(NSArray*)objects
             filter:(BOOL(^)(id object))filterHandler
-               now:(void(^)(NSArray* objects, BOOL isExpired))nowHandler;
+               now:(void(^)(DNCommunicationDetails* commDetails, NSArray* objects, BOOL isExpired))nowHandler;
 
 - (void)processRequest:(DNCommunicationDetails*)commDetails
-            completion:(void(^)(DNCommunicationDetails* commDetails, NSDictionary* response, NSDictionary* headers))completionHandler
-                 error:(void(^)(DNCommunicationDetails* commDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
+            completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+                 error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
+
+- (void)processingCompletionBlock:(DNCommunicationDetails*)commDetails
+                             page:(DNCommunicationPageDetails*)pageDetails
+                          objects:(NSArray*)objects
+                           filter:(BOOL(^)(id object))filterHandler
+                       completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler;
+
+- (void)subProcessResponse:(NSHTTPURLResponse*)httpResponse
+               commDetails:(DNCommunicationDetails*)commDetails
+               pageDetails:(DNCommunicationPageDetails*)pageDetails
+                 errorCode:(NSInteger)errorCode
+                   request:(NSURLRequest*)request
+                      data:(NSData*)data
+                     retry:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails))retryHandler
+                completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+                     error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
+
+- (void)subProcessRequest:(NSURLRequest*)request
+              commDetails:(DNCommunicationDetails*)commDetails
+              pageDetails:(DNCommunicationPageDetails*)pageDetails
+               completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+                    error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
+
+- (BOOL)queueProcess:(DNCommunicationDetails*)commDetails
+         pageDetails:(DNCommunicationPageDetails*)pageDetails
+              filter:(BOOL(^)(id object))filterHandler
+          completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
+               error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
 
 /*
 - (void)processPut:(NSString*)apikey
@@ -152,32 +167,7 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
                  error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler;
 */
 
-- (void)subProcessResponse:(NSHTTPURLResponse*)httpResponse
-               commDetails:(DNCommunicationDetails*)commDetails
-                 errorCode:(NSInteger)errorCode
-                   request:(NSURLRequest*)request
-                      data:(NSData*)data
-                     retry:(void(^)(DNCommunicationDetails* commDetails))retryHandler
-                completion:(void(^)(DNCommunicationDetails* commDetails, NSDictionary* response, NSDictionary* headers))completionHandler
-                     error:(void(^)(DNCommunicationDetails* commDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
-
-- (void)subProcessRequest:(NSURLRequest*)request
-              commDetails:(DNCommunicationDetails*)commDetails
-               completion:(void(^)(DNCommunicationDetails* commDetails, NSDictionary* response, NSDictionary* headers))completionHandler
-                    error:(void(^)(DNCommunicationDetails* commDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
-
-- (BOOL)queueProcess:(DNCommunicationDetails*)commDetails
-              filter:(BOOL(^)(id object))filterHandler
-          completion:(void(^)(DNCommunicationDetails* commDetails, NSArray* objects))completionHandler
-               error:(void(^)(DNCommunicationDetails* commDetails, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
-
 /*
-- (void)processingCompletionBlock:(NSString*)apikey
-                       withRouter:(id)router
-                          objects:(NSArray*)objects
-                           filter:(BOOL(^)(id object))filterHandler
-                       completion:(void(^)(NSArray* speakers))completionHandler;
-
 - (void)processingCompletionBlock:(NSString*)apikey
                        withRouter:(id)router
                            withID:(id)idValue

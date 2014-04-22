@@ -11,6 +11,8 @@
 
 #import "DNCommunicationDetails.h"
 
+#import "DNCommunicationPageDetails.h"
+
 @implementation DNCommunicationDetails
 
 + (id)details
@@ -28,5 +30,55 @@
     return self.router.URL;
 }
 
+- (NSString*)paramString
+{
+    NSMutableString*    paramString = [NSMutableString string];
+    [self.parameters enumerateKeysAndObjectsUsingBlock:^(NSString* key, id obj, BOOL* stop)
+     {
+         [paramString appendFormat:@"%@=%@&", key, obj];
+     }];
+
+    return paramString;
+}
+
+- (NSString*)fullPathOfPage:(DNCommunicationPageDetails*)pageDetails
+{
+    return [NSString stringWithFormat:@"%@?%@%@", self.path, self.paramString, [pageDetails paramString]];
+}
+
+- (NSString*)pagingStringOfSize:(NSUInteger)pageSize
+                        andPage:(NSUInteger)page
+{
+    return [NSString stringWithFormat:@"items_per_page=%d&page=%d", pageSize, page];
+}
+
+- (BOOL)enumeratePagesOfSize:(NSUInteger)pageSize
+                  usingBlock:(BOOL (^)(DNCommunicationPageDetails* pageDetails, NSString* fullpath, BOOL* stop))block
+{
+    BOOL    retval = NO;
+
+    NSUInteger  normalizedCount = (self.count == 0) ? 0 : (self.count - 1);
+    NSUInteger  firstPage       = (self.offset / pageSize) + 1;
+    NSUInteger  lastPage        = firstPage + (normalizedCount / pageSize);
+    for (NSUInteger page = firstPage; page <= lastPage; page++)
+    {
+        DNCommunicationPageDetails* pageDetails = [DNCommunicationPageDetails pageDetailsOfSize:pageSize andPage:page];
+
+        NSString*   fullpath    = [self fullPathOfPage:pageDetails];
+
+        BOOL    stop = NO;
+        if (block(pageDetails, fullpath, &stop))
+        {
+            retval = YES;
+        }
+
+        if (stop)
+        {
+            break;
+        }
+    }
+
+    return retval;
+}
 
 @end

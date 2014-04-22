@@ -13,6 +13,8 @@
 
 #import "RBRouteBuilder.h"
 
+@class DNCommunicationPageDetails;
+
 @interface DNCommunicationDetails : NSObject
 
 @property (strong, nonatomic) NSString*         apikey;
@@ -25,5 +27,14 @@
 
 - (NSString*)path;
 - (NSURL*)URL;
+
+- (NSString*)paramString;
+
+- (NSString*)fullPathOfPage:(DNCommunicationPageDetails*)pageDetails;
+- (NSString*)pagingStringOfSize:(NSUInteger)pageSize
+                        andPage:(NSUInteger)page;
+
+- (BOOL)enumeratePagesOfSize:(NSUInteger)pageSize
+                  usingBlock:(BOOL (^)(DNCommunicationPageDetails* pageDetails, NSString* fullpath, BOOL* stop))block;
 
 @end
