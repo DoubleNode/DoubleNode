@@ -266,66 +266,88 @@
     return timeout;
 }
 
-- (void)processRequest:(NSString*)apikey
-                offset:(NSUInteger)offset
-                 count:(NSUInteger)count
-            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
-                 error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
+- (BOOL)processNow:(DNCommunicationDetails*)commDetails
+           objects:(NSArray*)objects
+            filter:(BOOL(^)(id object))filterHandler
+               now:(void(^)(NSArray* objects, BOOL isExpired))nowHandler
 {
-    [self processRequest:apikey withParamString:@"" offset:offset count:count completion:completionHandler error:errorHandler];
-}
+    NSMutableString*    paramString = [NSMutableString string];
+    [commDetails.parameters enumerateKeysAndObjectsUsingBlock:^(NSString* key, id obj, BOOL* stop)
+     {
+         [paramString appendFormat:@"%@=%@&", key, obj];
+     }];
 
-- (void)processRequest:(NSString*)apikey
-                withID:(id)idValue
-                offset:(NSUInteger)offset
-                 count:(NSUInteger)count
-            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
-                 error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
-{
-    [self processRequest:apikey withID:idValue withParamString:nil offset:offset count:count completion:completionHandler error:errorHandler];
-}
+    BOOL        isExpired   = NO;
+    NSInteger   pageSize    = [self apiPageSizeRetrieve:commDetails.apikey];
 
-- (void)processRequest:(NSString*)apikey
-       withParamString:(NSString*)params
-                offset:(NSUInteger)offset
-                 count:(NSUInteger)count
-            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
-                 error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
-{
-    [self processRequest:apikey withID:nil withParamString:params offset:offset count:count completion:completionHandler error:errorHandler];
-}
-
-- (void)processRequest:(NSString*)apikey
-                withID:(id)idValue
-       withParamString:(NSString*)params
-                offset:(NSUInteger)offset
-                 count:(NSUInteger)count
-            completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
-                 error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
-{
-    NSString*   paramString = @"";
-    if ([params length] > 0)
-    {
-        paramString = [paramString stringByAppendingFormat:@"%@&", params];
-    }
-
-    NSInteger   pageSize    = [self apiPageSizeRetrieve:apikey];
-
-    NSUInteger  normalizedCount = (count == 0) ? 0 : (count - 1);
-    NSUInteger  firstPage       = (offset / pageSize) + 1;
+    NSUInteger  normalizedCount = (commDetails.count == 0) ? 0 : (commDetails.count - 1);
+    NSUInteger  firstPage       = (commDetails.offset / pageSize) + 1;
     NSUInteger  lastPage        = firstPage + (normalizedCount / pageSize);
     for (NSUInteger page = firstPage; page <= lastPage; page++)
     {
-        NSString*   urlPath = [NSString stringWithFormat:@"%@?%@items_per_page=%d&page=%d", [self apiURLRetrieve:apikey withID:idValue], paramString, pageSize, page];
+        NSString*   urlPath     = [NSString stringWithFormat:@"%@?%@items_per_page=%d&page=%d", commDetails.path, paramString, pageSize, page];
+        NSInteger   ttlMinutes  = [self apiTTLRetrieve:commDetails.apikey];
+        if ([self isExpired:urlPath withTTL:ttlMinutes])
+        {
+            isExpired = YES;
+        }
+    }
+
+    NSMutableArray*    results     = [NSMutableArray arrayWithCapacity:[objects count]];
+
+    if ([objects count] == 0)
+    {
+        DLog(LL_Debug, LD_API, @"ZERO OBJECTS [API]%@", commDetails.apikey);
+        return YES;
+    }
+
+    [DNUtilities runOnBackgroundThread:^
+     {
+         [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+          {
+              if ((filterHandler == nil) || filterHandler(obj))
+              {
+                  [results addObject:obj];
+              }
+          }];
+
+         if (nowHandler)
+         {
+             nowHandler(results, isExpired);
+         }
+     }];
+
+    return isExpired;
+}
+
+- (void)processRequest:(DNCommunicationDetails*)commDetails
+            completion:(void(^)(DNCommunicationDetails* commDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+                 error:(void(^)(DNCommunicationDetails* commDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
+{
+    NSMutableString*    paramString = [NSMutableString string];
+    [commDetails.parameters enumerateKeysAndObjectsUsingBlock:^(NSString* key, id obj, BOOL* stop)
+     {
+         [paramString appendFormat:@"%@=%@&", key, obj];
+     }];
+
+    NSInteger   pageSize    = [self apiPageSizeRetrieve:commDetails.apikey];
+
+    NSUInteger  normalizedCount = (commDetails.count == 0) ? 0 : (commDetails.count - 1);
+    NSUInteger  firstPage       = (commDetails.offset / pageSize) + 1;
+    NSUInteger  lastPage        = firstPage + (normalizedCount / pageSize);
+    for (NSUInteger page = firstPage; page <= lastPage; page++)
+    {
+        NSString*   urlPath = [NSString stringWithFormat:@"%@?%@items_per_page=%d&page=%d", commDetails.path, paramString, pageSize, page];
         NSURL*      URL     = [NSURL URLWithString:urlPath];
         DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
 
         NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
 
-        [self subProcessRequest:request apikey:apikey completion:completionHandler error:errorHandler];
+        [self subProcessRequest:request commDetails:commDetails completion:completionHandler error:errorHandler];
     }
 }
 
+/*
 - (void)processPut:(NSString*)apikey
             withID:(id)idValue
         withParams:(NSDictionary*)params
@@ -606,15 +628,16 @@
 
     [self subProcessRequest:request apikey:apikey completion:completionHandler error:errorHandler];
 }
+*/
 
 - (void)subProcessResponse:(NSHTTPURLResponse*)httpResponse
+               commDetails:(DNCommunicationDetails*)commDetails
                  errorCode:(NSInteger)errorCode
-                    apikey:(NSString*)apikey
                    request:(NSURLRequest*)request
                       data:(NSData*)data
-                     retry:(void(^)())retryHandler
-                completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
-                     error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
+                     retry:(void(^)(DNCommunicationDetails* commDetails))retryHandler
+                completion:(void(^)(DNCommunicationDetails* commDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+                     error:(void(^)(DNCommunicationDetails* commDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
 {
     NSError*    error = nil;
 
@@ -644,11 +667,11 @@
             // Unauthorized. Try authenticating and retrying.
             [self reauthorizeWithSuccess:^
              {
-                 retryHandler();
+                 retryHandler(commDetails);
              }
                                  failure:^
              {
-                 errorHandler(statusCode, error, [[request URL] absoluteString], [self retryRecommendation:apikey]);
+                 errorHandler(commDetails, statusCode, error, [self retryRecommendation:commDetails.apikey]);
              }];
 
             return;
@@ -738,17 +761,17 @@
         }
 
         DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
-        errorHandler(statusCode, error, [[request URL] absoluteString], [self retryRecommendation:apikey]);
+        errorHandler(commDetails, statusCode, error, [self retryRecommendation:commDetails.apikey]);
         return;
     }
 
-    completionHandler(resultDict, [httpResponse allHeaderFields]);
+    completionHandler(commDetails, resultDict, [httpResponse allHeaderFields]);
 }
 
 - (void)subProcessRequest:(NSURLRequest*)request
-                   apikey:(NSString*)apikey
-               completion:(void(^)(NSDictionary* response, NSDictionary* headers))completionHandler
-                    error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
+              commDetails:(DNCommunicationDetails*)commDetails
+               completion:(void(^)(DNCommunicationDetails* commDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+                    error:(void(^)(DNCommunicationDetails* commDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
 {
     /*
     if ([AppDelegate isReachable] == NO)
@@ -778,121 +801,39 @@
          NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
          
          [self subProcessResponse:httpResponse
+                      commDetails:commDetails
                         errorCode:error.code
-                           apikey:apikey
                           request:finalRequest
                              data:data
-                            retry:^
+                            retry:^(DNCommunicationDetails* commDetails)
           {
               [self subProcessRequest:finalRequest
-                               apikey:apikey
+                          commDetails:commDetails
                            completion:completionHandler
                                 error:errorHandler];
           }
-                       completion:^(NSDictionary* response, NSDictionary* headers)
+                       completion:^(DNCommunicationDetails* commDetails, NSDictionary* response, NSDictionary* headers)
           {
-              completionHandler(response, headers);
-              [self resetRetryRecommendation:apikey];
+              completionHandler(commDetails, response, headers);
+              [self resetRetryRecommendation:commDetails.apikey];
           }
-                            error:^(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation)
+                            error:^(DNCommunicationDetails* commDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation)
           {
-              errorHandler(responseCode, error, url, retryRecommendation);
+              errorHandler(commDetails, responseCode, error, retryRecommendation);
           }];
      }];
 }
 
-- (BOOL)processingNowBlock:(NSString*)apikey
-                    offset:(NSUInteger)offset
-                     count:(NSUInteger)count
-                   objects:(NSArray*)objects
-                    filter:(BOOL(^)(id object))filterHandler
-                       now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler
-{
-    return [self processingNowBlock:apikey withID:nil withParamString:nil offset:offset count:count objects:objects filter:filterHandler now:nowHandler];
-}
-
-- (BOOL)processingNowBlock:(NSString*)apikey
-                    withID:(id)idValue
-                    offset:(NSUInteger)offset
-                     count:(NSUInteger)count
-                   objects:(NSArray*)objects
-                    filter:(BOOL(^)(id object))filterHandler
-                       now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler
-{
-    return [self processingNowBlock:apikey withID:idValue withParamString:nil offset:offset count:count objects:objects filter:filterHandler now:nowHandler];
-}
-
-- (BOOL)processingNowBlock:(NSString*)apikey
-                    withID:(id)idValue
-           withParamString:(NSString*)params
-                    offset:(NSUInteger)offset
-                     count:(NSUInteger)count
-                   objects:(NSArray*)objects
-                    filter:(BOOL(^)(id object))filterHandler
-                       now:(void(^)(NSArray* speakers, BOOL isExpired))nowHandler
-{
-    NSString*   paramString = @"";
-    if ([params length] > 0)
-    {
-        paramString = [paramString stringByAppendingFormat:@"%@&", params];
-    }
-
-    BOOL        isExpired   = NO;
-    NSInteger   pageSize    = [self apiPageSizeRetrieve:apikey];
-
-    NSUInteger  normalizedCount = (count == 0) ? 0 : (count - 1);
-    NSUInteger  firstPage       = (offset / pageSize) + 1;
-    NSUInteger  lastPage        = firstPage + (normalizedCount / pageSize);
-    for (NSUInteger page = firstPage; page <= lastPage; page++)
-    {
-        NSString*   urlPath     = [NSString stringWithFormat:@"%@?%@items_per_page=%d&page=%d", [self apiURLRetrieve:apikey withID:idValue], paramString, pageSize, page];
-        NSInteger   ttlMinutes  = [self apiTTLRetrieve:apikey];
-        if ([self isExpired:urlPath withTTL:ttlMinutes])
-        {
-            isExpired = YES;
-        }
-    }
-
-    NSMutableArray*    results     = [NSMutableArray arrayWithCapacity:[objects count]];
-    
-    if ([objects count] == 0)
-    {
-        DLog(LL_Debug, LD_API, @"ZERO OBJECTS [API]%@", apikey);
-        return YES;
-    }
-
-    [DNUtilities runOnMainThreadWithoutDeadlocking:^
-     {
-         [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-          {
-              if ((filterHandler == nil) || filterHandler(obj))
-              {
-                  [results addObject:obj];
-              }
-          }];
-
-         [DNUtilities runAfterDelay:0.0f block:^
-          {
-              if (nowHandler)
-              {
-                  nowHandler(results, isExpired);
-              }
-          }];
-     }];
-
-    return isExpired;
-}
-
-- (BOOL)queueProcess:(NSString*)apikey
+- (BOOL)queueProcess:(DNCommunicationDetails*)commDetails
               filter:(BOOL(^)(id object))filterHandler
-          completion:(void(^)(NSArray* speakers))completionHandler
-               error:(void(^)(NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
+          completion:(void(^)(DNCommunicationDetails* commDetails, NSArray* objects))completionHandler
+               error:(void(^)(DNCommunicationDetails* commDetails, NSError* error, NSTimeInterval retryRecommendation))errorHandler
 {
-    NSMutableArray* processQueue    = [queues objectForKey:apikey];
+    NSMutableArray* processQueue    = [queues objectForKey:commDetails.apikey];
     if (processQueue == nil)
     {
         processQueue    = [NSMutableArray array];
-        [queues setObject:processQueue forKey:apikey];
+        [queues setObject:processQueue forKey:commDetails.apikey];
     }
     
     DNCommunicationsAPIQueued*  queuedObj  = [[DNCommunicationsAPIQueued alloc] init];
@@ -909,6 +850,7 @@
     return YES;
 }
 
+/*
 - (void)processingCompletionBlock:(NSString*)apikey
                           objects:(NSArray*)objects
                            filter:(BOOL(^)(id object))filterHandler
@@ -937,7 +879,7 @@
 
     NSMutableArray*    results     = [NSMutableArray arrayWithCapacity:[objects count]];
     
-    [DNUtilities runOnMainThreadWithoutDeadlocking:^
+    [DNUtilities runOnBackgroundThread:^
      {
          [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
           {
@@ -947,10 +889,7 @@
               }
           }];
 
-         [DNUtilities runAfterDelay:0.0f block:^
-          {
-              completionHandler(results);
-          }];
+          completionHandler(results);
      }];
 }
 
@@ -997,5 +936,6 @@
          queuedObj.errorHandler(error, url, retryRecommendation);
      }];
 }
+*/
 
 @end
