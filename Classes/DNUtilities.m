@@ -796,7 +796,7 @@
         logDebugLevel   = LL_Everything;
         logDebugDomains = [NSMutableDictionary dictionary];
 
-        [DNUtilities runAfterDelay:0.1f block:^
+        [DNUtilities runOnBackgroundThread:^
          {
              [self logResetLogState];
          }];

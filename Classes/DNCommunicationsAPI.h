@@ -71,7 +71,7 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
                  error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
 
 - (void)processingCompletionBlock:(DNCommunicationDetails*)commDetails
-                             page:(DNCommunicationPageDetails*)pageDetails
+                      pageDetails:(DNCommunicationPageDetails*)pageDetails
                           objects:(NSArray*)objects
                            filter:(BOOL(^)(id object))filterHandler
                        completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler;
