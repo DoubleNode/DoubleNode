@@ -70,6 +70,10 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
             completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
                  error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
 
+- (void)processPost:(DNCommunicationDetails*)commDetails
+         completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+              error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler;
+
 - (void)processingCompletionBlock:(DNCommunicationDetails*)commDetails
                       pageDetails:(DNCommunicationPageDetails*)pageDetails
                           objects:(NSArray*)objects

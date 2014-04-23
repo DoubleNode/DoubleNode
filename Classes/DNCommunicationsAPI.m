@@ -152,26 +152,6 @@
     return [methodName substringToIndex:endRange.location];
 }
 
-- (NSString*)apiURLRetrieve:(NSString*)apikey
-{
-    return [self apiURLRetrieve:apikey withID:nil];
-}
-
-- (NSString*)apiURLRetrieve:(NSString*)apikey
-                     withID:(id)idValue
-{
-    NSString*       hostnameStr = [self getAPIHostnameString];
-    NSURL*          hostname    = [NSURL URLWithString:hostnameStr];
-
-    NSString*       urlStr      = [plistDictionary objectForKey:apikey];
-    if (idValue)
-    {
-        urlStr  = [NSString stringWithFormat:urlStr, idValue];
-    }
-    NSURL*          url         = [NSURL URLWithString:urlStr relativeToURL:hostname];
-    return [url absoluteString];
-}
-
 - (NSInteger)apiPageSizeRetrieve:(NSString*)apikey
 {
     return [self apiPageSizeRetrieve:apikey default:20];
@@ -299,6 +279,24 @@
 
          return YES;
      }];
+}
+
+- (void)processPost:(DNCommunicationDetails*)commDetails
+         completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+              error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
+{
+    NSString*   paramString = [commDetails paramString];
+    NSString*   urlPath     = commDetails.path;
+    NSURL*      URL         = [NSURL URLWithString:urlPath];
+    DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
+    DLog(LL_Debug, LD_API, @"paramString=%@", paramString);
+
+    NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
+
+    [request setHTTPMethod:@"POST"];
+    [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
+
+    [self subProcessRequest:request commDetails:commDetails pageDetails:nil completion:completionHandler error:errorHandler];
 }
 
 /*
