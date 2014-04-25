@@ -132,16 +132,6 @@
     [self markExpired:[commDetails fullPathOfPage:pageDetails]];
 }
 
-- (NSString*)getAPIHostname
-{
-    return [[NSURL URLWithString:[self getAPIHostnameString]] host];
-}
-
-- (NSString*)getAPIHostnameString
-{
-    return [DNAppConstants apiHostname];
-}
-
 - (NSString*)getFirstPartMethod:(NSString*)methodName
 {
     NSRange     endRange    = [methodName rangeOfString:@":"];
@@ -264,7 +254,9 @@
 }
 
 - (void)processRequest:(DNCommunicationDetails*)commDetails
-            completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+                filter:(BOOL(^)(id object))filterHandler
+              incoming:(NSArray*(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))incomingHandler
+            completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
                  error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
 {
     [commDetails enumeratePagesOfSize:[self apiPageSizeRetrieve:commDetails.apikey]
@@ -275,14 +267,16 @@
 
          NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
 
-         [self subProcessRequest:request commDetails:commDetails pageDetails:pageDetails completion:completionHandler error:errorHandler];
+         [self subProcessRequest:request commDetails:commDetails pageDetails:pageDetails filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
 
          return YES;
      }];
 }
 
 - (void)processPost:(DNCommunicationDetails*)commDetails
-         completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
+             filter:(BOOL(^)(id object))filterHandler
+           incoming:(NSArray*(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))incomingHandler
+         completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
               error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
 {
     NSString*   paramString = [commDetails paramString];
@@ -296,7 +290,263 @@
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
 
-    [self subProcessRequest:request commDetails:commDetails pageDetails:nil completion:completionHandler error:errorHandler];
+    [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
+}
+
+- (void)subProcessResponse:(NSHTTPURLResponse*)httpResponse
+               commDetails:(DNCommunicationDetails*)commDetails
+               pageDetails:(DNCommunicationPageDetails*)pageDetails
+                 errorCode:(NSInteger)errorCode
+                   request:(NSURLRequest*)request
+                      data:(NSData*)data
+                     retry:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails))retryHandler
+                    filter:(BOOL(^)(id object))filterHandler
+                  incoming:(NSArray*(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))incomingHandler
+                completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
+                     error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
+{
+    NSError*    error = nil;
+
+    DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
+    DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
+
+    DLog(LL_Debug, LD_API, @"dataSize=%d", [data length]);
+    /*
+     if (data)
+     {
+     id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+     DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+     }
+     */
+
+    NSInteger      statusCode  = [httpResponse statusCode];
+
+    if (errorCode == -1012)
+    {
+        statusCode = 401;
+    }
+
+    switch (statusCode)
+    {
+        case 401:  // bad auth_token
+        {
+            // Unauthorized. Try authenticating and retrying.
+            [self reauthorizeWithSuccess:^
+             {
+                 retryHandler(commDetails, pageDetails);
+             }
+                                 failure:^
+             {
+                 errorHandler(commDetails, pageDetails, statusCode, error, [self retryRecommendation:commDetails.apikey]);
+             }];
+
+            return;
+        }
+
+        case 403:  // device deactivated
+        {
+            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+            [userInfoDict setValue:@"This request is forbidden" forKey:NSLocalizedDescriptionKey];
+
+            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:403 userInfo:userInfoDict];
+
+            break;
+        }
+
+        case 422:  // posting data missing
+        {
+            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+            [userInfoDict setValue:@"Posting data is missing" forKey:NSLocalizedDescriptionKey];
+
+            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:422 userInfo:userInfoDict];
+            break;
+        }
+
+        case 500:  // internal server error
+        {
+            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+            [userInfoDict setValue:@"Internal server error" forKey:NSLocalizedDescriptionKey];
+
+            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:500 userInfo:userInfoDict];
+            break;
+        }
+    }
+
+    NSDictionary*  resultDict  = nil;
+
+    if (((statusCode >= 200) && (statusCode <= 299) && (data != nil)) || (statusCode == 204))
+    {
+        id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        //DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+        if (responseR && [responseR isKindOfClass:[NSDictionary class]])
+        {
+            resultDict = responseR;
+        }
+        else if (responseR && [responseR isKindOfClass:[NSArray class]])
+        {
+            resultDict = @{ @"objects": responseR };
+        }
+        else
+        {
+            resultDict = [NSDictionary dictionary];
+        }
+    }
+
+    if ((error == nil) && (resultDict == nil))
+    {
+        NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+        [userInfoDict setValue:@"Invalid response from server" forKey:NSLocalizedDescriptionKey];
+
+        error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:420 userInfo:userInfoDict];
+    }
+
+    if (error)
+    {
+        DLog(LL_Debug, LD_API, @"allHeaderFields=%@", [httpResponse allHeaderFields]);
+
+        if (error.code == -1012)
+        {
+            [DNUtilities setSettingsItem:@"AuthenticationKey" value:@""];
+
+            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+            [userInfoDict setValue:@"The authentication token for this device is no longer valid" forKey:NSLocalizedDescriptionKey];
+
+            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:401 userInfo:userInfoDict];
+        }
+
+        NSData*    jsonData = data;
+        if (jsonData != nil)
+        {
+            id responseR = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+            DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+        }
+        else if (jsonData != nil)
+        {
+            NSString*  body = [NSString stringWithUTF8String:[jsonData bytes]];
+            DLog(LL_Debug, LD_API, @"error body=%@", body);
+        }
+
+        DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
+        errorHandler(commDetails, pageDetails, statusCode, error, [self retryRecommendation:commDetails.apikey]);
+        return;
+    }
+
+    NSArray*    objects = incomingHandler(commDetails, pageDetails, resultDict, [httpResponse allHeaderFields]);
+
+    if (objects)
+    {
+        completionHandler(commDetails, pageDetails, objects);
+    }
+}
+
+- (void)subProcessRequest:(NSURLRequest*)request
+              commDetails:(DNCommunicationDetails*)commDetails
+              pageDetails:(DNCommunicationPageDetails*)pageDetails
+                   filter:(BOOL(^)(id object))filterHandler
+                 incoming:(NSArray*(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))incomingHandler
+               completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
+                    error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
+{
+    /*
+     if ([AppDelegate isReachable] == NO)
+     {
+     NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+     [userInfoDict setValue:@"The App Server is currently not reachable" forKey:NSLocalizedDescriptionKey];
+
+     NSError*    error   = [NSError errorWithDomain:@"DNCommunicationsAPI" code:1001 userInfo:userInfoDict];
+     errorHandler(503, error, [[request URL] absoluteString], [self retryRecommendation:apikey]);
+     return;
+     }
+     */
+
+    NSURLRequest*   finalRequest    = [self addAuthorizationHeader:request];
+
+    DLog(LL_Debug, LD_API, @"headers=%@", [finalRequest allHTTPHeaderFields]);
+
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+
+    [NSURLConnection sendAsynchronousRequest:finalRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+     {
+         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+
+         DLog(LL_Debug, LD_API, @"mRequest=%@", finalRequest);
+         DLog(LL_Debug, LD_API, @"response=%@", response);
+
+         NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+
+         [self subProcessResponse:httpResponse
+                      commDetails:commDetails
+                      pageDetails:pageDetails
+                        errorCode:error.code
+                          request:finalRequest
+                             data:data
+                            retry:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails)
+          {
+              [self subProcessRequest:finalRequest
+                          commDetails:commDetails
+                          pageDetails:pageDetails
+                               filter:filterHandler
+                             incoming:incomingHandler
+                           completion:completionHandler
+                                error:errorHandler];
+          }
+                           filter:filterHandler
+                         incoming:^NSArray*(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers)
+          {
+              [self resetRetryRecommendation:commDetails.apikey];
+
+              NSArray*  objects = incomingHandler(commDetails, pageDetails, response, headers);
+
+              NSMutableArray*   results = [NSMutableArray arrayWithCapacity:[objects count]];
+
+              [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+               {
+                   if ((filterHandler == nil) || filterHandler(obj))
+                   {
+                       [results addObject:obj];
+                   }
+               }];
+
+              return results;
+          }
+                       completion:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects)
+          {
+              completionHandler(commDetails, pageDetails, objects);
+          }
+                            error:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation)
+          {
+              errorHandler(commDetails, pageDetails, responseCode, error, retryRecommendation);
+          }];
+     }];
+}
+
+- (BOOL)queueProcess:(DNCommunicationDetails*)commDetails
+         pageDetails:(DNCommunicationPageDetails*)pageDetails
+              filter:(BOOL(^)(id object))filterHandler
+            incoming:(NSArray*(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))incomingHandler
+          completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
+               error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSError* error, NSTimeInterval retryRecommendation))errorHandler
+{
+    NSMutableArray* processQueue    = [queues objectForKey:commDetails.apikey];
+    if (processQueue == nil)
+    {
+        processQueue    = [NSMutableArray array];
+        [queues setObject:processQueue forKey:commDetails.apikey];
+    }
+
+    DNCommunicationsAPIQueued*  queuedObj  = [[DNCommunicationsAPIQueued alloc] init];
+    queuedObj.filterHandler     = filterHandler;
+    queuedObj.incomingHandler   = incomingHandler;
+    queuedObj.completionHandler = completionHandler;
+    queuedObj.errorHandler      = errorHandler;
+    [processQueue addObject:queuedObj];
+    
+    if ([processQueue count] > 1)
+    {
+        return NO;
+    }
+    
+    return YES;
 }
 
 /*
@@ -580,243 +830,17 @@
 
     [self subProcessRequest:request apikey:apikey completion:completionHandler error:errorHandler];
 }
-*/
 
-- (void)subProcessResponse:(NSHTTPURLResponse*)httpResponse
-               commDetails:(DNCommunicationDetails*)commDetails
-               pageDetails:(DNCommunicationPageDetails*)pageDetails
-                 errorCode:(NSInteger)errorCode
-                   request:(NSURLRequest*)request
-                      data:(NSData*)data
-                     retry:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails))retryHandler
-                completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
-                     error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
-{
-    NSError*    error = nil;
-
-    DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
-    DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
-
-    DLog(LL_Debug, LD_API, @"dataSize=%d", [data length]);
-    /*
-    if (data)
-    {
-        id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
-    }
-     */
-
-    NSInteger      statusCode  = [httpResponse statusCode];
-
-    if (errorCode == -1012)
-    {
-        statusCode = 401;
-    }
-
-    switch (statusCode)
-    {
-        case 401:  // bad auth_token
-        {
-            // Unauthorized. Try authenticating and retrying.
-            [self reauthorizeWithSuccess:^
-             {
-                 retryHandler(commDetails, pageDetails);
-             }
-                                 failure:^
-             {
-                 errorHandler(commDetails, pageDetails, statusCode, error, [self retryRecommendation:commDetails.apikey]);
-             }];
-
-            return;
-        }
-
-        case 403:  // device deactivated
-        {
-            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-            [userInfoDict setValue:@"This request is forbidden" forKey:NSLocalizedDescriptionKey];
-
-            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:403 userInfo:userInfoDict];
-
-            break;
-        }
-
-        case 422:  // posting data missing
-        {
-            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-            [userInfoDict setValue:@"Posting data is missing" forKey:NSLocalizedDescriptionKey];
-
-            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:422 userInfo:userInfoDict];
-            break;
-        }
-
-        case 500:  // internal server error
-        {
-            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-            [userInfoDict setValue:@"Internal server error" forKey:NSLocalizedDescriptionKey];
-
-            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:500 userInfo:userInfoDict];
-            break;
-        }
-    }
-
-    NSDictionary*  resultDict  = nil;
-
-    if (((statusCode >= 200) && (statusCode <= 299) && (data != nil)) || (statusCode == 204))
-    {
-        id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        //DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
-        if (responseR && [responseR isKindOfClass:[NSDictionary class]])
-        {
-            resultDict = responseR;
-        }
-        else if (responseR && [responseR isKindOfClass:[NSArray class]])
-        {
-            resultDict = @{ @"objects": responseR };
-        }
-        else
-        {
-            resultDict = [NSDictionary dictionary];
-        }
-    }
-
-    if ((error == nil) && (resultDict == nil))
-    {
-        NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-        [userInfoDict setValue:@"Invalid response from server" forKey:NSLocalizedDescriptionKey];
-
-        error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:420 userInfo:userInfoDict];
-    }
-
-    if (error)
-    {
-        DLog(LL_Debug, LD_API, @"allHeaderFields=%@", [httpResponse allHeaderFields]);
-
-        if (error.code == -1012)
-        {
-            [DNUtilities setSettingsItem:@"AuthenticationKey" value:@""];
-
-            NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-            [userInfoDict setValue:@"The authentication token for this device is no longer valid" forKey:NSLocalizedDescriptionKey];
-
-            error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:401 userInfo:userInfoDict];
-        }
-
-        NSData*    jsonData = data;
-        if (jsonData != nil)
-        {
-            id responseR = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-            DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
-        }
-        else if (jsonData != nil)
-        {
-            NSString*  body = [NSString stringWithUTF8String:[jsonData bytes]];
-            DLog(LL_Debug, LD_API, @"error body=%@", body);
-        }
-
-        DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
-        errorHandler(commDetails, pageDetails, statusCode, error, [self retryRecommendation:commDetails.apikey]);
-        return;
-    }
-
-    completionHandler(commDetails, pageDetails, resultDict, [httpResponse allHeaderFields]);
-}
-
-- (void)subProcessRequest:(NSURLRequest*)request
-              commDetails:(DNCommunicationDetails*)commDetails
-              pageDetails:(DNCommunicationPageDetails*)pageDetails
-               completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))completionHandler
-                    error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
-{
-    /*
-    if ([AppDelegate isReachable] == NO)
-    {
-        NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-        [userInfoDict setValue:@"The App Server is currently not reachable" forKey:NSLocalizedDescriptionKey];
-        
-        NSError*    error   = [NSError errorWithDomain:@"DNCommunicationsAPI" code:1001 userInfo:userInfoDict];
-        errorHandler(503, error, [[request URL] absoluteString], [self retryRecommendation:apikey]);
-        return;
-    }
-    */
-
-    NSURLRequest*   finalRequest    = [self addAuthorizationHeader:request];
-
-    DLog(LL_Debug, LD_API, @"headers=%@", [finalRequest allHTTPHeaderFields]);
-
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    
-    [NSURLConnection sendAsynchronousRequest:finalRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
-     {
-         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
-         
-         DLog(LL_Debug, LD_API, @"mRequest=%@", finalRequest);
-         DLog(LL_Debug, LD_API, @"response=%@", response);
-
-         NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
-         
-         [self subProcessResponse:httpResponse
-                      commDetails:commDetails
-                      pageDetails:pageDetails
-                        errorCode:error.code
-                          request:finalRequest
-                             data:data
-                            retry:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails)
-          {
-              [self subProcessRequest:finalRequest
-                          commDetails:commDetails
-                          pageDetails:pageDetails
-                           completion:completionHandler
-                                error:errorHandler];
-          }
-                       completion:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers)
-          {
-              completionHandler(commDetails, pageDetails, response, headers);
-              [self resetRetryRecommendation:commDetails.apikey];
-          }
-                            error:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation)
-          {
-              errorHandler(commDetails, pageDetails, responseCode, error, retryRecommendation);
-          }];
-     }];
-}
-
-- (BOOL)queueProcess:(DNCommunicationDetails*)commDetails
-         pageDetails:(DNCommunicationPageDetails*)pageDetails
-              filter:(BOOL(^)(id object))filterHandler
-          completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
-               error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSError* error, NSTimeInterval retryRecommendation))errorHandler
-{
-    NSMutableArray* processQueue    = [queues objectForKey:commDetails.apikey];
-    if (processQueue == nil)
-    {
-        processQueue    = [NSMutableArray array];
-        [queues setObject:processQueue forKey:commDetails.apikey];
-    }
-    
-    DNCommunicationsAPIQueued*  queuedObj  = [[DNCommunicationsAPIQueued alloc] init];
-    queuedObj.filterHandler     = filterHandler;
-    queuedObj.completionHandler = completionHandler;
-    queuedObj.errorHandler      = errorHandler;
-    [processQueue addObject:queuedObj];
-    
-    if ([processQueue count] > 1)
-    {
-        return NO;
-    }
-    
-    return YES;
-}
-
-- (void)processingCompletionBlock:(DNCommunicationDetails*)commDetails
+ - (void)processingCompletionBlock:(DNCommunicationDetails*)commDetails
                       pageDetails:(DNCommunicationPageDetails*)pageDetails
                           objects:(NSArray*)objects
                            filter:(BOOL(^)(id object))filterHandler
-                       completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
+                       completion:(NSArray*(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
 {
     [self markCacheUpdated:commDetails withPageDetails:pageDetails];
 
     NSMutableArray*    results     = [NSMutableArray arrayWithCapacity:[objects count]];
-    
+
     [DNUtilities runOnBackgroundThread:^
      {
          [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
@@ -827,11 +851,10 @@
               }
           }];
 
-          completionHandler(commDetails, pageDetails, results);
+         completionHandler(commDetails, pageDetails, results);
      }];
 }
 
-/*
 - (void)processingQueueCompletionBlock:(NSString*)apikey
                                objects:(NSArray*)objects
 {
