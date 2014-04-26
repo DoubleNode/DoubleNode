@@ -569,6 +569,33 @@
     return retval;
 }
 
++ (NSDecimalNumber*)dictionaryDecimalNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDecimalNumber*)defaultValue
+{
+    return [[self class] dictionaryDecimalNumber:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSDecimalNumber*)dictionaryDecimalNumber:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDecimalNumber*)defaultValue
+{
+    NSDecimalNumber*   retval  = defaultValue;
+
+    id  object = [dictionary objectForKey:key];
+    if (object != nil)
+    {
+        if (object != (NSDecimalNumber*)[NSNull null])
+        {
+            NSDecimalNumber*   newval  = [NSDecimalNumber decimalNumberWithDecimal:[object decimalValue]];
+
+            if ((retval == nil) || ([newval compare:retval] != NSOrderedSame))
+            {
+                if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                retval = newval;
+            }
+        }
+    }
+
+    return retval;
+}
+
 + (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
     return [[self class] dictionaryDouble:dictionary dirty:nil withItem:key andDefault:defaultValue];

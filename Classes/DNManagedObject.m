@@ -459,6 +459,16 @@
     return [DNUtilities dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
+- (NSDecimalNumber*)dictionaryDecimalNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDecimalNumber*)defaultValue
+{
+    return [DNUtilities dictionaryDecimalNumber:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSDecimalNumber*)dictionaryDecimalNumber:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDecimalNumber*)defaultValue
+{
+    return [DNUtilities dictionaryDecimalNumber:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
 - (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
     return [DNUtilities dictionaryDouble:dictionary dirty:nil withItem:key andDefault:defaultValue];
@@ -527,6 +537,16 @@
 + (NSNumber*)dictionaryNumber:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
     return [DNUtilities dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
++ (NSDecimalNumber*)dictionaryDecimalNumber:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDecimalNumber*)defaultValue
+{
+    return [DNUtilities dictionaryDecimalNumber:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSDecimalNumber*)dictionaryDecimalNumber:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDecimalNumber*)defaultValue
+{
+    return [DNUtilities dictionaryDecimalNumber:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 + (NSNumber*)dictionaryDouble:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
