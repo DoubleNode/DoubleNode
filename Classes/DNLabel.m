@@ -32,8 +32,14 @@
         return;
     }
 
+    NSDictionary*   attributes  = nil;
+    if (self.attributedText && ([self.attributedText length] > 0))
+    {
+        attributes = [self.attributedText attributesAtIndex:0 effectiveRange:NULL];
+    }
+
     self.attributedText  = [[NSAttributedString alloc] initWithString:text
-                                                           attributes:[self.attributedText attributesAtIndex:0 effectiveRange:NULL]];
+                                                           attributes:attributes];
 }
 
 @end
