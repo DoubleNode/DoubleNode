@@ -18,6 +18,7 @@
 #import <AVFoundation/AVFoundation.h>
 
 #include <CommonCrypto/CommonHMAC.h>
+#import <mach/mach_time.h> // for mach_absolute_time() and friends
 
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -882,6 +883,27 @@
 }
 
 @end
+
+//
+// Function provided by BigNerdRanch
+// https://gist.github.com/bignerdranch/2006587
+//
+CGFloat DNTimeBlock (void (^block)(void))
+{
+    mach_timebase_info_data_t   info;
+    if (mach_timebase_info(&info) != KERN_SUCCESS)
+    {
+        return -1.0;
+    }
+
+    uint64_t    start   = mach_absolute_time ();
+    block ();
+    uint64_t    end     = mach_absolute_time ();
+    uint64_t    elapsed = end - start;
+
+    uint64_t    nanos   = (elapsed * info.numer) / info.denom;
+    return (CGFloat)nanos / NSEC_PER_SEC;
+}
 
 void DNLogMessageF(const char *filename, int lineNumber, const char *functionName, NSString *domain, int level, NSString *format, ...)
 {
