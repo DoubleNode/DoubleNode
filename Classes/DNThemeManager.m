@@ -403,6 +403,11 @@
     UIFont*     labelFont       = [[self class] performThemeSelectorForAttribute:@"LabelFont" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
     UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"LabelColor" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
 
+    if (!btnView.titleLabel.text)
+    {
+        return;
+    }
+
     NSMutableAttributedString*  attrString  = [[btnView attributedTitleForState:controlState] mutableCopy];
     NSRange                     attrRange   = NSMakeRange(0, [attrString length]);
     if ([attrString length] == 0)
@@ -457,6 +462,11 @@
     [[self class] customizeButtonLabel:btnView withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateHighlighted];
     [[self class] customizeButtonLabel:btnView withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateDisabled];
     [[self class] customizeButtonLabel:btnView withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateSelected];
+
+    if (!btnView.titleLabel.text)
+    {
+        return;
+    }
 
     NSNumber*   labelKerning    = [[self class] performThemeSelectorForAttribute:@"LabelKerning" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     [btnView.titleLabel setKerning:[labelKerning doubleValue]];
