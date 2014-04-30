@@ -416,17 +416,20 @@
 
 - (void)deleteAllWithCompletion:(DNModelCompletionHandlerBlock)handler;
 {
-    [[self getAll] enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
+    [self performBlock:^(NSManagedObjectContext* context)
      {
-         [object deleteWithNoSave];
+         [[self getAll] enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
+          {
+              [object deleteWithNoSave];
+          }];
+
+         [self saveContext];
+
+         if (handler != nil)
+         {
+             handler();
+         }
      }];
-    
-    [self saveContext];
-         
-     if (handler != nil)
-     {
-         handler();
-     }
 }
 
 #pragma mark - private methods

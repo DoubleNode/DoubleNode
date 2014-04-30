@@ -15,6 +15,8 @@
 {
     NSFetchRequest*             fetchRequest;
     NSFetchedResultsController* fetchResultsController;
+
+    BOOL    forceNoObjects;
 }
 
 @end
@@ -55,6 +57,11 @@
 
 - (NSArray*)objects
 {
+    if (forceNoObjects)
+    {
+        return @[];
+    }
+
     return fetchResultsController.fetchedObjects;
 }
 
@@ -67,18 +74,24 @@
 
     [super startWatch];
 
-    [self refreshWatch];
+    [self performWithContext:[fetchResultsController managedObjectContext]
+                       block:^(NSManagedObjectContext* context)
+     {
+         [self refreshWatch];
 
-    if ([[self objects] count] > 0)
-    {
-        [self executeWillChangeHandler];
-        [[self objects] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+         if ([[self objects] count] > 0)
          {
-             NSIndexPath*   indexPath   = [NSIndexPath indexPathForRow:idx inSection:0];
-             [self executeDidChangeObjectInsertHandler:obj atIndexPath:indexPath newIndexPath:indexPath];
-         }];
-        [self executeDidChangeHandler];
-    }
+             forceNoObjects  = YES;
+             [self executeWillChangeHandler];
+             forceNoObjects  = NO;
+             [[self objects] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+              {
+                  NSIndexPath*   indexPath   = [NSIndexPath indexPathForRow:idx inSection:0];
+                  [self executeDidChangeObjectInsertHandler:obj atIndexPath:indexPath newIndexPath:indexPath];
+              }];
+             [self executeDidChangeHandler];
+         }
+     }];
 }
 
 - (void)cancelWatch
@@ -92,6 +105,7 @@
     if ([objects count] > 0)
     {
         [self executeWillChangeHandler];
+        forceNoObjects  = YES;
         [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
          {
              NSIndexPath*   indexPath   = [NSIndexPath indexPathForRow:idx inSection:0];
@@ -99,6 +113,7 @@
          }];
 
         [self executeDidChangeHandler];
+        forceNoObjects  = NO;
     }
 
     [super cancelWatch];

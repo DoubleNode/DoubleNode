@@ -13,6 +13,8 @@
 
 #import "DNCollectionView.h"
 
+#import "DNUtilities.h"
+
 @interface DNCollectionView ()
 {
     NSMutableArray*     objectChanges;
@@ -86,43 +88,56 @@
         }
         else
         {
+            //DLog(LL_Debug, LD_General, @"performBatchUpdates: BEFORE [%d]", [self numberOfItemsInSection:0]);
             [self performBatchUpdates:^
              {
+                 //DLog(LL_Debug, LD_General, @"performBatchUpdates: INSIDE START");
                  for (NSDictionary* change in objectChanges)
                  {
+                     //DLog(LL_Debug, LD_General, @"performBatchUpdates: INSIDE Change Count = %d", [change count]);
                      [change enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, id obj, BOOL* stop)
                       {
+                          //DLog(LL_Debug, LD_General, @"performBatchUpdates: INSIDE Change item: %@ [%d items]", key, [obj count]);
                           NSFetchedResultsChangeType  type = [key unsignedIntegerValue];
                           switch (type)
                           {
                               case NSFetchedResultsChangeInsert:
                               {
                                   [self insertItemsAtIndexPaths:obj];
+                                  [self.window endEditing:YES];
                                   break;
                               }
 
                               case NSFetchedResultsChangeDelete:
                               {
                                   [self deleteItemsAtIndexPaths:obj];
+                                  [self.window endEditing:YES];
                                   break;
                               }
 
                               case NSFetchedResultsChangeUpdate:
                               {
                                   [self reloadItemsAtIndexPaths:obj];
+                                  [self.window endEditing:YES];
                                   break;
                               }
 
                               case NSFetchedResultsChangeMove:
                               {
                                   [self moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
+                                  [self.window endEditing:YES];
                                   break;
                               }
                           }
                       }];
                  }
+                 //DLog(LL_Debug, LD_General, @"performBatchUpdates: INSIDE END");
              }
-                           completion:nil];
+                           completion:^(BOOL finished)
+             {
+                 //DLog(LL_Debug, LD_General, @"performBatchUpdates: COMPLETION");
+             }];
+            //DLog(LL_Debug, LD_General, @"performBatchUpdates: AFTER");
         }
     }
     
