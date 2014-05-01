@@ -307,7 +307,7 @@
 {
     NSError*    error = nil;
 
-    DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
+    //DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
     DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
 
     DLog(LL_Debug, LD_API, @"dataSize=%d", [data length]);
@@ -470,7 +470,7 @@
          [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
          DLog(LL_Debug, LD_API, @"mRequest=%@", finalRequest);
-         DLog(LL_Debug, LD_API, @"response=%@", response);
+         //DLog(LL_Debug, LD_API, @"response=%@", response);
 
          NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
 

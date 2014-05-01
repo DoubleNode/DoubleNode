@@ -423,6 +423,8 @@
               [object deleteWithNoSave];
           }];
 
+         [context processPendingChanges];
+
          [self saveContext];
 
          if (handler != nil)

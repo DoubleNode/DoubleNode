@@ -269,6 +269,7 @@
     view.layer.borderColor  = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
     view.layer.borderWidth  = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 
+    view.tintColor          = [[self class] performThemeSelectorForAttribute:@"TintColor" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     view.backgroundColor    = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 }
 
@@ -688,6 +689,26 @@
     [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
     [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateHighlighted];
     [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateDisabled];
+}
+
++ (void)customizeSwitch:(UISwitch*)switchView
+              withGroup:(NSString*)group
+              andScreen:(NSString*)screen
+                andItem:(NSString*)item
+{
+    [[self class] customizeSwitch:switchView withGroup:group andScreen:screen andViewState:@"" andItem:item];
+}
+
++ (void)customizeSwitch:(UISwitch*)switchView
+              withGroup:(NSString*)group
+              andScreen:(NSString*)screen
+           andViewState:(NSString*)viewState
+                andItem:(NSString*)item
+{
+    switchView.onTintColor      = [[self class] performThemeSelectorForAttribute:@"OnTintColor" withType:@"SwitchView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    switchView.thumbTintColor   = [[self class] performThemeSelectorForAttribute:@"ThumbTintColor" withType:@"SwitchView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    switchView.backgroundColor  = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"SwitchView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 }
 
 @end

@@ -178,7 +178,7 @@
                        block:^(NSManagedObjectContext* context)
      {
          NSError*    error = nil;
-         
+
          if ([context hasChanges] && ![context save:&error])
          {
              // Replace this implementation with code to handle the error appropriately.
@@ -461,7 +461,7 @@
 
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(saveToDisk:) object:nil];
 
-    [self performSelector:@selector(saveToDisk:) withObject:nil afterDelay:SAVE_TO_DISK_TIME_INTERVAL];
+    [self performSelector:@selector(saveToDisk:) withObject:notification afterDelay:SAVE_TO_DISK_TIME_INTERVAL];
 }
 
 - (void)saveToDisk:(NSNotification*)notification
@@ -496,8 +496,6 @@
         DLog(LL_Debug, LD_CoreData, @"CDTableDataModel");
     }
 
-    DLog(LL_Debug, LD_CoreData, @"Main context saved to disk");
-
     if (![savingContext.parentContext hasChanges])
     {
         return;
@@ -509,6 +507,8 @@
                            block:^(NSManagedObjectContext* context)
          {
              NSError*    error = nil;
+
+             [savingContext.parentContext mergeChangesFromContextDidSaveNotification:notification];
 
              if (![savingContext.parentContext save:&error])
              {

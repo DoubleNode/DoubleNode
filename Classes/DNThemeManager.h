@@ -118,4 +118,15 @@
                   andViewState:(NSString*)viewState
                        andItem:(NSString*)item;
 
++ (void)customizeSwitch:(UISwitch*)switchView
+                withGroup:(NSString*)group
+                andScreen:(NSString*)screen
+                  andItem:(NSString*)item;
+
++ (void)customizeSwitch:(UISwitch*)switchView
+                withGroup:(NSString*)group
+                andScreen:(NSString*)screen
+             andViewState:(NSString*)viewState
+                  andItem:(NSString*)item;
+
 @end

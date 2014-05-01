@@ -419,6 +419,10 @@
 - (void)delete
 {
     [self deleteWithNoSave];
+    [self performBlock:^(NSManagedObjectContext* context)
+     {
+         [context processPendingChanges];
+     }];
     [self saveContext];
 }
 
