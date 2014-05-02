@@ -96,14 +96,6 @@
         return NSSelectorFromString(functionName);
     }
 
-    // LOG WelcomeView SignInWithKeyboard SignIn Button Font Normal
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, controlStateString];
-    if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
-    {
-        DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
-    }
-
     // LOG WelcomeView SignInWithKeyboard SignIn Button Font
     functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, item, type, attribute];
     if ([theme respondsToSelector:NSSelectorFromString(functionName)] == YES)
@@ -266,41 +258,48 @@
          andViewState:(NSString*)viewState
               andItem:(NSString*)item
 {
-    view.layer.borderColor  = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
-    view.layer.borderWidth  = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
-
-    view.tintColor          = [[self class] performThemeSelectorForAttribute:@"TintColor" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    view.backgroundColor    = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    [[self class] customizeView:view withType:@"View" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 }
 
-+ (void)customizeLabel:(DNLabel*)lblView
-             withGroup:(NSString*)group
-             andScreen:(NSString*)screen
-               andItem:(NSString*)item
++ (void)customizeView:(UIView*)view
+             withType:(NSString*)type
+             andGroup:(NSString*)group
+            andScreen:(NSString*)screen
+         andViewState:(NSString*)viewState
+              andItem:(NSString*)item
 {
-    [[self class] customizeLabel:lblView withGroup:group andScreen:screen andViewState:@"" andItem:item];
+    [[self class] customizeView:view withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
 }
 
-+ (void)customizeLabel:(DNLabel*)lblView
-             withGroup:(NSString*)group
-             andScreen:(NSString*)screen
-          andViewState:(NSString*)viewState
-               andItem:(NSString*)item
++ (void)customizeView:(UIView*)view
+             withType:(NSString*)type
+             andGroup:(NSString*)group
+            andScreen:(NSString*)screen
+         andViewState:(NSString*)viewState
+              andItem:(NSString*)item
+      andControlState:(UIControlState)controlState
 {
-    lblView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor"    withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
-    lblView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"    withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    view.layer.borderColor  = [[[self class] performThemeSelectorForAttribute:@"BorderColor"    withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState] CGColor];
+    view.layer.borderWidth  = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"    withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState] doubleValue];
 
-    lblView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    view.tintColor          = [[self class] performThemeSelectorForAttribute:@"TintColor"       withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    view.backgroundColor    = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+}
 
-    lblView.verticalAlignment   = [[[self class] performThemeSelectorForAttribute:@"VerticalAlignment"  withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
-    lblView.lineHeightMultiple  = [[[self class] performThemeSelectorForAttribute:@"LineHeightMultiple" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
++ (NSAttributedString*)labelAttributedString:(UILabel*)lblView
+                                    withType:(NSString*)type
+                                    andGroup:(NSString*)group
+                                   andScreen:(NSString*)screen
+                                andViewState:(NSString*)viewState
+                                     andItem:(NSString*)item
+                             andControlState:(UIControlState)controlState
+{
+    NSNumber*   labelKerning        = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    UIFont*     labelFont           = [[self class] performThemeSelectorForAttribute:@"Font"        withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    UIColor*    labelColor          = [[self class] performThemeSelectorForAttribute:@"Color"       withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    NSNumber*   labelLineSpacing    = [[self class] performThemeSelectorForAttribute:@"LineSpacing" withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
 
-    NSNumber*   labelKerning        = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIFont*     labelFont           = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIColor*    labelColor          = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    NSNumber*   labelLineSpacing    = [[self class] performThemeSelectorForAttribute:@"LineSpacing" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-
-    lblView.textAlignment           = [[[self class] performThemeSelectorForAttribute:@"TextAlignment"   withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
+    lblView.textAlignment           = [[[self class] performThemeSelectorForAttribute:@"TextAlignment"   withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState] intValue];
 
     NSMutableParagraphStyle*    paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     [paragraphStyle setLineSpacing:[labelLineSpacing intValue]];
@@ -348,10 +347,45 @@
     [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
     [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:attrRange];
 
+    return attrString;
+}
+
++ (void)customizeLabel:(UILabel*)lblView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+               andItem:(NSString*)item
+{
+    [[self class] customizeLabel:lblView withGroup:group andScreen:screen andViewState:@"" andItem:item];
+}
+
++ (void)customizeLabel:(UILabel*)lblView
+             withGroup:(NSString*)group
+             andScreen:(NSString*)screen
+          andViewState:(NSString*)viewState
+               andItem:(NSString*)item
+{
+    [[self class] customizeView:lblView withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
+
+    if ([lblView isKindOfClass:[DNLabel class]])
+    {
+        ((DNLabel*)lblView).verticalAlignment   = [[[self class] performThemeSelectorForAttribute:@"VerticalAlignment"  withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
+        ((DNLabel*)lblView).lineHeightMultiple  = [[[self class] performThemeSelectorForAttribute:@"LineHeightMultiple" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
+    }
+
+    NSAttributedString* attrString  = [[self class] labelAttributedString:lblView
+                                                                 withType:@"Label"
+                                                                 andGroup:group
+                                                                andScreen:screen
+                                                             andViewState:viewState
+                                                                  andItem:item
+                                                          andControlState:UIControlStateNormal];
     [lblView setAttributedText:attrString];
 
-    lblView.horizontalPadding   = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding"  withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
-    lblView.verticalPadding     = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding"    withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    if ([lblView isKindOfClass:[DNLabel class]])
+    {
+        ((DNLabel*)lblView).horizontalPadding   = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding"  withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+        ((DNLabel*)lblView).verticalPadding     = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding"    withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    }
 }
 
 + (void)customizeImage:(UIImageView*)imgView
@@ -368,21 +402,16 @@
           andViewState:(NSString*)viewState
                andItem:(NSString*)item
 {
-    UIColor*    borderColor = [[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    NSNumber*   borderWidth = [[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    [[self class] customizeView:imgView withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
     if ([imgView isKindOfClass:[NZCircularImageView class]])
     {
+        UIColor*    borderColor = [[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        NSNumber*   borderWidth = [[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
         ((NZCircularImageView*)imgView).borderColor = borderColor;
         ((NZCircularImageView*)imgView).borderWidth = borderWidth;
     }
-    else
-    {
-        imgView.layer.borderColor   = [borderColor CGColor];
-        imgView.layer.borderWidth   = [borderWidth doubleValue];
-    }
-
-    imgView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 }
 
 + (void)customizeButton:(UIButton*)btnView
@@ -393,87 +422,57 @@
     [[self class] customizeButton:btnView withGroup:group andScreen:screen andViewState:@"" andItem:item];
 }
 
-+ (void)customizeButtonLabel:(UIButton*)btnView
-                   withGroup:(NSString*)group
-                   andScreen:(NSString*)screen
-                andViewState:(NSString*)viewState
-                     andItem:(NSString*)item
-             andControlState:(UIControlState)controlState
-{
-    NSNumber*   labelKerning    = [[self class] performThemeSelectorForAttribute:@"LabelKerning" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
-    UIFont*     labelFont       = [[self class] performThemeSelectorForAttribute:@"LabelFont" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
-    UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"LabelColor" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
-
-    if (!btnView.titleLabel.text)
-    {
-        return;
-    }
-
-    NSMutableAttributedString*  attrString  = [[btnView attributedTitleForState:controlState] mutableCopy];
-    NSRange                     attrRange   = NSMakeRange(0, [attrString length]);
-    if ([attrString length] == 0)
-    {
-        attrString  = [[NSMutableAttributedString alloc] initWithString:btnView.titleLabel.text];
-        attrRange   = NSMakeRange(0, [attrString length]);
-    }
-
-    if (labelKerning)
-    {
-        [attrString removeAttribute:NSKernAttributeName range:attrRange];
-        [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/Button/LabelKerning is not specified!", group, screen, viewState, item, controlState);
-    }
-    if (labelFont)
-    {
-        [attrString removeAttribute:NSFontAttributeName range:attrRange];
-        [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/Button/LabelFont is not specified!", group, screen, viewState, item, controlState);
-    }
-    if (labelColor)
-    {
-        [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
-        [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/Button/LabelColor is not specified!", group, screen, viewState, item, controlState);
-    }
-
-    [btnView setAttributedTitle:attrString forState:controlState];
-}
-
 + (void)customizeButton:(UIButton*)btnView
               withGroup:(NSString*)group
               andScreen:(NSString*)screen
            andViewState:(NSString*)viewState
                 andItem:(NSString*)item
 {
-    btnView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
-    btnView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    [[self class] customizeView:btnView withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
 
-    btnView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-
-    [[self class] customizeButtonLabel:btnView withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
-    [[self class] customizeButtonLabel:btnView withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateHighlighted];
-    [[self class] customizeButtonLabel:btnView withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateDisabled];
-    [[self class] customizeButtonLabel:btnView withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateSelected];
-
-    if (!btnView.titleLabel.text)
     {
-        return;
+        NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
+                                                                     withType:@"ButtonLabel"
+                                                                     andGroup:group
+                                                                    andScreen:screen
+                                                                 andViewState:viewState
+                                                                      andItem:item
+                                                              andControlState:UIControlStateNormal];
+        [btnView setAttributedTitle:attrString forState:UIControlStateNormal];
     }
-
-    NSNumber*   labelKerning    = [[self class] performThemeSelectorForAttribute:@"LabelKerning" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    [btnView.titleLabel setKerning:[labelKerning doubleValue]];
+    {
+        NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
+                                                                     withType:@"ButtonLabel"
+                                                                     andGroup:group
+                                                                    andScreen:screen
+                                                                 andViewState:viewState
+                                                                      andItem:item
+                                                              andControlState:UIControlStateHighlighted];
+        [btnView setAttributedTitle:attrString forState:UIControlStateHighlighted];
+    }
+    {
+        NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
+                                                                     withType:@"ButtonLabel"
+                                                                     andGroup:group
+                                                                    andScreen:screen
+                                                                 andViewState:viewState
+                                                                      andItem:item
+                                                              andControlState:UIControlStateDisabled];
+        [btnView setAttributedTitle:attrString forState:UIControlStateDisabled];
+    }
+    {
+        NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
+                                                                     withType:@"ButtonLabel"
+                                                                     andGroup:group
+                                                                    andScreen:screen
+                                                                 andViewState:viewState
+                                                                      andItem:item
+                                                              andControlState:UIControlStateSelected];
+        [btnView setAttributedTitle:attrString forState:UIControlStateSelected];
+    }
 }
 
-+ (void)customizeTextField:(DNTextField*)txtfldView
++ (void)customizeTextField:(UITextField*)txtfldView
                  withGroup:(NSString*)group
                  andScreen:(NSString*)screen
                    andItem:(NSString*)item
@@ -481,39 +480,41 @@
     [[self class] customizeTextField:txtfldView withGroup:group andScreen:screen andViewState:@"" andItem:item];
 }
 
-+ (void)customizeTextField:(DNTextField*)txtfldView
++ (void)customizeTextField:(UITextField*)txtfldView
                  withGroup:(NSString*)group
                  andScreen:(NSString*)screen
               andViewState:(NSString*)viewState
                    andItem:(NSString*)item
 {
-    txtfldView.font                 = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtfldView.layer.borderColor    = [[[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
-    txtfldView.layer.borderWidth    = [[[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
-    txtfldView.borderStyle          = [[[self class] performThemeSelectorForAttribute:@"BorderStyle" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] integerValue];
+    [[self class] customizeView:txtfldView withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
 
-    txtfldView.backgroundColor      = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtfldView.unhighlightedColor   = [[self class] performThemeSelectorForAttribute:@"UnhighlightedColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtfldView.highlightedColor     = [[self class] performThemeSelectorForAttribute:@"HighlightedColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtfldView.font                 = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtfldView.borderStyle          = [[[self class] performThemeSelectorForAttribute:@"BorderStyle" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] integerValue];
 
     UIColor*    placeholderColor    = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     [txtfldView setValue:placeholderColor forKeyPath:@"_placeholderLabel.textColor"];
 
-    txtfldView.horizontalPadding    = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
-    txtfldView.verticalPadding      = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
-
-    // Default is YES/nil if not specified, therefore, if != NO...
-    if (![[[self class] performThemeSelectorForAttribute:@"ShowSuggestions" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] isEqual:@NO])
+    if ([txtfldView isKindOfClass:[DNTextField class]])
     {
-        CGRect  attachmentViewFrame = CGRectMake(0, 0, [DNUtilities screenWidth], 32.0f);
-        JTKeyboardAttachmentView*   attachmentView = [[JTKeyboardAttachmentView alloc] initWithFrame:attachmentViewFrame];
-        [txtfldView setInputAccessoryView:attachmentView];
+        ((DNTextField*)txtfldView).unhighlightedColor   = [[self class] performThemeSelectorForAttribute:@"UnhighlightedColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        ((DNTextField*)txtfldView).highlightedColor     = [[self class] performThemeSelectorForAttribute:@"HighlightedColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+        ((DNTextField*)txtfldView).horizontalPadding    = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+        ((DNTextField*)txtfldView).verticalPadding      = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+
+        // Default is YES/nil if not specified, therefore, if != NO...
+        if (![[[self class] performThemeSelectorForAttribute:@"ShowSuggestions" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] isEqual:@NO])
+        {
+            CGRect  attachmentViewFrame = CGRectMake(0, 0, [DNUtilities screenWidth], 32.0f);
+            JTKeyboardAttachmentView*   attachmentView = [[JTKeyboardAttachmentView alloc] initWithFrame:attachmentViewFrame];
+            [txtfldView setInputAccessoryView:attachmentView];
+        }
     }
 
     [txtfldView setNeedsLayout];
 }
 
-+ (void)customizeTextView:(DNTextView*)txtView
++ (void)customizeTextView:(UITextView*)txtView
                 withGroup:(NSString*)group
                 andScreen:(NSString*)screen
                   andItem:(NSString*)item
@@ -521,32 +522,34 @@
     [[self class] customizeTextView:txtView withGroup:group andScreen:screen andViewState:@"" andItem:item];
 }
 
-+ (void)customizeTextView:(DNTextView*)txtView
++ (void)customizeTextView:(UITextView*)txtView
                 withGroup:(NSString*)group
                 andScreen:(NSString*)screen
              andViewState:(NSString*)viewState
                   andItem:(NSString*)item
 {
-    txtView.layer.borderColor   = [[[self class] performThemeSelectorForAttribute:@"BorderColor"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] CGColor];
-    txtView.layer.borderWidth   = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    [[self class] customizeView:txtView withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
 
-    txtView.font                = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtView.realTextColor       = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtView.placeholderColor    = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor"    withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtView.backgroundColor     = [[self class] performThemeSelectorForAttribute:@"BackgroundColor"     withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtView.font    = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
-    // Default is YES/nil if not specified, therefore, if != NO...
-    if (![[[self class] performThemeSelectorForAttribute:@"ShowSuggestions" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] isEqual:@NO])
+    if ([txtView isKindOfClass:[DNTextView class]])
     {
-        CGRect  attachmentViewFrame = CGRectMake(0, 0, [DNUtilities screenWidth], 32.0f);
-        JTKeyboardAttachmentView*   attachmentView = [[JTKeyboardAttachmentView alloc] initWithFrame:attachmentViewFrame];
-        [txtView setInputAccessoryView:attachmentView];
+        ((DNTextView*)txtView).realTextColor    = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        ((DNTextView*)txtView).placeholderColor = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor"  withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+        // Default is YES/nil if not specified, therefore, if != NO...
+        if (![[[self class] performThemeSelectorForAttribute:@"ShowSuggestions" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item] isEqual:@NO])
+        {
+            CGRect  attachmentViewFrame = CGRectMake(0, 0, [DNUtilities screenWidth], 32.0f);
+            JTKeyboardAttachmentView*   attachmentView = [[JTKeyboardAttachmentView alloc] initWithFrame:attachmentViewFrame];
+            [txtView setInputAccessoryView:attachmentView];
+        }
     }
 
     [txtView setNeedsLayout];
 }
 
-+ (void)customizeSegmentedControl:(DNSegmentedControl*)segmentedControl
++ (void)customizeSegmentedControl:(UISegmentedControl*)segmentedControl
                         withGroup:(NSString*)group
                         andScreen:(NSString*)screen
                           andItem:(NSString*)item
@@ -554,81 +557,89 @@
     [[self class] customizeSegmentedControl:segmentedControl withGroup:group andScreen:screen andViewState:@"" andItem:item];
 }
 
-+ (void)customizeSegmentedControl:(DNSegmentedControl*)segmentedControl
++ (void)customizeSegmentedControl:(UISegmentedControl*)segmentedControl
                         withGroup:(NSString*)group
                         andScreen:(NSString*)screen
                      andViewState:(NSString*)viewState
                           andItem:(NSString*)item
 {
-    segmentedControl.color          = [[self class] performThemeSelectorForAttribute:@"BackgroundColor"         withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    segmentedControl.selectedColor  = [[self class] performThemeSelectorForAttribute:@"SelectedBackgroundColor" withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    [[self class] customizeView:segmentedControl withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
 
-    segmentedControl.borderColor    = [[self class] performThemeSelectorForAttribute:@"BorderColor"     withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    segmentedControl.borderWidth    = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"    withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+    if ([segmentedControl isKindOfClass:[DNSegmentedControl class]])
+    {
+        segmentedControl.layer.borderColor  = [[UIColor clearColor] CGColor];
+        segmentedControl.layer.borderWidth  = 0.0f;
 
-    NSNumber*   textAttributesKerning   = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIFont*     textAttributesFont      = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIColor*    textAttributesColor     = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        ((DNSegmentedControl*)segmentedControl).color           = [[self class] performThemeSelectorForAttribute:@"BackgroundColor"         withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        ((DNSegmentedControl*)segmentedControl).selectedColor   = [[self class] performThemeSelectorForAttribute:@"SelectedBackgroundColor" withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
-    NSMutableDictionary*    textAttributes  = [NSMutableDictionary dictionary];
-    if (textAttributesKerning)
-    {
-        [textAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Kerning is not specified!", group, screen, viewState, item);
-    }
-    if (textAttributesFont)
-    {
-        [textAttributes setObject:textAttributesFont forKey:NSFontAttributeName];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Font is not specified!", group, screen, viewState, item);
-    }
-    if (textAttributesColor)
-    {
-        [textAttributes setObject:textAttributesColor forKey:NSForegroundColorAttributeName];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Color is not specified!", group, screen, viewState, item);
-    }
+        ((DNSegmentedControl*)segmentedControl).borderColor     = [[self class] performThemeSelectorForAttribute:@"BorderColor"     withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        ((DNSegmentedControl*)segmentedControl).borderWidth     = [[[self class] performThemeSelectorForAttribute:@"BorderWidth"    withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 
-    segmentedControl.textAttributes = textAttributes;
+        NSNumber*   textAttributesKerning   = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        UIFont*     textAttributesFont      = [[self class] performThemeSelectorForAttribute:@"Font"        withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        UIColor*    textAttributesColor     = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
-    NSNumber*   selectedTextAttributesKerning   = [[self class] performThemeSelectorForAttribute:@"SelectedKerning" withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIFont*     selectedTextAttributesFont      = [[self class] performThemeSelectorForAttribute:@"SelectedFont"    withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    UIColor*    selectedTextAttributesColor     = [[self class] performThemeSelectorForAttribute:@"SelectedColor"   withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        NSMutableDictionary*    textAttributes  = [NSMutableDictionary dictionary];
+        if (textAttributesKerning)
+        {
+            [textAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
+        }
+        else
+        {
+            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Kerning is not specified!", group, screen, viewState, item);
+        }
+        if (textAttributesFont)
+        {
+            [textAttributes setObject:textAttributesFont forKey:NSFontAttributeName];
+        }
+        else
+        {
+            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Font is not specified!", group, screen, viewState, item);
+        }
+        if (textAttributesColor)
+        {
+            [textAttributes setObject:textAttributesColor forKey:NSForegroundColorAttributeName];
+        }
+        else
+        {
+            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Color is not specified!", group, screen, viewState, item);
+        }
 
-    NSMutableDictionary*    selectedTextAttributes  = [NSMutableDictionary dictionary];
-    if (selectedTextAttributesKerning)
-    {
-        [selectedTextAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedKerning is not specified!", group, screen, viewState, item);
-    }
-    if (selectedTextAttributesFont)
-    {
-        [selectedTextAttributes setObject:selectedTextAttributesFont forKey:NSFontAttributeName];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedFont is not specified!", group, screen, viewState, item);
-    }
-    if (selectedTextAttributesColor)
-    {
-        [selectedTextAttributes setObject:selectedTextAttributesColor forKey:NSForegroundColorAttributeName];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedColor is not specified!", group, screen, viewState, item);
-    }
+        ((DNSegmentedControl*)segmentedControl).textAttributes = textAttributes;
 
-    segmentedControl.selectedTextAttributes = selectedTextAttributes;
+        NSNumber*   selectedTextAttributesKerning   = [[self class] performThemeSelectorForAttribute:@"SelectedKerning" withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        UIFont*     selectedTextAttributesFont      = [[self class] performThemeSelectorForAttribute:@"SelectedFont"    withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        UIColor*    selectedTextAttributesColor     = [[self class] performThemeSelectorForAttribute:@"SelectedColor"   withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+        NSMutableDictionary*    selectedTextAttributes  = [NSMutableDictionary dictionary];
+        if (selectedTextAttributesKerning)
+        {
+            [selectedTextAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
+        }
+        else
+        {
+            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedKerning is not specified!", group, screen, viewState, item);
+        }
+        if (selectedTextAttributesFont)
+        {
+            [selectedTextAttributes setObject:selectedTextAttributesFont forKey:NSFontAttributeName];
+        }
+        else
+        {
+            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedFont is not specified!", group, screen, viewState, item);
+        }
+        if (selectedTextAttributesColor)
+        {
+            [selectedTextAttributes setObject:selectedTextAttributesColor forKey:NSForegroundColorAttributeName];
+        }
+        else
+        {
+            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedColor is not specified!", group, screen, viewState, item);
+        }
+        
+        ((DNSegmentedControl*)segmentedControl).selectedTextAttributes = selectedTextAttributes;
+    }
 }
 
 + (void)customizeBarButtonItem:(UIBarButtonItem*)barButtonItem
@@ -639,16 +650,16 @@
     [[self class] customizeBarButtonItem:barButtonItem withGroup:group andScreen:screen andViewState:@"" andItem:item];
 }
 
-+ (void)customizeBarButtonItemLabel:(UIBarButtonItem*)barButtonItem
-                          withGroup:(NSString*)group
-                          andScreen:(NSString*)screen
-                       andViewState:(NSString*)viewState
-                            andItem:(NSString*)item
-                    andControlState:(UIControlState)controlState
++ (void)customizeBarButtonItem:(UIBarButtonItem*)barButtonItem
+                     withGroup:(NSString*)group
+                     andScreen:(NSString*)screen
+                  andViewState:(NSString*)viewState
+                       andItem:(NSString*)item
+               andControlState:(UIControlState)controlState
 {
-    NSNumber*   labelKerning    = [[self class] performThemeSelectorForAttribute:@"LabelKerning" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
-    UIFont*     labelFont       = [[self class] performThemeSelectorForAttribute:@"LabelFont" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
-    UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"LabelColor" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    NSNumber*   labelKerning    = [[self class] performThemeSelectorForAttribute:@"Kerning" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    UIFont*     labelFont       = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"Color" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
 
     NSMutableDictionary*    textAttributes  = [NSMutableDictionary dictionary];
     if (labelKerning)
@@ -686,9 +697,9 @@
                   andViewState:(NSString*)viewState
                        andItem:(NSString*)item
 {
-    [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
-    [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateHighlighted];
-    [[self class] customizeBarButtonItemLabel:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateDisabled];
+    [[self class] customizeBarButtonItem:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
+    [[self class] customizeBarButtonItem:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateHighlighted];
+    [[self class] customizeBarButtonItem:barButtonItem withGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateDisabled];
 }
 
 + (void)customizeSwitch:(UISwitch*)switchView
@@ -705,10 +716,10 @@
            andViewState:(NSString*)viewState
                 andItem:(NSString*)item
 {
+    [[self class] customizeView:switchView withType:@"Switch" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
+
     switchView.onTintColor      = [[self class] performThemeSelectorForAttribute:@"OnTintColor" withType:@"SwitchView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     switchView.thumbTintColor   = [[self class] performThemeSelectorForAttribute:@"ThumbTintColor" withType:@"SwitchView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-
-    switchView.backgroundColor  = [[self class] performThemeSelectorForAttribute:@"BackgroundColor" withType:@"SwitchView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 }
 
 @end

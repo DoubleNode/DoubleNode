@@ -41,12 +41,12 @@
          andViewState:(NSString*)viewState
               andItem:(NSString*)item;
 
-+ (void)customizeLabel:(DNLabel*)lblView
++ (void)customizeLabel:(UILabel*)lblView
              withGroup:(NSString*)group
              andScreen:(NSString*)screen
                andItem:(NSString*)item;
 
-+ (void)customizeLabel:(DNLabel*)lblView
++ (void)customizeLabel:(UILabel*)lblView
              withGroup:(NSString*)group
              andScreen:(NSString*)screen
           andViewState:(NSString*)viewState
@@ -74,34 +74,34 @@
            andViewState:(NSString*)viewState
                 andItem:(NSString*)item;
 
-+ (void)customizeTextField:(DNTextField*)txtfldView
++ (void)customizeTextField:(UITextField*)txtfldView
                  withGroup:(NSString*)group
                  andScreen:(NSString*)screen
                    andItem:(NSString*)item;
 
-+ (void)customizeTextField:(DNTextField*)txtfldView
++ (void)customizeTextField:(UITextField*)txtfldView
                  withGroup:(NSString*)group
                  andScreen:(NSString*)screen
               andViewState:(NSString*)viewState
                    andItem:(NSString*)item;
 
-+ (void)customizeTextView:(DNTextView*)txtView
++ (void)customizeTextView:(UITextView*)txtView
                 withGroup:(NSString*)group
                 andScreen:(NSString*)screen
                   andItem:(NSString*)item;
 
-+ (void)customizeTextView:(DNTextView*)txtView
++ (void)customizeTextView:(UITextView*)txtView
                 withGroup:(NSString*)group
                 andScreen:(NSString*)screen
              andViewState:(NSString*)viewState
                   andItem:(NSString*)item;
 
-+ (void)customizeSegmentedControl:(DNSegmentedControl*)segmentedControl
++ (void)customizeSegmentedControl:(UISegmentedControl*)segmentedControl
                         withGroup:(NSString*)group
                         andScreen:(NSString*)screen
                           andItem:(NSString*)item;
 
-+ (void)customizeSegmentedControl:(DNSegmentedControl*)segmentedControl
++ (void)customizeSegmentedControl:(UISegmentedControl*)segmentedControl
                         withGroup:(NSString*)group
                         andScreen:(NSString*)screen
                      andViewState:(NSString*)viewState
