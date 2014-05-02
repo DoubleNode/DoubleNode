@@ -77,7 +77,7 @@
  *
  *  @return The current value of the specified user setting.
  */
-- (id)settingsItem:(NSString*)item boolDefault:(BOOL)defaultValue;
+- (BOOL)settingsItem:(NSString*)item boolDefault:(BOOL)defaultValue;
 
 /**
  *  Sets the value of the user setting, specified by a key.

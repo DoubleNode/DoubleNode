@@ -107,7 +107,7 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 
 + (id)settingsItem:(NSString*)item;
 + (id)settingsItem:(NSString*)item default:(id)defaultValue;
-+ (id)settingsItem:(NSString*)item boolDefault:(BOOL)defaultValue;
++ (BOOL)settingsItem:(NSString*)item boolDefault:(BOOL)defaultValue;
 + (void)setSettingsItem:(NSString*)item value:(id)value;
 + (void)setSettingsItem:(NSString*)item boolValue:(BOOL)value;
 

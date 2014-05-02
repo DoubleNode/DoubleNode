@@ -446,7 +446,7 @@
     return [[[self class] appDelegate] settingsItem:item default:defaultValue];
 }
 
-+ (id)settingsItem:(NSString*)item boolDefault:(BOOL)defaultValue
++ (BOOL)settingsItem:(NSString*)item boolDefault:(BOOL)defaultValue
 {
     return [[[self class] appDelegate] settingsItem:item boolDefault:defaultValue];
 }
@@ -877,7 +877,8 @@
         return NO;
     }
 
-    if ([logDebugDomains valueForKey:domain] != nil)
+    id  logDebug    = [logDebugDomains valueForKey:domain];
+    if (logDebug)
     {
         return (level <= [[logDebugDomains objectForKey:domain] intValue]);
     }
