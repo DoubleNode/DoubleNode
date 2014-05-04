@@ -19,6 +19,7 @@
 #import "DNTextView.h"
 #import "DNTextField.h"
 #import "DNLabel.h"
+#import "DNButton.h"
 #import "DNSegmentedControl.h"
 
 #import "UILabel+TextKerning.h"
@@ -469,6 +470,20 @@
                                                                       andItem:item
                                                               andControlState:UIControlStateSelected];
         [btnView setAttributedTitle:attrString forState:UIControlStateSelected];
+    }
+
+    if ([btnView isKindOfClass:[DNButton class]])
+    {
+        UIColor*    tintColorNormal         = [[self class] performThemeSelectorForAttribute:@"TintColor" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
+        UIColor*    tintColorHighlighted    = [[self class] performThemeSelectorForAttribute:@"TintColor" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateHighlighted];
+        UIColor*    tintColorDisabled       = [[self class] performThemeSelectorForAttribute:@"TintColor" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateDisabled];
+        UIColor*    tintColorSelected       = [[self class] performThemeSelectorForAttribute:@"TintColor" withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateSelected];
+
+        DNButton*   dnButton    = (DNButton*)btnView;
+        [dnButton setTintColor:tintColorNormal      forState:UIControlStateNormal];
+        [dnButton setTintColor:tintColorHighlighted forState:UIControlStateNormal];
+        [dnButton setTintColor:tintColorDisabled    forState:UIControlStateNormal];
+        [dnButton setTintColor:tintColorSelected    forState:UIControlStateNormal];
     }
 }
 
