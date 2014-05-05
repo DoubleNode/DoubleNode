@@ -481,9 +481,9 @@
 
         DNButton*   dnButton    = (DNButton*)btnView;
         [dnButton setTintColor:tintColorNormal      forState:UIControlStateNormal];
-        [dnButton setTintColor:tintColorHighlighted forState:UIControlStateNormal];
-        [dnButton setTintColor:tintColorDisabled    forState:UIControlStateNormal];
-        [dnButton setTintColor:tintColorSelected    forState:UIControlStateNormal];
+        [dnButton setTintColor:tintColorHighlighted forState:UIControlStateHighlighted];
+        [dnButton setTintColor:tintColorDisabled    forState:UIControlStateDisabled];
+        [dnButton setTintColor:tintColorSelected    forState:UIControlStateSelected];
     }
 }
 
