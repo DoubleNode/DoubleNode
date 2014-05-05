@@ -32,6 +32,7 @@
 
 @synthesize tempInMemoryObjectContext   = _tempInMemoryObjectContext;
 
+@synthesize currentObjectContexts       = _currentObjectContexts;
 @synthesize mainObjectContext           = _mainObjectContext;
 @synthesize concurrentObjectContext     = _concurrentObjectContext;
 @synthesize tempMainObjectContext       = _tempMainObjectContext;
@@ -135,6 +136,11 @@
 
     @try
     {
+        [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
+         {
+             [threadContext[@"context"] reset];
+         }];
+
         [_mainObjectContext reset];
         [_tempInMemoryObjectContext reset];
         [_concurrentObjectContext reset];
@@ -163,6 +169,9 @@
     _persistentStore            = nil;
     _managedObjectModel         = nil;
 
+    [_currentObjectContexts removeAllObjects];
+    _currentObjectContexts      = nil;
+
     _mainObjectContext          = nil;
     _tempInMemoryObjectContext  = nil;
     _concurrentObjectContext    = nil;
@@ -174,7 +183,7 @@
 
 - (void)saveContext
 {
-    [self performWithContext:self.mainObjectContext
+    [self performWithContext:self.currentObjectContext
                        block:^(NSManagedObjectContext* context)
      {
          NSError*    error = nil;
@@ -201,6 +210,96 @@
     }
 
     return retValue;
+}
+
+#pragma mark - Multi-Threaded support
+
+- (NSManagedObjectContext*)createContextForCurrentThread
+{
+    NSManagedObjectContext* tempContext = [self concurrentObjectContext];
+
+    [self assignContextToCurrentThread:tempContext];
+
+    return tempContext;
+}
+
+- (void)assignContextToCurrentThread:(NSManagedObjectContext*)context
+{
+    [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
+     {
+         NSThread*  thread  = threadContext[@"thread"];
+         if ([thread isEqual:[NSThread currentThread]])
+         {
+             [_currentObjectContexts removeObject:threadContext];
+             *stop  = YES;
+         }
+     }];
+
+    if (_currentObjectContexts == nil)
+    {
+        _currentObjectContexts = [NSMutableArray array];
+    }
+
+    NSDictionary*   threadContext   = @{
+                                        @"thread": [NSThread currentThread],
+                                        @"context": context
+                                        };
+
+    [_currentObjectContexts addObject:threadContext];
+}
+
+- (void)removeContextFromCurrentThread:(NSManagedObjectContext*)context
+{
+    [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
+     {
+         NSManagedObjectContext*    context = threadContext[@"context"];
+         if ([context isEqual:context])
+         {
+             [_currentObjectContexts removeObject:threadContext];
+             *stop = YES;
+         }
+     }];
+}
+
+- (void)saveAndRemoveContextFromCurrentThread:(NSManagedObjectContext*)context
+{
+    NSError*  error;
+
+    if (![context save:&error])
+    {
+        DLog(LL_Error, LD_CoreData, @"ERROR saving temp context: %@", [error localizedDescription]);
+        NSArray*   detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+        if ((detailedErrors != nil) && ([detailedErrors count] > 0))
+        {
+            for (NSError* detailedError in detailedErrors)
+            {
+                DLog(LL_Error, LD_CoreData, @"  DetailedError: %@", [detailedError userInfo]);
+            }
+        }
+        else
+        {
+            DLog(LL_Error, LD_CoreData, @"  %@", [error userInfo]);
+        }
+    }
+
+    [self removeContextFromCurrentThread:context];
+}
+
+- (NSManagedObjectContext*)currentObjectContext
+{
+    __block NSManagedObjectContext* retval = [self mainObjectContext];
+
+    [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
+     {
+         NSThread*  thread  = threadContext[@"thread"];
+         if ([thread isEqual:[NSThread currentThread]])
+         {
+             retval = threadContext[@"context"];
+             *stop  = YES;
+         }
+     }];
+
+    return retval;
 }
 
 #pragma mark - Core Data accessors
@@ -513,6 +612,18 @@
              if (![savingContext.parentContext save:&error])
              {
                  DLog(LL_Error, LD_CoreData, @"ERROR saving writer context: %@", [error localizedDescription]);
+                 NSArray*   detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+                 if ((detailedErrors != nil) && ([detailedErrors count] > 0))
+                 {
+                     for (NSError* detailedError in detailedErrors)
+                     {
+                         DLog(LL_Error, LD_CoreData, @"  DetailedError: %@", [detailedError userInfo]);
+                     }
+                 }
+                 else
+                 {
+                     DLog(LL_Error, LD_CoreData, @"  %@", [error userInfo]);
+                 }
              }
 
              DLog(LL_Debug, LD_CoreData, @"Writer context saved to disk");

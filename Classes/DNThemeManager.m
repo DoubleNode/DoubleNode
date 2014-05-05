@@ -288,7 +288,8 @@
 }
 
 + (NSAttributedString*)labelAttributedString:(UILabel*)lblView
-                                    withType:(NSString*)type
+                        withAttributedString:(NSAttributedString*)attributedString
+                                     andType:(NSString*)type
                                     andGroup:(NSString*)group
                                    andScreen:(NSString*)screen
                                 andViewState:(NSString*)viewState
@@ -306,14 +307,7 @@
     [paragraphStyle setLineSpacing:[labelLineSpacing intValue]];
     [paragraphStyle setAlignment:lblView.textAlignment];
 
-    NSMutableAttributedString*  attrString  = [[lblView attributedText] mutableCopy];
-    if ([attrString length] == 0)
-    {
-        if ([lblView.text length] > 0)
-        {
-            attrString  = [[NSMutableAttributedString alloc] initWithString:lblView.text];
-        }
-    }
+    NSMutableAttributedString*  attrString  = [attributedString mutableCopy];
 
     NSRange attrRange   = NSMakeRange(0, [attrString length]);
 
@@ -373,8 +367,18 @@
         ((DNLabel*)lblView).lineHeightMultiple  = [[[self class] performThemeSelectorForAttribute:@"LineHeightMultiple" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
     }
 
+    NSAttributedString* attributedString    = [lblView attributedText];
+    if ([attributedString length] == 0)
+    {
+        if ([lblView.text length] > 0)
+        {
+            attributedString = [[NSMutableAttributedString alloc] initWithString:lblView.text];
+        }
+    }
+
     NSAttributedString* attrString  = [[self class] labelAttributedString:lblView
-                                                                 withType:@"Label"
+                                                     withAttributedString:attributedString
+                                                                  andType:@"Label"
                                                                  andGroup:group
                                                                 andScreen:screen
                                                              andViewState:viewState
@@ -432,8 +436,15 @@
     [[self class] customizeView:btnView withType:@"Button" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
 
     {
+        NSAttributedString* attributedString    = [btnView attributedTitleForState:UIControlStateNormal];
+        if ([attributedString length] == 0)
+        {
+            attributedString = [[NSMutableAttributedString alloc] initWithString:[btnView titleForState:UIControlStateNormal]];
+        }
+        
         NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
-                                                                     withType:@"ButtonLabel"
+                                                         withAttributedString:attributedString
+                                                                      andType:@"ButtonLabel"
                                                                      andGroup:group
                                                                     andScreen:screen
                                                                  andViewState:viewState
@@ -442,8 +453,15 @@
         [btnView setAttributedTitle:attrString forState:UIControlStateNormal];
     }
     {
+        NSAttributedString* attributedString    = [btnView attributedTitleForState:UIControlStateHighlighted];
+        if ([attributedString length] == 0)
+        {
+            attributedString = [[NSMutableAttributedString alloc] initWithString:[btnView titleForState:UIControlStateHighlighted]];
+        }
+
         NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
-                                                                     withType:@"ButtonLabel"
+                                                         withAttributedString:attributedString
+                                                                      andType:@"ButtonLabel"
                                                                      andGroup:group
                                                                     andScreen:screen
                                                                  andViewState:viewState
@@ -452,8 +470,15 @@
         [btnView setAttributedTitle:attrString forState:UIControlStateHighlighted];
     }
     {
+        NSAttributedString* attributedString    = [btnView attributedTitleForState:UIControlStateDisabled];
+        if ([attributedString length] == 0)
+        {
+            attributedString = [[NSMutableAttributedString alloc] initWithString:[btnView titleForState:UIControlStateDisabled]];
+        }
+
         NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
-                                                                     withType:@"ButtonLabel"
+                                                         withAttributedString:attributedString
+                                                                      andType:@"ButtonLabel"
                                                                      andGroup:group
                                                                     andScreen:screen
                                                                  andViewState:viewState
@@ -462,8 +487,15 @@
         [btnView setAttributedTitle:attrString forState:UIControlStateDisabled];
     }
     {
+        NSAttributedString* attributedString    = [btnView attributedTitleForState:UIControlStateSelected];
+        if ([attributedString length] == 0)
+        {
+            attributedString = [[NSMutableAttributedString alloc] initWithString:[btnView titleForState:UIControlStateSelected]];
+        }
+
         NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
-                                                                     withType:@"ButtonLabel"
+                                                         withAttributedString:attributedString
+                                                                      andType:@"ButtonLabel"
                                                                      andGroup:group
                                                                     andScreen:screen
                                                                  andViewState:viewState

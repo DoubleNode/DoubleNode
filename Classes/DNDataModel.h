@@ -16,13 +16,15 @@
 
 @property (nonatomic, strong)   NSManagedObjectContext* tempInMemoryObjectContext;
 
-@property (strong, nonatomic, readonly)   NSManagedObjectContext*         mainObjectContext;
-@property (strong, nonatomic, readonly)   NSManagedObjectContext*         concurrentObjectContext;
-@property (strong, nonatomic, readonly)   NSManagedObjectContext*         tempMainObjectContext;
+@property (strong, nonatomic, readonly)   NSMutableArray*                   currentObjectContexts;
 
-@property (strong, nonatomic, readonly)   NSManagedObjectModel*           managedObjectModel;
-@property (strong, nonatomic, readonly)   NSPersistentStoreCoordinator*   persistentStoreCoordinator;
-@property (strong, nonatomic, readonly)   NSPersistentStore*              persistentStore;
+@property (strong, nonatomic, readonly)   NSManagedObjectContext*           mainObjectContext;
+@property (strong, nonatomic, readonly)   NSManagedObjectContext*           concurrentObjectContext;
+@property (strong, nonatomic, readonly)   NSManagedObjectContext*           tempMainObjectContext;
+
+@property (strong, nonatomic, readonly)   NSManagedObjectModel*             managedObjectModel;
+@property (strong, nonatomic, readonly)   NSPersistentStoreCoordinator*     persistentStoreCoordinator;
+@property (strong, nonatomic, readonly)   NSPersistentStore*                persistentStore;
 
 @property (strong, nonatomic)   NSString*   persistentStorePrefix;
 
@@ -42,6 +44,13 @@
 - (void)saveContext;
 
 - (NSManagedObjectContext*)createNewManagedObjectContext;
+- (NSManagedObjectContext*)concurrentObjectContext;
+
+- (NSManagedObjectContext*)createContextForCurrentThread;
+- (void)assignContextToCurrentThread:(NSManagedObjectContext*)context;
+- (void)removeContextFromCurrentThread:(NSManagedObjectContext*)context;
+- (void)saveAndRemoveContextFromCurrentThread:(NSManagedObjectContext*)context;
+- (NSManagedObjectContext*)currentObjectContext;
 
 - (void)performWithContext:(NSManagedObjectContext*)context
               blockAndWait:(void (^)(NSManagedObjectContext*))block;

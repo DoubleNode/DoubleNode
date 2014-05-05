@@ -50,7 +50,7 @@
 
 + (NSManagedObjectContext*)managedObjectContext
 {
-    return [[self dataModel] mainObjectContext];
+    return [[self dataModel] currentObjectContext];
 }
 
 + (void)saveContext

@@ -467,56 +467,59 @@
 
     [NSURLConnection sendAsynchronousRequest:finalRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
-         [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+         [DNUtilities runOnBackgroundThread:^
+         {
+             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 
-         DLog(LL_Debug, LD_API, @"mRequest=%@", finalRequest);
-         //DLog(LL_Debug, LD_API, @"response=%@", response);
+             DLog(LL_Debug, LD_API, @"mRequest=%@", finalRequest);
+             //DLog(LL_Debug, LD_API, @"response=%@", response);
 
-         NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
+             NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;
 
-         [self subProcessResponse:httpResponse
-                      commDetails:commDetails
-                      pageDetails:pageDetails
-                        errorCode:error.code
-                          request:finalRequest
-                             data:data
-                            retry:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails)
-          {
-              [self subProcessRequest:finalRequest
+             [self subProcessResponse:httpResponse
                           commDetails:commDetails
                           pageDetails:pageDetails
+                            errorCode:error.code
+                              request:finalRequest
+                                 data:data
+                                retry:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails)
+              {
+                  [self subProcessRequest:finalRequest
+                              commDetails:commDetails
+                              pageDetails:pageDetails
+                                   filter:filterHandler
+                                 incoming:incomingHandler
+                               completion:completionHandler
+                                    error:errorHandler];
+              }
                                filter:filterHandler
-                             incoming:incomingHandler
-                           completion:completionHandler
-                                error:errorHandler];
-          }
-                           filter:filterHandler
-                         incoming:^NSArray*(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers)
-          {
-              [self resetRetryRecommendation:commDetails.apikey];
+                             incoming:^NSArray*(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers)
+              {
+                  [self resetRetryRecommendation:commDetails.apikey];
 
-              NSArray*  objects = incomingHandler(commDetails, pageDetails, response, headers);
+                  NSArray*  objects = incomingHandler(commDetails, pageDetails, response, headers);
 
-              NSMutableArray*   results = [NSMutableArray arrayWithCapacity:[objects count]];
+                  NSMutableArray*   results = [NSMutableArray arrayWithCapacity:[objects count]];
 
-              [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-               {
-                   if ((filterHandler == nil) || filterHandler(obj))
+                  [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
                    {
-                       [results addObject:obj];
-                   }
-               }];
+                       if ((filterHandler == nil) || filterHandler(obj))
+                       {
+                           [results addObject:obj];
+                       }
+                   }];
 
-              return results;
-          }
-                       completion:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects)
-          {
-              completionHandler(commDetails, pageDetails, objects);
-          }
-                            error:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation)
-          {
-              errorHandler(commDetails, pageDetails, responseCode, error, retryRecommendation);
-          }];
+                  return results;
+              }
+                           completion:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects)
+              {
+                  completionHandler(commDetails, pageDetails, objects);
+              }
+                                error:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation)
+              {
+                  errorHandler(commDetails, pageDetails, responseCode, error, retryRecommendation);
+              }];
+         }];
      }];
 }
 

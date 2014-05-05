@@ -225,7 +225,7 @@
 
 + (NSManagedObjectContext*)managedObjectContext
 {
-    return [[[self entityModelClass] dataModel] mainObjectContext];
+    return [[[self entityModelClass] dataModel] currentObjectContext];
 }
 
 + (void)saveContext
