@@ -323,7 +323,10 @@
     self = newSelf;
     if (self)
     {
-        self.id = idValue;
+        if (![self.id isEqual:idValue])
+        {
+            self.id = idValue;
+        }
     }
     
     return self;
@@ -340,7 +343,10 @@
     self = newSelf;
     if (self)
     {
-        self.id = idValue;
+        if (![self.id isEqual:idValue])
+        {
+            self.id = idValue;
+        }
     }
 
     return self;
@@ -359,7 +365,10 @@
     self = newSelf;
     if (self)
     {
-        self.id = idValue;
+        if (![self.id isEqual:idValue])
+        {
+            self.id = idValue;
+        }
         
         [self loadWithDictionary:dict];
     }
@@ -383,7 +392,11 @@
 
 - (void)loadWithDictionary:(NSDictionary*)dict
 {
-    self.id  = [[self class] entityIDWithDictionary:dict];
+    id  newId   = [[self class] entityIDWithDictionary:dict];
+    if (![self.id isEqual:newId])
+    {
+        self.id  = newId;
+    }
 }
 
 - (NSDictionary*)saveToDictionary
@@ -439,6 +452,168 @@
     // }];
 
     return retval;
+}
+
+#pragma mark - Update If Changed functions
+
+- (NSNumber*)updateBooleanFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [self updateBooleanFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSNumber*)updateBooleanFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    BOOL    localDirtyFlag;
+    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+
+    *dirtyFlag  = NO;
+    id  newValue = [self dictionaryBoolean:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    if (*dirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+
+    return newValue;
+}
+
+- (NSNumber*)updateNumberFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [self updateNumberFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSNumber*)updateNumberFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    BOOL    localDirtyFlag;
+    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+
+    *dirtyFlag  = NO;
+    id  newValue = [self dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    if (*dirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+
+    return newValue;
+}
+
+- (NSDecimalNumber*)updateDecimalNumberFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDecimalNumber*)defaultValue
+{
+    return [self updateDecimalNumberFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSDecimalNumber*)updateDecimalNumberFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDecimalNumber*)defaultValue
+{
+    BOOL    localDirtyFlag;
+    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+
+    *dirtyFlag  = NO;
+    id  newValue = [self dictionaryDecimalNumber:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    if (*dirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+
+    return newValue;
+}
+
+- (NSNumber*)updateDoubleFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    return [self updateDoubleFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSNumber*)updateDoubleFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
+{
+    BOOL    localDirtyFlag;
+    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+
+    *dirtyFlag  = NO;
+    id  newValue = [self dictionaryDouble:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    if (*dirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+
+    return newValue;
+}
+
+- (NSString*)updateStringFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSString*)defaultValue
+{
+    return [self updateStringFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSString*)updateStringFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSString*)defaultValue
+{
+    BOOL    localDirtyFlag;
+    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+
+    *dirtyFlag  = NO;
+    id  newValue = [self dictionaryString:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    if (*dirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+
+    return newValue;
+}
+
+- (NSArray*)updateArrayFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSArray*)defaultValue
+{
+    return [self updateArrayFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSArray*)updateArrayFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSArray*)defaultValue
+{
+    BOOL    localDirtyFlag;
+    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+
+    *dirtyFlag  = NO;
+    id  newValue = [self dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    if (*dirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+
+    return newValue;
+}
+
+- (NSDate*)updateDateFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
+{
+    return [self updateDateFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSDate*)updateDateFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue
+{
+    BOOL    localDirtyFlag;
+    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+
+    *dirtyFlag  = NO;
+    id  newValue = [self dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    if (*dirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+
+    return newValue;
+}
+
+- (id)updateObjectFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue
+{
+    return [self updateObjectFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (id)updateObjectFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue
+{
+    BOOL    localDirtyFlag;
+    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+
+    *dirtyFlag  = NO;
+    id  newValue = [self dictionaryObject:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    if (*dirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+
+    return newValue;
 }
 
 #pragma mark - Dictionary Translation functions

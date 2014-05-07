@@ -46,6 +46,9 @@
 - (NSManagedObjectContext*)createNewManagedObjectContext;
 - (NSManagedObjectContext*)concurrentObjectContext;
 
+- (void)createContextForCurrentThreadPerformBlock:(BOOL (^)(NSManagedObjectContext* context))block;
+- (void)createContextForCurrentThreadPerformBlockAndWait:(BOOL (^)(NSManagedObjectContext* context))block;
+
 - (NSManagedObjectContext*)createContextForCurrentThread;
 - (void)assignContextToCurrentThread:(NSManagedObjectContext*)context;
 - (void)removeContextFromCurrentThread:(NSManagedObjectContext*)context;
