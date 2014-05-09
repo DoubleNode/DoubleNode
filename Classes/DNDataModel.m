@@ -184,20 +184,20 @@
 - (void)saveContext
 {
     NSManagedObjectContext* currentContext = self.currentObjectContext;
-    if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
-    {
-        DLog(LL_Debug, LD_CoreData, @"saveContext: currentContext=%@, parent=%@", currentContext, currentContext.parentContext);
-    }
+    //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
+    //{
+    //    DLog(LL_Debug, LD_CoreData, @"saveContext: currentContext=%@, parent=%@", currentContext, currentContext.parentContext);
+    //}
 
     [self performWithContext:currentContext
                        block:^(NSManagedObjectContext* context)
      {
          NSError*    error = nil;
 
-         if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
-         {
-             DLog(LL_Debug, LD_API, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[context registeredObjects] count], (unsigned long)[[context insertedObjects] count], (unsigned long)[[context updatedObjects] count], (unsigned long)[[context deletedObjects] count]);
-         }
+         //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
+         //{
+         //    DLog(LL_Debug, LD_CoreData, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[context registeredObjects] count], (unsigned long)[[context insertedObjects] count], (unsigned long)[[context updatedObjects] count], (unsigned long)[[context deletedObjects] count]);
+         //}
          if ([context hasChanges] && ![context save:&error])
          {
              // Replace this implementation with code to handle the error appropriately.
@@ -280,6 +280,7 @@
         _currentObjectContexts = [NSMutableArray array];
     }
 
+    [[NSThread currentThread] setName:@"DNDataModel Thread"];
     NSDictionary*   threadContext   = @{
                                         @"thread": [NSThread currentThread],
                                         @"context": context
@@ -292,10 +293,11 @@
 {
     [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
      {
-         NSManagedObjectContext*    context = threadContext[@"context"];
-         if ([context isEqual:context])
+         if ([context isEqual:threadContext[@"context"]])
          {
              [_currentObjectContexts removeObject:threadContext];
+
+             [[NSThread currentThread] setName:@"DNDataModel Thread DONE"];
              *stop = YES;
          }
      }];
@@ -303,17 +305,17 @@
 
 - (void)saveAndRemoveContextFromCurrentThread:(NSManagedObjectContext*)context
 {
-    if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
-    {
-        DLog(LL_Debug, LD_CoreData, @"saveAndRemoveContextFromCurrentThread: context=%@, parent=%@", context, context.parentContext);
-    }
+    //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
+    //{
+    //    DLog(LL_Debug, LD_CoreData, @"saveAndRemoveContextFromCurrentThread: context=%@, parent=%@", context, context.parentContext);
+    //}
 
     NSError*  error;
 
-    if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
-    {
-        DLog(LL_Debug, LD_API, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[context registeredObjects] count], (unsigned long)[[context insertedObjects] count], (unsigned long)[[context updatedObjects] count], (unsigned long)[[context deletedObjects] count]);
-    }
+    //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
+    //{
+    //    DLog(LL_Debug, LD_CoreData, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[context registeredObjects] count], (unsigned long)[[context insertedObjects] count], (unsigned long)[[context updatedObjects] count], (unsigned long)[[context deletedObjects] count]);
+    //}
     if (![context save:&error])
     {
         DLog(LL_Error, LD_CoreData, @"ERROR saving temp context: %@", [error localizedDescription]);
@@ -334,9 +336,9 @@
     [self removeContextFromCurrentThread:context];
 }
 
-- (NSManagedObjectContext*)currentObjectContext
+- (NSManagedObjectContext*)currentThreadedObjectContext
 {
-    __block NSManagedObjectContext* retval = [self mainObjectContext];
+    __block NSManagedObjectContext* retval;
 
     [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
      {
@@ -347,6 +349,17 @@
              *stop  = YES;
          }
      }];
+
+    return retval;
+}
+
+- (NSManagedObjectContext*)currentObjectContext
+{
+    NSManagedObjectContext* retval  = [self currentThreadedObjectContext];
+    if (retval == nil)
+    {
+        retval = [self mainObjectContext];
+    }
 
     return retval;
 }
@@ -612,7 +625,7 @@
     if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
     {
         DLog(LL_Debug, LD_CoreData, @"contextDidSave: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
-        DLog(LL_Debug, LD_API, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext registeredObjects] count], (unsigned long)[[notificationContext insertedObjects] count], (unsigned long)[[notificationContext updatedObjects] count], (unsigned long)[[notificationContext deletedObjects] count]);
+        DLog(LL_Debug, LD_CoreData, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext registeredObjects] count], (unsigned long)[[notificationContext insertedObjects] count], (unsigned long)[[notificationContext updatedObjects] count], (unsigned long)[[notificationContext deletedObjects] count]);
     }
     [notificationContext.parentContext performBlock:^
      {
@@ -621,7 +634,7 @@
          [notificationContext.parentContext mergeChangesFromContextDidSaveNotification:notification];
          if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
          {
-             DLog(LL_Debug, LD_API, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext.parentContext registeredObjects] count], (unsigned long)[[notificationContext.parentContext insertedObjects] count], (unsigned long)[[notificationContext.parentContext updatedObjects] count], (unsigned long)[[notificationContext.parentContext deletedObjects] count]);
+             DLog(LL_Debug, LD_CoreData, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext.parentContext registeredObjects] count], (unsigned long)[[notificationContext.parentContext insertedObjects] count], (unsigned long)[[notificationContext.parentContext updatedObjects] count], (unsigned long)[[notificationContext.parentContext deletedObjects] count]);
          }
          if (![notificationContext.parentContext save:&error])
          {
@@ -656,12 +669,12 @@
         return;
     }
 
-    if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
-    {
-        DLog(LL_Debug, LD_CoreData, @"contextObjectsDidChange: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
-        DLog(LL_Debug, LD_API, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext registeredObjects] count], (unsigned long)[[notificationContext insertedObjects] count], (unsigned long)[[notificationContext updatedObjects] count], (unsigned long)[[notificationContext deletedObjects] count]);
-        //DLog(LL_Error, LD_CoreData, @"contextObjectsDidChange: %@", notification);
-    }
+    //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
+    //{
+    //    DLog(LL_Debug, LD_CoreData, @"contextObjectsDidChange: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
+    //    DLog(LL_Debug, LD_CoreData, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext registeredObjects] count], (unsigned long)[[notificationContext insertedObjects] count], (unsigned long)[[notificationContext updatedObjects] count], (unsigned long)[[notificationContext deletedObjects] count]);
+    //    //DLog(LL_Error, LD_CoreData, @"contextObjectsDidChange: %@", notification);
+    //}
     [NSObject cancelPreviousPerformRequestsWithTarget:self selector:@selector(saveToDisk:) object:nil];
 
     [self performSelector:@selector(saveToDisk:) withObject:notification afterDelay:SAVE_TO_DISK_TIME_INTERVAL];
@@ -670,20 +683,20 @@
 - (void)saveToDisk:(NSNotification*)notification
 {
     NSManagedObjectContext* notificationContext = [notification object];
-    if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
-    {
-        DLog(LL_Debug, LD_CoreData, @"saveToDisk: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
-    }
+    //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
+    //{
+    //    DLog(LL_Debug, LD_CoreData, @"saveToDisk: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
+    //}
 
     [self performWithContext:notificationContext
                 blockAndWait:^(NSManagedObjectContext* context)
      {
          NSError*    error = nil;
          
-         if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
-         {
-             DLog(LL_Debug, LD_API, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext registeredObjects] count], (unsigned long)[[notificationContext insertedObjects] count], (unsigned long)[[notificationContext updatedObjects] count], (unsigned long)[[notificationContext deletedObjects] count]);
-         }
+         //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
+         //{
+         //    DLog(LL_Debug, LD_CoreData, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext registeredObjects] count], (unsigned long)[[notificationContext insertedObjects] count], (unsigned long)[[notificationContext updatedObjects] count], (unsigned long)[[notificationContext deletedObjects] count]);
+         //}
          if (![notificationContext save:&error])
          {
              DLog(LL_Error, LD_CoreData, @"ERROR saving main context: %@", [error localizedDescription]);
@@ -702,10 +715,10 @@
          }
      }];
 
-    if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
-    {
-        DLog(LL_Debug, LD_CoreData, @"CDTableDataModel");
-    }
+    //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
+    //{
+    //    DLog(LL_Debug, LD_CoreData, @"CDTableDataModel");
+    //}
 
     if (![notificationContext.parentContext hasChanges])
     {
@@ -721,10 +734,10 @@
 
              [notificationContext.parentContext mergeChangesFromContextDidSaveNotification:notification];
 
-             if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
-             {
-                 DLog(LL_Debug, LD_CoreData, @"CDTableDataModel");
-             }
+             //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
+             //{
+             //    DLog(LL_Debug, LD_CoreData, @"CDTableDataModel");
+             //}
              if (![notificationContext.parentContext save:&error])
              {
                  DLog(LL_Error, LD_CoreData, @"ERROR saving writer context: %@", [error localizedDescription]);

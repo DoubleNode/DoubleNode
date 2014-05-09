@@ -715,7 +715,7 @@
     }
     else
     {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/BarButtonItem/LabelKerning is not specified!", group, screen, viewState, item, controlState);
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%lu/BarButtonItem/LabelKerning is not specified!", group, screen, viewState, item, controlState);
     }
     if (labelFont)
     {
@@ -723,7 +723,7 @@
     }
     else
     {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/BarButtonItem/LabelFont is not specified!", group, screen, viewState, item, controlState);
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%lu/BarButtonItem/LabelFont is not specified!", group, screen, viewState, item, controlState);
     }
     if (labelColor)
     {
@@ -731,7 +731,7 @@
     }
     else
     {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%d/BarButtonItem/LabelColor is not specified!", group, screen, viewState, item, controlState);
+        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%lu/BarButtonItem/LabelColor is not specified!", group, screen, viewState, item, controlState);
     }
 
     [barButtonItem setTitleTextAttributes:textAttributes
