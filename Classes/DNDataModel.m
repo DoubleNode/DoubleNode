@@ -765,6 +765,14 @@
 - (void)performWithContext:(NSManagedObjectContext*)context
               blockAndWait:(void (^)(NSManagedObjectContext*))block
 {
+    if (!context)
+    {
+        DLog(LL_Critical, LD_CoreData, @"Invalid Context!");
+    }
+    if (![context isKindOfClass:[NSManagedObjectContext class]])
+    {
+        DLog(LL_Critical, LD_CoreData, @"Invalid Context Type!");
+    }
     if ((context == self.mainObjectContext) && ([NSThread isMainThread]))
     {
         block(context);

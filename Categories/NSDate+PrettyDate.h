@@ -23,6 +23,15 @@
 - (NSString*)prettyDate;
 
 /**
+ *  Creates and returns a new NSString object initialized with a natural language version of the source date in relation to now.
+ *
+ *  @warning This function is NOT localized, only supports English.
+ *
+ *  @return A new NSString object, configured with a natual language representation of the source date.
+ */
+- (NSString*)shortPrettyDate;
+
+/**
  *  Creates and returns a new NSString object initialized with a simple display of a date range, between the source date and the end data parameter.
  *
  *  @param end The end date for the date range string.

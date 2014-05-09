@@ -13,6 +13,59 @@
 
 @implementation NSDate (PrettyDate)
 
+- (NSString*)shortPrettyDate
+{
+    NSString*   prettyTimestamp;
+
+    float   delta = [self timeIntervalSinceNow] * -1;
+    if (delta < 60)
+    {
+        prettyTimestamp = @"just now";
+        //prettyTimestamp = [NSString stringWithFormat:@"%d seconds ago", (int)delta];
+    }
+    else if (delta < 120)
+    {
+        prettyTimestamp = @"1 min ago";
+    }
+    else if (delta < 3600)
+    {
+        prettyTimestamp = [NSString stringWithFormat:@"%d mins ago", (int)floor(delta / 60.0f)];
+    }
+    else if (delta < 7200)
+    {
+        prettyTimestamp = @"1 hr ago";
+    }
+    else if (delta < 86400)
+    {
+        prettyTimestamp = [NSString stringWithFormat:@"%d hrs ago", (int)floor(delta / 3600.0f)];
+    }
+    else if (delta < (86400 * 2))
+    {
+        prettyTimestamp = @"1 day ago";
+    }
+    else if (delta < (86400 * 7))
+    {
+        prettyTimestamp = [NSString stringWithFormat:@"%d days ago", (int)floor(delta / 86400.0f)];
+    }
+    else if (delta < (86400 * 14))
+    {
+        prettyTimestamp = [NSString stringWithFormat:@"1 wk ago"];
+    }
+    else if (delta < (86400 * 35))
+    {
+        prettyTimestamp = [NSString stringWithFormat:@"%d wks ago", (int)floor(delta / (86400.0f * 7))];
+    }
+    else
+    {
+        NSDateFormatter*    formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+
+        prettyTimestamp = [NSString stringWithFormat:@"on %@", [formatter stringFromDate:self]];
+    }
+
+    return prettyTimestamp;
+}
+
 - (NSString*)prettyDate
 {
     NSString*   prettyTimestamp;
@@ -46,6 +99,14 @@
     else if (delta < (86400 * 7))
     {
         prettyTimestamp = [NSString stringWithFormat:@"%d days ago", (int)floor(delta / 86400.0f)];
+    }
+    else if (delta < (86400 * 14))
+    {
+        prettyTimestamp = [NSString stringWithFormat:@"one week ago"];
+    }
+    else if (delta < (86400 * 35))
+    {
+        prettyTimestamp = [NSString stringWithFormat:@"%d weeks ago", (int)floor(delta / (86400.0f * 7))];
     }
     else
     {
