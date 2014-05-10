@@ -439,7 +439,12 @@
         NSAttributedString* attributedString    = [btnView attributedTitleForState:UIControlStateNormal];
         if ([attributedString length] == 0)
         {
-            attributedString = [[NSMutableAttributedString alloc] initWithString:[btnView titleForState:UIControlStateNormal]];
+            NSString*   string  = [btnView titleForState:UIControlStateNormal];
+            if (!string)
+            {
+                string  = @"";
+            }
+            attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         }
         
         NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
@@ -456,7 +461,12 @@
         NSAttributedString* attributedString    = [btnView attributedTitleForState:UIControlStateHighlighted];
         if ([attributedString length] == 0)
         {
-            attributedString = [[NSMutableAttributedString alloc] initWithString:[btnView titleForState:UIControlStateHighlighted]];
+            NSString*   string  = [btnView titleForState:UIControlStateHighlighted];
+            if (!string)
+            {
+                string  = @"";
+            }
+            attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         }
 
         NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
@@ -473,7 +483,12 @@
         NSAttributedString* attributedString    = [btnView attributedTitleForState:UIControlStateDisabled];
         if ([attributedString length] == 0)
         {
-            attributedString = [[NSMutableAttributedString alloc] initWithString:[btnView titleForState:UIControlStateDisabled]];
+            NSString*   string  = [btnView titleForState:UIControlStateDisabled];
+            if (!string)
+            {
+                string  = @"";
+            }
+            attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         }
 
         NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
@@ -490,7 +505,12 @@
         NSAttributedString* attributedString    = [btnView attributedTitleForState:UIControlStateSelected];
         if ([attributedString length] == 0)
         {
-            attributedString = [[NSMutableAttributedString alloc] initWithString:[btnView titleForState:UIControlStateSelected]];
+            NSString*   string  = [btnView titleForState:UIControlStateSelected];
+            if (!string)
+            {
+                string  = @"";
+            }
+            attributedString = [[NSMutableAttributedString alloc] initWithString:string];
         }
 
         NSAttributedString* attrString  = [[self class] labelAttributedString:btnView.titleLabel
