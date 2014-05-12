@@ -669,6 +669,12 @@
         return;
     }
 
+    if ([NSStringFromClass([self class]) isEqualToString:@"CDMainDataModel"])
+    {
+        DLog(LL_Debug, LD_CoreData, @"contextObjectsDidChange: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
+        DLog(LL_Debug, LD_CoreData, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext registeredObjects] count], (unsigned long)[[notificationContext insertedObjects] count], (unsigned long)[[notificationContext updatedObjects] count], (unsigned long)[[notificationContext deletedObjects] count]);
+        DLog(LL_Error, LD_CoreData, @"contextObjectsDidChange: %@", notification);
+    }
     //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
     //{
     //    DLog(LL_Debug, LD_CoreData, @"contextObjectsDidChange: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
@@ -683,9 +689,13 @@
 - (void)saveToDisk:(NSNotification*)notification
 {
     NSManagedObjectContext* notificationContext = [notification object];
-    if (![NSStringFromClass([self class]) isEqualToString:@"DNDataModel"])
+    if (![self isKindOfClass:[DNDataModel class]])
     {
         return;
+    }
+    if ([NSStringFromClass([self class]) isEqualToString:@"CDMainDataModel"])
+    {
+        DLog(LL_Debug, LD_CoreData, @"saveToDisk: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
     }
     //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
     //{
