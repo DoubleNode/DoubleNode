@@ -683,6 +683,10 @@
 - (void)saveToDisk:(NSNotification*)notification
 {
     NSManagedObjectContext* notificationContext = [notification object];
+    if (![NSStringFromClass([self class]) isEqualToString:@"DNDataModel"])
+    {
+        return;
+    }
     //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
     //{
     //    DLog(LL_Debug, LD_CoreData, @"saveToDisk: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
