@@ -32,6 +32,11 @@
 @property (atomic, assign) CGFloat  pendingHeight;
 
 /**
+ *  Returns if the view is currently loaded and visible.
+ */
+- (BOOL)isVisible;
+
+/**
  *  Resets pending alpha value to current alpha value.
  */
 - (void)resetPendingAlpha;

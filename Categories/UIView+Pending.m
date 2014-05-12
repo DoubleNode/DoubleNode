@@ -19,6 +19,16 @@ const NSString* kPendingTransform   = @"PendingTransform";
 
 @implementation UIView (Pending)
 
+- (BOOL)isVisible
+{
+    if (self.window)
+    {
+        return YES;
+    }
+
+    return NO;
+}
+
 - (CGPoint)origin   {   return self.frame.origin;       }
 - (CGFloat)x        {   return self.frame.origin.x;     }
 - (CGFloat)y        {   return self.frame.origin.y;     }
