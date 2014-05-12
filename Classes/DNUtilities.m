@@ -274,6 +274,15 @@
 
 + (void)runAfterDelay:(CGFloat)delay block:(void (^)())block
 {
+    [DNUtilities runOnBackgroundThread:^
+     {
+         void (^block_)() = [block copy];
+         [self performSelector:@selector(runBlock:) withObject:block_ afterDelay:delay];
+     }];
+}
+
++ (void)runOnMainThreadAfterDelay:(CGFloat)delay block:(void (^)())block
+{
     [DNUtilities runOnMainThreadWithoutDeadlocking:^
      {
          void (^block_)() = [block copy];
