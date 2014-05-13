@@ -136,10 +136,13 @@
 
     @try
     {
-        [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
-         {
-             [threadContext[@"context"] reset];
-         }];
+        @synchronized(_currentObjectContexts)
+        {
+            [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
+             {
+                 [threadContext[@"context"] reset];
+             }];
+        }
 
         [_mainObjectContext reset];
         [_tempInMemoryObjectContext reset];
@@ -265,42 +268,48 @@
 
 - (void)assignContextToCurrentThread:(NSManagedObjectContext*)context
 {
-    [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
-     {
-         NSThread*  thread  = threadContext[@"thread"];
-         if ([thread isEqual:[NSThread currentThread]])
-         {
-             [_currentObjectContexts removeObject:threadContext];
-             *stop  = YES;
-         }
-     }];
-
-    if (_currentObjectContexts == nil)
+    @synchronized(_currentObjectContexts)
     {
-        _currentObjectContexts = [NSMutableArray array];
+        [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
+         {
+             NSThread*  thread  = threadContext[@"thread"];
+             if ([thread isEqual:[NSThread currentThread]])
+             {
+                 [_currentObjectContexts removeObject:threadContext];
+                 *stop  = YES;
+             }
+         }];
+
+        if (_currentObjectContexts == nil)
+        {
+            _currentObjectContexts = [NSMutableArray array];
+        }
+
+        [[NSThread currentThread] setName:@"DNDataModel Thread"];
+        NSDictionary*   threadContext   = @{
+                                            @"thread": [NSThread currentThread],
+                                            @"context": context
+                                            };
+
+        [_currentObjectContexts addObject:threadContext];
     }
-
-    [[NSThread currentThread] setName:@"DNDataModel Thread"];
-    NSDictionary*   threadContext   = @{
-                                        @"thread": [NSThread currentThread],
-                                        @"context": context
-                                        };
-
-    [_currentObjectContexts addObject:threadContext];
 }
 
 - (void)removeContextFromCurrentThread:(NSManagedObjectContext*)context
 {
-    [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
-     {
-         if ([context isEqual:threadContext[@"context"]])
+    @synchronized(_currentObjectContexts)
+    {
+        [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
          {
-             [_currentObjectContexts removeObject:threadContext];
+             if ([context isEqual:threadContext[@"context"]])
+             {
+                 [_currentObjectContexts removeObject:threadContext];
 
-             [[NSThread currentThread] setName:@"DNDataModel Thread DONE"];
-             *stop = YES;
-         }
-     }];
+                 [[NSThread currentThread] setName:@"DNDataModel Thread DONE"];
+                 *stop = YES;
+             }
+         }];
+    }
 }
 
 - (void)saveAndRemoveContextFromCurrentThread:(NSManagedObjectContext*)context
@@ -340,15 +349,18 @@
 {
     __block NSManagedObjectContext* retval;
 
-    [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
-     {
-         NSThread*  thread  = threadContext[@"thread"];
-         if ([thread isEqual:[NSThread currentThread]])
+    @synchronized(_currentObjectContexts)
+    {
+        [_currentObjectContexts enumerateObjectsUsingBlock:^(NSDictionary* threadContext, NSUInteger idx, BOOL* stop)
          {
-             retval = threadContext[@"context"];
-             *stop  = YES;
-         }
-     }];
+             NSThread*  thread  = threadContext[@"thread"];
+             if ([thread isEqual:[NSThread currentThread]])
+             {
+                 retval = threadContext[@"context"];
+                 *stop  = YES;
+             }
+         }];
+    }
 
     return retval;
 }

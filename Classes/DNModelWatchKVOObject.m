@@ -73,11 +73,9 @@
      {
          [object addObserver:self
                   forKeyPath:attributeName
-                     options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                     options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionPrior
                      context:nil];
      }];
-
-    [self refreshWatch];
 }
 
 - (void)cancelWatch
@@ -96,6 +94,12 @@
 {
     [super refreshWatch];
     
+    [self executeWillChangeHandler];
+
+    [self executeDidChangeObjectUpdateHandler:[self object]
+                                  atIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
+                                 newIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+
     [self executeDidChangeHandler];
 }
 

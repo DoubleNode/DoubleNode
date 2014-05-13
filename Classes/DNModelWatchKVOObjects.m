@@ -76,12 +76,10 @@
           {
               [object addObserver:self
                        forKeyPath:attributeName
-                          options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                          options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionPrior
                           context:nil];
           }];
      }];
-
-    [self refreshWatch];
 }
 
 - (void)cancelWatch
@@ -110,7 +108,16 @@
 {
     [super refreshWatch];
     
-    [self executeDidChangeHandler];
+    [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
+     {
+         [self executeWillChangeHandler];
+
+         [self executeDidChangeObjectUpdateHandler:object
+                                       atIndexPath:[NSIndexPath indexPathForItem:idx inSection:0]
+                                      newIndexPath:[NSIndexPath indexPathForItem:idx inSection:0]];
+
+         [self executeDidChangeHandler];
+     }];
 }
 
 #pragma mark - NSKeyValueObserving protocol
@@ -126,7 +133,8 @@
     }
     else
     {
-        NSIndexPath*    indexPath   = [NSIndexPath indexPathForItem:0 inSection:0];
+        NSUInteger      idx         = [[self objects] indexOfObject:subjectObject];
+        NSIndexPath*    indexPath   = [NSIndexPath indexPathForItem:idx inSection:0];
 
         switch ([change[NSKeyValueChangeKindKey] integerValue])
         {

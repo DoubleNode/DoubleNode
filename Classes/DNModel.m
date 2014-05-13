@@ -89,52 +89,36 @@
 #pragma mark - watch management
 
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
-                         didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
     DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
                                                                          andObject:object
                                                                      andAttributes:nil];
-    watch.didChangeHandler  = handler;
-    [watch startWatch];
-    
     return watch;
 }
 
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
                      andAttributes:(NSArray*)attributes
-                         didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler
 {
     DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
                                                                          andObject:object
                                                                      andAttributes:attributes];
-    watch.didChangeHandler  = handler;
-    [watch startWatch];
-
     return watch;
 }
 
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
-                           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self
                                                                             andObjects:objects
                                                                          andAttributes:nil];
-    watch.didChangeHandler  = handler;
-    [watch startWatch];
-
     return watch;
 }
 
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
                        andAttributes:(NSArray*)attributes
-                           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self
                                                                             andObjects:objects
                                                                          andAttributes:attributes];
-    watch.didChangeHandler  = handler;
-    [watch startWatch];
-
     return watch;
 }
 

@@ -43,16 +43,13 @@ typedef void(^DNModelCompletionHandlerBlock)();
 - (NSArray*)getFromIDSortKeys;
 - (NSArray*)getAllSortKeys;
 
+- (DNModelWatchObject*)watchObject:(DNManagedObject*)object;
 - (DNModelWatchObject*)watchObject:(DNManagedObject*)object
-                         didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler;
-- (DNModelWatchObject*)watchObject:(DNManagedObject*)object
-                     andAttributes:(NSArray*)attributes
-                         didChange:(DNModelWatchObjectDidChangeHandlerBlock)handler;
+                     andAttributes:(NSArray*)attributes;
+
+- (DNModelWatchObjects*)watchObjects:(NSArray*)objects;
 - (DNModelWatchObjects*)watchObjects:(NSArray*)objects
-                           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
-- (DNModelWatchObjects*)watchObjects:(NSArray*)objects
-                       andAttributes:(NSArray*)attributes
-                           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
+                       andAttributes:(NSArray*)attributes;
 
 - (BOOL)checkWatch:(DNModelWatch*)watch;
 - (void)retainWatch:(DNModelWatch*)watch;
