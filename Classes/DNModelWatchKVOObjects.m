@@ -23,59 +23,32 @@
 
 + (id)watchWithModel:(DNModel*)model
           andObjects:(NSArray*)objects
-           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchKVOObjects alloc] initWithModel:model andObjects:objects didChange:handler];
+    return [[DNModelWatchKVOObjects alloc] initWithModel:model andObjects:objects];
 }
 
 + (id)watchWithModel:(DNModel*)model
           andObjects:(NSArray*)objects
        andAttributes:(NSArray*)attributes
-           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    return [[DNModelWatchKVOObjects alloc] initWithModel:model andObjects:objects andAttributes:attributes didChange:handler];
+    return [[DNModelWatchKVOObjects alloc] initWithModel:model andObjects:objects andAttributes:attributes];
 }
 
 - (id)initWithModel:(DNModel*)model
          andObjects:(NSArray*)pObjects
-          didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
-    return [self initWithModel:model andObjects:pObjects andAttributes:nil didChange:handler];
+    return [self initWithModel:model andObjects:pObjects andAttributes:nil];
 }
 
 - (id)initWithModel:(DNModel*)model
          andObjects:(NSArray*)pObjects
       andAttributes:(NSArray*)pAttributes
-          didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler
 {
     self = [super initWithModel:model];
     if (self)
     {
-        self.didChangeHandler   = handler;
-        [self startWatch];
-
         objects     = pObjects;
         attributes  = pAttributes;
-        
-        [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
-         {
-             NSArray*  objectAttributes = attributes;
-             if (objectAttributes == nil)
-             {
-                 // Track ALL attributes
-                 objectAttributes  = [[[object entityDescription] attributesByName] allKeys];
-             }
-             
-             [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
-              {
-                  [object addObserver:self
-                           forKeyPath:attributeName
-                              options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
-                              context:nil];
-              }];
-         }];
-        
-        [self refreshWatch];
     }
     
     return self;
@@ -86,10 +59,35 @@
     return objects;
 }
 
+- (void)startWatch
+{
+    [super startWatch];
+
+    [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
+     {
+         NSArray*  objectAttributes = attributes;
+         if (objectAttributes == nil)
+         {
+             // Track ALL attributes
+             objectAttributes  = [[[object entityDescription] attributesByName] allKeys];
+         }
+
+         [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
+          {
+              [object addObserver:self
+                       forKeyPath:attributeName
+                          options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew
+                          context:nil];
+          }];
+     }];
+
+    [self refreshWatch];
+}
+
 - (void)cancelWatch
 {
     [super cancelWatch];
-    
+
     [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
      {
          NSArray*  objectAttributes = attributes;
@@ -118,11 +116,58 @@
 #pragma mark - NSKeyValueObserving protocol
 
 - (void)observeValueForKeyPath:(NSString*)keyPath
-                      ofObject:(id)object
+                      ofObject:(id)subjectObject
                         change:(NSDictionary*)change
                        context:(void *)context
 {
-    [self executeDidChangeHandler];
+    if ([change[NSKeyValueChangeNotificationIsPriorKey] isEqualToNumber:@YES])
+    {
+        [self executeWillChangeHandler];
+    }
+    else
+    {
+        NSIndexPath*    indexPath   = [NSIndexPath indexPathForItem:0 inSection:0];
+
+        switch ([change[NSKeyValueChangeKindKey] integerValue])
+        {
+            case NSKeyValueChangeSetting:
+            {
+                if ([change[NSKeyValueChangeNewKey] isEqual:change[NSKeyValueChangeOldKey]] == NO)
+                {
+                    [self executeDidChangeObjectUpdateHandler:subjectObject
+                                                  atIndexPath:indexPath
+                                                 newIndexPath:indexPath];
+                }
+                break;
+            }
+
+            case NSKeyValueChangeInsertion:
+            {
+                [self executeDidChangeObjectInsertHandler:subjectObject
+                                              atIndexPath:indexPath
+                                             newIndexPath:indexPath];
+                break;
+            }
+
+            case NSKeyValueChangeRemoval:
+            {
+                [self executeDidChangeObjectDeleteHandler:subjectObject
+                                              atIndexPath:indexPath
+                                             newIndexPath:indexPath];
+                break;
+            }
+
+            case NSKeyValueChangeReplacement:
+            {
+                [self executeDidChangeObjectMoveHandler:subjectObject
+                                            atIndexPath:indexPath
+                                           newIndexPath:indexPath];
+                break;
+            }
+        }
+
+        [self executeDidChangeHandler];
+    }
 }
 
 @end

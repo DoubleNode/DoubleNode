@@ -76,7 +76,7 @@
 
 - (void)executeDidChangeObjectInsertHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
-                               newIndexPath:(NSIndexPath *)newIndexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
 {
     [super executeDidChangeObjectInsertHandler:object
                                    atIndexPath:indexPath
@@ -89,7 +89,7 @@
 
 - (void)executeDidChangeObjectDeleteHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
-                               newIndexPath:(NSIndexPath *)newIndexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
 {
     [super executeDidChangeObjectDeleteHandler:object
                                    atIndexPath:indexPath
@@ -102,7 +102,7 @@
 
 - (void)executeDidChangeObjectUpdateHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
-                               newIndexPath:(NSIndexPath *)newIndexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
 {
     [super executeDidChangeObjectUpdateHandler:object
                                    atIndexPath:indexPath
@@ -115,7 +115,7 @@
 
 - (void)executeDidChangeObjectMoveHandler:(id)object
                               atIndexPath:(NSIndexPath*)indexPath
-                             newIndexPath:(NSIndexPath *)newIndexPath
+                             newIndexPath:(NSIndexPath*)newIndexPath
 {
     [super executeDidChangeObjectMoveHandler:object
                                  atIndexPath:indexPath

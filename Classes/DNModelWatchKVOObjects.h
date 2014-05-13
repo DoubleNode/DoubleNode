@@ -19,21 +19,17 @@
 @interface DNModelWatchKVOObjects : DNModelWatchObjects
 
 + (id)watchWithModel:(DNModel*)model
-          andObjects:(NSArray*)objects
-           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
+          andObjects:(NSArray*)objects;
 
 + (id)watchWithModel:(DNModel*)model
           andObjects:(NSArray*)objects
-       andAttributes:(NSArray*)attributes
-           didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
+       andAttributes:(NSArray*)attributes;
+
+- (id)initWithModel:(DNModel*)model
+         andObjects:(NSArray*)objects;
 
 - (id)initWithModel:(DNModel*)model
          andObjects:(NSArray*)objects
-          didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
-
-- (id)initWithModel:(DNModel*)model
-         andObjects:(NSArray*)objects
-      andAttributes:(NSArray*)attributes
-          didChange:(DNModelWatchObjectsDidChangeHandlerBlock)handler;
+      andAttributes:(NSArray*)attributes;
 
 @end

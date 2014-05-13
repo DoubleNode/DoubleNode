@@ -15,11 +15,23 @@
 @class DNModelWatchObject;
 
 typedef void(^DNModelWatchObjectWillChangeHandlerBlock)(DNModelWatchObject* watch, id object);
+
+typedef void(^DNModelWatchObjectDidChangeObjectInsertHandlerBlock)(DNModelWatchObject* watch, id object);
+typedef void(^DNModelWatchObjectDidChangeObjectDeleteHandlerBlock)(DNModelWatchObject* watch, id object);
+typedef void(^DNModelWatchObjectDidChangeObjectUpdateHandlerBlock)(DNModelWatchObject* watch, id object);
+typedef void(^DNModelWatchObjectDidChangeObjectMoveHandlerBlock)(DNModelWatchObject* watch, id object);
+
 typedef void(^DNModelWatchObjectDidChangeHandlerBlock)(DNModelWatchObject* watch, id object);
 
 @interface DNModelWatchObject : DNModelWatch
 
 @property (strong, nonatomic) DNModelWatchObjectWillChangeHandlerBlock  willChangeHandler;
+
+@property (strong, nonatomic) DNModelWatchObjectDidChangeObjectInsertHandlerBlock   didChangeObjectInsertHandler;
+@property (strong, nonatomic) DNModelWatchObjectDidChangeObjectDeleteHandlerBlock   didChangeObjectDeleteHandler;
+@property (strong, nonatomic) DNModelWatchObjectDidChangeObjectUpdateHandlerBlock   didChangeObjectUpdateHandler;
+@property (strong, nonatomic) DNModelWatchObjectDidChangeObjectMoveHandlerBlock     didChangeObjectMoveHandler;
+
 @property (strong, nonatomic) DNModelWatchObjectDidChangeHandlerBlock   didChangeHandler;
 
 - (id)initWithModel:(DNModel*)model;

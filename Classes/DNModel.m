@@ -93,8 +93,9 @@
 {
     DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
                                                                          andObject:object
-                                                                     andAttributes:nil
-                                                                         didChange:handler];
+                                                                     andAttributes:nil];
+    watch.didChangeHandler  = handler;
+    [watch startWatch];
     
     return watch;
 }
@@ -105,9 +106,10 @@
 {
     DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
                                                                          andObject:object
-                                                                     andAttributes:attributes
-                                                                         didChange:handler];
-    
+                                                                     andAttributes:attributes];
+    watch.didChangeHandler  = handler;
+    [watch startWatch];
+
     return watch;
 }
 
@@ -116,9 +118,10 @@
 {
     DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self
                                                                             andObjects:objects
-                                                                         andAttributes:nil
-                                                                             didChange:handler];
-    
+                                                                         andAttributes:nil];
+    watch.didChangeHandler  = handler;
+    [watch startWatch];
+
     return watch;
 }
 
@@ -128,9 +131,10 @@
 {
     DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self
                                                                             andObjects:objects
-                                                                         andAttributes:attributes
-                                                                             didChange:handler];
-    
+                                                                         andAttributes:attributes];
+    watch.didChangeHandler  = handler;
+    [watch startWatch];
+
     return watch;
 }
 
