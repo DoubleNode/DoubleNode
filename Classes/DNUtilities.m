@@ -886,7 +886,7 @@
         return NO;
     }
 
-    id  logDebug    = [logDebugDomains valueForKey:domain];
+    id  logDebug    = [logDebugDomains objectForKey:domain];
     if (logDebug)
     {
         return (level <= [[logDebugDomains objectForKey:domain] intValue]);
