@@ -311,33 +311,17 @@
 
     NSRange attrRange   = NSMakeRange(0, [attrString length]);
 
-    if (labelKerning)
-    {
-        [attrString removeAttribute:NSKernAttributeName range:attrRange];
-        [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/Label/Kerning is not specified!", group, screen, viewState, item);
-    }
-    if (labelFont)
-    {
-        [attrString removeAttribute:NSFontAttributeName range:attrRange];
-        [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/Label/Font is not specified!", group, screen, viewState, item);
-    }
-    if (labelColor)
-    {
-        [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
-        [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/Label/Color is not specified!", group, screen, viewState, item);
-    }
+    NSAssert(labelKerning, @"%@/%@/%@/%@/Label/Kerning is not specified!", group, screen, viewState, item);
+    [attrString removeAttribute:NSKernAttributeName range:attrRange];
+    [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
+
+    NSAssert(labelFont, @"%@/%@/%@/%@/Label/Font is not specified!", group, screen, viewState, item);
+    [attrString removeAttribute:NSFontAttributeName range:attrRange];
+    [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
+
+    NSAssert(labelColor, @"%@/%@/%@/%@/Label/Color is not specified!", group, screen, viewState, item);
+    [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
+    [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
 
     [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
     [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:attrRange];
@@ -648,30 +632,15 @@
         UIColor*    textAttributesColor     = [[self class] performThemeSelectorForAttribute:@"Color"       withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
         NSMutableDictionary*    textAttributes  = [NSMutableDictionary dictionary];
-        if (textAttributesKerning)
-        {
-            [textAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
-        }
-        else
-        {
-            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Kerning is not specified!", group, screen, viewState, item);
-        }
-        if (textAttributesFont)
-        {
-            [textAttributes setObject:textAttributesFont forKey:NSFontAttributeName];
-        }
-        else
-        {
-            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Font is not specified!", group, screen, viewState, item);
-        }
-        if (textAttributesColor)
-        {
-            [textAttributes setObject:textAttributesColor forKey:NSForegroundColorAttributeName];
-        }
-        else
-        {
-            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/Color is not specified!", group, screen, viewState, item);
-        }
+
+        NSAssert(textAttributesKerning, @"%@/%@/%@/%@/SegmentedControl/Kerning is not specified!", group, screen, viewState, item);
+        [textAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
+
+        NSAssert(textAttributesFont, @"%@/%@/%@/%@/SegmentedControl/Font is not specified!", group, screen, viewState, item);
+        [textAttributes setObject:textAttributesFont forKey:NSFontAttributeName];
+
+        NSAssert(textAttributesColor, @"%@/%@/%@/%@/SegmentedControl/Color is not specified!", group, screen, viewState, item);
+        [textAttributes setObject:textAttributesColor forKey:NSForegroundColorAttributeName];
 
         ((DNSegmentedControl*)segmentedControl).textAttributes = textAttributes;
 
@@ -680,31 +649,16 @@
         UIColor*    selectedTextAttributesColor     = [[self class] performThemeSelectorForAttribute:@"SelectedColor"   withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
         NSMutableDictionary*    selectedTextAttributes  = [NSMutableDictionary dictionary];
-        if (selectedTextAttributesKerning)
-        {
-            [selectedTextAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
-        }
-        else
-        {
-            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedKerning is not specified!", group, screen, viewState, item);
-        }
-        if (selectedTextAttributesFont)
-        {
-            [selectedTextAttributes setObject:selectedTextAttributesFont forKey:NSFontAttributeName];
-        }
-        else
-        {
-            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedFont is not specified!", group, screen, viewState, item);
-        }
-        if (selectedTextAttributesColor)
-        {
-            [selectedTextAttributes setObject:selectedTextAttributesColor forKey:NSForegroundColorAttributeName];
-        }
-        else
-        {
-            DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/SegmentedControl/SelectedColor is not specified!", group, screen, viewState, item);
-        }
-        
+
+        NSAssert(selectedTextAttributesKerning, @"%@/%@/%@/%@/SegmentedControl/SelectedKerning is not specified!", group, screen, viewState, item);
+        [selectedTextAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
+
+        NSAssert(selectedTextAttributesFont, @"%@/%@/%@/%@/SegmentedControl/SelectedFont is not specified!", group, screen, viewState, item);
+        [selectedTextAttributes setObject:selectedTextAttributesFont forKey:NSFontAttributeName];
+
+        NSAssert(selectedTextAttributesColor, @"%@/%@/%@/%@/SegmentedControl/SelectedColor is not specified!", group, screen, viewState, item);
+        [selectedTextAttributes setObject:selectedTextAttributesColor forKey:NSForegroundColorAttributeName];
+
         ((DNSegmentedControl*)segmentedControl).selectedTextAttributes = selectedTextAttributes;
     }
 }
@@ -729,30 +683,15 @@
     UIColor*    labelColor      = [[self class] performThemeSelectorForAttribute:@"Color" withType:@"BarButtonItem" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
 
     NSMutableDictionary*    textAttributes  = [NSMutableDictionary dictionary];
-    if (labelKerning)
-    {
-        [textAttributes setObject:labelKerning forKey:NSKernAttributeName];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%lu/BarButtonItem/LabelKerning is not specified!", group, screen, viewState, item, controlState);
-    }
-    if (labelFont)
-    {
-        [textAttributes setObject:labelFont forKey:NSFontAttributeName];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%lu/BarButtonItem/LabelFont is not specified!", group, screen, viewState, item, controlState);
-    }
-    if (labelColor)
-    {
-        [textAttributes setObject:labelColor forKey:NSForegroundColorAttributeName];
-    }
-    else
-    {
-        DLog(LL_Error, LD_Theming, @"%@/%@/%@/%@/%lu/BarButtonItem/LabelColor is not specified!", group, screen, viewState, item, controlState);
-    }
+
+    NSAssert(labelKerning, @"%@/%@/%@/%@/%u/BarButtonItem/LabelKerning is not specified!", group, screen, viewState, item, controlState);
+    [textAttributes setObject:labelKerning forKey:NSKernAttributeName];
+
+    NSAssert(labelFont, @"%@/%@/%@/%@/%u/BarButtonItem/LabelFont is not specified!", group, screen, viewState, item, controlState);
+    [textAttributes setObject:labelFont forKey:NSFontAttributeName];
+
+    NSAssert(labelColor, @"%@/%@/%@/%@/%u/BarButtonItem/LabelColor is not specified!", group, screen, viewState, item, controlState);
+    [textAttributes setObject:labelColor forKey:NSForegroundColorAttributeName];
 
     [barButtonItem setTitleTextAttributes:textAttributes
                                  forState:controlState];

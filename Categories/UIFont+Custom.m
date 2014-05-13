@@ -16,6 +16,8 @@
 + (UIFont*)customFontWithName:(NSString*)fontName size:(double)fontSize
 {
     UIFont* retval  = [UIFont fontWithName:fontName size:fontSize];
+    /*
+     // Debugging code to help diagnose missing fonts...
     if (!retval)
     {
         NSArray*    fontFamilies = [UIFont familyNames];
@@ -34,6 +36,7 @@
         UIFont* font    = [UIFont fontWithDescriptor:fontDescriptor size:fontSize];
         NSLog (@"font: %@", font);
     }
+     */
 
     return [retval fontWithSize:fontSize];
 }

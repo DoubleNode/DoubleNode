@@ -693,6 +693,11 @@
     {
         return;
     }
+    if (![notificationContext isKindOfClass:[NSManagedObjectContext class]])
+    {
+        return;
+    }
+
     //if ([NSStringFromClass([self class]) isEqualToString:@"CDMainDataModel"])
     //{
     //    DLog(LL_Debug, LD_CoreData, @"saveToDisk: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
