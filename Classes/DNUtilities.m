@@ -880,7 +880,10 @@
 
 - (void)logEnableDomain:(NSString*)domain forLevel:(LogLevel)level
 {
-    [logDebugDomains setObject:[NSNumber numberWithInt:level] forKey:domain];
+    @synchronized(logDebugDomains)
+    {
+        [logDebugDomains setObject:[NSNumber numberWithInt:level] forKey:domain];
+    }
 }
 
 - (void)logDisableDomain:(NSString*)domain
@@ -890,7 +893,10 @@
 
 - (void)logDisableDomain:(NSString*)domain forLevel:(LogLevel)level
 {
-    [logDebugDomains setObject:[NSNumber numberWithInt:(level - 1)] forKey:domain];
+    @synchronized(logDebugDomains)
+    {
+        [logDebugDomains setObject:[NSNumber numberWithInt:(level - 1)] forKey:domain];
+    }
 }
 
 - (BOOL)isLogEnabledDomain:(NSString*)domain
@@ -901,13 +907,21 @@
         return NO;
     }
 
-    id  logDebug    = [logDebugDomains objectForKey:domain];
-    if (logDebug)
+    __block BOOL    retval = YES;
+
+    @synchronized(logDebugDomains)
     {
-        return (level <= [[logDebugDomains objectForKey:domain] intValue]);
+        [logDebugDomains enumerateKeysAndObjectsUsingBlock:^(NSString* key, NSNumber* obj, BOOL* stop)
+         {
+             if ([key isEqualToString:domain])
+             {
+                 retval = (level <= [[logDebugDomains objectForKey:domain] intValue]);
+                 *stop = YES;
+             }
+         }];
     }
 
-    return YES;
+    return retval;
 }
 
 @end

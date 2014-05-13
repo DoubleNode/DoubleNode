@@ -103,6 +103,72 @@
     [self executeDidChangeHandler];
 }
 
+#pragma mark - execute Handler overrides
+
+- (void)executeWillChangeHandler
+{
+    [DNUtilities runOnBackgroundThread:^
+     {
+         [super executeWillChangeHandler];
+     }];
+}
+
+- (void)executeDidChangeHandler
+{
+    [DNUtilities runOnBackgroundThread:^
+     {
+         [super executeDidChangeHandler];
+     }];
+}
+
+- (void)executeDidChangeObjectInsertHandler:(id)subjectObject
+                                atIndexPath:(NSIndexPath*)indexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
+{
+    [DNUtilities runOnBackgroundThread:^
+     {
+         [super executeDidChangeObjectInsertHandler:subjectObject
+                                        atIndexPath:indexPath
+                                       newIndexPath:newIndexPath];
+     }];
+}
+
+- (void)executeDidChangeObjectDeleteHandler:(id)subjectObject
+                                atIndexPath:(NSIndexPath*)indexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
+{
+    [DNUtilities runOnBackgroundThread:^
+     {
+         [super executeDidChangeObjectDeleteHandler:subjectObject
+                                        atIndexPath:indexPath
+                                       newIndexPath:newIndexPath];
+     }];
+}
+
+- (void)executeDidChangeObjectUpdateHandler:(id)subjectObject
+                                atIndexPath:(NSIndexPath*)indexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
+{
+    [DNUtilities runOnBackgroundThread:^
+     {
+         [super executeDidChangeObjectUpdateHandler:subjectObject
+                                        atIndexPath:indexPath
+                                       newIndexPath:newIndexPath];
+     }];
+}
+
+- (void)executeDidChangeObjectMoveHandler:(id)subjectObject
+                              atIndexPath:(NSIndexPath*)indexPath
+                             newIndexPath:(NSIndexPath*)newIndexPath
+{
+    [DNUtilities runOnBackgroundThread:^
+     {
+         [super executeDidChangeObjectMoveHandler:subjectObject
+                                      atIndexPath:indexPath
+                                     newIndexPath:newIndexPath];
+     }];
+}
+
 #pragma mark - NSKeyValueObserving protocol
 
 - (void)observeValueForKeyPath:(NSString*)keyPath

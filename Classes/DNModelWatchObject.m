@@ -36,90 +36,72 @@
 
 - (void)executeWillChangeHandler
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeWillChangeHandler];
-         if ([self checkWatch] && (self.willChangeHandler != nil))
-         {
-             self.willChangeHandler(self, [self object]);
-         }
-     }];
+    [super executeWillChangeHandler];
+    if ([self checkWatch] && (self.willChangeHandler != nil))
+    {
+        self.willChangeHandler(self, [self object]);
+    }
 }
 
 - (void)executeDidChangeHandler
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeHandler];
-         if ([self checkWatch] && (self.didChangeHandler != nil))
-         {
-             self.didChangeHandler(self, [self object]);
-         }
-     }];
+    [super executeDidChangeHandler];
+    if ([self checkWatch] && (self.didChangeHandler != nil))
+    {
+        self.didChangeHandler(self, [self object]);
+    }
 }
 
 - (void)executeDidChangeObjectInsertHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
                                newIndexPath:(NSIndexPath*)newIndexPath
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeObjectInsertHandler:object
-                                        atIndexPath:indexPath
-                                       newIndexPath:newIndexPath];
-         if ([self checkWatch] && (self.didChangeObjectInsertHandler != nil))
-         {
-             self.didChangeObjectInsertHandler(self, object);
-         }
-     }];
+    [super executeDidChangeObjectInsertHandler:object
+                                   atIndexPath:indexPath
+                                  newIndexPath:newIndexPath];
+    if ([self checkWatch] && (self.didChangeObjectInsertHandler != nil))
+    {
+        self.didChangeObjectInsertHandler(self, object);
+    }
 }
 
 - (void)executeDidChangeObjectDeleteHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
                                newIndexPath:(NSIndexPath*)newIndexPath
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeObjectDeleteHandler:object
-                                        atIndexPath:indexPath
-                                       newIndexPath:newIndexPath];
-         if ([self checkWatch] && (self.didChangeObjectDeleteHandler != nil))
-         {
-             self.didChangeObjectDeleteHandler(self, object);
-         }
-     }];
+    [super executeDidChangeObjectDeleteHandler:object
+                                   atIndexPath:indexPath
+                                  newIndexPath:newIndexPath];
+    if ([self checkWatch] && (self.didChangeObjectDeleteHandler != nil))
+    {
+        self.didChangeObjectDeleteHandler(self, object);
+    }
 }
 
 - (void)executeDidChangeObjectUpdateHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
                                newIndexPath:(NSIndexPath*)newIndexPath
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeObjectUpdateHandler:object
-                                        atIndexPath:indexPath
-                                       newIndexPath:newIndexPath];
-         if ([self checkWatch] && (self.didChangeObjectUpdateHandler != nil))
-         {
-             self.didChangeObjectUpdateHandler(self, object);
-         }
-     }];
+    [super executeDidChangeObjectUpdateHandler:object
+                                   atIndexPath:indexPath
+                                  newIndexPath:newIndexPath];
+    if ([self checkWatch] && (self.didChangeObjectUpdateHandler != nil))
+    {
+        self.didChangeObjectUpdateHandler(self, object);
+    }
 }
 
 - (void)executeDidChangeObjectMoveHandler:(id)object
                               atIndexPath:(NSIndexPath*)indexPath
                              newIndexPath:(NSIndexPath*)newIndexPath
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeObjectMoveHandler:object
-                                      atIndexPath:indexPath
-                                     newIndexPath:newIndexPath];
-         if ([self checkWatch] && (self.didChangeObjectMoveHandler != nil))
-         {
-             self.didChangeObjectMoveHandler(self, object);
-         }
-     }];
+    [super executeDidChangeObjectMoveHandler:object
+                                 atIndexPath:indexPath
+                                newIndexPath:newIndexPath];
+    if ([self checkWatch] && (self.didChangeObjectMoveHandler != nil))
+    {
+        self.didChangeObjectMoveHandler(self, object);
+    }
 }
 
 @end
