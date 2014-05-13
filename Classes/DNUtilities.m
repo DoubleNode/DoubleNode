@@ -269,25 +269,30 @@
 
 + (void)runBlock:(void (^)())block
 {
-    block();
+    [DNUtilities runOnMainThreadWithoutDeadlocking:^
+     {
+         block();
+     }];
+}
+
++ (void)runOnMainThreadBlock:(void (^)())block
+{
+    [DNUtilities runOnBackgroundThread:^
+     {
+         block();
+     }];
 }
 
 + (void)runAfterDelay:(CGFloat)delay block:(void (^)())block
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         void (^block_)() = [block copy];
-         [self performSelector:@selector(runBlock:) withObject:block_ afterDelay:delay];
-     }];
+    void (^block_)() = [block copy];
+    [self performSelector:@selector(runBlock:) withObject:block_ afterDelay:delay];
 }
 
 + (void)runOnMainThreadAfterDelay:(CGFloat)delay block:(void (^)())block
 {
-    [DNUtilities runOnMainThreadWithoutDeadlocking:^
-     {
-         void (^block_)() = [block copy];
-         [self performSelector:@selector(runBlock:) withObject:block_ afterDelay:delay];
-     }];
+    void (^block_)() = [block copy];
+    [self performSelector:@selector(runOnMainThreadBlock:) withObject:block_ afterDelay:delay];
 }
 
 + (void)runRepeatedlyAfterDelay:(CGFloat)delay block:(void (^)(BOOL* stop))block
