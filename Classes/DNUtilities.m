@@ -305,6 +305,21 @@
      }];
 }
 
++ (void)runOnMainThreadRepeatedlyAfterDelay:(CGFloat)delay block:(void (^)(BOOL* stop))block
+{
+    [[self class] runOnMainThreadAfterDelay:delay
+                                      block:^
+     {
+         BOOL   stop = NO;
+         block(&stop);
+         if (stop == NO)
+         {
+             [[self class] runOnMainThreadRepeatedlyAfterDelay:delay
+                                                         block:block];
+         }
+     }];
+}
+
 - (void)instanceRunBlock:(void (^)())block
 {
     block();
