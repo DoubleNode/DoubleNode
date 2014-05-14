@@ -409,4 +409,12 @@
 
 @interface DNTheme : ADVDefaultTheme <DNThemeProtocol>
 
+- (SEL)functionNameForAttribute:(NSString*)attribute
+                       withType:(NSString*)type
+                       andGroup:(NSString*)group
+                      andScreen:(NSString*)screen
+                   andViewState:(NSString*)viewState
+                        andItem:(NSString*)item
+                andControlState:(NSString*)controlStateString;
+
 @end
