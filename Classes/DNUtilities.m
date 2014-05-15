@@ -747,6 +747,36 @@
     return retval;
 }
 
++ (NSDictionary*)dictionaryDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue
+{
+    return [[self class] dictionaryDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSDictionary*)dictionaryDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue
+{
+    NSDictionary*    retval  = defaultValue;
+
+    id  object = [dictionary objectForKey:key];
+    if (object != nil)
+    {
+        if (object != (NSDictionary*)[NSNull null])
+        {
+            if ([object isKindOfClass:[NSDictionary class]] == YES)
+            {
+                NSDictionary*   newval  = object;
+
+                if ((retval == nil) || ([newval isEqualToDictionary:retval] == NO))
+                {
+                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                    retval = newval;
+                }
+            }
+        }
+    }
+
+    return retval;
+}
+
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
     return [[self class] dictionaryDate:dictionary dirty:nil withItem:key andDefault:defaultValue];

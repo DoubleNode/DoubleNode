@@ -576,6 +576,26 @@
     return newValue;
 }
 
+- (NSDictionary*)updateDictionaryFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue
+{
+    return [self updateDictionaryFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSDictionary*)updateDictionaryFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue
+{
+    BOOL    localDirtyFlag;
+    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+
+    *dirtyFlag  = NO;
+    id  newValue = [self dictionaryDictionary:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    if (*dirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+
+    return newValue;
+}
+
 - (NSDate*)updateDateFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
     return [self updateDateFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
@@ -678,6 +698,16 @@
     return [DNUtilities dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
+- (NSDictionary*)dictionaryDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue
+{
+    return [DNUtilities dictionaryDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (NSDictionary*)dictionaryDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue
+{
+    return [DNUtilities dictionaryDictionary:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
 - (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
     return [DNUtilities dictionaryDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
@@ -756,6 +786,16 @@
 + (NSArray*)dictionaryArray:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSArray*)defaultValue
 {
     return [DNUtilities dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
++ (NSDictionary*)dictionaryDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue
+{
+    return [DNUtilities dictionaryDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (NSDictionary*)dictionaryDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue
+{
+    return [DNUtilities dictionaryDictionary:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue
