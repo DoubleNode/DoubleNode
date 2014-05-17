@@ -25,7 +25,6 @@
     //[dateComponents setSecond:0];
 
     NSDate* midnightUTC = [calendar dateFromComponents:dateComponents];
-    [calendar release];
 
     return midnightUTC;
 }
