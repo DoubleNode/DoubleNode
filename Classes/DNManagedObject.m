@@ -18,6 +18,7 @@
 #import "NSString+HTML.h"
 #import "NSString+Inflections.h"
 #import "NSInvocation+Constructors.h"
+#import "NSDate+Unix.h"
 
 @implementation DNManagedObject
 
@@ -368,7 +369,29 @@
     {
         if (![self.id isEqual:idValue])
         {
-            self.id = idValue;
+            NSDictionary*           attributes  = [self.entity attributesByName];
+            NSAttributeDescription* attribute   = [attributes objectForKey:@"id"];
+            BOOL                    stringFlag  = NO;
+            if (attribute && (attribute.attributeType == NSStringAttributeType))
+            {
+                stringFlag  = YES;
+            }
+
+            if (stringFlag)
+            {
+                self.id = [NSString stringWithFormat:@"%@", idValue];
+            }
+            else
+            {
+                if ([idValue isKindOfClass:[NSString class]])
+                {
+                    self.id = [NSNumber numberWithInteger:(int)[idValue intValue]];
+                }
+                else
+                {
+                    self.id = idValue;
+                }
+            }
         }
         
         [self loadWithDictionary:dict withExceptions:nil];
@@ -392,22 +415,15 @@
 }
 
 - (void)loadWithDictionary:(NSDictionary*)dict
-{
-    id  newId   = [[self class] entityIDWithDictionary:dict];
-    if (![self.id isEqual:newId])
-    {
-        self.id  = newId;
-    }
-}
-
-- (void)loadWithDictionary:(NSDictionary*)dict
             withExceptions:(NSArray*)exceptions
 {
+    /*
     id  newId   = [[self class] entityIDWithDictionary:dict];
     if (![self.id isEqual:newId])
     {
         self.id  = newId;
     }
+     */
 
     NSDictionary*   attributes  = [self.entity attributesByName];
 
@@ -514,9 +530,16 @@
 
                       id     newObject  = [cdoSubClass entityFromDictionary:obj];
 
-                      NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object", [relationship.destinationEntity name]];
+                      NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object", [[relationship name] camelize]];
+                      SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
 
-                      //[self addCommentsObject:newObject];
+                      if ([self respondsToSelector:addObjectSelector])
+                      {
+                          NSInvocation*  inv = [NSInvocation invocationWithTarget:self
+                                                                         selector:addObjectSelector];
+                          [inv setArgument:&newObject atIndex:0];
+                          [inv invoke];
+                      }
                   }];
              }
          }
@@ -533,10 +556,12 @@
                  BOOL   isEqual = NO;
 
                  NSString*  equalityMethodName  = [NSString stringWithFormat:@"isEqualTo%@", [relationship.destinationEntity name]];
-                 if ([existingObject respondsToSelector:@selector(equalityMethodName)])
+                 SEL        equalitySelector    = NSSelectorFromString(equalityMethodName);
+
+                 if ([existingObject respondsToSelector:equalitySelector])
                  {
                      NSInvocation*  inv = [NSInvocation invocationWithTarget:existingObject
-                                                                    selector:@selector(equalityMethodName)];
+                                                                    selector:equalitySelector];
                      [inv invoke];
                      [inv getReturnValue:&isEqual];
                  }
@@ -574,7 +599,61 @@
 
          if (currentValue)
          {
-             dict[key]  = currentValue;
+             switch (attribute.attributeType)
+             {
+                 case NSInteger16AttributeType:
+                 case NSInteger32AttributeType:
+                 case NSInteger64AttributeType:
+                 case NSBooleanAttributeType:
+                 case NSDecimalAttributeType:
+                 case NSDoubleAttributeType:
+                 case NSFloatAttributeType:
+                 case NSStringAttributeType:
+                 {
+                     dict[key]  = currentValue;
+                     break;
+                 }
+
+                 case NSDateAttributeType:
+                 {
+                     DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
+                     dict[key]  = [NSNumber numberWithInt:[currentValue unixTimestamp]];
+                     break;
+                 }
+             }
+         }
+     }];
+
+    NSDictionary*   relationships   = [self.entity relationshipsByName];
+
+    [relationships enumerateKeysAndObjectsUsingBlock:^(id key, NSRelationshipDescription* relationship, BOOL* stop)
+     {
+         if (![key isKindOfClass:[NSString class]])
+         {
+             DLog(LL_Debug, LD_General, @"saveRelate: NOTSTRING key=%@", key);
+             return;
+         }
+
+         if ([relationship isToMany])
+         {
+             DLog(LL_Debug, LD_General, @"saveRelateToMany: key=%@", key);
+             id currentValue    = [self valueForKey:key];
+
+             dict[key]  = [NSMutableArray arrayWithCapacity:[currentValue count]];
+             [currentValue enumerateObjectsUsingBlock:^(DNManagedObject* obj, NSUInteger idx, BOOL* stop)
+              {
+                  [dict[key] addObject:[obj saveIDToDictionary]];
+              }];
+         }
+         else
+         {
+             DLog(LL_Debug, LD_General, @"saveRelateToOne: key=%@", key);
+             id currentValue    = [self valueForKey:key];
+
+             if (currentValue)
+             {
+                 dict[key]  = [currentValue saveIDToDictionary];
+             }
          }
      }];
 

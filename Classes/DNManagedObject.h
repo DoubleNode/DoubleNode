@@ -20,6 +20,121 @@
 #define kDNDefaultDate_NeverExpires [NSDate dateWithTimeIntervalSince1970:31536000000.0f]
 // **********
 
+#define CDO_DEFAULT_METHOD_PROTOTYPES(name,type)            \
++ (instancetype)name;                                       \
++ (instancetype)name##FromID:(NSNumber*)idValue;            \
++ (instancetype)name##FromIDIfExists:(NSNumber*)idValue;    \
+- (BOOL)isEqualTo##type:(CDO##type*)object;
+
+#define CDO_DEFAULT_METHOD_INSTANCES(name,type)             \
++ (Class)entityModelClass                                   \
+{                                                           \
+    return [CD##type##Model class];                         \
+}                                                           \
+                                                            \
++ (instancetype)name                                        \
+{                                                           \
+    return [self entity];                                   \
+}                                                           \
+                                                            \
++ (instancetype)name##FromID:(NSNumber*)idValue             \
+{                                                           \
+    return [[self alloc] initWithID:idValue];               \
+}                                                           \
+                                                            \
++ (instancetype)name##FromIDIfExists:(NSNumber*)idValue     \
+{                                                           \
+    return [[self alloc] initWithIDIfExists:idValue];       \
+}                                                           \
+                                                            \
+- (BOOL)isEqualTo##type:(CDO##type*)object                  \
+{                                                           \
+    if (!object)                                            \
+    {                                                       \
+        return NO;                                          \
+    }                                                       \
+                                                            \
+    return [self.objectID isEqual:object.objectID];         \
+}
+
+#define CDO_DEFAULT_STRINGID_METHOD_PROTOTYPES(name,type)   \
++ (instancetype)name;                                       \
++ (instancetype)name##FromID:(NSString*)idValue;            \
++ (instancetype)name##FromIDIfExists:(NSString*)idValue;    \
+- (BOOL)isEqualTo##type:(CDO##type*)object;
+
+#define CDO_DEFAULT_STRINGID_METHOD_INSTANCES(name,type)    \
++ (Class)entityModelClass                                   \
+{                                                           \
+    return [CD##type##Model class];                         \
+}                                                           \
+                                                            \
++ (instancetype)name                                        \
+{                                                           \
+    return [self entity];                                   \
+}                                                           \
+                                                            \
++ (instancetype)name##FromID:(NSString*)idValue             \
+{                                                           \
+    return [[self alloc] initWithID:idValue];               \
+}                                                           \
+                                                            \
++ (instancetype)name##FromIDIfExists:(NSString*)idValue     \
+{                                                           \
+    return [[self alloc] initWithIDIfExists:idValue];       \
+}                                                           \
+                                                            \
+- (BOOL)isEqualTo##type:(CDO##type*)object                  \
+{                                                           \
+    if (!object)                                            \
+    {                                                       \
+        return NO;                                          \
+    }                                                       \
+                                                            \
+    return [self.objectID isEqual:object.objectID];         \
+}
+
+#define CDO_TOMANY_ACCESSORS_PROTOTYPES(name,type)      \
+- (void)add##name##Object:(CDO##type*)value;            \
+- (void)remove##name##Object:(CDO##type*)value;         \
+- (void)add##name:(NSSet*)values;                       \
+- (void)remove##name:(NSSet*)values;
+
+#define CDO_TOMANY_ACCESSORS_INSTANCES(name,type)
+
+#define CDO_TOMANY_ORDERED_ACCESSORS_PROTOTYPES(name,name2,type)                        \
+- (void)insertObject:(CDO##type*)value in##name##AtIndex:(NSUInteger)idx;               \
+- (void)removeObjectFrom##name##AtIndex:(NSUInteger)idx;                                \
+- (void)insert##name:(NSArray*)value atIndexes:(NSIndexSet*)indexes;                    \
+- (void)remove##name##AtIndexes:(NSIndexSet*)indexes;                                   \
+- (void)replaceObjectIn##name##AtIndex:(NSUInteger)idx withObject:(CDO##type*)value;    \
+- (void)replace##name##AtIndexes:(NSIndexSet*)indexes withObjects:(NSArray*)values;     \
+- (void)add##name##Object:(CDO##type*)value;                                            \
+- (void)remove##name##Object:(CDO##type*)value;                                         \
+- (void)add##name:(NSOrderedSet*)values;                                                \
+- (void)remove##name:(NSOrderedSet*)values;
+
+#define CDO_TOMANY_ORDERED_ACCESSORS_INSTANCES(name,name2,type)                                         \
+- (void)add##name##Object:(CDO##type*)value                                                             \
+{                                                                                                       \
+    [self.managedObjectContext performBlockAndWait:^                                                    \
+     {                                                                                                  \
+         NSMutableOrderedSet*    tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.name2];   \
+         [tempSet addObject:value];                                                                     \
+         self.name2 = tempSet;                                                                          \
+     }];                                                                                                \
+}                                                                                                       \
+                                                                                                        \
+- (void)remove##name##Object:(CDO##type*)value                                                          \
+{                                                                                                       \
+    [self.managedObjectContext performBlockAndWait:^                                                    \
+     {                                                                                                  \
+         NSMutableOrderedSet*    tempSet = [NSMutableOrderedSet orderedSetWithOrderedSet:self.name2];   \
+         [tempSet removeObject:value];                                                                  \
+         self.name2 = tempSet;                                                                          \
+     }];                                                                                                \
+}
+
 @class DNModel;
 
 @interface DNManagedObject : NSManagedObject
@@ -141,7 +256,6 @@
 - (instancetype)initWithDictionary:(NSDictionary*)dict;
 
 - (void)clearData;
-- (void)loadWithDictionary:(NSDictionary*)dict;
 - (void)loadWithDictionary:(NSDictionary*)dict withExceptions:(NSArray*)exceptions;
 - (NSDictionary*)saveToDictionary;
 - (NSDictionary*)saveIDToDictionary;
