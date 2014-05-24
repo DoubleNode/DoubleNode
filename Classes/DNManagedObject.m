@@ -48,14 +48,19 @@
     return [NSStringFromClass([self class]) substringFromIndex:3];
 }
 
++ (NSString*)idAttribute
+{
+    return @"id";
+}
+
 + (id)entityIDWithDictionary:(NSDictionary*)dict
 {
-    if ([[dict objectForKey:@"id"] isKindOfClass:[NSString class]])
-    {
-        return [DNUtilities dictionaryString:dict withItem:@"id" andDefault:nil];
-    }
+    //if ([[dict objectForKey:@"id"] isKindOfClass:[NSString class]])
+    //{
+    //    return [DNUtilities dictionaryString:dict withItem:@"id" andDefault:nil];
+    //}
 
-    return [DNUtilities dictionaryNumber:dict withItem:@"id" andDefault:nil];
+    return [DNUtilities dictionaryNumber:dict withItem:[[self class] idAttribute] andDefault:nil];
 }
 
 + (NSString*)pathForEntity
@@ -314,6 +319,49 @@
     return self;
 }
 
+- (void)setIdIfChanged:(id)idValue
+{
+    NSDictionary*           attributes  = [self.entity attributesByName];
+    NSAttributeDescription* attribute   = [attributes objectForKey:[[self class] idAttribute]];
+    BOOL                    stringFlag  = NO;
+    if (attribute && (attribute.attributeType == NSStringAttributeType))
+    {
+        stringFlag  = YES;
+    }
+
+    if (stringFlag)
+    {
+        if (![self.id isEqualToString:[NSString stringWithFormat:@"%@", idValue]])
+        {
+            self.id = [NSString stringWithFormat:@"%@", idValue];
+        }
+    }
+    else
+    {
+        NSNumber*   newValue;
+        if ([idValue isKindOfClass:[NSString class]])
+        {
+            newValue = [NSNumber numberWithInteger:(int)[idValue intValue]];
+        }
+        else
+        {
+            newValue = idValue;
+        }
+
+        if (newValue)
+        {
+            if (![self.id isEqualToNumber:newValue])
+            {
+                self.id = newValue;
+            }
+        }
+        else
+        {
+            self.id = nil;
+        }
+    }
+}
+
 - (instancetype)initWithID:(id)idValue
 {
     id  newSelf = [[[self class] entityModel] getFromID:idValue];
@@ -327,7 +375,7 @@
     {
         if (![self.id isEqual:idValue])
         {
-            self.id = idValue;
+            [self setIdIfChanged:idValue];
         }
     }
     
@@ -347,7 +395,7 @@
     {
         if (![self.id isEqual:idValue])
         {
-            self.id = idValue;
+            [self setIdIfChanged:idValue];
         }
     }
 
@@ -367,36 +415,11 @@
     self = newSelf;
     if (self)
     {
-        if (![self.id isEqual:idValue])
-        {
-            NSDictionary*           attributes  = [self.entity attributesByName];
-            NSAttributeDescription* attribute   = [attributes objectForKey:@"id"];
-            BOOL                    stringFlag  = NO;
-            if (attribute && (attribute.attributeType == NSStringAttributeType))
-            {
-                stringFlag  = YES;
-            }
+        [self setIdIfChanged:idValue];
 
-            if (stringFlag)
-            {
-                self.id = [NSString stringWithFormat:@"%@", idValue];
-            }
-            else
-            {
-                if ([idValue isKindOfClass:[NSString class]])
-                {
-                    self.id = [NSNumber numberWithInteger:(int)[idValue intValue]];
-                }
-                else
-                {
-                    self.id = idValue;
-                }
-            }
-        }
-        
         [self loadWithDictionary:dict withExceptions:nil];
     }
-    
+
     return self;
 }
 
@@ -437,17 +460,17 @@
 
          if (exceptions && [exceptions containsObject:key])
          {
-             DLog(LL_Debug, LD_General, @"load: SKIPPING key=%@", key);
+             //DLog(LL_Debug, LD_General, @"load: SKIPPING key=%@", key);
              return;
          }
 
-         if ([key isEqualToString:@"id"])
+         if ([key isEqualToString:[[self class] idAttribute]])
          {
-             DLog(LL_Debug, LD_General, @"load: ID key=%@", key);
+             //DLog(LL_Debug, LD_General, @"load: ID key=%@", key);
              return;
          }
 
-         DLog(LL_Debug, LD_General, @"load: key=%@", key);
+         //DLog(LL_Debug, LD_General, @"load: key=%@", key);
          id defaultValue    = [self valueForKey:key];
 
          switch (attribute.attributeType)
@@ -456,21 +479,21 @@
              case NSInteger32AttributeType:
              case NSInteger64AttributeType:
              {
-                 DLog(LL_Debug, LD_General, @"load: updateNumberFieldIfChanged");
+                 //DLog(LL_Debug, LD_General, @"load: updateNumberFieldIfChanged");
                  [self updateNumberFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
                  break;
              }
 
              case NSBooleanAttributeType:
              {
-                 DLog(LL_Debug, LD_General, @"load: updateBooleanFieldIfChanged");
+                 //DLog(LL_Debug, LD_General, @"load: updateBooleanFieldIfChanged");
                  [self updateBooleanFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
                  break;
              }
 
              case NSDecimalAttributeType:
              {
-                 DLog(LL_Debug, LD_General, @"load: updateDecimalNumberFieldIfChanged");
+                 //DLog(LL_Debug, LD_General, @"load: updateDecimalNumberFieldIfChanged");
                  [self updateDecimalNumberFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
                  break;
              }
@@ -478,21 +501,21 @@
              case NSDoubleAttributeType:
              case NSFloatAttributeType:
              {
-                 DLog(LL_Debug, LD_General, @"load: updateDoubleFieldIfChanged");
+                 //DLog(LL_Debug, LD_General, @"load: updateDoubleFieldIfChanged");
                  [self updateDoubleFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
                  break;
              }
 
              case NSStringAttributeType:
              {
-                 DLog(LL_Debug, LD_General, @"load: updateStringFieldIfChanged");
+                 //DLog(LL_Debug, LD_General, @"load: updateStringFieldIfChanged");
                  [self updateStringFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
                  break;
              }
 
              case NSDateAttributeType:
              {
-                 DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
+                 //DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
                  if (!defaultValue)
                  {
                      defaultValue   = kDNDefaultDate_NeverExpires;
@@ -515,13 +538,13 @@
 
          if (exceptions && [exceptions containsObject:key])
          {
-             DLog(LL_Debug, LD_General, @"loadRelate: SKIPPING key=%@", key);
+             //DLog(LL_Debug, LD_General, @"loadRelate: SKIPPING key=%@", key);
              return;
          }
 
          if ([relationship isToMany])
          {
-             DLog(LL_Debug, LD_General, @"loadRelateToMany: key=%@", key);
+             //DLog(LL_Debug, LD_General, @"loadRelateToMany: key=%@", key);
              if (dict[key] && ![dict[key] isKindOfClass:[NSNull class]])
              {
                  [dict[key] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
@@ -530,14 +553,14 @@
 
                       id     newObject  = [cdoSubClass entityFromDictionary:obj];
 
-                      NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object", [[relationship name] camelize]];
+                      NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[relationship name] camelize]];
                       SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
 
                       if ([self respondsToSelector:addObjectSelector])
                       {
                           NSInvocation*  inv = [NSInvocation invocationWithTarget:self
                                                                          selector:addObjectSelector];
-                          [inv setArgument:&newObject atIndex:0];
+                          [inv setArgument:&newObject atIndex:2];
                           [inv invoke];
                       }
                   }];
@@ -545,7 +568,7 @@
          }
          else
          {
-             DLog(LL_Debug, LD_General, @"loadRelateToOne: key=%@", key);
+             //DLog(LL_Debug, LD_General, @"loadRelateToOne: key=%@", key);
              if (dict[key] && ![dict[key] isKindOfClass:[NSNull class]])
              {
                  Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
@@ -555,13 +578,14 @@
 
                  BOOL   isEqual = NO;
 
-                 NSString*  equalityMethodName  = [NSString stringWithFormat:@"isEqualTo%@", [relationship.destinationEntity name]];
+                 NSString*  equalityMethodName  = [NSString stringWithFormat:@"isEqualTo%@:", [relationship.destinationEntity name]];
                  SEL        equalitySelector    = NSSelectorFromString(equalityMethodName);
 
                  if ([existingObject respondsToSelector:equalitySelector])
                  {
                      NSInvocation*  inv = [NSInvocation invocationWithTarget:existingObject
                                                                     selector:equalitySelector];
+                     [inv setArgument:&newObject atIndex:2];
                      [inv invoke];
                      [inv getReturnValue:&isEqual];
                  }
@@ -588,13 +612,13 @@
              return;
          }
 
-         if ([key isEqualToString:@"id"])
+         if ([key isEqualToString:[[self class] idAttribute]])
          {
-             DLog(LL_Debug, LD_General, @"save: ID key=%@", key);
+             //DLog(LL_Debug, LD_General, @"save: ID key=%@", key);
              return;
          }
 
-         DLog(LL_Debug, LD_General, @"save: key=%@", key);
+         //DLog(LL_Debug, LD_General, @"save: key=%@", key);
          id currentValue    = [self valueForKey:key];
 
          if (currentValue)
@@ -616,7 +640,7 @@
 
                  case NSDateAttributeType:
                  {
-                     DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
+                     //DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
                      dict[key]  = [NSNumber numberWithInt:[currentValue unixTimestamp]];
                      break;
                  }
@@ -636,7 +660,7 @@
 
          if ([relationship isToMany])
          {
-             DLog(LL_Debug, LD_General, @"saveRelateToMany: key=%@", key);
+             //DLog(LL_Debug, LD_General, @"saveRelateToMany: key=%@", key);
              id currentValue    = [self valueForKey:key];
 
              dict[key]  = [NSMutableArray arrayWithCapacity:[currentValue count]];
@@ -647,7 +671,7 @@
          }
          else
          {
-             DLog(LL_Debug, LD_General, @"saveRelateToOne: key=%@", key);
+             //DLog(LL_Debug, LD_General, @"saveRelateToOne: key=%@", key);
              id currentValue    = [self valueForKey:key];
 
              if (currentValue)
@@ -665,8 +689,8 @@
     [self.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
 
     return @{
-             @"id"          : self.id,
-             @"objectID"    : [[[self objectID] URIRepresentation] absoluteString]
+             [[self class] idAttribute] : [self valueForKey:[[self class] idAttribute]],
+             @"objectID"                : [[[self objectID] URIRepresentation] absoluteString]
              };
 }
 
