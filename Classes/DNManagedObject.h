@@ -142,6 +142,7 @@
 
 - (void)clearData;
 - (void)loadWithDictionary:(NSDictionary*)dict;
+- (void)loadWithDictionary:(NSDictionary*)dict withExceptions:(NSArray*)exceptions;
 - (NSDictionary*)saveToDictionary;
 - (NSDictionary*)saveIDToDictionary;
 

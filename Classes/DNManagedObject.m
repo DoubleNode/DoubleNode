@@ -17,6 +17,7 @@
 #import "DNUtilities.h"
 #import "NSString+HTML.h"
 #import "NSString+Inflections.h"
+#import "NSInvocation+Constructors.h"
 
 @implementation DNManagedObject
 
@@ -370,7 +371,7 @@
             self.id = idValue;
         }
         
-        [self loadWithDictionary:dict];
+        [self loadWithDictionary:dict withExceptions:nil];
     }
     
     return self;
@@ -399,9 +400,185 @@
     }
 }
 
+- (void)loadWithDictionary:(NSDictionary*)dict
+            withExceptions:(NSArray*)exceptions
+{
+    id  newId   = [[self class] entityIDWithDictionary:dict];
+    if (![self.id isEqual:newId])
+    {
+        self.id  = newId;
+    }
+
+    NSDictionary*   attributes  = [self.entity attributesByName];
+
+    [attributes enumerateKeysAndObjectsUsingBlock:^(id key, NSAttributeDescription* attribute, BOOL* stop)
+     {
+         if (![key isKindOfClass:[NSString class]])
+         {
+             DLog(LL_Debug, LD_General, @"load: NOTSTRING key=%@", key);
+             return;
+         }
+
+         if (exceptions && [exceptions containsObject:key])
+         {
+             DLog(LL_Debug, LD_General, @"load: SKIPPING key=%@", key);
+             return;
+         }
+
+         if ([key isEqualToString:@"id"])
+         {
+             DLog(LL_Debug, LD_General, @"load: ID key=%@", key);
+             return;
+         }
+
+         DLog(LL_Debug, LD_General, @"load: key=%@", key);
+         id defaultValue    = [self valueForKey:key];
+
+         switch (attribute.attributeType)
+         {
+             case NSInteger16AttributeType:
+             case NSInteger32AttributeType:
+             case NSInteger64AttributeType:
+             {
+                 DLog(LL_Debug, LD_General, @"load: updateNumberFieldIfChanged");
+                 [self updateNumberFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                 break;
+             }
+
+             case NSBooleanAttributeType:
+             {
+                 DLog(LL_Debug, LD_General, @"load: updateBooleanFieldIfChanged");
+                 [self updateBooleanFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                 break;
+             }
+
+             case NSDecimalAttributeType:
+             {
+                 DLog(LL_Debug, LD_General, @"load: updateDecimalNumberFieldIfChanged");
+                 [self updateDecimalNumberFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                 break;
+             }
+
+             case NSDoubleAttributeType:
+             case NSFloatAttributeType:
+             {
+                 DLog(LL_Debug, LD_General, @"load: updateDoubleFieldIfChanged");
+                 [self updateDoubleFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                 break;
+             }
+
+             case NSStringAttributeType:
+             {
+                 DLog(LL_Debug, LD_General, @"load: updateStringFieldIfChanged");
+                 [self updateStringFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                 break;
+             }
+
+             case NSDateAttributeType:
+             {
+                 DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
+                 if (!defaultValue)
+                 {
+                     defaultValue   = kDNDefaultDate_NeverExpires;
+                 }
+                 [self updateDateFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                 break;
+             }
+         }
+     }];
+
+    NSDictionary*   relationships   = [self.entity relationshipsByName];
+
+    [relationships enumerateKeysAndObjectsUsingBlock:^(id key, NSRelationshipDescription* relationship, BOOL* stop)
+     {
+         if (![key isKindOfClass:[NSString class]])
+         {
+             DLog(LL_Debug, LD_General, @"loadRelate: NOTSTRING key=%@", key);
+             return;
+         }
+
+         if (exceptions && [exceptions containsObject:key])
+         {
+             DLog(LL_Debug, LD_General, @"loadRelate: SKIPPING key=%@", key);
+             return;
+         }
+
+         if ([relationship isToMany])
+         {
+             DLog(LL_Debug, LD_General, @"loadRelateToMany: key=%@", key);
+             if (dict[key] && ![dict[key] isKindOfClass:[NSNull class]])
+             {
+                 [dict[key] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+                  {
+                      Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
+
+                      id     newObject  = [cdoSubClass entityFromDictionary:obj];
+
+                      NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object", [relationship.destinationEntity name]];
+
+                      //[self addCommentsObject:newObject];
+                  }];
+             }
+         }
+         else
+         {
+             DLog(LL_Debug, LD_General, @"loadRelateToOne: key=%@", key);
+             if (dict[key] && ![dict[key] isKindOfClass:[NSNull class]])
+             {
+                 Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
+
+                 id     existingObject  = [self valueForKey:key];
+                 id     newObject       = [cdoSubClass entityFromDictionary:dict[key]];
+
+                 BOOL   isEqual = NO;
+
+                 NSString*  equalityMethodName  = [NSString stringWithFormat:@"isEqualTo%@", [relationship.destinationEntity name]];
+                 if ([existingObject respondsToSelector:@selector(equalityMethodName)])
+                 {
+                     NSInvocation*  inv = [NSInvocation invocationWithTarget:existingObject
+                                                                    selector:@selector(equalityMethodName)];
+                     [inv invoke];
+                     [inv getReturnValue:&isEqual];
+                 }
+
+                 if (!isEqual)
+                 {
+                     [self setValue:newObject forKey:key];
+                 }
+             }
+         }
+     }];
+}
+
 - (NSDictionary*)saveToDictionary
 {
-    return [self saveIDToDictionary];
+    NSMutableDictionary*    dict        = [[self saveIDToDictionary] mutableCopy];
+    NSDictionary*           attributes  = [self.entity attributesByName];
+
+    [attributes enumerateKeysAndObjectsUsingBlock:^(id key, NSAttributeDescription* attribute, BOOL* stop)
+     {
+         if (![key isKindOfClass:[NSString class]])
+         {
+             DLog(LL_Debug, LD_General, @"save: NOTSTRING key=%@", key);
+             return;
+         }
+
+         if ([key isEqualToString:@"id"])
+         {
+             DLog(LL_Debug, LD_General, @"save: ID key=%@", key);
+             return;
+         }
+
+         DLog(LL_Debug, LD_General, @"save: key=%@", key);
+         id currentValue    = [self valueForKey:key];
+
+         if (currentValue)
+         {
+             dict[key]  = currentValue;
+         }
+     }];
+
+    return dict;
 }
 
 - (NSDictionary*)saveIDToDictionary
