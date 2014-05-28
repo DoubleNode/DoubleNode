@@ -71,9 +71,11 @@
 
     [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
      {
+         NSUInteger initialFlag = ((idx == 0) ? NSKeyValueObservingOptionInitial : 0);
+
          [object addObserver:self
                   forKeyPath:attributeName
-                     options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionInitial | NSKeyValueObservingOptionPrior
+                     options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionPrior | initialFlag
                      context:nil];
      }];
 }

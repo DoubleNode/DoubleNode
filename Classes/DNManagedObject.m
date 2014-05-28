@@ -551,6 +551,21 @@
                   {
                       Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
 
+                      /*
+                      NSEntityDescription*   entityDescription   = [NSEntityDescription entityForName:[relationship.destinationEntity name]
+                                                                               inManagedObjectContext:[cdoSubClass managedObjectContext]];
+
+                      NSMutableDictionary*   objectD = [[cdoSubClass representationsForRelationshipsFromRepresentation:obj
+                                                                                                              ofEntity:entityDescription
+                                                                                                          fromResponse:nil] mutableCopy];
+
+                      [objectD addEntriesFromDictionary:[cdoSubClass attributesForRepresentation:obj
+                                                                                        ofEntity:entityDescription
+                                                                                    fromResponse:nil]];
+                      
+                      id     newObject  = [cdoSubClass entityFromDictionary:objectD];
+                       */
+                      
                       id     newObject  = [cdoSubClass entityFromDictionary:obj];
 
                       NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[relationship name] camelize]];

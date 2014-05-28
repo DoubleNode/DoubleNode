@@ -9,6 +9,7 @@
 //  All rights reserved.
 //
 
+#import "DNUtilities.h"
 #import "DNCircularImageView.h"
 
 @implementation DNCircularImageView
@@ -20,14 +21,16 @@
 
 - (void)setFirstName:(NSString*)firstName
 {
-    _firstName  = firstName;
-    self.image  = nil;
+    _firstName                  = firstName;
+    _initialsBackgroundColor    = nil;
+    self.image                  = nil;
 }
 
 - (void)setLastName:(NSString*)lastName
 {
-    _lastName   = lastName;
-    self.image  = nil;
+    _lastName                   = lastName;
+    _initialsBackgroundColor    = nil;
+    self.image                  = nil;
 }
 
 - (void)layoutSubviews

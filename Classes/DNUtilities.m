@@ -53,6 +53,32 @@
     return instance;
 }
 
++ (NSDateFormatter*)dictionaryDateDateFormatter
+{
+    static dispatch_once_t  once;
+    static NSDateFormatter* instance = nil;
+
+    dispatch_once(&once, ^{
+        instance = [[NSDateFormatter alloc] init];
+        [instance setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    });
+
+    return instance;
+}
+
++ (NSNumberFormatter*)dictionaryDateNumberFormatter
+{
+    static dispatch_once_t      once;
+    static NSNumberFormatter*   instance = nil;
+
+    dispatch_once(&once, ^{
+        instance = [[NSNumberFormatter alloc] init];
+        [instance setAllowsFloats:NO];
+    });
+
+    return instance;
+}
+
 + (CGFloat)screenHeight
 {
     CGRect  bounds  = [[UIScreen mainScreen] bounds];
@@ -806,16 +832,10 @@
         {
             if (object != (NSString*)[NSNull null])
             {
-                NSDateFormatter* dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-
-                NSDate*   newval  = [dateFormatter dateFromString:object];
+                NSDate*   newval  = [[[self class] dictionaryDateDateFormatter] dateFromString:object];
                 if (newval == nil)
                 {
-                    NSNumberFormatter* numberFormatter = [[NSNumberFormatter alloc] init];
-                    [numberFormatter setAllowsFloats:NO];
-
-                    NSNumber*   timestamp = [numberFormatter numberFromString:object];
+                    NSNumber*   timestamp = [[[self class] dictionaryDateNumberFormatter] numberFromString:object];
                     if (timestamp != nil)
                     {
                         if ([timestamp integerValue] != 0)
