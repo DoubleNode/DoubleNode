@@ -295,15 +295,12 @@
 
 + (void)runBlock:(void (^)())block
 {
-    [DNUtilities runOnMainThreadWithoutDeadlocking:^
-     {
-         block();
-     }];
+    block();
 }
 
 + (void)runOnMainThreadBlock:(void (^)())block
 {
-    [DNUtilities runOnBackgroundThread:^
+    [DNUtilities runOnMainThreadWithoutDeadlocking:^
      {
          block();
      }];

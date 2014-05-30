@@ -35,15 +35,13 @@
 
 - (void)layoutSubviews
 {
-    [super layoutSubviews];
-
     if (self.isShowingInitials)
     {
         if (([_firstName length] > 0) && ([_lastName length] > 0))
         {
             if (!_initialsFont)
             {
-                _initialsFont               = [UIFont systemFontOfSize:20.0f];
+                _initialsFont               = [UIFont systemFontOfSize:18.0f];
             }
             if (!_initialsTextColor)
             {
@@ -62,6 +60,8 @@
             [self addText];
         }
     }
+
+    [super layoutSubviews];
 }
 
 - (UIColor*)randomColor
@@ -69,7 +69,14 @@
     CGFloat hue         = (arc4random() % 128 / 256.0) + 0.25;
     CGFloat saturation  = (arc4random() % 128 / 256.0) + 0.25;
     CGFloat brightness  = (arc4random() % 128 / 256.0) + 0.25;
-    
+
+    if (([_firstName length] > 0) && ([_lastName length] > 0))
+    {
+        hue             = ([_firstName hash] % 128 / 256.0) + 0.25;
+        saturation      = ([_lastName hash]  % 128 / 256.0) + 0.25;
+        brightness      = ([[NSString stringWithFormat:@"%@ %@", _firstName, _lastName] hash] % 128 / 256.0) + 0.25;
+    }
+
     return [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
 }
 
@@ -79,7 +86,7 @@
 
     CGContextRef    context = UIGraphicsGetCurrentContext();
     CGContextSetFillColorWithColor(context, _initialsBackgroundColor.CGColor);
-    CGContextFillEllipseInRect(context, self.frame);
+    CGContextFillEllipseInRect(context, CGRectMake(0, 0, self.frame.size.width, self.frame.size.height));
 
     self.blankImage = UIGraphicsGetImageFromCurrentImageContext();
     self.image      = self.blankImage;
@@ -103,10 +110,10 @@
 
     CGFloat     fontHeight  = _initialsFont.lineHeight;
     CGFloat     yOffset     = (self.frame.size.height - fontHeight) / 2.0;
-    [initialsString drawInRect:CGRectMake(self.frame.origin.x, yOffset, self.frame.size.width, self.frame.size.height)];
+    [initialsString drawInRect:CGRectMake(0, yOffset, self.frame.size.width, self.frame.size.height)];
 
-    UIImage*    result = UIGraphicsGetImageFromCurrentImageContext();
-    self.image = result;
+    self.blankImage = UIGraphicsGetImageFromCurrentImageContext();
+    self.image      = self.blankImage;
 
     UIGraphicsEndImageContext();
 }
@@ -116,7 +123,7 @@
     NSMutableString*    initials = [[NSMutableString alloc]initWithString:[_firstName substringToIndex:1]];
     [initials appendString:[_lastName substringToIndex:1]];
 
-    return initials;
+    return [initials uppercaseString];
 }
 
 @end
