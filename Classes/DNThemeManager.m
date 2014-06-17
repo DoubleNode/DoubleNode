@@ -53,6 +53,27 @@
     return sharedTheme;
 }
 
++ (UIColor*)primaryColor
+{
+    id <DNThemeProtocol>    theme = [self sharedTheme];
+
+    return [theme primaryColor];
+}
+
++ (UIColor*)secondaryColor
+{
+    id <DNThemeProtocol>    theme = [self sharedTheme];
+
+    return [theme secondaryColor];
+}
+
++ (void)resetCache
+{
+    id <DNThemeProtocol>    theme = [self sharedTheme];
+
+    [theme resetCache];
+}
+
 + (SEL)functionNameForAttribute:(NSString*)attribute
                        withType:(NSString*)type
                        andGroup:(NSString*)group
@@ -213,7 +234,7 @@
     NSAssert(labelFont, @"%@/%@/%@/%@/Label/Font is not specified!", group, screen, viewState, item);
     [attrString removeAttribute:NSFontAttributeName range:attrRange];
     [attrString addAttribute:NSFontAttributeName value:labelFont range:attrRange];
-
+    
     NSAssert(labelColor, @"%@/%@/%@/%@/Label/Color is not specified!", group, screen, viewState, item);
     [attrString removeAttribute:NSForegroundColorAttributeName range:attrRange];
     [attrString addAttribute:NSForegroundColorAttributeName value:labelColor range:attrRange];
@@ -239,6 +260,8 @@
                andItem:(NSString*)item
 {
     [[self class] customizeView:lblView withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
+
+    lblView.minimumScaleFactor  = [[[self class] performThemeSelectorForAttribute:@"MinimumScaleFactor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
 
     if ([lblView isKindOfClass:[DNLabel class]])
     {
@@ -269,6 +292,7 @@
     {
         ((DNLabel*)lblView).horizontalPadding   = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding"  withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
         ((DNLabel*)lblView).verticalPadding     = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding"    withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
+        ((DNLabel*)lblView).minimumScaleFactor  = [[[self class] performThemeSelectorForAttribute:@"MinimumScaleFactor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
     }
 }
 

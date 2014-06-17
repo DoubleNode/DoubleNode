@@ -17,6 +17,11 @@
 
 #import "UIFont+Custom.h"
 
+#pragma mark - Theme-Wide Macros
+
+#define DNThemeMethod_PrimaryColor()            - (UIColor*) defaultPrimaryColor
+#define DNThemeMethod_SecondaryColor()          - (UIColor*) defaultSecondaryColor
+
 #pragma mark - Attribute Macros
 
 // ie: Font
@@ -32,6 +37,7 @@
 #define DNThemeMethod_Kerning()                 - (NSNumber*) Kerning
 #define DNThemeMethod_LineHeightMultiple()      - (NSNumber*) LineHeightMultiple
 #define DNThemeMethod_LineSpacing()             - (NSNumber*) LineSpacing
+#define DNThemeMethod_MinimumScaleFactor()      - (NSNumber*) MinimumScaleFactor
 #define DNThemeMethod_Name()                    - (NSString*) Name
 #define DNThemeMethod_OnTintColor()             - (UIColor*) OnTintColor
 #define DNThemeMethod_PlaceholderColor()        - (UIColor*) PlaceholderColor
@@ -62,6 +68,7 @@
 #define DNThemeMethod_Type_Kerning(type)                    - (NSNumber*) type##Kerning
 #define DNThemeMethod_Type_LineHeightMultiple(type)         - (NSNumber*) type##LineHeightMultiple
 #define DNThemeMethod_Type_LineSpacing(type)                - (NSNumber*) type##LineSpacing
+#define DNThemeMethod_Type_MinimumScaleFactor(type)         - (NSNumber*) type##MinimumScaleFactor
 #define DNThemeMethod_Type_Name(type)                       - (NSString*) type##Name
 #define DNThemeMethod_Type_OnTintColor(type)                - (UIColor*) type##OnTintColor
 #define DNThemeMethod_Type_PlaceholderColor(type)           - (UIColor*) type##PlaceholderColor
@@ -92,6 +99,7 @@
 #define DNThemeMethod_TypeControlState_Kerning(type,controlState)                   - (NSNumber*) type##Kerning##controlState
 #define DNThemeMethod_TypeControlState_LineHeightMultiple(type,controlState)        - (NSNumber*) type##LineHeightMultiple##controlState
 #define DNThemeMethod_TypeControlState_LineSpacing(type,controlState)               - (NSNumber*) type##LineSpacing##controlState
+#define DNThemeMethod_TypeControlState_MinimumScaleFactor(type,controlState)        - (NSNumber*) type##MinimumScaleFactor##controlState
 #define DNThemeMethod_TypeControlState_Name(type,controlState)                      - (NSString*) type##Name##controlState
 #define DNThemeMethod_TypeControlState_OnTintColor(type,controlState)               - (UIColor*) type##OnTintColor##controlState
 #define DNThemeMethod_TypeControlState_PlaceholderColor(type,controlState)          - (UIColor*) type##PlaceholderColor##controlState
@@ -122,6 +130,7 @@
 #define DNThemeMethod_GroupType_Kerning(group,type)                     - (NSNumber*) group##type##Kerning
 #define DNThemeMethod_GroupType_LineHeightMultiple(group,type)          - (NSNumber*) group##type##LineHeightMultiple
 #define DNThemeMethod_GroupType_LineSpacing(group,type)                 - (NSNumber*) group##type##LineSpacing
+#define DNThemeMethod_GroupType_MinimumScaleFactor(group,type)          - (NSNumber*) group##type##MinimumScaleFactor
 #define DNThemeMethod_GroupType_Name(group,type)                        - (NSString*) group##type##Name
 #define DNThemeMethod_GroupType_OnTintColor(group,type)                 - (UIColor*) group##type##OnTintColor
 #define DNThemeMethod_GroupType_PlaceholderColor(group,type)            - (UIColor*) group##type##PlaceholderColor
@@ -152,6 +161,7 @@
 #define DNThemeMethod_GroupTypeControlState_Kerning(group,type,controlState)                    - (NSNumber*) group##type##Kerning##controlState
 #define DNThemeMethod_GroupTypeControlState_LineHeightMultiple(group,type,controlState)         - (NSNumber*) group##type##LineHeightMultiple##controlState
 #define DNThemeMethod_GroupTypeControlState_LineSpacing(group,type,controlState)                - (NSNumber*) group##type##LineSpacing##controlState
+#define DNThemeMethod_GroupTypeControlState_MinimumScaleFactor(group,type,controlState)         - (NSNumber*) group##type##MinimumScaleFactor##controlState
 #define DNThemeMethod_GroupTypeControlState_Name(group,type,controlState)                       - (NSString*) group##type##Name##controlState
 #define DNThemeMethod_GroupTypeControlState_OnTintColor(group,type,controlState)                - (UIColor*) group##type##OnTintColor##controlState
 #define DNThemeMethod_GroupTypeControlState_PlaceholderColor(group,type,controlState)           - (UIColor*) group##type##PlaceholderColor##controlState
@@ -182,6 +192,7 @@
 #define DNThemeMethod_GroupScreenType_Kerning(group,screen,type)                    - (NSNumber*) group##screen##type##Kerning
 #define DNThemeMethod_GroupScreenType_LineHeightMultiple(group,screen,type)         - (NSNumber*) group##screen##type##LineHeightMultiple
 #define DNThemeMethod_GroupScreenType_LineSpacing(group,screen,type)                - (NSNumber*) group##screen##type##LineSpacing
+#define DNThemeMethod_GroupScreenType_MinimumScaleFactor(group,screen,type)         - (NSNumber*) group##screen##type##MinimumScaleFactor
 #define DNThemeMethod_GroupScreenType_Name(group,screen,type)                       - (NSString*) group##screen##type##Name
 #define DNThemeMethod_GroupScreenType_OnTintColor(group,screen,type)                - (UIColor*) group##screen##type##OnTintColor
 #define DNThemeMethod_GroupScreenType_PlaceholderColor(group,screen,type)           - (UIColor*) group##screen##type##PlaceholderColor
@@ -212,6 +223,7 @@
 #define DNThemeMethod_GroupScreenTypeControlState_Kerning(group,screen,type,controlState)                   - (NSNumber*) group##screen##type##Kerning##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_LineHeightMultiple(group,screen,type,controlState)        - (NSNumber*) group##screen##type##LineHeightMultiple##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_LineSpacing(group,screen,type,controlState)               - (NSNumber*) group##screen##type##LineSpacing##controlState
+#define DNThemeMethod_GroupScreenTypeControlState_MinimumScaleFactor(group,screen,type,controlState)        - (NSNumber*) group##screen##type##MinimumScaleFactor##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_Name(group,screen,type,controlState)                      - (NSString*) group##screen##type##Name##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_OnTintColor(group,screen,type,controlState)               - (UIColor*) group##screen##type##OnTintColor##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_PlaceholderColor(group,screen,type,controlState)          - (UIColor*) group##screen##type##PlaceholderColor##controlState
@@ -229,6 +241,7 @@
 
 #pragma mark - Group/Screen/ViewState/Type/Attribute Macros
 
+
 // ie: LOG WelcomeView SignInWithKeyboard Button Font
 // functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, viewState, type, attribute];
 #define DNThemeMethod_GroupScreenViewStateType_BackgroundColor(group,screen,viewstate,type)             - (UIColor*) group##screen##viewstate##type##BackgroundColor
@@ -242,6 +255,7 @@
 #define DNThemeMethod_GroupScreenViewStateType_Kerning(group,screen,viewstate,type)                     - (NSNumber*) group##screen##viewstate##type##Kerning
 #define DNThemeMethod_GroupScreenViewStateType_LineHeightMultiple(group,screen,viewstate,type)          - (NSNumber*) group##screen##viewstate##type##LineHeightMultiple
 #define DNThemeMethod_GroupScreenViewStateType_LineSpacing(group,screen,viewstate,type)                 - (NSNumber*) group##screen##viewstate##type##LineSpacing
+#define DNThemeMethod_GroupScreenViewStateType_MinimumScaleFactor(group,screen,viewstate,type)          - (NSNumber*) group##screen##viewstate##type##MinimumScaleFactor
 #define DNThemeMethod_GroupScreenViewStateType_Name(group,screen,viewstate,type)                        - (NSString*) group##screen##viewstate##type##Name
 #define DNThemeMethod_GroupScreenViewStateType_OnTintColor(group,screen,viewstate,type)                 - (UIColor*) group##screen##viewstate##type##OnTintColor
 #define DNThemeMethod_GroupScreenViewStateType_PlaceholderColor(group,screen,viewstate,type)            - (UIColor*) group##screen##viewstate##type##PlaceholderColor
@@ -272,6 +286,7 @@
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_Kerning(group,screen,viewstate,type,controlState)                    - (NSNumber*) group##screen##viewstate##type##Kerning##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_LineHeightMultiple(group,screen,viewstate,type,controlState)         - (NSNumber*) group##screen##viewstate##type##LineHeightMultiple##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_LineSpacing(group,screen,viewstate,type,controlState)                - (NSNumber*) group##screen##viewstate##type##LineSpacing##controlState
+#define DNThemeMethod_GroupScreenViewStateTypeControlState_MinimumScaleFactor(group,screen,viewstate,type,controlState)         - (NSNumber*) group##screen##viewstate##type##MinimumScaleFactor##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_Name(group,screen,viewstate,type,controlState)                       - (NSString*) group##screen##viewstate##type##Name##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_OnTintColor(group,screen,viewstate,type,controlState)                - (UIColor*) group##screen##viewstate##type##OnTintColor##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_PlaceholderColor(group,screen,viewstate,type,controlState)           - (UIColor*) group##screen##viewstate##type##PlaceholderColor##controlState
@@ -302,6 +317,7 @@
 #define DNThemeMethod_GroupScreenItemType_Kerning(group,screen,item,type)                       - (NSNumber*) group##screen##item##type##Kerning
 #define DNThemeMethod_GroupScreenItemType_LineHeightMultiple(group,screen,item,type)            - (NSNumber*) group##screen##item##type##LineHeightMultiple
 #define DNThemeMethod_GroupScreenItemType_LineSpacing(group,screen,item,type)                   - (NSNumber*) group##screen##item##type##LineSpacing
+#define DNThemeMethod_GroupScreenItemType_MinimumScaleFactor(group,screen,item,type)            - (NSNumber*) group##screen##item##type##MinimumScaleFactor
 #define DNThemeMethod_GroupScreenItemType_Name(group,screen,item,type)                          - (NSString*) group##screen##item##type##Name
 #define DNThemeMethod_GroupScreenItemType_OnTintColor(group,screen,item,type)                   - (UIColor*) group##screen##item##type##OnTintColor
 #define DNThemeMethod_GroupScreenItemType_PlaceholderColor(group,screen,item,type)              - (UIColor*) group##screen##item##type##PlaceholderColor
@@ -332,6 +348,7 @@
 #define DNThemeMethod_GroupScreenViewStateItemType_Kerning(group,screen,viewstate,item,type)                    - (NSNumber*) group##screen##viewstate##item##type##Kerning
 #define DNThemeMethod_GroupScreenViewStateItemType_LineHeightMultiple(group,screen,viewstate,item,type)         - (NSNumber*) group##screen##viewstate##item##type##LineHeightMultiple
 #define DNThemeMethod_GroupScreenViewStateItemType_LineSpacing(group,screen,viewstate,item,type)                - (NSNumber*) group##screen##viewstate##item##type##LineSpacing
+#define DNThemeMethod_GroupScreenViewStateItemType_MinimumScaleFactor(group,screen,viewstate,item,type)         - (NSNumber*) group##screen##viewstate##item##type##MinimumScaleFactor
 #define DNThemeMethod_GroupScreenViewStateItemType_Name(group,screen,viewstate,item,type)                       - (NSString*) group##screen##viewstate##item##type##Name
 #define DNThemeMethod_GroupScreenViewStateItemType_OnTintColor(group,screen,viewstate,item,type)                - (UIColor*) group##screen##viewstate##item##type##OnTintColor
 #define DNThemeMethod_GroupScreenViewStateItemType_PlaceholderColor(group,screen,viewstate,item,type)           - (UIColor*) group##screen##viewstate##item##type##PlaceholderColor
@@ -362,6 +379,7 @@
 #define DNThemeMethod_GroupScreenItemTypeControlState_Kerning(group,screen,item,type,controlState)                      - (NSNumber*) group##screen##item##type##Kerning##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_LineHeightMultiple(group,screen,item,type,controlState)           - (NSNumber*) group##screen##item##type##LineHeightMultiple##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_LineSpacing(group,screen,item,type,controlState)                  - (NSNumber*) group##screen##item##type##LineSpacing##controlState
+#define DNThemeMethod_GroupScreenItemTypeControlState_MinimumScaleFactor(group,screen,item,type,controlState)           - (NSNumber*) group##screen##item##type##MinimumScaleFactor##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_Name(group,screen,item,type,controlState)                         - (NSString*) group##screen##item##type##Name##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_OnTintColor(group,screen,item,type,controlState)                  - (UIColor*) group##screen##item##type##OnTintColor##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_PlaceholderColor(group,screen,item,type,controlState)             - (UIColor*) group##screen##item##type##PlaceholderColor##controlState
@@ -392,6 +410,7 @@
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_Kerning(group,screen,viewstate,item,type,controlState)                   - (NSNumber*) group##screen##viewstate##item##type##Kerning##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_LineHeightMultiple(group,screen,viewstate,item,type,controlState)        - (NSNumber*) group##screen##viewstate##item##type##LineHeightMultiple##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_LineSpacing(group,screen,viewstate,item,type,controlState)               - (NSNumber*) group##screen##viewstate##item##type##LineSpacing##controlState
+#define DNThemeMethod_GroupScreenViewStateItemTypeControlState_MinimumScaleFactor(group,screen,viewstate,item,type,controlState)        - (NSNumber*) group##screen##viewstate##item##type##MinimumScaleFactor##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_Name(group,screen,viewstate,item,type,controlState)                      - (NSString*) group##screen##viewstate##item##type##Name##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_OnTintColor(group,screen,viewstate,item,type,controlState)               - (UIColor*) group##screen##viewstate##item##type##OnTintColor##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_PlaceholderColor(group,screen,viewstate,item,type,controlState)          - (UIColor*) group##screen##viewstate##item##type##PlaceholderColor##controlState
@@ -408,6 +427,17 @@
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_VerticalPadding(group,screen,viewstate,item,type,controlState)           - (NSNumber*) group##screen##viewstate##item##type##VerticalPadding##controlState
 
 @interface DNTheme : ADVDefaultTheme <DNThemeProtocol>
+
+@property (strong, nonatomic) UIColor*  primaryColor;
+@property (strong, nonatomic) UIColor*  secondaryColor;
+
+- (UIColor*)defaultPrimaryColor;
+- (UIColor*)defaultSecondaryColor;
+
+- (UIColor*)primaryColor;
+- (UIColor*)secondaryColor;
+
+- (void)resetCache;
 
 - (SEL)functionNameForAttribute:(NSString*)attribute
                        withType:(NSString*)type

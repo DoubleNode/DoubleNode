@@ -21,6 +21,47 @@
 
 @implementation DNTheme
 
+@synthesize primaryColor    = _primaryColor;
+@synthesize secondaryColor  = _secondaryColor;
+
+- (UIColor*)defaultPrimaryColor
+{
+    return [UIColor darkGrayColor];
+}
+
+- (UIColor*)defaultSecondaryColor
+{
+    return [UIColor lightGrayColor];
+}
+
+- (UIColor*)primaryColor
+{
+    if (!_primaryColor)
+    {
+        _primaryColor   = [self defaultPrimaryColor];
+    }
+
+    return _primaryColor;
+}
+
+- (UIColor*)secondaryColor
+{
+    if (!_secondaryColor)
+    {
+        _secondaryColor = [self defaultSecondaryColor];
+    }
+
+    return _secondaryColor;
+}
+
+- (void)resetCache
+{
+    _primaryColor   = nil;
+    _secondaryColor = nil;
+
+    self.cacheDictionary    = [[NSMutableDictionary alloc] init];
+}
+
 - (id)init
 {
     self = [super init];

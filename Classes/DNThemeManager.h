@@ -19,6 +19,11 @@
 
 @protocol DNThemeProtocol <ADVTheme, NSObject>
 
+- (UIColor*)primaryColor;
+- (UIColor*)secondaryColor;
+
+- (void)resetCache;
+
 - (SEL)functionNameForAttribute:(NSString*)attribute
                        withType:(NSString*)type
                        andGroup:(NSString*)group
@@ -33,6 +38,11 @@
 
 + (NSString*)themeName;
 + (id <DNThemeProtocol>)sharedTheme;
+
++ (UIColor*)primaryColor;
++ (UIColor*)secondaryColor;
+
++ (void)resetCache;
 
 + (NSString*)customizeNibNameWithClass:(NSString*)className
                              withGroup:(NSString*)group
