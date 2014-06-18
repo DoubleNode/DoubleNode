@@ -25,6 +25,17 @@
 #import "UILabel+TextKerning.h"
 #import "NZCircularImageView.h"
 
+@interface DNAttributedStringAttribute : NSObject
+
+@property (nonatomic, assign) NSDictionary* attributes;
+@property (nonatomic, assign) NSRange       range;
+
+@end
+
+@implementation DNAttributedStringAttribute
+
+@end
+
 @implementation DNThemeManager
 
 + (NSString*)themeName
@@ -227,6 +238,19 @@
 
     NSRange attrRange   = NSMakeRange(0, [attrString length]);
 
+    NSMutableArray* savedAttributes = [NSMutableArray array];
+
+    [attrString enumerateAttributesInRange:attrRange
+                                   options:0
+                                usingBlock:^(NSDictionary *attrs, NSRange range, BOOL* stop)
+     {
+         DNAttributedStringAttribute*   asa = [[DNAttributedStringAttribute alloc] init];
+         asa.attributes = attrs;
+         asa.range      = range;
+
+         [savedAttributes addObject:asa];
+     }];
+
     NSAssert(labelKerning, @"%@/%@/%@/%@/Label/Kerning is not specified!", group, screen, viewState, item);
     [attrString removeAttribute:NSKernAttributeName range:attrRange];
     [attrString addAttribute:NSKernAttributeName value:labelKerning range:attrRange];
@@ -241,6 +265,17 @@
 
     [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
     [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:attrRange];
+
+    [savedAttributes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+     {
+         DNAttributedStringAttribute*   asa = obj;
+
+         if ((asa.range.length != attrRange.length) ||
+             (asa.range.location != attrRange.location))
+         {
+             [attrString addAttributes:asa.attributes range:asa.range];
+         }
+     }];
 
     return attrString;
 }
