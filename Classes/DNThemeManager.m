@@ -27,7 +27,7 @@
 
 @interface DNAttributedStringAttribute : NSObject
 
-@property (nonatomic, assign) NSDictionary* attributes;
+@property (nonatomic, retain) NSDictionary* attributes;
 @property (nonatomic, assign) NSRange       range;
 
 @end
@@ -223,20 +223,25 @@
                                      andItem:(NSString*)item
                              andControlState:(UIControlState)controlState
 {
-    NSNumber*   labelKerning        = [[self class] performThemeSelectorForAttribute:@"Kerning"     withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
-    UIFont*     labelFont           = [[self class] performThemeSelectorForAttribute:@"Font"        withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
-    UIColor*    labelColor          = [[self class] performThemeSelectorForAttribute:@"Color"       withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
-    NSNumber*   labelLineSpacing    = [[self class] performThemeSelectorForAttribute:@"LineSpacing" withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    NSNumber*   labelKerning        = [[self class] performThemeSelectorForAttribute:@"Kerning"             withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    UIFont*     labelFont           = [[self class] performThemeSelectorForAttribute:@"Font"                withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    UIColor*    labelColor          = [[self class] performThemeSelectorForAttribute:@"Color"               withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    NSNumber*   labelLineSpacing    = [[self class] performThemeSelectorForAttribute:@"LineSpacing"         withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState];
+    NSNumber*   lineHeightMultiple  = [[self class] performThemeSelectorForAttribute:@"LineHeightMultiple"  withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item  andControlState:controlState];
 
-    lblView.textAlignment           = [[[self class] performThemeSelectorForAttribute:@"TextAlignment"   withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState] intValue];
+    lblView.textAlignment           = [[[self class] performThemeSelectorForAttribute:@"TextAlignment"      withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:controlState] intValue];
 
     NSMutableParagraphStyle*    paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:[labelLineSpacing intValue]];
+    [paragraphStyle setLineSpacing:[labelLineSpacing doubleValue]];
+    [paragraphStyle setLineHeightMultiple:[lineHeightMultiple doubleValue]];
     [paragraphStyle setAlignment:lblView.textAlignment];
 
     NSMutableAttributedString*  attrString  = [attributedString mutableCopy];
 
     NSRange attrRange   = NSMakeRange(0, [attrString length]);
+
+    [attrString addAttributes:@{ NSParagraphStyleAttributeName: paragraphStyle }
+                        range:attrRange];
 
     NSMutableArray* savedAttributes = [NSMutableArray array];
 
@@ -270,11 +275,7 @@
      {
          DNAttributedStringAttribute*   asa = obj;
 
-         if ((asa.range.length != attrRange.length) ||
-             (asa.range.location != attrRange.location))
-         {
-             [attrString addAttributes:asa.attributes range:asa.range];
-         }
+         [attrString addAttributes:asa.attributes range:asa.range];
      }];
 
     return attrString;
@@ -301,7 +302,7 @@
     if ([lblView isKindOfClass:[DNLabel class]])
     {
         ((DNLabel*)lblView).verticalAlignment   = [[[self class] performThemeSelectorForAttribute:@"VerticalAlignment"  withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
-        ((DNLabel*)lblView).lineHeightMultiple  = [[[self class] performThemeSelectorForAttribute:@"LineHeightMultiple" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
+        //((DNLabel*)lblView).lineHeightMultiple  = [[[self class] performThemeSelectorForAttribute:@"LineHeightMultiple" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] intValue];
     }
 
     NSAttributedString* attributedString    = [lblView attributedText];
@@ -327,7 +328,6 @@
     {
         ((DNLabel*)lblView).horizontalPadding   = [[[self class] performThemeSelectorForAttribute:@"HorizontalPadding"  withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
         ((DNLabel*)lblView).verticalPadding     = [[[self class] performThemeSelectorForAttribute:@"VerticalPadding"    withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
-        ((DNLabel*)lblView).minimumScaleFactor  = [[[self class] performThemeSelectorForAttribute:@"MinimumScaleFactor" withType:@"Label" andGroup:group andScreen:screen andViewState:viewState andItem:item] doubleValue];
     }
 }
 

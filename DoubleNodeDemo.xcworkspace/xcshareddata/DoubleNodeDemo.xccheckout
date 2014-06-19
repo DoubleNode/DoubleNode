@@ -5,36 +5,36 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>62CB0E27-6CD0-47E0-A1FC-41A6A8F7E20A</string>
+	<string>82DDFF6A-2AB9-4053-968C-2DED177DD5B9</string>
 	<key>IDESourceControlProjectName</key>
 	<string>DoubleNodeDemo</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>C5A86567-B134-4A40-B58F-53EF2276F2DF</key>
-		<string>ssh://github.com/ehlersd/DoubleNode.git</string>
+		<key>540708DF-5276-47D8-8990-791E75E4A42C</key>
+		<string>ssh://github.com/DoubleNode/DoubleNode.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>DoubleNodeDemo/DoubleNodeDemo.xcworkspace</string>
+	<string>DoubleNodeDemo.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>C5A86567-B134-4A40-B58F-53EF2276F2DF</key>
-		<string>../..</string>
+		<key>540708DF-5276-47D8-8990-791E75E4A42C</key>
+		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/ehlersd/DoubleNode.git</string>
+	<string>ssh://github.com/DoubleNode/DoubleNode.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>C5A86567-B134-4A40-B58F-53EF2276F2DF</string>
+	<string>540708DF-5276-47D8-8990-791E75E4A42C</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>C5A86567-B134-4A40-B58F-53EF2276F2DF</string>
+			<string>540708DF-5276-47D8-8990-791E75E4A42C</string>
 			<key>IDESourceControlWCCName</key>
-			<string>DoubleNode</string>
+			<string>DoubleNodePod</string>
 		</dict>
 	</array>
 </dict>

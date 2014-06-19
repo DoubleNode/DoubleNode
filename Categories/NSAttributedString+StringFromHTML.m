@@ -15,6 +15,8 @@
 
 #import "NSAttributedString+StringFromHTML.h"
 
+#import "ColorUtils.h"
+
 @implementation NSAttributedString (StringFromHTML)
 
 /// As we can't use the attributed string attributes params, so generate CSS from it
@@ -22,6 +24,12 @@
 + (NSString*)_cssStringFromAttributedStringAttributes:(NSDictionary*)dictionary
 {
     NSMutableString*    cssString = [NSMutableString stringWithString:@"<style> p {"];
+
+    if ([dictionary objectForKey:NSForegroundColorAttributeName])
+    {
+        UIColor*    color   = dictionary[NSForegroundColorAttributeName];
+        [cssString appendFormat:@"color: %@;", [color stringValue]];
+    }
 
     if ([dictionary objectForKey:NSFontAttributeName])
     {
