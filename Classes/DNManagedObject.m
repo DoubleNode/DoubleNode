@@ -542,6 +542,7 @@
              return;
          }
 
+         //DLog(LL_Debug, LD_General, @"entity=%@: key=%@", self.entity.name, key);
          if ([relationship isToMany])
          {
              //DLog(LL_Debug, LD_General, @"loadRelateToMany: key=%@", key);

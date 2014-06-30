@@ -275,7 +275,7 @@
      {
          DNAttributedStringAttribute*   asa = obj;
 
-         [attrString addAttributes:asa.attributes range:asa.range];
+         //[attrString addAttributes:asa.attributes range:asa.range];
      }];
 
     return attrString;

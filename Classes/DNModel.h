@@ -55,14 +55,30 @@ typedef void(^DNModelCompletionHandlerBlock)();
 - (void)retainWatch:(DNModelWatch*)watch;
 - (void)releaseWatch:(DNModelWatch*)watch;
 
+- (NSFetchRequest*)getFetchRequestWithSortKeys:(NSArray*)sortKeys;
+- (id)getOneWithFetch:(NSFetchRequest*)fetchRequest;
+- (NSArray*)getAllWithFetch:(NSFetchRequest*)fetchRequest;
+
 - (id)getFromID:(id)idValue;
 - (DNModelWatchObject*)watchFromID:(id)idValue;
+- (NSPredicate*)getFromID_FetchRequestPredicate:(id)idValue;
+- (NSFetchRequest*)getFromID_FetchRequest:(id)idValue;
 
 - (id)getFromDictionary:(NSDictionary*)dict;
 - (DNModelWatchObject*)watchFromDictionary:(NSDictionary*)dict;
+- (NSPredicate*)getFromDictionary_FetchRequestPredicate:(NSDictionary*)dict;
+- (NSFetchRequest*)getFromDictionary_FetchRequest:(NSDictionary*)dict;
 
 - (NSArray*)getAll;
+- (NSArray*)getAllOffset:(NSUInteger)offset
+                   count:(NSUInteger)count;
+
 - (DNModelWatchObjects*)watchAll;
+- (DNModelWatchObjects*)watchAllOffset:(NSUInteger)offset
+                                 count:(NSUInteger)count;
+
+- (NSFetchRequest*)getAll_FetchRequestOffset:(NSUInteger)offset
+                                       count:(NSUInteger)count;
 
 - (void)deleteAllWithCompletion:(DNModelCompletionHandlerBlock)handler;
 

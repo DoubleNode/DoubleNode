@@ -137,161 +137,9 @@
     [watches removeObject:watch];
 }
 
-#pragma mark - getFromID
+#pragma mark - getWithFetch
 
-- (id)getFromID:(id)idValue
-{
-    NSFetchRequest* fetchRequest    = [self getFromID_FetchRequest:idValue];
-    if (fetchRequest == nil)
-    {
-        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
-        return nil;
-    }
-    
-    __block NSArray*    resultArray;
-    
-    [self performBlockAndWait:^(NSManagedObjectContext* context)
-     {
-         @try
-         {
-             NSError*    error;
-
-             resultArray  = [context executeFetchRequest:fetchRequest error:&error];
-             if ([resultArray count] == 0)
-             {
-                 resultArray    = nil;
-                 return;
-             }
-         }
-         @catch (NSException *exception)
-         {
-             DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
-             resultArray    = nil;
-             return;
-         }
-     }];
-
-    if ([resultArray count] == 0)
-    {
-        return nil;
-    }
-
-    return [resultArray objectAtIndex:0];
-}
-
-- (DNModelWatchObject*)watchFromID:(id)idValue
-{
-    NSFetchRequest* fetchRequest    = [self getFromID_FetchRequest:idValue];
-    if (fetchRequest == nil)
-    {
-        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
-        return nil;
-    }
-    
-    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest];
-}
-
-- (NSPredicate*)getFromID_FetchRequestPredicate:(id)idValue
-{
-    return [NSPredicate predicateWithFormat:@"id == %@", idValue];
-}
-
-- (NSFetchRequest*)getFromID_FetchRequest:(id)idValue
-{
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[[self class] entityName]];
-    if (fetchRequest == nil)
-    {
-        DLog(LL_Error, LD_CoreData, @"Unable to create fetchRequest");
-        return nil;
-    }
-    
-    [fetchRequest setPredicate:[self getFromID_FetchRequestPredicate:idValue]];
-    
-    NSMutableArray* sortDescriptors = [NSMutableArray array];
-    
-    [[self getFromIDSortKeys] enumerateObjectsUsingBlock:^(NSDictionary* sortDict, NSUInteger idx, BOOL *stop)
-     {
-         NSString*  sortKey         = sortDict[@"field"];
-         BOOL       sortAscending   = [sortDict[@"ascending"] boolValue];
-         if (([sortKey length] > 0))
-         {
-             [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:sortAscending]];
-         }
-     }];
-    if ([sortDescriptors count] > 0)
-    {
-        [fetchRequest setSortDescriptors:sortDescriptors];
-    }
-    
-    [fetchRequest setFetchLimit:1];
-    
-    return fetchRequest;
-}
-
-#pragma mark - getFromDictionary
-
-- (id)getFromDictionary:(NSDictionary*)dict
-{
-    NSFetchRequest* fetchRequest    = [self getFromDictionary_FetchRequest:dict];
-    if (fetchRequest == nil)
-    {
-        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
-        return nil;
-    }
-
-    __block NSArray*    resultArray;
-
-    [self performBlockAndWait:^(NSManagedObjectContext* context)
-     {
-         @try
-         {
-             NSError*    error;
-
-             resultArray  = [context executeFetchRequest:fetchRequest error:&error];
-             if ([resultArray count] == 0)
-             {
-                 resultArray    = nil;
-                 return;
-             }
-         }
-         @catch (NSException *exception)
-         {
-             DLog(LL_Error, LD_CoreData, @"Unable to execute fetchRequest (%@)", exception);
-             resultArray    = nil;
-             return;
-         }
-     }];
-
-    if ([resultArray count] == 0)
-    {
-        return nil;
-    }
-
-    return [resultArray objectAtIndex:0];
-}
-
-- (DNModelWatchObject*)watchFromDictionary:(NSDictionary*)dict
-{
-    NSFetchRequest* fetchRequest    = [self getFromDictionary_FetchRequest:dict];
-    if (fetchRequest == nil)
-    {
-        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
-        return nil;
-    }
-
-    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest];
-}
-
-- (NSPredicate*)getFromDictionary_FetchRequestPredicate:(NSDictionary*)dict
-{
-    id  idValue     = dict[@"id"];
-    id  authorID    = dict[@"author"][@"id"];
-    id  prayerID    = dict[@"prayer"][@"assignmentID"];
-
-    return [NSPredicate predicateWithFormat:@"((id == %@) OR (id == 0)) AND (author.id == %@) AND (prayer.id == %@)", idValue, authorID, prayerID];
-}
-
-- (NSFetchRequest*)getFromDictionary_FetchRequest:(NSDictionary*)dict
+- (NSFetchRequest*)getFetchRequestWithSortKeys:(NSArray*)sortKeys
 {
     NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[[self class] entityName]];
     if (fetchRequest == nil)
@@ -300,11 +148,9 @@
         return nil;
     }
 
-    [fetchRequest setPredicate:[self getFromDictionary_FetchRequestPredicate:dict]];
-
     NSMutableArray* sortDescriptors = [NSMutableArray array];
 
-    [[self getFromIDSortKeys] enumerateObjectsUsingBlock:^(NSDictionary* sortDict, NSUInteger idx, BOOL *stop)
+    [sortKeys enumerateObjectsUsingBlock:^(NSDictionary* sortDict, NSUInteger idx, BOOL *stop)
      {
          NSString*  sortKey         = sortDict[@"field"];
          BOOL       sortAscending   = [sortDict[@"ascending"] boolValue];
@@ -323,17 +169,19 @@
     return fetchRequest;
 }
 
-#pragma mark - getAll
-
-- (NSArray*)getAll
+- (id)getOneWithFetch:(NSFetchRequest*)fetchRequest
 {
-    NSFetchRequest* fetchRequest    = [self getAll_FetchRequest];
-    if (fetchRequest == nil)
+    NSArray*    resultArray = [self getAllWithFetch:fetchRequest];
+    if ([resultArray count] == 0)
     {
-        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
         return nil;
     }
-    
+
+    return [resultArray objectAtIndex:0];
+}
+
+- (NSArray*)getAllWithFetch:(NSFetchRequest*)fetchRequest
+{
     __block NSArray*    resultArray;
 
     [self performBlockAndWait:^(NSManagedObjectContext* context)
@@ -360,43 +208,144 @@
     return resultArray;
 }
 
-- (DNModelWatchObjects*)watchAll
+#pragma mark - getFromID/watchFromID
+
+- (id)getFromID:(id)idValue
 {
-    NSFetchRequest* fetchRequest    = [self getAll_FetchRequest];
+    NSFetchRequest* fetchRequest    = [self getFromID_FetchRequest:idValue];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+
+    return [self getOneWithFetch:fetchRequest];
+}
+
+- (DNModelWatchObject*)watchFromID:(id)idValue
+{
+    NSFetchRequest* fetchRequest    = [self getFromID_FetchRequest:idValue];
     if (fetchRequest == nil)
     {
         DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
         return nil;
     }
     
+    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest];
+}
+
+- (NSPredicate*)getFromID_FetchRequestPredicate:(id)idValue
+{
+    return [NSPredicate predicateWithFormat:@"id == %@", idValue];
+}
+
+- (NSFetchRequest*)getFromID_FetchRequest:(id)idValue
+{
+    NSArray*        sortKeys        = [self getFromIDSortKeys];
+    NSFetchRequest* fetchRequest    = [self getFetchRequestWithSortKeys:sortKeys];
+
+    NSPredicate*    predicate   = [self getFromID_FetchRequestPredicate:idValue];
+    if (predicate)
+    {
+        [fetchRequest setPredicate:predicate];
+    }
+    
+    return fetchRequest;
+}
+
+#pragma mark - getFromDictionary/watchFromDictionary
+
+- (id)getFromDictionary:(NSDictionary*)dict
+{
+    NSFetchRequest* fetchRequest    = [self getFromDictionary_FetchRequest:dict];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+
+    return [self getOneWithFetch:fetchRequest];
+}
+
+- (DNModelWatchObject*)watchFromDictionary:(NSDictionary*)dict
+{
+    NSFetchRequest* fetchRequest    = [self getFromDictionary_FetchRequest:dict];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+
+    return [DNModelWatchFetchedObject watchWithModel:self andFetch:fetchRequest];
+}
+
+- (NSPredicate*)getFromDictionary_FetchRequestPredicate:(NSDictionary*)dict
+{
+    id  idValue     = dict[@"id"];
+    id  authorID    = dict[@"author"][@"id"];
+    id  prayerID    = dict[@"prayer"][@"assignmentID"];
+
+    return [NSPredicate predicateWithFormat:@"((id == %@) OR (id == 0)) AND (author.id == %@) AND (prayer.id == %@)", idValue, authorID, prayerID];
+}
+
+- (NSFetchRequest*)getFromDictionary_FetchRequest:(NSDictionary*)dict
+{
+    NSArray*        sortKeys        = [self getFromIDSortKeys];
+    NSFetchRequest* fetchRequest    = [self getFetchRequestWithSortKeys:sortKeys];
+    
+    NSPredicate*    predicate   = [self getFromDictionary_FetchRequestPredicate:dict];
+    if (predicate)
+    {
+        [fetchRequest setPredicate:predicate];
+    }
+
+    return fetchRequest;
+}
+
+#pragma mark - getAll/watchAll
+
+- (NSArray*)getAll
+{
+    return [self getAllOffset:0 count:0];
+}
+
+- (NSArray*)getAllOffset:(NSUInteger)offset
+                   count:(NSUInteger)count
+{
+    NSFetchRequest* fetchRequest    = [self getAll_FetchRequestOffset:offset count:count];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+
+    return [self getAllWithFetch:fetchRequest];
+}
+
+- (DNModelWatchObjects*)watchAll
+{
+    return [self watchAllOffset:0 count:0];
+}
+
+- (DNModelWatchObjects*)watchAllOffset:(NSUInteger)offset
+                                 count:(NSUInteger)count
+{
+    NSFetchRequest* fetchRequest    = [self getAll_FetchRequestOffset:offset count:count];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+
     return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest];
 }
 
-- (NSFetchRequest*)getAll_FetchRequest
+- (NSFetchRequest*)getAll_FetchRequestOffset:(NSUInteger)offset
+                                       count:(NSUInteger)count
 {
-    NSFetchRequest* fetchRequest = [[NSFetchRequest alloc] initWithEntityName:[[self class] entityName]];
-    if (fetchRequest == nil)
-    {
-        DLog(LL_Error, LD_CoreData, @"Unable to create fetchRequest");
-        return nil;
-    }
-    
-    NSMutableArray* sortDescriptors = [NSMutableArray array];
-    
-    [[self getAllSortKeys] enumerateObjectsUsingBlock:^(NSDictionary* sortDict, NSUInteger idx, BOOL *stop)
-     {
-         NSString*  sortKey         = sortDict[@"field"];
-         BOOL       sortAscending   = [sortDict[@"ascending"] boolValue];
-         if (([sortKey length] > 0))
-         {
-             [sortDescriptors addObject:[NSSortDescriptor sortDescriptorWithKey:sortKey ascending:sortAscending]];
-         }
-     }];
-    if ([sortDescriptors count] > 0)
-    {
-        [fetchRequest setSortDescriptors:sortDescriptors];
-    }
-    
+    NSArray*        sortKeys        = [self getAllSortKeys];
+    NSFetchRequest* fetchRequest    = [self getFetchRequestWithSortKeys:sortKeys];
+
     return fetchRequest;
 }
 
