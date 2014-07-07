@@ -164,13 +164,13 @@
         [fetchRequest setSortDescriptors:sortDescriptors];
     }
 
-    [fetchRequest setFetchLimit:1];
-
     return fetchRequest;
 }
 
 - (id)getOneWithFetch:(NSFetchRequest*)fetchRequest
 {
+    [fetchRequest setFetchLimit:1];
+
     NSArray*    resultArray = [self getAllWithFetch:fetchRequest];
     if ([resultArray count] == 0)
     {
