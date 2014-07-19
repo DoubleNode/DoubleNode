@@ -394,10 +394,28 @@
 
     if ((error == nil) && (resultDict == nil))
     {
-        NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-        [userInfoDict setValue:@"Invalid response from server" forKey:NSLocalizedDescriptionKey];
+        NSMutableDictionary*    userInfoDict        = [NSMutableDictionary dictionary];
+        NSInteger               httpStatusCode      = statusCode;
+        NSString*               errorDescription    = @"Invalid response from server";
 
-        error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:420 userInfo:userInfoDict];
+        id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        if (responseR)
+        {
+            httpStatusCode  = [responseR[@"code"] integerValue];
+
+            id metaR    = responseR[@"meta"];
+            if (metaR)
+            {
+                id errorR   = metaR[@"error"];
+                if (errorR)
+                {
+                    errorDescription    = errorR;
+                }
+            }
+        }
+
+        [userInfoDict setValue:errorDescription forKey:NSLocalizedDescriptionKey];
+        error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:httpStatusCode userInfo:userInfoDict];
     }
 
     if (error)

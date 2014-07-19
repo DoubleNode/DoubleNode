@@ -24,6 +24,8 @@
     _firstName                  = firstName;
     _initialsBackgroundColor    = nil;
     self.image                  = nil;
+
+    [self setNeedsLayout];
 }
 
 - (void)setLastName:(NSString*)lastName
@@ -31,6 +33,8 @@
     _lastName                   = lastName;
     _initialsBackgroundColor    = nil;
     self.image                  = nil;
+
+    [self setNeedsLayout];
 }
 
 - (void)layoutSubviews
