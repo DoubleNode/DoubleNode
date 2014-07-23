@@ -550,34 +550,37 @@
              {
                  [dict[key] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
                   {
-                      Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
-
-                      /*
-                      NSEntityDescription*   entityDescription   = [NSEntityDescription entityForName:[relationship.destinationEntity name]
-                                                                               inManagedObjectContext:[cdoSubClass managedObjectContext]];
-
-                      NSMutableDictionary*   objectD = [[cdoSubClass representationsForRelationshipsFromRepresentation:obj
-                                                                                                              ofEntity:entityDescription
-                                                                                                          fromResponse:nil] mutableCopy];
-
-                      [objectD addEntriesFromDictionary:[cdoSubClass attributesForRepresentation:obj
-                                                                                        ofEntity:entityDescription
-                                                                                    fromResponse:nil]];
-                      
-                      id     newObject  = [cdoSubClass entityFromDictionary:objectD];
-                       */
-                      
-                      id     newObject  = [cdoSubClass entityFromDictionary:obj];
-
-                      NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[relationship name] camelize]];
-                      SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
-
-                      if ([self respondsToSelector:addObjectSelector])
+                      if (obj && ![obj isEqual:[NSNull null]])
                       {
-                          NSInvocation*  inv = [NSInvocation invocationWithTarget:self
-                                                                         selector:addObjectSelector];
-                          [inv setArgument:&newObject atIndex:2];
-                          [inv invoke];
+                          Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
+
+                          /*
+                           NSEntityDescription*   entityDescription   = [NSEntityDescription entityForName:[relationship.destinationEntity name]
+                           inManagedObjectContext:[cdoSubClass managedObjectContext]];
+
+                           NSMutableDictionary*   objectD = [[cdoSubClass representationsForRelationshipsFromRepresentation:obj
+                           ofEntity:entityDescription
+                           fromResponse:nil] mutableCopy];
+
+                           [objectD addEntriesFromDictionary:[cdoSubClass attributesForRepresentation:obj
+                           ofEntity:entityDescription
+                           fromResponse:nil]];
+
+                           id     newObject  = [cdoSubClass entityFromDictionary:objectD];
+                           */
+
+                          id     newObject  = [cdoSubClass entityFromDictionary:obj];
+
+                          NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[relationship name] camelize]];
+                          SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
+
+                          if ([self respondsToSelector:addObjectSelector])
+                          {
+                              NSInvocation*  inv = [NSInvocation invocationWithTarget:self
+                                                                             selector:addObjectSelector];
+                              [inv setArgument:&newObject atIndex:2];
+                              [inv invoke];
+                          }
                       }
                   }];
              }
@@ -657,7 +660,7 @@
                  case NSDateAttributeType:
                  {
                      //DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
-                     dict[key]  = [NSNumber numberWithInt:[currentValue unixTimestamp]];
+                     dict[key]  = [NSNumber numberWithUnsignedInt:[currentValue unixTimestamp]];
                      break;
                  }
              }

@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSString*         apikey;
 @property (strong, nonatomic) RBRouteBuilder*   router;
 @property (strong, nonatomic) NSDictionary*     parameters;
+@property (strong, nonatomic) NSDictionary*     files;
 @property (assign, nonatomic) NSUInteger        offset;
 @property (assign, nonatomic) NSUInteger        count;
 

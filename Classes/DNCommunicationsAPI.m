@@ -267,6 +267,8 @@
 
          NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
 
+         [request setTimeoutInterval:60];
+         
          [self subProcessRequest:request commDetails:commDetails pageDetails:pageDetails filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
 
          return YES;
@@ -287,9 +289,112 @@
 
     NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
 
-    [request setHTTPMethod:@"POST"];
-    [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
+    [request setTimeoutInterval:60];
 
+    [request setHTTPMethod:@"POST"];
+    if (!commDetails.files || ([commDetails.files count] == 0))
+    {
+        [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
+
+        [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
+        return;
+    }
+
+    [request setTimeoutInterval:10000];
+
+    // set Content-Type in HTTP header
+    NSString*   boundary    = @"---------------------------14737809831466499882746641449";
+    NSString*   contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+
+    // post body
+    NSMutableData*      body    = [NSMutableData data];
+    NSMutableString*    bodyStr = [NSMutableString stringWithString:@""];
+
+    {
+        NSString*   newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+        [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+        [bodyStr appendString:newStr];
+    }
+
+    //add (key,value) pairs (no idea why all the \r's and \n's are necessary ... but everyone seems to have them)
+    [commDetails.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+     {
+         {
+             NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+             [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+             [bodyStr appendString:newStr];
+         }
+
+         {
+             NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key];
+             [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+             [bodyStr appendString:newStr];
+         }
+
+         {
+             NSString*  newStr  = [NSString stringWithFormat:@"%@\r\n", obj];
+             [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+             [bodyStr appendString:newStr];
+         }
+     }];
+
+    [commDetails.files enumerateKeysAndObjectsUsingBlock:
+     ^(NSString* key, UIImage* image, BOOL* stop)
+    {
+        // add image data
+        NSData* imageData   = UIImageJPEGRepresentation(image, 0.8f);
+        //NSData* imageData   = UIImagePNGRepresentation(image);
+        if (imageData)
+        {
+            {
+                NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+                [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                [bodyStr appendString:newStr];
+            }
+
+            {
+                NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpg\"\r\n", key, key];
+                [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                [bodyStr appendString:newStr];
+            }
+
+            {
+                NSString*  newStr  = @"Content-Type: application/octet-stream\r\n\r\n";
+                [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                [bodyStr appendString:newStr];
+            }
+
+            {
+                [body appendData:imageData];
+                [bodyStr appendString:[[NSString alloc] initWithData:imageData encoding:NSASCIIStringEncoding]];
+            }
+
+            {
+                NSString*  newStr  = @"\r\n";
+                [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                [bodyStr appendString:newStr];
+            }
+        }
+        
+        // TODO: Support more than 1 file
+        *stop   = YES;
+    }];
+
+    {
+        NSString*  newStr  = [NSString stringWithFormat:@"--%@--\r\n", boundary];
+        [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+        [bodyStr appendString:newStr];
+    }
+
+    // set the body of the post to the reqeust
+    [request setHTTPBody:body];
+    //DLog(LL_Debug, LD_API, @"bodyStr=%@", bodyStr);
+
+    // set the content-length
+    NSString*   postLength = [NSString stringWithFormat:@"%d", [body length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
     [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
 }
 
@@ -398,22 +503,35 @@
         NSInteger               httpStatusCode      = statusCode;
         NSString*               errorDescription    = @"Invalid response from server";
 
-        id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        if (responseR)
+        if (!data)
         {
-            httpStatusCode  = [responseR[@"code"] integerValue];
+            errorDescription    = @"No data returned from server";
 
-            id metaR    = responseR[@"meta"];
-            if (metaR)
+            if (statusCode == 0)
             {
-                id errorR   = metaR[@"error"];
-                if (errorR)
+                httpStatusCode      = 408;
+                errorDescription    = @"Request Timeout";
+            }
+        }
+        if (data)
+        {
+            id responseR = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+            if (responseR)
+            {
+                httpStatusCode  = [responseR[@"code"] integerValue];
+
+                id metaR    = responseR[@"meta"];
+                if (metaR)
                 {
-                    errorDescription    = errorR;
+                    id errorR   = metaR[@"error"];
+                    if (errorR)
+                    {
+                        errorDescription    = errorR;
+                    }
                 }
             }
         }
-
+        
         [userInfoDict setValue:errorDescription forKey:NSLocalizedDescriptionKey];
         error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:httpStatusCode userInfo:userInfoDict];
     }
@@ -430,6 +548,11 @@
             [userInfoDict setValue:@"The authentication token for this device is no longer valid" forKey:NSLocalizedDescriptionKey];
 
             error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:401 userInfo:userInfoDict];
+        }
+
+        if (statusCode == 403)
+        {
+            DLog(LL_Debug, LD_API, @"Forbidden error");
         }
 
         NSData*    jsonData = data;
