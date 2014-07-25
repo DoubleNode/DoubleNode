@@ -423,6 +423,13 @@
     return self;
 }
 
+- (id)objectInContext:(NSManagedObjectContext*)context
+{
+    NSManagedObjectID*    objectID = [self objectID];
+
+    return [context objectWithID:objectID];
+}
+
 - (void)clearData
 {
     /*
@@ -765,8 +772,14 @@
     BOOL    localDirtyFlag;
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue)
+    {
+        localDefaultValue   = defaultValue;
+    }
+
     *dirtyFlag  = NO;
-    id  newValue = [self dictionaryBoolean:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    id  newValue = [self dictionaryBoolean:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
     if (*dirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
@@ -785,8 +798,14 @@
     BOOL    localDirtyFlag;
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue)
+    {
+        localDefaultValue   = defaultValue;
+    }
+
     *dirtyFlag  = NO;
-    id  newValue = [self dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    id  newValue = [self dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
     if (*dirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
@@ -805,8 +824,14 @@
     BOOL    localDirtyFlag;
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue)
+    {
+        localDefaultValue   = defaultValue;
+    }
+
     *dirtyFlag  = NO;
-    id  newValue = [self dictionaryDecimalNumber:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    id  newValue = [self dictionaryDecimalNumber:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
     if (*dirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
@@ -825,8 +850,14 @@
     BOOL    localDirtyFlag;
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue)
+    {
+        localDefaultValue   = defaultValue;
+    }
+
     *dirtyFlag  = NO;
-    id  newValue = [self dictionaryDouble:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    id  newValue = [self dictionaryDouble:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
     if (*dirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
@@ -845,8 +876,14 @@
     BOOL    localDirtyFlag;
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue)
+    {
+        localDefaultValue   = defaultValue;
+    }
+
     *dirtyFlag  = NO;
-    id  newValue = [self dictionaryString:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    id  newValue = [self dictionaryString:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
     if (*dirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
@@ -865,8 +902,14 @@
     BOOL    localDirtyFlag;
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue)
+    {
+        localDefaultValue   = defaultValue;
+    }
+
     *dirtyFlag  = NO;
-    id  newValue = [self dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    id  newValue = [self dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
     if (*dirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
@@ -885,8 +928,14 @@
     BOOL    localDirtyFlag;
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue)
+    {
+        localDefaultValue   = defaultValue;
+    }
+
     *dirtyFlag  = NO;
-    id  newValue = [self dictionaryDictionary:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    id  newValue = [self dictionaryDictionary:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
     if (*dirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
@@ -905,8 +954,14 @@
     BOOL    localDirtyFlag;
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue)
+    {
+        localDefaultValue   = defaultValue;
+    }
+
     *dirtyFlag  = NO;
-    id  newValue = [self dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    id  newValue = [self dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
     if (*dirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
@@ -925,8 +980,14 @@
     BOOL    localDirtyFlag;
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue)
+    {
+        localDefaultValue   = defaultValue;
+    }
+
     *dirtyFlag  = NO;
-    id  newValue = [self dictionaryObject:dictionary dirty:dirtyFlag withItem:key andDefault:[self valueForKeyPath:keypath]];
+    id  newValue = [self dictionaryObject:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
     if (*dirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];

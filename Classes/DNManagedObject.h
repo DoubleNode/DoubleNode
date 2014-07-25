@@ -184,6 +184,8 @@
 - (NSDictionary*)serialize;
 - (id)initFromSerialization:(NSDictionary*)serialization;
 
+- (id)objectInContext:(NSManagedObjectContext*)context;
+
 #pragma mark - Update If Changed functions
 
 - (NSNumber*)updateBooleanFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSNumber*)defaultValue;

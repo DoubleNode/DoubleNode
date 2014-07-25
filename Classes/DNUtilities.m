@@ -594,6 +594,10 @@
             }
         }
     }
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+    }
 
     return retval;
 }
@@ -620,6 +624,10 @@
                 retval = newval;
             }
         }
+    }
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
     }
 
     return retval;
@@ -648,6 +656,10 @@
             }
         }
     }
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+    }
 
     return retval;
 }
@@ -674,6 +686,10 @@
                 retval = newval;
             }
         }
+    }
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
     }
 
     return retval;
@@ -736,6 +752,10 @@
             }
         }
     }
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+    }
 
     return [retval stringByDecodingXMLEntities];
 }
@@ -766,6 +786,10 @@
             }
         }
     }
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+    }
 
     return retval;
 }
@@ -795,6 +819,10 @@
                 }
             }
         }
+    }
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
     }
 
     return retval;
@@ -865,6 +893,10 @@
             }
         }
     }
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+    }
 
     return retval;
 }
@@ -891,7 +923,11 @@
             }
         }
     }
-    
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+    }
+
     return retval;
 }
 
