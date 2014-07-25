@@ -282,10 +282,8 @@
 - (NSPredicate*)getFromDictionary_FetchRequestPredicate:(NSDictionary*)dict
 {
     id  idValue     = dict[@"id"];
-    id  authorID    = dict[@"author"][@"id"];
-    id  prayerID    = dict[@"prayer"][@"assignmentID"];
 
-    return [NSPredicate predicateWithFormat:@"((id == %@) OR (id == 0)) AND (author.id == %@) AND (prayer.id == %@)", idValue, authorID, prayerID];
+    return [NSPredicate predicateWithFormat:@"id == %@", idValue];
 }
 
 - (NSFetchRequest*)getFromDictionary_FetchRequest:(NSDictionary*)dict

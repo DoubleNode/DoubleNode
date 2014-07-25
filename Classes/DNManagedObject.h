@@ -259,6 +259,8 @@
 - (instancetype)initWithIDIfExists:(id)idValue;
 - (instancetype)initWithDictionary:(NSDictionary*)dict;
 
+- (void)setIdIfChanged:(id)idValue;
+
 - (void)clearData;
 - (void)loadWithDictionary:(NSDictionary*)dict withExceptions:(NSArray*)exceptions;
 - (NSDictionary*)saveToDictionary;

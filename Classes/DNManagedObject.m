@@ -576,7 +576,10 @@
                            id     newObject  = [cdoSubClass entityFromDictionary:objectD];
                            */
 
-                          id     newObject  = [cdoSubClass entityFromDictionary:obj];
+                          NSMutableDictionary*  objMD   = [obj mutableCopy];
+                          objMD[@"_relationship"]       = key;
+
+                          id     newObject  = [cdoSubClass entityFromDictionary:objMD];
 
                           NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[relationship name] camelize]];
                           SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
@@ -599,8 +602,11 @@
              {
                  Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
 
+                 NSMutableDictionary*  objMD   = [dict[key] mutableCopy];
+                 objMD[@"_relationship"]       = key;
+
                  id     existingObject  = [self valueForKey:key];
-                 id     newObject       = [cdoSubClass entityFromDictionary:dict[key]];
+                 id     newObject       = [cdoSubClass entityFromDictionary:objMD];
 
                  BOOL   isEqual = NO;
 
