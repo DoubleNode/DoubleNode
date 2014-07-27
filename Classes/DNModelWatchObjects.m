@@ -34,95 +34,107 @@
     return nil;
 }
 
-- (void)executeWillChangeHandler
+- (void)executeWillChangeHandler:(NSDictionary*)context
 {
-    [super executeWillChangeHandler];
+    [super executeWillChangeHandler:context];
     if ([self checkWatch] && (self.willChangeHandler != nil))
     {
-        self.willChangeHandler(self, [self objects]);
+        self.willChangeHandler(self, [self objects], context);
     }
 }
 
-- (void)executeDidChangeHandler
+- (void)executeDidChangeHandler:(NSDictionary*)context
 {
-    [super executeDidChangeHandler];
+    [super executeDidChangeHandler:context];
     if ([self checkWatch] && (self.didChangeHandler != nil))
     {
-        self.didChangeHandler(self, [self objects]);
+        self.didChangeHandler(self, [self objects], context);
     }
 }
 
 - (void)executeDidChangeSectionInsertHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
                                      atIndex:(NSUInteger)sectionIndex
+                                     context:(NSDictionary*)context
 {
     [super executeDidChangeSectionInsertHandler:sectionInfo
-                                        atIndex:sectionIndex];
+                                        atIndex:sectionIndex
+                                        context:context];
     if ([self checkWatch] && (self.didChangeSectionInsertHandler != nil))
     {
-        self.didChangeSectionInsertHandler(self, sectionInfo, sectionIndex);
+        self.didChangeSectionInsertHandler(self, sectionInfo, sectionIndex, context);
     }
 }
 
 - (void)executeDidChangeSectionDeleteHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
                                      atIndex:(NSUInteger)sectionIndex
+                                     context:(NSDictionary*)context
 {
     [super executeDidChangeSectionDeleteHandler:sectionInfo
-                                        atIndex:sectionIndex];
+                                        atIndex:sectionIndex
+                                        context:context];
     if ([self checkWatch] && (self.didChangeSectionDeleteHandler != nil))
     {
-        self.didChangeSectionDeleteHandler(self, sectionInfo, sectionIndex);
+        self.didChangeSectionDeleteHandler(self, sectionInfo, sectionIndex, context);
     }
 }
 
 - (void)executeDidChangeObjectInsertHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
                                newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
 {
     [super executeDidChangeObjectInsertHandler:object
                                    atIndexPath:indexPath
-                                  newIndexPath:newIndexPath];
+                                  newIndexPath:newIndexPath
+                                       context:context];
     if ([self checkWatch] && (self.didChangeObjectInsertHandler != nil))
     {
-        self.didChangeObjectInsertHandler(self, object, newIndexPath);
+        self.didChangeObjectInsertHandler(self, object, newIndexPath, context);
     }
 }
 
 - (void)executeDidChangeObjectDeleteHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
                                newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
 {
     [super executeDidChangeObjectDeleteHandler:object
                                    atIndexPath:indexPath
-                                  newIndexPath:newIndexPath];
+                                  newIndexPath:newIndexPath
+                                       context:context];
     if ([self checkWatch] && (self.didChangeObjectDeleteHandler != nil))
     {
-        self.didChangeObjectDeleteHandler(self, object, indexPath);
+        self.didChangeObjectDeleteHandler(self, object, indexPath, context);
     }
 }
 
 - (void)executeDidChangeObjectUpdateHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
                                newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
 {
     [super executeDidChangeObjectUpdateHandler:object
                                    atIndexPath:indexPath
-                                  newIndexPath:newIndexPath];
+                                  newIndexPath:newIndexPath
+                                       context:context];
     if ([self checkWatch] && (self.didChangeObjectUpdateHandler != nil))
     {
-        self.didChangeObjectUpdateHandler(self, object, indexPath);
+        self.didChangeObjectUpdateHandler(self, object, indexPath, context);
     }
 }
 
 - (void)executeDidChangeObjectMoveHandler:(id)object
                               atIndexPath:(NSIndexPath*)indexPath
                              newIndexPath:(NSIndexPath*)newIndexPath
+                                  context:(NSDictionary*)context
 {
     [super executeDidChangeObjectMoveHandler:object
                                  atIndexPath:indexPath
-                                newIndexPath:newIndexPath];
+                                newIndexPath:newIndexPath
+                                     context:context];
     if ([self checkWatch] && (self.didChangeObjectMoveHandler != nil))
     {
-        self.didChangeObjectMoveHandler(self, object, indexPath, newIndexPath);
+        self.didChangeObjectMoveHandler(self, object, indexPath, newIndexPath, context);
     }
 }
 

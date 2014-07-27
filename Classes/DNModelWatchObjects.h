@@ -13,16 +13,16 @@
 
 @class DNModelWatchObjects;
 
-typedef void(^DNModelWatchObjectsWillChangeHandlerBlock)(DNModelWatchObjects* watch, NSArray* objects);
-typedef void(^DNModelWatchObjectsDidChangeHandlerBlock)(DNModelWatchObjects* watch, NSArray* objects);
+typedef void(^DNModelWatchObjectsWillChangeHandlerBlock)(DNModelWatchObjects* watch, NSArray* objects, NSDictionary* context);
+typedef void(^DNModelWatchObjectsDidChangeHandlerBlock)(DNModelWatchObjects* watch, NSArray* objects, NSDictionary* context);
 
-typedef void(^DNModelWatchObjectsDidChangeSectionInsertHandlerBlock)(DNModelWatchObjects* watch, id <NSFetchedResultsSectionInfo> section, NSUInteger sectionIndex);
-typedef void(^DNModelWatchObjectsDidChangeSectionDeleteHandlerBlock)(DNModelWatchObjects* watch, id <NSFetchedResultsSectionInfo> section, NSUInteger sectionIndex);
+typedef void(^DNModelWatchObjectsDidChangeSectionInsertHandlerBlock)(DNModelWatchObjects* watch, id <NSFetchedResultsSectionInfo> section, NSUInteger sectionIndex, NSDictionary* context);
+typedef void(^DNModelWatchObjectsDidChangeSectionDeleteHandlerBlock)(DNModelWatchObjects* watch, id <NSFetchedResultsSectionInfo> section, NSUInteger sectionIndex, NSDictionary* context);
 
-typedef void(^DNModelWatchObjectsDidChangeObjectInsertHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* newIndexPath);
-typedef void(^DNModelWatchObjectsDidChangeObjectDeleteHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* indexPath);
-typedef void(^DNModelWatchObjectsDidChangeObjectUpdateHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* indexPath);
-typedef void(^DNModelWatchObjectsDidChangeObjectMoveHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* indexPath, NSIndexPath* newIndexPath);
+typedef void(^DNModelWatchObjectsDidChangeObjectInsertHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* newIndexPath, NSDictionary* context);
+typedef void(^DNModelWatchObjectsDidChangeObjectDeleteHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* indexPath, NSDictionary* context);
+typedef void(^DNModelWatchObjectsDidChangeObjectUpdateHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* indexPath, NSDictionary* context);
+typedef void(^DNModelWatchObjectsDidChangeObjectMoveHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* indexPath, NSIndexPath* newIndexPath, NSDictionary* context);
 
 @interface DNModelWatchObjects : DNModelWatch
 

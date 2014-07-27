@@ -102,7 +102,7 @@
     }
 
     // LOG WelcomeView SignInWithKeyboard SignIn Button Font Normal
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, controlStateString];
+    functionName  = cacheKey;
     if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
     {
         self.cacheDictionary[cacheKey]  = functionName;

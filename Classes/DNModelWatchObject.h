@@ -14,14 +14,14 @@
 @class DNManagedObject;
 @class DNModelWatchObject;
 
-typedef void(^DNModelWatchObjectWillChangeHandlerBlock)(DNModelWatchObject* watch, id object);
+typedef void(^DNModelWatchObjectWillChangeHandlerBlock)(DNModelWatchObject* watch, id object, NSDictionary* context);
 
-typedef void(^DNModelWatchObjectDidChangeObjectInsertHandlerBlock)(DNModelWatchObject* watch, id object);
-typedef void(^DNModelWatchObjectDidChangeObjectDeleteHandlerBlock)(DNModelWatchObject* watch, id object);
-typedef void(^DNModelWatchObjectDidChangeObjectUpdateHandlerBlock)(DNModelWatchObject* watch, id object);
-typedef void(^DNModelWatchObjectDidChangeObjectMoveHandlerBlock)(DNModelWatchObject* watch, id object);
+typedef void(^DNModelWatchObjectDidChangeObjectInsertHandlerBlock)(DNModelWatchObject* watch, id object, NSDictionary* context);
+typedef void(^DNModelWatchObjectDidChangeObjectDeleteHandlerBlock)(DNModelWatchObject* watch, id object, NSDictionary* context);
+typedef void(^DNModelWatchObjectDidChangeObjectUpdateHandlerBlock)(DNModelWatchObject* watch, id object, NSDictionary* context);
+typedef void(^DNModelWatchObjectDidChangeObjectMoveHandlerBlock)(DNModelWatchObject* watch, id object, NSDictionary* context);
 
-typedef void(^DNModelWatchObjectDidChangeHandlerBlock)(DNModelWatchObject* watch, id object);
+typedef void(^DNModelWatchObjectDidChangeHandlerBlock)(DNModelWatchObject* watch, id object, NSDictionary* context);
 
 @interface DNModelWatchObject : DNModelWatch
 

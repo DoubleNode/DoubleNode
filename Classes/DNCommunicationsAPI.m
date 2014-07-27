@@ -161,7 +161,7 @@
 
 - (NSInteger)apiTTLRetrieve:(NSString*)apikey
 {
-    return [self apiTTLRetrieve:apikey default:60];
+    return [self apiTTLRetrieve:apikey default:5];
 }
 
 - (NSInteger)apiTTLRetrieve:(NSString*)apikey
@@ -208,17 +208,18 @@
                now:(void(^)(DNCommunicationDetails* commDetails, NSArray* objects, BOOL isExpired))nowHandler
 {
     BOOL    isExpired = [commDetails enumeratePagesOfSize:[self apiPageSizeRetrieve:commDetails.apikey]
-                                               usingBlock:^BOOL(DNCommunicationPageDetails* pageDetails, NSString* fullpath, BOOL* stop)
+                                               usingBlock:
+                         ^BOOL(DNCommunicationPageDetails* pageDetails, NSString* fullpath, BOOL* stop)
                          {
                              NSInteger   ttlMinutes  = [self apiTTLRetrieve:commDetails.apikey];
                              if ([self isCacheExpired:commDetails withPageDetails:pageDetails withTTL:ttlMinutes])
                              {
                                  return YES;
                              }
-                             
+
                              return NO;
                          }];
-    
+
     NSMutableArray*    results     = [NSMutableArray arrayWithCapacity:[objects count]];
 
     if ([objects count] == 0)
@@ -636,6 +637,8 @@
                                filter:filterHandler
                              incoming:^NSArray*(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers)
               {
+                  [self markCacheUpdated:commDetails withPageDetails:pageDetails];
+
                   [self resetRetryRecommendation:commDetails.apikey];
 
                   NSArray*  objects = incomingHandler(commDetails, pageDetails, response, headers);

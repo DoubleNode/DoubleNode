@@ -63,7 +63,7 @@
 
     if ([[self objects] count] > 0)
     {
-        [self executeDidChangeHandler];
+        [self executeDidChangeHandler:nil];
     }
 }
 
@@ -108,12 +108,12 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController*)controller
 {
-    [self executeWillChangeHandler];
+    [self executeWillChangeHandler:nil];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
-    [self executeDidChangeHandler];
+    [self executeDidChangeHandler:nil];
 }
 
 - (void)controller:(NSFetchedResultsController*)controller

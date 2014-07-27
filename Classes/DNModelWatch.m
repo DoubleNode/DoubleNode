@@ -57,45 +57,51 @@
 {
 }
 
-- (void)executeWillChangeHandler
+- (void)executeWillChangeHandler:(NSDictionary*)context
 {
 }
 
-- (void)executeDidChangeHandler
+- (void)executeDidChangeHandler:(NSDictionary*)context
 {
 }
 
 - (void)executeDidChangeSectionInsertHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
-                                     atIndex:(NSUInteger)sectionIndex;
+                                     atIndex:(NSUInteger)sectionIndex
+                                     context:(NSDictionary*)context
 {
 }
 
 - (void)executeDidChangeSectionDeleteHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
-                                     atIndex:(NSUInteger)sectionIndex;
+                                     atIndex:(NSUInteger)sectionIndex
+                                     context:(NSDictionary*)context
 {
 }
 
 - (void)executeDidChangeObjectInsertHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
-                               newIndexPath:(NSIndexPath *)newIndexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
 {
 }
 
 - (void)executeDidChangeObjectDeleteHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
-                               newIndexPath:(NSIndexPath *)newIndexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
 {
 }
 
 - (void)executeDidChangeObjectUpdateHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
-                               newIndexPath:(NSIndexPath *)newIndexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
 {
 }
 
 - (void)executeDidChangeObjectMoveHandler:(id)object
                               atIndexPath:(NSIndexPath*)indexPath
-                             newIndexPath:(NSIndexPath *)newIndexPath
+                             newIndexPath:(NSIndexPath*)newIndexPath
+                                  context:(NSDictionary*)context
 {
 }
 

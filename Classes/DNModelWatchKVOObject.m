@@ -76,7 +76,7 @@
          [object addObserver:self
                   forKeyPath:attributeName
                      options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionPrior | initialFlag
-                     context:nil];
+                     context:CFBridgingRetain(attributeName)];
      }];
 }
 
@@ -96,78 +96,98 @@
 {
     [super refreshWatch];
     
-    [self executeWillChangeHandler];
+    if (attributes == nil)
+    {
+        // Track ALL attributes
+        attributes  = [[[object entityDescription] attributesByName] allKeys];
+    }
 
-    [self executeDidChangeObjectUpdateHandler:[self object]
-                                  atIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
-                                 newIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]];
+    [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
+     {
+         NSDictionary*  context = @{ @"keyPath" : attributeName };
 
-    [self executeDidChangeHandler];
+         [self executeWillChangeHandler:context];
+         
+         [self executeDidChangeObjectUpdateHandler:[self object]
+                                       atIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
+                                      newIndexPath:[NSIndexPath indexPathForItem:0 inSection:0]
+                                           context:context];
+
+         [self executeDidChangeHandler:context];
+     }];
 }
 
 #pragma mark - execute Handler overrides
 
-- (void)executeWillChangeHandler
+- (void)executeWillChangeHandler:(NSDictionary*)context
 {
     [DNUtilities runOnBackgroundThread:^
      {
-         [super executeWillChangeHandler];
+         [super executeWillChangeHandler:context];
      }];
 }
 
-- (void)executeDidChangeHandler
+- (void)executeDidChangeHandler:(NSDictionary*)context
 {
     [DNUtilities runOnBackgroundThread:^
      {
-         [super executeDidChangeHandler];
+         [super executeDidChangeHandler:context];
      }];
 }
 
 - (void)executeDidChangeObjectInsertHandler:(id)subjectObject
                                 atIndexPath:(NSIndexPath*)indexPath
                                newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
 {
     [DNUtilities runOnBackgroundThread:^
      {
          [super executeDidChangeObjectInsertHandler:subjectObject
                                         atIndexPath:indexPath
-                                       newIndexPath:newIndexPath];
+                                       newIndexPath:newIndexPath
+                                            context:context];
      }];
 }
 
 - (void)executeDidChangeObjectDeleteHandler:(id)subjectObject
                                 atIndexPath:(NSIndexPath*)indexPath
                                newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
 {
     [DNUtilities runOnBackgroundThread:^
      {
          [super executeDidChangeObjectDeleteHandler:subjectObject
                                         atIndexPath:indexPath
-                                       newIndexPath:newIndexPath];
+                                       newIndexPath:newIndexPath
+                                            context:context];
      }];
 }
 
 - (void)executeDidChangeObjectUpdateHandler:(id)subjectObject
                                 atIndexPath:(NSIndexPath*)indexPath
                                newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
 {
     [DNUtilities runOnBackgroundThread:^
      {
          [super executeDidChangeObjectUpdateHandler:subjectObject
                                         atIndexPath:indexPath
-                                       newIndexPath:newIndexPath];
+                                       newIndexPath:newIndexPath
+                                            context:context];
      }];
 }
 
 - (void)executeDidChangeObjectMoveHandler:(id)subjectObject
                               atIndexPath:(NSIndexPath*)indexPath
                              newIndexPath:(NSIndexPath*)newIndexPath
+                                  context:(NSDictionary*)context
 {
     [DNUtilities runOnBackgroundThread:^
      {
          [super executeDidChangeObjectMoveHandler:subjectObject
                                       atIndexPath:indexPath
-                                     newIndexPath:newIndexPath];
+                                     newIndexPath:newIndexPath
+                                          context:context];
      }];
 }
 
@@ -176,11 +196,16 @@
 - (void)observeValueForKeyPath:(NSString*)keyPath
                       ofObject:(id)subjectObject
                         change:(NSDictionary*)change
-                       context:(void *)context
+                       context:(void*)context
 {
+    NSDictionary*   contextDictionary   = @{
+                                            @"keyPath" : CFBridgingRelease(context),
+                                            @"change"  : change
+                                            };
+
     if ([change[NSKeyValueChangeNotificationIsPriorKey] isEqualToNumber:@YES])
     {
-        [self executeWillChangeHandler];
+        [self executeWillChangeHandler:contextDictionary];
     }
     else
     {
@@ -194,7 +219,8 @@
                 {
                     [self executeDidChangeObjectUpdateHandler:subjectObject
                                                   atIndexPath:indexPath
-                                                 newIndexPath:indexPath];
+                                                 newIndexPath:indexPath
+                                                      context:contextDictionary];
                 }
                 break;
             }
@@ -203,7 +229,8 @@
             {
                 [self executeDidChangeObjectInsertHandler:subjectObject
                                               atIndexPath:indexPath
-                                             newIndexPath:indexPath];
+                                             newIndexPath:indexPath
+                                                  context:contextDictionary];
                 break;
             }
 
@@ -211,7 +238,8 @@
             {
                 [self executeDidChangeObjectDeleteHandler:subjectObject
                                               atIndexPath:indexPath
-                                             newIndexPath:indexPath];
+                                             newIndexPath:indexPath
+                                                  context:contextDictionary];
                 break;
             }
 
@@ -219,12 +247,13 @@
             {
                 [self executeDidChangeObjectMoveHandler:subjectObject
                                             atIndexPath:indexPath
-                                           newIndexPath:indexPath];
+                                           newIndexPath:indexPath
+                                                context:contextDictionary];
                 break;
             }
         }
 
-        [self executeDidChangeHandler];
+        [self executeDidChangeHandler:contextDictionary];
     }
 }
 

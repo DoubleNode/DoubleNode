@@ -25,26 +25,32 @@
 - (void)cancelWatch;
 - (void)refreshWatch;
 
-- (void)executeWillChangeHandler;
-- (void)executeDidChangeHandler;
+- (void)executeWillChangeHandler:(NSDictionary*)context;
+- (void)executeDidChangeHandler:(NSDictionary*)context;
 
 - (void)executeDidChangeSectionInsertHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
-                                     atIndex:(NSUInteger)sectionIndex;
+                                     atIndex:(NSUInteger)sectionIndex
+                                     context:(NSDictionary*)context;
 - (void)executeDidChangeSectionDeleteHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
-                                     atIndex:(NSUInteger)sectionIndex;
+                                     atIndex:(NSUInteger)sectionIndex
+                                     context:(NSDictionary*)context;
 
 - (void)executeDidChangeObjectInsertHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
-                               newIndexPath:(NSIndexPath *)newIndexPath;
+                               newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context;
 - (void)executeDidChangeObjectDeleteHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
-                               newIndexPath:(NSIndexPath *)newIndexPath;
+                               newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context;
 - (void)executeDidChangeObjectUpdateHandler:(id)object
                                 atIndexPath:(NSIndexPath*)indexPath
-                               newIndexPath:(NSIndexPath *)newIndexPath;
+                               newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context;
 - (void)executeDidChangeObjectMoveHandler:(id)object
                               atIndexPath:(NSIndexPath*)indexPath
-                             newIndexPath:(NSIndexPath *)newIndexPath;
+                             newIndexPath:(NSIndexPath*)newIndexPath
+                                  context:(NSDictionary*)context;
 
 - (void)performBlockAndWait:(void (^)(NSManagedObjectContext* context))block;
 - (void)performBlock:(void (^)(NSManagedObjectContext* context))block;
