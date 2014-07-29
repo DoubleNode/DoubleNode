@@ -559,13 +559,32 @@
         NSData*    jsonData = data;
         if (jsonData != nil)
         {
-            id responseR = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
-            DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
-        }
-        else if (jsonData != nil)
-        {
-            NSString*  body = [NSString stringWithUTF8String:[jsonData bytes]];
-            DLog(LL_Debug, LD_API, @"error body=%@", body);
+            id  userInfo;
+            id  responseR = [NSJSONSerialization JSONObjectWithData:jsonData options:NSJSONReadingMutableContainers error:nil];
+            if (responseR != nil)
+            {
+                DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
+                
+                userInfo    = responseR[@"meta"];
+
+                id  errorMsg    = userInfo[@"error"];
+                if (errorMsg && ![errorMsg isEqual:[NSNull null]])
+                {
+                    userInfo[NSLocalizedDescriptionKey] = errorMsg;
+                }
+            }
+            else
+            {
+                NSString*  body = [NSString stringWithUTF8String:[jsonData bytes]];
+                DLog(LL_Debug, LD_API, @"error body=%@", body);
+
+                userInfo    = @{ NSLocalizedDescriptionKey: body };
+            }
+
+            if (userInfo && ![userInfo isEqual:[NSNull null]])
+            {
+                error  = [NSError errorWithDomain:@"DNCommunicationsAPI" code:error.code userInfo:userInfo];
+            }
         }
 
         DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
