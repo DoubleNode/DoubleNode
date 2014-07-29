@@ -537,6 +537,27 @@
 
     txtView.font    = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
+    UIColor*    linkTextColor               = [[self class] performThemeSelectorForAttribute:@"LinkTextColor"               withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    UIFont*     linkTextFont                = [[self class] performThemeSelectorForAttribute:@"LinkTextFont"                withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    NSNumber*   linkTextAlignment           = [[self class] performThemeSelectorForAttribute:@"LinkTextAlignment"           withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    NSNumber*   linkTextUnderline           = [[self class] performThemeSelectorForAttribute:@"LinkTextUnderline"           withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    NSNumber*   linkTextKerning             = [[self class] performThemeSelectorForAttribute:@"LinkTextKerning"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    NSNumber*   linkTextLineSpacing         = [[self class] performThemeSelectorForAttribute:@"LinkTextLineSpacing"         withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    NSNumber*   linkTextLineHeightMultiple  = [[self class] performThemeSelectorForAttribute:@"LinkTextLineHeightMultiple"  withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+
+    NSMutableParagraphStyle*    linkTextParagraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [linkTextParagraphStyle setAlignment:[linkTextAlignment doubleValue]];
+    [linkTextParagraphStyle setLineSpacing:[linkTextLineSpacing doubleValue]];
+    [linkTextParagraphStyle setLineHeightMultiple:[linkTextLineHeightMultiple doubleValue]];
+
+    txtView.linkTextAttributes  = @{
+                                    NSForegroundColorAttributeName  : linkTextColor,
+                                    NSFontAttributeName             : linkTextFont,
+                                    NSKernAttributeName             : linkTextKerning,
+                                    NSUnderlineStyleAttributeName   : linkTextUnderline,
+                                    NSParagraphStyleAttributeName   : linkTextParagraphStyle
+                                    };
+
     if ([txtView isKindOfClass:[DNTextView class]])
     {
         ((DNTextView*)txtView).realTextColor    = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];

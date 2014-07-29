@@ -633,8 +633,14 @@
 
 - (NSDictionary*)saveToDictionary
 {
-    NSMutableDictionary*    dict        = [[self saveIDToDictionary] mutableCopy];
     NSDictionary*           attributes  = [self.entity attributesByName];
+    NSMutableDictionary*    dict        = [NSMutableDictionary dictionary];
+
+    NSDictionary*           newDict     = [self saveIDToDictionary];
+    if (newDict)
+    {
+        dict    = [newDict mutableCopy];
+    }
 
     [attributes enumerateKeysAndObjectsUsingBlock:^(id key, NSAttributeDescription* attribute, BOOL* stop)
      {
@@ -698,7 +704,11 @@
              dict[key]  = [NSMutableArray arrayWithCapacity:[currentValue count]];
              [currentValue enumerateObjectsUsingBlock:^(DNManagedObject* obj, NSUInteger idx, BOOL* stop)
               {
-                  [dict[key] addObject:[obj saveIDToDictionary]];
+                  id    newObject   = [obj saveIDToDictionary];
+                  if (newObject)
+                  {
+                      [dict[key] addObject:newObject];
+                  }
               }];
          }
          else
@@ -708,7 +718,11 @@
 
              if (currentValue)
              {
-                 dict[key]  = [currentValue saveIDToDictionary];
+                 id    newObject   = [currentValue saveIDToDictionary];
+                 if (newObject)
+                 {
+                     dict[key]  = newObject;
+                 }
              }
          }
      }];
@@ -720,8 +734,14 @@
 {
     [self.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
 
+    id  idValue = [self valueForKey:[[self class] idAttribute]];
+    if (!idValue || [idValue isEqual:[NSNull null]])
+    {
+        return nil;
+    }
+
     return @{
-             [[self class] idAttribute] : [self valueForKey:[[self class] idAttribute]],
+             [[self class] idAttribute] : idValue,
              @"objectID"                : [[[self objectID] URIRepresentation] absoluteString]
              };
 }
