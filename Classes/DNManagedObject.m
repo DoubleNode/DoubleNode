@@ -523,7 +523,7 @@
              case NSDateAttributeType:
              {
                  //DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
-                 if (!defaultValue)
+                 if (!defaultValue || ![defaultValue isKindOfClass:[NSDate class]])
                  {
                      defaultValue   = kDNDefaultDate_NeverExpires;
                  }
@@ -981,7 +981,7 @@
     if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
 
     id  localDefaultValue   = [self valueForKeyPath:keypath];
-    if (!localDefaultValue)
+    if (!localDefaultValue || ![localDefaultValue isKindOfClass:[NSDate class]])
     {
         localDefaultValue   = defaultValue;
     }

@@ -836,6 +836,10 @@
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
     NSDate*   retval  = defaultValue;
+    if ((id)retval == (id)@0)
+    {
+        retval = nil;
+    }
 
     id  object = [dictionary objectForKey:key];
     if (object != nil)
