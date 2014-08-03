@@ -235,6 +235,7 @@
     [paragraphStyle setLineSpacing:[labelLineSpacing doubleValue]];
     [paragraphStyle setLineHeightMultiple:[lineHeightMultiple doubleValue]];
     [paragraphStyle setAlignment:lblView.textAlignment];
+    [paragraphStyle setLineBreakMode:lblView.lineBreakMode];
 
     NSMutableAttributedString*  attrString  = [attributedString mutableCopy];
 
@@ -560,7 +561,8 @@
 
     if ([txtView isKindOfClass:[DNTextView class]])
     {
-        ((DNTextView*)txtView).realTextColor    = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        ((DNTextView*)txtView).textColor    = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        //((DNTextView*)txtView).realTextColor    = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
         ((DNTextView*)txtView).placeholderColor = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor"  withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
         // Default is YES/nil if not specified, therefore, if != NO...
