@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.9.5"
+  s.version      = "0.9.6"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode

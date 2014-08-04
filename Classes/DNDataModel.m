@@ -15,7 +15,7 @@
 
 #import "DNUtilities.h"
 
-#define SAVE_TO_DISK_TIME_INTERVAL 1.0f
+#define SAVE_TO_DISK_TIME_INTERVAL 5.0f
 
 @interface DNDataModel ()
 {
@@ -424,7 +424,8 @@
         [_mainObjectContext setStalenessInterval:0];
 
         [self performWithContext:_mainObjectContext
-                    blockAndWait:^(NSManagedObjectContext* context)
+                    blockAndWait:
+         ^(NSManagedObjectContext* context)
          {
              [context setParentContext:self.privateWriterContext];
          }];
@@ -606,7 +607,8 @@
         //[_privateWriterContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
 
         [self performWithContext:_privateWriterContext
-                    blockAndWait:^(NSManagedObjectContext* context)
+                    blockAndWait:
+         ^(NSManagedObjectContext* context)
          {
              [context setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
          }];
@@ -763,34 +765,37 @@
          {
              NSError*    error = nil;
 
+             NSLog(@"Writer context merging changes...");
              [notificationContext.parentContext mergeChangesFromContextDidSaveNotification:notification];
+             NSLog(@"Writer context merging changes...done!");
 
              //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
              //{
              //    DLog(LL_Debug, LD_CoreData, @"CDTableDataModel");
              //}
+             NSLog(@"Writer context saving context...");
              if (![notificationContext.parentContext save:&error])
              {
-                 DLog(LL_Error, LD_CoreData, @"ERROR saving writer context: %@", [error localizedDescription]);
+                 NSLog(@"ERROR saving writer context: %@", [error localizedDescription]);
                  NSArray*   detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
                  if ((detailedErrors != nil) && ([detailedErrors count] > 0))
                  {
                      for (NSError* detailedError in detailedErrors)
                      {
-                         DLog(LL_Error, LD_CoreData, @"  DetailedError: %@", [detailedError userInfo]);
+                         NSLog(@"  DetailedError: %@", [detailedError userInfo]);
                      }
                  }
                  else
                  {
-                     DLog(LL_Error, LD_CoreData, @"  %@", [error userInfo]);
+                     NSLog(@"  %@", [error userInfo]);
                  }
              }
 
-             NSLog(@"Writer context saved to disk");
+             NSLog(@"Writer context saving context...Done!");
          }];
     };
-    
-    [notificationContext performBlockAndWait:saveToDiskBlock];
+
+    [notificationContext performBlock:saveToDiskBlock];
 }
 
 - (void)performWithContext:(NSManagedObjectContext*)context
@@ -810,9 +815,11 @@
     }
     else
     {
-        [context performBlockAndWait:^{
-            block(context);
-        }];
+        [context performBlockAndWait:
+         ^()
+         {
+             block(context);
+         }];
     }
 }
 
@@ -825,9 +832,11 @@
     }
     else
     {
-        [context performBlock:^{
-            block(context);
-        }];
+        [context performBlock:
+         ^()
+         {
+             block(context);
+         }];
     }
 }
 
