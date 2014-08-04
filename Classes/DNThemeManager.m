@@ -561,8 +561,7 @@
 
     if ([txtView isKindOfClass:[DNTextView class]])
     {
-        ((DNTextView*)txtView).textColor    = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-        //((DNTextView*)txtView).realTextColor    = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+        ((DNTextView*)txtView).realTextColor    = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
         ((DNTextView*)txtView).placeholderColor = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor"  withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
         // Default is YES/nil if not specified, therefore, if != NO...

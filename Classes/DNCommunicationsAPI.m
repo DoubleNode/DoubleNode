@@ -578,7 +578,10 @@
                 NSString*  body = [NSString stringWithUTF8String:[jsonData bytes]];
                 DLog(LL_Debug, LD_API, @"error body=%@", body);
 
-                userInfo    = @{ NSLocalizedDescriptionKey: body };
+                if (body)
+                {
+                    userInfo    = @{ NSLocalizedDescriptionKey: body };
+                }
             }
 
             if (userInfo && ![userInfo isEqual:[NSNull null]])

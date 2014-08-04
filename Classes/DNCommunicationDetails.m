@@ -33,9 +33,22 @@
 - (NSString*)paramString
 {
     NSMutableString*    paramString = [NSMutableString string];
-    [self.parameters enumerateKeysAndObjectsUsingBlock:^(NSString* key, id obj, BOOL* stop)
+    [self.parameters enumerateKeysAndObjectsUsingBlock:
+     ^(NSString* key, id obj, BOOL* stop)
      {
-         [paramString appendFormat:@"%@=%@&", key, obj];
+         if ([obj isKindOfClass:[NSArray class]])
+         {
+             NSArray*   objArray    = obj;
+             [objArray enumerateObjectsUsingBlock:
+              ^(NSString* objStr, NSUInteger idx, BOOL* stop)
+              {
+                  [paramString appendFormat:@"%@[]=%@&", key, objStr];
+              }];
+         }
+         else
+         {
+             [paramString appendFormat:@"%@=%@&", key, obj];
+         }
      }];
 
     return paramString;

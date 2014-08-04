@@ -786,7 +786,7 @@
                  }
              }
 
-             DLog(LL_Debug, LD_CoreData, @"Writer context saved to disk");
+             NSLog(@"Writer context saved to disk");
          }];
     };
     
