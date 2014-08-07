@@ -74,23 +74,27 @@
 
     [super startWatch];
 
-    [self performWithContext:[fetchResultsController managedObjectContext]
-                       block:^(NSManagedObjectContext* context)
+    [DNUtilities runOnBackgroundThread:
+     ^()
      {
-         [self refreshWatch];
+         [self performWithContext:[fetchResultsController managedObjectContext]
+                            block:^(NSManagedObjectContext* context)
+          {
+              [self refreshWatch];
 
-         if ([[self objects] count] > 0)
-         {
-             forceNoObjects  = YES;
-             [self executeWillChangeHandler:nil];
-             forceNoObjects  = NO;
-             [[self objects] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+              if ([[self objects] count] > 0)
               {
-                  NSIndexPath*   indexPath   = [NSIndexPath indexPathForRow:idx inSection:0];
-                  [self executeDidChangeObjectInsertHandler:obj atIndexPath:indexPath newIndexPath:indexPath context:nil];
-              }];
-             [self executeDidChangeHandler:nil];
-         }
+                  forceNoObjects  = YES;
+                  [self executeWillChangeHandler:nil];
+                  forceNoObjects  = NO;
+                  [[self objects] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+                   {
+                       NSIndexPath*   indexPath   = [NSIndexPath indexPathForRow:idx inSection:0];
+                       [self executeDidChangeObjectInsertHandler:obj atIndexPath:indexPath newIndexPath:indexPath context:nil];
+                   }];
+                  [self executeDidChangeHandler:nil];
+              }
+          }];
      }];
 }
 

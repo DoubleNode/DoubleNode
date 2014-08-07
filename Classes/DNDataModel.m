@@ -765,15 +765,15 @@
          {
              NSError*    error = nil;
 
-             NSLog(@"Writer context merging changes...");
+             //NSLog(@"Writer context merging changes...");
              [notificationContext.parentContext mergeChangesFromContextDidSaveNotification:notification];
-             NSLog(@"Writer context merging changes...done!");
+             //NSLog(@"Writer context merging changes...done!");
 
              //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
              //{
              //    DLog(LL_Debug, LD_CoreData, @"CDTableDataModel");
              //}
-             NSLog(@"Writer context saving context...");
+             //NSLog(@"Writer context saving context...");
              if (![notificationContext.parentContext save:&error])
              {
                  NSLog(@"ERROR saving writer context: %@", [error localizedDescription]);
@@ -791,7 +791,7 @@
                  }
              }
 
-             NSLog(@"Writer context saving context...Done!");
+             //NSLog(@"Writer context saving context...Done!");
          }];
     };
 

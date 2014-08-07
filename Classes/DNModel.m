@@ -183,11 +183,14 @@
 - (NSArray*)getAllWithFetch:(NSFetchRequest*)fetchRequest
 {
     __block NSArray*    resultArray;
+    __block NSThread*   createdThread;
 
     [self performBlockAndWait:^(NSManagedObjectContext* context)
      {
          @try
          {
+             createdThread  = [NSThread currentThread];
+
              NSError*    error;
 
              resultArray  = [context executeFetchRequest:fetchRequest error:&error];
@@ -205,6 +208,19 @@
          }
      }];
 
+    if (resultArray && (![createdThread isEqual:[NSThread currentThread]]))
+    {
+        NSMutableArray* finalArray  = [NSMutableArray array];
+
+        [resultArray enumerateObjectsUsingBlock:
+         ^(DNManagedObject* obj, NSUInteger idx, BOOL* stop)
+         {
+             [finalArray addObject:[obj objectInContext:[[self class] managedObjectContext]]];
+         }];
+
+        return finalArray;
+    }
+    
     return resultArray;
 }
 
