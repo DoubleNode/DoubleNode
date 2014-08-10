@@ -126,7 +126,8 @@
     NSMutableDictionary*    retRepresentation   = [[NSMutableDictionary alloc] initWithCapacity:representation.count];
     NSDictionary*           attributes          = [entity attributesByName];
 
-    [representation enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
+    [representation enumerateKeysAndObjectsUsingBlock:
+     ^(id key, id obj, BOOL* stop)
      {
          if (![key isKindOfClass:[NSString class]])
          {
@@ -185,10 +186,31 @@
                                                           ofEntity:(NSEntityDescription*)entity
                                                       fromResponse:(NSHTTPURLResponse*)response
 {
-    NSMutableDictionary*    mutableRelationshipRepresentations = [NSMutableDictionary dictionaryWithCapacity:[entity.relationshipsByName count]];
-    [entity.relationshipsByName enumerateKeysAndObjectsUsingBlock:^(id name, id relationship, BOOL* stop)
+    NSMutableDictionary*    retRepresentation   = [NSMutableDictionary dictionaryWithCapacity:[entity.relationshipsByName count]];
+    NSDictionary*           relationships       = [entity relationshipsByName];
+
+    [representation enumerateKeysAndObjectsUsingBlock:
+     ^(id key, id obj, BOOL* stop)
      {
-         id value = [representation valueForKey:name];
+         if (![key isKindOfClass:[NSString class]])
+         {
+             return;
+         }
+
+         NSString*  name    = [self translationForAttribute:key ofEntity:entity];
+
+         NSRelationshipDescription* relationship    = [relationships objectForKey:name];
+         if (!relationship)
+         {
+             name           = [name pluralize];
+             relationship   = [relationships objectForKey:name];
+         }
+         if (!relationship)
+         {
+             return;
+         }
+
+         id value = [representation valueForKey:key];
          if (value)
          {
              if ([relationship isToMany])
@@ -203,16 +225,16 @@
                      arrayOfRelationshipRepresentations = [NSArray arrayWithObject:value];
                  }
 
-                 [mutableRelationshipRepresentations setValue:arrayOfRelationshipRepresentations forKey:name];
+                 [retRepresentation setValue:arrayOfRelationshipRepresentations forKey:name];
              }
              else
              {
-                 [mutableRelationshipRepresentations setValue:value forKey:name];
+                 [retRepresentation setValue:value forKey:name];
              }
          }
      }];
 
-    return mutableRelationshipRepresentations;
+    return retRepresentation;
 }
 
 + (BOOL)shouldFetchRemoteAttributeValuesForObjectWithID:(NSManagedObjectID*)objectID

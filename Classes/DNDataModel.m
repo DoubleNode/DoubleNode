@@ -721,33 +721,38 @@
     //    DLog(LL_Debug, LD_CoreData, @"saveToDisk: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
     //}
 
-    [self performWithContext:notificationContext
-                blockAndWait:^(NSManagedObjectContext* context)
+    [DNUtilities runOnBackgroundThread:
+     ^()
      {
-         NSError*    error = nil;
-         
-         //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
-         //{
-         //    DLog(LL_Debug, LD_CoreData, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext registeredObjects] count], (unsigned long)[[notificationContext insertedObjects] count], (unsigned long)[[notificationContext updatedObjects] count], (unsigned long)[[notificationContext deletedObjects] count]);
-         //}
-         if (![notificationContext save:&error])
-         {
-             DLog(LL_Error, LD_CoreData, @"ERROR saving main context: %@", [error localizedDescription]);
-             NSArray*   detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
-             if ((detailedErrors != nil) && ([detailedErrors count] > 0))
-             {
-                 for (NSError* detailedError in detailedErrors)
-                 {
-                     DLog(LL_Error, LD_CoreData, @"  DetailedError: %@", [detailedError userInfo]);
-                 }
-             }
-             else
-             {
-                 DLog(LL_Error, LD_CoreData, @"  %@", [error userInfo]);
-             }
-         }
-     }];
+         [self performWithContext:notificationContext
+                     blockAndWait:
+          ^(NSManagedObjectContext* context)
+          {
+              NSError*    error = nil;
 
+              //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"])
+              //{
+              //    DLog(LL_Debug, LD_CoreData, @"%lu objects (ins:%lu, upd:%lu, del:%lu)", (unsigned long)[[notificationContext registeredObjects] count], (unsigned long)[[notificationContext insertedObjects] count], (unsigned long)[[notificationContext updatedObjects] count], (unsigned long)[[notificationContext deletedObjects] count]);
+              //}
+              if (![context save:&error])
+              {
+                  DLog(LL_Error, LD_CoreData, @"ERROR saving main context: %@", [error localizedDescription]);
+                  NSArray*   detailedErrors = [[error userInfo] objectForKey:NSDetailedErrorsKey];
+                  if ((detailedErrors != nil) && ([detailedErrors count] > 0))
+                  {
+                      for (NSError* detailedError in detailedErrors)
+                      {
+                          DLog(LL_Error, LD_CoreData, @"  DetailedError: %@", [detailedError userInfo]);
+                      }
+                  }
+                  else
+                  {
+                      DLog(LL_Error, LD_CoreData, @"  %@", [error userInfo]);
+                  }
+              }
+          }];
+     }];
+    
     //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
     //{
     //    DLog(LL_Debug, LD_CoreData, @"CDTableDataModel");
