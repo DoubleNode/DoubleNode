@@ -140,6 +140,27 @@
     return [[self class] performThemeSelectorForAttribute:attribute withType:type andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
 }
 
++ (NSString*)controlStateString:(UIControlState)controlState
+{
+    NSString*   controlStateString;
+
+    switch (controlState)
+    {
+        case UIControlStateNormal:      {   controlStateString  = @"UIControlStateNormal";      break;  }
+        case UIControlStateHighlighted: {   controlStateString  = @"UIControlStateHighlighted"; break;  }
+        case UIControlStateDisabled:    {   controlStateString  = @"UIControlStateDisabled";    break;  }
+        case UIControlStateSelected:    {   controlStateString  = @"UIControlStateSelected";    break;  }
+
+        default:
+        {
+            controlStateString  = [NSString stringWithFormat:@"%d", controlState];
+            break;
+        }
+    }
+
+    return controlStateString;
+}
+
 + (id)performThemeSelectorForAttribute:(NSString*)attribute
                               withType:(NSString*)type
                               andGroup:(NSString*)group
@@ -156,7 +177,18 @@
                                                      andItem:item
                                              andControlState:controlState];
 
-    return [[self class] performThemeSelector:aSelector];
+    if (!aSelector)
+    {
+        DLog(LL_Error, LD_Theming, @"No valid selector found! (%@/%@/%@/%@/%@/%@/%@)", attribute, type, group, screen, viewState, item, [[self class] controlStateString:controlState]);
+        return nil;
+    }
+
+    id  retval = [[self class] performThemeSelector:aSelector];
+    if (!retval)
+    {
+        DLog(LL_Error, LD_Theming, @"%@ returned nil! (%@/%@/%@/%@/%@/%@/%@)", NSStringFromSelector(aSelector), attribute, type, group, screen, viewState, item, [[self class] controlStateString:controlState]);
+    }
+    return retval;
 }
 
 + (NSString*)customizeNibNameWithClass:(NSString*)className

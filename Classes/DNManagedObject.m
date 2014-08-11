@@ -701,7 +701,10 @@
                  case NSDateAttributeType:
                  {
                      //DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
-                     dict[key]  = [NSNumber numberWithUnsignedInt:[currentValue unixTimestamp]];
+                     if (currentValue && ![currentValue isEqual:[NSNull null]] && [currentValue isKindOfClass:[NSDate class]])
+                     {
+                         dict[key]  = [NSNumber numberWithUnsignedInt:[currentValue unixTimestamp]];
+                     }
                      break;
                  }
              }
