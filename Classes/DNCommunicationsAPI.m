@@ -23,6 +23,8 @@
     NSMutableDictionary*    failures;
     
     NSDictionary*   plistDictionary;
+
+    NSMutableCharacterSet*  allowedCharacterSet;
 }
 
 @end
@@ -55,6 +57,9 @@
         NSString*   API_Path    = [[NSBundle mainBundle] pathForResource:filename ofType: @"plist"];
 
         plistDictionary = [[NSDictionary alloc] initWithContentsOfFile:API_Path];
+
+        allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+        [allowedCharacterSet removeCharactersInString:@"+"];
     }
     
     return self;
@@ -291,11 +296,14 @@
     NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
 
     [request setTimeoutInterval:60];
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
 
     [request setHTTPMethod:@"POST"];
     if (!commDetails.files || ([commDetails.files count] == 0))
     {
-        [request setHTTPBody:[paramString dataUsingEncoding:NSUTF8StringEncoding]];
+        NSString*   encodedParamString  = [paramString stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+
+        [request setHTTPBody:[encodedParamString dataUsingEncoding:NSUTF8StringEncoding]];
 
         [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
         return;

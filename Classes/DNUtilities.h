@@ -92,6 +92,9 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (NSString*)appendNibSuffix:(NSString*)nibNameOrNil withDefaultNib:(NSString*)defaultNib;
 + (NSString*)deviceImageName:(NSString*)name;
 
++ (void)runOnBackgroundThreadAfterDelay:(CGFloat)delay
+                                  block:(void (^)())block;
+
 + (void)runOnMainThreadWithoutDeadlocking:(void (^)())block;
 + (void)runOnBackgroundThread:(void (^)())block;
 + (void)runBlock:(void (^)())block;

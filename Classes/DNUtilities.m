@@ -274,16 +274,27 @@
     return [fileName stringByAppendingFormat:@".%@", extension];
 }
 
-+ (void)runOnMainThreadWithoutDeadlocking:(void (^)())block
++ (void)runOnBackgroundThreadAfterDelay:(CGFloat)delay
+                                  block:(void (^)())block
 {
-    if ([NSThread isMainThread])
+    [NSThread detachNewThreadSelector:@selector(runAfterDelayBlock:)
+                             toTarget:self
+                           withObject:@[ [NSNumber numberWithFloat:delay], block ]];
+}
+
++ (void)runAfterDelayBlock:(NSArray*)arrayBlock
+{
+    CGFloat delay = 0;
+
+    id  delayD = arrayBlock[0];
+    if (delayD && [delayD isKindOfClass:[NSNumber class]])
     {
-        block();
+        delay = [delayD floatValue];
     }
-    else
-    {
-        dispatch_sync(dispatch_get_main_queue(), block);
-    }
+
+    [NSThread sleepForTimeInterval:delay];
+
+    [DNUtilities runBlock:arrayBlock[1]];
 }
 
 + (void)runOnBackgroundThread:(void (^)())block
@@ -296,6 +307,18 @@
 + (void)runBlock:(void (^)())block
 {
     block();
+}
+
++ (void)runOnMainThreadWithoutDeadlocking:(void (^)())block
+{
+    if ([NSThread isMainThread])
+    {
+        block();
+    }
+    else
+    {
+        dispatch_sync(dispatch_get_main_queue(), block);
+    }
 }
 
 + (void)runOnMainThreadBlock:(void (^)())block
