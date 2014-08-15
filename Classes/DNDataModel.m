@@ -721,9 +721,9 @@
     //    DLog(LL_Debug, LD_CoreData, @"saveToDisk: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
     //}
 
-    [DNUtilities runOnBackgroundThread:
-     ^()
-     {
+    //[DNUtilities runOnBackgroundThread:
+    //^()
+    // {
          [self performWithContext:notificationContext
                      blockAndWait:
           ^(NSManagedObjectContext* context)
@@ -751,7 +751,7 @@
                   }
               }
           }];
-     }];
+    // }];
     
     //if ([NSStringFromClass([self class]) isEqualToString:@"CDTableDataModel"] == YES)
     //{

@@ -603,7 +603,7 @@
 
                           id     newObject  = [cdoSubClass entityFromDictionary:objMD];
 
-                          NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[relationship name] camelize]];
+                          NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[[relationship name] underscore] camelize]];
                           SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
 
                           if ([self respondsToSelector:addObjectSelector])
@@ -612,6 +612,10 @@
                                                                              selector:addObjectSelector];
                               [inv setArgument:&newObject atIndex:2];
                               [inv invoke];
+                          }
+                          else
+                          {
+                              DLog(LL_Debug, LD_CoreData, @"No Selector Match: %@", NSStringFromSelector(addObjectSelector));
                           }
                       }
                   }];
