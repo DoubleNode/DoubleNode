@@ -60,6 +60,9 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 - (NSTimeInterval)retryRecommendation:(NSString*)apikey;
 
 - (BOOL)processNow:(DNCommunicationDetails*)commDetails
+               now:(void(^)(DNCommunicationDetails* commDetails, NSArray* objects, BOOL isExpired))nowHandler;
+
+- (BOOL)processNow:(DNCommunicationDetails*)commDetails
            objects:(NSArray*)objects
             filter:(BOOL(^)(id object))filterHandler
                now:(void(^)(DNCommunicationDetails* commDetails, NSArray* objects, BOOL isExpired))nowHandler;

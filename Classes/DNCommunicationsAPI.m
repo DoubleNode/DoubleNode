@@ -80,7 +80,7 @@
           withTTL:(NSUInteger)ttl
 {
     NSDate* lastCheck = [[NSUserDefaults standardUserDefaults] objectForKey:[NSString stringWithFormat:@"[API]%@", cacheKey]];
-    DLog(LL_Debug, LD_API, @"[API]%@ lastCheck=%@", cacheKey, lastCheck);
+    //DLog(LL_Debug, LD_API, @"[API]%@ lastCheck=%@", cacheKey, lastCheck);
     if (lastCheck)
     {
         NSCalendar*         gregorian   = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -89,16 +89,16 @@
         
         NSInteger   days    = [components day];
         NSInteger   minutes = [components minute];
-        DLog(LL_Debug, LD_API, @"days=%d, minutes=%d", days, minutes);
+        //DLog(LL_Debug, LD_API, @"days=%d, minutes=%d", days, minutes);
         
         if (minutes < ttl)
         {
-            DLog(LL_Debug, LD_API, @"NOT expired");
+            //DLog(LL_Debug, LD_API, @"NOT expired");
             return NO;
         }
     }
     
-    DLog(LL_Debug, LD_API, @"Expired");
+    //DLog(LL_Debug, LD_API, @"Expired");
     return YES;
 }
 
@@ -107,6 +107,8 @@
     [DNUtilities runOnBackgroundThread:^
      {
          [[NSUserDefaults standardUserDefaults] setObject:[NSDate date] forKey:[NSString stringWithFormat:@"[API]%@", cacheKey]];
+         [[NSUserDefaults standardUserDefaults] synchronize];
+         //DLog(LL_Debug, LD_API, @"markUpdated [API]%@", cacheKey);
      }];
 }
 
@@ -115,6 +117,8 @@
     [DNUtilities runOnBackgroundThread:^
      {
          [[NSUserDefaults standardUserDefaults] removeObjectForKey:[NSString stringWithFormat:@"[API]%@", cacheKey]];
+         [[NSUserDefaults standardUserDefaults] synchronize];
+         //DLog(LL_Debug, LD_API, @"markExpired [API]%@", cacheKey);
      }];
 }
 
@@ -208,6 +212,12 @@
 }
 
 - (BOOL)processNow:(DNCommunicationDetails*)commDetails
+               now:(void(^)(DNCommunicationDetails* commDetails, NSArray* objects, BOOL isExpired))nowHandler
+{
+    return [self processNow:commDetails objects:nil filter:nil now:nowHandler];
+}
+
+- (BOOL)processNow:(DNCommunicationDetails*)commDetails
            objects:(NSArray*)objects
             filter:(BOOL(^)(id object))filterHandler
                now:(void(^)(DNCommunicationDetails* commDetails, NSArray* objects, BOOL isExpired))nowHandler
@@ -219,16 +229,19 @@
                              NSInteger   ttlMinutes  = [self apiTTLRetrieve:commDetails.apikey];
                              if ([self isCacheExpired:commDetails withPageDetails:pageDetails withTTL:ttlMinutes])
                              {
+                                 //DLog(LL_Debug, LD_API, @"processNow:page:EXPIRED [API] %@", commDetails.apikey);
                                  return YES;
                              }
 
+                             //DLog(LL_Debug, LD_API, @"processNow:page:NOT EXPIRED [API] %@", commDetails.apikey);
                              return NO;
                          }];
 
     NSMutableArray*    results     = [NSMutableArray arrayWithCapacity:[objects count]];
 
-    if ([objects count] == 0)
+    if (objects && ([objects count] == 0))
     {
+        // Only perform check for zero objects when valid objects array is passed in
         DLog(LL_Debug, LD_API, @"ZERO OBJECTS [API]%@", commDetails.apikey);
 
         isExpired   = YES;  // Force expired when zero objects
@@ -240,21 +253,28 @@
         return isExpired;
     }
 
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
-          {
-              if ((filterHandler == nil) || filterHandler(obj))
-              {
-                  [results addObject:obj];
-              }
-          }];
-
-         if (nowHandler)
+    if (nowHandler && objects)
+    {
+        [DNUtilities runOnBackgroundThread:^
          {
+             if (!filterHandler)
+             {
+                 [results addObjectsFromArray:objects];
+             }
+             else
+             {
+                 [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+                  {
+                      if (filterHandler(obj))
+                      {
+                          [results addObject:obj];
+                      }
+                  }];
+             }
+
              nowHandler(commDetails, results, isExpired);
-         }
-     }];
+         }];
+    }
 
     return isExpired;
 }
