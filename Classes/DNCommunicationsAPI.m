@@ -122,23 +122,29 @@
      }];
 }
 
+- (NSString*)cacheKey:(DNCommunicationDetails*)commDetails
+      withPageDetails:(DNCommunicationPageDetails*)pageDetails
+{
+    return [commDetails fullPathOfPage:pageDetails];
+}
+
 - (BOOL)isCacheExpired:(DNCommunicationDetails*)commDetails
        withPageDetails:(DNCommunicationPageDetails*)pageDetails
                withTTL:(NSUInteger)ttl
 {
-    return [self isExpired:[commDetails fullPathOfPage:pageDetails] withTTL:ttl];
+    return [self isExpired:[self cacheKey:commDetails withPageDetails:pageDetails] withTTL:ttl];
 }
 
 - (void)markCacheUpdated:(DNCommunicationDetails*)commDetails
          withPageDetails:(DNCommunicationPageDetails*)pageDetails
 {
-    [self markUpdated:[commDetails fullPathOfPage:pageDetails]];
+    [self markUpdated:[self cacheKey:commDetails withPageDetails:pageDetails]];
 }
 
 - (void)markCacheExpired:(DNCommunicationDetails*)commDetails
          withPageDetails:(DNCommunicationPageDetails*)pageDetails
 {
-    [self markExpired:[commDetails fullPathOfPage:pageDetails]];
+    [self markExpired:[self cacheKey:commDetails withPageDetails:pageDetails]];
 }
 
 - (NSString*)getFirstPartMethod:(NSString*)methodName

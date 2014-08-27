@@ -38,6 +38,9 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 - (void)reauthorizeWithSuccess:(void (^)(void))success
                        failure:(void (^)(void))failure;
 
+- (NSString*)cacheKey:(DNCommunicationDetails*)commDetails
+      withPageDetails:(DNCommunicationPageDetails*)pageDetails;
+
 - (BOOL)isCacheExpired:(DNCommunicationDetails*)commDetails
        withPageDetails:(DNCommunicationPageDetails*)pageDetails
                withTTL:(NSUInteger)ttl;
