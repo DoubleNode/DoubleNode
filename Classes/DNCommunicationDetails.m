@@ -20,6 +20,17 @@
     return [[[self class] alloc] init];
 }
 
+- (id)init
+{
+    self = [super init];
+    if (self)
+    {
+        self.contentType    = DNCommunicationDetailsContentTypeFormUrlEncoded;
+    }
+
+    return self;
+}
+
 - (NSString*)path
 {
     return self.router.path;

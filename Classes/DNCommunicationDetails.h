@@ -13,6 +13,12 @@
 
 #import "RBRouteBuilder.h"
 
+typedef NS_ENUM(NSUInteger, DNCommunicationDetailsContentType)
+{
+    DNCommunicationDetailsContentTypeFormUrlEncoded,
+    DNCommunicationDetailsContentTypeJSON,
+};
+
 @class DNCommunicationPageDetails;
 
 @interface DNCommunicationDetails : NSObject
@@ -21,8 +27,11 @@
 @property (strong, nonatomic) RBRouteBuilder*   router;
 @property (strong, nonatomic) NSDictionary*     parameters;
 @property (strong, nonatomic) NSDictionary*     files;
+
 @property (assign, nonatomic) NSUInteger        offset;
 @property (assign, nonatomic) NSUInteger        count;
+
+@property (assign, nonatomic) DNCommunicationDetailsContentType contentType;
 
 + (id)details;
 
