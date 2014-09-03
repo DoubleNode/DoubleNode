@@ -313,28 +313,63 @@
          completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
               error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
 {
-    NSString*   paramString = [commDetails paramString];
     NSString*   urlPath     = commDetails.path;
     NSURL*      URL         = [NSURL URLWithString:urlPath];
     DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
-    DLog(LL_Debug, LD_API, @"paramString=%@", paramString);
 
     NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
 
     [request setTimeoutInterval:60];
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
 
     [request setHTTPMethod:@"POST"];
     if (!commDetails.files || ([commDetails.files count] == 0))
     {
-        NSString*   encodedParamString  = [paramString stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+        switch (commDetails.contentType)
+        {
+            case DNCommunicationDetailsContentTypeFormUrlEncoded:
+            {
+                [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
 
-        [request setHTTPBody:[encodedParamString dataUsingEncoding:NSUTF8StringEncoding]];
+                NSString*   encodedParamString  = [[commDetails paramString] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+                DLog(LL_Debug, LD_API, @"encodedParamString=%@", encodedParamString);
 
+                [request setHTTPBody:[encodedParamString dataUsingEncoding:NSUTF8StringEncoding]];
+                break;
+            }
+
+            case DNCommunicationDetailsContentTypeJSON:
+            {
+                [request setValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
+
+                if (![NSJSONSerialization isValidJSONObject:commDetails.parameters])
+                {
+                    DLog(LL_Debug, LD_API, @"!isValidJSONObject");
+                    NSAssert(NO, @"!isValidJSONObject");
+                }
+
+                NSError*    error;
+                NSData*     json    = [NSJSONSerialization dataWithJSONObject:commDetails.parameters
+                                                                      options:NSJSONWritingPrettyPrinted
+                                                                        error:&error];
+                if (!json || error)
+                {
+                    DLog(LL_Debug, LD_API, @"!dataWithJSONObject: error=%@", error);
+                    NSAssert(NO, @"!dataWithJSONObject");
+                }
+
+                NSString*   jsonString = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+                DLog(LL_Debug, LD_API, @"jsonString=%@", jsonString);
+
+                [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+                break;
+            }
+        }
+        
         [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
         return;
     }
 
+    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
     [request setTimeoutInterval:10000];
 
     // set Content-Type in HTTP header
