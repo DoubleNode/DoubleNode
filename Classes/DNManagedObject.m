@@ -630,7 +630,13 @@
              {
                  Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
 
-                 NSMutableDictionary*  objMD   = [dict[key] mutableCopy];
+                 id objD    = dict[key];
+                 if ([objD isKindOfClass:[NSString class]])
+                 {
+                     objD   = @{ @"id" : objD };
+                 }
+
+                 NSMutableDictionary*  objMD   = [objD mutableCopy];
                  objMD[@"_relationship"]       = key;
 
                  id     existingObject  = [self valueForKey:key];
@@ -717,6 +723,15 @@
          }
      }];
 
+    BOOL    addedFaked = NO;
+
+    id    added = [self valueForKey:@"added"];
+    if (!added)
+    {
+        addedFaked  = YES;
+        [self setValue:[NSDate date] forKey:@"added"];
+    }
+
     NSDictionary*   relationships   = [self.entity relationshipsByName];
 
     [relationships enumerateKeysAndObjectsUsingBlock:^(id key, NSRelationshipDescription* relationship, BOOL* stop)
@@ -735,7 +750,19 @@
              dict[key]  = [NSMutableArray arrayWithCapacity:[currentValue count]];
              [currentValue enumerateObjectsUsingBlock:^(DNManagedObject* obj, NSUInteger idx, BOOL* stop)
               {
-                  id    newObject   = [obj saveIDToDictionary];
+                  id    newObject;
+
+                  id    added       = [obj valueForKey:@"added"];
+                  if (!added)
+                  {
+                      [obj setValue:[NSDate date] forKey:@"added"];
+                      newObject   = [obj saveToDictionary];
+                      [obj setValue:nil forKey:@"added"];
+                  }
+                  else
+                  {
+                      newObject   = [obj saveIDToDictionary];
+                  }
                   if (newObject)
                   {
                       [dict[key] addObject:newObject];
@@ -749,7 +776,19 @@
 
              if (currentValue)
              {
-                 id    newObject   = [currentValue saveIDToDictionary];
+                 id    newObject;
+
+                 id    added       = [currentValue valueForKey:@"added"];
+                 if (!added)
+                 {
+                     [currentValue setValue:[NSDate date] forKey:@"added"];
+                     newObject   = [currentValue saveToDictionary];
+                     [currentValue setValue:nil forKey:@"added"];
+                 }
+                 else
+                 {
+                     newObject   = [currentValue saveIDToDictionary];
+                 }
                  if (newObject)
                  {
                      dict[key]  = newObject;
@@ -757,6 +796,11 @@
              }
          }
      }];
+
+    if (addedFaked)
+    {
+        [self setValue:nil forKey:@"added"];
+    }
 
     return dict;
 }

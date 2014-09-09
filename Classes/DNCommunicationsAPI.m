@@ -322,54 +322,55 @@
     [request setTimeoutInterval:60];
 
     [request setHTTPMethod:@"POST"];
+
+    NSString*   bodyContentType;
+    NSString*   parameterBody;
+
+    switch (commDetails.contentType)
+    {
+        case DNCommunicationDetailsContentTypeFormUrlEncoded:
+        {
+            bodyContentType = @"application/x-www-form-urlencoded";
+            parameterBody   = [[commDetails paramString] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+            DLog(LL_Debug, LD_API, @"encodedParamString=%@", parameterBody);
+            break;
+        }
+
+        case DNCommunicationDetailsContentTypeJSON:
+        {
+            bodyContentType = @"application/json";
+
+            if (![NSJSONSerialization isValidJSONObject:commDetails.parameters])
+            {
+                DLog(LL_Debug, LD_API, @"!isValidJSONObject");
+                NSAssert(NO, @"!isValidJSONObject");
+            }
+
+            NSError*    error;
+            NSData*     json    = [NSJSONSerialization dataWithJSONObject:commDetails.parameters
+                                                                  options:NSJSONWritingPrettyPrinted
+                                                                    error:&error];
+            if (!json || error)
+            {
+                DLog(LL_Debug, LD_API, @"!dataWithJSONObject: error=%@", error);
+                NSAssert(NO, @"!dataWithJSONObject");
+            }
+
+            parameterBody = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+            DLog(LL_Debug, LD_API, @"jsonString=%@", parameterBody);
+            break;
+        }
+    }
+
     if (!commDetails.files || ([commDetails.files count] == 0))
     {
-        switch (commDetails.contentType)
-        {
-            case DNCommunicationDetailsContentTypeFormUrlEncoded:
-            {
-                [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
+        [request setValue:bodyContentType forHTTPHeaderField: @"Content-Type"];
+        [request setHTTPBody:[parameterBody dataUsingEncoding:NSUTF8StringEncoding]];
 
-                NSString*   encodedParamString  = [[commDetails paramString] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
-                DLog(LL_Debug, LD_API, @"encodedParamString=%@", encodedParamString);
-
-                [request setHTTPBody:[encodedParamString dataUsingEncoding:NSUTF8StringEncoding]];
-                break;
-            }
-
-            case DNCommunicationDetailsContentTypeJSON:
-            {
-                [request setValue:@"application/json" forHTTPHeaderField: @"Content-Type"];
-
-                if (![NSJSONSerialization isValidJSONObject:commDetails.parameters])
-                {
-                    DLog(LL_Debug, LD_API, @"!isValidJSONObject");
-                    NSAssert(NO, @"!isValidJSONObject");
-                }
-
-                NSError*    error;
-                NSData*     json    = [NSJSONSerialization dataWithJSONObject:commDetails.parameters
-                                                                      options:NSJSONWritingPrettyPrinted
-                                                                        error:&error];
-                if (!json || error)
-                {
-                    DLog(LL_Debug, LD_API, @"!dataWithJSONObject: error=%@", error);
-                    NSAssert(NO, @"!dataWithJSONObject");
-                }
-
-                NSString*   jsonString = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
-                DLog(LL_Debug, LD_API, @"jsonString=%@", jsonString);
-
-                [request setHTTPBody:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
-                break;
-            }
-        }
-        
         [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
         return;
     }
 
-    [request setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField: @"Content-Type"];
     [request setTimeoutInterval:10000];
 
     // set Content-Type in HTTP header
@@ -381,31 +382,78 @@
     NSMutableData*      body    = [NSMutableData data];
     NSMutableString*    bodyStr = [NSMutableString stringWithString:@""];
 
-    {
-        NSString*   newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
-        [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
-        [bodyStr appendString:newStr];
-    }
-
     //add (key,value) pairs (no idea why all the \r's and \n's are necessary ... but everyone seems to have them)
     [commDetails.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
      {
+         if ([obj isKindOfClass:[NSArray class]])
          {
-             NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
-             [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
-             [bodyStr appendString:newStr];
-         }
+             [obj enumerateObjectsUsingBlock:
+              ^(id subobj, NSUInteger idx, BOOL* stop)
+              {
+                  if ([subobj isKindOfClass:[NSDictionary class]])
+                  {
+                      [subobj enumerateKeysAndObjectsUsingBlock:^(id subkey, id subobj2, BOOL *stop)
+                       {
+                           {
+                               NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+                               [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                               [bodyStr appendString:newStr];
+                           }
 
-         {
-             NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key];
-             [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
-             [bodyStr appendString:newStr];
-         }
+                           {
+                               NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%d][%@]\"\r\n\r\n", key, idx, subkey];
+                               [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                               [bodyStr appendString:newStr];
+                           }
 
+                           {
+                               NSString*  newStr  = [NSString stringWithFormat:@"%@\r\n", subobj2];
+                               [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                               [bodyStr appendString:newStr];
+                           }
+                       }];
+                  }
+                  else
+                  {
+                      {
+                          NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+                          [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                          [bodyStr appendString:newStr];
+                      }
+
+                      {
+                          NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%d]\"\r\n\r\n", key, idx];
+                          [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                          [bodyStr appendString:newStr];
+                      }
+
+                      {
+                          NSString*  newStr  = [NSString stringWithFormat:@"%@\r\n", subobj];
+                          [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                          [bodyStr appendString:newStr];
+                      }
+                  }
+              }];
+         }
+         else
          {
-             NSString*  newStr  = [NSString stringWithFormat:@"%@\r\n", obj];
-             [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
-             [bodyStr appendString:newStr];
+             {
+                 NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
+             
+             {
+                 NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key];
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
+
+             {
+                 NSString*  newStr  = [NSString stringWithFormat:@"%@\r\n", obj];
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
          }
      }];
 
@@ -441,14 +489,11 @@
             }
 
             {
-                NSString*  newStr  = @"\r\n";
+                NSString*  newStr  = @"\r\n\r\n";
                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
                 [bodyStr appendString:newStr];
             }
         }
-        
-        // TODO: Support more than 1 file
-        *stop   = YES;
     }];
 
     {
