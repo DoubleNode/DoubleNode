@@ -77,6 +77,7 @@
     // DME: Skip Object Changes when Section Changes are being done?????
     if ([objectChanges count] > 0 && [sectionChanges count] == 0)
     {
+        /*
         if ([self shouldReloadCollectionViewToPreventKnownIssue] || (self.window == nil))
         {
             // This is to prevent a bug in UICollectionView from occurring.
@@ -88,6 +89,7 @@
         }
         else
         {
+         */
             //DLog(LL_Debug, LD_General, @"performBatchUpdates: BEFORE [%d]", [self numberOfItemsInSection:0]);
             [self performBatchUpdates:^
              {
@@ -138,7 +140,7 @@
                  //DLog(LL_Debug, LD_General, @"performBatchUpdates: COMPLETION");
              }];
             //DLog(LL_Debug, LD_General, @"performBatchUpdates: AFTER");
-        }
+        //}
     }
     
     [objectChanges removeAllObjects];
@@ -233,7 +235,7 @@
              }
          }];
     }
-
+    
     return shouldReload;
 }
 

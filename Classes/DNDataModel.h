@@ -54,6 +54,7 @@
 - (void)removeContextFromCurrentThread:(NSManagedObjectContext*)context;
 - (void)saveAndRemoveContextFromCurrentThread:(NSManagedObjectContext*)context;
 - (NSManagedObjectContext*)currentObjectContext;
+- (NSManagedObjectContext*)currentThreadedObjectContext;
 
 - (void)performWithContext:(NSManagedObjectContext*)context
               blockAndWait:(void (^)(NSManagedObjectContext*))block;

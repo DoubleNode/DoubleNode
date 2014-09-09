@@ -15,7 +15,7 @@
 
 #import "DNUtilities.h"
 
-#define SAVE_TO_DISK_TIME_INTERVAL 5.0f
+#define SAVE_TO_DISK_TIME_INTERVAL 1.0f
 
 @interface DNDataModel ()
 {
@@ -721,6 +721,11 @@
     //    DLog(LL_Debug, LD_CoreData, @"saveToDisk: notificationContext=%@, parent=%@", notificationContext, notificationContext.parentContext);
     //}
 
+    if (![notificationContext hasChanges])
+	{
+        return;
+    }
+    
     //[DNUtilities runOnBackgroundThread:
     //^()
     // {

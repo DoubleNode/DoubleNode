@@ -477,6 +477,8 @@
     }
      */
 
+    NSManagedObjectContext* context = [[[[self class] entityModelClass] dataModel] currentThreadedObjectContext];
+
     NSDictionary*   attributes  = [self.entity attributesByName];
 
     [attributes enumerateKeysAndObjectsUsingBlock:^(id key, NSAttributeDescription* attribute, BOOL* stop)
@@ -601,7 +603,7 @@
                           NSMutableDictionary*  objMD   = [obj mutableCopy];
                           objMD[@"_relationship"]       = key;
 
-                          id     newObject  = [cdoSubClass entityFromDictionary:objMD];
+                          id     newObject  = [[cdoSubClass entityFromDictionary:objMD] objectInContext:context];
 
                           NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[[relationship name] underscore] camelize]];
                           SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
@@ -632,7 +634,7 @@
                  objMD[@"_relationship"]       = key;
 
                  id     existingObject  = [self valueForKey:key];
-                 id     newObject       = [cdoSubClass entityFromDictionary:objMD];
+                 id     newObject       = [[cdoSubClass entityFromDictionary:objMD] objectInContext:context];
 
                  BOOL   isEqual = NO;
 

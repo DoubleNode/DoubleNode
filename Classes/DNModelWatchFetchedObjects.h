@@ -15,10 +15,14 @@
 
 #import "DNModel.h"
 
+@class DNCollectionView;
+
 @interface DNModelWatchFetchedObjects : DNModelWatchObjects
 
 + (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch;
++ (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch andCollectionView:(DNCollectionView*)collectionView;
 
 - (id)initWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch;
+- (id)initWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch andCollectionView:(DNCollectionView*)collectionView;
 
 @end

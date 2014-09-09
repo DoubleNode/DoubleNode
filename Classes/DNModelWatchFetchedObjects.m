@@ -11,6 +11,8 @@
 
 #import "DNModelWatchFetchedObjects.h"
 
+#import "DNCollectionView.h"
+
 @interface DNModelWatchFetchedObjects () <NSFetchedResultsControllerDelegate>
 {
     NSFetchRequest*             fetchRequest;
@@ -18,6 +20,8 @@
 
     BOOL    forceNoObjects;
 }
+
+@property (nonatomic, retain) DNCollectionView*     collectionView;
 
 @end
 
@@ -29,13 +33,29 @@
     return [[DNModelWatchFetchedObjects alloc] initWithModel:model andFetch:fetch];
 }
 
++ (id)watchWithModel:(DNModel*)model
+            andFetch:(NSFetchRequest*)fetch
+   andCollectionView:(DNCollectionView*)collectionView
+{
+    return [[DNModelWatchFetchedObjects alloc] initWithModel:model andFetch:fetch andCollectionView:collectionView];
+}
+
 - (id)initWithModel:(DNModel*)model
            andFetch:(NSFetchRequest*)fetch
+{
+    return [self initWithModel:model andFetch:fetch andCollectionView:nil];
+}
+
+- (id)initWithModel:(DNModel*)model
+           andFetch:(NSFetchRequest*)fetch
+  andCollectionView:(DNCollectionView*)collectionView
 {
     self = [super initWithModel:model];
     if (self)
     {
         fetchRequest    = fetch;
+
+        self.collectionView = collectionView;
 
         [self performWithContext:[[model class] managedObjectContext]
                     blockAndWait:^(NSManagedObjectContext* context)
@@ -153,6 +173,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
     //DLog(LL_Debug, LD_CoreData, @"controllerDidChangeContent:");
+
     [self executeDidChangeHandler:nil];
 }
 
@@ -219,6 +240,117 @@
             break;
         }
     }
+}
+
+#pragma mark - Block Handler Calls
+
+- (void)executeWillChangeHandler:(NSDictionary*)context
+{
+    //NSLog(@"DNModelWatchFetchedObjects:executeWillChangeHandler [objects count]=%d", [[self objects] count]);
+    if (self.collectionView)
+    {
+        [self.collectionView beginUpdates];
+    }
+
+    [super executeWillChangeHandler:context];
+}
+
+- (void)executeDidChangeHandler:(NSDictionary*)context
+{
+    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeHandler [objects count]=%d", [[self objects] count]);
+    if (self.collectionView)
+    {
+        [self.collectionView endUpdates];
+    }
+
+    [super executeDidChangeHandler:context];
+}
+
+- (void)executeDidChangeSectionInsertHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
+                                     atIndex:(NSUInteger)sectionIndex
+                                     context:(NSDictionary*)context
+{
+    [super executeDidChangeSectionInsertHandler:sectionInfo
+                                        atIndex:sectionIndex
+                                        context:context];
+}
+
+- (void)executeDidChangeSectionDeleteHandler:(id <NSFetchedResultsSectionInfo>)sectionInfo
+                                     atIndex:(NSUInteger)sectionIndex
+                                     context:(NSDictionary*)context
+{
+    [super executeDidChangeSectionDeleteHandler:sectionInfo
+                                        atIndex:sectionIndex
+                                        context:context];
+}
+
+- (void)executeDidChangeObjectInsertHandler:(id)object
+                                atIndexPath:(NSIndexPath*)indexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
+{
+    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeObjectInsertHandler:[%d:%d] newIndexPath:[%d:%d] [objects count]=%d", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, [[self objects] count]);
+    if (self.collectionView)
+    {
+        [self.collectionView insertRowsAtIndexPaths:@[ newIndexPath ]];
+    }
+
+    [super executeDidChangeObjectInsertHandler:object
+                                   atIndexPath:indexPath
+                                  newIndexPath:newIndexPath
+                                       context:context];
+}
+
+- (void)executeDidChangeObjectDeleteHandler:(id)object
+                                atIndexPath:(NSIndexPath*)indexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
+{
+    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeObjectDeleteHandler:[%d:%d] newIndexPath:[%d:%d] [objects count]=%d", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, [[self objects] count]);
+    if (self.collectionView)
+    {
+        [self.collectionView deleteRowsAtIndexPaths:@[ indexPath ]];
+    }
+
+    [super executeDidChangeObjectDeleteHandler:object
+                                   atIndexPath:indexPath
+                                  newIndexPath:newIndexPath
+                                       context:context];
+}
+
+- (void)executeDidChangeObjectUpdateHandler:(id)object
+                                atIndexPath:(NSIndexPath*)indexPath
+                               newIndexPath:(NSIndexPath*)newIndexPath
+                                    context:(NSDictionary*)context
+{
+    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeObjectUpdateHandler:[%d:%d] newIndexPath:[%d:%d] [objects count]=%d", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, [[self objects] count]);
+    if (self.collectionView)
+    {
+        [self.collectionView reloadRowsAtIndexPaths:@[ indexPath ]];
+    }
+
+    [super executeDidChangeObjectUpdateHandler:object
+                                   atIndexPath:indexPath
+                                  newIndexPath:newIndexPath
+                                       context:context];
+}
+
+- (void)executeDidChangeObjectMoveHandler:(id)object
+                              atIndexPath:(NSIndexPath*)indexPath
+                             newIndexPath:(NSIndexPath*)newIndexPath
+                                  context:(NSDictionary*)context
+{
+    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeObjectMoveHandler:[%d:%d] newIndexPath:[%d:%d] [objects count]=%d", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, [[self objects] count]);
+    if (self.collectionView)
+    {
+        [self.collectionView moveRowAtIndexPath:indexPath
+                                    toIndexPath:newIndexPath];
+    }
+
+    [super executeDidChangeObjectMoveHandler:object
+                                 atIndexPath:indexPath
+                                newIndexPath:newIndexPath
+                                     context:context];
 }
 
 @end
