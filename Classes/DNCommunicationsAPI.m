@@ -735,7 +735,7 @@
 
     [request setHTTPMethod:@"DELETE"];
 
-    [self subProcessRequest:request commDetails:commDetails pageDetails:pageDetails filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
+    [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
 }
 
 - (void)subProcessResponse:(NSHTTPURLResponse*)httpResponse
