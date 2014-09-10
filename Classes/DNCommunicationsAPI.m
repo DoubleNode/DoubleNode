@@ -285,11 +285,11 @@
     return isExpired;
 }
 
-- (void)processRequest:(DNCommunicationDetails*)commDetails
-                filter:(BOOL(^)(id object))filterHandler
-              incoming:(NSArray*(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))incomingHandler
-            completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
-                 error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
+- (void)processGet:(DNCommunicationDetails*)commDetails
+            filter:(BOOL(^)(id object))filterHandler
+          incoming:(DNCommunicationsAPIIncomingHandlerBlock)incomingHandler
+        completion:(DNCommunicationsAPICompletionHandlerBlock)completionHandler
+             error:(DNCommunicationsAPIErrorHandlerBlock)errorHandler
 {
     [commDetails enumeratePagesOfSize:[self apiPageSizeRetrieve:commDetails.apikey]
                            usingBlock:^BOOL(DNCommunicationPageDetails* pageDetails, NSString* fullpath, BOOL* stop)
@@ -309,9 +309,9 @@
 
 - (void)processPost:(DNCommunicationDetails*)commDetails
              filter:(BOOL(^)(id object))filterHandler
-           incoming:(NSArray*(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))incomingHandler
-         completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
-              error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
+           incoming:(DNCommunicationsAPIIncomingHandlerBlock)incomingHandler
+         completion:(DNCommunicationsAPICompletionHandlerBlock)completionHandler
+              error:(DNCommunicationsAPIErrorHandlerBlock)errorHandler
 {
     NSString*   urlPath     = commDetails.path;
     NSURL*      URL         = [NSURL URLWithString:urlPath];
@@ -511,6 +511,231 @@
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
+}
+
+- (void)processPut:(DNCommunicationDetails*)commDetails
+            filter:(BOOL(^)(id object))filterHandler
+          incoming:(DNCommunicationsAPIIncomingHandlerBlock)incomingHandler
+        completion:(DNCommunicationsAPICompletionHandlerBlock)completionHandler
+             error:(DNCommunicationsAPIErrorHandlerBlock)errorHandler
+{
+    NSString*   urlPath     = commDetails.path;
+    NSURL*      URL         = [NSURL URLWithString:urlPath];
+    DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
+
+    NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
+
+    [request setTimeoutInterval:60];
+
+    [request setHTTPMethod:@"PUT"];
+
+    NSString*   bodyContentType;
+    NSString*   parameterBody;
+
+    switch (commDetails.contentType)
+    {
+        case DNCommunicationDetailsContentTypeFormUrlEncoded:
+        {
+            bodyContentType = @"application/x-www-form-urlencoded";
+            parameterBody   = [[commDetails paramString] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+            DLog(LL_Debug, LD_API, @"encodedParamString=%@", parameterBody);
+            break;
+        }
+
+        case DNCommunicationDetailsContentTypeJSON:
+        {
+            bodyContentType = @"application/json";
+
+            if (![NSJSONSerialization isValidJSONObject:commDetails.parameters])
+            {
+                DLog(LL_Debug, LD_API, @"!isValidJSONObject");
+                NSAssert(NO, @"!isValidJSONObject");
+            }
+
+            NSError*    error;
+            NSData*     json    = [NSJSONSerialization dataWithJSONObject:commDetails.parameters
+                                                                  options:NSJSONWritingPrettyPrinted
+                                                                    error:&error];
+            if (!json || error)
+            {
+                DLog(LL_Debug, LD_API, @"!dataWithJSONObject: error=%@", error);
+                NSAssert(NO, @"!dataWithJSONObject");
+            }
+
+            parameterBody = [[NSString alloc] initWithData:json encoding:NSUTF8StringEncoding];
+            DLog(LL_Debug, LD_API, @"jsonString=%@", parameterBody);
+            break;
+        }
+    }
+
+    if (!commDetails.files || ([commDetails.files count] == 0))
+    {
+        [request setValue:bodyContentType forHTTPHeaderField: @"Content-Type"];
+        [request setHTTPBody:[parameterBody dataUsingEncoding:NSUTF8StringEncoding]];
+
+        [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
+        return;
+    }
+
+    [request setTimeoutInterval:10000];
+
+    // set Content-Type in HTTP header
+    NSString*   boundary    = @"---------------------------14737809831466499882746641449";
+    NSString*   contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+    [request setValue:contentType forHTTPHeaderField: @"Content-Type"];
+
+    // post body
+    NSMutableData*      body    = [NSMutableData data];
+    NSMutableString*    bodyStr = [NSMutableString stringWithString:@""];
+
+    //add (key,value) pairs (no idea why all the \r's and \n's are necessary ... but everyone seems to have them)
+    [commDetails.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+     {
+         if ([obj isKindOfClass:[NSArray class]])
+         {
+             [obj enumerateObjectsUsingBlock:
+              ^(id subobj, NSUInteger idx, BOOL* stop)
+              {
+                  if ([subobj isKindOfClass:[NSDictionary class]])
+                  {
+                      [subobj enumerateKeysAndObjectsUsingBlock:^(id subkey, id subobj2, BOOL *stop)
+                       {
+                           {
+                               NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+                               [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                               [bodyStr appendString:newStr];
+                           }
+
+                           {
+                               NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%d][%@]\"\r\n\r\n", key, idx, subkey];
+                               [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                               [bodyStr appendString:newStr];
+                           }
+
+                           {
+                               NSString*  newStr  = [NSString stringWithFormat:@"%@\r\n", subobj2];
+                               [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                               [bodyStr appendString:newStr];
+                           }
+                       }];
+                  }
+                  else
+                  {
+                      {
+                          NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+                          [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                          [bodyStr appendString:newStr];
+                      }
+
+                      {
+                          NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%d]\"\r\n\r\n", key, idx];
+                          [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                          [bodyStr appendString:newStr];
+                      }
+
+                      {
+                          NSString*  newStr  = [NSString stringWithFormat:@"%@\r\n", subobj];
+                          [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                          [bodyStr appendString:newStr];
+                      }
+                  }
+              }];
+         }
+         else
+         {
+             {
+                 NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
+
+             {
+                 NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key];
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
+
+             {
+                 NSString*  newStr  = [NSString stringWithFormat:@"%@\r\n", obj];
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
+         }
+     }];
+
+    [commDetails.files enumerateKeysAndObjectsUsingBlock:
+     ^(NSString* key, UIImage* image, BOOL* stop)
+     {
+         // add image data
+         NSData* imageData   = UIImageJPEGRepresentation(image, 0.8f);
+         //NSData* imageData   = UIImagePNGRepresentation(image);
+         if (imageData)
+         {
+             {
+                 NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
+
+             {
+                 NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"; filename=\"%@.jpg\"\r\n", key, key];
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
+
+             {
+                 NSString*  newStr  = @"Content-Type: application/octet-stream\r\n\r\n";
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
+
+             {
+                 [body appendData:imageData];
+                 [bodyStr appendString:[[NSString alloc] initWithData:imageData encoding:NSASCIIStringEncoding]];
+             }
+
+             {
+                 NSString*  newStr  = @"\r\n\r\n";
+                 [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+                 [bodyStr appendString:newStr];
+             }
+         }
+     }];
+
+    {
+        NSString*  newStr  = [NSString stringWithFormat:@"--%@--\r\n", boundary];
+        [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
+        [bodyStr appendString:newStr];
+    }
+
+    // set the body of the post to the reqeust
+    [request setHTTPBody:body];
+    //DLog(LL_Debug, LD_API, @"bodyStr=%@", bodyStr);
+
+    // set the content-length
+    NSString*   postLength = [NSString stringWithFormat:@"%d", [body length]];
+    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    
+    [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
+}
+
+- (void)processDelete:(DNCommunicationDetails*)commDetails
+               filter:(BOOL(^)(id object))filterHandler
+             incoming:(DNCommunicationsAPIIncomingHandlerBlock)incomingHandler
+           completion:(DNCommunicationsAPICompletionHandlerBlock)completionHandler
+                error:(DNCommunicationsAPIErrorHandlerBlock)errorHandler
+{
+    NSString*   urlPath     = commDetails.path;
+    NSURL*      URL         = [NSURL URLWithString:urlPath];
+    DLog(LL_Debug, LD_API, @"urlPath=%@", urlPath);
+
+    NSMutableURLRequest*    request = [NSMutableURLRequest requestWithURL:URL];
+
+    [request setTimeoutInterval:60];
+
+    [request setHTTPMethod:@"DELETE"];
+
+    [self subProcessRequest:request commDetails:commDetails pageDetails:pageDetails filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
 }
 
 - (void)subProcessResponse:(NSHTTPURLResponse*)httpResponse
