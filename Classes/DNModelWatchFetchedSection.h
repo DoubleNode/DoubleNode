@@ -10,6 +10,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/NSFetchedResultsController.h>
 
 @interface DNModelWatchFetchedSection : NSObject <NSFetchedResultsSectionInfo>
 
