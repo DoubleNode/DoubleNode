@@ -121,18 +121,12 @@
 
 - (void)executeWillChangeHandler:(NSDictionary*)context
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeWillChangeHandler:context];
-     }];
+    [super executeWillChangeHandler:context];
 }
 
 - (void)executeDidChangeHandler:(NSDictionary*)context
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeHandler:context];
-     }];
+    [super executeDidChangeHandler:context];
 }
 
 - (void)executeDidChangeObjectInsertHandler:(id)subjectObject
@@ -140,13 +134,10 @@
                                newIndexPath:(NSIndexPath*)newIndexPath
                                     context:(NSDictionary*)context
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeObjectInsertHandler:subjectObject
-                                        atIndexPath:indexPath
-                                       newIndexPath:newIndexPath
-                                            context:context];
-     }];
+    [super executeDidChangeObjectInsertHandler:subjectObject
+                                   atIndexPath:indexPath
+                                  newIndexPath:newIndexPath
+                                       context:context];
 }
 
 - (void)executeDidChangeObjectDeleteHandler:(id)subjectObject
@@ -154,13 +145,10 @@
                                newIndexPath:(NSIndexPath*)newIndexPath
                                     context:(NSDictionary*)context
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeObjectDeleteHandler:subjectObject
-                                        atIndexPath:indexPath
-                                       newIndexPath:newIndexPath
-                                            context:context];
-     }];
+    [super executeDidChangeObjectDeleteHandler:subjectObject
+                                   atIndexPath:indexPath
+                                  newIndexPath:newIndexPath
+                                       context:context];
 }
 
 - (void)executeDidChangeObjectUpdateHandler:(id)subjectObject
@@ -168,13 +156,10 @@
                                newIndexPath:(NSIndexPath*)newIndexPath
                                     context:(NSDictionary*)context
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeObjectUpdateHandler:subjectObject
-                                        atIndexPath:indexPath
-                                       newIndexPath:newIndexPath
-                                            context:context];
-     }];
+    [super executeDidChangeObjectUpdateHandler:subjectObject
+                                   atIndexPath:indexPath
+                                  newIndexPath:newIndexPath
+                                       context:context];
 }
 
 - (void)executeDidChangeObjectMoveHandler:(id)subjectObject
@@ -182,13 +167,10 @@
                              newIndexPath:(NSIndexPath*)newIndexPath
                                   context:(NSDictionary*)context
 {
-    [DNUtilities runOnBackgroundThread:^
-     {
-         [super executeDidChangeObjectMoveHandler:subjectObject
-                                      atIndexPath:indexPath
-                                     newIndexPath:newIndexPath
-                                          context:context];
-     }];
+    [super executeDidChangeObjectMoveHandler:subjectObject
+                                 atIndexPath:indexPath
+                                newIndexPath:newIndexPath
+                                     context:context];
 }
 
 #pragma mark - NSKeyValueObserving protocol

@@ -238,6 +238,18 @@
     return [self getOneWithFetch:fetchRequest];
 }
 
+- (id)getAllFromID:(id)idValue
+{
+    NSFetchRequest* fetchRequest    = [self getFromID_FetchRequest:idValue];
+    if (fetchRequest == nil)
+    {
+        DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
+        return nil;
+    }
+    
+    return [self getAllWithFetch:fetchRequest];
+}
+
 - (DNModelWatchObject*)watchFromID:(id)idValue
 {
     NSFetchRequest* fetchRequest    = [self getFromID_FetchRequest:idValue];

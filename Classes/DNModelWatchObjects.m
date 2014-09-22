@@ -29,7 +29,37 @@
     return self;
 }
 
+- (NSArray*)sections
+{
+    return nil;
+}
+
+- (id<NSFetchedResultsSectionInfo>)section:(NSUInteger)sectionNdx
+{
+    return nil;
+}
+
+- (NSString*)sectionName:(NSUInteger)sectionNdx
+{
+    return @"";
+}
+
+- (NSString*)sectionIndexTitle:(NSUInteger)sectionNdx
+{
+    return @"";
+}
+
 - (NSArray*)objects
+{
+    return nil;
+}
+
+- (NSArray*)objectsForSection:(NSUInteger)section
+{
+    return nil;
+}
+
+- (id)objectAtIndexPath:(NSIndexPath*)indexPath
 {
     return nil;
 }
@@ -136,6 +166,23 @@
     {
         self.didChangeObjectMoveHandler(self, object, indexPath, newIndexPath, context);
     }
+}
+
+- (BOOL)executeShouldChangeObjectUpdateHandler:(id)object
+                                   atIndexPath:(NSIndexPath*)indexPath
+                                  newIndexPath:(NSIndexPath*)newIndexPath
+                                       context:(NSDictionary*)context
+{
+    BOOL retval = [super executeShouldChangeObjectUpdateHandler:object
+                                                    atIndexPath:indexPath
+                                                   newIndexPath:newIndexPath
+                                                        context:context];
+    if ([self checkWatch] && (self.shouldChangeObjectUpdateHandler != nil))
+    {
+        retval = self.shouldChangeObjectUpdateHandler(self, object, indexPath, context);
+    }
+    
+    return retval;
 }
 
 @end

@@ -38,6 +38,18 @@
  */
 - (UIViewController*)rootViewController;
 
+/**
+ *  Displays/hides the status bar networkActivityIndicator in a thread-safe, nested manner.
+ *
+ */
+- (void)setNetworkActivityIndicatorVisible:(BOOL)setVisible;
+
+/**
+ *  Returns the current state of reachability.
+ *
+ */
+- (BOOL)isReachable;
+
 #pragma mark - CoreData DNApplicationProtocol functions
 
 /**

@@ -177,6 +177,7 @@
 + (NSManagedObjectContext*)managedObjectContext;
 
 + (NSString*)idAttribute;
++ (NSString*)addedAttribute;
 + (id)entityIDWithDictionary:(NSDictionary*)dict;
 
 + (void)saveContext;

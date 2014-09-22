@@ -25,6 +25,10 @@ const NSString* kPendingTransform   = @"PendingTransform";
     {
         return YES;
     }
+    if (self.superview)
+    {
+        return YES;
+    }
 
     return NO;
 }

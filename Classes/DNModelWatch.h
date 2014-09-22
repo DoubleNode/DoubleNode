@@ -52,6 +52,11 @@
                              newIndexPath:(NSIndexPath*)newIndexPath
                                   context:(NSDictionary*)context;
 
+- (BOOL)executeShouldChangeObjectUpdateHandler:(id)object
+                                   atIndexPath:(NSIndexPath*)indexPath
+                                  newIndexPath:(NSIndexPath*)newIndexPath
+                                       context:(NSDictionary*)context;
+
 - (void)performBlockAndWait:(void (^)(NSManagedObjectContext* context))block;
 - (void)performBlock:(void (^)(NSManagedObjectContext* context))block;
 

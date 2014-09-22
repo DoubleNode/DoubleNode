@@ -755,7 +755,7 @@
     //DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
     DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
 
-    DLog(LL_Debug, LD_API, @"dataSize=%d", [data length]);
+    //DLog(LL_Debug, LD_API, @"dataSize=%d", [data length]);
     /*
      if (data)
      {
@@ -950,31 +950,29 @@
                completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
                     error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
 {
-    /*
-     if ([AppDelegate isReachable] == NO)
-     {
-     NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
-     [userInfoDict setValue:@"The App Server is currently not reachable" forKey:NSLocalizedDescriptionKey];
-
-     NSError*    error   = [NSError errorWithDomain:@"DNCommunicationsAPI" code:1001 userInfo:userInfoDict];
-     errorHandler(503, error, [[request URL] absoluteString], [self retryRecommendation:apikey]);
-     return;
-     }
-     */
+    if ([[DNUtilities appDelegate] isReachable] == NO)
+    {
+        NSMutableDictionary*    userInfoDict = [NSMutableDictionary dictionary];
+        [userInfoDict setValue:@"The App Server is currently not reachable" forKey:NSLocalizedDescriptionKey];
+        
+        NSError*    error   = [NSError errorWithDomain:@"DNCommunicationsAPI" code:1001 userInfo:userInfoDict];
+        errorHandler(commDetails, pageDetails, 503, error, [self retryRecommendation:commDetails.apikey]);
+        return;
+    }
 
     NSURLRequest*   finalRequest    = [self addAuthorizationHeader:request];
 
-    DLog(LL_Debug, LD_API, @"headers=%@", [finalRequest allHTTPHeaderFields]);
+    //DLog(LL_Debug, LD_API, @"headers=%@", [finalRequest allHTTPHeaderFields]);
 
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[DNUtilities appDelegate] setNetworkActivityIndicatorVisible:YES];
 
     [NSURLConnection sendAsynchronousRequest:finalRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
      {
          [DNUtilities runOnBackgroundThread:^
          {
-             [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+             [[DNUtilities appDelegate] setNetworkActivityIndicatorVisible:NO];
 
-             DLog(LL_Debug, LD_API, @"mRequest=%@", finalRequest);
+             //DLog(LL_Debug, LD_API, @"mRequest=%@", finalRequest);
              //DLog(LL_Debug, LD_API, @"response=%@", response);
 
              NSHTTPURLResponse* httpResponse = (NSHTTPURLResponse*)response;

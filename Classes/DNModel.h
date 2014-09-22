@@ -60,6 +60,7 @@ typedef void(^DNModelCompletionHandlerBlock)();
 - (NSArray*)getAllWithFetch:(NSFetchRequest*)fetchRequest;
 
 - (id)getFromID:(id)idValue;
+- (id)getAllFromID:(id)idValue;
 - (DNModelWatchObject*)watchFromID:(id)idValue;
 - (NSPredicate*)getFromID_FetchRequestPredicate:(id)idValue;
 - (NSFetchRequest*)getFromID_FetchRequest:(id)idValue;

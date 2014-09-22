@@ -15,10 +15,14 @@
 
 #import "DNUtilities.h"
 
+#define D2LogMarker nada
+//#define D2LogMarker NSLog
+
+void nada() {   }
+
 @interface DNCollectionView ()
 {
-    NSMutableArray*     objectChanges;
-    NSMutableArray*     sectionChanges;
+    NSMutableArray*     updateBlocks;
 }
 
 @end
@@ -27,216 +31,133 @@
 
 - (void)beginUpdates
 {
-    objectChanges   = [NSMutableArray array];
-    sectionChanges  = [NSMutableArray array];
+    D2LogMarker(@"beginUpdates");
+    updateBlocks    = [NSMutableArray array];
 }
 
 - (void)endUpdates
 {
-    if ([sectionChanges count] > 0)
+    D2LogMarker(@"endUpdates - 1");
+    //if (self.window == nil)
     {
-        [self performBatchUpdates:^
-         {
-             for (NSDictionary*  change in sectionChanges)
-             {
-                 [change enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, id obj, BOOL* stop)
-                  {
-                      NSFetchedResultsChangeType  type = [key unsignedIntegerValue];
-                      switch (type)
-                      {
-                          case NSFetchedResultsChangeInsert:
-                          {
-                              [super insertSections:obj];
-                              break;
-                          }
-
-                          case NSFetchedResultsChangeDelete:
-                          {
-                              [super deleteSections:obj];
-                              break;
-                          }
-
-                          case NSFetchedResultsChangeUpdate:
-                          {
-                              [super reloadSections:obj];
-                              break;
-                          }
-
-                          case NSFetchedResultsChangeMove:
-                          {
-                              [super moveSection:[obj[0] integerValue] toSection:[obj[1] integerValue]];
-                              break;
-                          }
-                      }
-                  }];
-             }
-         }
-                       completion:nil];
-    }
-
-    // DME: Skip Object Changes when Section Changes are being done?????
-    if ([objectChanges count] > 0 && [sectionChanges count] == 0)
-    {
-        /*
-        if ([self shouldReloadCollectionViewToPreventKnownIssue] || (self.window == nil))
+        NSUInteger  sectionCount = [self numberOfSections];
+        if (sectionCount > 0)
         {
-            // This is to prevent a bug in UICollectionView from occurring.
-            // The bug presents itself when inserting the first object or deleting the last object in a collection view.
-            // http://stackoverflow.com/questions/12611292/uicollectionview-assertion-failure
-            // This code should be removed once the bug has been fixed, it is tracked in OpenRadar
-            // http://openradar.appspot.com/12954582
-            [self reloadData];
+            [self numberOfItemsInSection:0];
         }
-        else
-        {
-         */
-            //DLog(LL_Debug, LD_General, @"performBatchUpdates: BEFORE [%d]", [self numberOfItemsInSection:0]);
-            [self performBatchUpdates:^
-             {
-                 //DLog(LL_Debug, LD_General, @"performBatchUpdates: INSIDE START");
-                 for (NSDictionary* change in objectChanges)
-                 {
-                     //DLog(LL_Debug, LD_General, @"performBatchUpdates: INSIDE Change Count = %d", [change count]);
-                     [change enumerateKeysAndObjectsUsingBlock:^(NSNumber* key, id obj, BOOL* stop)
-                      {
-                          //DLog(LL_Debug, LD_General, @"performBatchUpdates: INSIDE Change item: %@ [%d items]", key, [obj count]);
-                          NSFetchedResultsChangeType  type = [key unsignedIntegerValue];
-                          switch (type)
-                          {
-                              case NSFetchedResultsChangeInsert:
-                              {
-                                  [self insertItemsAtIndexPaths:obj];
-                                  [self.window endEditing:YES];
-                                  break;
-                              }
-
-                              case NSFetchedResultsChangeDelete:
-                              {
-                                  [self deleteItemsAtIndexPaths:obj];
-                                  [self.window endEditing:YES];
-                                  break;
-                              }
-
-                              case NSFetchedResultsChangeUpdate:
-                              {
-                                  [self reloadItemsAtIndexPaths:obj];
-                                  [self.window endEditing:YES];
-                                  break;
-                              }
-
-                              case NSFetchedResultsChangeMove:
-                              {
-                                  [self moveItemAtIndexPath:obj[0] toIndexPath:obj[1]];
-                                  [self.window endEditing:YES];
-                                  break;
-                              }
-                          }
-                      }];
-                 }
-                 //DLog(LL_Debug, LD_General, @"performBatchUpdates: INSIDE END");
-             }
-                           completion:^(BOOL finished)
-             {
-                 //DLog(LL_Debug, LD_General, @"performBatchUpdates: COMPLETION");
-             }];
-            //DLog(LL_Debug, LD_General, @"performBatchUpdates: AFTER");
-        //}
     }
-    
-    [objectChanges removeAllObjects];
-    [sectionChanges removeAllObjects];
+    D2LogMarker(@"endUpdates - 2");
+    [self performBatchUpdates:
+     ^()
+     {
+         D2LogMarker(@"endUpdates - 3");
+         [updateBlocks enumerateObjectsUsingBlock:
+          ^(void(^updateBlock)(void), NSUInteger idx, BOOL* stop)
+          {
+              updateBlock();
+          }];
+         
+         D2LogMarker(@"endUpdates - 4");
+     }
+                   completion:
+     ^(BOOL finished)
+     {
+         D2LogMarker(@"endUpdates - 5");
+     }];
 }
 
 - (void)insertSections:(NSIndexSet*)sections
 {
-    [sectionChanges addObject:@{ @(NSFetchedResultsChangeInsert): [sections copy] }];
+    D2LogMarker(@"insertSections [%d]", [sections firstIndex]);
+    [updateBlocks addObject:
+     ^()
+     {
+         D2LogMarker(@"insertSections:block [%d]", [sections firstIndex]);
+         [super insertSections:sections];
+     }];
 }
 
 - (void)deleteSections:(NSIndexSet*)sections
 {
-    [sectionChanges addObject:@{ @(NSFetchedResultsChangeDelete): [sections copy] }];
+    D2LogMarker(@"deleteSections [%d]", [sections firstIndex]);
+    [updateBlocks addObject:
+     ^()
+     {
+         D2LogMarker(@"deleteSections:block [%d]", [sections firstIndex]);
+         [super deleteSections:sections];
+     }];
 }
 
 - (void)reloadSections:(NSIndexSet*)sections
 {
-    [sectionChanges addObject:@{ @(NSFetchedResultsChangeUpdate): [sections copy] }];
+    D2LogMarker(@"reloadSections [%d]", [sections firstIndex]);
+    [updateBlocks addObject:
+     ^()
+     {
+         D2LogMarker(@"reloadSections:block [%d]", [sections firstIndex]);
+         [super reloadSections:sections];
+     }];
 }
 
 - (void)moveSection:(NSInteger)section toSection:(NSInteger)newSection
 {
-    [sectionChanges addObject:@{ @(NSFetchedResultsChangeMove): @[ @(section), @(newSection) ] }];
+    D2LogMarker(@"moveSection [%d]-[%d]", section, newSection);
+    [updateBlocks addObject:
+     ^()
+     {
+         D2LogMarker(@"moveSection:block [%d]-[%d]", section, newSection);
+         [super moveSection:section toSection:newSection];
+     }];
 }
 
 - (void)insertRowsAtIndexPaths:(NSArray*)indexPaths
 {
-    [objectChanges addObject:@{ @(NSFetchedResultsChangeInsert): [indexPaths copy] }];
+    NSArray*    indexPathsArray = [NSArray arrayWithArray:indexPaths];
+    
+    D2LogMarker(@"insertRowsAtIndexPaths [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+    [updateBlocks addObject:
+     ^()
+     {
+         D2LogMarker(@"insertRowsAtIndexPaths:block [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+         [self insertItemsAtIndexPaths:indexPathsArray];
+     }];
 }
 
 - (void)deleteRowsAtIndexPaths:(NSArray*)indexPaths
 {
-    [objectChanges addObject:@{ @(NSFetchedResultsChangeDelete): [indexPaths copy] }];
+    NSArray*    indexPathsArray = [NSArray arrayWithArray:indexPaths];
+    
+    D2LogMarker(@"deleteRowsAtIndexPaths [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+    [updateBlocks addObject:
+     ^()
+     {
+         D2LogMarker(@"deleteRowsAtIndexPaths:block [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+         [self deleteItemsAtIndexPaths:indexPathsArray];
+     }];
 }
 
 - (void)reloadRowsAtIndexPaths:(NSArray*)indexPaths
 {
-    [objectChanges addObject:@{ @(NSFetchedResultsChangeUpdate): [indexPaths copy] }];
+    NSArray*    indexPathsArray = [NSArray arrayWithArray:indexPaths];
+    
+    D2LogMarker(@"reloadRowsAtIndexPaths [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+    [updateBlocks addObject:
+     ^()
+     {
+         D2LogMarker(@"reloadRowsAtIndexPaths:block [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+         [self reloadItemsAtIndexPaths:indexPathsArray];
+     }];
 }
 
 - (void)moveRowAtIndexPath:(NSIndexPath*)indexPath toIndexPath:(NSIndexPath*)newIndexPath
 {
-    [objectChanges addObject:@{ @(NSFetchedResultsChangeMove): @[ [indexPath copy], [newIndexPath copy] ] }];
-}
-
-- (BOOL)shouldReloadCollectionViewToPreventKnownIssue
-{
-    __block BOOL    shouldReload = NO;
-
-    for (NSDictionary* change in objectChanges)
-    {
-        [change enumerateKeysAndObjectsUsingBlock:^(id key, NSArray* obj, BOOL* stop)
-         {
-             NSFetchedResultsChangeType  type = [key unsignedIntegerValue];
-
-             [obj enumerateObjectsUsingBlock:^(NSIndexPath* obj, NSUInteger idx, BOOL* stop)
-              {
-                  switch (type)
-                  {
-                      case NSFetchedResultsChangeInsert:
-                      {
-                          if ([self numberOfItemsInSection:obj.section] == 0)
-                          {
-                              shouldReload = YES;
-                              *stop = YES;
-                          }
-                          break;
-                      }
-
-                      case NSFetchedResultsChangeDelete:
-                      {
-                          if ([self numberOfItemsInSection:obj.section] == 1)
-                          {
-                              shouldReload = YES;
-                              *stop = YES;
-                          }
-                          break;
-                      }
-
-                      case NSFetchedResultsChangeUpdate:
-                      case NSFetchedResultsChangeMove:
-                      {
-                          break;
-                      }
-                  }
-              }];
-
-             if (shouldReload)
-             {
-                 *stop = YES;
-             }
-         }];
-    }
-    
-    return shouldReload;
+    D2LogMarker(@"moveRowAtIndexPath [%d:%d]-[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+    [updateBlocks addObject:
+     ^()
+     {
+         D2LogMarker(@"moveRowAtIndexPath:block [%d:%d]-[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+         [self moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
+     }];
 }
 
 @end

@@ -77,6 +77,11 @@
     return fetchResultsController.fetchedObjects[0];
 }
 
+- (id)objectAtIndexPath:(NSIndexPath*)indexPath
+{
+    return [fetchResultsController objectAtIndexPath:indexPath];
+}
+
 - (void)cancelWatch
 {
     [super cancelWatch];

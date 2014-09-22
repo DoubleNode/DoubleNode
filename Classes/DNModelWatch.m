@@ -105,6 +105,14 @@
 {
 }
 
+- (BOOL)executeShouldChangeObjectUpdateHandler:(id)object
+                                   atIndexPath:(NSIndexPath*)indexPath
+                                  newIndexPath:(NSIndexPath*)newIndexPath
+                                       context:(NSDictionary*)context
+{
+    return YES;
+}
+
 #pragma mark - private methods
 
 - (void)performBlockAndWait:(void (^)(NSManagedObjectContext* context))block

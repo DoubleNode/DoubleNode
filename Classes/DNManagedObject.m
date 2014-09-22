@@ -53,6 +53,11 @@
     return @"id";
 }
 
++ (NSString*)addedAttribute
+{
+    return @"added";
+}
+
 + (id)entityIDWithDictionary:(NSDictionary*)dict
 {
     //if ([[dict objectForKey:@"id"] isKindOfClass:[NSString class]])
@@ -447,6 +452,11 @@
 
 - (id)objectInContext:(NSManagedObjectContext*)context
 {
+    if (!context)
+    {
+        return self;
+    }
+    
     NSManagedObjectID*    objectID = [self objectID];
 
     return [context objectWithID:objectID];
@@ -579,7 +589,12 @@
              //DLog(LL_Debug, LD_General, @"loadRelateToMany: key=%@", key);
              if (dict[key] && ![dict[key] isKindOfClass:[NSNull class]])
              {
-                 [dict[key] enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+                 id arrayValue  = dict[key];
+                 if (![arrayValue isKindOfClass:[NSArray class]])
+                 {
+                     arrayValue = nil;
+                 }
+                 [arrayValue enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
                   {
                       if (obj && ![obj isEqual:[NSNull null]])
                       {
@@ -604,20 +619,26 @@
                           objMD[@"_relationship"]       = key;
 
                           id     newObject  = [[cdoSubClass entityFromDictionary:objMD] objectInContext:context];
-
-                          NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[[relationship name] underscore] camelize]];
-                          SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
-
-                          if ([self respondsToSelector:addObjectSelector])
+                          if (newObject)
                           {
-                              NSInvocation*  inv = [NSInvocation invocationWithTarget:self
-                                                                             selector:addObjectSelector];
-                              [inv setArgument:&newObject atIndex:2];
-                              [inv invoke];
+                              NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[[relationship name] underscore] camelize]];
+                              SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
+                              
+                              if ([self respondsToSelector:addObjectSelector])
+                              {
+                                  NSInvocation*  inv = [NSInvocation invocationWithTarget:self
+                                                                                 selector:addObjectSelector];
+                                  [inv setArgument:&newObject atIndex:2];
+                                  [inv invoke];
+                              }
+                              else
+                              {
+                                  DLog(LL_Debug, LD_CoreData, @"No Selector Match: %@", NSStringFromSelector(addObjectSelector));
+                              }
                           }
                           else
                           {
-                              DLog(LL_Debug, LD_CoreData, @"No Selector Match: %@", NSStringFromSelector(addObjectSelector));
+                              DLog(LL_Debug, LD_CoreData, @"Sub-Object Creation Failed: %@", NSStringFromClass(cdoSubClass));
                           }
                       }
                   }];
@@ -641,24 +662,30 @@
 
                  id     existingObject  = [self valueForKey:key];
                  id     newObject       = [[cdoSubClass entityFromDictionary:objMD] objectInContext:context];
-
-                 BOOL   isEqual = NO;
-
-                 NSString*  equalityMethodName  = [NSString stringWithFormat:@"isEqualTo%@:", [relationship.destinationEntity name]];
-                 SEL        equalitySelector    = NSSelectorFromString(equalityMethodName);
-
-                 if ([existingObject respondsToSelector:equalitySelector])
+                 if (newObject)
                  {
-                     NSInvocation*  inv = [NSInvocation invocationWithTarget:existingObject
-                                                                    selector:equalitySelector];
-                     [inv setArgument:&newObject atIndex:2];
-                     [inv invoke];
-                     [inv getReturnValue:&isEqual];
+                     BOOL   isEqual = NO;
+                     
+                     NSString*  equalityMethodName  = [NSString stringWithFormat:@"isEqualTo%@:", [relationship.destinationEntity name]];
+                     SEL        equalitySelector    = NSSelectorFromString(equalityMethodName);
+                     
+                     if ([existingObject respondsToSelector:equalitySelector])
+                     {
+                         NSInvocation*  inv = [NSInvocation invocationWithTarget:existingObject
+                                                                        selector:equalitySelector];
+                         [inv setArgument:&newObject atIndex:2];
+                         [inv invoke];
+                         [inv getReturnValue:&isEqual];
+                     }
+                     
+                     if (!isEqual)
+                     {
+                         [self setValue:newObject forKey:key];
+                     }
                  }
-
-                 if (!isEqual)
+                 else
                  {
-                     [self setValue:newObject forKey:key];
+                     DLog(LL_Debug, LD_CoreData, @"Sub-Object Creation Failed: %@", NSStringFromClass(cdoSubClass));
                  }
              }
          }
@@ -725,11 +752,13 @@
 
     BOOL    addedFaked = NO;
 
-    id    added = [self valueForKey:@"added"];
+    NSString*   addedKey    = [[self class] addedAttribute];
+    
+    id    added = [self valueForKey:addedKey];
     if (!added)
     {
         addedFaked  = YES;
-        [self setValue:[NSDate date] forKey:@"added"];
+        [self setValue:[NSDate date] forKey:addedKey];
     }
 
     NSDictionary*   relationships   = [self.entity relationshipsByName];
@@ -752,12 +781,12 @@
               {
                   id    newObject;
 
-                  id    added       = [obj valueForKey:@"added"];
+                  id    added       = [obj valueForKey:addedKey];
                   if (!added)
                   {
-                      [obj setValue:[NSDate date] forKey:@"added"];
+                      [obj setValue:[NSDate date] forKey:addedKey];
                       newObject   = [obj saveToDictionary];
-                      [obj setValue:nil forKey:@"added"];
+                      [obj setValue:nil forKey:addedKey];
                   }
                   else
                   {
@@ -778,12 +807,12 @@
              {
                  id    newObject;
 
-                 id    added       = [currentValue valueForKey:@"added"];
+                 id    added       = [currentValue valueForKey:addedKey];
                  if (!added)
                  {
-                     [currentValue setValue:[NSDate date] forKey:@"added"];
+                     [currentValue setValue:[NSDate date] forKey:addedKey];
                      newObject   = [currentValue saveToDictionary];
-                     [currentValue setValue:nil forKey:@"added"];
+                     [currentValue setValue:nil forKey:addedKey];
                  }
                  else
                  {
@@ -799,7 +828,7 @@
 
     if (addedFaked)
     {
-        [self setValue:nil forKey:@"added"];
+        [self setValue:nil forKey:addedKey];
     }
 
     return dict;

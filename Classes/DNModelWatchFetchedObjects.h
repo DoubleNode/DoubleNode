@@ -22,7 +22,13 @@
 + (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch;
 + (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch andCollectionView:(DNCollectionView*)collectionView;
 
++ (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch groupBy:(NSString*)sectionKeyPath;
++ (id)watchWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch groupBy:(NSString*)sectionKeyPath andCollectionView:(DNCollectionView*)collectionView;
+
 - (id)initWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch;
 - (id)initWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch andCollectionView:(DNCollectionView*)collectionView;
+
+- (id)initWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch groupBy:(NSString*)sectionKeyPath;
+- (id)initWithModel:(DNModel*)model andFetch:(NSFetchRequest*)fetch groupBy:(NSString*)sectionKeyPath andCollectionView:(DNCollectionView*)collectionView;
 
 @end

@@ -24,6 +24,8 @@ typedef void(^DNModelWatchObjectsDidChangeObjectDeleteHandlerBlock)(DNModelWatch
 typedef void(^DNModelWatchObjectsDidChangeObjectUpdateHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* indexPath, NSDictionary* context);
 typedef void(^DNModelWatchObjectsDidChangeObjectMoveHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* indexPath, NSIndexPath* newIndexPath, NSDictionary* context);
 
+typedef BOOL(^DNModelWatchObjectsShouldChangeObjectUpdateHandlerBlock)(DNModelWatchObjects* watch, id object, NSIndexPath* indexPath, NSDictionary* context);
+
 @interface DNModelWatchObjects : DNModelWatch
 
 @property (strong, nonatomic) DNModelWatchObjectsWillChangeHandlerBlock     willChangeHandler;
@@ -37,8 +39,19 @@ typedef void(^DNModelWatchObjectsDidChangeObjectMoveHandlerBlock)(DNModelWatchOb
 @property (strong, nonatomic) DNModelWatchObjectsDidChangeObjectUpdateHandlerBlock      didChangeObjectUpdateHandler;
 @property (strong, nonatomic) DNModelWatchObjectsDidChangeObjectMoveHandlerBlock        didChangeObjectMoveHandler;
 
+@property (strong, nonatomic) DNModelWatchObjectsShouldChangeObjectUpdateHandlerBlock   shouldChangeObjectUpdateHandler;
+
 - (id)initWithModel:(DNModel*)model;
 
+- (NSArray*)sections;
+- (id<NSFetchedResultsSectionInfo>)section:(NSUInteger)sectionNdx;
+
+- (NSString*)sectionName:(NSUInteger)sectionNdx;
+- (NSString*)sectionIndexTitle:(NSUInteger)sectionNdx;
+
 - (NSArray*)objects;
+- (NSArray*)objectsForSection:(NSUInteger)section;
+
+- (id)objectAtIndexPath:(NSIndexPath*)indexPath;
 
 @end
