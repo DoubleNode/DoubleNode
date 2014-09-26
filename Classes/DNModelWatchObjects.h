@@ -44,6 +44,7 @@ typedef BOOL(^DNModelWatchObjectsShouldChangeObjectUpdateHandlerBlock)(DNModelWa
 - (id)initWithModel:(DNModel*)model;
 
 - (NSArray*)sections;
+- (NSInteger)numberOfSections;
 - (id<NSFetchedResultsSectionInfo>)section:(NSUInteger)sectionNdx;
 
 - (NSString*)sectionName:(NSUInteger)sectionNdx;
@@ -51,6 +52,7 @@ typedef BOOL(^DNModelWatchObjectsShouldChangeObjectUpdateHandlerBlock)(DNModelWa
 
 - (NSArray*)objects;
 - (NSArray*)objectsForSection:(NSUInteger)section;
+- (NSInteger)numberOfObjectsInSection:(NSUInteger)section;
 
 - (id)objectAtIndexPath:(NSIndexPath*)indexPath;
 

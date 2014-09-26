@@ -287,6 +287,44 @@
      }];
 }
 
+#pragma mark - UICollectionDataSource
+
+- (NSInteger)collectionView:(UICollectionView*)collectionView
+     numberOfItemsInSection:(NSInteger)section
+{
+    if (self.numberOfItemsInSectionHandler)
+    {
+        return self.numberOfItemsInSectionHandler(self, collectionView, section);
+    }
+    
+    return [self numberOfObjectsInSection:section];
+}
+
+- (UICollectionViewCell*)collectionView:(UICollectionView*)collectionView
+                 cellForItemAtIndexPath:(NSIndexPath*)indexPath
+{
+    NSAssert(self.cellForItemAtIndexPathHandler, @"cellForItemAtIndexPathHandler required handler is not defined");
+    return self.cellForItemAtIndexPathHandler(self, collectionView, indexPath);
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView*)collectionView
+{
+    if (self.numberOfSectionsInCollectionViewHandler)
+    {
+        return self.numberOfSectionsInCollectionViewHandler(self, collectionView);
+    }
+    
+    return [self numberOfSections];
+}
+
+- (UICollectionReusableView*)collectionView:(UICollectionView*)collectionView
+          viewForSupplementaryElementOfKind:(NSString*)kind
+                                atIndexPath:(NSIndexPath*)indexPath
+{
+    NSAssert(self.viewForSupplementaryElementOfKindHandler, @"viewForSupplementaryElementOfKindHandler required handler is not defined");
+    return self.viewForSupplementaryElementOfKindHandler(self, collectionView, kind, indexPath);
+}
+
 #pragma mark - NSFetchedResultsControllerDelegate
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController*)controller

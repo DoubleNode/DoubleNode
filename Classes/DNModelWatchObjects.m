@@ -34,6 +34,11 @@
     return nil;
 }
 
+- (NSInteger)numberOfSections
+{
+    return [[self sections] count];
+}
+
 - (id<NSFetchedResultsSectionInfo>)section:(NSUInteger)sectionNdx
 {
     return nil;
@@ -57,6 +62,11 @@
 - (NSArray*)objectsForSection:(NSUInteger)section
 {
     return nil;
+}
+
+- (NSInteger)numberOfObjectsInSection:(NSUInteger)section
+{
+    return [[self objectsForSection:section] count];
 }
 
 - (id)objectAtIndexPath:(NSIndexPath*)indexPath
