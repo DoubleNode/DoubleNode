@@ -92,6 +92,10 @@
         sectionKeyPath  = groupBy;
         
         self.collectionView = collectionView;
+        if (self.collectionView && !self.collectionView.dataSource)
+        {
+            self.collectionView.dataSource  = self;
+        }
         
         [self performWithContext:[[model class] managedObjectContext]
                     blockAndWait:^(NSManagedObjectContext* context)

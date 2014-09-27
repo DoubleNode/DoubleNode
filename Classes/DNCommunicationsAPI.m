@@ -461,7 +461,7 @@
      ^(NSString* key, UIImage* image, BOOL* stop)
     {
         // add image data
-        NSData* imageData   = UIImageJPEGRepresentation(image, 0.8f);
+        NSData* imageData   = UIImageJPEGRepresentation(image, 1.0f);
         //NSData* imageData   = UIImagePNGRepresentation(image);
         if (imageData)
         {
@@ -667,7 +667,7 @@
      ^(NSString* key, UIImage* image, BOOL* stop)
      {
          // add image data
-         NSData* imageData   = UIImageJPEGRepresentation(image, 0.8f);
+         NSData* imageData   = UIImageJPEGRepresentation(image, 1.0f);
          //NSData* imageData   = UIImagePNGRepresentation(image);
          if (imageData)
          {

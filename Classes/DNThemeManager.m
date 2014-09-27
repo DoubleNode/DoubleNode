@@ -547,6 +547,11 @@
             JTKeyboardAttachmentView*   attachmentView = [[JTKeyboardAttachmentView alloc] initWithFrame:attachmentViewFrame];
             [txtfldView setInputAccessoryView:attachmentView];
         }
+        else
+        {
+            ((DNTextField*)txtfldView).useSyntaxCompletion      = NO;
+            ((DNTextField*)txtfldView).useSyntaxHighlighting    = NO;
+        }
     }
 
     [txtfldView setNeedsLayout];
@@ -593,7 +598,6 @@
 
     if ([txtView isKindOfClass:[DNTextView class]])
     {
-        // No Longer Used: ((DNTextView*)txtView).realTextColor    = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
         ((DNTextView*)txtView).textColor        = [[self class] performThemeSelectorForAttribute:@"Color"             withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
         ((DNTextView*)txtView).placeholderColor = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor"  withType:@"TextView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
 
@@ -603,6 +607,11 @@
             CGRect  attachmentViewFrame = CGRectMake(0, 0, [DNUtilities screenWidth], 32.0f);
             JTKeyboardAttachmentView*   attachmentView = [[JTKeyboardAttachmentView alloc] initWithFrame:attachmentViewFrame];
             [txtView setInputAccessoryView:attachmentView];
+        }
+        else
+        {
+            ((DNTextView*)txtView).useSyntaxCompletion      = NO;
+            ((DNTextView*)txtView).useSyntaxHighlighting    = NO;
         }
     }
 

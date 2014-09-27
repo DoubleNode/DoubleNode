@@ -12,10 +12,14 @@
 #import <UIKit/UIKit.h>
 #import <JustType/JustType.h>
 
-//#import "GCPlaceholderTextView.h"
-#import "GCPTextView.h"
+@interface DNTextView : JTTextView
 
-@interface DNTextView : GCPTextView     // GCPlaceholderTextView  // TODO: Temporarily removed -- JTTextView
+/**
+ * The placeholder text if no text has been entered yet.
+ */
+@property (strong, nonatomic) NSString* placeholder;
+
+@property (strong, nonatomic) UIColor*  placeholderColor;
 
 - (void)shake;
 

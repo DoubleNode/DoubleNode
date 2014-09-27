@@ -11,7 +11,81 @@
 
 #import "DNTextView.h"
 
+@interface DNTextView()
+
+@property (strong, nonatomic) UILabel* placeholderLabel;
+
+@end
+
 @implementation DNTextView
+
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self)
+    {
+        [self defaultInit];
+    }
+    
+    return self;
+}
+
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self)
+    {
+        [self defaultInit];
+    }
+    
+    return self;
+}
+
+- (void)defaultInit
+{
+    self.placeholderColor   = [UIColor lightGrayColor];
+    
+    CGRect caretRect        = [self caretRectForPosition:[self beginningOfDocument]];
+    CGRect placeholderFrame = CGRectMake(caretRect.origin.x, caretRect.origin.y + 1, 0, 0);
+    
+    self.placeholderLabel = [[UILabel alloc] initWithFrame:placeholderFrame];
+    self.placeholderLabel.font      = self.font;
+    self.placeholderLabel.textColor = self.placeholderColor;
+    
+    [self addSubview:self.placeholderLabel];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(textDidChange)
+                                                 name:UITextViewTextDidChangeNotification
+                                               object:self];
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)setPlaceholder:(NSString*)placeholder
+{
+    if (![_placeholder isEqualToString:placeholder])
+    {
+        _placeholder = placeholder;
+        
+        self.placeholderLabel.text = placeholder;
+        [self.placeholderLabel sizeToFit];
+    }
+}
+
+- (void)setPlaceholderColor:(UIColor*)placeholderColor
+{
+    if (![_placeholderColor isEqual:placeholderColor])
+    {
+        _placeholderColor = placeholderColor;
+        
+        self.placeholderLabel.textColor = placeholderColor;
+        [self.placeholderLabel sizeToFit];
+    }
+}
 
 - (void)shake
 {
@@ -39,6 +113,18 @@
     shakeAnimation.path             = shakePath;
 
     [layer addAnimation:shakeAnimation forKey:nil];
+}
+
+- (void)textDidChange
+{
+    if (!self.text.length > 0)
+    {
+        self.placeholderLabel.hidden = NO;
+    }
+    else
+    {
+        self.placeholderLabel.hidden = YES;
+    }
 }
 
 // DME: Touches intercepted and forwarded to nextResponder and super to handle touched embedded links and data detector results
