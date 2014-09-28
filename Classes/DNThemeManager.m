@@ -47,7 +47,7 @@
 {
     static id <DNThemeProtocol> sharedTheme = nil;
     static dispatch_once_t      onceToken;
-
+    
     dispatch_once(&onceToken, ^
                   {
                       // Create and return the theme:
@@ -62,6 +62,28 @@
                   });
     
     return sharedTheme;
+}
+
++ (NSCache*)sharedCache
+{
+    static NSCache*         sharedCache = nil;
+    static dispatch_once_t  onceToken;
+
+    dispatch_once(&onceToken, ^
+                  {
+                      // Create and return the cache:
+                      sharedCache       = [[NSCache alloc] init];
+                      sharedCache.name  = @"com.doublenode.dnthememanager.cache";
+                      if (!sharedCache)
+                      {
+                          NSException*    exception = [NSException exceptionWithName:@"DNThemeManager Exception"
+                                                                              reason:@"sharedCache is missing!"
+                                                                            userInfo:nil];
+                          @throw exception;
+                      }
+                  });
+    
+    return sharedCache;
 }
 
 + (UIColor*)primaryColor
@@ -83,6 +105,9 @@
     id <DNThemeProtocol>    theme = [self sharedTheme];
 
     [theme resetCache];
+    
+    NSCache*    cache   = [self sharedCache];
+    [cache removeAllObjects];
 }
 
 + (SEL)functionNameForAttribute:(NSString*)attribute
@@ -169,6 +194,14 @@
                                andItem:(NSString*)item
                        andControlState:(UIControlState)controlState
 {
+    NSString*   cacheKey    = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, [self controlStateString:controlState]];
+
+    id  retval  = [[self sharedCache] objectForKey:cacheKey];
+    if (retval)
+    {
+        return retval;
+    }
+    
     SEL aSelector   = [[self class] functionNameForAttribute:attribute
                                                     withType:type
                                                     andGroup:group
@@ -176,18 +209,23 @@
                                                 andViewState:viewState
                                                      andItem:item
                                              andControlState:controlState];
-
+    
     if (!aSelector)
     {
         DLog(LL_Error, LD_Theming, @"No valid selector found! (%@/%@/%@/%@/%@/%@/%@)", attribute, type, group, screen, viewState, item, [[self class] controlStateString:controlState]);
         return nil;
     }
-
-    id  retval = [[self class] performThemeSelector:aSelector];
+    
+    retval = [[self class] performThemeSelector:aSelector];
     if (!retval)
     {
         DLog(LL_Error, LD_Theming, @"%@ returned nil! (%@/%@/%@/%@/%@/%@/%@)", NSStringFromSelector(aSelector), attribute, type, group, screen, viewState, item, [[self class] controlStateString:controlState]);
     }
+    else
+    {
+        [[self sharedCache] setObject:retval forKey:cacheKey cost:sizeof(retval)];
+    }
+
     return retval;
 }
 
@@ -526,9 +564,11 @@
 {
     [[self class] customizeView:txtfldView withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
 
-    txtfldView.font                 = [[self class] performThemeSelectorForAttribute:@"Font" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-    txtfldView.borderStyle          = [[[self class] performThemeSelectorForAttribute:@"BorderStyle" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] integerValue];
-
+    txtfldView.textColor            = [[self class] performThemeSelectorForAttribute:@"Color"           withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtfldView.font                 = [[self class] performThemeSelectorForAttribute:@"Font"            withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
+    txtfldView.borderStyle          = [[[self class] performThemeSelectorForAttribute:@"BorderStyle"    withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] integerValue];
+    txtfldView.keyboardType         = [[[self class] performThemeSelectorForAttribute:@"KeyboardType"   withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item] integerValue];
+    
     UIColor*    placeholderColor    = [[self class] performThemeSelectorForAttribute:@"PlaceholderColor" withType:@"TextField" andGroup:group andScreen:screen andViewState:viewState andItem:item];
     [txtfldView setValue:placeholderColor forKeyPath:@"_placeholderLabel.textColor"];
 

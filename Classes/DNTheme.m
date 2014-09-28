@@ -15,7 +15,7 @@
 
 @interface DNTheme ()
 
-@property (strong, nonatomic) NSMutableDictionary*  cacheDictionary;
+@property (strong, nonatomic) NSCache*  cache;
 
 @end
 
@@ -59,7 +59,9 @@
     _primaryColor   = nil;
     _secondaryColor = nil;
 
-    self.cacheDictionary    = [[NSMutableDictionary alloc] init];
+    // Init the memory cache
+    self.cache      = [[NSCache alloc] init];
+    self.cache.name = @"com.doublenode.dntheme.cache";
 }
 
 - (id)init
@@ -67,7 +69,9 @@
     self = [super init];
     if (self)
     {
-        self.cacheDictionary    = [[NSMutableDictionary alloc] init];
+        // Init the memory cache
+        self.cache      = [[NSCache alloc] init];
+        self.cache.name = @"com.doublenode.dntheme.cache";
     }
 
     return self;
@@ -80,6 +84,12 @@
 - (UIColor*)BorderColor     {   return nil;     }
 - (NSNumber*)BorderWidth    {   return @0.0f;   }
 
+- (void)saveCacheObject:(NSString*)functionName
+                 forKey:(NSString*)cacheKey
+{
+    //[self.cache setObject:functionName forKey:cacheKey cost:[functionName length]];
+}
+
 - (SEL)functionNameForAttribute:(NSString*)attribute
                        withType:(NSString*)type
                        andGroup:(NSString*)group
@@ -88,9 +98,10 @@
                         andItem:(NSString*)item
                 andControlState:(NSString*)controlStateString
 {
+    SEL functionSelector;
+    
     NSString*   cacheKey        = [NSString stringWithFormat:@"%@%@%@%@%@%@%@", group, screen, viewState, item, type, attribute, controlStateString];
-
-    NSString*   functionName    = [self.cacheDictionary objectForKey:cacheKey];
+    NSString*   functionName    = [self.cache objectForKey:cacheKey];
     if (functionName)
     {
         if ([functionName isEqualToString:@""])
@@ -98,140 +109,155 @@
             return nil;
         }
 
-        return NSSelectorFromString(functionName);
+        functionSelector    = NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG WelcomeView SignInWithKeyboard SignIn Button Font Normal
-    functionName  = cacheKey;
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = cacheKey;
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
+        [self saveCacheObject:functionName forKey:cacheKey];
 
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG WelcomeView SignIn Button Font Normal
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, item, type, attribute, controlStateString];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, item, type, attribute, controlStateString];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG WelcomeView SignInWithKeyboard SignIn Button Font
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, item, type, attribute];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, item, type, attribute];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG WelcomeView SignIn Button Font
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, item, type, attribute];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, item, type, attribute];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG WelcomeView SignInWithKeyboard Button Font Normal
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, type, attribute, controlStateString];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@%@%@%@", group, screen, viewState, type, attribute, controlStateString];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG WelcomeView SignInWithKeyboard Button Font
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, viewState, type, attribute];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, viewState, type, attribute];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG WelcomeView Button Font Normal
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, type, attribute, controlStateString];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@%@%@", group, screen, type, attribute, controlStateString];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG WelcomeView Button Font
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@", group, screen, type, attribute];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@%@", group, screen, type, attribute];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG Button Font Normal
-    functionName  = [NSString stringWithFormat:@"%@%@%@%@", group, type, attribute, controlStateString];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@%@", group, type, attribute, controlStateString];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // LOG Button Font
-    functionName  = [NSString stringWithFormat:@"%@%@%@", group, type, attribute];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@", group, type, attribute];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // Button Font Normal
-    functionName  = [NSString stringWithFormat:@"%@%@%@", type, attribute, controlStateString];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@%@", type, attribute, controlStateString];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // Button Font
-    functionName  = [NSString stringWithFormat:@"%@%@", type, attribute];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@%@", type, attribute];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
     // Font
-    functionName  = [NSString stringWithFormat:@"%@", attribute];
-    if ([self respondsToSelector:NSSelectorFromString(functionName)] == YES)
+    functionName        = [NSString stringWithFormat:@"%@", attribute];
+    functionSelector    = NSSelectorFromString(functionName);
+    if ([self respondsToSelector:functionSelector] == YES)
     {
-        self.cacheDictionary[cacheKey]  = functionName;
-
+        [self saveCacheObject:functionName forKey:cacheKey];
+        
         //DLog(LL_Debug, LD_Theming, @"Calling %@...", functionName);
-        return NSSelectorFromString(functionName);
+        return functionSelector;
     }
 
-    self.cacheDictionary[cacheKey]  = @"";
+    functionName    = @"";
+    [self saveCacheObject:functionName forKey:cacheKey];
 
     //DLog(LL_Debug, LD_Theming, @"No Function Called!");
     return nil;

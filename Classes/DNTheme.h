@@ -35,6 +35,7 @@
 #define DNThemeMethod_HighlightedColor()            - (UIColor*) HighlightedColor
 #define DNThemeMethod_HorizontalPadding()           - (NSNumber*) HorizontalPadding
 #define DNThemeMethod_Kerning()                     - (NSNumber*) Kerning
+#define DNThemeMethod_KeyboardType()                - (NSNumber*) KeyboardType
 #define DNThemeMethod_LinkTextColor()               - (UIColor*) LinkTextColor
 #define DNThemeMethod_LinkTextFont()                - (UIFont*) LinkTextFont
 #define DNThemeMethod_LinkTextAlignment()           - (NSNumber*) LinkTextAlignment
@@ -73,6 +74,7 @@
 #define DNThemeMethod_Type_HighlightedColor(type)           - (UIColor*) type##HighlightedColor
 #define DNThemeMethod_Type_HorizontalPadding(type)          - (NSNumber*) type##HorizontalPadding
 #define DNThemeMethod_Type_Kerning(type)                    - (NSNumber*) type##Kerning
+#define DNThemeMethod_Type_KeyboardType(type)               - (NSNumber*) type##KeyboardType
 #define DNThemeMethod_Type_LinkTextColor(type)              - (UIColor*) type##LinkTextColor
 #define DNThemeMethod_Type_LinkTextFont(type)               - (UIFont*) type##LinkTextFont
 #define DNThemeMethod_Type_LinkTextAlignment(type)          - (NSNumber*) type##LinkTextAlignment
@@ -111,6 +113,7 @@
 #define DNThemeMethod_TypeControlState_HighlightedColor(type,controlState)              - (UIColor*) type##HighlightedColor##controlState
 #define DNThemeMethod_TypeControlState_HorizontalPadding(type,controlState)             - (NSNumber*) type##HorizontalPadding##controlState
 #define DNThemeMethod_TypeControlState_Kerning(type,controlState)                       - (NSNumber*) type##Kerning##controlState
+#define DNThemeMethod_TypeControlState_KeyboardType(type,controlState)                  - (NSNumber*) type##KeyboardType##controlState
 #define DNThemeMethod_TypeControlState_LinkTextColor(type,controlState)                 - (UIColor*) type##LinkTextColor##controlState
 #define DNThemeMethod_TypeControlState_LinkTextFont(type,controlState)                  - (UIFont*) type##LinkTextFont##controlState
 #define DNThemeMethod_TypeControlState_LinkTextAlignment(type,controlState)             - (NSNumber*) type##LinkTextAlignment##controlState
@@ -149,6 +152,7 @@
 #define DNThemeMethod_GroupType_HighlightedColor(group,type)            - (UIColor*) group##type##HighlightedColor
 #define DNThemeMethod_GroupType_HorizontalPadding(group,type)           - (NSNumber*) group##type##HorizontalPadding
 #define DNThemeMethod_GroupType_Kerning(group,type)                     - (NSNumber*) group##type##Kerning
+#define DNThemeMethod_GroupType_KeyboardType(group,type)                - (NSNumber*) group##type##KeyboardType
 #define DNThemeMethod_GroupType_LinkTextColor(group,type)               - (UIColor*) group##type##LinkTextColor
 #define DNThemeMethod_GroupType_LinkTextFont(group,type)                - (UIFont*) group##type##LinkTextFont
 #define DNThemeMethod_GroupType_LinkTextAlignment(group,type)           - (NSNumber*) group##type##LinkTextAlignment
@@ -187,6 +191,7 @@
 #define DNThemeMethod_GroupTypeControlState_HighlightedColor(group,type,controlState)           - (UIColor*) group##type##HighlightedColor##controlState
 #define DNThemeMethod_GroupTypeControlState_HorizontalPadding(group,type,controlState)          - (NSNumber*) group##type##HorizontalPadding##controlState
 #define DNThemeMethod_GroupTypeControlState_Kerning(group,type,controlState)                    - (NSNumber*) group##type##Kerning##controlState
+#define DNThemeMethod_GroupTypeControlState_KeyboardType(group,type,controlState)               - (NSNumber*) group##type##KeyboardType##controlState
 #define DNThemeMethod_GroupTypeControlState_LinkTextColor(group,type,controlState)              - (UIColor*) group##type##LinkTextColor##controlState
 #define DNThemeMethod_GroupTypeControlState_LinkTextFont(group,type,controlState)               - (UIFont*) group##type##LinkTextFont##controlState
 #define DNThemeMethod_GroupTypeControlState_LinkTextAlignment(group,type,controlState)          - (NSNumber*) group##type##LinkTextAlignment##controlState
@@ -225,6 +230,7 @@
 #define DNThemeMethod_GroupScreenType_HighlightedColor(group,screen,type)           - (UIColor*) group##screen##type##HighlightedColor
 #define DNThemeMethod_GroupScreenType_HorizontalPadding(group,screen,type)          - (NSNumber*) group##screen##type##HorizontalPadding
 #define DNThemeMethod_GroupScreenType_Kerning(group,screen,type)                    - (NSNumber*) group##screen##type##Kerning
+#define DNThemeMethod_GroupScreenType_KeyboardType(group,screen,type)               - (NSNumber*) group##screen##type##KeyboardType
 #define DNThemeMethod_GroupScreenType_LinkTextColor(group,screen,type)              - (UIColor*) group##screen##type##LinkTextColor
 #define DNThemeMethod_GroupScreenType_LinkTextFont(group,screen,type)               - (UIFont*) group##screen##type##LinkTextFont
 #define DNThemeMethod_GroupScreenType_LinkTextAlignment(group,screen,type)          - (NSNumber*) group##screen##type##LinkTextAlignment
@@ -263,6 +269,7 @@
 #define DNThemeMethod_GroupScreenTypeControlState_HighlightedColor(group,screen,type,controlState)              - (UIColor*) group##screen##type##HighlightedColor##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_HorizontalPadding(group,screen,type,controlState)             - (NSNumber*) group##screen##type##HorizontalPadding##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_Kerning(group,screen,type,controlState)                       - (NSNumber*) group##screen##type##Kerning##controlState
+#define DNThemeMethod_GroupScreenTypeControlState_KeyboardType(group,screen,type,controlState)                  - (NSNumber*) group##screen##type##KeyboardType##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_LinkTextColor(group,screen,type,controlState)                 - (UIColor*) group##screen##type##LinkTextColor##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_LinkTextFont(group,screen,type,controlState)                  - (UIFont*) group##screen##type##LinkTextFont##controlState
 #define DNThemeMethod_GroupScreenTypeControlState_LinkTextAlignment(group,screen,type,controlState)             - (NSNumber*) group##screen##type##LinkTextAlignment##controlState
@@ -302,6 +309,7 @@
 #define DNThemeMethod_GroupScreenViewStateType_HighlightedColor(group,screen,viewstate,type)            - (UIColor*) group##screen##viewstate##type##HighlightedColor
 #define DNThemeMethod_GroupScreenViewStateType_HorizontalPadding(group,screen,viewstate,type)           - (NSNumber*) group##screen##viewstate##type##HorizontalPadding
 #define DNThemeMethod_GroupScreenViewStateType_Kerning(group,screen,viewstate,type)                     - (NSNumber*) group##screen##viewstate##type##Kerning
+#define DNThemeMethod_GroupScreenViewStateType_KeyboardType(group,screen,viewstate,type)                - (NSNumber*) group##screen##viewstate##type##KeyboardType
 #define DNThemeMethod_GroupScreenViewStateType_LinkTextColor(group,screen,viewstate,type)               - (UIColor*) group##screen##viewstate##type##LinkTextColor
 #define DNThemeMethod_GroupScreenViewStateType_LinkTextFont(group,screen,viewstate,type)                - (UIFont*) group##screen##viewstate##type##LinkTextFont
 #define DNThemeMethod_GroupScreenViewStateType_LinkTextAlignment(group,screen,viewstate,type)           - (NSNumber*) group##screen##viewstate##type##LinkTextAlignment
@@ -340,6 +348,7 @@
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_HighlightedColor(group,screen,viewstate,type,controlState)           - (UIColor*) group##screen##viewstate##type##HighlightedColor##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_HorizontalPadding(group,screen,viewstate,type,controlState)          - (NSNumber*) group##screen##viewstate##type##HorizontalPadding##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_Kerning(group,screen,viewstate,type,controlState)                    - (NSNumber*) group##screen##viewstate##type##Kerning##controlState
+#define DNThemeMethod_GroupScreenViewStateTypeControlState_KeyboardType(group,screen,viewstate,type,controlState)               - (NSNumber*) group##screen##viewstate##type##KeyboardType##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_LinkTextColor(group,screen,viewstate,type,controlState)              - (UIColor*) group##screen##viewstate##type##LinkTextColor##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_LinkTextFont(group,screen,viewstate,type,controlState)               - (UIFont*) group##screen##viewstate##type##LinkTextFont##controlState
 #define DNThemeMethod_GroupScreenViewStateTypeControlState_LinkTextAlignment(group,screen,viewstate,type,controlState)          - (NSNumber*) group##screen##viewstate##type##LinkTextAlignment##controlState
@@ -378,6 +387,7 @@
 #define DNThemeMethod_GroupScreenItemType_HighlightedColor(group,screen,item,type)              - (UIColor*) group##screen##item##type##HighlightedColor
 #define DNThemeMethod_GroupScreenItemType_HorizontalPadding(group,screen,item,type)             - (NSNumber*) group##screen##item##type##HorizontalPadding
 #define DNThemeMethod_GroupScreenItemType_Kerning(group,screen,item,type)                       - (NSNumber*) group##screen##item##type##Kerning
+#define DNThemeMethod_GroupScreenItemType_KeyboardType(group,screen,item,type)                  - (NSNumber*) group##screen##item##type##KeyboardType
 #define DNThemeMethod_GroupScreenItemType_LinkTextColor(group,screen,item,type)                 - (UIColor*) group##screen##item##type##LinkTextColor
 #define DNThemeMethod_GroupScreenItemType_LinkTextFont(group,screen,item,type)                  - (UIFont*) group##screen##item##type##LinkTextFont
 #define DNThemeMethod_GroupScreenItemType_LinkTextAlignment(group,screen,item,type)             - (NSNumber*) group##screen##item##type##LinkTextAlignment
@@ -416,6 +426,7 @@
 #define DNThemeMethod_GroupScreenViewStateItemType_HighlightedColor(group,screen,viewstate,item,type)           - (UIColor*) group##screen##viewstate##item##type##HighlightedColor
 #define DNThemeMethod_GroupScreenViewStateItemType_HorizontalPadding(group,screen,viewstate,item,type)          - (NSNumber*) group##screen##viewstate##item##type##HorizontalPadding
 #define DNThemeMethod_GroupScreenViewStateItemType_Kerning(group,screen,viewstate,item,type)                    - (NSNumber*) group##screen##viewstate##item##type##Kerning
+#define DNThemeMethod_GroupScreenViewStateItemType_KeyboardType(group,screen,viewstate,item,type)               - (NSNumber*) group##screen##viewstate##item##type##KeyboardType
 #define DNThemeMethod_GroupScreenViewStateItemType_LinkTextColor(group,screen,viewstate,item,type)              - (UIColor*) group##screen##viewstate##item##type##LinkTextColor
 #define DNThemeMethod_GroupScreenViewStateItemType_LinkTextFont(group,screen,viewstate,item,type)               - (UIFont*) group##screen##viewstate##item##type##LinkTextFont
 #define DNThemeMethod_GroupScreenViewStateItemType_LinkTextAlignment(group,screen,viewstate,item,type)          - (NSNumber*) group##screen##viewstate##item##type##LinkTextAlignment
@@ -454,6 +465,7 @@
 #define DNThemeMethod_GroupScreenItemTypeControlState_HighlightedColor(group,screen,item,type,controlState)             - (UIColor*) group##screen##item##type##HighlightedColor##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_HorizontalPadding(group,screen,item,type,controlState)            - (NSNumber*) group##screen##item##type##HorizontalPadding##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_Kerning(group,screen,item,type,controlState)                      - (NSNumber*) group##screen##item##type##Kerning##controlState
+#define DNThemeMethod_GroupScreenItemTypeControlState_KeyboardType(group,screen,item,type,controlState)                 - (NSNumber*) group##screen##item##type##KeyboardType##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_LinkTextColor(group,screen,item,type,controlState)                - (UIColor*) group##screen##item##type##LinkTextColor##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_LinkTextFont(group,screen,item,type,controlState)                 - (UIFont*) group##screen##item##type##LinkTextFont##controlState
 #define DNThemeMethod_GroupScreenItemTypeControlState_LinkTextAlignment(group,screen,item,type,controlState)            - (NSNumber*) group##screen##item##type##LinkTextAlignment##controlState
@@ -492,6 +504,7 @@
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_HighlightedColor(group,screen,viewstate,item,type,controlState)              - (UIColor*) group##screen##viewstate##item##type##HighlightedColor##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_HorizontalPadding(group,screen,viewstate,item,type,controlState)             - (NSNumber*) group##screen##viewstate##item##type##HorizontalPadding##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_Kerning(group,screen,viewstate,item,type,controlState)                       - (NSNumber*) group##screen##viewstate##item##type##Kerning##controlState
+#define DNThemeMethod_GroupScreenViewStateItemTypeControlState_KeyboardType(group,screen,viewstate,item,type,controlState)                  - (NSNumber*) group##screen##viewstate##item##type##KeyboardType##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_LinkTextColor(group,screen,viewstate,item,type,controlState)                 - (UIColor*) group##screen##viewstate##item##type##LinkTextColor##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_LinkTextFont(group,screen,viewstate,item,type,controlState)                  - (UIFont*) group##screen##viewstate##item##type##LinkTextFont##controlState
 #define DNThemeMethod_GroupScreenViewStateItemTypeControlState_LinkTextAlignment(group,screen,viewstate,item,type,controlState)             - (NSNumber*) group##screen##viewstate##item##type##LinkTextAlignment##controlState
