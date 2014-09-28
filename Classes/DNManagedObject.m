@@ -152,13 +152,13 @@
              case NSInteger32AttributeType:
              case NSInteger64AttributeType:
              {
-                 [retRepresentation setObject:[self dictionaryNumber:representation dirty:nil withItem:key andDefault:@0] forKey:name];
+                 retRepresentation[name]    = [self dictionaryNumber:representation dirty:nil withItem:key andDefault:@0];
                  break;
              }
 
              case NSBooleanAttributeType:
              {
-                 [retRepresentation setObject:[self dictionaryBoolean:representation dirty:nil withItem:key andDefault:@NO] forKey:name];
+                 retRepresentation[name]    = [self dictionaryBoolean:representation dirty:nil withItem:key andDefault:@NO];
                  break;
              }
 
@@ -166,19 +166,19 @@
              case NSDoubleAttributeType:
              case NSFloatAttributeType:
              {
-                 [retRepresentation setObject:[self dictionaryDouble:representation dirty:nil withItem:key andDefault:@0.0f] forKey:name];
+                 retRepresentation[name]    = [self dictionaryDouble:representation dirty:nil withItem:key andDefault:@0.0f];
                  break;
              }
 
              case NSStringAttributeType:
              {
-                 [retRepresentation setObject:[self dictionaryString:representation dirty:nil withItem:key andDefault:@""] forKey:name];
+                 retRepresentation[name]    = [self dictionaryString:representation dirty:nil withItem:key andDefault:@""];
                  break;
              }
 
              case NSDateAttributeType:
              {
-                 [retRepresentation setObject:[self dictionaryDate:representation dirty:nil withItem:key andDefault:kDNDefaultDate_NeverExpires] forKey:name];
+                 retRepresentation[name]    = [self dictionaryDate:representation dirty:nil withItem:key andDefault:kDNDefaultDate_NeverExpires];
                  break;
              }
          }
@@ -204,11 +204,11 @@
 
          NSString*  name    = [self translationForAttribute:key ofEntity:entity];
 
-         NSRelationshipDescription* relationship    = [relationships objectForKey:name];
+         NSRelationshipDescription* relationship    = relationships[name];
          if (!relationship)
          {
              name           = [name pluralize];
-             relationship   = [relationships objectForKey:name];
+             relationship   = relationships[name];
          }
          if (!relationship)
          {
@@ -227,7 +227,7 @@
                  }
                  else
                  {
-                     arrayOfRelationshipRepresentations = [NSArray arrayWithObject:value];
+                     arrayOfRelationshipRepresentations = @[ value ];
                  }
 
                  [retRepresentation setValue:arrayOfRelationshipRepresentations forKey:name];
@@ -337,8 +337,7 @@
 
     [self performBlockAndWait:^(NSManagedObjectContext* context)
      {
-         NSError*   error = nil;
-         bself = (DNManagedObject*)[context existingObjectWithID:objectId error:&error];
+         bself = (DNManagedObject*)[context existingObjectWithID:objectId error:NULL];
      }];
 
     self = bself;
@@ -349,7 +348,7 @@
 - (void)setIdIfChanged:(id)idValue
 {
     NSDictionary*           attributes  = [self.entity attributesByName];
-    NSAttributeDescription* attribute   = [attributes objectForKey:[[self class] idAttribute]];
+    NSAttributeDescription* attribute   = attributes[[[self class] idAttribute]];
     BOOL                    stringFlag  = NO;
     if (attribute && (attribute.attributeType == NSStringAttributeType))
     {
@@ -742,7 +741,7 @@
                      //DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
                      if (currentValue && ![currentValue isEqual:[NSNull null]] && [currentValue isKindOfClass:[NSDate class]])
                      {
-                         dict[key]  = [NSNumber numberWithUnsignedInt:[currentValue unixTimestamp]];
+                         dict[key]  = @([currentValue unixTimestamp]);
                      }
                      break;
                  }
@@ -836,7 +835,7 @@
 
 - (NSDictionary*)saveIDToDictionary
 {
-    [self.managedObjectContext obtainPermanentIDsForObjects:[NSArray arrayWithObject:self] error:nil];
+    [self.managedObjectContext obtainPermanentIDsForObjects:@[ ] error:nil];
 
     id  idValue = [self valueForKey:[[self class] idAttribute]];
     if (!idValue || [idValue isEqual:[NSNull null]])
@@ -899,8 +898,12 @@
 
 - (NSNumber*)updateBooleanFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
-    BOOL    localDirtyFlag;
-    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
 
     id  localDefaultValue   = [self valueForKeyPath:keypath];
     if (!localDefaultValue)
@@ -908,9 +911,10 @@
         localDefaultValue   = defaultValue;
     }
 
-    *dirtyFlag  = NO;
-    id  newValue = [self dictionaryBoolean:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
-    if (*dirtyFlag)
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryBoolean:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
     }
@@ -925,18 +929,23 @@
 
 - (NSNumber*)updateNumberFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
-    BOOL    localDirtyFlag;
-    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
-
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
+    
     id  localDefaultValue   = [self valueForKeyPath:keypath];
     if (!localDefaultValue)
     {
         localDefaultValue   = defaultValue;
     }
 
-    *dirtyFlag  = NO;
-    id  newValue = [self dictionaryNumber:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
-    if (*dirtyFlag)
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryNumber:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
     }
@@ -951,18 +960,23 @@
 
 - (NSDecimalNumber*)updateDecimalNumberFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDecimalNumber*)defaultValue
 {
-    BOOL    localDirtyFlag;
-    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
-
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
+    
     id  localDefaultValue   = [self valueForKeyPath:keypath];
     if (!localDefaultValue)
     {
         localDefaultValue   = defaultValue;
     }
 
-    *dirtyFlag  = NO;
-    id  newValue = [self dictionaryDecimalNumber:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
-    if (*dirtyFlag)
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryDecimalNumber:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
     }
@@ -977,18 +991,23 @@
 
 - (NSNumber*)updateDoubleFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSNumber*)defaultValue
 {
-    BOOL    localDirtyFlag;
-    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
-
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
+    
     id  localDefaultValue   = [self valueForKeyPath:keypath];
     if (!localDefaultValue)
     {
         localDefaultValue   = defaultValue;
     }
 
-    *dirtyFlag  = NO;
-    id  newValue = [self dictionaryDouble:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
-    if (*dirtyFlag)
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryDouble:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
     }
@@ -1003,18 +1022,23 @@
 
 - (NSString*)updateStringFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSString*)defaultValue
 {
-    BOOL    localDirtyFlag;
-    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
-
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
+    
     id  localDefaultValue   = [self valueForKeyPath:keypath];
     if (!localDefaultValue)
     {
         localDefaultValue   = defaultValue;
     }
 
-    *dirtyFlag  = NO;
-    id  newValue = [self dictionaryString:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
-    if (*dirtyFlag)
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryString:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
     }
@@ -1029,18 +1053,23 @@
 
 - (NSArray*)updateArrayFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSArray*)defaultValue
 {
-    BOOL    localDirtyFlag;
-    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
-
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
+    
     id  localDefaultValue   = [self valueForKeyPath:keypath];
     if (!localDefaultValue)
     {
         localDefaultValue   = defaultValue;
     }
 
-    *dirtyFlag  = NO;
-    id  newValue = [self dictionaryArray:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
-    if (*dirtyFlag)
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryArray:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
     }
@@ -1055,18 +1084,23 @@
 
 - (NSDictionary*)updateDictionaryFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDictionary*)defaultValue
 {
-    BOOL    localDirtyFlag;
-    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
-
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
+    
     id  localDefaultValue   = [self valueForKeyPath:keypath];
     if (!localDefaultValue)
     {
         localDefaultValue   = defaultValue;
     }
 
-    *dirtyFlag  = NO;
-    id  newValue = [self dictionaryDictionary:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
-    if (*dirtyFlag)
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryDictionary:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
     }
@@ -1081,18 +1115,23 @@
 
 - (NSDate*)updateDateFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
-    BOOL    localDirtyFlag;
-    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
-
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
+    
     id  localDefaultValue   = [self valueForKeyPath:keypath];
     if (!localDefaultValue || ![localDefaultValue isKindOfClass:[NSDate class]])
     {
         localDefaultValue   = defaultValue;
     }
 
-    *dirtyFlag  = NO;
-    id  newValue = [self dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
-    if (*dirtyFlag)
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryDate:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
     }
@@ -1107,18 +1146,23 @@
 
 - (id)updateObjectFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue
 {
-    BOOL    localDirtyFlag;
-    if (!dirtyFlag) {   dirtyFlag = &localDirtyFlag;    }
-
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
+    
     id  localDefaultValue   = [self valueForKeyPath:keypath];
     if (!localDefaultValue)
     {
         localDefaultValue   = defaultValue;
     }
 
-    *dirtyFlag  = NO;
-    id  newValue = [self dictionaryObject:dictionary dirty:dirtyFlag withItem:key andDefault:localDefaultValue];
-    if (*dirtyFlag)
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryObject:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
     {
         [self setValue:newValue forKeyPath:keypath];
     }

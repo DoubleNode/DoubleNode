@@ -13,7 +13,7 @@
 
 @implementation DNStateOptions
 
-+ (id)stateOptions
++ (instancetype)stateOptions
 {
     return [[DNStateOptions alloc] init];
 }

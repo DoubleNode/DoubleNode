@@ -94,7 +94,7 @@
     CALayer*    layer   = [self layer];
     CGPoint     pos     = layer.position;
 
-    CAKeyframeAnimation*    shakeAnimation  = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+    CAKeyframeAnimation*    shakeAnimation  = [CAKeyframeAnimation animationWithKeyPath:NSStringFromSelector(@selector(position))];
     CGMutablePathRef        shakePath       = CGPathCreateMutable();
 
     CGPathMoveToPoint(shakePath, NULL, pos.x, pos.y);

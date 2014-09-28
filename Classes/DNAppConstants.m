@@ -115,7 +115,7 @@ static NSString*        plistServerCode = nil;
 {
     NSDictionary*   dict = [[self class] plistDict];
     
-    id  value = [dict objectForKey:key];
+    id  value = dict[key];
     if ((value == nil) || (value == [NSNull null]))
     {
         DLog(LL_Warning, LD_Framework, @"***** MISSING CONSTANT KEY: %@", key);

@@ -383,8 +383,8 @@
     if (!_tempInMemoryObjectContext)
     {
         NSMutableDictionary*    options = [[NSMutableDictionary alloc] initWithObjectsAndKeys:
-                                           [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
-                                           [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+                                           @YES, NSMigratePersistentStoresAutomaticallyOption,
+                                           @YES, NSInferMappingModelAutomaticallyOption, nil];
 
         NSError*    error = nil;
 

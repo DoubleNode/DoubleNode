@@ -165,7 +165,7 @@
 - (NSInteger)apiPageSizeRetrieve:(NSString*)apikey
                          default:(NSInteger)defaultPageSize
 {
-    NSInteger   retval = [[plistDictionary objectForKey:[apikey stringByAppendingString:@"PageSize"]] integerValue];
+    NSInteger   retval = [plistDictionary[[apikey stringByAppendingString:@"PageSize"]] integerValue];
     if (retval < 1)
     {
         retval = defaultPageSize;
@@ -182,7 +182,7 @@
 - (NSInteger)apiTTLRetrieve:(NSString*)apikey
                     default:(NSInteger)defaultTTL
 {
-    NSInteger   retval = [[plistDictionary objectForKey:[apikey stringByAppendingString:@"TTL"]] integerValue];
+    NSInteger   retval = [plistDictionary[[apikey stringByAppendingString:@"TTL"]] integerValue];
     if (retval < 1)
     {
         retval = defaultTTL;
@@ -198,11 +198,11 @@
 
 - (NSTimeInterval)retryRecommendation:(NSString*)apikey
 {
-    NSDate* firstFailure    = [failures objectForKey:apikey];
+    NSDate* firstFailure    = failures[apikey];
     if (firstFailure == nil)
     {
-        firstFailure    = [NSDate date];
-        [failures setObject:firstFailure forKey:apikey];
+        firstFailure        = [NSDate date];
+        failures[apikey]    = firstFailure;
     }
     
     NSTimeInterval  timeout         = 5.0f;
@@ -269,7 +269,8 @@
              }
              else
              {
-                 [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+                 [objects enumerateObjectsUsingBlock:
+                  ^(id obj, NSUInteger idx, BOOL* stop)
                   {
                       if (filterHandler(obj))
                       {
@@ -383,7 +384,8 @@
     NSMutableString*    bodyStr = [NSMutableString stringWithString:@""];
 
     //add (key,value) pairs (no idea why all the \r's and \n's are necessary ... but everyone seems to have them)
-    [commDetails.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [commDetails.parameters enumerateKeysAndObjectsUsingBlock:
+     ^(id key, id obj, BOOL* stop)
      {
          if ([obj isKindOfClass:[NSArray class]])
          {
@@ -392,7 +394,8 @@
               {
                   if ([subobj isKindOfClass:[NSDictionary class]])
                   {
-                      [subobj enumerateKeysAndObjectsUsingBlock:^(id subkey, id subobj2, BOOL *stop)
+                      [subobj enumerateKeysAndObjectsUsingBlock:
+                       ^(id subkey, id subobj2, BOOL* stop)
                        {
                            {
                                NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
@@ -589,7 +592,8 @@
     NSMutableString*    bodyStr = [NSMutableString stringWithString:@""];
 
     //add (key,value) pairs (no idea why all the \r's and \n's are necessary ... but everyone seems to have them)
-    [commDetails.parameters enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [commDetails.parameters enumerateKeysAndObjectsUsingBlock:
+     ^(id key, id obj, BOOL* stop)
      {
          if ([obj isKindOfClass:[NSArray class]])
          {
@@ -598,7 +602,8 @@
               {
                   if ([subobj isKindOfClass:[NSDictionary class]])
                   {
-                      [subobj enumerateKeysAndObjectsUsingBlock:^(id subkey, id subobj2, BOOL *stop)
+                      [subobj enumerateKeysAndObjectsUsingBlock:
+                       ^(id subkey, id subobj2, BOOL* stop)
                        {
                            {
                                NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
@@ -1004,7 +1009,8 @@
 
                   NSMutableArray*   results = [NSMutableArray arrayWithCapacity:[objects count]];
 
-                  [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+                  [objects enumerateObjectsUsingBlock:
+                   ^(id obj, NSUInteger idx, BOOL* stop)
                    {
                        if ((filterHandler == nil) || filterHandler(obj))
                        {
@@ -1063,7 +1069,7 @@
              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     __block NSString*   paramString = @"";
-    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
      {
          paramString = [paramString stringByAppendingFormat:@"%@=%@&", key, obj];
      }];
@@ -1090,7 +1096,7 @@
              error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     __block NSString*   paramString = @"";
-    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
      {
          paramString = [paramString stringByAppendingFormat:@"%@=%@&", key, obj];
      }];
@@ -1122,7 +1128,7 @@
     }
 
     //add (key,value) pairs (no idea why all the \r's and \n's are necessary ... but everyone seems to have them)
-    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
      {
          {
              NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
@@ -1209,7 +1215,7 @@
               error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     __block NSString*   paramString = @"";
-    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
      {
          paramString = [paramString stringByAppendingFormat:@"%@=%@&", key, obj];
      }];
@@ -1234,7 +1240,7 @@
               error:(void(^)(NSInteger responseCode, NSError* error, NSString* url, NSTimeInterval retryRecommendation))errorHandler
 {
     __block NSString*   paramString = @"";
-    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
      {
          paramString = [paramString stringByAppendingFormat:@"%@=%@&", key, obj];
      }];
@@ -1265,7 +1271,7 @@
     }
     
     //add (key,value) pairs (no idea why all the \r's and \n's are necessary ... but everyone seems to have them)
-    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+    [params enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL* stop)
      {
          {
              NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
@@ -1349,7 +1355,7 @@
 
     [DNUtilities runOnBackgroundThread:^
      {
-         [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+         [objects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
           {
               if ((filterHandler == nil) || filterHandler(obj))
               {
@@ -1371,7 +1377,7 @@
     }
     [queues removeObjectForKey:apikey];
     
-    [processQueue enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    [processQueue enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
      {
          DNCommunicationsAPIQueued* queuedObj = obj;
          
@@ -1397,7 +1403,7 @@
     }
     [queues removeObjectForKey:apikey];
     
-    [processQueue enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    [processQueue enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
      {
          DNCommunicationsAPIQueued* queuedObj = obj;
          

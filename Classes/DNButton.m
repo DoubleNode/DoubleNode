@@ -70,7 +70,7 @@
 {
     [super touchesBegan:touches withEvent:event];
 
-    UIColor*    highlightedColor = [tintColorStates objectForKey:[NSNumber numberWithInt:UIControlStateHighlighted]];
+    UIColor*    highlightedColor = tintColorStates[@(UIControlStateHighlighted)];
     if (highlightedColor)
     {
         self.tintColor = highlightedColor;
@@ -83,7 +83,7 @@
 {
     [super touchesCancelled:touches withEvent:event];
 
-    UIColor*    normalColor = [tintColorStates objectForKey:[NSNumber numberWithInt:UIControlStateNormal]];
+    UIColor*    normalColor = tintColorStates[@(UIControlStateNormal)];
     if (normalColor)
     {
         self.tintColor = normalColor;
@@ -96,7 +96,7 @@
 {
     [super touchesEnded:touches withEvent:event];
 
-    UIColor*    normalColor = [tintColorStates objectForKey:[NSNumber numberWithInt:UIControlStateNormal]];
+    UIColor*    normalColor = tintColorStates[@(UIControlStateNormal)];
     if (normalColor)
     {
         self.tintColor = normalColor;

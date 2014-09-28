@@ -19,6 +19,6 @@
 @property (atomic)              double  toDuration;
 @property (strong, nonatomic)   void (^completion)(BOOL finished);
 
-+ (id)stateOptions;
++ (instancetype)stateOptions;
 
 @end

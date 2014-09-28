@@ -20,7 +20,7 @@
     NSString*   previousViewState;
 }
 
-@property (weak, nonatomic) NSString*   currentViewState;
+@property (copy, nonatomic) NSString*   currentViewState;
 
 @property (atomic) BOOL     transitionPending;
 

@@ -145,41 +145,43 @@
 
 + (NSString*)appendNibSuffix:(NSString*)nibNameOrNil
 {
+    NSString*   retval  = nibNameOrNil;
+    
     //NSString*   bundlePath      = [[NSBundle mainBundle] pathForResource:[[[NSUserDefaults standardUserDefaults] objectForKey:@"AppleLanguages"] objectAtIndex:0] ofType:@"lproj"];
     NSString*   bundlePath      = [[NSBundle mainBundle] pathForResource:@"Base" ofType:@"lproj"];
     NSBundle*   languageBundle  = [NSBundle bundleWithPath:bundlePath];
 
     if ([DNUtilities isDeviceIPad])
     {
-        NSString*   tempNibName = [NSString stringWithFormat:@"%@~ipad", nibNameOrNil];
+        NSString*   tempNibName = [NSString stringWithFormat:@"%@~ipad", retval];
         if([languageBundle pathForResource:tempNibName ofType:@"nib"] != nil)
         {
             //file found
-            nibNameOrNil = tempNibName;
+            retval = tempNibName;
         }
     }
     else
     {
-        NSString*   tempNibName = [NSString stringWithFormat:@"%@~iphone", nibNameOrNil];
+        NSString*   tempNibName = [NSString stringWithFormat:@"%@~iphone", retval];
         if([languageBundle pathForResource:tempNibName ofType:@"nib"] != nil)
         {
             //file found
-            nibNameOrNil = tempNibName;
+            retval = tempNibName;
         }
         
         if ([DNUtilities isTall])
         {
-            NSString*   tempNibName = [NSString stringWithFormat:@"%@-568h", nibNameOrNil];
+            NSString*   tempNibName = [NSString stringWithFormat:@"%@-568h", retval];
             if([languageBundle pathForResource:tempNibName ofType:@"nib"] != nil)
             {
                 //file found
-                nibNameOrNil = tempNibName;
+                retval = tempNibName;
             }
             
         }
     }
     
-    return nibNameOrNil;
+    return retval;
 }
 
 + (NSString*)deviceImageName:(NSString*)name
@@ -475,8 +477,8 @@
     
     [DNUtilities runAfterDelay:3.0f block:^
      {
-         NSError*    error;
-         [[AVAudioSession sharedInstance] setActive:NO withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:&error];
+         //NSError*    error;
+         [[AVAudioSession sharedInstance] setActive:NO withFlags:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:NULL];
      }];
 }
 
@@ -550,8 +552,8 @@
         while(temp_addr != NULL) {
             sa_family_t sa_type = temp_addr->ifa_addr->sa_family;
             if(sa_type == AF_INET || sa_type == AF_INET6) {
-                NSString *name = [NSString stringWithUTF8String:temp_addr->ifa_name];
-                NSString *addr = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)]; // pdp_ip0
+                NSString*   name    = @(temp_addr->ifa_name);
+                NSString*   addr    = [NSString stringWithUTF8String:inet_ntoa(((struct sockaddr_in *)temp_addr->ifa_addr)->sin_addr)]; // pdp_ip0
                 //NSLog(@"NAME: \"%@\" addr: %@", name, addr); // see for yourself
                 
                 if([name isEqualToString:@"en0"]) {
@@ -568,7 +570,7 @@
         // Free memory
         freeifaddrs(interfaces);
     }
-    NSString *addr = wifiAddress ? wifiAddress : cellAddress;
+    NSString*   addr = wifiAddress ?: cellAddress;
     return addr ? addr : @"0.0.0.0";
 }
 
@@ -603,7 +605,7 @@
 {
     NSNumber*   retval  = defaultValue;
 
-    id  object = [dictionary objectForKey:key];
+    id  object = dictionary[key];
     if (object != nil)
     {
         if (object != (NSNumber*)[NSNull null])
@@ -634,7 +636,7 @@
 {
     NSNumber*   retval  = defaultValue;
 
-    id  object = [dictionary objectForKey:key];
+    id  object = dictionary[key];
     if (object != nil)
     {
         if (object != (NSNumber*)[NSNull null])
@@ -701,7 +703,7 @@
     {
         if (object != (NSString*)[NSNull null])
         {
-            NSNumber*   newval  = [NSNumber numberWithDouble:[object doubleValue]];
+            NSNumber*   newval  = @([object doubleValue]);
 
             if ((retval == nil) || ([newval isEqualToNumber:retval] == NO))
             {
@@ -826,7 +828,7 @@
 {
     NSDictionary*    retval  = defaultValue;
 
-    id  object = [dictionary objectForKey:key];
+    id  object = dictionary[key];
     if (object != nil)
     {
         if (object != (NSDictionary*)[NSNull null])
@@ -937,7 +939,7 @@
 {
     id  retval  = defaultValue;
 
-    if ([dictionary objectForKey:key] != nil)
+    if (dictionary[key] != nil)
     {
         if (dictionary[key] != (id)[NSNull null])
         {
@@ -997,7 +999,7 @@
 {
     @synchronized(logDebugDomains)
     {
-        [logDebugDomains setObject:[NSNumber numberWithInt:level] forKey:domain];
+        logDebugDomains[domain] = @(level);
     }
 }
 
@@ -1010,7 +1012,7 @@
 {
     @synchronized(logDebugDomains)
     {
-        [logDebugDomains setObject:[NSNumber numberWithInt:(level - 1)] forKey:domain];
+        logDebugDomains[domain] = @(level - 1);
     }
 }
 

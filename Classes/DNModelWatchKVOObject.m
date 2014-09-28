@@ -69,14 +69,15 @@
         attributes  = [[[object entityDescription] attributesByName] allKeys];
     }
 
-    [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
+    [attributes enumerateObjectsUsingBlock:
+     ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
      {
          NSUInteger initialFlag = ((idx == 0) ? NSKeyValueObservingOptionInitial : 0);
 
          [object addObserver:self
                   forKeyPath:attributeName
                      options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionPrior | initialFlag
-                     context:CFBridgingRetain(attributeName)];
+                     context:(__bridge void *)(attributeName)];
      }];
 }
 
@@ -84,9 +85,10 @@
 {
     [super cancelWatch];
 
-    [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
+    [attributes enumerateObjectsUsingBlock:
+     ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
      {
-         [object removeObserver:self forKeyPath:attributeName];
+         [object removeObserver:self forKeyPath:attributeName context:(__bridge void *)(attributeName)];
      }];
     
     object  = nil;
@@ -102,7 +104,8 @@
         attributes  = [[[object entityDescription] attributesByName] allKeys];
     }
 
-    [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
+    [attributes enumerateObjectsUsingBlock:
+     ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
      {
          NSDictionary*  context = @{ @"keyPath" : attributeName };
 

@@ -63,7 +63,8 @@
 {
     [super startWatch];
 
-    [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
+    [objects enumerateObjectsUsingBlock:
+     ^(DNManagedObject* object, NSUInteger idx, BOOL* stop)
      {
          NSArray*  objectAttributes = attributes;
          if (objectAttributes == nil)
@@ -72,14 +73,15 @@
              objectAttributes  = [[[object entityDescription] attributesByName] allKeys];
          }
 
-         [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
+         [attributes enumerateObjectsUsingBlock:
+          ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
           {
               NSUInteger initialFlag = ((idx == 0) ? NSKeyValueObservingOptionInitial : 0);
 
               [object addObserver:self
                        forKeyPath:attributeName
                           options:NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew | NSKeyValueObservingOptionPrior | initialFlag
-                          context:CFBridgingRetain(attributeName)];
+                          context:(__bridge void *)(attributeName)];
           }];
      }];
 }
@@ -88,7 +90,8 @@
 {
     [super cancelWatch];
 
-    [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
+    [objects enumerateObjectsUsingBlock:
+     ^(DNManagedObject* object, NSUInteger idx, BOOL* stop)
      {
          NSArray*  objectAttributes = attributes;
          if (objectAttributes == nil)
@@ -97,9 +100,10 @@
              objectAttributes  = [[[object entityDescription] attributesByName] allKeys];
          }
          
-         [attributes enumerateObjectsUsingBlock:^(NSString* attributeName, NSUInteger idx, BOOL *stop)
+         [attributes enumerateObjectsUsingBlock:
+          ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
           {
-              [object removeObserver:self forKeyPath:attributeName];
+              [object removeObserver:self forKeyPath:attributeName context:(__bridge void *)(attributeName)];
           }];
      }];
     
@@ -110,7 +114,8 @@
 {
     [super refreshWatch];
     
-    [objects enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
+    [objects enumerateObjectsUsingBlock:
+     ^(DNManagedObject* object, NSUInteger idx, BOOL* stop)
      {
          [self executeWillChangeHandler:nil];
 

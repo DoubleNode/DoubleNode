@@ -150,7 +150,8 @@
 
     NSMutableArray* sortDescriptors = [NSMutableArray array];
 
-    [sortKeys enumerateObjectsUsingBlock:^(NSDictionary* sortDict, NSUInteger idx, BOOL *stop)
+    [sortKeys enumerateObjectsUsingBlock:
+     ^(NSDictionary* sortDict, NSUInteger idx, BOOL* stop)
      {
          NSString*  sortKey         = sortDict[@"field"];
          BOOL       sortAscending   = [sortDict[@"ascending"] boolValue];
@@ -177,7 +178,7 @@
         return nil;
     }
 
-    return [resultArray objectAtIndex:0];
+    return resultArray[0];
 }
 
 - (NSArray*)getAllWithFetch:(NSFetchRequest*)fetchRequest
@@ -379,9 +380,11 @@
 
 - (void)deleteAllWithCompletion:(DNModelCompletionHandlerBlock)handler;
 {
-    [self performBlock:^(NSManagedObjectContext* context)
+    [self performBlock:
+     ^(NSManagedObjectContext* context)
      {
-         [[self getAll] enumerateObjectsUsingBlock:^(DNManagedObject* object, NSUInteger idx, BOOL *stop)
+         [[self getAll] enumerateObjectsUsingBlock:
+          ^(DNManagedObject* object, NSUInteger idx, BOOL* stop)
           {
               [object deleteWithNoSave];
           }];

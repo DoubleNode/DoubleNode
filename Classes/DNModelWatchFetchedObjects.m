@@ -133,7 +133,7 @@
         return nil;
     }
     
-    return [sections objectAtIndex:sectionNdx];
+    return sections[sectionNdx];
 }
 
 - (NSString*)sectionName:(NSUInteger)sectionNdx

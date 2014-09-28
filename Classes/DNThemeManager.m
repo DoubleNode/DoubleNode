@@ -342,7 +342,8 @@
     [attrString removeAttribute:NSParagraphStyleAttributeName range:attrRange];
     [attrString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:attrRange];
 
-    [savedAttributes enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop)
+    [savedAttributes enumerateObjectsUsingBlock:
+     ^(id obj, NSUInteger idx, BOOL* stop)
      {
          DNAttributedStringAttribute*   asa = obj;
 
@@ -709,13 +710,13 @@
         NSMutableDictionary*    selectedTextAttributes  = [NSMutableDictionary dictionary];
 
         NSAssert(selectedTextAttributesKerning, @"%@/%@/%@/%@/SegmentedControl/SelectedKerning is not specified!", group, screen, viewState, item);
-        [selectedTextAttributes setObject:textAttributesKerning forKey:NSKernAttributeName];
+        selectedTextAttributes[NSKernAttributeName]             = textAttributesKerning;
 
         NSAssert(selectedTextAttributesFont, @"%@/%@/%@/%@/SegmentedControl/SelectedFont is not specified!", group, screen, viewState, item);
-        [selectedTextAttributes setObject:selectedTextAttributesFont forKey:NSFontAttributeName];
+        selectedTextAttributes[NSFontAttributeName]             = selectedTextAttributesFont;
 
         NSAssert(selectedTextAttributesColor, @"%@/%@/%@/%@/SegmentedControl/SelectedColor is not specified!", group, screen, viewState, item);
-        [selectedTextAttributes setObject:selectedTextAttributesColor forKey:NSForegroundColorAttributeName];
+        selectedTextAttributes[NSForegroundColorAttributeName]  = selectedTextAttributesColor;
 
         ((DNSegmentedControl*)segmentedControl).selectedTextAttributes = selectedTextAttributes;
     }
@@ -743,13 +744,13 @@
     NSMutableDictionary*    textAttributes  = [NSMutableDictionary dictionary];
 
     NSAssert(labelKerning, @"%@/%@/%@/%@/%u/BarButtonItem/LabelKerning is not specified!", group, screen, viewState, item, controlState);
-    [textAttributes setObject:labelKerning forKey:NSKernAttributeName];
+    textAttributes[NSKernAttributeName]             = labelKerning;
 
     NSAssert(labelFont, @"%@/%@/%@/%@/%u/BarButtonItem/LabelFont is not specified!", group, screen, viewState, item, controlState);
-    [textAttributes setObject:labelFont forKey:NSFontAttributeName];
+    textAttributes[NSFontAttributeName]             = labelFont;
 
     NSAssert(labelColor, @"%@/%@/%@/%@/%u/BarButtonItem/LabelColor is not specified!", group, screen, viewState, item, controlState);
-    [textAttributes setObject:labelColor forKey:NSForegroundColorAttributeName];
+    textAttributes[NSForegroundColorAttributeName]  = labelColor;
 
     [barButtonItem setTitleTextAttributes:textAttributes
                                  forState:controlState];

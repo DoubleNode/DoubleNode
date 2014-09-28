@@ -83,9 +83,11 @@
 {
     self.transitionPending  = YES;
 
-    [DNUtilities runOnMainThreadWithoutDeadlocking:^
+    [DNUtilities runOnMainThreadWithoutDeadlocking:
+     ^()
      {
-         [[self propertiesDictionary] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+         [[self propertiesDictionary] enumerateKeysAndObjectsUsingBlock:
+          ^(id key, id obj, BOOL* stop)
           {
               if ([obj isKindOfClass:[UIView class]] == YES)
               {
@@ -118,9 +120,12 @@
                    [self viewStateDidAppear:newViewState animated:animated];
                    if (completion != nil) {   completion(finished);   }
 
-                   [UIView animateWithDuration:0.5f animations:^
+                   [UIView animateWithDuration:0.5f
+                                    animations:
+                    ^()
                     {
-                        [[self propertiesDictionary] enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop)
+                        [[self propertiesDictionary] enumerateKeysAndObjectsUsingBlock:
+                         ^(id key, id obj, BOOL* stop)
                          {
                              if ([obj isKindOfClass:[UIView class]] == YES)
                              {
