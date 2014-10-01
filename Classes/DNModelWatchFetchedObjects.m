@@ -117,8 +117,6 @@
 
 - (void)dealloc
 {
-    [self cancelWatch];
-    
     self.collectionView = nil;
 }
 
