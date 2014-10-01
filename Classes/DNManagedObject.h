@@ -39,12 +39,12 @@
                                                             \
 + (instancetype)name##FromID:(NSNumber*)idValue             \
 {                                                           \
-    return [[self alloc] initWithID:idValue];               \
+    return [self entityFromID:idValue];                     \
 }                                                           \
                                                             \
 + (instancetype)name##FromIDIfExists:(NSNumber*)idValue     \
 {                                                           \
-    return [[self alloc] initWithIDIfExists:idValue];       \
+    return [self entityFromIDIfExists:idValue];             \
 }                                                           \
                                                             \
 - (BOOL)isEqualTo##type:(CDO##type*)object                  \
@@ -76,12 +76,12 @@
                                                             \
 + (instancetype)name##FromID:(NSString*)idValue             \
 {                                                           \
-    return [[self alloc] initWithID:idValue];               \
+    return [self entityFromID:idValue];                     \
 }                                                           \
                                                             \
 + (instancetype)name##FromIDIfExists:(NSString*)idValue     \
 {                                                           \
-    return [[self alloc] initWithIDIfExists:idValue];       \
+    return [self entityFromIDIfExists:idValue];             \
 }                                                           \
                                                             \
 - (BOOL)isEqualTo##type:(CDO##type*)object                  \
@@ -139,8 +139,8 @@
 
 @interface DNManagedObject : NSManagedObject
 {
-    NSFetchedResultsController* fetchedResultsController;
-    NSManagedObjectContext*     managedObjectContext;
+    //NSFetchedResultsController* fetchedResultsController;
+    //NSManagedObjectContext*     managedObjectContext;
 }
 
 @property (nonatomic, retain)   id  id;
@@ -185,6 +185,7 @@
 - (NSDictionary*)serialize;
 - (id)initFromSerialization:(NSDictionary*)serialization;
 
+- (id)objectInCurrentContext;
 - (id)objectInContext:(NSManagedObjectContext*)context;
 
 #pragma mark - Update If Changed functions
@@ -253,6 +254,7 @@
 + (instancetype)entityFromObjectID:(NSManagedObjectID*)objectId;
 + (instancetype)entityFromDictionary:(NSDictionary*)dict;
 + (instancetype)entityFromID:(id)idValue;
++ (instancetype)entityFromIDIfExists:(id)idValue;
 
 - (instancetype)init;
 - (instancetype)initWithObjectID:(NSManagedObjectID*)objectId;

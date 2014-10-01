@@ -165,6 +165,8 @@
         [fetchRequest setSortDescriptors:sortDescriptors];
     }
 
+    fetchRequest.fetchBatchSize = 20;
+    
     return fetchRequest;
 }
 

@@ -22,7 +22,8 @@ void nada() {   }
 
 @interface DNCollectionView ()
 {
-    NSMutableArray*     updateBlocks;
+    NSMutableArray*         updateBlocks;
+    UICollectionViewCell*   currentCell;
 }
 
 @end
@@ -33,6 +34,7 @@ void nada() {   }
 {
     D2LogMarker(@"beginUpdates");
     updateBlocks    = [NSMutableArray array];
+    currentCell     = [self.visibleCells firstObject];
 }
 
 - (void)endUpdates
@@ -63,6 +65,22 @@ void nada() {   }
      ^(BOOL finished)
      {
          D2LogMarker(@"endUpdates - 5");
+         if (currentCell)
+         {
+             NSIndexPath*   currentCellIndex    = [self indexPathForCell:currentCell];
+             if ([NSStringFromClass([currentCell class]) isEqualToString:@"DetailPeopleCell"])
+             {
+                 DLog(LL_Debug, LD_General, @"DetailPeopleCell.currentCellIndex=%@", currentCellIndex);
+                 DLog(LL_Debug, LD_General, @"break");
+             }
+
+             /*
+             [self scrollToItemAtIndexPath:currentCellIndex
+                          atScrollPosition:UICollectionViewScrollPositionTop
+                                  animated:YES];
+             */
+             currentCell    = nil;
+         }
      }];
 }
 

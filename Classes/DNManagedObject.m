@@ -271,22 +271,78 @@
 
 + (instancetype)entity
 {
-    return [[self alloc] init];
+    __block id  retval;
+    
+    [[self entityModel] performBlockAndWait:
+     ^(NSManagedObjectContext* context)
+     {
+         NSEntityDescription*    entity = [NSEntityDescription entityForName:[self entityName] inManagedObjectContext:context];
+         
+         retval = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+     }];
+    
+    return retval;
 }
 
 + (instancetype)entityFromObjectID:(NSManagedObjectID*)objectId
 {
-    return [[self alloc] initWithObjectID:objectId];
+    __block id  retval;
+    
+    [[self entityModel] performWithContext:[self managedObjectContext]
+                              blockAndWait:
+     ^(NSManagedObjectContext* context)
+     {
+         NSError*   error;
+         retval = [context existingObjectWithID:objectId error:&error];
+         if (!retval)
+         {
+             DLog(LL_Debug, LD_General, @"error=%@", error);
+         }
+     }];
+    
+    return retval;
 }
 
 + (instancetype)entityFromDictionary:(NSDictionary*)dict
 {
-    return [[self alloc] initWithDictionary:dict];
+    //return [[self alloc] initWithDictionary:dict];
+
+    id  idValue = [self entityIDWithDictionary:dict];
+
+    id  retval  = [self entityFromID:idValue];
+    if (retval)
+    {
+        [retval loadWithDictionary:dict withExceptions:nil];
+    }
+    
+    return retval;
 }
 
 + (instancetype)entityFromID:(id)idValue
 {
-    return [[self alloc] initWithID:idValue];
+    //return [[self alloc] initWithID:idValue];
+    
+    id  retval  = [[self entityModel] getFromID:idValue];
+    if (!retval)
+    {
+        retval = [self entity];
+    }
+
+    if (retval)
+    {
+        [retval performBlockAndWait:
+         ^(NSManagedObjectContext* context)
+         {
+             [retval setIdIfChanged:idValue];
+         }];
+    }
+    
+    return retval;
+}
+
++ (instancetype)entityFromIDIfExists:(id)idValue
+{
+    return [[self entityModel] getFromID:idValue];
 }
 
 - (NSDictionary*)serialize
@@ -343,49 +399,6 @@
     self = bself;
 
     return self;
-}
-
-- (void)setIdIfChanged:(id)idValue
-{
-    NSDictionary*           attributes  = [self.entity attributesByName];
-    NSAttributeDescription* attribute   = attributes[[[self class] idAttribute]];
-    BOOL                    stringFlag  = NO;
-    if (attribute && (attribute.attributeType == NSStringAttributeType))
-    {
-        stringFlag  = YES;
-    }
-
-    if (stringFlag)
-    {
-        if (![self.id isEqualToString:[NSString stringWithFormat:@"%@", idValue]])
-        {
-            self.id = [NSString stringWithFormat:@"%@", idValue];
-        }
-    }
-    else
-    {
-        NSNumber*   newValue;
-        if ([idValue isKindOfClass:[NSString class]])
-        {
-            newValue = [NSNumber numberWithInteger:(int)[idValue intValue]];
-        }
-        else
-        {
-            newValue = idValue;
-        }
-
-        if (newValue)
-        {
-            if (![self.id isEqualToNumber:newValue])
-            {
-                self.id = newValue;
-            }
-        }
-        else
-        {
-            self.id = nil;
-        }
-    }
 }
 
 - (instancetype)initWithID:(id)idValue
@@ -449,16 +462,75 @@
     return self;
 }
 
-- (id)objectInContext:(NSManagedObjectContext*)context
+- (id)objectInCurrentContext
 {
+    return [self objectInContext:nil];
+}
+
+- (id)objectInContext:(NSManagedObjectContext*)pContext
+{
+    NSManagedObjectContext* context = pContext;
+    
     if (!context)
     {
-        return self;
+        DNDataModel*    dataModel   = [[[[self class] entityModel] class] dataModel];
+        
+        context = [dataModel currentObjectContext];
+    }
+
+    __block id  retval;
+    
+    [[[self class] entityModel] performWithContext:context
+                                      blockAndWait:
+     ^(NSManagedObjectContext* context)
+     {
+         retval = [context objectWithID:self.objectID];
+     }];
+
+    return retval;
+}
+
+- (void)setIdIfChanged:(id)idValue
+{
+    NSDictionary*           attributes  = [self.entity attributesByName];
+    NSAttributeDescription* attribute   = attributes[[[self class] idAttribute]];
+    BOOL                    stringFlag  = NO;
+    if (attribute && (attribute.attributeType == NSStringAttributeType))
+    {
+        stringFlag  = YES;
     }
     
-    NSManagedObjectID*    objectID = [self objectID];
-
-    return [context objectWithID:objectID];
+    if (stringFlag)
+    {
+        if (![self.id isEqualToString:[NSString stringWithFormat:@"%@", idValue]])
+        {
+            self.id = [NSString stringWithFormat:@"%@", idValue];
+        }
+    }
+    else
+    {
+        NSNumber*   newValue;
+        if ([idValue isKindOfClass:[NSString class]])
+        {
+            newValue = [NSNumber numberWithInteger:(int)[idValue intValue]];
+        }
+        else
+        {
+            newValue = idValue;
+        }
+        
+        if (newValue)
+        {
+            if (![self.id isEqualToNumber:newValue])
+            {
+                self.id = newValue;
+            }
+        }
+        else
+        {
+            self.id = nil;
+        }
+    }
 }
 
 - (void)clearData
@@ -835,7 +907,9 @@
 
 - (NSDictionary*)saveIDToDictionary
 {
-    [self.managedObjectContext obtainPermanentIDsForObjects:@[ ] error:nil];
+    NSError*   error;
+
+    [self.managedObjectContext obtainPermanentIDsForObjects:@[ self ] error:nil];
 
     id  idValue = [self valueForKey:[[self class] idAttribute]];
     if (!idValue || [idValue isEqual:[NSNull null]])
@@ -845,7 +919,7 @@
 
     return @{
              [[self class] idAttribute] : idValue,
-             @"objectID"                : [[[self objectID] URIRepresentation] absoluteString]
+             @"objectID"                : [[self.objectID URIRepresentation] absoluteString]
              };
 }
 
@@ -1356,13 +1430,13 @@
 
 - (void)performBlockAndWait:(void (^)(NSManagedObjectContext* context))block
 {
-    [self performWithContext:[[self class] managedObjectContext]
+    [self performWithContext:[self managedObjectContext]
                 blockAndWait:block];
 }
 
 - (void)performBlock:(void (^)(NSManagedObjectContext* context))block
 {
-    [self performWithContext:[[self class] managedObjectContext]
+    [self performWithContext:[self managedObjectContext]
                        block:block];
 }
 

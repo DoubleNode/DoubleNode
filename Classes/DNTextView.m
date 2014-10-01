@@ -12,6 +12,9 @@
 #import "DNTextView.h"
 
 @interface DNTextView()
+{
+    CGFloat _contentHeight;
+}
 
 @property (strong, nonatomic) UILabel* placeholderLabel;
 
@@ -43,6 +46,8 @@
 
 - (void)defaultInit
 {
+    _contentHeight  = 0;
+    
     self.placeholderColor   = [UIColor lightGrayColor];
     
     CGRect caretRect        = [self caretRectForPosition:[self beginningOfDocument]];
@@ -125,6 +130,23 @@
     {
         self.placeholderLabel.hidden = YES;
     }
+    
+    [self updateContentHeight];
+}
+
+- (void)updateContentHeight
+{
+    CGFloat contentHeight = ceil([self sizeThatFits:self.frame.size].height);
+    if (contentHeight != _contentHeight)
+    {
+        _contentHeight = contentHeight;
+    }
+}
+
+- (CGFloat)contentHeight
+{
+    
+    return _contentHeight;
 }
 
 // DME: Touches intercepted and forwarded to nextResponder and super to handle touched embedded links and data detector results

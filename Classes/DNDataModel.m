@@ -148,7 +148,12 @@
         [_tempInMemoryObjectContext reset];
         [_concurrentObjectContext reset];
         [_tempMainObjectContext reset];
-        [_privateWriterContext reset];
+        
+        [_privateWriterContext performBlockAndWait:
+         ^()
+         {
+             [_privateWriterContext reset];
+         }];
 
         for (NSPersistentStore* store in [self persistentStoreCoordinator].persistentStores)
         {
@@ -244,16 +249,49 @@
  
 - (void)createContextForCurrentThreadPerformBlockAndWait:(BOOL (^)(NSManagedObjectContext* context))block
 {
-    NSManagedObjectContext* tempContext = [self createContextForCurrentThread];
-    [tempContext performBlockAndWait:^
+    NSManagedObjectContext* tempContext;
+
+    if ([NSThread isMainThread])
+    {
+        tempContext = [self mainObjectContext];
+    }
+    else
+    {
+        tempContext = [self createContextForCurrentThread];
+    }
+
+    [tempContext performBlockAndWait:
+     ^()
      {
+         if ([NSThread isMainThread])
+         {
+             [tempContext save:NULL];
+         }
+
          BOOL   save = block(tempContext);
          if (!save)
          {
              [tempContext reset];
          }
 
-         [self saveAndRemoveContextFromCurrentThread:tempContext];
+         if ([NSThread isMainThread])
+         {
+             if (save)
+             {
+                 [tempContext save:NULL];
+             }
+         }
+         else
+         {
+             if (save)
+             {
+                 [self saveAndRemoveContextFromCurrentThread:tempContext];
+             }
+             else
+             {
+                 [self removeContextFromCurrentThread:tempContext];
+             }
+         }
      }];
 }
 
@@ -370,7 +408,14 @@
     NSManagedObjectContext* retval  = [self currentThreadedObjectContext];
     if (retval == nil)
     {
-        retval = [self mainObjectContext];
+        if ([NSThread isMainThread])
+        {
+            retval = [self mainObjectContext];
+        }
+        else
+        {
+            retval = [self createContextForCurrentThread];
+        }
     }
 
     return retval;
@@ -415,39 +460,46 @@
         return _mainObjectContext;
     }
 
-    _mainObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    if (_mainObjectContext)
-    {
-        [_mainObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
-        [_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType]];
-        //[_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
-        [_mainObjectContext setStalenessInterval:0];
-
-        [self performWithContext:_mainObjectContext
-                    blockAndWait:
-         ^(NSManagedObjectContext* context)
+    [DNUtilities runOnMainThreadWithoutDeadlocking:
+     ^()
+     {
+         _mainObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+         if (_mainObjectContext)
          {
-             [context setParentContext:self.privateWriterContext];
-         }];
+             [_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType]];
+             //[_mainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
 
-        /*
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:NSManagedObjectContextDidSaveNotification
-                                                      object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(contextDidSave:)
-                                                     name:NSManagedObjectContextDidSaveNotification
-                                                   object:nil];
-         */
+             [_mainObjectContext setStalenessInterval:0];
+             
+             [self performWithContext:_mainObjectContext
+                         blockAndWait:
+              ^(NSManagedObjectContext* context)
+              {
+                  NSString*   mocName = [NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)];
+                  [context.userInfo setObject:mocName forKey:@"mocName"];
 
-        [[NSNotificationCenter defaultCenter] removeObserver:self
-                                                        name:NSManagedObjectContextObjectsDidChangeNotification
-                                                      object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(contextObjectsDidChange:)
-                                                     name:NSManagedObjectContextObjectsDidChangeNotification
-                                                   object:_mainObjectContext];
-    }
+                  [context setParentContext:self.privateWriterContext];
+              }];
+             
+             /*
+              [[NSNotificationCenter defaultCenter] removeObserver:self
+              name:NSManagedObjectContextDidSaveNotification
+              object:nil];
+              [[NSNotificationCenter defaultCenter] addObserver:self
+              selector:@selector(contextDidSave:)
+              name:NSManagedObjectContextDidSaveNotification
+              object:nil];
+              */
+             
+             [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                             name:NSManagedObjectContextObjectsDidChangeNotification
+                                                           object:nil];
+             [[NSNotificationCenter defaultCenter] addObserver:self
+                                                      selector:@selector(contextObjectsDidChange:)
+                                                          name:NSManagedObjectContextObjectsDidChangeNotification
+                                                        object:_mainObjectContext];
+         }
+     }];
 
     return _mainObjectContext;
 }
@@ -457,10 +509,18 @@
     NSManagedObjectContext* concurrentObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     if (concurrentObjectContext)
     {
-        [concurrentObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
         [concurrentObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType]];
         //[concurrentObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
-        [concurrentObjectContext setParentContext:self.mainObjectContext];
+
+        [self performWithContext:concurrentObjectContext
+                    blockAndWait:
+         ^(NSManagedObjectContext* context)
+         {
+             NSString*   mocName = [NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)];
+             [context.userInfo setObject:mocName forKey:@"mocName"];
+             
+             [context setParentContext:self.mainObjectContext];
+         }];
     }
 
     return concurrentObjectContext;
@@ -471,10 +531,18 @@
     NSManagedObjectContext* tempMainObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
     if (tempMainObjectContext)
     {
-        [tempMainObjectContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
         [tempMainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType]];
         //[tempMainObjectContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
-        [tempMainObjectContext setParentContext:self.mainObjectContext];
+        
+        [self performWithContext:tempMainObjectContext
+                    blockAndWait:
+         ^(NSManagedObjectContext* context)
+         {
+             NSString*   mocName = [NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)];
+             [context.userInfo setObject:mocName forKey:@"mocName"];
+             
+             [context setParentContext:self.mainObjectContext];
+         }];
     }
 
     return tempMainObjectContext;
@@ -602,14 +670,16 @@
     _privateWriterContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     if (_privateWriterContext)
     {
-        [_privateWriterContext.userInfo setObject:[NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)] forKey:@"mocName"];
         [_privateWriterContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSMergeByPropertyObjectTrumpMergePolicyType]];
         //[_privateWriterContext setMergePolicy:[[NSMergePolicy alloc] initWithMergeType:NSOverwriteMergePolicyType]];
-
+        
         [self performWithContext:_privateWriterContext
                     blockAndWait:
          ^(NSManagedObjectContext* context)
          {
+             NSString*   mocName = [NSString stringWithFormat:@"%@@%@", [[self class] dataModelName], NSStringFromSelector(_cmd)];
+             [context.userInfo setObject:mocName forKey:@"mocName"];
+             
              [context setPersistentStoreCoordinator:[self persistentStoreCoordinator]];
          }];
     }

@@ -115,6 +115,13 @@
     return self;
 }
 
+- (void)dealloc
+{
+    [self cancelWatch];
+    
+    self.collectionView = nil;
+}
+
 - (NSArray*)sections
 {
     if (forcedSections)
@@ -266,7 +273,10 @@
         
         self.collectionView = nil;
         
-        [collectionView reloadData];
+        if (collectionView.dataSource)
+        {
+            [collectionView reloadData];
+        }
     }
     
     [super cancelWatch];

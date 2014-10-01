@@ -23,4 +23,9 @@
 
 - (void)shake;
 
+/**
+ Height of content given current width
+ */
+- (CGFloat)contentHeight;
+
 @end
