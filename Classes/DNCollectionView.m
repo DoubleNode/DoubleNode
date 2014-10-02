@@ -70,8 +70,8 @@ void nada() {   }
              NSIndexPath*   currentCellIndex    = [self indexPathForCell:currentCell];
              if ([NSStringFromClass([currentCell class]) isEqualToString:@"DetailPeopleCell"])
              {
-                 DLog(LL_Debug, LD_General, @"DetailPeopleCell.currentCellIndex=%@", currentCellIndex);
-                 DLog(LL_Debug, LD_General, @"break");
+                 ///DLog(LL_Debug, LD_General, @"DetailPeopleCell.currentCellIndex=%@", currentCellIndex);
+                 //DLog(LL_Debug, LD_General, @"break");
              }
 
              /*

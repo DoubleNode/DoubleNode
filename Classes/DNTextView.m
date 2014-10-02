@@ -48,7 +48,7 @@
 {
     _contentHeight  = 0;
     
-    self.placeholderColor   = [UIColor lightGrayColor];
+    self.placeholderColor   = [UIColor colorWithWhite:0.700 alpha:1.000];
     
     CGRect caretRect        = [self caretRectForPosition:[self beginningOfDocument]];
     CGRect placeholderFrame = CGRectMake(caretRect.origin.x, caretRect.origin.y + 1, 0, 0);
