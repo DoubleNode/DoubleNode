@@ -189,12 +189,12 @@
     [DNUtilities runOnBackgroundThread:
      ^()
      {
+         [self refreshWatch];
+         
          [self performWithContext:[fetchResultsController managedObjectContext]
                             block:
           ^(NSManagedObjectContext* context)
           {
-              [self refreshWatch];
-              
               NSArray*   sections    = [self sections];
               
               forcedSections    = [NSMutableArray array];
@@ -287,10 +287,11 @@
     fetchResultsController.fetchRequest.resultType = NSManagedObjectResultType;
 
     [self performWithContext:[fetchResultsController managedObjectContext]
-                       block:^(NSManagedObjectContext* context)
+                blockAndWait:
+     ^(NSManagedObjectContext* context)
      {
          NSError*    error = nil;
-
+         
          BOOL   result = [fetchResultsController performFetch:&error];
          if (result == NO)
          {
