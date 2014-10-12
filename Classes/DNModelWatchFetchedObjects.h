@@ -24,6 +24,8 @@ typedef UICollectionReusableView*(^DNModelWatchFetchedObjectsViewForSupplementar
 
 @interface DNModelWatchFetchedObjects : DNModelWatchObjects <UICollectionViewDataSource>
 
+@property (nonatomic, retain) DNCollectionView*     collectionView;
+
 @property (strong, nonatomic) DNModelWatchFetchedObjectsNumberOfItemsInSectionHandlerBlock              numberOfItemsInSectionHandler;
 @property (strong, nonatomic) DNModelWatchFetchedObjectsCellForItemAtIndexPathHandlerBlock              cellForItemAtIndexPathHandler;
 @property (strong, nonatomic) DNModelWatchFetchedObjectsNumberOfSectionsInCollectionViewHandlerBlock    numberOfSectionsInCollectionViewHandler;

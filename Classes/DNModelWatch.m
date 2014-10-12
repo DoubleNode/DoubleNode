@@ -33,6 +33,8 @@
     if (self)
     {
         model   = myModel;
+        
+        self.name   = [NSString stringWithFormat:@"%@", NSStringFromClass(self.class)];
     }
     
     return self;
@@ -55,6 +57,16 @@
 
 - (void)refreshWatch
 {
+}
+
+- (void)pauseWatch
+{
+    self.paused = YES;
+}
+
+- (void)resumeWatch
+{
+    self.paused = NO;
 }
 
 - (void)executeWillChangeHandler:(NSDictionary*)context

@@ -54,15 +54,25 @@ typedef NS_ENUM(NSInteger, LogLevel)
 #if !defined(DEBUG)
 #define DLogMarker(marker)                      NSLog(@"%@", marker)
 #define DLog(level,domain,...)                  NSLog(__VA_ARGS__)
-#define DLogData(level,domain,data)             do{}while(0)
-#define DLogImage(...)                          do{}while(0)
+#define DOLog(level,domain,...)                 NSLog(__VA_ARGS__)
+#define DLogData(level,domain,data)             ;
+#define DLogImage(...)                          ;
 #define DLogTimeBlock(level,domain,title,block) block()
+#define DAssertIsMainThread                     ;
 #else
 #define DLogMarker(marker)                      NSLog(@"%@", marker); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,@"%@", marker)
 #define DLog(level,domain,...)                  DNLogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__)
+#define DOLog(level,domain,...)                 DNLogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,__VA_ARGS__)
 #define DLogData(level,domain,data)             LogDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,data)
 #define DLogImage(level,domain,image)           LogImageDataF(__FILE__,__LINE__,__FUNCTION__,domain,level,image.size.width,image.size.height,UIImagePNGRepresentation(image))
 #define DLogTimeBlock(level,domain,title,block) DNLogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,@"%@: blockTime: %f",title,DNTimeBlock(block)); LogMessageF(__FILE__,__LINE__,__FUNCTION__,domain,level,@"%@: blockTime: %f",title,DNTimeBlock(block))
+#define DAssertIsMainThread                     if (![NSThread isMainThread])                                                                                                                   \
+                                                {                                                                                                                                               \
+                                                    NSException* exception = [NSException exceptionWithName:@"DNUtilities Exception"                                                            \
+                                                                                                     reason:[NSString stringWithFormat:@"Not in Main Thread"]                                   \
+                                                                                                   userInfo:@{ @"FILE" : @(__FILE__), @"LINE" : @(__LINE__), @"FUNCTION" : @(__FUNCTION__) }];  \
+                                                    @throw exception;                                                                                                                           \
+                                                }
 
 extern void LogImageDataF(const char *filename, int lineNumber, const char *functionName, NSString *domain, int level, int width, int height, NSData *data);
 
@@ -95,6 +105,7 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (void)runOnBackgroundThreadAfterDelay:(CGFloat)delay
                                   block:(void (^)())block;
 
++ (void)runOnMainThreadAsynchronouslyWithoutDeadlocking:(void (^)())block;
 + (void)runOnMainThreadWithoutDeadlocking:(void (^)())block;
 + (void)runOnBackgroundThread:(void (^)())block;
 + (void)runBlock:(void (^)())block;

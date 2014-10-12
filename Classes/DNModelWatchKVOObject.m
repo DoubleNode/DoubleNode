@@ -49,6 +49,8 @@
     {
         object      = pObject;
         attributes  = pAttributes;
+        
+        self.name   = [NSString stringWithFormat:@"%@.%@", NSStringFromClass(self.class), NSStringFromClass([object class])];
     }
     
     return self;
@@ -88,7 +90,14 @@
     [attributes enumerateObjectsUsingBlock:
      ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
      {
-         [object removeObserver:self forKeyPath:attributeName context:(__bridge void *)(attributeName)];
+         @try
+         {
+             [object removeObserver:self forKeyPath:attributeName context:(__bridge void *)(attributeName)];
+         }
+         @catch (NSException* exception)
+         {
+             DLog(LL_Debug, LD_General, @"exception=%@", exception);
+         }
      }];
     
     object  = nil;
@@ -183,6 +192,16 @@
                         change:(NSDictionary*)change
                        context:(void*)context
 {
+    /* DME-DEBUG CODE
+    if ([NSStringFromClass([subjectObject class]) isEqualToString:@"CDOLesson"])
+    {
+        DOLog(LL_Debug, LD_General, @"KVO=CDOLesson, keyPath=%@", keyPath);
+        if ([keyPath isEqualToString:@"notes"])
+        {
+            DOLog(LL_Debug, LD_General, @"KVO=CDOLesson, keyPath=%@", keyPath);
+        }
+    }
+     */
     NSDictionary*   contextDictionary   = @{
                                             @"keyPath" : CFBridgingRelease(context),
                                             @"change"  : change

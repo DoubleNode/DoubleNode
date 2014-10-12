@@ -25,6 +25,38 @@
 
 @implementation DNModel
 
++ (NSArray*)globalWatchesArray
+{
+    static dispatch_once_t  once;
+    static NSMutableArray*  instance = nil;
+    
+    dispatch_once(&once, ^{
+        instance = [NSMutableArray array];
+    });
+    
+    return instance;
+}
+
++ (void)addGlobalWatch:(DNModelWatch*)watch
+{
+    NSMutableArray* array   = (NSMutableArray*)[self globalWatchesArray];
+    
+    @synchronized(array)
+    {
+        [array addObject:watch];
+    }
+}
+
++ (void)removeGlobalWatch:(DNModelWatch*)watch
+{
+    NSMutableArray* array   = (NSMutableArray*)[self globalWatchesArray];
+    
+    @synchronized(array)
+    {
+        [array removeObject:watch];
+    }
+}
+
 + (id)dataModel
 {
     return [[self dataModelClass] dataModel];
@@ -93,6 +125,9 @@
     DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
                                                                          andObject:object
                                                                      andAttributes:nil];
+    
+    watch.name   = [NSString stringWithFormat:@"%@.%@:%@", NSStringFromClass(self.class), NSStringFromSelector(_cmd), NSStringFromClass([object class])];
+    
     return watch;
 }
 
@@ -102,6 +137,9 @@
     DNModelWatchKVOObject*  watch   = [[DNModelWatchKVOObject alloc] initWithModel:self
                                                                          andObject:object
                                                                      andAttributes:attributes];
+
+    watch.name   = [NSString stringWithFormat:@"%@.%@:%@", NSStringFromClass(self.class), NSStringFromSelector(_cmd), NSStringFromClass([object class])];
+    
     return watch;
 }
 
@@ -110,6 +148,9 @@
     DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self
                                                                             andObjects:objects
                                                                          andAttributes:nil];
+    
+    watch.name   = [NSString stringWithFormat:@"%@.%@:%@ (%d objects)", NSStringFromClass(self.class), NSStringFromSelector(_cmd), NSStringFromClass([[objects firstObject] class]), [objects count]];
+    
     return watch;
 }
 
@@ -119,6 +160,9 @@
     DNModelWatchKVOObjects*    watch   = [[DNModelWatchKVOObjects alloc] initWithModel:self
                                                                             andObjects:objects
                                                                          andAttributes:attributes];
+
+    watch.name   = [NSString stringWithFormat:@"%@.%@:%@ (%d objects)", NSStringFromClass(self.class), NSStringFromSelector(_cmd), NSStringFromClass([[objects firstObject] class]), [objects count]];
+    
     return watch;
 }
 
@@ -129,12 +173,14 @@
 
 - (void)retainWatch:(DNModelWatch*)watch
 {
+    [[self class] addGlobalWatch:watch];
     [watches addObject:watch];
 }
 
 - (void)releaseWatch:(DNModelWatch*)watch
 {
     [watches removeObject:watch];
+    [[self class] removeGlobalWatch:watch];
 }
 
 #pragma mark - getWithFetch
@@ -188,7 +234,8 @@
     __block NSArray*    resultArray;
     __block NSThread*   createdThread;
 
-    [self performBlockAndWait:^(NSManagedObjectContext* context)
+    [self performBlockAndWait:
+     ^(NSManagedObjectContext* context)
      {
          @try
          {
@@ -211,6 +258,7 @@
          }
      }];
 
+    //DLog(LL_Error, LD_CoreData, @"Trace Point");
     if (resultArray && (![createdThread isEqual:[NSThread currentThread]]))
     {
         NSMutableArray* finalArray  = [NSMutableArray array];
@@ -353,11 +401,18 @@
 
 - (DNModelWatchObjects*)watchAll
 {
-    return [self watchAllOffset:0 count:0];
+    return [self watchAllWithCollectionView:nil offset:0 count:0];
 }
 
 - (DNModelWatchObjects*)watchAllOffset:(NSUInteger)offset
                                  count:(NSUInteger)count
+{
+    return [self watchAllWithCollectionView:nil offset:offset count:count];
+}
+
+- (DNModelWatchObjects*)watchAllWithCollectionView:(DNCollectionView*)collectionView
+                                            offset:(NSUInteger)offset
+                                             count:(NSUInteger)count
 {
     NSFetchRequest* fetchRequest    = [self getAll_FetchRequestOffset:offset count:count];
     if (fetchRequest == nil)
@@ -365,8 +420,8 @@
         DLog(LL_Error, LD_CoreData, @"Unable to get fetchRequest");
         return nil;
     }
-
-    return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest];
+    
+    return [DNModelWatchFetchedObjects watchWithModel:self andFetch:fetchRequest andCollectionView:collectionView];
 }
 
 - (NSFetchRequest*)getAll_FetchRequestOffset:(NSUInteger)offset

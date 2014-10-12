@@ -758,7 +758,10 @@
     NSError*    error = nil;
 
     //DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
-    DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
+    if ([httpResponse statusCode] != 200)
+    {
+        DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
+    }
 
     //DLog(LL_Debug, LD_API, @"dataSize=%d", [data length]);
     /*
@@ -830,7 +833,7 @@
         //DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
         if (responseR && [responseR isKindOfClass:[NSDictionary class]])
         {
-            resultDict = responseR;
+            resultDict = [responseR copy];
         }
         else if (responseR && [responseR isKindOfClass:[NSArray class]])
         {
@@ -1009,15 +1012,22 @@
 
                   NSMutableArray*   results = [NSMutableArray arrayWithCapacity:[objects count]];
 
-                  [objects enumerateObjectsUsingBlock:
-                   ^(id obj, NSUInteger idx, BOOL* stop)
-                   {
-                       if ((filterHandler == nil) || filterHandler(obj))
+                  if (filterHandler)
+                  {
+                      [objects enumerateObjectsUsingBlock:
+                       ^(id obj, NSUInteger idx, BOOL* stop)
                        {
-                           [results addObject:obj];
-                       }
-                   }];
-
+                           if ((filterHandler == nil) || filterHandler(obj))
+                           {
+                               [results addObject:obj];
+                           }
+                       }];
+                  }
+                  else
+                  {
+                      results = objects;
+                  }
+                  
                   return results;
               }
                            completion:^(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects)

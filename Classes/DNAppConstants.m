@@ -77,6 +77,7 @@ static NSString*        plistServerCode = nil;
 + (NSDictionary*)plistDict
 {
     NSString*   serverCode  = [[DNUtilities appDelegate] settingsItem:@"ServerCode"];
+    //DLog(LL_Debug, LD_General, @"ServerCode=%@", serverCode);
     if (![serverCode isEqualToString:plistServerCode])
     {
         plistConfigDict = nil;

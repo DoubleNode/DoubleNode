@@ -26,6 +26,11 @@
 
 #pragma mark - Entity description functions
 
+- (void)prepareForDeletion
+{
+    [super prepareForDeletion];
+}
+
 + (Class)entityModelClass
 {
     NSException*    exception = [NSException exceptionWithName:@"DMManagedObject Exception"
@@ -273,12 +278,19 @@
 {
     __block id  retval;
     
-    [[self entityModel] performBlockAndWait:
-     ^(NSManagedObjectContext* context)
+    [self.managedObjectContext performBlockAndWait:
+     ^()
      {
-         NSEntityDescription*    entity = [NSEntityDescription entityForName:[self entityName] inManagedObjectContext:context];
+         NSEntityDescription*    entity = [NSEntityDescription entityForName:[self entityName]
+                                                      inManagedObjectContext:self.managedObjectContext];
          
-         retval = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:context];
+         retval = [[self alloc] initWithEntity:entity insertIntoManagedObjectContext:self.managedObjectContext];
+         
+         NSError*   error;
+         if (![self.managedObjectContext obtainPermanentIDsForObjects:@[ retval ] error:&error])
+         {
+             DLog(LL_Debug, LD_General, @"error=%@", error);
+         }
      }];
     
     return retval;
@@ -288,12 +300,12 @@
 {
     __block id  retval;
     
-    [[self entityModel] performWithContext:[self managedObjectContext]
-                              blockAndWait:
-     ^(NSManagedObjectContext* context)
+    [self.managedObjectContext performBlockAndWait:
+     ^()
      {
          NSError*   error;
-         retval = [context existingObjectWithID:objectId error:&error];
+         retval = [self.managedObjectContext existingObjectWithID:objectId
+                                                            error:&error];
          if (!retval)
          {
              DLog(LL_Debug, LD_General, @"error=%@", error);
@@ -305,8 +317,6 @@
 
 + (instancetype)entityFromDictionary:(NSDictionary*)dict
 {
-    //return [[self alloc] initWithDictionary:dict];
-
     id  idValue = [self entityIDWithDictionary:dict];
 
     id  retval  = [self entityFromID:idValue];
@@ -320,8 +330,6 @@
 
 + (instancetype)entityFromID:(id)idValue
 {
-    //return [[self alloc] initWithID:idValue];
-    
     id  retval  = [[self entityModel] getFromID:idValue];
     if (!retval)
     {
@@ -330,11 +338,7 @@
 
     if (retval)
     {
-        [retval performBlockAndWait:
-         ^(NSManagedObjectContext* context)
-         {
-             [retval setIdIfChanged:idValue];
-         }];
+        [retval setIdIfChanged:idValue];
     }
     
     return retval;
@@ -371,7 +375,8 @@
 {
     __block DNManagedObject*    bself   = self;
 
-    [self performBlockAndWait:^(NSManagedObjectContext* context)
+    [self performBlockAndWait:
+     ^(NSManagedObjectContext* context)
      {
          NSEntityDescription*    entity = [NSEntityDescription entityForName:[[self class] entityName] inManagedObjectContext:context];
 
@@ -391,7 +396,8 @@
 {
     __block DNManagedObject*    bself   = self;
 
-    [self performBlockAndWait:^(NSManagedObjectContext* context)
+    [self performBlockAndWait:
+     ^(NSManagedObjectContext* context)
      {
          bself = (DNManagedObject*)[context existingObjectWithID:objectId error:NULL];
      }];
@@ -480,8 +486,8 @@
 
     __block id  retval;
     
-    [[[self class] entityModel] performWithContext:context
-                                      blockAndWait:
+    [self performWithContext:context
+                blockAndWait:
      ^(NSManagedObjectContext* context)
      {
          retval = [context objectWithID:self.objectID];
@@ -500,37 +506,41 @@
         stringFlag  = YES;
     }
     
-    if (stringFlag)
-    {
-        if (![self.id isEqualToString:[NSString stringWithFormat:@"%@", idValue]])
-        {
-            self.id = [NSString stringWithFormat:@"%@", idValue];
-        }
-    }
-    else
-    {
-        NSNumber*   newValue;
-        if ([idValue isKindOfClass:[NSString class]])
-        {
-            newValue = [NSNumber numberWithInteger:(int)[idValue intValue]];
-        }
-        else
-        {
-            newValue = idValue;
-        }
-        
-        if (newValue)
-        {
-            if (![self.id isEqualToNumber:newValue])
-            {
-                self.id = newValue;
-            }
-        }
-        else
-        {
-            self.id = nil;
-        }
-    }
+    [self performBlockAndWait:
+     ^(NSManagedObjectContext* context)
+     {
+         if (stringFlag)
+         {
+             if (![self.id isEqualToString:[NSString stringWithFormat:@"%@", idValue]])
+             {
+                 self.id = [NSString stringWithFormat:@"%@", idValue];
+             }
+         }
+         else
+         {
+             NSNumber*   newValue;
+             if ([idValue isKindOfClass:[NSString class]])
+             {
+                 newValue = [NSNumber numberWithInteger:(int)[idValue intValue]];
+             }
+             else
+             {
+                 newValue = idValue;
+             }
+             
+             if (newValue)
+             {
+                 if (![self.id isEqualToNumber:newValue])
+                 {
+                     self.id = newValue;
+                 }
+             }
+             else
+             {
+                 self.id = nil;
+             }
+         }
+     }];
 }
 
 - (void)clearData
@@ -550,214 +560,226 @@
 - (void)loadWithDictionary:(NSDictionary*)dict
             withExceptions:(NSArray*)exceptions
 {
-    /*
-    id  newId   = [[self class] entityIDWithDictionary:dict];
-    if (![self.id isEqual:newId])
-    {
-        self.id  = newId;
-    }
-     */
-
-    NSDictionary*   attributes  = [self.entity attributesByName];
-
-    [attributes enumerateKeysAndObjectsUsingBlock:^(id key, NSAttributeDescription* attribute, BOOL* stop)
+    [self performBlockAndWait:
+     ^(NSManagedObjectContext* context)
      {
-         if (![key isKindOfClass:[NSString class]])
-         {
-             DLog(LL_Debug, LD_General, @"load: NOTSTRING key=%@", key);
-             return;
-         }
-
-         if (exceptions && [exceptions containsObject:key])
-         {
-             //DLog(LL_Debug, LD_General, @"load: SKIPPING key=%@", key);
-             return;
-         }
-
-         if ([key isEqualToString:[[self class] idAttribute]])
-         {
-             //DLog(LL_Debug, LD_General, @"load: ID key=%@", key);
-             return;
-         }
-
-         //DLog(LL_Debug, LD_General, @"load: key=%@", key);
-         id defaultValue    = [self valueForKey:key];
-
-         switch (attribute.attributeType)
-         {
-             case NSInteger16AttributeType:
-             case NSInteger32AttributeType:
-             case NSInteger64AttributeType:
-             {
-                 //DLog(LL_Debug, LD_General, @"load: updateNumberFieldIfChanged");
-                 [self updateNumberFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
-                 break;
-             }
-
-             case NSBooleanAttributeType:
-             {
-                 //DLog(LL_Debug, LD_General, @"load: updateBooleanFieldIfChanged");
-                 [self updateBooleanFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
-                 break;
-             }
-
-             case NSDecimalAttributeType:
-             {
-                 //DLog(LL_Debug, LD_General, @"load: updateDecimalNumberFieldIfChanged");
-                 [self updateDecimalNumberFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
-                 break;
-             }
-
-             case NSDoubleAttributeType:
-             case NSFloatAttributeType:
-             {
-                 //DLog(LL_Debug, LD_General, @"load: updateDoubleFieldIfChanged");
-                 [self updateDoubleFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
-                 break;
-             }
-
-             case NSStringAttributeType:
-             {
-                 //DLog(LL_Debug, LD_General, @"load: updateStringFieldIfChanged");
-                 [self updateStringFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
-                 break;
-             }
-
-             case NSDateAttributeType:
-             {
-                 //DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
-                 if (!defaultValue || ![defaultValue isKindOfClass:[NSDate class]])
-                 {
-                     defaultValue   = kDNDefaultDate_NeverExpires;
-                 }
-                 [self updateDateFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
-                 break;
-             }
-         }
-     }];
-
-    NSDictionary*   relationships   = [self.entity relationshipsByName];
-
-    [relationships enumerateKeysAndObjectsUsingBlock:^(id key, NSRelationshipDescription* relationship, BOOL* stop)
-     {
-         if (![key isKindOfClass:[NSString class]])
-         {
-             DLog(LL_Debug, LD_General, @"loadRelate: NOTSTRING key=%@", key);
-             return;
-         }
-
-         if (exceptions && [exceptions containsObject:key])
-         {
-             //DLog(LL_Debug, LD_General, @"loadRelate: SKIPPING key=%@", key);
-             return;
-         }
-
-         //DLog(LL_Debug, LD_General, @"entity=%@: key=%@", self.entity.name, key);
-         if ([relationship isToMany])
-         {
-             //DLog(LL_Debug, LD_General, @"loadRelateToMany: key=%@", key);
-             if (dict[key] && ![dict[key] isKindOfClass:[NSNull class]])
-             {
-                 id arrayValue  = dict[key];
-                 if (![arrayValue isKindOfClass:[NSArray class]])
-                 {
-                     arrayValue = nil;
-                 }
-                 [arrayValue enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+         NSDictionary*   attributes  = [self.entity attributesByName];
+         
+         [attributes enumerateKeysAndObjectsUsingBlock:
+          ^(id key, NSAttributeDescription* attribute, BOOL* stop)
+          {
+              if (![key isKindOfClass:[NSString class]])
+              {
+                  DLog(LL_Debug, LD_General, @"load: NOTSTRING key=%@", key);
+                  return;
+              }
+              
+              if (exceptions && [exceptions containsObject:key])
+              {
+                  //DLog(LL_Debug, LD_General, @"load: SKIPPING key=%@", key);
+                  return;
+              }
+              
+              if ([key isEqualToString:[[self class] idAttribute]])
+              {
+                  //DLog(LL_Debug, LD_General, @"load: ID key=%@", key);
+                  return;
+              }
+              
+              //DLog(LL_Debug, LD_General, @"load: key=%@", key);
+              id defaultValue    = [self valueForKey:key];
+              
+              switch (attribute.attributeType)
+              {
+                  case NSInteger16AttributeType:
+                  case NSInteger32AttributeType:
+                  case NSInteger64AttributeType:
                   {
-                      if (obj && ![obj isEqual:[NSNull null]])
+                      //DLog(LL_Debug, LD_General, @"load: updateNumberFieldIfChanged");
+                      [self updateNumberFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                      break;
+                  }
+                      
+                  case NSBooleanAttributeType:
+                  {
+                      //DLog(LL_Debug, LD_General, @"load: updateBooleanFieldIfChanged");
+                      [self updateBooleanFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                      break;
+                  }
+                      
+                  case NSDecimalAttributeType:
+                  {
+                      //DLog(LL_Debug, LD_General, @"load: updateDecimalNumberFieldIfChanged");
+                      [self updateDecimalNumberFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                      break;
+                  }
+                      
+                  case NSDoubleAttributeType:
+                  case NSFloatAttributeType:
+                  {
+                      //DLog(LL_Debug, LD_General, @"load: updateDoubleFieldIfChanged");
+                      [self updateDoubleFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                      break;
+                  }
+                      
+                  case NSStringAttributeType:
+                  {
+                      //DLog(LL_Debug, LD_General, @"load: updateStringFieldIfChanged");
+                      [self updateStringFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                      break;
+                  }
+                      
+                  case NSDateAttributeType:
+                  {
+                      //DLog(LL_Debug, LD_General, @"load: updateDateFieldIfChanged");
+                      if (!defaultValue || ![defaultValue isKindOfClass:[NSDate class]])
                       {
-                          Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
-
-                          /*
-                           NSEntityDescription*   entityDescription   = [NSEntityDescription entityForName:[relationship.destinationEntity name]
-                           inManagedObjectContext:[cdoSubClass managedObjectContext]];
-
-                           NSMutableDictionary*   objectD = [[cdoSubClass representationsForRelationshipsFromRepresentation:obj
-                           ofEntity:entityDescription
-                           fromResponse:nil] mutableCopy];
-
-                           [objectD addEntriesFromDictionary:[cdoSubClass attributesForRepresentation:obj
-                           ofEntity:entityDescription
-                           fromResponse:nil]];
-
-                           id     newObject  = [cdoSubClass entityFromDictionary:objectD];
-                           */
-
-                          NSMutableDictionary*  objMD   = [obj mutableCopy];
-                          objMD[@"_relationship"]       = key;
-
-                          id     newObject  = [[cdoSubClass entityFromDictionary:objMD] objectInCurrentContext];
-                          if (newObject)
-                          {
-                              NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[[relationship name] underscore] camelize]];
-                              SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
-                              
-                              if ([self respondsToSelector:addObjectSelector])
-                              {
-                                  NSInvocation*  inv = [NSInvocation invocationWithTarget:self
-                                                                                 selector:addObjectSelector];
-                                  [inv setArgument:&newObject atIndex:2];
-                                  [inv invoke];
-                              }
-                              else
-                              {
-                                  DLog(LL_Debug, LD_CoreData, @"No Selector Match: %@", NSStringFromSelector(addObjectSelector));
-                              }
-                          }
-                          else
-                          {
-                              DLog(LL_Debug, LD_CoreData, @"Sub-Object Creation Failed: %@", NSStringFromClass(cdoSubClass));
-                          }
+                          defaultValue   = kDNDefaultDate_NeverExpires;
                       }
-                  }];
-             }
-         }
-         else
-         {
-             //DLog(LL_Debug, LD_General, @"loadRelateToOne: key=%@", key);
-             if (dict[key] && ![dict[key] isKindOfClass:[NSNull class]])
-             {
-                 Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
-
-                 id objD    = dict[key];
-                 if ([objD isKindOfClass:[NSString class]])
-                 {
-                     objD   = @{ @"id" : objD };
-                 }
-
-                 NSMutableDictionary*  objMD   = [objD mutableCopy];
-                 objMD[@"_relationship"]       = key;
-
-                 id     existingObject  = [self valueForKey:key];
-                 id     newObject       = [[cdoSubClass entityFromDictionary:objMD] objectInCurrentContext];
-                 if (newObject)
-                 {
-                     BOOL   isEqual = NO;
-                     
-                     NSString*  equalityMethodName  = [NSString stringWithFormat:@"isEqualTo%@:", [relationship.destinationEntity name]];
-                     SEL        equalitySelector    = NSSelectorFromString(equalityMethodName);
-                     
-                     if ([existingObject respondsToSelector:equalitySelector])
-                     {
-                         NSInvocation*  inv = [NSInvocation invocationWithTarget:existingObject
-                                                                        selector:equalitySelector];
-                         [inv setArgument:&newObject atIndex:2];
-                         [inv invoke];
-                         [inv getReturnValue:&isEqual];
-                     }
-                     
-                     if (!isEqual)
-                     {
-                         [self setValue:newObject forKey:key];
-                     }
-                 }
-                 else
-                 {
-                     DLog(LL_Debug, LD_CoreData, @"Sub-Object Creation Failed: %@", NSStringFromClass(cdoSubClass));
-                 }
-             }
-         }
+                      [self updateDateFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                      break;
+                  }
+              }
+          }];
+         
+         NSDictionary*   relationships   = [self.entity relationshipsByName];
+         
+         [relationships enumerateKeysAndObjectsUsingBlock:^(id key, NSRelationshipDescription* relationship, BOOL* stop)
+          {
+              if (![key isKindOfClass:[NSString class]])
+              {
+                  DLog(LL_Debug, LD_General, @"loadRelate: NOTSTRING key=%@", key);
+                  return;
+              }
+              
+              if (exceptions && [exceptions containsObject:key])
+              {
+                  //DLog(LL_Debug, LD_General, @"loadRelate: SKIPPING key=%@", key);
+                  return;
+              }
+              
+              //DLog(LL_Debug, LD_General, @"entity=%@: key=%@", self.entity.name, key);
+              if ([relationship isToMany])
+              {
+                  //DLog(LL_Debug, LD_General, @"loadRelateToMany: key=%@", key);
+                  if (dict[key] && ![dict[key] isKindOfClass:[NSNull class]])
+                  {
+                      //if ([key isEqualToString:@"features"])
+                      //{
+                      //    DLog(LL_Debug, LD_General, @"entity=%@: key=%@", self.entity.name, key);
+                      //}
+                      
+                      id arrayValue  = dict[key];
+                      if (![arrayValue isKindOfClass:[NSArray class]])
+                      {
+                          arrayValue = nil;
+                      }
+                      [arrayValue enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL* stop)
+                       {
+                           if (obj && ![obj isEqual:[NSNull null]])
+                           {
+                               Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
+                               
+                               /*
+                                NSEntityDescription*   entityDescription   = [NSEntityDescription entityForName:[relationship.destinationEntity name]
+                                inManagedObjectContext:[cdoSubClass managedObjectContext]];
+                                
+                                NSMutableDictionary*   objectD = [[cdoSubClass representationsForRelationshipsFromRepresentation:obj
+                                ofEntity:entityDescription
+                                fromResponse:nil] mutableCopy];
+                                
+                                [objectD addEntriesFromDictionary:[cdoSubClass attributesForRepresentation:obj
+                                ofEntity:entityDescription
+                                fromResponse:nil]];
+                                
+                                id     newObject  = [cdoSubClass entityFromDictionary:objectD];
+                                */
+                               
+                               NSMutableDictionary*  objMD   = [obj mutableCopy];
+                               objMD[@"_relationship"]       = key;
+                               
+                               [[cdoSubClass entityModel] performBlockAndWait:
+                                ^(NSManagedObjectContext* context)
+                                {
+                                    id     newObject  = [cdoSubClass entityFromDictionary:objMD];
+                                    if (newObject)
+                                    {
+                                        NSString*  addObjectMethodName  = [NSString stringWithFormat:@"add%@Object:", [[[relationship name] underscore] camelize]];
+                                        SEL        addObjectSelector    = NSSelectorFromString(addObjectMethodName);
+                                        
+                                        if ([self respondsToSelector:addObjectSelector])
+                                        {
+                                            NSInvocation*  inv = [NSInvocation invocationWithTarget:self
+                                                                                           selector:addObjectSelector];
+                                            [inv setArgument:&newObject atIndex:2];
+                                            [inv invoke];
+                                        }
+                                        else
+                                        {
+                                            DLog(LL_Debug, LD_CoreData, @"No Selector Match: %@", NSStringFromSelector(addObjectSelector));
+                                        }
+                                        //DLog(LL_Debug, LD_CoreData, @"Trace Point [%@] sub=%@", NSStringFromClass([self class]), NSStringFromClass([newObject class]));
+                                    }
+                                    else
+                                    {
+                                        DLog(LL_Debug, LD_CoreData, @"Sub-Object Creation Failed: %@", NSStringFromClass(cdoSubClass));
+                                    }
+                                }];
+                           }
+                       }];
+                  }
+              }
+              else
+              {
+                  //DLog(LL_Debug, LD_General, @"loadRelateToOne: key=%@", key);
+                  if (dict[key] && ![dict[key] isKindOfClass:[NSNull class]])
+                  {
+                      Class  cdoSubClass = NSClassFromString([NSString stringWithFormat:@"CDO%@", [relationship.destinationEntity name]]);
+                      
+                      id objD    = dict[key];
+                      if ([objD isKindOfClass:[NSString class]])
+                      {
+                          objD   = @{ @"id" : objD };
+                      }
+                      
+                      NSMutableDictionary*  objMD   = [objD mutableCopy];
+                      objMD[@"_relationship"]       = key;
+                      
+                      [[cdoSubClass entityModel] performBlockAndWait:
+                       ^(NSManagedObjectContext* context)
+                       {
+                           id     existingObject  = [self valueForKey:key];
+                           id     newObject       = [cdoSubClass entityFromDictionary:objMD];
+                           if (newObject)
+                           {
+                               BOOL   isEqual = NO;
+                               
+                               NSString*  equalityMethodName  = [NSString stringWithFormat:@"isEqualTo%@:", [relationship.destinationEntity name]];
+                               SEL        equalitySelector    = NSSelectorFromString(equalityMethodName);
+                               
+                               //DLog(LL_Debug, LD_CoreData, @"Trace Point [%@] sub=%@", NSStringFromClass([self class]), NSStringFromClass([newObject class]));
+                               if ([existingObject respondsToSelector:equalitySelector])
+                               {
+                                   NSInvocation*  inv = [NSInvocation invocationWithTarget:existingObject
+                                                                                  selector:equalitySelector];
+                                   [inv setArgument:&newObject atIndex:2];
+                                   [inv invoke];
+                                   [inv getReturnValue:&isEqual];
+                               }
+                               
+                               if (!isEqual)
+                               {
+                                   [self setValue:newObject forKey:key];
+                               }
+                           }
+                           else
+                           {
+                               DLog(LL_Debug, LD_CoreData, @"Sub-Object Creation Failed: %@", NSStringFromClass(cdoSubClass));
+                           }
+                       }];
+                  }
+              }
+          }];
      }];
 }
 
@@ -772,7 +794,8 @@
         dict    = [newDict mutableCopy];
     }
 
-    [attributes enumerateKeysAndObjectsUsingBlock:^(id key, NSAttributeDescription* attribute, BOOL* stop)
+    [attributes enumerateKeysAndObjectsUsingBlock:
+     ^(id key, NSAttributeDescription* attribute, BOOL* stop)
      {
          if (![key isKindOfClass:[NSString class]])
          {
@@ -826,8 +849,11 @@
     id    added = [self valueForKey:addedKey];
     if (!added)
     {
-        addedFaked  = YES;
-        [self setValue:[NSDate date] forKey:addedKey];
+        if ([[attributes allKeys] containsObject:addedKey])
+        {
+            addedFaked  = YES;
+            [self setValue:[NSDate date] forKey:addedKey];
+        }
     }
 
     NSDictionary*   relationships   = [self.entity relationshipsByName];
@@ -905,10 +931,21 @@
 
 - (NSDictionary*)saveIDToDictionary
 {
-    NSError*   error;
-
-    [self.managedObjectContext obtainPermanentIDsForObjects:@[ self ] error:nil];
-
+    if ([self.objectID isTemporaryID])
+    {
+        [self.managedObjectContext performBlockAndWait:
+         ^()
+         {
+             NSError*   error;
+             
+             [self.managedObjectContext obtainPermanentIDsForObjects:@[ self ] error:&error];
+         }];
+    }
+    if ([self.objectID isTemporaryID])
+    {
+        DLog(LL_Debug, LD_General, @"STILL temporary!");
+    }
+    
     id  idValue = [self valueForKey:[[self class] idAttribute]];
     if (!idValue || [idValue isEqual:[NSNull null]])
     {
@@ -930,7 +967,8 @@
 
 - (void)deleteWithNoSave
 {
-    [self performBlock:^(NSManagedObjectContext* context)
+    [self performBlock:
+     ^(NSManagedObjectContext* context)
      {
          [context deleteObject:self];
      }];
@@ -939,7 +977,8 @@
 - (void)delete
 {
     [self deleteWithNoSave];
-    [self performBlock:^(NSManagedObjectContext* context)
+    [self performBlock:
+     ^(NSManagedObjectContext* context)
      {
          [context processPendingChanges];
      }];
@@ -952,11 +991,8 @@
 {
     __block NSEntityDescription*    retval;
 
-    //[self performBlockAndWait:^(NSManagedObjectContext* context)
-    // {
-         retval = [NSEntityDescription entityForName:[[self class] entityName]
-                              inManagedObjectContext:[[self class] managedObjectContext]];
-    // }];
+    retval = [NSEntityDescription entityForName:[[self class] entityName]
+                         inManagedObjectContext:[[self class] managedObjectContext]];
 
     return retval;
 }

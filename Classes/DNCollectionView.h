@@ -11,7 +11,15 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DNCollectionViewRecoveryProtocol;
+
 @interface DNCollectionView : UICollectionView
+
+@property (weak, nonatomic) id<DNCollectionViewRecoveryProtocol>    recovery;
+
+@property (nonatomic, assign, getter=isPaused) BOOL paused;
+
+@property (strong, nonatomic) NSString* name;
 
 - (void)beginUpdates;   // allow multiple insert/delete of rows and sections to be animated simultaneously. Nestable
 - (void)endUpdates;     // only call insert/delete/reload calls or change the editing state inside an update block.  otherwise things like row count, etc. may be invalid.
@@ -25,5 +33,12 @@
 - (void)deleteRowsAtIndexPaths:(NSArray*)indexPaths;
 - (void)reloadRowsAtIndexPaths:(NSArray*)indexPaths;
 - (void)moveRowAtIndexPath:(NSIndexPath*)indexPath toIndexPath:(NSIndexPath*)newIndexPath;
+
+@end
+
+@protocol DNCollectionViewRecoveryProtocol <NSObject>
+
+@required
+- (void)collectionView:(DNCollectionView*)collectionView fatalErrorRecovery:(NSException*)exception;
 
 @end

@@ -20,6 +20,8 @@
 
 typedef void(^DNModelCompletionHandlerBlock)();
 
+@class DNCollectionView;
+
 @interface DNModel : NSObject
 
 + (id)dataModel;
@@ -28,6 +30,8 @@ typedef void(^DNModelCompletionHandlerBlock)();
 + (NSString*)entityName;
 
 #pragma mark - AppDelegate access functions
+
++ (NSArray*)globalWatchesArray;
 
 + (NSManagedObjectContext*)managedObjectContext;
 + (void)saveContext;
@@ -77,6 +81,9 @@ typedef void(^DNModelCompletionHandlerBlock)();
 - (DNModelWatchObjects*)watchAll;
 - (DNModelWatchObjects*)watchAllOffset:(NSUInteger)offset
                                  count:(NSUInteger)count;
+- (DNModelWatchObjects*)watchAllWithCollectionView:(DNCollectionView*)collectionView
+                                            offset:(NSUInteger)offset
+                                             count:(NSUInteger)count;
 
 - (NSFetchRequest*)getAll_FetchRequestOffset:(NSUInteger)offset
                                        count:(NSUInteger)count;

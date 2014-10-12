@@ -15,15 +15,16 @@
 
 #import "DNUtilities.h"
 
-#define D2LogMarker nada
-//#define D2LogMarker NSLog
-
-void nada() {   }
+//#define D2LogMarker ;
+#define D2LogMarker NSLog
 
 @interface DNCollectionView ()
 {
-    NSMutableArray*         updateBlocks;
-    UICollectionViewCell*   currentCell;
+    NSMutableArray* updateBlocks;
+    
+    BOOL            shouldReloadCollectionView;
+    NSInteger       sectionCount;
+    NSMutableArray* objectCounts;
 }
 
 @end
@@ -32,124 +33,176 @@ void nada() {   }
 
 - (void)beginUpdates
 {
-    D2LogMarker(@"beginUpdates");
-    updateBlocks    = [NSMutableArray array];
-    currentCell     = [self.visibleCells firstObject];
+    //DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 1", self.name);
+    if (updateBlocks)
+    {
+        DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 1a *** REENTERED ***", self.name);
+    }
+    updateBlocks                = [NSMutableArray array];
+    shouldReloadCollectionView  = NO;
+    
+    objectCounts    = [NSMutableArray array];
+    sectionCount    = [self numberOfSections];
+    //DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 2 sectionCount=%d", self.name, sectionCount);
+    for (int section = 0; section < sectionCount; section++)
+    {
+        [objectCounts addObject:@([self numberOfItemsInSection:section])];
+        //DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 3 [section:%d] objectCount=%@", self.name, section, objectCounts[section]);
+    }
 }
 
 - (void)endUpdates
 {
-    D2LogMarker(@"endUpdates - 1");
-    //if (self.window == nil)
+    //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 1", self.name);
+    if (self.isPaused || (self.window == nil) || shouldReloadCollectionView)
     {
-        NSUInteger  sectionCount = [self numberOfSections];
-        if (sectionCount > 0)
-        {
-            [self numberOfItemsInSection:0];
-        }
+        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 1a", self.name);
+        [self reloadData];
+        
+        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 1b", self.name);
+        updateBlocks    = nil;
+        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 1c", self.name);
+        return;
     }
-    D2LogMarker(@"endUpdates - 2");
-    [self performBatchUpdates:
-     ^()
-     {
-         D2LogMarker(@"endUpdates - 3");
-         [updateBlocks enumerateObjectsUsingBlock:
-          ^(void(^updateBlock)(void), NSUInteger idx, BOOL* stop)
-          {
-              updateBlock();
-          }];
-         
-         D2LogMarker(@"endUpdates - 4");
-     }
-                   completion:
-     ^(BOOL finished)
-     {
-         D2LogMarker(@"endUpdates - 5");
-         if (currentCell)
-         {
-             NSIndexPath*   currentCellIndex    = [self indexPathForCell:currentCell];
-             if ([NSStringFromClass([currentCell class]) isEqualToString:@"DetailPeopleCell"])
-             {
-                 ///DLog(LL_Debug, LD_General, @"DetailPeopleCell.currentCellIndex=%@", currentCellIndex);
-                 //DLog(LL_Debug, LD_General, @"break");
-             }
+    
+    @try
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 2", self.name);
+        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 2a sectionCount=%d", self.name, [self numberOfSections]);
+        for (int section = 0; section < sectionCount; section++)
+        {
+            //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 2b [section:%d] objectCount=%@", self.name, section, @([self numberOfItemsInSection:section]));
+        }
 
-             /*
-             [self scrollToItemAtIndexPath:currentCellIndex
-                          atScrollPosition:UICollectionViewScrollPositionTop
-                                  animated:YES];
-             */
-             currentCell    = nil;
+        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 2c", self.name);
+        [self performBatchUpdates:
+         ^()
+         {
+             //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 3", self.name);
+             [updateBlocks enumerateObjectsUsingBlock:
+              ^(void(^updateBlock)(void), NSUInteger idx, BOOL* stop)
+              {
+                  updateBlock();
+              }];
+             
+             //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 4", self.name);
          }
-     }];
+                       completion:
+         ^(BOOL finished)
+         {
+             //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 5", self.name);
+             updateBlocks = nil;
+         }];
+
+        updateBlocks = nil;
+        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 6", self.name);
+    }
+    @catch (NSException* exception)
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 7", self.name);
+
+        DLog(LL_Error, LD_General, @"[%@] exception=%@", self.name, exception);
+        updateBlocks = nil;
+
+        if (self.recovery)
+        {
+            [self.recovery collectionView:self fatalErrorRecovery:exception];
+        }
+        
+        // DME-DEBUG
+        //[self reloadData];
+        //[self reloadSections:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(0, sectionCount)]];
+        //[self reloadItemsAtIndexPaths:[self indexPathsForVisibleItems]];
+        //[self.collectionViewLayout invalidateLayout];
+    }
 }
 
 - (void)insertSections:(NSIndexSet*)sections
 {
-    D2LogMarker(@"insertSections [%d]", [sections firstIndex]);
+    //DOLog(LL_Debug, LD_General, @"[%@] insertSections [%d]", self.name, [sections firstIndex]);
     [updateBlocks addObject:
      ^()
      {
-         D2LogMarker(@"insertSections:block [%d]", [sections firstIndex]);
+         //DOLog(LL_Debug, LD_General, @"[%@] insertSections:block [%d]", self.name, [sections firstIndex]);
          [super insertSections:sections];
      }];
 }
 
 - (void)deleteSections:(NSIndexSet*)sections
 {
-    D2LogMarker(@"deleteSections [%d]", [sections firstIndex]);
+    //DOLog(LL_Debug, LD_General, @"[%@] deleteSections [%d]", self.name, [sections firstIndex]);
     [updateBlocks addObject:
      ^()
      {
-         D2LogMarker(@"deleteSections:block [%d]", [sections firstIndex]);
+         //DOLog(LL_Debug, LD_General, @"[%@] deleteSections:block [%d]", self.name, [sections firstIndex]);
          [super deleteSections:sections];
      }];
 }
 
 - (void)reloadSections:(NSIndexSet*)sections
 {
-    D2LogMarker(@"reloadSections [%d]", [sections firstIndex]);
+    //DOLog(LL_Debug, LD_General, @"[%@] reloadSections [%d]", self.name, [sections firstIndex]);
     [updateBlocks addObject:
      ^()
      {
-         D2LogMarker(@"reloadSections:block [%d]", [sections firstIndex]);
+         //DOLog(LL_Debug, LD_General, @"[%@] reloadSections:block [%d]", self.name, [sections firstIndex]);
          [super reloadSections:sections];
      }];
 }
 
 - (void)moveSection:(NSInteger)section toSection:(NSInteger)newSection
 {
-    D2LogMarker(@"moveSection [%d]-[%d]", section, newSection);
+    //DOLog(LL_Debug, LD_General, @"[%@] moveSection [%d]-[%d]", self.name, section, newSection);
     [updateBlocks addObject:
      ^()
      {
-         D2LogMarker(@"moveSection:block [%d]-[%d]", section, newSection);
+         //DOLog(LL_Debug, LD_General, @"[%@] moveSection:block [%d]-[%d]", self.name, section, newSection);
          [super moveSection:section toSection:newSection];
      }];
 }
 
 - (void)insertRowsAtIndexPaths:(NSArray*)indexPaths
 {
+    if (sectionCount == 0)
+    {
+        shouldReloadCollectionView = YES;
+        return;
+    }
+
+    //NSIndexPath*    indexPath = [indexPaths firstObject];
+    //if ([objectCounts[indexPath.section] intValue] == 0)
+    //{
+    //    shouldReloadCollectionView = YES;
+    //    return;
+    //}
+
     NSArray*    indexPathsArray = [NSArray arrayWithArray:indexPaths];
     
-    D2LogMarker(@"insertRowsAtIndexPaths [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+    //DOLog(LL_Debug, LD_General, @"[%@] insertRowsAtIndexPaths (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
     [updateBlocks addObject:
      ^()
      {
-         D2LogMarker(@"insertRowsAtIndexPaths:block [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+         //DOLog(LL_Debug, LD_General, @"[%@] insertRowsAtIndexPaths:block (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
          [self insertItemsAtIndexPaths:indexPathsArray];
      }];
 }
 
 - (void)deleteRowsAtIndexPaths:(NSArray*)indexPaths
 {
+    NSIndexPath*    indexPath = [indexPaths firstObject];
+    if ([objectCounts[indexPath.section] intValue] == 1)
+    {
+        shouldReloadCollectionView = YES;
+        return;
+    }
+    
     NSArray*    indexPathsArray = [NSArray arrayWithArray:indexPaths];
     
-    D2LogMarker(@"deleteRowsAtIndexPaths [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+    //DOLog(LL_Debug, LD_General, @"[%@] deleteRowsAtIndexPaths (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
     [updateBlocks addObject:
      ^()
      {
-         D2LogMarker(@"deleteRowsAtIndexPaths:block [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+         //DOLog(LL_Debug, LD_General, @"[%@] deleteRowsAtIndexPaths:block (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
          [self deleteItemsAtIndexPaths:indexPathsArray];
      }];
 }
@@ -158,22 +211,22 @@ void nada() {   }
 {
     NSArray*    indexPathsArray = [NSArray arrayWithArray:indexPaths];
     
-    D2LogMarker(@"reloadRowsAtIndexPaths [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+    //DOLog(LL_Debug, LD_General, @"[%@] reloadRowsAtIndexPaths (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
     [updateBlocks addObject:
      ^()
      {
-         D2LogMarker(@"reloadRowsAtIndexPaths:block [%d:%d]", ((NSIndexPath*)indexPaths[0]).section, ((NSIndexPath*)indexPaths[0]).row);
+         //DOLog(LL_Debug, LD_General, @"[%@] reloadRowsAtIndexPaths:block (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
          [self reloadItemsAtIndexPaths:indexPathsArray];
      }];
 }
 
 - (void)moveRowAtIndexPath:(NSIndexPath*)indexPath toIndexPath:(NSIndexPath*)newIndexPath
 {
-    D2LogMarker(@"moveRowAtIndexPath [%d:%d]-[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+    //DOLog(LL_Debug, LD_General, @"[%@] moveRowAtIndexPath [%d:%d]-[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
     [updateBlocks addObject:
      ^()
      {
-         D2LogMarker(@"moveRowAtIndexPath:block [%d:%d]-[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+         //DOLog(LL_Debug, LD_General, @"[%@] moveRowAtIndexPath:block [%d:%d]-[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
          [self moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
      }];
 }

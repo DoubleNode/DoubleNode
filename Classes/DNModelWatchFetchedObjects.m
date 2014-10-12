@@ -24,9 +24,9 @@
     NSString*   sectionKeyPath;
 
     NSMutableArray* forcedSections;
+    
+    NSArray*    inProgressSections;
 }
-
-@property (nonatomic, retain) DNCollectionView*     collectionView;
 
 @end
 
@@ -96,6 +96,13 @@
         {
             self.collectionView.dataSource  = self;
         }
+        if (self.collectionView && !self.collectionView.name)
+        {
+            DLog(LL_Error, LD_CoreData, @"Invalid Collection Name");
+            DAssertIsMainThread
+        }
+        
+        DAssertIsMainThread
         
         [self performWithContext:[[model class] managedObjectContext]
                     blockAndWait:^(NSManagedObjectContext* context)
@@ -103,11 +110,13 @@
              NSAssert(context != nil, @"context is NIL");
              NSAssert(fetchRequest != nil, @"fetchRequest is NIL");
              
+             DAssertIsMainThread
+             
              fetchResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
                                                                           managedObjectContext:context
                                                                             sectionNameKeyPath:sectionKeyPath
                                                                                      cacheName:nil];    //NSStringFromClass([self class])];
-         }];
+        }];
         
         fetchResultsController.delegate = self;
     }
@@ -184,17 +193,23 @@
         return;
     }
 
+    if (self.collectionView)
+    {
+        [self.collectionView reloadData];
+    }
+
     [super startWatch];
 
+    //DOLog(LL_Debug, LD_General, @"[%@] startWatch - 1", self.name);
     [DNUtilities runOnBackgroundThread:
      ^()
      {
-         [self refreshWatch];
-         
          [self performWithContext:[fetchResultsController managedObjectContext]
                             block:
           ^(NSManagedObjectContext* context)
           {
+              [self refreshWatch];
+              
               NSArray*   sections    = [self sections];
               
               forcedSections    = [NSMutableArray array];
@@ -202,21 +217,27 @@
               [sections enumerateObjectsUsingBlock:
                ^(id<NSFetchedResultsSectionInfo> obj, NSUInteger sectionNdx, BOOL* stop)
                {
-                   [self executeWillChangeHandler:nil];
-                   
                    NSMutableArray*  forcedObjects   = [NSMutableArray array];
-                   
-                   DNModelWatchFetchedSection*  forcedSection   = [[DNModelWatchFetchedSection alloc] init];
-                   forcedSection.name               = obj.name;
-                   forcedSection.indexTitle         = obj.indexTitle;
-                   forcedSection.numberOfObjects    = obj.numberOfObjects;
-                   forcedSection.objects            = forcedObjects;
-                   
-                   [forcedSections addObject:forcedSection];
-                   
-                   [self executeDidChangeSectionInsertHandler:forcedSection atIndex:sectionNdx context:nil];
-                   
-                   [self executeDidChangeHandler:nil];
+
+                   [DNUtilities runOnMainThreadWithoutDeadlocking:
+                    ^()
+                    {
+                        //DOLog(LL_Debug, LD_General, @"[%@] startWatch - 2", self.name);
+                        [self executeWillChangeHandler:nil];
+                        
+                        DNModelWatchFetchedSection*  forcedSection   = [[DNModelWatchFetchedSection alloc] init];
+                        forcedSection.name               = obj.name;
+                        forcedSection.indexTitle         = obj.indexTitle;
+                        forcedSection.numberOfObjects    = obj.numberOfObjects;
+                        forcedSection.objects            = forcedObjects;
+                        
+                        [forcedSections addObject:forcedSection];
+                        
+                        [self executeDidChangeSectionInsertHandler:forcedSection atIndex:sectionNdx context:nil];
+                        
+                        [self executeDidChangeHandler:nil];
+                        //DOLog(LL_Debug, LD_General, @"[%@] startWatch - 3", self.name);
+                    }];
                    
                    NSMutableArray*    arrayOfArrays = [NSMutableArray array];
                    
@@ -238,38 +259,48 @@
                    [arrayOfArrays enumerateObjectsUsingBlock:
                     ^(NSArray* subObjects, NSUInteger idx, BOOL* stop)
                     {
-                        [self executeWillChangeHandler:nil];
-                        
-                        [forcedObjects addObjectsFromArray:subObjects];
-                        
-                        [subObjects enumerateObjectsUsingBlock:
-                         ^(id obj, NSUInteger idx2, BOOL* stop)
+                        //DOLog(LL_Debug, LD_General, @"[%@] startWatch - 4", self.name);
+                        [DNUtilities runOnMainThreadWithoutDeadlocking:
+                         ^()
                          {
-                             NSIndexPath*   indexPath   = [NSIndexPath indexPathForRow:objectNdx++ inSection:sectionNdx];
+                             [self executeWillChangeHandler:nil];
                              
-                             [self executeDidChangeObjectInsertHandler:obj atIndexPath:indexPath newIndexPath:indexPath context:nil];
+                             [forcedObjects addObjectsFromArray:subObjects];
+                             
+                             [subObjects enumerateObjectsUsingBlock:
+                              ^(id obj, NSUInteger idx2, BOOL* stop)
+                              {
+                                  NSIndexPath*   indexPath   = [NSIndexPath indexPathForRow:objectNdx++ inSection:sectionNdx];
+                                  
+                                  [self executeDidChangeObjectInsertHandler:obj atIndexPath:indexPath newIndexPath:indexPath context:nil];
+                              }];
+                             
+                             [self executeDidChangeHandler:nil];
+                             //DOLog(LL_Debug, LD_General, @"[%@] startWatch - 5", self.name);
                          }];
-                        
-                        [self executeDidChangeHandler:nil];
                     }];
                }];
          
               forcedSections    = nil;
+              
+              //DOLog(LL_Debug, LD_General, @"[%@] startWatch - 6", self.name);
           }];
      }];
 }
 
 - (void)cancelWatch
 {
+    DNCollectionView*   collectionView  = self.collectionView;
+
+    self.collectionView = nil;
+
     fetchRequest                    = nil;
     fetchResultsController.delegate = nil;
     fetchResultsController          = nil;
-    
-    if (self.collectionView)
+
+    if (collectionView)
     {
-        DNCollectionView*   collectionView  = self.collectionView;
-        
-        self.collectionView = nil;
+        DAssertIsMainThread
         
         if (collectionView.dataSource)
         {
@@ -287,16 +318,52 @@
     fetchResultsController.fetchRequest.resultType = NSManagedObjectResultType;
 
     [self performWithContext:[fetchResultsController managedObjectContext]
-                blockAndWait:
-     ^(NSManagedObjectContext* context)
+                       block:^(NSManagedObjectContext* context)
      {
          NSError*    error = nil;
-         
+
          BOOL   result = [fetchResultsController performFetch:&error];
          if (result == NO)
          {
-             DLog(LL_Error, LD_CoreData, @"error=%@", [error localizedDescription]);
+             DLog(LL_Error, LD_CoreData, @"[%@] error=%@", self.name, [error localizedDescription]);
          }
+     }];
+}
+
+- (void)pauseWatch
+{
+    if ([self isPaused])    {   return; }
+    
+    [super pauseWatch];
+    
+    [DNUtilities runOnMainThreadWithoutDeadlocking:
+     ^()
+     {
+         fetchResultsController.delegate = nil;
+         
+         if (self.collectionView)
+         {
+             self.collectionView.paused = YES;
+         }
+     }];
+}
+
+- (void)resumeWatch
+{
+    if (![self isPaused])   {   return; }
+    
+    [super resumeWatch];
+    
+    [DNUtilities runOnMainThreadWithoutDeadlocking:
+     ^()
+     {
+         if (self.collectionView)
+         {
+             [self.collectionView reloadData];
+             self.collectionView.paused = NO;
+         }
+         
+         fetchResultsController.delegate = self;
      }];
 }
 
@@ -305,12 +372,19 @@
 - (NSInteger)collectionView:(UICollectionView*)collectionView
      numberOfItemsInSection:(NSInteger)section
 {
+    NSInteger   numberOfItems;
+    
     if (self.numberOfItemsInSectionHandler)
     {
-        return self.numberOfItemsInSectionHandler(self, collectionView, section);
+        numberOfItems = self.numberOfItemsInSectionHandler(self, collectionView, section);
+    }
+    else
+    {
+        numberOfItems = [self numberOfObjectsInSection:section];
     }
     
-    return [self numberOfObjectsInSection:section];
+    //DOLog(LL_Debug, LD_General, @"[%@] numberOfItemsInSection: %d", self.name, numberOfItems);
+    return numberOfItems;
 }
 
 - (UICollectionViewCell*)collectionView:(UICollectionView*)collectionView
@@ -322,12 +396,19 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView*)collectionView
 {
+    NSInteger   numberOfSections;
+
     if (self.numberOfSectionsInCollectionViewHandler)
     {
-        return self.numberOfSectionsInCollectionViewHandler(self, collectionView);
+        numberOfSections = self.numberOfSectionsInCollectionViewHandler(self, collectionView);
+    }
+    else
+    {
+        numberOfSections = [self numberOfSections];
     }
     
-    return [self numberOfSections];
+    //DOLog(LL_Debug, LD_General, @"[%@] numberOfSections: %d", self.name, numberOfSections);
+    return numberOfSections;
 }
 
 - (UICollectionReusableView*)collectionView:(UICollectionView*)collectionView
@@ -342,13 +423,13 @@
 
 - (void)controllerWillChangeContent:(NSFetchedResultsController*)controller
 {
-    //NSLog(@"controllerWillChangeContent:");
+    //DOLog(LL_Debug, LD_General, @"[%@] controllerWillChangeContent:", self.name);
     [self executeWillChangeHandler:nil];
 }
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController*)controller
 {
-    //NSLog(@"controllerDidChangeContent:");
+    //DOLog(LL_Debug, LD_General, @"[%@] controllerDidChangeContent:", self.name);
     [self executeDidChangeHandler:nil];
 }
 
@@ -357,20 +438,20 @@
            atIndex:(NSUInteger)sectionIndex
      forChangeType:(NSFetchedResultsChangeType)type
 {
-    //NSLog(@"controller:didChangeSection:atIndex:%d forChangeType:", sectionIndex);
+    //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeSection:atIndex:%d forChangeType:", self.name, sectionIndex);
     
     switch (type)
     {
         case NSFetchedResultsChangeInsert:
         {
-            //NSLog(@"controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeInsert", sectionIndex);
+            //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeInsert", self.name, sectionIndex);
             [self executeDidChangeSectionInsertHandler:sectionInfo atIndex:sectionIndex context:nil];
             break;
         }
 
         case NSFetchedResultsChangeDelete:
         {
-            //NSLog(@"controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeDelete", sectionIndex);
+            //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeDelete", self.name, sectionIndex);
             [self executeDidChangeSectionDeleteHandler:sectionInfo atIndex:sectionIndex context:nil];
             break;
         }
@@ -383,27 +464,27 @@
      forChangeType:(NSFetchedResultsChangeType)type
       newIndexPath:(NSIndexPath *)newIndexPath
 {
-    //NSLog(@"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+    //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:newIndexPath:[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
     
     switch (type)
     {
         case NSFetchedResultsChangeInsert:
         {
-            //NSLog(@"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeInsert newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+            //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeInsert newIndexPath:[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
             [self executeDidChangeObjectInsertHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath context:nil];
             break;
         }
             
         case NSFetchedResultsChangeDelete:
         {
-            //NSLog(@"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeDelete newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+            //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeDelete newIndexPath:[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
             [self executeDidChangeObjectDeleteHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath context:nil];
             break;
         }
 
         case NSFetchedResultsChangeUpdate:
         {
-            //NSLog(@"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeUpdate newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+            //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeUpdate newIndexPath:[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
             if ([self executeShouldChangeObjectUpdateHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath context:nil])
             {
                 [self executeDidChangeObjectUpdateHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath context:nil];
@@ -413,7 +494,7 @@
 
         case NSFetchedResultsChangeMove:
         {
-            //NSLog(@"controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeMove newIndexPath:[%d:%d]", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
+            //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:NSFetchedResultsChangeMove newIndexPath:[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
             [self executeDidChangeObjectMoveHandler:anObject atIndexPath:indexPath newIndexPath:newIndexPath context:nil];
             break;
         }
@@ -424,7 +505,14 @@
 
 - (void)executeWillChangeHandler:(NSDictionary*)context
 {
-    //NSLog(@"DNModelWatchFetchedObjects:executeWillChangeHandler [objects count]=%d", [[self objects] count]);
+    DAssertIsMainThread
+    
+    //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeWillChangeHandler [sections count]=%d [objects count]=%d", self.name, [[self sections] count], [[self objects] count]);
+    for (int section = 0; section < [[self sections] count]; section++)
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeWillChangeHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
+    }
+
     if (self.collectionView)
     {
         [self.collectionView beginUpdates];
@@ -435,7 +523,14 @@
 
 - (void)executeDidChangeHandler:(NSDictionary*)context
 {
-    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeHandler [objects count]=%d", [[self objects] count]);
+    DAssertIsMainThread
+
+    //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeHandler [sections count]=%d [objects count]=%d", self.name, [[self sections] count], [[self objects] count]);
+    for (int section = 0; section < [[self sections] count]; section++)
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
+    }
+
     if (self.collectionView)
     {
         [self.collectionView endUpdates];
@@ -448,7 +543,14 @@
                                      atIndex:(NSUInteger)sectionIndex
                                      context:(NSDictionary*)context
 {
-    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeSectionInsertHandler:[%d] [objects[%d] count]=%d", sectionIndex, sectionIndex, [[self objectsForSection:sectionIndex] count]);
+    DAssertIsMainThread
+    
+    //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeSectionInsertHandler:[%d] [objects[%d] count]=%d", self.name, sectionIndex, sectionIndex, [[self objectsForSection:sectionIndex] count]);
+    for (int section = 0; section < [[self sections] count]; section++)
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeSectionInsertHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
+    }
+    
     if (self.collectionView)
     {
         [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
@@ -463,7 +565,14 @@
                                      atIndex:(NSUInteger)sectionIndex
                                      context:(NSDictionary*)context
 {
-    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeSectionDeleteHandler:[%d] [objects[%d] count]=%d", sectionIndex, sectionIndex, [[self objectsForSection:sectionIndex] count]);
+    DAssertIsMainThread
+    
+    //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeSectionDeleteHandler:[%d] [objects[%d] count]=%d", self.name, sectionIndex, sectionIndex, [[self objectsForSection:sectionIndex] count]);
+    for (int section = 0; section < [[self sections] count]; section++)
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeSectionDeleteHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
+    }
+    
     if (self.collectionView)
     {
         [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
@@ -479,7 +588,14 @@
                                newIndexPath:(NSIndexPath*)newIndexPath
                                     context:(NSDictionary*)context
 {
-    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeObjectInsertHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, newIndexPath.section, [[self objectsForSection:newIndexPath.section] count]);
+    DAssertIsMainThread
+    
+    //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectInsertHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, newIndexPath.section, [[self objectsForSection:newIndexPath.section] count]);
+    for (int section = 0; section < [[self sections] count]; section++)
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectInsertHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
+    }
+    
     if (self.collectionView)
     {
         [self.collectionView insertRowsAtIndexPaths:@[ newIndexPath ]];
@@ -496,7 +612,14 @@
                                newIndexPath:(NSIndexPath*)newIndexPath
                                     context:(NSDictionary*)context
 {
-    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeObjectDeleteHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, indexPath.section, [[self objectsForSection:indexPath.section] count]);
+    DAssertIsMainThread
+    
+    //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectDeleteHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, indexPath.section, [[self objectsForSection:indexPath.section] count]);
+    for (int section = 0; section < [[self sections] count]; section++)
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectDeleteHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
+    }
+    
     if (self.collectionView)
     {
         [self.collectionView deleteRowsAtIndexPaths:@[ indexPath ]];
@@ -513,7 +636,14 @@
                                newIndexPath:(NSIndexPath*)newIndexPath
                                     context:(NSDictionary*)context
 {
-    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeObjectUpdateHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, indexPath.section, [[self objectsForSection:indexPath.section] count]);
+    DAssertIsMainThread
+    
+    //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectUpdateHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, indexPath.section, [[self objectsForSection:indexPath.section] count]);
+    for (int section = 0; section < [[self sections] count]; section++)
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectUpdateHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
+    }
+    
     if (self.collectionView)
     {
         [self.collectionView reloadRowsAtIndexPaths:@[ indexPath ]];
@@ -530,7 +660,14 @@
                              newIndexPath:(NSIndexPath*)newIndexPath
                                   context:(NSDictionary*)context
 {
-    //NSLog(@"DNModelWatchFetchedObjects:executeDidChangeObjectMoveHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, indexPath.section, [[self objectsForSection:indexPath.section] count]);
+    DAssertIsMainThread
+    
+    //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectMoveHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, indexPath.section, [[self objectsForSection:indexPath.section] count]);
+    for (int section = 0; section < [[self sections] count]; section++)
+    {
+        //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectMoveHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
+    }
+    
     if (self.collectionView)
     {
         [self.collectionView moveRowAtIndexPath:indexPath
@@ -548,7 +685,9 @@
                                   newIndexPath:(NSIndexPath*)newIndexPath
                                        context:(NSDictionary*)context
 {
-    //NSLog(@"DNModelWatchFetchedObjects:executeShouldChangeObjectUpdateHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, indexPath.section, [[self objectsForSection:indexPath.section] count]);
+    DAssertIsMainThread
+    
+    //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeShouldChangeObjectUpdateHandler:[%d:%d] newIndexPath:[%d:%d] [objects[%d] count]=%d", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row, indexPath.section, [[self objectsForSection:indexPath.section] count]);
     return [super executeShouldChangeObjectUpdateHandler:object
                                              atIndexPath:indexPath
                                             newIndexPath:newIndexPath

@@ -311,6 +311,23 @@
     block();
 }
 
++ (void)runOnMainThreadAsynchronouslyWithoutDeadlocking:(void (^)())block
+{
+    if ([NSThread isMainThread])
+    {
+        [DNUtilities runOnMainThreadAfterDelay:0.01f
+                                         block:
+         ^()
+         {
+             block();
+         }];
+    }
+    else
+    {
+        dispatch_async(dispatch_get_main_queue(), block);
+    }
+}
+
 + (void)runOnMainThreadWithoutDeadlocking:(void (^)())block
 {
     if ([NSThread isMainThread])
@@ -1072,7 +1089,7 @@ void DNLogMessageF(const char *filename, int lineNumber, const char *functionNam
         va_start(args, format);
 
         NSString*   formattedStr = [[NSString alloc] initWithFormat:format arguments:args];
-        NSLog(@"{%@} [%@:%d] %@", domain, [[NSString stringWithUTF8String:filename] lastPathComponent], lineNumber, formattedStr);
+        NSLog(@"[%@] {%@} [%@:%d] %@", ([NSThread isMainThread] ? @"MT" : @"BT"), domain, [[NSString stringWithUTF8String:filename] lastPathComponent], lineNumber, formattedStr);
         
         va_end(args);
     }

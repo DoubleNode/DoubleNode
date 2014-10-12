@@ -52,11 +52,14 @@
 + (NSAttributedString*)attributedStringWithTextParams:(NSDictionary*)textParams
                                               andHTML:(NSString *)HTML
 {
-    NSDictionary*   importParams = @{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType };
+    NSDictionary*   importParams = @{
+                                     NSDocumentTypeDocumentAttribute:      NSHTMLTextDocumentType,
+                                     NSCharacterEncodingDocumentAttribute: [NSNumber numberWithInt:NSUTF8StringEncoding]
+                                     };
 
     NSError*    error           = nil;
     NSString*   formatString    = [[self _cssStringFromAttributedStringAttributes:textParams] stringByAppendingFormat:@"%@</body>", HTML];
-    NSData*     stringData      = [formatString dataUsingEncoding:NSUnicodeStringEncoding] ;
+    NSData*     stringData      = [formatString dataUsingEncoding:NSUTF8StringEncoding];    // NSUnicodeStringEncoding];
 
     NSAttributedString* attributedString = [[NSAttributedString alloc] initWithData:stringData options:importParams documentAttributes:NULL error:&error];
     if (error)

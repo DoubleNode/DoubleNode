@@ -30,6 +30,10 @@
 
 @required
 
+- (NSString*)buildString;
+- (NSString*)versionString;
+- (NSString*)bundleName;
+
 /**
  *  Returns the rootViewController.
  *

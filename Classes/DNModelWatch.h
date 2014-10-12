@@ -18,12 +18,19 @@
 
 @interface DNModelWatch : NSObject
 
+@property (strong, nonatomic) NSString* name;
+
+@property (nonatomic, assign, getter=isPaused) BOOL paused;
+
 - (id)initWithModel:(DNModel*)model;
 
 - (void)startWatch;
 - (BOOL)checkWatch;
 - (void)cancelWatch;
 - (void)refreshWatch;
+
+- (void)pauseWatch;
+- (void)resumeWatch;
 
 - (void)executeWillChangeHandler:(NSDictionary*)context;
 - (void)executeDidChangeHandler:(NSDictionary*)context;
