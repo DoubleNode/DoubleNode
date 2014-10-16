@@ -974,7 +974,10 @@
 
     [[DNUtilities appDelegate] setNetworkActivityIndicatorVisible:YES];
 
-    [NSURLConnection sendAsynchronousRequest:finalRequest queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error)
+    [NSURLConnection sendAsynchronousRequest:finalRequest
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:
+     ^(NSURLResponse* response, NSData* data, NSError* error)
      {
          [DNUtilities runOnBackgroundThread:^
          {

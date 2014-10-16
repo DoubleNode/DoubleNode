@@ -67,7 +67,12 @@
 
 - (NSString*)fullPathOfPage:(DNCommunicationPageDetails*)pageDetails
 {
-    return [NSString stringWithFormat:@"%@?%@%@", self.path, self.paramString, [pageDetails paramString]];
+    NSMutableCharacterSet*  allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+    [allowedCharacterSet removeCharactersInString:@"+"];
+
+    NSString*   encodedParamString  = [self.paramString stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+    
+    return [NSString stringWithFormat:@"%@?%@%@", self.path, encodedParamString, [pageDetails paramString]];
 }
 
 - (NSString*)pagingStringOfSize:(NSUInteger)pageSize

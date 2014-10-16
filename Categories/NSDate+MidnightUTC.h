@@ -20,4 +20,11 @@
  */
 - (NSDate*)midnightUTC;
 
+/**
+ *  Creates and returns a new NSDate object initialized at midnight (current timezone) on the source date.
+ *
+ *  @return A new NSDate object, configured with midnight (current timezone) of the source date.
+ */
+- (NSDate*)midnight;
+
 @end
