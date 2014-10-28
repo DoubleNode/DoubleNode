@@ -102,6 +102,12 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (NSString*)appendNibSuffix:(NSString*)nibNameOrNil withDefaultNib:(NSString*)defaultNib;
 + (NSString*)deviceImageName:(NSString*)name;
 
++ (void)registerCellNib:(NSString*)nibName withCollectionView:(UICollectionView*)collectionView;
+
++ (UICollectionViewCell*)registerCellNib:(NSString*)nibName
+                      withCollectionView:(UICollectionView*)collectionView
+                          withSizingCell:(BOOL)sizingCellFlag;
+
 + (void)runOnBackgroundThreadAfterDelay:(CGFloat)delay
                                   block:(void (^)())block;
 

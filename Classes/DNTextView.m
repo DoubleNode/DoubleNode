@@ -70,6 +70,13 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
+- (void)setText:(NSString *)text
+{
+    [super setText:text];
+    
+    [self textDidChange];
+}
+
 - (void)setPlaceholder:(NSString*)placeholder
 {
     if (![_placeholder isEqualToString:placeholder])
