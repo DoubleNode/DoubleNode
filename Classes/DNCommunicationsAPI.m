@@ -45,6 +45,40 @@
     return sharedManager;
 }
 
++ (void)clearCache
+{
+    NSMutableArray* settingsToRemove    = [NSMutableArray array];
+    
+    NSDictionary*   settings = [[NSUserDefaults standardUserDefaults] dictionaryRepresentation];
+    [settings enumerateKeysAndObjectsUsingBlock:
+     ^(id key, id obj, BOOL* stop)
+     {
+         if ([key isKindOfClass:[NSString class]])
+         {
+             if ([key length] > 5)
+             {
+                 if ([[key substringToIndex:5] isEqualToString:@"[API]"])
+                 {
+                     [settingsToRemove addObject:key];
+                 }
+             }
+         }
+     }];
+
+    [DNUtilities runOnBackgroundThread:
+     ^()
+     {
+         [settingsToRemove enumerateObjectsUsingBlock:
+          ^(NSString* key, NSUInteger idx, BOOL* stop)
+          {
+              //DLog(LL_Debug, LD_General, @"Clear Cache Key=%@", key);
+              [[NSUserDefaults standardUserDefaults] removeObjectForKey:key];
+          }];
+         
+         [[NSUserDefaults standardUserDefaults] synchronize];
+     }];
+}
+
 - (id)init
 {
     self = [super init];

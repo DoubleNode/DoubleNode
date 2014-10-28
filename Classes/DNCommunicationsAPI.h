@@ -34,6 +34,7 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 @interface DNCommunicationsAPI : NSObject
 
 + (id)manager;
++ (void)clearCache;
 
 - (id)init;
 
