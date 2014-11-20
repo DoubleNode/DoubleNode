@@ -100,12 +100,14 @@
 }
 
 - (NSURLRequest*)addAuthorizationHeader:(NSURLRequest*)request
+                            commDetails:(DNCommunicationDetails*)commDetails
 {
     return request;
 }
 
-- (void)reauthorizeWithSuccess:(void (^)(void))success
-                       failure:(void (^)(void))failure
+- (void)reauthorizeWithCommDetails:(DNCommunicationDetails*)commDetails
+                           success:(void (^)(void))success
+                           failure:(void (^)(void))failure
 {
 }
 
@@ -818,11 +820,12 @@
         case 401:  // bad auth_token
         {
             // Unauthorized. Try authenticating and retrying.
-            [self reauthorizeWithSuccess:^
+            [self reauthorizeWithCommDetails:commDetails
+                                     success:^
              {
                  retryHandler(commDetails, pageDetails);
              }
-                                 failure:^
+                                     failure:^
              {
                  errorHandler(commDetails, pageDetails, statusCode, error, [self retryRecommendation:commDetails.apikey]);
              }];
@@ -1002,7 +1005,7 @@
         return;
     }
 
-    NSURLRequest*   finalRequest    = [self addAuthorizationHeader:request];
+    NSURLRequest*   finalRequest    = [self addAuthorizationHeader:request commDetails:commDetails];
 
     //DLog(LL_Debug, LD_API, @"headers=%@", [finalRequest allHTTPHeaderFields]);
 

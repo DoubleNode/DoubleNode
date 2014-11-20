@@ -38,10 +38,12 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 
 - (id)init;
 
-- (NSURLRequest*)addAuthorizationHeader:(NSURLRequest*)request;
+- (NSURLRequest*)addAuthorizationHeader:(NSURLRequest*)request
+                            commDetails:(DNCommunicationDetails*)commDetails;
 
-- (void)reauthorizeWithSuccess:(void (^)(void))success
-                       failure:(void (^)(void))failure;
+- (void)reauthorizeWithCommDetails:(DNCommunicationDetails*)commDetails
+                           success:(void (^)(void))success
+                           failure:(void (^)(void))failure;
 
 - (NSString*)cacheKey:(DNCommunicationDetails*)commDetails
       withPageDetails:(DNCommunicationPageDetails*)pageDetails;

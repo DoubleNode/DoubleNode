@@ -88,7 +88,7 @@
 
     NSUInteger  normalizedCount = (self.count == 0) ? 0 : (self.count - 1);
     NSUInteger  firstPage       = (self.offset / pageSize) + 1;
-    NSUInteger  lastPage        = firstPage + (normalizedCount / pageSize);
+    NSUInteger  lastPage        = firstPage + ((normalizedCount + self.offset) / pageSize);
     for (NSUInteger page = firstPage; page <= lastPage; page++)
     {
         DNCommunicationPageDetails* pageDetails = [DNCommunicationPageDetails pageDetailsOfSize:pageSize andPage:page];

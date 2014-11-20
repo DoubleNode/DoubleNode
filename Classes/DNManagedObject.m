@@ -851,8 +851,15 @@
     {
         if ([[attributes allKeys] containsObject:addedKey])
         {
-            addedFaked  = YES;
-            [self setValue:[NSDate date] forKey:addedKey];
+            @try
+            {
+                [self setValue:[NSDate date] forKey:addedKey];
+                addedFaked  = YES;
+            }
+            @catch (NSException *exception)
+            {
+                // TODO: respond to CoreData fault
+            }
         }
     }
 
