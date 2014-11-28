@@ -9,6 +9,8 @@
 //  All rights reserved.
 //
 
+#import <AvailabilityMacros.h>
+
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
@@ -46,8 +48,18 @@
 - (NSManagedObjectContext*)createNewManagedObjectContext;
 - (NSManagedObjectContext*)concurrentObjectContext;
 
-- (void)createContextForCurrentThreadPerformBlock:(BOOL (^)(NSManagedObjectContext* context))block;
-- (void)createContextForCurrentThreadPerformBlockAndWait:(BOOL (^)(NSManagedObjectContext* context))block;
+// Method deprecated - use new startTransactionPerformBlock: method
+- (void)createContextForCurrentThreadPerformBlock:(BOOL (^)(NSManagedObjectContext* context))block DEPRECATED_ATTRIBUTE;
+
+// Method deprecated - use new startTransactionPerformBlockAndWait: method
+- (void)createContextForCurrentThreadPerformBlockAndWait:(BOOL (^)(NSManagedObjectContext* context))block DEPRECATED_ATTRIBUTE;
+
+- (NSManagedObjectContext*)startTransaction;
+- (void)cancelTransaction:(NSManagedObjectContext*)context;
+- (void)saveTransaction:(NSManagedObjectContext*)context;
+
+- (void)startTransactionPerformBlockAndWait:(BOOL (^)(NSManagedObjectContext* context))block;
+- (void)startTransactionPerformBlock:(BOOL (^)(NSManagedObjectContext* context))block;
 
 - (NSManagedObjectContext*)createContextForCurrentThread;
 - (void)assignContextToCurrentThread:(NSManagedObjectContext*)context;

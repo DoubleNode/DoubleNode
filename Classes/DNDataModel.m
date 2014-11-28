@@ -248,82 +248,119 @@
 
 #pragma mark - Multi-Threaded support
 
+// Method deprecated - use new startTransactionPerformBlock: method
 - (void)createContextForCurrentThreadPerformBlock:(BOOL (^)(NSManagedObjectContext* context))block
 {
-    NSManagedObjectContext* tempContext = [self createContextForCurrentThread];
-    [tempContext performBlock:^
-     {
-         BOOL   save;
-         
-         //@autoreleasepool
-         {
-             save = block(tempContext);
-         }
-         if (!save)
-         {
-             [tempContext reset];
-         }
-
-         [self saveAndRemoveContextFromCurrentThread:tempContext];
-     }];
+    [self startTransactionPerformBlock:block];
 }
- 
+
+// Method deprecated - use new startTransactionPerformBlockAndWait: method
 - (void)createContextForCurrentThreadPerformBlockAndWait:(BOOL (^)(NSManagedObjectContext* context))block
 {
-    NSManagedObjectContext* tempContext;
+    [self startTransactionPerformBlockAndWait:block];
+}
 
-    if ([NSThread isMainThread])
+- (NSManagedObjectContext*)startTransaction
+{
+    // DME-DEBUG Problem with MainThread -- return [self concurrentObjectContext];
+    return [self createContextForCurrentThread];
+}
+
+- (void)cancelTransaction:(NSManagedObjectContext*)context
+{
+    if (!context)
     {
-        tempContext = [self mainObjectContext];
-    }
-    else
-    {
-        tempContext = [self createContextForCurrentThread];
+        return;
     }
 
-    [tempContext performBlockAndWait:
+    [context reset];
+    
+    if (![NSThread isMainThread])
+    {
+        [self removeContextFromCurrentThread:context];
+    }
+}
+
+- (void)saveTransaction:(NSManagedObjectContext*)context
+{
+    if (!context)
+    {
+        return;
+    }
+    
+    [context save:NULL];
+    
+    if (![NSThread isMainThread])
+    {
+        [self removeContextFromCurrentThread:context];
+    }
+}
+
+- (void)startTransactionPerformBlockAndWait:(BOOL (^)(NSManagedObjectContext* context))block
+{
+    NSManagedObjectContext* context = [self startTransaction];
+
+    [context performBlockAndWait:
      ^()
      {
-         if ([NSThread isMainThread])
-         {
-             [tempContext save:NULL];
-         }
-
          BOOL   save;
          
          //@autoreleasepool
          {
-             save = block(tempContext);
+             save = block(context);
          }
          if (!save)
          {
-             [tempContext reset];
-         }
-
-         if ([NSThread isMainThread])
-         {
-             if (save)
-             {
-                 [tempContext save:NULL];
-             }
+             [self cancelTransaction:context];
          }
          else
          {
-             if (save)
-             {
-                 [self saveAndRemoveContextFromCurrentThread:tempContext];
-             }
-             else
-             {
-                 [self removeContextFromCurrentThread:tempContext];
-             }
+             [self saveTransaction:context];
+         }
+     }];
+}
+
+- (void)startTransactionPerformBlock:(BOOL (^)(NSManagedObjectContext* context))block
+{
+    NSManagedObjectContext* context = [self startTransaction];
+    
+    [context performBlock:
+     ^()
+     {
+         BOOL   save;
+         
+         //@autoreleasepool
+         {
+             save = block(context);
+         }
+         if (!save)
+         {
+             [self cancelTransaction:context];
+         }
+         else
+         {
+             [self saveTransaction:context];
          }
      }];
 }
 
 - (NSManagedObjectContext*)createContextForCurrentThread
 {
-    NSManagedObjectContext* tempContext = [self concurrentObjectContext];
+    NSManagedObjectContext* tempContext;
+
+    if ([NSThread isMainThread])
+    {
+        tempContext = [self mainObjectContext];
+        [tempContext performBlockAndWait:
+         ^()
+         {
+             [tempContext save:NULL];
+         }];
+
+        return tempContext;
+    }
+
+    tempContext = [self concurrentObjectContext];
 
     [self assignContextToCurrentThread:tempContext];
 
