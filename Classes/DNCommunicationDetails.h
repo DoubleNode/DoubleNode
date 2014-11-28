@@ -38,7 +38,7 @@ typedef NS_ENUM(NSUInteger, DNCommunicationDetailsContentType)
 - (NSString*)path;
 - (NSURL*)URL;
 
-- (NSString*)paramString;
+- (NSString*)paramStringWithAllowedCharacterSet:(NSCharacterSet*)allowedCharacterSet;
 
 - (NSString*)fullPathOfPage:(DNCommunicationPageDetails*)pageDetails;
 - (NSString*)pagingStringOfSize:(NSUInteger)pageSize

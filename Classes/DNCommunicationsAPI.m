@@ -93,7 +93,7 @@
         plistDictionary = [[NSDictionary alloc] initWithContentsOfFile:API_Path];
 
         allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
-        [allowedCharacterSet removeCharactersInString:@"+"];
+        [allowedCharacterSet removeCharactersInString:@"+&"];
     }
     
     return self;
@@ -368,8 +368,8 @@
         case DNCommunicationDetailsContentTypeFormUrlEncoded:
         {
             bodyContentType = @"application/x-www-form-urlencoded";
-            parameterBody   = [[commDetails paramString] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
-            DLog(LL_Debug, LD_API, @"encodedParamString=%@", parameterBody);
+            parameterBody   = [commDetails paramStringWithAllowedCharacterSet:allowedCharacterSet];
+            //DLog(LL_Debug, LD_API, @"encodedParamString=%@", parameterBody);
             break;
         }
 
@@ -497,12 +497,20 @@
      }];
 
     [commDetails.files enumerateKeysAndObjectsUsingBlock:
-     ^(NSString* key, UIImage* image, BOOL* stop)
+     ^(NSString* key, id filedata, BOOL* stop)
     {
-        // add image data
-        NSData* imageData   = UIImageJPEGRepresentation(image, 1.0f);
-        //NSData* imageData   = UIImagePNGRepresentation(image);
-        if (imageData)
+        NSData* data = filedata;
+        
+        if ([filedata isKindOfClass:[UIImage class]])
+        {
+            UIImage*    image   = filedata;
+            
+            // add image data
+            data = UIImageJPEGRepresentation(image, 1.0f);
+            //NSData* imageData   = UIImagePNGRepresentation(image);
+        }
+        
+        if (data)
         {
             {
                 NSString*  newStr  = [NSString stringWithFormat:@"--%@\r\n", boundary];
@@ -523,8 +531,8 @@
             }
 
             {
-                [body appendData:imageData];
-                [bodyStr appendString:[[NSString alloc] initWithData:imageData encoding:NSASCIIStringEncoding]];
+                [body appendData:data];
+                [bodyStr appendString:[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]];
             }
 
             {
@@ -576,7 +584,7 @@
         case DNCommunicationDetailsContentTypeFormUrlEncoded:
         {
             bodyContentType = @"application/x-www-form-urlencoded";
-            parameterBody   = [[commDetails paramString] stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+            parameterBody   = [commDetails paramStringWithAllowedCharacterSet:allowedCharacterSet];
             DLog(LL_Debug, LD_API, @"encodedParamString=%@", parameterBody);
             break;
         }

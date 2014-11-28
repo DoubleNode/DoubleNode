@@ -208,6 +208,34 @@
     return retval;
 }
 
++ (void)registerCellNib:(NSString*)nibName
+forSupplementaryViewOfKind:(NSString*)kind
+     withCollectionView:(UICollectionView*)collectionView
+{
+    [self registerCellNib:nibName forSupplementaryViewOfKind:kind withCollectionView:collectionView withSizingCell:NO];
+}
+
++ (UICollectionViewCell*)registerCellNib:(NSString*)nibName
+              forSupplementaryViewOfKind:(NSString*)kind
+                      withCollectionView:(UICollectionView*)collectionView
+                          withSizingCell:(BOOL)sizingCellFlag
+{
+    NSString*   cellNibName = [self appendNibSuffix:nibName];
+    UINib*      cellNib     = [UINib nibWithNibName:cellNibName bundle:nil];
+    [collectionView registerNib:cellNib
+     forSupplementaryViewOfKind:kind
+            withReuseIdentifier:nibName];
+
+    UICollectionViewCell*   retval  = nil;
+    
+    if (sizingCellFlag)
+    {
+        retval = [cellNib instantiateWithOwner:nil options:nil].firstObject;
+    }
+    
+    return retval;
+}
+
 + (NSString*)deviceImageName:(NSString*)name
 {
     NSString*   fileName        = [[[NSFileManager defaultManager] displayNameAtPath:name] stringByDeletingPathExtension];

@@ -41,7 +41,7 @@
     return self.router.URL;
 }
 
-- (NSString*)paramString
+- (NSString*)paramStringWithAllowedCharacterSet:(NSCharacterSet*)allowedCharacterSet
 {
     NSMutableString*    paramString = [NSMutableString string];
     [self.parameters enumerateKeysAndObjectsUsingBlock:
@@ -53,24 +53,34 @@
              [objArray enumerateObjectsUsingBlock:
               ^(NSString* objStr, NSUInteger idx, BOOL* stop)
               {
-                  [paramString appendFormat:@"%@[]=%@&", key, objStr];
+                  [paramString appendFormat:@"%@[]=%@&", key, [self encodeObject:objStr withAllowedCharacterSet:allowedCharacterSet]];
               }];
          }
          else
          {
-             [paramString appendFormat:@"%@=%@&", key, obj];
+             [paramString appendFormat:@"%@=%@&", key, [self encodeObject:obj withAllowedCharacterSet:allowedCharacterSet]];
          }
      }];
 
     return paramString;
 }
 
+- (NSString*)encodeObject:(id)obj
+  withAllowedCharacterSet:(NSCharacterSet*)allowedCharacterSet
+{
+    NSString*   retval = [NSString stringWithFormat:@"%@", obj];
+    
+    retval = [retval stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+
+    return retval;
+}
+
 - (NSString*)fullPathOfPage:(DNCommunicationPageDetails*)pageDetails
 {
     NSMutableCharacterSet*  allowedCharacterSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
-    [allowedCharacterSet removeCharactersInString:@"+"];
+    [allowedCharacterSet removeCharactersInString:@"+&"];
 
-    NSString*   encodedParamString  = [self.paramString stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacterSet];
+    NSString*   encodedParamString  = [self paramStringWithAllowedCharacterSet:allowedCharacterSet];
     
     return [NSString stringWithFormat:@"%@?%@%@", self.path, encodedParamString, [pageDetails paramString]];
 }
