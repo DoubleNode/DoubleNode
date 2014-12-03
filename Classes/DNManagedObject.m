@@ -186,6 +186,12 @@
                  retRepresentation[name]    = [self dictionaryDate:representation dirty:nil withItem:key andDefault:kDNDefaultDate_NeverExpires];
                  break;
              }
+                 
+             case NSTransformableAttributeType:
+             {
+                 retRepresentation[name]    = [self dictionaryString:representation dirty:nil withItem:key andDefault:@""];
+                 break;
+             }
          }
      }];
 
@@ -639,6 +645,12 @@
                       [self updateDateFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
                       break;
                   }
+                      
+                  case NSTransformableAttributeType:
+                  {
+                      [self updateStringFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                      break;
+                  }
               }
           }];
          
@@ -836,6 +848,12 @@
                      {
                          dict[key]  = @([currentValue unixTimestamp]);
                      }
+                     break;
+                 }
+                     
+                 case NSTransformableAttributeType:
+                 {
+                     dict[key]  = currentValue;
                      break;
                  }
              }
