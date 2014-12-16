@@ -25,7 +25,10 @@
 #include <ifaddrs.h>
 #include <arpa/inet.h>
 
+#import "DNDate.h"
+
 #import "NSString+HTML.h"
+#import "NSDate+Utils.h"
 
 @interface DNUtilities()
 {
@@ -996,6 +999,96 @@ forSupplementaryViewOfKind:(NSString*)kind
         if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
     }
 
+    return retval;
+}
+
++ (DNDate*)dictionaryDNDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(DNDate*)defaultValue
+{
+    return [[self class] dictionaryDNDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (DNDate*)dictionaryDNDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(DNDate*)defaultValue
+{
+    unsigned    dateFlags   = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute;
+    
+    DNDate*     retval      = defaultValue;
+    if ((id)retval == (id)@0)
+    {
+        retval = nil;
+    }
+    
+    id  object = [dictionary objectForKey:key];
+    if (object != nil)
+    {
+        if ([object isKindOfClass:[NSNumber class]])
+        {
+            if (object != (NSNumber*)[NSNull null])
+            {
+                NSDate*     gmtTime     = [NSDate dateWithTimeIntervalSince1970:[object intValue]];
+                NSDate*     localTime   = [gmtTime toLocalTime];
+                
+                DNDate*   newval = [DNDate dateWithComponentFlags:dateFlags fromDate:localTime];
+                
+                if ((retval == nil) || ([newval isEqualToDNDate:retval] == NO))
+                {
+                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                    retval = newval;
+                }
+            }
+        }
+        else if ([object isKindOfClass:[NSString class]])
+        {
+            if (object != (NSString*)[NSNull null])
+            {
+                NSDate*        gmtTime          = [NSDate dateWithTimeIntervalSince1970:[object intValue]];
+                NSTimeInterval gmtTimeInterval  = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:gmtTime];
+                NSDate*        localTime        = [gmtTime dateByAddingTimeInterval:gmtTimeInterval];
+                
+                DNDate*   newval = [DNDate dateWithComponentFlags:dateFlags fromDate:localTime];
+                if (newval == nil)
+                {
+                    NSNumber*   timestamp = [[[self class] dictionaryDateNumberFormatter] numberFromString:object];
+                    if (timestamp != nil)
+                    {
+                        if ([timestamp integerValue] != 0)
+                        {
+                            NSDate*        gmtTime          = [NSDate dateWithTimeIntervalSince1970:[timestamp intValue]];
+                            NSTimeInterval gmtTimeInterval  = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:gmtTime];
+                            NSDate*        localTime        = [gmtTime dateByAddingTimeInterval:gmtTimeInterval];
+                            
+                            newval = [DNDate dateWithComponentFlags:dateFlags fromDate:localTime];
+                        }
+                    }
+                }
+                if (newval)
+                {
+                    if ((retval == nil) || ([newval isEqualToDNDate:retval] == NO))
+                    {
+                        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                        retval = newval;
+                    }
+                }
+            }
+        }
+        else if ([object isKindOfClass:[DNDate class]])
+        {
+            if (object != (DNDate*)[NSNull null])
+            {
+                DNDate*   newval  = object;
+                
+                if ((retval == nil) || ([newval isEqualToDNDate:retval] == NO))
+                {
+                    if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+                    retval = newval;
+                }
+            }
+        }
+    }
+    else if (retval)
+    {
+        if (dirtyFlag != nil)   {   *dirtyFlag = YES;   }
+    }
+    
     return retval;
 }
 

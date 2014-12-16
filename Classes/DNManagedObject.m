@@ -14,6 +14,8 @@
 #import "DNDataModel.h"
 #import "DNModel.h"
 
+#import "DNDate.h"
+
 #import "DNUtilities.h"
 #import "NSString+HTML.h"
 #import "NSString+Inflections.h"
@@ -189,7 +191,9 @@
                  
              case NSTransformableAttributeType:
              {
-                 retRepresentation[name]    = [self dictionaryString:representation dirty:nil withItem:key andDefault:@""];
+                 unsigned  dateFlags            = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute;
+                 DNDate*   defaultDNDateValue   = [DNDate dateWithComponentFlags:dateFlags fromDate:kDNDefaultDate_NeverExpires];
+                 retRepresentation[name]        = [self dictionaryDNDate:representation dirty:nil withItem:key andDefault:defaultDNDateValue];
                  break;
              }
          }
@@ -648,7 +652,9 @@
                       
                   case NSTransformableAttributeType:
                   {
-                      [self updateStringFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultValue];
+                      unsigned  dateFlags           = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitWeekday | NSCalendarUnitHour | NSCalendarUnitMinute;
+                      DNDate*   defaultDNDateValue  = [DNDate dateWithComponentFlags:dateFlags fromDate:kDNDefaultDate_NeverExpires];
+                      [self updateDNDateFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultDNDateValue];
                       break;
                   }
               }
@@ -853,7 +859,7 @@
                      
                  case NSTransformableAttributeType:
                  {
-                     dict[key]  = currentValue;
+                     dict[key]  = @([[currentValue date] unixTimestamp]);
                      break;
                  }
              }
@@ -897,7 +903,8 @@
              id currentValue    = [self valueForKey:key];
 
              dict[key]  = [NSMutableArray arrayWithCapacity:[currentValue count]];
-             [currentValue enumerateObjectsUsingBlock:^(DNManagedObject* obj, NSUInteger idx, BOOL* stop)
+             [currentValue enumerateObjectsUsingBlock:
+              ^(DNManagedObject* obj, NSUInteger idx, BOOL* stop)
               {
                   id    newObject;
 
@@ -1272,6 +1279,37 @@
     return newValue;
 }
 
+- (DNDate*)updateDNDateFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(DNDate*)defaultValue
+{
+    return [self updateDNDateFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (DNDate*)updateDNDateFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(DNDate*)defaultValue
+{
+    BOOL*   localDirtyFlag  = dirtyFlag;
+    BOOL    defaultDirtyFlag;
+    if (!localDirtyFlag)
+    {
+        localDirtyFlag  = &defaultDirtyFlag;
+    }
+    
+    id  localDefaultValue   = [self valueForKeyPath:keypath];
+    if (!localDefaultValue || ![localDefaultValue isKindOfClass:[DNDate class]])
+    {
+        localDefaultValue   = defaultValue;
+    }
+    
+    *localDirtyFlag  = NO;
+    
+    id  newValue = [self dictionaryDNDate:dictionary dirty:localDirtyFlag withItem:key andDefault:localDefaultValue];
+    if (*localDirtyFlag)
+    {
+        [self setValue:newValue forKeyPath:keypath];
+    }
+    
+    return newValue;
+}
+
 - (id)updateObjectFieldIfChanged:(NSString*)keypath fromDictionary:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue
 {
     return [self updateObjectFieldIfChanged:keypath fromDictionary:dictionary dirty:nil withItem:key andDefault:defaultValue];
@@ -1385,6 +1423,16 @@
     return [DNUtilities dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
+- (DNDate*)dictionaryDNDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(DNDate*)defaultValue
+{
+    return [DNUtilities dictionaryDNDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
+- (DNDate*)dictionaryDNDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(DNDate*)defaultValue
+{
+    return [DNUtilities dictionaryDNDate:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
 - (id)dictionaryObject:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue
 {
     return [DNUtilities dictionaryObject:dictionary dirty:nil withItem:key andDefault:defaultValue];
@@ -1473,6 +1521,16 @@
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue
 {
     return [DNUtilities dictionaryDate:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
+}
+
++ (DNDate*)dictionaryDNDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(DNDate*)defaultValue
+{
+    return [DNUtilities dictionaryDNDate:dictionary dirty:nil withItem:key andDefault:defaultValue];
+}
+
++ (DNDate*)dictionaryDNDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(DNDate*)defaultValue
+{
+    return [DNUtilities dictionaryDNDate:dictionary dirty:dirtyFlag withItem:key andDefault:defaultValue];
 }
 
 + (id)dictionaryObject:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue

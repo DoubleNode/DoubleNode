@@ -102,79 +102,108 @@
 {
     DNDate* otherDate   = (DNDate*)otherObject;
     
-    if (self.era < otherDate.era)
+    if ((self.era != INT32_MAX) && (otherDate.era != INT32_MAX))
     {
-        return NSOrderedAscending;
-    }
-    else if (self.era > otherDate.era)
-    {
-        return NSOrderedDescending;
+        if (self.era < otherDate.era)
+        {
+            return NSOrderedAscending;
+        }
+        else if (self.era > otherDate.era)
+        {
+            return NSOrderedDescending;
+        }
     }
     
-    if (self.year < otherDate.year)
+    if ((self.year != INT32_MAX) && (otherDate.year != INT32_MAX))
     {
-        return NSOrderedAscending;
+        if (self.year < otherDate.year)
+        {
+            return NSOrderedAscending;
+        }
+        else if (self.year > otherDate.year)
+        {
+            return NSOrderedDescending;
+        }
     }
-    else if (self.year > otherDate.year)
+    
+    if ((self.month != INT32_MAX) && (otherDate.month != INT32_MAX))
     {
-        return NSOrderedDescending;
+        if (self.month < otherDate.month)
+        {
+            return NSOrderedAscending;
+        }
+        else if (self.month > otherDate.month)
+        {
+            return NSOrderedDescending;
+        }
     }
-
-    if (self.month < otherDate.month)
+    
+    if ((self.day != INT32_MAX) && (otherDate.day != INT32_MAX))
     {
-        return NSOrderedAscending;
+        if (self.day < otherDate.day)
+        {
+            return NSOrderedAscending;
+        }
+        else if (self.day > otherDate.day)
+        {
+            return NSOrderedDescending;
+        }
     }
-    else if (self.month > otherDate.month)
+    
+    if ((self.hour != INT32_MAX) && (otherDate.hour != INT32_MAX))
     {
-        return NSOrderedDescending;
+        if (self.hour < otherDate.hour)
+        {
+            return NSOrderedAscending;
+        }
+        else if (self.hour > otherDate.hour)
+        {
+            return NSOrderedDescending;
+        }
     }
-
-    if (self.day < otherDate.day)
+    
+    if ((self.minute != INT32_MAX) && (otherDate.minute != INT32_MAX))
     {
-        return NSOrderedAscending;
+        if (self.minute < otherDate.minute)
+        {
+            return NSOrderedAscending;
+        }
+        else if (self.minute > otherDate.minute)
+        {
+            return NSOrderedDescending;
+        }
     }
-    else if (self.day > otherDate.day)
+    
+    if ((self.second != INT32_MAX) && (otherDate.second != INT32_MAX))
     {
-        return NSOrderedDescending;
+        if (self.second < otherDate.second)
+        {
+            return NSOrderedAscending;
+        }
+        else if (self.second > otherDate.second)
+        {
+            return NSOrderedDescending;
+        }
     }
-
-    if (self.hour < otherDate.hour)
+    
+    if ((self.nanosecond != INT32_MAX) && (otherDate.nanosecond != INT32_MAX))
     {
-        return NSOrderedAscending;
-    }
-    else if (self.hour > otherDate.hour)
-    {
-        return NSOrderedDescending;
-    }
-
-    if (self.minute < otherDate.minute)
-    {
-        return NSOrderedAscending;
-    }
-    else if (self.minute > otherDate.minute)
-    {
-        return NSOrderedDescending;
-    }
-
-    if (self.second < otherDate.second)
-    {
-        return NSOrderedAscending;
-    }
-    else if (self.second > otherDate.second)
-    {
-        return NSOrderedDescending;
-    }
-
-    if (self.nanosecond < otherDate.nanosecond)
-    {
-        return NSOrderedAscending;
-    }
-    else if (self.nanosecond > otherDate.nanosecond)
-    {
-        return NSOrderedDescending;
+        if (self.nanosecond < otherDate.nanosecond)
+        {
+            return NSOrderedAscending;
+        }
+        else if (self.nanosecond > otherDate.nanosecond)
+        {
+            return NSOrderedDescending;
+        }
     }
     
     return NSOrderedSame;
+}
+
+- (BOOL)isEqualToDNDate:(DNDate*)otherDate
+{
+    return ([self compare:otherDate] == NSOrderedSame);
 }
 
 - (NSDate*)date

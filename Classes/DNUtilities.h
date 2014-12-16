@@ -86,6 +86,8 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 
 #endif
 
+@class DNDate;
+
 @interface DNUtilities : NSObject
 
 + (id<DNApplicationProtocol>)appDelegate;
@@ -172,6 +174,9 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(NSDate*)defaultValue;
 + (NSDate*)dictionaryDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(NSDate*)defaultValue;
+
++ (DNDate*)dictionaryDNDate:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(DNDate*)defaultValue;
++ (DNDate*)dictionaryDNDate:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(DNDate*)defaultValue;
 
 + (id)dictionaryObject:(NSDictionary*)dictionary withItem:(NSString*)key andDefault:(id)defaultValue;
 + (id)dictionaryObject:(NSDictionary*)dictionary dirty:(BOOL*)dirtyFlag withItem:(NSString*)key andDefault:(id)defaultValue;

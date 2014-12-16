@@ -20,6 +20,7 @@
 - (void)encodeWithCoder:(NSCoder*)encoder;
 
 - (NSComparisonResult)compare:(id)otherObject;
+- (BOOL)isEqualToDNDate:(DNDate*)otherDate;
 
 - (NSDate*)date;
 
