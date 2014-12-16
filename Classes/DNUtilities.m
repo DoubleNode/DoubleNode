@@ -1040,9 +1040,8 @@ forSupplementaryViewOfKind:(NSString*)kind
         {
             if (object != (NSString*)[NSNull null])
             {
-                NSDate*        gmtTime          = [NSDate dateWithTimeIntervalSince1970:[object intValue]];
-                NSTimeInterval gmtTimeInterval  = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:gmtTime];
-                NSDate*        localTime        = [gmtTime dateByAddingTimeInterval:gmtTimeInterval];
+                NSDate*     gmtTime     = [NSDate dateWithTimeIntervalSince1970:[object intValue]];
+                NSDate*     localTime   = [gmtTime toGlobalTime];
                 
                 DNDate*   newval = [DNDate dateWithComponentFlags:dateFlags fromDate:localTime];
                 if (newval == nil)
@@ -1052,9 +1051,8 @@ forSupplementaryViewOfKind:(NSString*)kind
                     {
                         if ([timestamp integerValue] != 0)
                         {
-                            NSDate*        gmtTime          = [NSDate dateWithTimeIntervalSince1970:[timestamp intValue]];
-                            NSTimeInterval gmtTimeInterval  = [[NSTimeZone systemTimeZone] secondsFromGMTForDate:gmtTime];
-                            NSDate*        localTime        = [gmtTime dateByAddingTimeInterval:gmtTimeInterval];
+                            NSDate*     gmtTime     = [NSDate dateWithTimeIntervalSince1970:[timestamp intValue]];
+                            NSDate*     localTime   = [gmtTime toGlobalTime];
                             
                             newval = [DNDate dateWithComponentFlags:dateFlags fromDate:localTime];
                         }
