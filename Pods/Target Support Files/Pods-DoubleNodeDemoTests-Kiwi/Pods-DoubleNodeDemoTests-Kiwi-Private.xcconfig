@@ -1,0 +1,6 @@
+#include "Pods-DoubleNodeDemoTests-Kiwi.xcconfig"
+FRAMEWORK_SEARCH_PATHS = ${PODS_DOUBLENODEDEMOTESTS_KIWI_FRAMEWORK_SEARCH_PATHS}
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/Kiwi" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ColorUtils" "${PODS_ROOT}/Headers/Public/Kiwi" "${PODS_ROOT}/Headers/Public/NSLogger"
+OTHER_LDFLAGS = ${PODS_DOUBLENODEDEMOTESTS_KIWI_OTHER_LDFLAGS} -ObjC
+PODS_ROOT = ${SRCROOT}

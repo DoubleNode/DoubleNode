@@ -12,22 +12,34 @@
 	<dict>
 		<key>540708DF-5276-47D8-8990-791E75E4A42C</key>
 		<string>ssh://github.com/DoubleNode/DoubleNode.git</string>
+		<key>94487F1C0FA2E1D785BA0E7CB8C35A2351AC5154</key>
+		<string>https://github.com/DoubleNode/DoubleNode.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>DoubleNodeDemo.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>540708DF-5276-47D8-8990-791E75E4A42C</key>
+		<string>../../DoubleNodePod</string>
+		<key>94487F1C0FA2E1D785BA0E7CB8C35A2351AC5154</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/DoubleNode/DoubleNode.git</string>
+	<string>https://github.com/DoubleNode/DoubleNode.git</string>
 	<key>IDESourceControlProjectVersion</key>
-	<integer>110</integer>
+	<integer>111</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>540708DF-5276-47D8-8990-791E75E4A42C</string>
+	<string>94487F1C0FA2E1D785BA0E7CB8C35A2351AC5154</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>94487F1C0FA2E1D785BA0E7CB8C35A2351AC5154</string>
+			<key>IDESourceControlWCCName</key>
+			<string>DoubleNode</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
