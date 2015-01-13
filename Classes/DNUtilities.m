@@ -1025,7 +1025,7 @@ forSupplementaryViewOfKind:(NSString*)kind
             if (object != (NSNumber*)[NSNull null])
             {
                 NSDate*     gmtTime     = [NSDate dateWithTimeIntervalSince1970:[object intValue]];
-                NSDate*     localTime   = [gmtTime toLocalTime];
+                NSDate*     localTime   = [gmtTime toGlobalTime];
                 
                 DNDate*   newval = [DNDate dateWithComponentFlags:dateFlags fromDate:localTime];
                 

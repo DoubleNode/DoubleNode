@@ -54,8 +54,9 @@
     CGRect placeholderFrame = CGRectMake(caretRect.origin.x, caretRect.origin.y + 1, 0, 0);
     
     self.placeholderLabel = [[UILabel alloc] initWithFrame:placeholderFrame];
-    self.placeholderLabel.font      = self.font;
-    self.placeholderLabel.textColor = self.placeholderColor;
+    self.placeholderLabel.numberOfLines = 0;
+    self.placeholderLabel.font          = self.font;
+    self.placeholderLabel.textColor     = self.placeholderColor;
     
     [self addSubview:self.placeholderLabel];
     

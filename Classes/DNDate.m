@@ -222,4 +222,36 @@
     return super.date;
 }
 
+- (NSString*)dayOfWeekString
+{
+    switch (self.weekday)
+    {
+        case 1:     return @"Sunday";
+        case 2:     return @"Monday";
+        case 3:     return @"Tuesday";
+        case 4:     return @"Wednesday";
+        case 5:     return @"Thursday";
+        case 6:     return @"Friday";
+        case 7:     return @"Saturday";
+    }
+}
+
+- (NSString*)dateString
+{
+    return [NSString stringWithFormat:@"%02d/%02d/%04d", self.month, self.day, self.year];
+}
+
+- (NSString*)timeString
+{
+    NSString*   ampm    = (self.hour >= 12) ? @"pm" : @"am";
+    NSUInteger  hour    = (self.hour == 0) ? 12 : ((self.hour > 12) ? (self.hour - 12) : self.hour);
+    
+    if (self.minute > 0)
+    {
+        return [NSString stringWithFormat:@"%2d:%02d%@", hour, self.minute, ampm];
+    }
+
+    return [NSString stringWithFormat:@"%2d%@", hour, ampm];
+}
+
 @end

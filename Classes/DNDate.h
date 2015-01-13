@@ -24,4 +24,8 @@
 
 - (NSDate*)date;
 
+- (NSString*)dayOfWeekString;
+- (NSString*)dateString;
+- (NSString*)timeString;
+
 @end
