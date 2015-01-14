@@ -251,6 +251,7 @@ forSupplementaryViewOfKind:(NSString*)kind
     UIInterfaceOrientation  orientation = [UIApplication sharedApplication].statusBarOrientation;
     switch (orientation)
     {
+        case UIInterfaceOrientationUnknown:
         case UIInterfaceOrientationPortrait:
         {
             orientationStr  = @"-Portrait";

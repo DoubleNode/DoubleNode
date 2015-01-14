@@ -16,7 +16,7 @@
 
 /* Name of the section
  */
-@property (nonatomic, copy)         NSString*   name;
+@property (nonatomic, retain)         NSString*   name;
 
 /* Title of the section (used when displaying the index)
  */

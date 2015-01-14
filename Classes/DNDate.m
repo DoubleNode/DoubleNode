@@ -232,13 +232,16 @@
         case 4:     return @"Wednesday";
         case 5:     return @"Thursday";
         case 6:     return @"Friday";
-        case 7:     return @"Saturday";
+            
+        case 7:
+        default:
+            return @"Saturday";
     }
 }
 
 - (NSString*)dateString
 {
-    return [NSString stringWithFormat:@"%02d/%02d/%04d", self.month, self.day, self.year];
+    return [NSString stringWithFormat:@"%02ld/%02ld/%04ld", (long)self.month, (long)self.day, (long)self.year];
 }
 
 - (NSString*)timeString
@@ -248,10 +251,10 @@
     
     if (self.minute > 0)
     {
-        return [NSString stringWithFormat:@"%2d:%02d%@", hour, self.minute, ampm];
+        return [NSString stringWithFormat:@"%2lu:%02ld%@", (unsigned long)hour, (long)self.minute, ampm];
     }
 
-    return [NSString stringWithFormat:@"%2d%@", hour, ampm];
+    return [NSString stringWithFormat:@"%2lu%@", (unsigned long)hour, ampm];
 }
 
 @end

@@ -7,16 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
 
-@interface DNAppDelegate : UIResponder <UIApplicationDelegate>
+#import "DNApplicationProtocol.h"
+
+@interface DNAppDelegate : UIResponder <UIApplicationDelegate, DNApplicationProtocol>
+{
+    NSString*   persistentStorePrefix;
+    BOOL        doNotUseIncrementalStore;
+    
+    NSMutableDictionary*    managedObjectModelDictionary;
+    NSMutableDictionary*    managedObjectContextDictionary;
+    NSMutableDictionary*    persistentStoreDictionary;
+    NSMutableDictionary*    persistentStoreCoordinatorDictionary;
+}
 
 @property (strong, nonatomic) UIWindow *window;
-
-@property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
-- (void)saveContext;
-- (NSURL *)applicationDocumentsDirectory;
 
 @end

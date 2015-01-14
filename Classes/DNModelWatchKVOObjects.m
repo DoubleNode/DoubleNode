@@ -73,7 +73,7 @@
              objectAttributes  = [[[object entityDescription] attributesByName] allKeys];
          }
 
-         [attributes enumerateObjectsUsingBlock:
+         [objectAttributes enumerateObjectsUsingBlock:
           ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
           {
               NSUInteger initialFlag = ((idx == 0) ? NSKeyValueObservingOptionInitial : 0);
@@ -100,7 +100,7 @@
              objectAttributes  = [[[object entityDescription] attributesByName] allKeys];
          }
          
-         [attributes enumerateObjectsUsingBlock:
+         [objectAttributes enumerateObjectsUsingBlock:
           ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
           {
               [object removeObserver:self forKeyPath:attributeName context:(__bridge void *)(attributeName)];

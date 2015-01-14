@@ -178,12 +178,14 @@
 
     NSArray*    indexPathsArray = [NSArray arrayWithArray:indexPaths];
     
+    __block DNCollectionView*   bSelf   = self;
+    
     //DOLog(LL_Debug, LD_General, @"[%@] insertRowsAtIndexPaths (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
     [updateBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] insertRowsAtIndexPaths:block (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
-         [self insertItemsAtIndexPaths:indexPathsArray];
+         [bSelf insertItemsAtIndexPaths:indexPathsArray];
      }];
 }
 
@@ -198,12 +200,14 @@
     
     NSArray*    indexPathsArray = [NSArray arrayWithArray:indexPaths];
     
+    __block DNCollectionView*   bSelf   = self;
+    
     //DOLog(LL_Debug, LD_General, @"[%@] deleteRowsAtIndexPaths (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
     [updateBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] deleteRowsAtIndexPaths:block (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
-         [self deleteItemsAtIndexPaths:indexPathsArray];
+         [bSelf deleteItemsAtIndexPaths:indexPathsArray];
      }];
 }
 
@@ -211,23 +215,27 @@
 {
     NSArray*    indexPathsArray = [NSArray arrayWithArray:indexPaths];
     
+    __block DNCollectionView*   bSelf   = self;
+    
     //DOLog(LL_Debug, LD_General, @"[%@] reloadRowsAtIndexPaths (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
     [updateBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] reloadRowsAtIndexPaths:block (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
-         [self reloadItemsAtIndexPaths:indexPathsArray];
+         [bSelf reloadItemsAtIndexPaths:indexPathsArray];
      }];
 }
 
 - (void)moveRowAtIndexPath:(NSIndexPath*)indexPath toIndexPath:(NSIndexPath*)newIndexPath
 {
+    __block DNCollectionView*   bSelf   = self;
+    
     //DOLog(LL_Debug, LD_General, @"[%@] moveRowAtIndexPath [%d:%d]-[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
     [updateBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] moveRowAtIndexPath:block [%d:%d]-[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
-         [self moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
+         [bSelf moveItemAtIndexPath:indexPath toIndexPath:newIndexPath];
      }];
 }
 

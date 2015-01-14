@@ -1,0 +1,1 @@
+../../../JustType/JustType/JTSyntaxLinguisticWord.h

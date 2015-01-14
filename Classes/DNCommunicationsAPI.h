@@ -27,7 +27,7 @@ typedef BOOL(^APIProcessingNowBlock)(NSArray* objects);
 @property (nonatomic, copy) BOOL        (^filterHandler)(id item);
 @property (nonatomic, copy) NSArray*    (^incomingHandler)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers);
 @property (nonatomic, copy) void        (^completionHandler)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects);
-@property (nonatomic, copy) void        (^errorHandler)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSError* error, NSTimeInterval retryRecommendation);
+@property (nonatomic, copy) void        (^errorHandler)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation);
 
 @end
 

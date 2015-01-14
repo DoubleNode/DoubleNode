@@ -123,7 +123,7 @@
         NSUInteger          unitFlags   = NSDayCalendarUnit | NSMinuteCalendarUnit;
         NSDateComponents*   components  = [gregorian components:unitFlags fromDate:lastCheck toDate:[NSDate date] options:0];
         
-        NSInteger   days    = [components day];
+        //NSInteger   days    = [components day];
         NSInteger   minutes = [components minute];
         //DLog(LL_Debug, LD_API, @"days=%d, minutes=%d", days, minutes);
         
@@ -440,7 +440,7 @@
                            }
 
                            {
-                               NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%d][%@]\"\r\n\r\n", key, idx, subkey];
+                               NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%lu][%@]\"\r\n\r\n", key, (unsigned long)idx, subkey];
                                [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
                                [bodyStr appendString:newStr];
                            }
@@ -461,7 +461,7 @@
                       }
 
                       {
-                          NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%d]\"\r\n\r\n", key, idx];
+                          NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%lu]\"\r\n\r\n", key, (unsigned long)idx];
                           [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
                           [bodyStr appendString:newStr];
                       }
@@ -554,7 +554,7 @@
     //DLog(LL_Debug, LD_API, @"bodyStr=%@", bodyStr);
 
     // set the content-length
-    NSString*   postLength = [NSString stringWithFormat:@"%d", [body length]];
+    NSString*   postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
@@ -656,7 +656,7 @@
                            }
 
                            {
-                               NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%d][%@]\"\r\n\r\n", key, idx, subkey];
+                               NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%lu][%@]\"\r\n\r\n", key, (unsigned long)idx, subkey];
                                [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
                                [bodyStr appendString:newStr];
                            }
@@ -677,7 +677,7 @@
                       }
 
                       {
-                          NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%d]\"\r\n\r\n", key, idx];
+                          NSString*  newStr  = [NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@[%lu]\"\r\n\r\n", key, (unsigned long)idx];
                           [body appendData:[newStr dataUsingEncoding:NSASCIIStringEncoding]];
                           [bodyStr appendString:newStr];
                       }
@@ -762,7 +762,7 @@
     //DLog(LL_Debug, LD_API, @"bodyStr=%@", bodyStr);
 
     // set the content-length
-    NSString*   postLength = [NSString stringWithFormat:@"%d", [body length]];
+    NSString*   postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[body length]];
     [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
     
     [self subProcessRequest:request commDetails:commDetails pageDetails:nil filter:filterHandler incoming:incomingHandler completion:completionHandler error:errorHandler];
@@ -804,7 +804,7 @@
     //DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
     if ([httpResponse statusCode] != 200)
     {
-        DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
+        DLog(LL_Debug, LD_API, @"responseCode=%ld, response=%@, error=%@", (long)[httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
     }
 
     //DLog(LL_Debug, LD_API, @"dataSize=%d", [data length]);
@@ -982,7 +982,7 @@
             }
         }
 
-        DLog(LL_Debug, LD_API, @"responseCode=%d, response=%@, error=%@", [httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
+        DLog(LL_Debug, LD_API, @"responseCode=%ld, response=%@, error=%@", (long)[httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
         errorHandler(commDetails, pageDetails, statusCode, error, [self retryRecommendation:commDetails.apikey]);
         return;
     }
@@ -1073,7 +1073,7 @@
                   }
                   else
                   {
-                      results = objects;
+                       results = [objects mutableCopy];
                   }
                   
                   return results;
@@ -1095,7 +1095,7 @@
               filter:(BOOL(^)(id object))filterHandler
             incoming:(NSArray*(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSDictionary* response, NSDictionary* headers))incomingHandler
           completion:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSArray* objects))completionHandler
-               error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSError* error, NSTimeInterval retryRecommendation))errorHandler
+               error:(void(^)(DNCommunicationDetails* commDetails, DNCommunicationPageDetails* pageDetails, NSInteger responseCode, NSError* error, NSTimeInterval retryRecommendation))errorHandler
 {
     NSMutableArray* processQueue    = [queues objectForKey:commDetails.apikey];
     if (processQueue == nil)

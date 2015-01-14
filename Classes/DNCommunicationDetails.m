@@ -88,7 +88,7 @@
 - (NSString*)pagingStringOfSize:(NSUInteger)pageSize
                         andPage:(NSUInteger)page
 {
-    return [NSString stringWithFormat:@"items_per_page=%d&page=%d", pageSize, page];
+    return [NSString stringWithFormat:@"items_per_page=%lu&page=%lu", (unsigned long)pageSize, (unsigned long)page];
 }
 
 - (BOOL)enumeratePagesOfSize:(NSUInteger)pageSize

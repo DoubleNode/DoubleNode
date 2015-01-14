@@ -26,7 +26,7 @@
     {
         objc_property_t property = properties[i];
 
-        NSString*   propertyName = [[NSString alloc] initWithCString:property_getName(property)];
+        NSString*   propertyName = [[NSString alloc] initWithCString:property_getName(property) encoding:NSASCIIStringEncoding];
 
         id  propertyValue = [self valueForKey:(NSString*)propertyName];
         if (propertyValue)

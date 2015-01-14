@@ -196,6 +196,14 @@
                  retRepresentation[name]        = [self dictionaryDNDate:representation dirty:nil withItem:key andDefault:defaultDNDateValue];
                  break;
              }
+                 
+             case NSBinaryDataAttributeType:
+             case NSObjectIDAttributeType:
+             case NSUndefinedAttributeType:
+             {
+                 NSAssert(NO, @"Shouldn't be here");
+                 break;
+             }
          }
      }];
 
@@ -657,6 +665,14 @@
                       [self updateDNDateFieldIfChanged:key fromDictionary:dict withItem:key andDefault:defaultDNDateValue];
                       break;
                   }
+                      
+                  case NSBinaryDataAttributeType:
+                  case NSObjectIDAttributeType:
+                  case NSUndefinedAttributeType:
+                  {
+                      NSAssert(NO, @"Shouldn't be here");
+                      break;
+                  }
               }
           }];
          
@@ -860,6 +876,14 @@
                  case NSTransformableAttributeType:
                  {
                      dict[key]  = @([[currentValue date] unixTimestamp]);
+                     break;
+                 }
+                     
+                 case NSBinaryDataAttributeType:
+                 case NSObjectIDAttributeType:
+                 case NSUndefinedAttributeType:
+                 {
+                     NSAssert(NO, @"Shouldn't be here");
                      break;
                  }
              }

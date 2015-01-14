@@ -178,7 +178,7 @@
 
         default:
         {
-            controlStateString  = [NSString stringWithFormat:@"%d", controlState];
+            controlStateString  = [NSString stringWithFormat:@"%lu", controlState];
             break;
         }
     }
@@ -345,7 +345,7 @@
     [savedAttributes enumerateObjectsUsingBlock:
      ^(id obj, NSUInteger idx, BOOL* stop)
      {
-         DNAttributedStringAttribute*   asa = obj;
+         //DNAttributedStringAttribute*   asa = obj;
 
          //[attrString addAttributes:asa.attributes range:asa.range];
      }];
@@ -743,13 +743,13 @@
 
     NSMutableDictionary*    textAttributes  = [NSMutableDictionary dictionary];
 
-    NSAssert(labelKerning, @"%@/%@/%@/%@/%u/BarButtonItem/LabelKerning is not specified!", group, screen, viewState, item, controlState);
+    NSAssert(labelKerning, @"%@/%@/%@/%@/%lu/BarButtonItem/LabelKerning is not specified!", group, screen, viewState, item, controlState);
     textAttributes[NSKernAttributeName]             = labelKerning;
 
-    NSAssert(labelFont, @"%@/%@/%@/%@/%u/BarButtonItem/LabelFont is not specified!", group, screen, viewState, item, controlState);
+    NSAssert(labelFont, @"%@/%@/%@/%@/%lu/BarButtonItem/LabelFont is not specified!", group, screen, viewState, item, controlState);
     textAttributes[NSFontAttributeName]             = labelFont;
 
-    NSAssert(labelColor, @"%@/%@/%@/%@/%u/BarButtonItem/LabelColor is not specified!", group, screen, viewState, item, controlState);
+    NSAssert(labelColor, @"%@/%@/%@/%@/%lu/BarButtonItem/LabelColor is not specified!", group, screen, viewState, item, controlState);
     textAttributes[NSForegroundColorAttributeName]  = labelColor;
 
     [barButtonItem setTitleTextAttributes:textAttributes

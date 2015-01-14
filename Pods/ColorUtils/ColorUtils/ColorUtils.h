@@ -1,7 +1,7 @@
 //
 //  ColorUtils.h
 //
-//  Version 1.0.3
+//  Version 1.1.3
 //
 //  Created by Nick Lockwood on 19/11/2011.
 //  Copyright (c) 2011 Charcoal Design
@@ -31,7 +31,13 @@
 //
 
 
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wauto-import"
+#pragma GCC diagnostic ignored "-Wobjc-missing-property-synthesis"
+
+
 #import <UIKit/UIKit.h>
+
 
 @interface UIColor (ColorUtils)
 
@@ -40,14 +46,16 @@
 @property (nonatomic, readonly) CGFloat blue;
 @property (nonatomic, readonly) CGFloat alpha;
 
-+ (UIColor *)colorWithString:(NSString *)string;
-+ (UIColor *)colorWithRGBValue:(int32_t)rgb;
-+ (UIColor *)colorWithRGBAValue:(uint32_t)rgba;
-- (UIColor *)initWithString:(NSString *)string;
-- (UIColor *)initWithRGBValue:(int32_t)rgb;
-- (UIColor *)initWithRGBAValue:(uint32_t)rgba;
++ (void)registerColor:(UIColor *)color forName:(NSString *)name;
 
-- (int32_t)RGBValue;
++ (instancetype)colorWithString:(NSString *)string;
++ (instancetype)colorWithRGBValue:(uint32_t)rgb;
++ (instancetype)colorWithRGBAValue:(uint32_t)rgba;
+- (instancetype)initWithString:(NSString *)string;
+- (instancetype)initWithRGBValue:(uint32_t)rgb;
+- (instancetype)initWithRGBAValue:(uint32_t)rgba;
+
+- (uint32_t)RGBValue;
 - (uint32_t)RGBAValue;
 - (NSString *)stringValue;
 
@@ -55,4 +63,10 @@
 - (BOOL)isEquivalent:(id)object;
 - (BOOL)isEquivalentToColor:(UIColor *)color;
 
+- (instancetype)colorWithBrightness:(CGFloat)brightness;
+- (instancetype)colorBlendedWithColor:(UIColor *)color factor:(CGFloat)factor;
+
 @end
+
+
+#pragma GCC diagnostic pop

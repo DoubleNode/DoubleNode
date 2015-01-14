@@ -455,6 +455,18 @@
             [self executeDidChangeSectionDeleteHandler:sectionInfo atIndex:sectionIndex context:nil];
             break;
         }
+            
+        case NSFetchedResultsChangeMove:
+        {
+            //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeMove", self.name, sectionIndex);
+            break;
+        }
+            
+        case NSFetchedResultsChangeUpdate:
+        {
+            //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeSection:atIndex:%d forChangeType:NSFetchedResultsChangeUpdate", self.name, sectionIndex);
+            break;
+        }
     }
 }
 

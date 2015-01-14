@@ -1,0 +1,1 @@
+../../../Foundry/Classes/NSManagedObject+Foundry.h

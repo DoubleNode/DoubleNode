@@ -135,6 +135,12 @@
             
         case NSFetchedResultsChangeDelete:
             break;
+            
+        case NSFetchedResultsChangeMove:
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            break;
     }
 }
 

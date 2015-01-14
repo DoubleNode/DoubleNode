@@ -149,7 +149,7 @@
                                                                             andObjects:objects
                                                                          andAttributes:nil];
     
-    watch.name   = [NSString stringWithFormat:@"%@.%@:%@ (%d objects)", NSStringFromClass(self.class), NSStringFromSelector(_cmd), NSStringFromClass([[objects firstObject] class]), [objects count]];
+    watch.name   = [NSString stringWithFormat:@"%@.%@:%@ (%lu objects)", NSStringFromClass(self.class), NSStringFromSelector(_cmd), NSStringFromClass([[objects firstObject] class]), (unsigned long)[objects count]];
     
     return watch;
 }
@@ -161,7 +161,7 @@
                                                                             andObjects:objects
                                                                          andAttributes:attributes];
 
-    watch.name   = [NSString stringWithFormat:@"%@.%@:%@ (%d objects)", NSStringFromClass(self.class), NSStringFromSelector(_cmd), NSStringFromClass([[objects firstObject] class]), [objects count]];
+    watch.name   = [NSString stringWithFormat:@"%@.%@:%@ (%lu objects)", NSStringFromClass(self.class), NSStringFromSelector(_cmd), NSStringFromClass([[objects firstObject] class]), (unsigned long)[objects count]];
     
     return watch;
 }
