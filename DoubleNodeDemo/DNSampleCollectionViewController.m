@@ -84,8 +84,6 @@
         companyWatch    = nil;
     }
     
-    __block DNSampleCollectionViewController*   bSelf   = self;
-    
     companyWatch    = [companyModel watchAllWithCollectionView:self.collectionView offset:0 count:0];
     
     companyWatch.cellForItemAtIndexPathHandler = ^UICollectionViewCell*(DNModelWatchObjects* watch, UICollectionView* collectionView, NSIndexPath* indexPath)

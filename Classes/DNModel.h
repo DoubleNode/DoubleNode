@@ -20,7 +20,7 @@
 
 typedef void(^DNModelCompletionHandlerBlock)();
 
-@class DNCollectionView;
+@class DNCollectionView, DNModelWatchFetchedObjects;
 
 @interface DNModel : NSObject
 
@@ -79,9 +79,9 @@ typedef void(^DNModelCompletionHandlerBlock)();
 - (DNModelWatchObjects*)watchAll;
 - (DNModelWatchObjects*)watchAllOffset:(NSUInteger)offset
                                  count:(NSUInteger)count;
-- (DNModelWatchObjects*)watchAllWithCollectionView:(DNCollectionView*)collectionView
-                                            offset:(NSUInteger)offset
-                                             count:(NSUInteger)count;
+- (DNModelWatchFetchedObjects*)watchAllWithCollectionView:(DNCollectionView*)collectionView
+                                                   offset:(NSUInteger)offset
+                                                    count:(NSUInteger)count;
 
 - (NSFetchRequest*)getAll_FetchRequestOffset:(NSUInteger)offset
                                        count:(NSUInteger)count;

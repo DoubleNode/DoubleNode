@@ -410,9 +410,9 @@
     return [self watchAllWithCollectionView:nil offset:offset count:count];
 }
 
-- (DNModelWatchObjects*)watchAllWithCollectionView:(DNCollectionView*)collectionView
-                                            offset:(NSUInteger)offset
-                                             count:(NSUInteger)count
+- (DNModelWatchFetchedObjects*)watchAllWithCollectionView:(DNCollectionView*)collectionView
+                                                   offset:(NSUInteger)offset
+                                                    count:(NSUInteger)count
 {
     NSFetchRequest* fetchRequest    = [self getAll_FetchRequestOffset:offset count:count];
     if (fetchRequest == nil)
