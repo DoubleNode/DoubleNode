@@ -20,7 +20,7 @@
 
 @interface DNSampleCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
 {
-    DNModelWatchObjects*    companyWatch;
+    DNModelWatchFetchedObjects* companyWatch;
     
     CDCompanyModel* companyModel;
 }
@@ -84,7 +84,24 @@
         companyWatch    = nil;
     }
     
+    __block DNSampleCollectionViewController*   bSelf   = self;
+    
     companyWatch    = [companyModel watchAllWithCollectionView:self.collectionView offset:0 count:0];
+    
+    companyWatch.cellForItemAtIndexPathHandler = ^UICollectionViewCell*(DNModelWatchObjects* watch, UICollectionView* collectionView, NSIndexPath* indexPath)
+    {
+        DNSampleCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:[DNSampleCollectionViewCell className] forIndexPath:indexPath];
+        
+        cell.backgroundColor    = [UIColor whiteColor];
+        cell.nameLabel.text     = [NSString stringWithFormat:@"indexPath = %ld/%ld", (long)indexPath.section, (long)indexPath.row];
+        
+        return cell;
+    };
+    
+    companyWatch.didChangeHandler = ^(DNModelWatchObjects* watch, NSArray* objects, NSDictionary* context)
+    {
+        NSLog(@"companyWatch.didChangeHandler");
+    };
     
     [companyWatch startWatch];
     [companyWatch pauseWatch];

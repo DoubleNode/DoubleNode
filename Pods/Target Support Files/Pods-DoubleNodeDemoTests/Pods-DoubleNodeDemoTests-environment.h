@@ -6,18 +6,6 @@
 // project.
 
 
-// Foundry
-#define COCOAPODS_POD_AVAILABLE_Foundry
-#define COCOAPODS_VERSION_MAJOR_Foundry 0
-#define COCOAPODS_VERSION_MINOR_Foundry 1
-#define COCOAPODS_VERSION_PATCH_Foundry 1
-
-// Gizou
-#define COCOAPODS_POD_AVAILABLE_Gizou
-#define COCOAPODS_VERSION_MAJOR_Gizou 0
-#define COCOAPODS_VERSION_MINOR_Gizou 1
-#define COCOAPODS_VERSION_PATCH_Gizou 3
-
 // KPAViewControllerTestHelper
 #define COCOAPODS_POD_AVAILABLE_KPAViewControllerTestHelper
 #define COCOAPODS_VERSION_MAJOR_KPAViewControllerTestHelper 1

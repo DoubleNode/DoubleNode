@@ -25,7 +25,6 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                     <connections>
-                        <outlet property="dataSource" destination="-1" id="msJ-tb-iZE"/>
                         <outlet property="delegate" destination="-1" id="kcM-F2-fnv"/>
                     </connections>
                 </collectionView>

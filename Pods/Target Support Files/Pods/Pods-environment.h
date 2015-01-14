@@ -18,11 +18,23 @@
 #define COCOAPODS_VERSION_MINOR_FontAwesome_iOS 1
 #define COCOAPODS_VERSION_PATCH_FontAwesome_iOS 4
 
+// Foundry
+#define COCOAPODS_POD_AVAILABLE_Foundry
+#define COCOAPODS_VERSION_MAJOR_Foundry 0
+#define COCOAPODS_VERSION_MINOR_Foundry 1
+#define COCOAPODS_VERSION_PATCH_Foundry 1
+
 // GCPlaceholderTextView
 #define COCOAPODS_POD_AVAILABLE_GCPlaceholderTextView
 #define COCOAPODS_VERSION_MAJOR_GCPlaceholderTextView 1
 #define COCOAPODS_VERSION_MINOR_GCPlaceholderTextView 0
 #define COCOAPODS_VERSION_PATCH_GCPlaceholderTextView 1
+
+// Gizou
+#define COCOAPODS_POD_AVAILABLE_Gizou
+#define COCOAPODS_VERSION_MAJOR_Gizou 0
+#define COCOAPODS_VERSION_MINOR_Gizou 1
+#define COCOAPODS_VERSION_PATCH_Gizou 3
 
 // Inflections
 #define COCOAPODS_POD_AVAILABLE_Inflections
@@ -39,8 +51,14 @@
 // NSLogger
 #define COCOAPODS_POD_AVAILABLE_NSLogger
 #define COCOAPODS_VERSION_MAJOR_NSLogger 1
-#define COCOAPODS_VERSION_MINOR_NSLogger 1
-#define COCOAPODS_VERSION_PATCH_NSLogger 0
+#define COCOAPODS_VERSION_MINOR_NSLogger 5
+#define COCOAPODS_VERSION_PATCH_NSLogger 1
+
+// NSLogger/Standard
+#define COCOAPODS_POD_AVAILABLE_NSLogger_Standard
+#define COCOAPODS_VERSION_MAJOR_NSLogger_Standard 1
+#define COCOAPODS_VERSION_MINOR_NSLogger_Standard 5
+#define COCOAPODS_VERSION_PATCH_NSLogger_Standard 1
 
 // NZCircularImageView
 #define COCOAPODS_POD_AVAILABLE_NZCircularImageView

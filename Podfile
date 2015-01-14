@@ -9,12 +9,11 @@ target :'DoubleNodeDemoTests', :exclusive => true do
     pod 'Kiwi', '~> 2.3'
     pod 'Nocilla'
     pod 'KPAViewControllerTestHelper'
-
-    pod 'Foundry'
 end
 
 pod 'ColorUtils'    #, :git => "git@github.com:/ColorUtils.git"
 
+pod 'Foundry'
 pod 'NSLogger'
 pod 'JustType'
 pod 'Inflections'

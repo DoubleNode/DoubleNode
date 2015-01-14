@@ -22,12 +22,6 @@
 
 /* Begin PBXBuildFile section */
 		53E9B941638B46D8B3AB150C /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6A82657FC714FFD82E1CAC5 /* libPods.a */; };
-		6AA2FBFD1A6591A60021AF78 /* CDOCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FBFC1A6591A60021AF78 /* CDOCompany.m */; };
-		6AA2FC001A6591C40021AF78 /* CDOEmployee.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FBFF1A6591C40021AF78 /* CDOEmployee.m */; };
-		6AA2FC061A6595240021AF78 /* CDCompanyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FC031A6595240021AF78 /* CDCompanyModel.m */; };
-		6AA2FC071A6595240021AF78 /* CDEmployeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FC051A6595240021AF78 /* CDEmployeeModel.m */; };
-		6AA2FC0C1A6595CF0021AF78 /* CDTestDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FC0B1A6595CF0021AF78 /* CDTestDataModel.m */; };
-		6AA2FCAC1A6599AA0021AF78 /* CDOTestEntityBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCAB1A6599AA0021AF78 /* CDOTestEntityBase.m */; };
 		6AA2FCAE1A659E0B0021AF78 /* DoubleNodeEmployeeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCAD1A659E0B0021AF78 /* DoubleNodeEmployeeTests.m */; };
 		6AA2FCB01A659E590021AF78 /* DoubleNodeCompanyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCAF1A659E590021AF78 /* DoubleNodeCompanyTests.m */; };
 		6AA2FCB21A659EC90021AF78 /* DoubleNodeModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCB11A659EC90021AF78 /* DoubleNodeModelTests.m */; };
@@ -90,6 +84,12 @@
 		6AA2FCF41A66E5270021AF78 /* DNSampleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCF31A66E5270021AF78 /* DNSampleCollectionViewCell.m */; };
 		6AA2FCF61A66E5440021AF78 /* DNSampleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA2FCF51A66E5440021AF78 /* DNSampleCollectionViewCell.xib */; };
 		6AA2FCF81A66EE110021AF78 /* DoubleNodeCollectionViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCF71A66EE110021AF78 /* DoubleNodeCollectionViewTests.m */; };
+		6AA2FCFA1A66F9F50021AF78 /* CDTestDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FC0B1A6595CF0021AF78 /* CDTestDataModel.m */; };
+		6AA2FCFB1A66FA010021AF78 /* CDOTestEntityBase.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCAB1A6599AA0021AF78 /* CDOTestEntityBase.m */; };
+		6AA2FCFC1A66FA010021AF78 /* CDOCompany.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FBFC1A6591A60021AF78 /* CDOCompany.m */; };
+		6AA2FCFD1A66FA010021AF78 /* CDOEmployee.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FBFF1A6591C40021AF78 /* CDOEmployee.m */; };
+		6AA2FCFE1A66FA010021AF78 /* CDCompanyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FC031A6595240021AF78 /* CDCompanyModel.m */; };
+		6AA2FCFF1A66FA010021AF78 /* CDEmployeeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FC051A6595240021AF78 /* CDEmployeeModel.m */; };
 		ADC9D4F61821A2800019F0DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC9D4F51821A2800019F0DA /* Foundation.framework */; };
 		ADC9D4F81821A2800019F0DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC9D4F71821A2800019F0DA /* CoreGraphics.framework */; };
 		ADC9D4FA1821A2800019F0DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC9D4F91821A2800019F0DA /* UIKit.framework */; };
@@ -132,8 +132,8 @@
 		6AA2FC031A6595240021AF78 /* CDCompanyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDCompanyModel.m; sourceTree = "<group>"; };
 		6AA2FC041A6595240021AF78 /* CDEmployeeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDEmployeeModel.h; sourceTree = "<group>"; };
 		6AA2FC051A6595240021AF78 /* CDEmployeeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDEmployeeModel.m; sourceTree = "<group>"; };
-		6AA2FC0A1A6595CF0021AF78 /* CDTestDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDTestDataModel.h; sourceTree = "<group>"; };
-		6AA2FC0B1A6595CF0021AF78 /* CDTestDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDTestDataModel.m; sourceTree = "<group>"; };
+		6AA2FC0A1A6595CF0021AF78 /* CDTestDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDTestDataModel.h; path = DoubleNodeDemoTests/CDTestDataModel.h; sourceTree = SOURCE_ROOT; };
+		6AA2FC0B1A6595CF0021AF78 /* CDTestDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDTestDataModel.m; path = DoubleNodeDemoTests/CDTestDataModel.m; sourceTree = SOURCE_ROOT; };
 		6AA2FC0D1A6597C50021AF78 /* DNAppConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNAppConstants.h; sourceTree = "<group>"; };
 		6AA2FC0E1A6597C50021AF78 /* DNAppConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNAppConstants.m; sourceTree = "<group>"; };
 		6AA2FC0F1A6597C50021AF78 /* DNApplicationProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNApplicationProtocol.h; sourceTree = "<group>"; };
@@ -315,10 +315,6 @@
 			children = (
 				6AA2FC011A6592C70021AF78 /* DoubleNodeTestCase.h */,
 				ADC9D5201821A2800019F0DA /* DoubleNodeTestCase.m */,
-				6AA2FC0A1A6595CF0021AF78 /* CDTestDataModel.h */,
-				6AA2FC0B1A6595CF0021AF78 /* CDTestDataModel.m */,
-				6AA2FC081A6595560021AF78 /* Test Entiites */,
-				6AA2FC091A6595610021AF78 /* Test Models */,
 			);
 			name = "Test Fixtures";
 			sourceTree = "<group>";
@@ -334,7 +330,8 @@
 				6AA2FBFF1A6591C40021AF78 /* CDOEmployee.m */,
 			);
 			name = "Test Entiites";
-			sourceTree = "<group>";
+			path = DoubleNodeDemoTests;
+			sourceTree = SOURCE_ROOT;
 		};
 		6AA2FC091A6595610021AF78 /* Test Models */ = {
 			isa = PBXGroup;
@@ -345,6 +342,19 @@
 				6AA2FC051A6595240021AF78 /* CDEmployeeModel.m */,
 			);
 			name = "Test Models";
+			path = DoubleNodeDemoTests;
+			sourceTree = SOURCE_ROOT;
+		};
+		6AA2FCF91A66F9E40021AF78 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				6AA2FCE71A65B28A0021AF78 /* Test.xcdatamodeld */,
+				6AA2FC0A1A6595CF0021AF78 /* CDTestDataModel.h */,
+				6AA2FC0B1A6595CF0021AF78 /* CDTestDataModel.m */,
+				6AA2FC081A6595560021AF78 /* Test Entiites */,
+				6AA2FC091A6595610021AF78 /* Test Models */,
+			);
+			name = CoreData;
 			sourceTree = "<group>";
 		};
 		ADC9D4E91821A2800019F0DA = {
@@ -396,7 +406,7 @@
 				6AA2FCF31A66E5270021AF78 /* DNSampleCollectionViewCell.m */,
 				6AA2FCF51A66E5440021AF78 /* DNSampleCollectionViewCell.xib */,
 				ADC9D50C1821A2800019F0DA /* Images.xcassets */,
-				6AA2FCE71A65B28A0021AF78 /* Test.xcdatamodeld */,
+				6AA2FCF91A66F9E40021AF78 /* CoreData */,
 				ADC9D4FE1821A2800019F0DA /* Supporting Files */,
 			);
 			path = DoubleNodeDemo;
@@ -780,15 +790,18 @@
 			files = (
 				6AA2FCE01A65ABE00021AF78 /* UIFont+Custom.m in Sources */,
 				ADC9D57E1821A93F0019F0DA /* DNAppDelegate.m in Sources */,
+				6AA2FCFB1A66FA010021AF78 /* CDOTestEntityBase.m in Sources */,
 				6AA2FCBD1A65ABC80021AF78 /* DNGravatar.m in Sources */,
 				6AA2FCF41A66E5270021AF78 /* DNSampleCollectionViewCell.m in Sources */,
 				6AA2FCD11A65ABC80021AF78 /* DNUtilities.m in Sources */,
 				6AA2FCE41A65ABE00021AF78 /* UIView+Pending.m in Sources */,
 				6AA2FCCF1A65ABC80021AF78 /* DNTheme.m in Sources */,
+				6AA2FCFF1A66FA010021AF78 /* CDEmployeeModel.m in Sources */,
 				6AA2FCF01A66E4670021AF78 /* DNSampleCollectionViewController.m in Sources */,
 				6AA2FCD61A65ABE00021AF78 /* NSDate+Unix.m in Sources */,
 				6AA2FCCD1A65ABC80021AF78 /* DNTextField.m in Sources */,
 				6AA2FCE11A65ABE00021AF78 /* UILabel+TextKerning.m in Sources */,
+				6AA2FCFD1A66FA010021AF78 /* CDOEmployee.m in Sources */,
 				6AA2FCB71A65ABC80021AF78 /* DNCollectionViewCell.m in Sources */,
 				6AA2FCDB1A65ABE00021AF78 /* NSString+Contains.m in Sources */,
 				6AA2FCDF1A65ABE00021AF78 /* UIApplication+AppDimensions.m in Sources */,
@@ -819,6 +832,7 @@
 				6AA2FCD51A65ABDF0021AF78 /* NSDate+PrettyDate.m in Sources */,
 				6AA2FCB31A65ABC80021AF78 /* DNAppConstants.m in Sources */,
 				6AA2FCD31A65ABDF0021AF78 /* NSAttributedString+StringFromHTML.m in Sources */,
+				6AA2FCFC1A66FA010021AF78 /* CDOCompany.m in Sources */,
 				6AA2FCC11A65ABC80021AF78 /* DNModelWatch.m in Sources */,
 				6AA2FCE51A65ABE00021AF78 /* UIView+ViewWithNibName.m in Sources */,
 				6AA2FCBE1A65ABC80021AF78 /* DNLabel.m in Sources */,
@@ -833,9 +847,11 @@
 				6AA2FCD01A65ABC80021AF78 /* DNThemeManager.m in Sources */,
 				6AA2FCC61A65ABC80021AF78 /* DNModelWatchKVOObjects.m in Sources */,
 				6AA2FCB51A65ABC80021AF78 /* DNCircularImageView.m in Sources */,
+				6AA2FCFE1A66FA010021AF78 /* CDCompanyModel.m in Sources */,
 				6AA2FCBA1A65ABC80021AF78 /* DNCommunicationsAPI.m in Sources */,
 				6AA2FCB41A65ABC80021AF78 /* DNButton.m in Sources */,
 				ADC9D5C61821EA5E0019F0DA /* ADVDefaultTheme.m in Sources */,
+				6AA2FCFA1A66F9F50021AF78 /* CDTestDataModel.m in Sources */,
 				6AA2FCC81A65ABC80021AF78 /* DNModelWatchObjects.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -846,16 +862,10 @@
 			files = (
 				ADC9D5211821A2800019F0DA /* DoubleNodeTestCase.m in Sources */,
 				6AA2FCF81A66EE110021AF78 /* DoubleNodeCollectionViewTests.m in Sources */,
-				6AA2FC001A6591C40021AF78 /* CDOEmployee.m in Sources */,
-				6AA2FC061A6595240021AF78 /* CDCompanyModel.m in Sources */,
-				6AA2FBFD1A6591A60021AF78 /* CDOCompany.m in Sources */,
 				6AA2FCB01A659E590021AF78 /* DoubleNodeCompanyTests.m in Sources */,
 				6AA2FCAE1A659E0B0021AF78 /* DoubleNodeEmployeeTests.m in Sources */,
 				6AA2FCEC1A66E3B70021AF78 /* DoubleNodeWatchTests.m in Sources */,
 				6AA2FCB21A659EC90021AF78 /* DoubleNodeModelTests.m in Sources */,
-				6AA2FCAC1A6599AA0021AF78 /* CDOTestEntityBase.m in Sources */,
-				6AA2FC071A6595240021AF78 /* CDEmployeeModel.m in Sources */,
-				6AA2FC0C1A6595CF0021AF78 /* CDTestDataModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

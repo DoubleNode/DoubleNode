@@ -1,5 +1,5 @@
-#include "Pods-DoubleNodeDemoTests-Foundry.xcconfig"
+#include "Pods-Foundry.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Build" "${PODS_ROOT}/Headers/Build/Foundry" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ColorUtils" "${PODS_ROOT}/Headers/Public/FontAwesome+iOS" "${PODS_ROOT}/Headers/Public/Foundry" "${PODS_ROOT}/Headers/Public/GCPlaceholderTextView" "${PODS_ROOT}/Headers/Public/Gizou" "${PODS_ROOT}/Headers/Public/Inflections" "${PODS_ROOT}/Headers/Public/JustType" "${PODS_ROOT}/Headers/Public/KPAViewControllerTestHelper" "${PODS_ROOT}/Headers/Public/Kiwi" "${PODS_ROOT}/Headers/Public/NSLogger" "${PODS_ROOT}/Headers/Public/NZCircularImageView" "${PODS_ROOT}/Headers/Public/Nocilla" "${PODS_ROOT}/Headers/Public/PPiAwesomeButton" "${PODS_ROOT}/Headers/Public/PPiFlatSegmentedControl" "${PODS_ROOT}/Headers/Public/RBRouteBuilder" "${PODS_ROOT}/Headers/Public/RegexKitLite" "${PODS_ROOT}/Headers/Public/SDWebImage" "${PODS_ROOT}/Headers/Public/TTTAttributedLabel" "${PODS_ROOT}/Headers/Public/UIActivityIndicator-for-SDWebImage"
-OTHER_LDFLAGS = ${PODS_DOUBLENODEDEMOTESTS_FOUNDRY_OTHER_LDFLAGS} -ObjC
+OTHER_LDFLAGS = ${PODS_FOUNDRY_OTHER_LDFLAGS} -ObjC
 PODS_ROOT = ${SRCROOT}
