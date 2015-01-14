@@ -10,6 +10,8 @@
 
 #import "DNUtilities.h"
 
+#import "DNSampleCollectionViewController.h"
+
 @implementation DNAppDelegate
 
 #pragma mark - General DNApplicationProtocol functions
@@ -153,11 +155,11 @@
     persistentStoreCoordinatorDictionary    = [NSMutableDictionary dictionaryWithCapacity:10];
     
     //[self setDoNotUseIncrementalStore:YES];
-    
+   
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.rootViewController = [[DNSampleCollectionViewController alloc] initWithNibName:@"DNSampleCollectionViewController" bundle:nil];
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

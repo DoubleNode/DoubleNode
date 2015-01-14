@@ -84,6 +84,12 @@
 		6AA2FCE51A65ABE00021AF78 /* UIView+ViewWithNibName.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FC931A6597D70021AF78 /* UIView+ViewWithNibName.m */; };
 		6AA2FCE61A65ABE00021AF78 /* UIViewController+Visible.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FC951A6597D70021AF78 /* UIViewController+Visible.m */; };
 		6AA2FCEA1A65E2ED0021AF78 /* Test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCE71A65B28A0021AF78 /* Test.xcdatamodeld */; };
+		6AA2FCEC1A66E3B70021AF78 /* DoubleNodeWatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCEB1A66E3B70021AF78 /* DoubleNodeWatchTests.m */; };
+		6AA2FCF01A66E4670021AF78 /* DNSampleCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCEE1A66E4670021AF78 /* DNSampleCollectionViewController.m */; };
+		6AA2FCF11A66E4670021AF78 /* DNSampleCollectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA2FCEF1A66E4670021AF78 /* DNSampleCollectionViewController.xib */; };
+		6AA2FCF41A66E5270021AF78 /* DNSampleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCF31A66E5270021AF78 /* DNSampleCollectionViewCell.m */; };
+		6AA2FCF61A66E5440021AF78 /* DNSampleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6AA2FCF51A66E5440021AF78 /* DNSampleCollectionViewCell.xib */; };
+		6AA2FCF81A66EE110021AF78 /* DoubleNodeCollectionViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6AA2FCF71A66EE110021AF78 /* DoubleNodeCollectionViewTests.m */; };
 		ADC9D4F61821A2800019F0DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC9D4F51821A2800019F0DA /* Foundation.framework */; };
 		ADC9D4F81821A2800019F0DA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC9D4F71821A2800019F0DA /* CoreGraphics.framework */; };
 		ADC9D4FA1821A2800019F0DA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADC9D4F91821A2800019F0DA /* UIKit.framework */; };
@@ -239,6 +245,14 @@
 		6AA2FCAF1A659E590021AF78 /* DoubleNodeCompanyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleNodeCompanyTests.m; sourceTree = "<group>"; };
 		6AA2FCB11A659EC90021AF78 /* DoubleNodeModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleNodeModelTests.m; sourceTree = "<group>"; };
 		6AA2FCE81A65B28A0021AF78 /* Test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Test.xcdatamodel; sourceTree = "<group>"; };
+		6AA2FCEB1A66E3B70021AF78 /* DoubleNodeWatchTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleNodeWatchTests.m; sourceTree = "<group>"; };
+		6AA2FCED1A66E4670021AF78 /* DNSampleCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNSampleCollectionViewController.h; sourceTree = "<group>"; };
+		6AA2FCEE1A66E4670021AF78 /* DNSampleCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNSampleCollectionViewController.m; sourceTree = "<group>"; };
+		6AA2FCEF1A66E4670021AF78 /* DNSampleCollectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DNSampleCollectionViewController.xib; sourceTree = "<group>"; };
+		6AA2FCF21A66E5270021AF78 /* DNSampleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DNSampleCollectionViewCell.h; sourceTree = "<group>"; };
+		6AA2FCF31A66E5270021AF78 /* DNSampleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DNSampleCollectionViewCell.m; sourceTree = "<group>"; };
+		6AA2FCF51A66E5440021AF78 /* DNSampleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DNSampleCollectionViewCell.xib; sourceTree = "<group>"; };
+		6AA2FCF71A66EE110021AF78 /* DoubleNodeCollectionViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleNodeCollectionViewTests.m; sourceTree = "<group>"; };
 		6EF125394017A1C4D2DE0EA6 /* Pods-DoubleNodeDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoubleNodeDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoubleNodeDemoTests/Pods-DoubleNodeDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		ADC9D4F21821A2800019F0DA /* DoubleNodeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoubleNodeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADC9D4F51821A2800019F0DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -375,6 +389,12 @@
 			children = (
 				ADC9D5061821A2800019F0DA /* DNAppDelegate.h */,
 				ADC9D5071821A2800019F0DA /* DNAppDelegate.m */,
+				6AA2FCED1A66E4670021AF78 /* DNSampleCollectionViewController.h */,
+				6AA2FCEE1A66E4670021AF78 /* DNSampleCollectionViewController.m */,
+				6AA2FCEF1A66E4670021AF78 /* DNSampleCollectionViewController.xib */,
+				6AA2FCF21A66E5270021AF78 /* DNSampleCollectionViewCell.h */,
+				6AA2FCF31A66E5270021AF78 /* DNSampleCollectionViewCell.m */,
+				6AA2FCF51A66E5440021AF78 /* DNSampleCollectionViewCell.xib */,
 				ADC9D50C1821A2800019F0DA /* Images.xcassets */,
 				6AA2FCE71A65B28A0021AF78 /* Test.xcdatamodeld */,
 				ADC9D4FE1821A2800019F0DA /* Supporting Files */,
@@ -399,6 +419,8 @@
 				6AA2FCB11A659EC90021AF78 /* DoubleNodeModelTests.m */,
 				6AA2FCAF1A659E590021AF78 /* DoubleNodeCompanyTests.m */,
 				6AA2FCAD1A659E0B0021AF78 /* DoubleNodeEmployeeTests.m */,
+				6AA2FCEB1A66E3B70021AF78 /* DoubleNodeWatchTests.m */,
+				6AA2FCF71A66EE110021AF78 /* DoubleNodeCollectionViewTests.m */,
 				6AA2FBF71A658D9C0021AF78 /* Test Fixtures */,
 				ADC9D51B1821A2800019F0DA /* Supporting Files */,
 			);
@@ -657,9 +679,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AA2FCF11A66E4670021AF78 /* DNSampleCollectionViewController.xib in Resources */,
 				ADC9D5801821EA530019F0DA /* README.md in Resources */,
 				ADC9D5021821A2800019F0DA /* InfoPlist.strings in Resources */,
 				ADC9D50D1821A2800019F0DA /* Images.xcassets in Resources */,
+				6AA2FCF61A66E5440021AF78 /* DNSampleCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,9 +781,11 @@
 				6AA2FCE01A65ABE00021AF78 /* UIFont+Custom.m in Sources */,
 				ADC9D57E1821A93F0019F0DA /* DNAppDelegate.m in Sources */,
 				6AA2FCBD1A65ABC80021AF78 /* DNGravatar.m in Sources */,
+				6AA2FCF41A66E5270021AF78 /* DNSampleCollectionViewCell.m in Sources */,
 				6AA2FCD11A65ABC80021AF78 /* DNUtilities.m in Sources */,
 				6AA2FCE41A65ABE00021AF78 /* UIView+Pending.m in Sources */,
 				6AA2FCCF1A65ABC80021AF78 /* DNTheme.m in Sources */,
+				6AA2FCF01A66E4670021AF78 /* DNSampleCollectionViewController.m in Sources */,
 				6AA2FCD61A65ABE00021AF78 /* NSDate+Unix.m in Sources */,
 				6AA2FCCD1A65ABC80021AF78 /* DNTextField.m in Sources */,
 				6AA2FCE11A65ABE00021AF78 /* UILabel+TextKerning.m in Sources */,
@@ -819,11 +845,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADC9D5211821A2800019F0DA /* DoubleNodeTestCase.m in Sources */,
+				6AA2FCF81A66EE110021AF78 /* DoubleNodeCollectionViewTests.m in Sources */,
 				6AA2FC001A6591C40021AF78 /* CDOEmployee.m in Sources */,
 				6AA2FC061A6595240021AF78 /* CDCompanyModel.m in Sources */,
 				6AA2FBFD1A6591A60021AF78 /* CDOCompany.m in Sources */,
 				6AA2FCB01A659E590021AF78 /* DoubleNodeCompanyTests.m in Sources */,
 				6AA2FCAE1A659E0B0021AF78 /* DoubleNodeEmployeeTests.m in Sources */,
+				6AA2FCEC1A66E3B70021AF78 /* DoubleNodeWatchTests.m in Sources */,
 				6AA2FCB21A659EC90021AF78 /* DoubleNodeModelTests.m in Sources */,
 				6AA2FCAC1A6599AA0021AF78 /* CDOTestEntityBase.m in Sources */,
 				6AA2FC071A6595240021AF78 /* CDEmployeeModel.m in Sources */,

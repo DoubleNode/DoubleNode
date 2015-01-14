@@ -13,6 +13,11 @@
 
 @implementation DNCollectionViewCell
 
++ (NSString*)className
+{
+    return NSStringFromClass([self class]);
+}
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];

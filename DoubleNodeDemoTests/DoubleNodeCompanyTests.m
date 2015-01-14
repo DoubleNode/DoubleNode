@@ -87,4 +87,32 @@ const NSUInteger    kTestCompanyEmployeesCount  = 5;
     XCTAssertEqual([company.employees count], kTestCompanyEmployeesCount);
 }
 
+- (void)testCreate100000CompaniesAndEmployees
+{
+    for (int i = 0; i < 100; i++)
+    {
+        DLog(LL_Debug, LD_General, @"Creating block #%d of 100...", i);
+        
+        [[CDCompanyModel dataModel] createContextForCurrentThreadPerformBlockAndWait:
+         ^BOOL(NSManagedObjectContext* context)
+         {
+             for (int j = 0; j < 1000; j++)
+             {
+                 __block CDOCompany* company    = [CDOCompany foundryBuildWithContext:context];
+                 
+                 XCTAssertNotNil(company);
+                 XCTAssertEqual([company.id length], kTestCompanyIDLength);
+                 XCTAssertEqual([company.employees count], kTestCompanyEmployeesCount);
+             }
+             
+             return YES;
+         }];
+    }
+
+    NSArray*    companies   = [[CDCompanyModel model] getAll];
+
+    XCTAssertNotNil(companies);
+    XCTAssertEqual([companies count], 100000);
+}
+
 @end

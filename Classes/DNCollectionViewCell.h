@@ -13,4 +13,8 @@
 
 @interface DNCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel*   nameLabel;
+
++ (NSString*)className;
+
 @end
