@@ -18,6 +18,8 @@
 
 @implementation CDCompanyModel
 
+- (NSArray*)getAllSortKeys      {   return @[ @{ @"field": @"added", @"ascending": @NO } ];   }
+
 + (NSString*)dataModelName
 {
     return @"Test";

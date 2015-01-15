@@ -15,8 +15,14 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Company Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zy8-pd-wDH">
-                        <rect key="frame" x="8" y="14" width="304" height="21"/>
+                        <rect key="frame" x="8" y="6" width="304" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Company Timestamp" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nlv-45-7Gq">
+                        <rect key="frame" x="8" y="24" width="304" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -25,6 +31,7 @@
             </view>
             <connections>
                 <outlet property="nameLabel" destination="Zy8-pd-wDH" id="nsZ-8e-4pE"/>
+                <outlet property="timestampLabel" destination="nlv-45-7Gq" id="B2b-Fu-qJy"/>
             </connections>
         </collectionViewCell>
     </objects>

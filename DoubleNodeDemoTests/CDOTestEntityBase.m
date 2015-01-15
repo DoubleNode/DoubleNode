@@ -11,6 +11,7 @@
 @implementation CDOTestEntityBase
 
 @dynamic id;
+@dynamic added;
 
 + (instancetype)foundryBuildWithContext:(NSManagedObjectContext*)context
 {
@@ -22,12 +23,18 @@
 + (NSDictionary*)foundryBuildSpecs
 {
     return @{
-             @"id"  : @(FoundryPropertyTypeUUID),
+             @"id"      : @(FoundryPropertyTypeUUID),
+             @"added"   : @(FoundryPropertyTypeCustom),
              };
 }
 
 + (id)foundryAttributeForProperty:(NSString*)property
 {
+    if ([property isEqualToString:@"added"])
+    {
+        return [NSDate date];
+    }
+    
     return nil;
 }
 

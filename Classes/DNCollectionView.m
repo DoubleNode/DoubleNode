@@ -20,7 +20,10 @@
 
 @interface DNCollectionView ()
 {
-    NSMutableArray* updateBlocks;
+    NSMutableArray* insertBlocks;
+    NSMutableArray* deleteBlocks;
+    NSMutableArray* reloadBlocks;
+    NSMutableArray* moveBlocks;
     
     BOOL            shouldReloadCollectionView;
     NSInteger       sectionCount;
@@ -34,16 +37,35 @@
 - (void)beginUpdates
 {
     //DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 1", self.name);
-    if (updateBlocks)
+    if (insertBlocks)
     {
-        DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 1a *** REENTERED ***", self.name);
+        DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 1a *** REENTERED insertBlocks ***", self.name);
     }
-    updateBlocks                = [NSMutableArray array];
+    insertBlocks                = [NSMutableArray array];
+
+    if (deleteBlocks)
+    {
+        DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 1a *** REENTERED deleteBlocks ***", self.name);
+    }
+    deleteBlocks                = [NSMutableArray array];
+
+    if (reloadBlocks)
+    {
+        DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 1a *** REENTERED reloadBlocks ***", self.name);
+    }
+    reloadBlocks                = [NSMutableArray array];
+
+    if (moveBlocks)
+    {
+        DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 1a *** REENTERED moveBlocks ***", self.name);
+    }
+    moveBlocks                = [NSMutableArray array];
+
     shouldReloadCollectionView  = NO;
     
     objectCounts    = [NSMutableArray array];
     sectionCount    = [self numberOfSections];
-    //DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 2 sectionCount=%d", self.name, sectionCount);
+    DOLog(LL_Debug, LD_General, @"[%@] beginUpdates - 2 sectionCount=%d", self.name, sectionCount);
     for (int section = 0; section < sectionCount; section++)
     {
         [objectCounts addObject:@([self numberOfItemsInSection:section])];
@@ -60,7 +82,10 @@
         [self reloadData];
         
         //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 1b", self.name);
-        updateBlocks    = nil;
+        insertBlocks    = nil;
+        deleteBlocks    = nil;
+        reloadBlocks    = nil;
+        moveBlocks      = nil;
         //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 1c", self.name);
         return;
     }
@@ -78,31 +103,72 @@
         [self performBatchUpdates:
          ^()
          {
-             //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 3", self.name);
-             [updateBlocks enumerateObjectsUsingBlock:
-              ^(void(^updateBlock)(void), NSUInteger idx, BOOL* stop)
+             __block NSUInteger insertCount = 0;
+             
+             DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 3a", self.name);
+             [insertBlocks enumerateObjectsUsingBlock:
+              ^(void(^block)(void), NSUInteger idx, BOOL* stop)
               {
-                  updateBlock();
+                  insertCount++;
+                  block();
               }];
              
-             //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 4", self.name);
+             __block NSUInteger deleteCount = 0;
+             
+             DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 3b", self.name);
+             [deleteBlocks enumerateObjectsUsingBlock:
+              ^(void(^block)(void), NSUInteger idx, BOOL* stop)
+              {
+                  deleteCount++;
+                  block();
+              }];
+             
+             __block NSUInteger reloadCount = 0;
+             
+             DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 3c", self.name);
+             [reloadBlocks enumerateObjectsUsingBlock:
+              ^(void(^block)(void), NSUInteger idx, BOOL* stop)
+              {
+                  reloadCount++;
+                  block();
+              }];
+             
+             __block NSUInteger moveCount = 0;
+             
+             DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 3d", self.name);
+             [moveBlocks enumerateObjectsUsingBlock:
+              ^(void(^block)(void), NSUInteger idx, BOOL* stop)
+              {
+                  moveCount++;
+                  block();
+              }];
+             
+             DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 4 (insertCount=%d)", self.name, insertCount);
+             DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 4 (deleteCount=%d)", self.name, deleteCount);
+             DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 4 (reloadCount=%d)", self.name, reloadCount);
+             DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 4 (moveCount=%d)", self.name, moveCount);
          }
                        completion:
          ^(BOOL finished)
          {
-             //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 5", self.name);
-             updateBlocks = nil;
+             DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 5", self.name);
          }];
 
-        updateBlocks = nil;
-        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 6", self.name);
+        insertBlocks    = nil;
+        deleteBlocks    = nil;
+        reloadBlocks    = nil;
+        moveBlocks      = nil;
+        DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 6", self.name);
     }
     @catch (NSException* exception)
     {
-        //DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 7", self.name);
+        DOLog(LL_Debug, LD_General, @"[%@] endUpdates - 7", self.name);
 
         DLog(LL_Error, LD_General, @"[%@] exception=%@", self.name, exception);
-        updateBlocks = nil;
+        insertBlocks    = nil;
+        deleteBlocks    = nil;
+        reloadBlocks    = nil;
+        moveBlocks      = nil;
 
         if (self.recovery)
         {
@@ -120,7 +186,7 @@
 - (void)insertSections:(NSIndexSet*)sections
 {
     //DOLog(LL_Debug, LD_General, @"[%@] insertSections [%d]", self.name, [sections firstIndex]);
-    [updateBlocks addObject:
+    [insertBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] insertSections:block [%d]", self.name, [sections firstIndex]);
@@ -131,7 +197,7 @@
 - (void)deleteSections:(NSIndexSet*)sections
 {
     //DOLog(LL_Debug, LD_General, @"[%@] deleteSections [%d]", self.name, [sections firstIndex]);
-    [updateBlocks addObject:
+    [deleteBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] deleteSections:block [%d]", self.name, [sections firstIndex]);
@@ -142,7 +208,7 @@
 - (void)reloadSections:(NSIndexSet*)sections
 {
     //DOLog(LL_Debug, LD_General, @"[%@] reloadSections [%d]", self.name, [sections firstIndex]);
-    [updateBlocks addObject:
+    [reloadBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] reloadSections:block [%d]", self.name, [sections firstIndex]);
@@ -153,7 +219,7 @@
 - (void)moveSection:(NSInteger)section toSection:(NSInteger)newSection
 {
     //DOLog(LL_Debug, LD_General, @"[%@] moveSection [%d]-[%d]", self.name, section, newSection);
-    [updateBlocks addObject:
+    [moveBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] moveSection:block [%d]-[%d]", self.name, section, newSection);
@@ -181,10 +247,14 @@
     __block DNCollectionView*   bSelf   = self;
     
     //DOLog(LL_Debug, LD_General, @"[%@] insertRowsAtIndexPaths (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
-    [updateBlocks addObject:
+    [insertBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] insertRowsAtIndexPaths:block (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
+         if ([indexPathsArray count] > 1)
+         {
+             DOLog(LL_Debug, LD_General, @"count error");
+         }
          [bSelf insertItemsAtIndexPaths:indexPathsArray];
      }];
 }
@@ -203,7 +273,7 @@
     __block DNCollectionView*   bSelf   = self;
     
     //DOLog(LL_Debug, LD_General, @"[%@] deleteRowsAtIndexPaths (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
-    [updateBlocks addObject:
+    [deleteBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] deleteRowsAtIndexPaths:block (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
@@ -218,7 +288,7 @@
     __block DNCollectionView*   bSelf   = self;
     
     //DOLog(LL_Debug, LD_General, @"[%@] reloadRowsAtIndexPaths (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
-    [updateBlocks addObject:
+    [reloadBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] reloadRowsAtIndexPaths:block (%d)[%d:%d]", self.name, [indexPathsArray count], ((NSIndexPath*)indexPathsArray[0]).section, ((NSIndexPath*)indexPathsArray[0]).row);
@@ -231,7 +301,7 @@
     __block DNCollectionView*   bSelf   = self;
     
     //DOLog(LL_Debug, LD_General, @"[%@] moveRowAtIndexPath [%d:%d]-[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
-    [updateBlocks addObject:
+    [moveBlocks addObject:
      ^()
      {
          //DOLog(LL_Debug, LD_General, @"[%@] moveRowAtIndexPath:block [%d:%d]-[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);

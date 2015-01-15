@@ -37,7 +37,7 @@ CDO_TOMANY_ACCESSORS_INSTANCES(Employees, Employee)
     NSMutableDictionary*    specs   = [[super foundryBuildSpecs] mutableCopy];
     
     [specs addEntriesFromDictionary:@{
-                                      @"name"   : [NSNumber numberWithInteger:FoundryPropertyTypeFullName],
+                                      @"name"   : @(FoundryPropertyTypeFullName),
                                       }];
     
     return specs;

@@ -18,7 +18,7 @@
 
 #import "DNSampleCollectionViewCell.h"
 
-@interface DNSampleCollectionViewController () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface DNSampleCollectionViewController () <UICollectionViewDelegate>
 {
     DNModelWatchFetchedObjects* companyWatch;
     
@@ -34,21 +34,54 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    self.collectionView.name    = NSStringFromClass([self.collectionView class]);
+    self.collectionView.name    = NSStringFromClass([self class]);
     
     [DNUtilities registerCellNib:[DNSampleCollectionViewCell className] withCollectionView:self.collectionView];
     
+    [[CDCompanyModel dataModel] deletePersistentStore];
+
     companyModel    = [CDCompanyModel model];
     
     [[CDCompanyModel dataModel] createContextForCurrentThreadPerformBlockAndWait:
      ^BOOL(NSManagedObjectContext* context)
      {
-         for (int j = 0; j < 100; j++)
+         for (int j = 0; j < 10000; j++)
          {
-             [CDOCompany foundryBuildWithContext:context];
+             CDOCompany*    company = [CDOCompany foundryBuildWithContext:context];
+             
+             company.name   = [NSString stringWithFormat:@"%@ (#%d)", company.name, j + 1];
          }
          
          return YES;
+     }];
+    
+    [DNUtilities runRepeatedlyAfterDelay:3.0f
+                                   block:
+     ^(BOOL* stop)
+     {
+         for (int i = 0; i < 10; i++)
+         {
+             [DNUtilities runOnBackgroundThread:
+              ^()
+              {
+                  [[CDCompanyModel dataModel] createContextForCurrentThreadPerformBlockAndWait:
+                   ^BOOL(NSManagedObjectContext* context)
+                   {
+                       NSArray*   companies   = [companyModel getAll];
+                       
+                       for (int j = 0; j < 50; j++)
+                       {
+                           int    idx = arc4random_uniform([companies count]);
+                           
+                           CDOCompany*    company = companies[idx];
+                           
+                           company.added  = [NSDate date];
+                       }
+                       
+                       return YES;
+                   }];
+              }];
+         }
      }];
     
     [self createCompanyWatch];
@@ -59,6 +92,8 @@
     [super viewDidAppear:animated];
     
     [companyWatch resumeWatch];
+    
+    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -86,36 +121,28 @@
     
     companyWatch    = [companyModel watchAllWithCollectionView:self.collectionView offset:0 count:0];
     
+    __block DNSampleCollectionViewController*   bSelf   = self;
+    
     companyWatch.cellForItemAtIndexPathHandler = ^UICollectionViewCell*(DNModelWatchObjects* watch, UICollectionView* collectionView, NSIndexPath* indexPath)
     {
+        CDOCompany* company = [bSelf->companyWatch objectAtIndexPath:indexPath];
+        
         DNSampleCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:[DNSampleCollectionViewCell className] forIndexPath:indexPath];
         
-        cell.backgroundColor    = [UIColor whiteColor];
-        cell.nameLabel.text     = [NSString stringWithFormat:@"indexPath = %ld/%ld", (long)indexPath.section, (long)indexPath.row];
+        cell.backgroundColor        = [UIColor whiteColor];
+        cell.nameLabel.text         = company.name;
+        cell.timestampLabel.text    = [NSString stringWithFormat:@"%@", company.added];
         
         return cell;
     };
     
     companyWatch.didChangeHandler = ^(DNModelWatchObjects* watch, NSArray* objects, NSDictionary* context)
     {
-        NSLog(@"companyWatch.didChangeHandler");
+        //NSLog(@"companyWatch.didChangeHandler");
     };
     
     [companyWatch startWatch];
     [companyWatch pauseWatch];
-}
-
-#pragma mark - UICollectionViewDataSource
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView*)collectionView
-{
-    return 20;
-}
-
-- (NSInteger)collectionView:(UICollectionView*)collectionView
-     numberOfItemsInSection:(NSInteger)section
-{
-    return 10;
 }
 
 #pragma mark - UICollectionViewDelegate
@@ -125,18 +152,6 @@
   sizeForItemAtIndexPath:(NSIndexPath*)indexPath
 {
     return (CGSize){ 320, 50 };
-}
-
-- (UICollectionViewCell*)collectionView:(UICollectionView*)collectionView
-                 cellForItemAtIndexPath:(NSIndexPath*)indexPath
-{
-    DNSampleCollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:[DNSampleCollectionViewCell className] forIndexPath:indexPath];
-    NSAssert(cell, @"cell dequeue failed!");
-    
-    cell.backgroundColor    = [UIColor whiteColor];
-    cell.nameLabel.text     = [NSString stringWithFormat:@"indexPath = %ld/%ld", (long)indexPath.section, (long)indexPath.row];
-    
-    return cell;
 }
 
 - (void)collectionView:(UICollectionView*)collectionView

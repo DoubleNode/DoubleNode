@@ -13,6 +13,7 @@
 @interface CDOTestEntityBase : DNManagedObject<TGFoundryObject>
 
 @property (nonatomic, retain) NSString* id;
+@property (nonatomic, retain) NSDate*   added;
 
 + (instancetype)foundryBuildWithContext:(NSManagedObjectContext*)context;
 

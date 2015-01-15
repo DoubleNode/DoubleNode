@@ -30,9 +30,9 @@ CDO_DEFAULT_METHOD_INSTANCES(employee, Employee)
     NSMutableDictionary*    specs   = [[super foundryBuildSpecs] mutableCopy];
     
     [specs addEntriesFromDictionary:@{
-                                      @"birthdate"      : [NSNumber numberWithInteger:FoundryPropertyTypeCustom],
-                                      @"firstName"      : [NSNumber numberWithInteger:FoundryPropertyTypeFirstName],
-                                      @"lastName"       : [NSNumber numberWithInteger:FoundryPropertyTypeLastName],
+                                      @"birthdate"      : @(FoundryPropertyTypeCustom),
+                                      @"firstName"      : @(FoundryPropertyTypeFirstName),
+                                      @"lastName"       : @(FoundryPropertyTypeLastName),
                                       }];
     
     return specs;
