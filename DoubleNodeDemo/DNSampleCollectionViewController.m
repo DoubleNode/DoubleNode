@@ -55,10 +55,12 @@
          return YES;
      }];
     
-    [DNUtilities runRepeatedlyAfterDelay:3.0f
+    [DNUtilities runRepeatedlyAfterDelay:15.0f
                                    block:
      ^(BOOL* stop)
      {
+         DLog(LL_Debug, LD_General, @"background thread updates");
+         
          for (int i = 0; i < 10; i++)
          {
              [DNUtilities runOnBackgroundThread:
@@ -92,8 +94,6 @@
     [super viewDidAppear:animated];
     
     [companyWatch resumeWatch];
-    
-    
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -105,6 +105,7 @@
 
 - (void)didReceiveMemoryWarning
 {
+    DLog(LL_Debug, LD_General, @"*** didReceiveMemoryWarning ***");
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -132,6 +133,13 @@
         cell.backgroundColor        = [UIColor whiteColor];
         cell.nameLabel.text         = company.name;
         cell.timestampLabel.text    = [NSString stringWithFormat:@"%@", company.added];
+        
+        // test change for performance improvements
+        cell.layer.shouldRasterize      = YES;
+        cell.layer.rasterizationScale   = [UIScreen mainScreen].scale;
+        
+        // this lets Core Data release the image memory
+        //[company.managedObjectContext refreshObject:company mergeChanges:NO];
         
         return cell;
     };
