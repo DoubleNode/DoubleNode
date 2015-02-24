@@ -1,0 +1,7 @@
+app_identifier "com.doublenode.DoubleNodeDemo"
+apple_id "darren@doublenode.com"
+
+# You can uncomment the lines below and add your own 
+# team selection in case you're in multiple teams
+# team_name "Felix Krause"
+# team_id "Q2CBPJ58CA"
