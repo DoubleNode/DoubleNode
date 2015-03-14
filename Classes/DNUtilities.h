@@ -76,6 +76,8 @@ typedef NS_ENUM(NSInteger, LogLevel)
 
 extern void LogImageDataF(const char *filename, int lineNumber, const char *functionName, NSString *domain, int level, int width, int height, NSData *data);
 
+#define OBJ_OR_NULL(x)  (x ? x : [NSNull null])
+
 #undef assert
 #if __DARWIN_UNIX03
 #define assert(e)   (__builtin_expect(!(e), 0) ? (CFShow(CFSTR("assert going to fail, connect NSLogger NOW\n")), LoggerFlush(NULL,YES), __assert_rtn(__func__, __FILE__, __LINE__, #e)) : (void)0)
