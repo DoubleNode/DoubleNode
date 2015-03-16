@@ -143,11 +143,15 @@
                  [contexts enumerateObjectsUsingBlock:
                   ^(NSManagedObjectContext* context, NSUInteger idx, BOOL *stop)
                   {
-                      [context performBlockAndWait:
+                      [DNUtilities runOnBackgroundThread:
                        ^()
-                       {
-                           [context reset];
-                       }];
+                      {
+                          [context performBlockAndWait:
+                           ^()
+                           {
+                               [context reset];
+                           }];
+                      }];
                   }];
              }];
             
@@ -1018,24 +1022,18 @@
     }
     if (![context isKindOfClass:[NSManagedObjectContext class]])
     {
-        DLog(LL_Critical, LD_CoreData, @"Invalid Context Type!");
+        DLog(LL_Critical, LD_CoreData, @"Invalid Context Type! [%@]", NSStringFromClass([context class]));
     }
     if ((context == self.mainObjectContext) && ([NSThread isMainThread]))
     {
-        //@autoreleasepool
-        {
-            block(context);
-        }
+        block(context);
     }
     else
     {
         [context performBlockAndWait:
          ^()
          {
-             //@autoreleasepool
-             {
-                 block(context);
-             }
+             block(context);
          }];
     }
 }
@@ -1045,20 +1043,14 @@
 {
     if ((context == self.mainObjectContext) && ([NSThread isMainThread]))
     {
-        //@autoreleasepool
-        {
-            block(context);
-        }
+        block(context);
     }
     else
     {
         [context performBlock:
          ^()
          {
-             //@autoreleasepool
-             {
-                 block(context);
-             }
+             block(context);
          }];
     }
 }

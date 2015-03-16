@@ -23,7 +23,6 @@
 #import "DNSegmentedControl.h"
 
 #import "UILabel+TextKerning.h"
-#import "NZCircularImageView.h"
 
 @interface DNAttributedStringAttribute : NSObject
 
@@ -418,15 +417,6 @@
                andItem:(NSString*)item
 {
     [[self class] customizeView:imgView withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-
-    if ([imgView isKindOfClass:[NZCircularImageView class]])
-    {
-        UIColor*    borderColor = [[self class] performThemeSelectorForAttribute:@"BorderColor" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-        NSNumber*   borderWidth = [[self class] performThemeSelectorForAttribute:@"BorderWidth" withType:@"ImageView" andGroup:group andScreen:screen andViewState:viewState andItem:item];
-
-        ((NZCircularImageView*)imgView).borderColor = borderColor;
-        ((NZCircularImageView*)imgView).borderWidth = borderWidth;
-    }
 }
 
 + (void)customizeButton:(UIButton*)btnView
