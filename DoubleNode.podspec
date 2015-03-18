@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.11.14"
+  s.version      = "0.11.15"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
@@ -101,11 +101,9 @@ Pod::Spec.new do |s|
 
   # Finally, specify any Pods that this Pod depends on.
   #
-  # s.dependency 'JSONKit', '~> 1.4'
   s.dependency 'NSLogger'
   s.dependency 'JustType'
   s.dependency 'Inflections'
-  #s.dependency 'NZCircularImageView'
   s.dependency 'TTTAttributedLabel'
   s.dependency 'PPiFlatSegmentedControl'
   s.dependency 'GCPlaceholderTextView'
