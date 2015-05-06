@@ -15,9 +15,9 @@ before_all do
   # increment_build_number
 
   ipa({
-    workspace: "MyApp.xcworkspace",
+    workspace: "DoubleNodeDemo.xcworkspace",
     configuration: "Debug",
-    scheme: "MyApp",
+    scheme: "DoubleNodeDemo",
   })
 
   # xctool
@@ -43,12 +43,30 @@ end
 
 lane :inhouse do
   # insert your code here
+  say "It works"
+end
+
+lane :appstore do
+    produce({
+        produce_username: 'darren@doublenode.com',
+        produce_app_identifier: 'com.doublenode.DoubleNodeDemo',
+        produce_app_name: 'DoubleNodeDemo',
+        produce_language: 'English',
+        produce_version: '1.0',
+        produce_sku: 123,
+        produce_team_name: 'DoubleNode.com', # only necessary when in multiple teams
+        produce_team_id: 'T864D3RXRZ' # only necessary when in multiple teams
+    })
+
+    deliver
 end
 
 # You can define as many lanes as you want
 
 after_all do |lane|
   # This block is called, only if the executed lane was successful
+  say "Successfully deployed new App Update for [App](http://link.com)."
+
   # slack({
   #   message: "Successfully deployed new App Update for [App](http://link.com).",
   #   success: true,

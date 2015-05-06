@@ -3,6 +3,7 @@
 
 # hide_transporter_output # remove the '#' in the beginning of the line, to hide the output while uploading
 
+apple_id ENV['PRODUCE_APPLE_ID']
 
 ########################################
 # App Metadata
@@ -34,7 +35,7 @@ ipa do
     # If you only want to upload app metadata, remove the complete ipa block.
 
     # system("ipa build --verbose") # build your project using Shenzhen
-    "./DoubleNode.ipa" # Tell 'Deliver' where it can find the finished ipa file
+    "/Users/darren.ehlers/Google Drive/clients/DoubleNode/DoubleNode/DoubleNodeDemo.ipa" # Tell 'Deliver' where it can find the finished ipa file
 end
 
 # ipa "./latest.ipa" # this can be used instead of the `do` block, if you prefer manually building the ipa file
@@ -50,5 +51,5 @@ end
 # end
 
 success do
-  # system("say 'Successfully deployed a new version.'")
+  system("say 'Successfully deployed a new version.'")
 end

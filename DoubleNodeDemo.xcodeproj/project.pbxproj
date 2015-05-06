@@ -254,6 +254,10 @@
 		6AA2FCF51A66E5440021AF78 /* DNSampleCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DNSampleCollectionViewCell.xib; sourceTree = "<group>"; };
 		6AA2FCF71A66EE110021AF78 /* DoubleNodeCollectionViewTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DoubleNodeCollectionViewTests.m; sourceTree = "<group>"; };
 		6EF125394017A1C4D2DE0EA6 /* Pods-DoubleNodeDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DoubleNodeDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-DoubleNodeDemoTests/Pods-DoubleNodeDemoTests.release.xcconfig"; sourceTree = "<group>"; };
+		AD24E5A31A9C341E0008CEC4 /* Fastfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Fastfile; path = fastlane/Fastfile; sourceTree = "<group>"; };
+		AD24E5A41A9C41250008CEC4 /* Appfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Appfile; path = fastlane/Appfile; sourceTree = "<group>"; };
+		AD24E5A51A9C41250008CEC4 /* Deliverfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Deliverfile; path = fastlane/Deliverfile; sourceTree = "<group>"; };
+		AD24E5A61A9C41250008CEC4 /* Snapfile */ = {isa = PBXFileReference; lastKnownFileType = text; name = Snapfile; path = fastlane/Snapfile; sourceTree = "<group>"; };
 		ADC9D4F21821A2800019F0DA /* DoubleNodeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DoubleNodeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADC9D4F51821A2800019F0DA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ADC9D4F71821A2800019F0DA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -360,6 +364,10 @@
 		ADC9D4E91821A2800019F0DA = {
 			isa = PBXGroup;
 			children = (
+				AD24E5A31A9C341E0008CEC4 /* Fastfile */,
+				AD24E5A41A9C41250008CEC4 /* Appfile */,
+				AD24E5A51A9C41250008CEC4 /* Deliverfile */,
+				AD24E5A61A9C41250008CEC4 /* Snapfile */,
 				6AA2FBF61A65877D0021AF78 /* DoubleNode.podspec */,
 				ADC9D57F1821EA530019F0DA /* README.md */,
 				ADC9D5C81821EA640019F0DA /* Source */,

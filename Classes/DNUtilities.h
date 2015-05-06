@@ -132,6 +132,7 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (void)runOnMainThreadRepeatedlyAfterDelay:(CGFloat)delay block:(void (^)(BOOL* stop))block;
 
 + (NSTimer*)repeatRunAfterDelay:(CGFloat)delay block:(void (^)())block;
++ (NSTimer*)runTimerAfterDelay:(CGFloat)delay block:(void (^)())block;
 
 + (bool)canDevicePlaceAPhoneCall;
 

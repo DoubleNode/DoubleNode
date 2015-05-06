@@ -446,10 +446,11 @@ forSupplementaryViewOfKind:(NSString*)kind
      }];
 }
 
-- (void)instanceRunBlock:(void (^)())block
+- (void)instanceRunBlock:(NSTimer*)timer
 {
+    void (^block)() = timer.userInfo;
+    
     block();
-    //[DNUtilities runBlock:block];
 }
 
 + (NSTimer*)repeatRunAfterDelay:(CGFloat)delay block:(void (^)())block
@@ -457,6 +458,13 @@ forSupplementaryViewOfKind:(NSString*)kind
     void (^block_)() = [block copy];
 
     return [NSTimer scheduledTimerWithTimeInterval:delay target:[DNUtilities sharedInstance] selector:@selector(instanceRunBlock:) userInfo:block_ repeats:YES];
+}
+
++ (NSTimer*)runTimerAfterDelay:(CGFloat)delay block:(void (^)())block
+{
+    void (^block_)() = [block copy];
+    
+    return [NSTimer scheduledTimerWithTimeInterval:delay target:[DNUtilities sharedInstance] selector:@selector(instanceRunBlock:) userInfo:block_ repeats:NO];
 }
 
 + (bool)canDevicePlaceAPhoneCall

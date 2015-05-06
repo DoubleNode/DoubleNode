@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0500"
+   LastUpgradeVersion = "0510"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D6668242DC234999AFA4819E"
+               BlueprintIdentifier = "4426869184012ACF147C3037"
                BuildableName = "libPods-DoubleNodeDemoTests-Kiwi.a"
                BlueprintName = "Pods-DoubleNodeDemoTests-Kiwi"
                ReferencedContainer = "container:Pods.xcodeproj">

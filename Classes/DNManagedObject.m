@@ -907,6 +907,7 @@
             @catch (NSException *exception)
             {
                 // TODO: respond to CoreData fault
+                DLog(LL_Debug, LD_General, @"exception=%@", exception);
             }
         }
     }
