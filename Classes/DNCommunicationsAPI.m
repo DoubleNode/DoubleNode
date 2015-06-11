@@ -801,8 +801,10 @@
 {
     NSError*    error = nil;
 
+    NSInteger      statusCode  = [httpResponse statusCode];
+    
     //DLog(LL_Debug, LD_API, @"httpResponse=%@", httpResponse);
-    if ([httpResponse statusCode] != 200)
+    if ((statusCode < 200) || (statusCode > 299))
     {
         DLog(LL_Debug, LD_API, @"responseCode=%ld, response=%@, error=%@", (long)[httpResponse statusCode], [NSHTTPURLResponse localizedStringForStatusCode:[httpResponse statusCode]], error);
     }
@@ -815,8 +817,6 @@
      DLog(LL_Debug, LD_API, @"responseR=%@", responseR);
      }
      */
-
-    NSInteger      statusCode  = [httpResponse statusCode];
 
     if (errorCode == -1012)
     {

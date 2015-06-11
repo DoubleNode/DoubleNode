@@ -229,7 +229,7 @@
              // Replace this implementation with code to handle the error appropriately.
              // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
              DLog(LL_Critical, LD_CoreData, @"Unresolved error %@, %@", error, [error userInfo]);
-             abort();
+             //abort();
          }
      }];
 }
@@ -277,7 +277,14 @@
         return;
     }
 
-    [context reset];
+    @try
+    {
+        [context reset];
+    }
+    @catch (NSException* exception)
+    {
+        DLog(LL_Debug, LD_CoreData, @"Exception: %@", exception);
+    }
     
     if (![NSThread isMainThread])
     {
@@ -292,8 +299,15 @@
         return;
     }
     
-    [context save:NULL];
-    
+    @try
+    {
+        [context save:NULL];
+    }
+    @catch (NSException* exception)
+    {
+        DLog(LL_Debug, LD_CoreData, @"Exception: %@", exception);
+    }
+
     if (![NSThread isMainThread])
     {
         [self removeContextFromCurrentThread:context];

@@ -196,6 +196,11 @@
     if (self.collectionView)
     {
         [self.collectionView reloadData];
+
+        if (!self.collectionView.name)
+        {
+            DOLog(LL_Debug, LD_General, @"Nameless CollectionView! [%@]", NSStringFromSelector(_cmd));
+        }
     }
 
     [super startWatch];
@@ -477,7 +482,7 @@
       newIndexPath:(NSIndexPath *)newIndexPath
 {
     //DOLog(LL_Debug, LD_General, @"[%@] controller:didChangeObject:atIndexPath:[%d:%d] forChangeType:newIndexPath:[%d:%d]", self.name, indexPath.section, indexPath.row, newIndexPath.section, newIndexPath.row);
-    
+
     switch (type)
     {
         case NSFetchedResultsChangeInsert:
@@ -525,13 +530,16 @@
         //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeWillChangeHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
     }
 
-    if (!self.collectionView.window)
+    if (self.collectionView)
     {
-        DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
-    }
-    if (self.collectionView && self.collectionView.window)
-    {
-        [self.collectionView beginUpdates];
+        if (!self.collectionView.window)
+        {
+            DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        }
+        else
+        {
+            [self.collectionView beginUpdates];
+        }
     }
 
     [super executeWillChangeHandler:context];
@@ -547,15 +555,18 @@
         //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
     }
 
-    if (!self.collectionView.window)
+    if (self.collectionView)
     {
-        DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        if (!self.collectionView.window)
+        {
+            DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        }
+        else
+        {
+            [self.collectionView endUpdates];
+        }
     }
-    if (self.collectionView && self.collectionView.window)
-    {
-        [self.collectionView endUpdates];
-    }
-
+    
     [super executeDidChangeHandler:context];
 }
 
@@ -571,13 +582,16 @@
         //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeSectionInsertHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
     }
     
-    if (!self.collectionView.window)
+    if (self.collectionView)
     {
-        DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
-    }
-    if (self.collectionView && self.collectionView.window)
-    {
-        [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+        if (!self.collectionView.window)
+        {
+            DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        }
+        else
+        {
+            [self.collectionView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+        }
     }
     
     [super executeDidChangeSectionInsertHandler:sectionInfo
@@ -597,13 +611,16 @@
         //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeSectionDeleteHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
     }
     
-    if (!self.collectionView.window)
+    if (self.collectionView)
     {
-        DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
-    }
-    if (self.collectionView && self.collectionView.window)
-    {
-        [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+        if (!self.collectionView.window)
+        {
+            DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        }
+        else
+        {
+            [self.collectionView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex]];
+        }
     }
     
     [super executeDidChangeSectionDeleteHandler:sectionInfo
@@ -624,15 +641,18 @@
         //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectInsertHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
     }
     
-    if (!self.collectionView.window)
+    if (self.collectionView)
     {
-        DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        if (!self.collectionView.window)
+        {
+            DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        }
+        else
+        {
+            [self.collectionView insertRowsAtIndexPaths:@[ newIndexPath ]];
+        }
     }
-    if (self.collectionView && self.collectionView.window)
-    {
-        [self.collectionView insertRowsAtIndexPaths:@[ newIndexPath ]];
-    }
-
+    
     [super executeDidChangeObjectInsertHandler:object
                                    atIndexPath:indexPath
                                   newIndexPath:newIndexPath
@@ -652,15 +672,18 @@
         //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectDeleteHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
     }
     
-    if (!self.collectionView.window)
+    if (self.collectionView)
     {
-        DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        if (!self.collectionView.window)
+        {
+            DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        }
+        else
+        {
+            [self.collectionView deleteRowsAtIndexPaths:@[ indexPath ]];
+        }
     }
-    if (self.collectionView && self.collectionView.window)
-    {
-        [self.collectionView deleteRowsAtIndexPaths:@[ indexPath ]];
-    }
-
+    
     [super executeDidChangeObjectDeleteHandler:object
                                    atIndexPath:indexPath
                                   newIndexPath:newIndexPath
@@ -680,15 +703,18 @@
         //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectUpdateHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
     }
     
-    if (!self.collectionView.window)
+    if (self.collectionView)
     {
-        DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        if (!self.collectionView.window)
+        {
+            DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        }
+        else
+        {
+            [self.collectionView reloadRowsAtIndexPaths:@[ indexPath ]];
+        }
     }
-    if (self.collectionView && self.collectionView.window)
-    {
-        [self.collectionView reloadRowsAtIndexPaths:@[ indexPath ]];
-    }
-
+    
     [super executeDidChangeObjectUpdateHandler:object
                                    atIndexPath:indexPath
                                   newIndexPath:newIndexPath
@@ -708,16 +734,19 @@
         //DOLog(LL_Debug, LD_General, @"[%@] DNModelWatchFetchedObjects:executeDidChangeObjectMoveHandler - 2b [section:%d] objectCount=%d", self.name, section, [[self objectsForSection:section] count]);
     }
     
-    if (!self.collectionView.window)
+    if (self.collectionView)
     {
-        DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        if (!self.collectionView.window)
+        {
+            DOLog(LL_Debug, LD_General, @"CollectionView (%@) Not Visible! [%@]", self.collectionView.name, NSStringFromSelector(_cmd));
+        }
+        else
+        {
+            [self.collectionView moveRowAtIndexPath:indexPath
+                                        toIndexPath:newIndexPath];
+        }
     }
-    if (self.collectionView && self.collectionView.window)
-    {
-        [self.collectionView moveRowAtIndexPath:indexPath
-                                    toIndexPath:newIndexPath];
-    }
-
+    
     [super executeDidChangeObjectMoveHandler:object
                                  atIndexPath:indexPath
                                 newIndexPath:newIndexPath

@@ -803,7 +803,14 @@
                                
                                if (!isEqual)
                                {
-                                   [self setValue:newObject forKey:key];
+                                   @try
+                                   {
+                                       [self setValue:newObject forKey:key];
+                                   }
+                                   @catch (NSException* exception)
+                                   {
+                                       DLog(LL_Debug, LD_CoreData, @"Exception: %@", exception);
+                                   }
                                }
                            }
                            else
@@ -1024,9 +1031,10 @@
 
 - (void)deleteWithNoSave
 {
-    [self performBlock:
+    [self performBlockAndWait:
      ^(NSManagedObjectContext* context)
      {
+         DLog(LL_Debug, LD_General, @"Delete Object: %@", NSStringFromClass([self class]));
          [context deleteObject:self];
      }];
 }
@@ -1034,7 +1042,7 @@
 - (void)delete
 {
     [self deleteWithNoSave];
-    [self performBlock:
+    [self performBlockAndWait:
      ^(NSManagedObjectContext* context)
      {
          [context processPendingChanges];
