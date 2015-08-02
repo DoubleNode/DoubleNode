@@ -95,6 +95,10 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (id<DNApplicationProtocol>)appDelegate;
 + (DNUtilities*)sharedInstance;
 
++ (CGSize)screenSizeUnits;
++ (CGFloat)screenHeightUnits;
++ (CGFloat)screenWidthUnits;
++ (CGSize)screenSize;
 + (CGFloat)screenHeight;
 + (CGFloat)screenWidth;
 + (BOOL)isTall;

@@ -82,6 +82,32 @@
     return instance;
 }
 
++ (CGSize)screenSizeUnits
+{
+    return (CGSize){ [self screenWidthUnits], [self screenHeightUnits] };
+}
+
++ (CGFloat)screenHeightUnits
+{
+    CGRect  bounds  = [[UIScreen mainScreen] bounds];
+    CGFloat height  = bounds.size.height;
+    
+    return height;
+}
+
++ (CGFloat)screenWidthUnits
+{
+    CGRect  bounds  = [[UIScreen mainScreen] bounds];
+    CGFloat width   = bounds.size.width;
+    
+    return width;
+}
+
++ (CGSize)screenSize
+{
+    return (CGSize){ [self screenWidth], [self screenHeight] };
+}
+
 + (CGFloat)screenHeight
 {
     CGRect  bounds  = [[UIScreen mainScreen] bounds];

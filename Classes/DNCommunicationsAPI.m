@@ -886,7 +886,8 @@
         }
         else
         {
-            resultDict = [NSDictionary dictionary];
+            NSString* responseString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            resultDict = @{ @"html" : responseString };
         }
     }
 
