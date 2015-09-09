@@ -22,6 +22,18 @@
 + (NSString*)apiHostname;
 
 /**
+ *  Creates and returns a NSDate object, initialized with the NSDate loaded from the Constants plist file for the specified key.
+ *
+ *  @param key The string which specifies the key to the Constants plist file.
+ *
+ *  @return A new NSDate object, configured according to the value in the Constants plist file.
+ */
++ (NSDate*)dateConstant:(NSString*)key;
+
++ (NSDate*)dateConstant:(NSString*)key
+                 filter:(NSString*)filter;
+
+/**
  *  Creates and returns a UIColor object, initialized with the NSString loaded from the Constants plist file for the specified key.
  *
  *  @param key The string which specifies the key to the Constants plist file.
@@ -29,6 +41,9 @@
  *  @return A new UIColor object, configured according to the value in the Constants plist file.
  */
 + (UIColor*)colorConstant:(NSString*)key;
+
++ (UIColor*)colorConstant:(NSString*)key
+                   filter:(NSString*)filter;
 
 /**
  *  Returns a BOOL value, initialized with the boolValue of the NSString loaded from the Constants plist file for the specified key.
@@ -39,6 +54,9 @@
  */
 + (BOOL)boolConstant:(NSString*)key;
 
++ (BOOL)boolConstant:(NSString*)key
+              filter:(NSString*)filter;
+
 /**
  *  Returns a int value, initialized with the intValue of the NSString loaded from the Constants plist file for the specified key.
  *
@@ -48,6 +66,9 @@
  */
 + (int)intConstant:(NSString*)key;
 
++ (int)intConstant:(NSString*)key
+            filter:(NSString*)filter;
+
 /**
  *  Returns a double value, initialized with the doubleValue of the NSString loaded from the Constants plist file for the specified key.
  *
@@ -56,6 +77,9 @@
  *  @return A double value, configured according to the boolValue of the NSString in the Constants plist file.
  */
 + (double)doubleConstant:(NSString*)key;
+
++ (double)doubleConstant:(NSString*)key
+                  filter:(NSString*)filter;
 
 /**
  *  Creates and returns a UIFont object, initialized with the NSString objects loaded from the Constants plist file for the specified key.
@@ -69,6 +93,9 @@
  */
 + (UIFont*)fontConstant:(NSString*)key;
 
++ (UIFont*)fontConstant:(NSString*)key
+                 filter:(NSString*)filter;
+
 /**
  *  Returns a CGSize value, initialized with the floatValue of the NSString objects loaded from the Constants plist file for the specified key.
  *
@@ -81,6 +108,18 @@
  */
 + (CGSize)sizeConstant:(NSString*)key;
 
++ (CGSize)sizeConstant:(NSString*)key
+                filter:(NSString*)filter;
+
+/**
+ *  Returns a NSDictionary object, initialized with the dictionartyValue of the NSString objects loaded from the Constants plist file for the specified key.
+ *
+ *  @param key The string which specifies the key to the Constants plist file.
+ *
+ *  @return A new NSDictionary value, configured according to the value in the Constants plist file.
+ */
++ (NSDictionary*)dictionaryConstant:(NSString*)key;
+
 #pragma mark - Low-level functions
 
 /**
@@ -91,6 +130,9 @@
  *  @return A new NSString object, configured according to the value in the Constants plist file.
  */
 + (id)constantValue:(NSString*)key;
+
++ (id)constantValue:(NSString*)key
+             filter:(NSString*)filter;
 
 /**
  *  Returns the NSDictionary of a plist file (loaded the first time) specified by the 'Constants_plist' setting in the App's main *-Info.plst file.
