@@ -143,7 +143,7 @@
             value   = values[@"default"];
         }
     }
-    else
+    else if (value)
     {
         value   = [NSString stringWithFormat:@"%@", value];
     }

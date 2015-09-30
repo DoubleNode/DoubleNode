@@ -317,7 +317,8 @@
 - (void)startTransactionPerformBlockAndWait:(BOOL (^)(NSManagedObjectContext* context))block
 {
     NSManagedObjectContext* context = [self startTransaction];
-
+    NSAssert(context, @"Invalid/nil context!");
+    
     [context performBlockAndWait:
      ^()
      {

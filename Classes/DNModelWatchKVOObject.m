@@ -71,7 +71,9 @@
         attributes  = [[[object entityDescription] attributesByName] allKeys];
     }
 
-    [attributes enumerateObjectsUsingBlock:
+    NSArray*    localAttributes = [attributes copy];
+    
+    [localAttributes enumerateObjectsUsingBlock:
      ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
      {
          NSUInteger initialFlag = ((idx == 0) ? NSKeyValueObservingOptionInitial : 0);
@@ -87,7 +89,9 @@
 {
     [super cancelWatch];
 
-    [attributes enumerateObjectsUsingBlock:
+    NSArray*    localAttributes = [attributes copy];
+    
+    [localAttributes enumerateObjectsUsingBlock:
      ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
      {
          @try
@@ -100,7 +104,8 @@
          }
      }];
     
-    object  = nil;
+    object      = nil;
+    attributes  = nil;
 }
 
 - (void)refreshWatch
@@ -113,7 +118,9 @@
         attributes  = [[[object entityDescription] attributesByName] allKeys];
     }
 
-    [attributes enumerateObjectsUsingBlock:
+    NSArray*    localAttributes = [attributes copy];
+    
+    [localAttributes enumerateObjectsUsingBlock:
      ^(NSString* attributeName, NSUInteger idx, BOOL* stop)
      {
          NSDictionary*  context = @{ @"keyPath" : attributeName };
