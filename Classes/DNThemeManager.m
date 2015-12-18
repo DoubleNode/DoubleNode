@@ -20,7 +20,6 @@
 #import "DNTextField.h"
 #import "DNLabel.h"
 #import "DNButton.h"
-#import "DNSegmentedControl.h"
 
 #import "UILabel+TextKerning.h"
 
@@ -665,6 +664,7 @@
 {
     [[self class] customizeView:segmentedControl withType:@"SegmentedControl" andGroup:group andScreen:screen andViewState:viewState andItem:item andControlState:UIControlStateNormal];
 
+    /*
     if ([segmentedControl isKindOfClass:[DNSegmentedControl class]])
     {
         segmentedControl.layer.borderColor  = [[UIColor clearColor] CGColor];
@@ -710,6 +710,7 @@
 
         ((DNSegmentedControl*)segmentedControl).selectedTextAttributes = selectedTextAttributes;
     }
+     */
 }
 
 + (void)customizeBarButtonItem:(UIBarButtonItem*)barButtonItem
