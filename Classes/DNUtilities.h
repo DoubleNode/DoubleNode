@@ -10,8 +10,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import "LoggerClient.h"
+#import <NSLogger/LoggerClient.h>
 
 #import "DNApplicationProtocol.h"
 

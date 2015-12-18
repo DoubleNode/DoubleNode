@@ -9,7 +9,7 @@
 //  All rights reserved.
 //
 
-#import "PPiFlatSegmentedControl.h"
+#import <PPiFlatSegmentedControl/PPiFlatSegmentedControl.h>
 
 @interface DNSegmentedControl : PPiFlatSegmentedControl
 

@@ -1,1 +1,0 @@
-../../../JustType/JustType/JTKeyboardGestureRecognizer.h

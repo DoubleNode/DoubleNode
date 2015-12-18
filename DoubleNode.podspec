@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.11.21"
+  s.version      = "0.11.22"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
@@ -40,14 +40,14 @@ Pod::Spec.new do |s|
   # If this Pod runs only on iOS or OS X, then specify the platform and
   # the deployment target.
   #
-  s.platform     = :ios, '5.1'
+  s.platform     = :ios, '7.0'
 
   # ――― MULTI-PLATFORM VALUES ――――――――――――――――――――――――――――――――――――――――――――――――― #
 
   # If this Pod runs on both platforms, then specify the deployment
   # targets.
   #
-  # s.ios.deployment_target = '5.0'
+  # s.ios.deployment_target = '7.0'
   # s.osx.deployment_target = '10.7'
 
   # A list of file patterns which select the source files that should be

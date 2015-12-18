@@ -10,8 +10,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
-#import "RBRouteBuilder.h"
+#import <RBRouteBuilder/RBRouteBuilder.h>
 
 typedef NS_ENUM(NSUInteger, DNCommunicationDetailsContentType)
 {
