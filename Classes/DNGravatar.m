@@ -14,6 +14,8 @@
 //  https://www.cocoacontrols.com/controls/uiimageview-gravatar
 //
 
+#import <CommonCrypto/CommonDigest.h>
+
 #import "DNGravatar.h"
 
 @implementation DNGravatar

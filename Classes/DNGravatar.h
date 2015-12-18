@@ -14,7 +14,7 @@
 //  https://www.cocoacontrols.com/controls/uiimageview-gravatar
 //
 
-#import <CommonCrypto/CommonDigest.h>
+#import <UIKit/UIKit.h>
 
 // Rating of Gravatar
 enum

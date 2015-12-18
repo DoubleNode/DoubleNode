@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.11.22"
+  s.version      = "0.12.00"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
@@ -105,7 +105,6 @@ Pod::Spec.new do |s|
   s.dependency 'JustType'
   s.dependency 'Inflections'
   s.dependency 'TTTAttributedLabel'
-  s.dependency 'PPiFlatSegmentedControl'
   s.dependency 'GCPlaceholderTextView'
   s.dependency 'RBRouteBuilder'
 
