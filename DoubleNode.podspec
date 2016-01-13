@@ -116,7 +116,7 @@ Pod::Spec.new do |s|
   # * name:    'RestKit/Network'
   # Other attributes are delegated to the `part_of' spec, so the version, summary etc will by default be the same
   s.subspec 'ColorUtils' do |cu|
-    cu.description = 'A useful category extending UIColor with additional functionality including direct access to color components and creating colors from hex values.'
+    #cu.description = 'A useful category extending UIColor with additional functionality including direct access to color components and creating colors from hex values.'
     cu.source_files = 'ColorUtils/ColorUtils/*.{h,m}'
   end
 end
