@@ -493,6 +493,32 @@ forSupplementaryViewOfKind:(NSString*)kind
     return [NSTimer scheduledTimerWithTimeInterval:delay target:[DNUtilities sharedInstance] selector:@selector(instanceRunBlock:) userInfo:block_ repeats:NO];
 }
 
++ (void)runGroupOnBackgroundThread:(void (^)(dispatch_group_t group))block
+                    withCompletion:(void (^)())completionBlock
+{
+    [DNUtilities runOnBackgroundThread:
+     ^()
+     {
+         dispatch_group_t group = dispatch_group_create();
+
+         block ? block(group) : nil;
+         
+         dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+         
+         completionBlock ? completionBlock() : nil;
+     }];
+}
+
++ (void)enterGroup:(dispatch_group_t)group
+{
+    dispatch_group_enter(group);
+}
+
++ (void)leaveGroup:(dispatch_group_t)group
+{
+    dispatch_group_leave(group);
+}
+
 + (bool)canDevicePlaceAPhoneCall
 {
     /*
