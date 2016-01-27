@@ -496,6 +496,15 @@ forSupplementaryViewOfKind:(NSString*)kind
 + (void)runGroupOnBackgroundThread:(void (^)(dispatch_group_t group))block
                     withCompletion:(void (^)())completionBlock
 {
+    [self runGroupWithTimeout:DISPATCH_TIME_FOREVER
+           onBackgroundThread:block
+               withCompletion:completionBlock];
+}
+
++ (void)runGroupWithTimeout:(dispatch_time_t)timeout
+         onBackgroundThread:(void (^)(dispatch_group_t group))block
+             withCompletion:(void (^)())completionBlock
+{
     [DNUtilities runOnBackgroundThread:
      ^()
      {
@@ -503,7 +512,7 @@ forSupplementaryViewOfKind:(NSString*)kind
 
          block ? block(group) : nil;
          
-         dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
+         dispatch_group_wait(group, timeout);
          
          completionBlock ? completionBlock() : nil;
      }];

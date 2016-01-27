@@ -140,6 +140,10 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
 + (void)runGroupOnBackgroundThread:(void (^)(dispatch_group_t group))block
                     withCompletion:(void (^)())completionBlock;
 
++ (void)runGroupWithTimeout:(dispatch_time_t)timeout
+         onBackgroundThread:(void (^)(dispatch_group_t group))block
+             withCompletion:(void (^)())completionBlock;
+
 + (void)enterGroup:(dispatch_group_t)group;
 + (void)leaveGroup:(dispatch_group_t)group;
 
