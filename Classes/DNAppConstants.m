@@ -168,7 +168,7 @@ static NSString*        plistServerCode = nil;
     {
         if (plistConfigDict == nil)
         {
-            NSString*   constantsPlist  = [NSString stringWithFormat:@"Constants_%@", serverCode];
+            NSString*   constantsPlist  = @"Constants";
             NSString*   constantsPath   = [[NSBundle mainBundle] pathForResource:constantsPlist ofType:@"plist"];
             if (!constantsPath)
             {
@@ -187,12 +187,11 @@ static NSString*        plistServerCode = nil;
                 @throw exception;
             }
 
-            NSString*   constantsPlist2 = @"Constants";
+            NSString*   constantsPlist2 = [NSString stringWithFormat:@"Constants_%@", serverCode];
             NSString*   constantsPath2  = [[NSBundle mainBundle] pathForResource:constantsPlist2 ofType:@"plist"];
             if (constantsPath2)
             {
                 NSMutableDictionary*    newDict = [NSMutableDictionary dictionaryWithDictionary:plistConfigDict];
-                //[newDict addEntriesFromDictionary:[[NSDictionary alloc] initWithContentsOfFile:constantsPath2]];
                 
                 NSDictionary*   overrideItems   = [[NSDictionary alloc] initWithContentsOfFile:constantsPath2];
                 [overrideItems enumerateKeysAndObjectsUsingBlock:
@@ -200,12 +199,6 @@ static NSString*        plistServerCode = nil;
                  {
                      id originalObj = newDict[key];
                      
-                     if (!originalObj)
-                     {
-                         newDict[key]   = obj;
-                         return;
-                     }
-
                      if ([obj isKindOfClass:[NSDictionary class]])
                      {
                          NSMutableDictionary*   objMD  = [obj mutableCopy];
