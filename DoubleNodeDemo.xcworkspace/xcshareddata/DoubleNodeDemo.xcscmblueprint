@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "94487F1C0FA2E1D785BA0E7CB8C35A2351AC5154",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "94487F1C0FA2E1D785BA0E7CB8C35A2351AC5154" : 0,
+    "540708DF-5276-47D8-8990-791E75E4A42C" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "82DDFF6A-2AB9-4053-968C-2DED177DD5B9",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "94487F1C0FA2E1D785BA0E7CB8C35A2351AC5154" : "DoubleNode",
+    "540708DF-5276-47D8-8990-791E75E4A42C" : "DoubleNodePod"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DoubleNodeDemo",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "DoubleNodeDemo.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "ssh:\/\/github.com\/DoubleNode\/DoubleNode.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "540708DF-5276-47D8-8990-791E75E4A42C"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/DoubleNode\/DoubleNode.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "94487F1C0FA2E1D785BA0E7CB8C35A2351AC5154"
+    }
+  ]
+}

@@ -6,7 +6,7 @@
 #
 Pod::Spec.new do |s|
   s.name         = "DoubleNode"
-  s.version      = "0.12.10"
+  s.version      = "0.12.11"
   s.summary      = "A collection of utility functions."
   # s.description  = <<-DESC
   #                   An optional longer description of DoubleNode
@@ -107,6 +107,7 @@ Pod::Spec.new do |s|
   s.dependency 'TTTAttributedLabel'
   s.dependency 'GCPlaceholderTextView'
   s.dependency 'RBRouteBuilder'
+  s.dependency 'ColorUtils'
 
   # Eventually, this needs to be here.  Keep in Parent project for the time being
   # s.dependency 'AFIncrementalStore', :git => "git@github.com:tableproject/AFIncrementalStore.git", :commit => '51588f5af25dec6f1f1746b7450982582ebd8d93'

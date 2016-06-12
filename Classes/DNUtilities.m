@@ -24,6 +24,7 @@
 #include <sys/socket.h>
 #include <ifaddrs.h>
 #include <arpa/inet.h>
+#include <objc/message.h>
 
 #import "DNDate.h"
 
@@ -1404,20 +1405,52 @@ CGFloat DNTimeBlock (void (^block)(void))
 
 void DNLogMessageF(const char *filename, int lineNumber, const char *functionName, NSString *domain, int level, NSString *format, ...)
 {
-    if ([[DNUtilities sharedInstance] isLogEnabledDomain:domain andLevel:level] == YES)
+    if ([[DNUtilities sharedInstance] isLogEnabledDomain:domain andLevel:level] != YES)
     {
-        NSString*   domainColor = [DNUtilities xcodeColorsDomainColor:domain];
-        NSString*   mainColor   = [DNUtilities xcodeColorsLevelColor:level];
-        NSString*   otherColor  = [DNUtilities xcodeColorsOtherColor];
-        
-        va_list args;
-        va_start(args, format);
-
-        NSString*   formattedStr = [[NSString alloc] initWithFormat:format arguments:args];
-        
-        va_end(args);
-        
-        NSLog(@"%@[%@] %@{%@} %@[%@:%d] %@%@%@", otherColor, ([NSThread isMainThread] ? @"MT" : @"BT"), domainColor, domain, otherColor, [NSString stringWithUTF8String:filename].lastPathComponent, lineNumber, mainColor, formattedStr, DNUtilities.xcodeColorsReset);
+        return;
     }
+    
+    NSString*   domainColor = [DNUtilities xcodeColorsDomainColor:domain];
+    NSString*   mainColor   = [DNUtilities xcodeColorsLevelColor:level];
+    NSString*   otherColor  = [DNUtilities xcodeColorsOtherColor];
+    
+    va_list args;
+    va_start(args, format);
+    
+    NSString*   formattedStr = [[NSString alloc] initWithFormat:format arguments:args];
+    
+    va_end(args);
+    
+    Class   bfClass = NSClassFromString(@"Bugfender");
+    
+    if (bfClass)
+    {
+        int bfLevel = 0;
+        
+        if (level <= LL_Error)
+        {
+            bfLevel = 2;
+        }
+        else if (level <= LL_Warning)
+        {
+            bfLevel = 1;
+        }
+        
+        SEL bfSelector = NSSelectorFromString(@"logLineNumber:method:file:level:tag:format:");
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        /*
+         [bgClass performSelector logLineNumber:lineNumber
+         method:functionName
+         file:[NSString stringWithUTF8String:filename].lastPathComponent
+         level:bfLevel
+         tag:domain
+         format:formattedStr];
+         */
+#pragma clang diagnostic pop
+    }
+    
+    NSLog(@"%@[%@] %@{%@} %@[%@:%d] %@%@%@", otherColor, ([NSThread isMainThread] ? @"MT" : @"BT"), domainColor, domain, otherColor, [NSString stringWithUTF8String:filename].lastPathComponent, lineNumber, mainColor, formattedStr, DNUtilities.xcodeColorsReset);
 }
 
