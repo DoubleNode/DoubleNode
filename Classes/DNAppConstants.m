@@ -168,7 +168,7 @@ static NSString*        plistServerCode = nil;
     {
         if (plistConfigDict == nil)
         {
-            NSString*   constantsPlist  = [NSString stringWithFormat:@"Constants_%@", serverCode];
+            NSString*   constantsPlist  = [NSString stringWithFormat:@"Constants%@%@", ((serverCode.length > 0) ? @"_" : @""), serverCode];
             NSString*   constantsPath   = [[NSBundle mainBundle] pathForResource:constantsPlist ofType:@"plist"];
             if (!constantsPath)
             {
