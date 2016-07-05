@@ -109,8 +109,13 @@
                        noResponseBodyHandler:(void(^ _Nullable)())noResponseBodyHandler
                            completionHandler:(void(^ _Nullable)(NSURLResponse* _Nonnull response, id _Nullable responseObject))completionHandler
 {
-    return [super dataTaskWithRequest:request
-                    completionHandler:
+    return [super uploadTaskWithRequest:request
+                               fromData:data
+                               progress:
+            ^(NSProgress* _Nonnull uploadProgress)
+            {
+            }
+                      completionHandler:
             ^(NSURLResponse* _Nonnull response, id _Nullable responseObject, NSError* _Nullable dataError)
             {
                 if (dataError)
