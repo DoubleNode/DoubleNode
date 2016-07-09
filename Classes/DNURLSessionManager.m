@@ -53,6 +53,24 @@
                 {
                     DLog(LL_Info, LD_Networking, @"DATAERROR - %@", response.URL);
                     
+                    if (dataError.code == NSURLErrorTimedOut)
+                    {
+                        NSHTTPURLResponse*  httpResponse;
+                        if ([response isKindOfClass:[NSHTTPURLResponse class]])
+                        {
+                            httpResponse    = (NSHTTPURLResponse*)response;
+                        }
+                        
+                        DLog(LL_Info, LD_Networking, @"WILLRETRY - %@", response.URL);
+                        [DNUtilities runOnBackgroundThreadAfterDelay:1.0f
+                                                               block:
+                         ^()
+                         {
+                             serverErrorHandler ? serverErrorHandler(httpResponse) : nil;
+                         }];
+                        return;
+                    }
+                    
                     if ([response isKindOfClass:[NSHTTPURLResponse class]])
                     {
                         NSHTTPURLResponse*    httpResponse    = (NSHTTPURLResponse*)response;
@@ -82,8 +100,13 @@
                         if (jsonData)
                         {
                             NSString*  errorMessage    = jsonData[@"error"];
+                            if (!errorMessage)
+                            {
+                                errorMessage    = jsonData[@"data"][@"error"];
+                            }
                             
                             dataErrorHandler ? dataErrorHandler(errorData, errorMessage) : nil;
+                            return;
                         }
                     }
                     
@@ -121,6 +144,24 @@
                 if (dataError)
                 {
                     DLog(LL_Info, LD_Networking, @"DATAERROR - %@", response.URL);
+                    
+                    if (dataError.code == NSURLErrorTimedOut)
+                    {
+                        NSHTTPURLResponse*  httpResponse;
+                        if ([response isKindOfClass:[NSHTTPURLResponse class]])
+                        {
+                            httpResponse    = (NSHTTPURLResponse*)response;
+                        }
+                        
+                        DLog(LL_Info, LD_Networking, @"WILLRETRY - %@", response.URL);
+                        [DNUtilities runOnBackgroundThreadAfterDelay:1.0f
+                                                               block:
+                         ^()
+                         {
+                             serverErrorHandler ? serverErrorHandler(httpResponse) : nil;
+                         }];
+                        return;
+                    }
                     
                     if ([response isKindOfClass:[NSHTTPURLResponse class]])
                     {
