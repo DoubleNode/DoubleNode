@@ -44,6 +44,7 @@ typedef NS_ENUM(NSInteger, LogLevel)
 #define LD_Framework        @"FRAMEWORK"
 #define LD_CoreData         @"COREDATA"
 #define LD_CoreDataIS       @"COREDATAIS"
+#define LD_Realm            @"REALM"
 #define LD_ViewState        @"VIEWSTATE"
 #define LD_Theming          @"THEMING"
 #define LD_Location         @"LOCATION"
