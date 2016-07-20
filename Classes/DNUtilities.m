@@ -24,6 +24,7 @@
 #include <sys/socket.h>
 #include <ifaddrs.h>
 #include <arpa/inet.h>
+#include <objc/message.h>
 
 #import "DNDate.h"
 
@@ -35,6 +36,10 @@
     LogLevel                logDebugLevel;
     NSMutableDictionary*    logDebugDomains;
 }
+
+@property (strong, nonatomic) NSString* xcodeColorsEscape;
+@property (strong, nonatomic) NSString* xcodeColorsReset;
+
 @end
 
 @implementation DNUtilities
@@ -1226,11 +1231,48 @@ forHeaderFooterViewReuseIdentifier:(NSString*)kind
     return retval;
 }
 
+// How to apply color formatting to your log statements:
+//
+// To set the foreground color:
+// Insert the ESCAPE_SEQ into your string, followed by "fg124,12,255;" where r=124, g=12, b=255.
+//
+// To set the background color:
+// Insert the ESCAPE_SEQ into your string, followed by "bg12,24,36;" where r=12, g=24, b=36.
+//
+// To reset the foreground color (to default value):
+// Insert the ESCAPE_SEQ into your string, followed by "fg;"
+//
+// To reset the background color (to default value):
+// Insert the ESCAPE_SEQ into your string, followed by "bg;"
+//
+// To reset the foreground and background color (to default values) in one operation:
+// Insert the ESCAPE_SEQ into your string, followed by ";"
+
+#define XCODE_COLORS_ESCAPE @"\033["
+
+#define XCODE_COLORS_RESET_FG  XCODE_COLORS_ESCAPE @"fg;" // Clear any foreground color
+#define XCODE_COLORS_RESET_BG  XCODE_COLORS_ESCAPE @"bg;" // Clear any background color
+#define XCODE_COLORS_RESET     XCODE_COLORS_ESCAPE @";"   // Clear any foreground or background color
+
 - (id)init
 {
     self = [super init];
     if (self)
     {
+        self.xcodeColorsEscape  = @"";
+        self.xcodeColorsReset   = @"";
+        
+        // Force XcodeColors on for now.  Env Variable isn't working right
+        setenv("XcodeColors", "YES", 0); // Enables XcodeColors (you obviously have to install it too)
+
+        char*   xcode_colors = getenv("XcodeColors");
+        if (xcode_colors && (strcmp(xcode_colors, "YES") == 0))
+        {
+            // XcodeColors is installed and enabled!
+            self.xcodeColorsEscape  = XCODE_COLORS_ESCAPE;
+            self.xcodeColorsReset   = XCODE_COLORS_ESCAPE @"fg;" XCODE_COLORS_ESCAPE @"bg;";
+        }
+        
         logDebugLevel   = LL_Everything;
         logDebugDomains = [NSMutableDictionary dictionary];
 
@@ -1241,6 +1283,73 @@ forHeaderFooterViewReuseIdentifier:(NSString*)kind
     }
 
     return self;
+}
+
++ (NSString*)xcodeColorsEscape
+{
+    return [DNUtilities sharedInstance].xcodeColorsEscape;
+}
+
++ (NSString*)xcodeColorsReset
+{
+    return [DNUtilities sharedInstance].xcodeColorsReset;
+}
+
++ (NSString*)xcodeColorsLevelColor:(LogLevel)level
+{
+    if ([DNUtilities sharedInstance].xcodeColorsEscape.length == 0)
+    {
+        return @"";
+    }
+    
+    NSString*   color   = @"fg;bg;";
+    
+    switch (level)
+    {
+        case LL_Critical:       {   color   = XCODE_COLORS_ESCAPE @"fg255,255,255;" XCODE_COLORS_ESCAPE @"bg255,0,0;";  break;  }
+        case LL_Error:          {   color   = XCODE_COLORS_ESCAPE @"fg255,0,0;" XCODE_COLORS_ESCAPE @"bg;";             break;  }
+        case LL_Warning:        {   color   = XCODE_COLORS_ESCAPE @"fg255,127,0;" XCODE_COLORS_ESCAPE @"bg;";           break;  }
+        case LL_Debug:          {   color   = XCODE_COLORS_ESCAPE @"fg0,0,255;" XCODE_COLORS_ESCAPE @"bg;";             break;  }
+        case LL_Info:           {   color   = XCODE_COLORS_ESCAPE @"fg100,100,133;" XCODE_COLORS_ESCAPE @"bg;";         break;  }
+        case LL_Everything:     {   color   = XCODE_COLORS_ESCAPE @"fg64,64,64;" XCODE_COLORS_ESCAPE @"bg;";            break;  }
+    }
+    
+    return color;
+}
+
++ (NSString*)xcodeColorsDomainColor:(NSString*)domain
+{
+    if ([DNUtilities sharedInstance].xcodeColorsEscape.length == 0)
+    {
+        return @"";
+    }
+    
+    NSString*   color   = @"fg;bg;";
+    
+    if ([domain isEqualToString:LD_UnitTests])          {   color   = XCODE_COLORS_ESCAPE @"fg255,255,255;" XCODE_COLORS_ESCAPE @"bg255,0,0;"; }
+    else if ([domain isEqualToString:LD_General])       {   color   = XCODE_COLORS_ESCAPE @"fg80,80,80;" XCODE_COLORS_ESCAPE @"bg;"; }
+    else if ([domain isEqualToString:LD_Framework])     {   color   = XCODE_COLORS_ESCAPE @"fg255,0,0;" XCODE_COLORS_ESCAPE @"bg;"; }
+    else if ([domain isEqualToString:LD_CoreData])      {   color   = XCODE_COLORS_ESCAPE @"fg255,255,255;" XCODE_COLORS_ESCAPE @"bg0,0,255;"; }
+    else if ([domain isEqualToString:LD_CoreDataIS])    {   color   = XCODE_COLORS_ESCAPE @"fg255,252,229;" XCODE_COLORS_ESCAPE @"bg0,0,255;"; }
+    else if ([domain isEqualToString:LD_ViewState])     {   color   = XCODE_COLORS_ESCAPE @"fg255,252,229;" XCODE_COLORS_ESCAPE@"bg0,127,0;"; }
+    else if ([domain isEqualToString:LD_Theming])       {   color   = XCODE_COLORS_ESCAPE @"fg255,255,255;" XCODE_COLORS_ESCAPE @"bg0,127,0;"; }
+    else if ([domain isEqualToString:LD_Location])      {   color   = XCODE_COLORS_ESCAPE @"fg255,127,0;" XCODE_COLORS_ESCAPE @"bg;"; }
+    else if ([domain isEqualToString:LD_Networking])    {   color   = XCODE_COLORS_ESCAPE @"fg0,0,255;" XCODE_COLORS_ESCAPE @"bg;"; }
+    else if ([domain isEqualToString:LD_API])           {   color   = XCODE_COLORS_ESCAPE @"fg0,127,255;" XCODE_COLORS_ESCAPE @"bg;"; }
+    
+    return color;
+}
+
++ (NSString*)xcodeColorsOtherColor
+{
+    if ([DNUtilities sharedInstance].xcodeColorsEscape.length == 0)
+    {
+        return @"";
+    }
+    
+    NSString*   color   = XCODE_COLORS_ESCAPE @"fg192,192,192;" XCODE_COLORS_ESCAPE @"bg;";
+    
+    return color;
 }
 
 - (void)logResetLogState
@@ -1332,15 +1441,52 @@ CGFloat DNTimeBlock (void (^block)(void))
 
 void DNLogMessageF(const char *filename, int lineNumber, const char *functionName, NSString *domain, int level, NSString *format, ...)
 {
-    if ([[DNUtilities sharedInstance] isLogEnabledDomain:domain andLevel:level] == YES)
+    if ([[DNUtilities sharedInstance] isLogEnabledDomain:domain andLevel:level] != YES)
     {
-        va_list args;
-        va_start(args, format);
-
-        NSString*   formattedStr = [[NSString alloc] initWithFormat:format arguments:args];
-        NSLog(@"[%@] {%@} [%@:%d] %@", ([NSThread isMainThread] ? @"MT" : @"BT"), domain, [[NSString stringWithUTF8String:filename] lastPathComponent], lineNumber, formattedStr);
-        
-        va_end(args);
+        return;
     }
+    
+    NSString*   domainColor = [DNUtilities xcodeColorsDomainColor:domain];
+    NSString*   mainColor   = [DNUtilities xcodeColorsLevelColor:level];
+    NSString*   otherColor  = [DNUtilities xcodeColorsOtherColor];
+    
+    va_list args;
+    va_start(args, format);
+    
+    NSString*   formattedStr = [[NSString alloc] initWithFormat:format arguments:args];
+    
+    va_end(args);
+    
+    Class   bfClass = NSClassFromString(@"Bugfender");
+    
+    if (bfClass)
+    {
+        int bfLevel = 0;
+        
+        if (level <= LL_Error)
+        {
+            bfLevel = 2;
+        }
+        else if (level <= LL_Warning)
+        {
+            bfLevel = 1;
+        }
+        
+        SEL bfSelector = NSSelectorFromString(@"logLineNumber:method:file:level:tag:format:");
+        
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+        /*
+         [bgClass performSelector logLineNumber:lineNumber
+         method:functionName
+         file:[NSString stringWithUTF8String:filename].lastPathComponent
+         level:bfLevel
+         tag:domain
+         format:formattedStr];
+         */
+#pragma clang diagnostic pop
+    }
+    
+    NSLog(@"%@[%@] %@{%@} %@[%@:%d] %@%@%@", otherColor, ([NSThread isMainThread] ? @"MT" : @"BT"), domainColor, domain, otherColor, [NSString stringWithUTF8String:filename].lastPathComponent, lineNumber, mainColor, formattedStr, DNUtilities.xcodeColorsReset);
 }
 
