@@ -270,6 +270,42 @@ forSupplementaryViewOfKind:(NSString*)kind
     return retval;
 }
 
++ (void)registerCellNib:(NSString*)nibName
+          withTableView:(UITableView*)tableView
+{
+    NSString*   cellNibName = [self appendNibSuffix:nibName];
+    UINib*      cellNib     = [UINib nibWithNibName:cellNibName bundle:nil];
+    
+    [tableView registerNib:cellNib forCellReuseIdentifier:nibName];
+}
+
++ (void)registerCellClass:(NSString*)className
+            withTableView:(UITableView*)tableView
+{
+    Class   cellClass   = NSClassFromString(className);
+    
+    [tableView registerClass:cellClass forCellReuseIdentifier:className];
+}
+
++ (void)registerCellNib:(NSString*)nibName
+forHeaderFooterViewReuseIdentifier:(NSString*)kind
+          withTableView:(UITableView*)tableView
+{
+    NSString*   cellNibName = [self appendNibSuffix:nibName];
+    UINib*      cellNib     = [UINib nibWithNibName:cellNibName bundle:nil];
+    
+    [tableView registerNib:cellNib forHeaderFooterViewReuseIdentifier:nibName];
+}
+
++ (void)registerCellClass:(NSString*)className
+forHeaderFooterViewReuseIdentifier:(NSString*)kind
+            withTableView:(UITableView*)tableView
+{
+    Class   cellClass   = NSClassFromString(className);
+    
+    [tableView registerClass:cellClass forHeaderFooterViewReuseIdentifier:className];
+}
+
 + (NSString*)deviceImageName:(NSString*)name
 {
     NSString*   fileName        = [[[NSFileManager defaultManager] displayNameAtPath:name] stringByDeletingPathExtension];

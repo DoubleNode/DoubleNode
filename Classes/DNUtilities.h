@@ -121,6 +121,12 @@ extern void LogImageDataF(const char *filename, int lineNumber, const char *func
                       withCollectionView:(UICollectionView*)collectionView
                           withSizingCell:(BOOL)sizingCellFlag;
 
++ (void)registerCellNib:(NSString*)nibName withTableView:(UITableView*)tableView;
++ (void)registerCellClass:(NSString*)className withTableView:(UITableView*)tableView;
+
++ (void)registerCellNib:(NSString*)nibName forHeaderFooterViewReuseIdentifier:(NSString*)kind withTableView:(UITableView*)tableView;
++ (void)registerCellClass:(NSString*)className forHeaderFooterViewReuseIdentifier:(NSString*)kind withTableView:(UITableView*)tableView;
+
 + (void)runOnBackgroundThreadAfterDelay:(CGFloat)delay
                                   block:(void (^)())block;
 
