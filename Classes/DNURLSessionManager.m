@@ -104,6 +104,10 @@
                             {
                                 errorMessage    = jsonData[@"data"][@"error"];
                             }
+                            if (!errorMessage)
+                            {
+                                errorMessage    = jsonData[@"data"][@"message"];
+                            }
                             
                             dataErrorHandler ? dataErrorHandler(errorData, errorMessage) : nil;
                             return;
