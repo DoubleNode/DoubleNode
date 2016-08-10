@@ -1331,11 +1331,13 @@ forHeaderFooterViewReuseIdentifier:(NSString*)kind
     else if ([domain isEqualToString:LD_Framework])     {   color   = XCODE_COLORS_ESCAPE @"fg255,0,0;" XCODE_COLORS_ESCAPE @"bg;"; }
     else if ([domain isEqualToString:LD_CoreData])      {   color   = XCODE_COLORS_ESCAPE @"fg255,255,255;" XCODE_COLORS_ESCAPE @"bg0,0,255;"; }
     else if ([domain isEqualToString:LD_CoreDataIS])    {   color   = XCODE_COLORS_ESCAPE @"fg255,252,229;" XCODE_COLORS_ESCAPE @"bg0,0,255;"; }
+    else if ([domain isEqualToString:LD_Realm])         {   color   = XCODE_COLORS_ESCAPE @"fg0,127,0;" XCODE_COLORS_ESCAPE @"bg;"; }
     else if ([domain isEqualToString:LD_ViewState])     {   color   = XCODE_COLORS_ESCAPE @"fg255,252,229;" XCODE_COLORS_ESCAPE@"bg0,127,0;"; }
     else if ([domain isEqualToString:LD_Theming])       {   color   = XCODE_COLORS_ESCAPE @"fg255,255,255;" XCODE_COLORS_ESCAPE @"bg0,127,0;"; }
     else if ([domain isEqualToString:LD_Location])      {   color   = XCODE_COLORS_ESCAPE @"fg255,127,0;" XCODE_COLORS_ESCAPE @"bg;"; }
     else if ([domain isEqualToString:LD_Networking])    {   color   = XCODE_COLORS_ESCAPE @"fg0,0,255;" XCODE_COLORS_ESCAPE @"bg;"; }
-    else if ([domain isEqualToString:LD_API])           {   color   = XCODE_COLORS_ESCAPE @"fg0,127,255;" XCODE_COLORS_ESCAPE @"bg;"; }
+    else if ([domain isEqualToString:LD_API])           {   color   = XCODE_COLORS_ESCAPE @"fg0,255,127;" XCODE_COLORS_ESCAPE @"bg;"; }
+    else if ([domain isEqualToString:LD_DAO])           {   color   = XCODE_COLORS_ESCAPE @"fg0,255,127;" XCODE_COLORS_ESCAPE @"bg;"; }
     
     return color;
 }
