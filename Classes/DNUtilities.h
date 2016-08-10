@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, LogLevel)
 #define DLogTimeBlock(level,domain,title,block) block()
 #define DAssertIsMainThread                     ;
 #else
-#define DAssert(condition,domain,...)           DNLogMessageF(__FILE__,__LINE__,__PRETTY_FUNCTION__,domain,LL_Critical,__VA_ARGS__); NSAssert(condition, __VA_ARGS__);
+#define DAssert(condition,domain,...)           if (!(condition)) { DNLogMessageF(__FILE__,__LINE__,__PRETTY_FUNCTION__,domain,LL_Critical,__VA_ARGS__); } NSAssert(condition, __VA_ARGS__);
 #define DLogMarker(marker)                      NSLog(@"%@", marker); LogMessageF(__FILE__,__LINE__,__PRETTY_FUNCTION__,domain,level,@"%@", marker)
 #define DLog(level,domain,...)                  DNLogMessageF(__FILE__,__LINE__,__PRETTY_FUNCTION__,domain,level,__VA_ARGS__); //LogMessageF(__FILE__,__LINE__,__PRETTY_FUNCTION__,domain,level,__VA_ARGS__)
 #define DOLog(level,domain,...)                 DNLogMessageF(__FILE__,__LINE__,__PRETTY_FUNCTION__,domain,level,__VA_ARGS__)
