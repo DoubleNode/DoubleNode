@@ -1,9 +1,10 @@
 //
 //  DNDate.h
-//  MADStudios
+//  DoubleNode.com
 //
-//  Created by Darren Ehlers on 11/16/14.
-//  Copyright (c) 2014 DoubleNode. All rights reserved.
+//  Derived from work originally created by Darren Ehlers
+//  Portions Copyright (c) 2012 DoubleNode.com and Darren Ehlers.
+//  All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
