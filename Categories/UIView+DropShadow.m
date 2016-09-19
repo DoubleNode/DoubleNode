@@ -11,24 +11,24 @@
 
 @implementation UIView (DropShadow)
 
-const CGSize    DS_DEFAULT_OFFSET   = (CGSize){ 3, 3 };
-const CGFloat   DS_DEFAULT_RADIUS   = 2.0f;
-const CGFloat   DS_DEFAULT_OPACITY  = 0.6f;
+const CGSize    DNVDS_DEFAULT_OFFSET   = (CGSize){ 3, 3 };
+const CGFloat   DNVDS_DEFAULT_RADIUS   = 2.0f;
+const CGFloat   DNVDS_DEFAULT_OPACITY  = 0.6f;
 
 - (void)addDropShadow
 {
     [self addDropShadow:[UIColor blackColor]
-             withOffset:DS_DEFAULT_OFFSET
-                 radius:DS_DEFAULT_RADIUS
-                opacity:DS_DEFAULT_OPACITY];
+             withOffset:DNVDS_DEFAULT_OFFSET
+                 radius:DNVDS_DEFAULT_RADIUS
+                opacity:DNVDS_DEFAULT_OPACITY];
 }
 
 - (void)addDropShadow:(UIColor*)color
 {
     [self addDropShadow:color
-             withOffset:DS_DEFAULT_OFFSET
-                 radius:DS_DEFAULT_RADIUS
-                opacity:DS_DEFAULT_OPACITY];
+             withOffset:DNVDS_DEFAULT_OFFSET
+                 radius:DNVDS_DEFAULT_RADIUS
+                opacity:DNVDS_DEFAULT_OPACITY];
 }
 
 - (void)addDropShadow:(UIColor*)color

@@ -13,24 +13,24 @@
 
 @implementation UIView (InnerShadow)
 
-const CGSize    DS_DEFAULT_OFFSET   = (CGSize){ 3, 3 };
-const CGFloat   DS_DEFAULT_RADIUS   = 2.0f;
-const CGFloat   DS_DEFAULT_OPACITY  = 0.6f;
+const CGSize    DNVIS_DEFAULT_OFFSET   = (CGSize){ 3, 3 };
+const CGFloat   DNVIS_DEFAULT_RADIUS   = 2.0f;
+const CGFloat   DNVIS_DEFAULT_OPACITY  = 0.6f;
 
 - (void)addInnerShadow
 {
     [self addInnerShadow:[UIColor blackColor]
-             withOffset:DS_DEFAULT_OFFSET
-                 radius:DS_DEFAULT_RADIUS
-                opacity:DS_DEFAULT_OPACITY];
+             withOffset:DNVIS_DEFAULT_OFFSET
+                 radius:DNVIS_DEFAULT_RADIUS
+                opacity:DNVIS_DEFAULT_OPACITY];
 }
 
 - (void)addInnerShadow:(UIColor*)color
 {
     [self addInnerShadow:color
-             withOffset:DS_DEFAULT_OFFSET
-                 radius:DS_DEFAULT_RADIUS
-                opacity:DS_DEFAULT_OPACITY];
+             withOffset:DNVIS_DEFAULT_OFFSET
+                 radius:DNVIS_DEFAULT_RADIUS
+                opacity:DNVIS_DEFAULT_OPACITY];
 }
 
 - (void)addInnerShadow:(UIColor*)color
